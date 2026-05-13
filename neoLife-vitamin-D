@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
+  <meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- META_DESC: NeoLife Vitamin D – D3-tillskott för ben, immunsystem och kalciumupptag. Särskilt viktigt i Norden med begränsad solexponering. Oberoende faktagranskning. -->
+  <title>NeoLife Vitamin D: D3-tillskott för ben och immunsystem | LevNytt.se</title>
+  <meta name="description" content="NeoLife Vitamin D – D3-tillskott för ben, immunsystem och kalciumupptag. Särskilt viktigt i Norden med begränsad solexponering. Oberoende faktagranskning.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-vitamin-d/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="NeoLife Vitamin D: D3-tillskott för ben och immunsystem | LevNytt.se">
+  <meta property="og:url" content="https://levnytt.se/neolife-vitamin-d/">
+  <meta property="og:site_name" content="LevNytt">
+  <meta property="og:locale" content="sv_SE">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"NeoLife Vitamin D: D3-tillskott för ben och immunsystem","url":"https://levnytt.se/neolife-vitamin-d/","datePublished":"2026-05-14","dateModified":"2026-05-14","author":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"}}</script>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"Varför är vitamin D extra viktigt i Sverige?","acceptedAnswer":{"@type":"Answer","text":"Sverige ligger på en nordlig breddgrad där UVB-strålningen under höst och vinter inte är tillräcklig för att huden ska kunna producera vitamin D. Studier visar att upp till 93% av vuxna i åldersgruppen 51–70 år inte uppnår rekommenderat dagligt intag. Livsmedelsverket rekommenderar D-vitamintillskott till riskgrupper, och många experter förespråkar tillskott för hela befolkningen under vintermånaderna."}},
+    {"@type":"Question","name":"Vad är skillnaden mellan vitamin D2 och D3?","acceptedAnswer":{"@type":"Answer","text":"Vitamin D2 (ergokalciferol) bildas i växter från sterolen ergosterol, medan D3 (kolekalciferol) bildas i huden hos människor och djur vid UVB-exponering. D3 är den form som kroppen producerar naturligt och som forskning visar är mer effektiv på att höja och bibehålla vitamin D-nivåer i blodet."}},
+    {"@type":"Question","name":"Vilka hälsorisker förknippas med D-vitaminbrist?","acceptedAnswer":{"@type":"Answer","text":"Utöver försvagade ben kan D-vitaminbrist associeras med ökad mottaglighet för kroniska sjukdomar såsom högt blodtryck, cancer, periodontal sjukdom, multipel skleros, kronisk smärta, säsongsbunden affektiv störning och flera autoimmuna sjukdomar inklusive typ 1-diabetes. Hos barn kan brist leda till rakitis, hos vuxna till osteomalaci."}},
+    {"@type":"Question","name":"Hur mycket D-vitamin är tillräckligt?","acceptedAnswer":{"@type":"Answer","text":"Food and Nutrition Board (USA) fastställde 1997 ett adekvat intag på 200 IU för åldersgruppen 1–50 år och 400–600 IU för äldre. Sedan dess har forskning lett till att många hälsoexperter förespråkar 1 000 IU per dag för vuxna. Konsultera alltid läkare för personlig dosrekommendation."}}
+  ]}</script>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Hem","item":"https://levnytt.se/"},
+    {"@type":"ListItem","position":2,"name":"NeoLife kosttillskott","item":"https://levnytt.se/neolife-kosttillskott/"},
+    {"@type":"ListItem","position":3,"name":"Vitamin D","item":"https://levnytt.se/neolife-vitamin-d/"}
+  ]}</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#C8962E;--gold-light:#E8C870;--gold-dark:#8B6914;--green:#2D6A4F;--green-light:#40916C;--green-dark:#1B4332;--cream:#FBF8F0;--cream-dark:#F0EBDD;--ink:#1A1A1A;--ink-muted:#555555;--white:#FFFFFF;--border:#E0D8C8;--shadow-lg:0 8px 32px rgba(0,0,0,0.12);--radius:8px;--max-w:1200px;--transition:0.25s cubic-bezier(0.4,0,0.2,1);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+    body{font-family:'Inter',-apple-system,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(251,248,240,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:var(--gold-dark);text-decoration:none;}
+    .nav-brand span{color:var(--green);}
+    .nav-links{display:flex;gap:8px;align-items:center;}
+    .nav-links a{font-size:0.85rem;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all var(--transition);}
+    .nav-links a:hover{color:var(--ink);background:var(--cream-dark);}
+    .nav-links a.active{color:var(--gold-dark);font-weight:700;}
+    .nav-cta{background:var(--green)!important;color:var(--white)!important;font-weight:600!important;padding:8px 18px!important;}
+    .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+    .nav-hamburger svg{width:24px;height:24px;stroke:var(--ink);}
+    .freshness-banner{background:linear-gradient(135deg,var(--green-dark),var(--green));color:var(--white);text-align:center;padding:10px 24px;font-size:0.82rem;font-weight:500;}
+    .freshness-banner strong{color:var(--gold-light);}
+    .hero{position:relative;min-height:320px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#1B4332 0%,#2D6A4F 40%,#40916C 100%);}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,67,50,0.85) 0%,rgba(45,106,79,0.7) 50%,rgba(200,150,46,0.3) 100%);}
+    .hero-content{position:relative;z-index:2;max-width:var(--max-w);margin:0 auto;padding:64px 24px;width:100%;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:0.85rem;flex-wrap:wrap;}
+    .breadcrumb a{color:var(--gold-light);text-decoration:none;font-weight:500;}
+    .breadcrumb .sep{color:rgba(255,255,255,0.4);}
+    .breadcrumb .current{color:rgba(255,255,255,0.8);}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:700;color:var(--white);line-height:1.15;max-width:720px;letter-spacing:-0.02em;}
+    .hero-stats{display:flex;gap:40px;flex-wrap:wrap;margin-top:28px;}
+    .hero-stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold-light);line-height:1;}
+    .hero-stat-label{font-size:0.75rem;color:rgba(255,255,255,0.55);margin-top:4px;letter-spacing:0.05em;text-transform:uppercase;}
+    .article-content{padding:64px 0 80px;}
+    .article-inner{max-width:800px;margin:0 auto;padding:0 24px;}
+    .article-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--ink);line-height:1.25;margin:48px 0 16px;letter-spacing:-0.02em;}
+    .article-inner h2:first-child{margin-top:0;}
+    .article-inner h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin:36px 0 12px;}
+    .article-inner p{font-size:1.02rem;color:var(--ink-muted);line-height:1.75;margin-bottom:20px;}
+    .article-inner ul,.article-inner ol{margin:0 0 20px 24px;color:var(--ink-muted);line-height:1.75;}
+    .article-inner li{margin-bottom:8px;font-size:1.02rem;}
+    .article-inner a{color:var(--green);text-decoration:underline;text-underline-offset:2px;font-weight:500;}
+    .article-inner blockquote{border-left:4px solid var(--gold);background:var(--white);padding:20px 24px;margin:28px 0;border-radius:0 var(--radius) var(--radius) 0;font-style:italic;color:var(--ink-muted);}
+    .article-inner blockquote p{margin-bottom:0;}
+    .article-inner table{width:100%;border-collapse:collapse;margin:28px 0;font-size:0.92rem;background:var(--white);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
+    .article-inner th{background:var(--green);color:var(--white);font-weight:600;text-align:left;padding:12px 16px;font-size:0.85rem;}
+    .article-inner td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--ink-muted);}
+    .article-inner tr:last-child td{border-bottom:none;}
+    .article-inner tr:nth-child(even) td{background:var(--cream);}
+    .callout{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
+    .callout-gold{border-left-color:var(--gold);}
+    .callout h4{margin-top:0;color:var(--green);font-size:1.05rem;font-weight:700;margin-bottom:10px;}
+    .callout-gold h4{color:var(--gold-dark);}
+    .back-link-wrapper{max-width:800px;margin:0 auto;padding:12px 24px 0;}
+    .back-link{color:var(--gold);text-decoration:none;font-size:0.9rem;font-weight:500;}
+    .internal-links-section{background:var(--cream-dark);border-top:1px solid var(--border);padding:48px 0;}
+    .internal-links-section .container{max-width:800px;margin:0 auto;padding:0 24px;}
+    .internal-links-section h3{font-family:'Playfair Display',serif;color:var(--green);font-size:1.4rem;margin-bottom:16px;}
+    .internal-links-section ul{list-style:none;padding:0;margin:0;}
+    .internal-links-section li{margin-bottom:10px;}
+    .internal-links-section a{color:var(--gold);text-decoration:none;font-weight:500;}
+    .internal-links-section a:hover{color:var(--green);text-decoration:underline;}
+    .btn{display:inline-flex;align-items:center;padding:14px 28px;border-radius:var(--radius);font-size:0.95rem;font-weight:600;text-decoration:none;transition:all var(--transition);border:none;}
+    .btn-primary{background:var(--gold);color:var(--white);}
+    .btn-green{background:var(--green);color:var(--white);}
+    footer{background:var(--ink);color:rgba(255,255,255,0.6);padding:56px 0 32px;}
+    .footer-grid{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+    .footer-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--white);margin-bottom:12px;}
+    .footer-brand span{color:var(--gold-light);}
+    .footer-tagline{font-size:0.85rem;line-height:1.6;max-width:280px;}
+    .footer-col h5{color:var(--white);font-size:0.82rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+    .footer-col a{display:block;color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.88rem;padding:4px 0;}
+    .footer-col a:hover{color:var(--gold-light);}
+    .footer-bottom{max-width:var(--max-w);margin:0 auto;padding:24px 24px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:0.78rem;}
+    .footer-disclaimer{margin-top:16px;font-size:0.72rem;color:rgba(255,255,255,0.35);line-height:1.6;}
+    @media(max-width:900px){.nav-links{display:none;}.nav-hamburger{display:block;}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:16px 24px;box-shadow:var(--shadow-lg);}.footer-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:600px){.footer-grid{grid-template-columns:1fr;}.hero-stats{gap:24px;}}
+  </style>
+</head>
+<body>
+
+<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+    <button class="nav-hamburger" onclick="document.getElementById('navVD').classList.toggle('open')" aria-label="Meny">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="nav-links" id="navVD">
+      <a href="/neolife-historia/">Historia</a>
+      <a href="/neolife-vetenskap/">Vetenskap</a>
+      <a href="/neolife-kosttillskott/">Alla produkter</a>
+      <a href="/neolife-vitamin-d/" class="active">Vitamin D</a>
+      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="nav-cta" target="_blank" rel="noopener">Handla NeoLife &rarr;</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="breadcrumb">
+      <a href="/">Hem</a><span class="sep">/</span>
+      <a href="/neolife-kosttillskott/">NeoLife produkter</a><span class="sep">/</span>
+      <span class="current">Vitamin D</span>
+    </div>
+    <h1>NeoLife Vitamin D: Solskensvitaminet — särskilt viktigt i Norden</h1>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">93%</div><div class="hero-stat-label">Brist i 51–70 år (USA-data)</div></div>
+      <div><div class="hero-stat-num">D3</div><div class="hero-stat-label">Kroppens naturliga form</div></div>
+      <div><div class="hero-stat-num">700+</div><div class="hero-stat-label">Biokemiska reaktioner</div></div>
+      <div><div class="hero-stat-num">1958</div><div class="hero-stat-label">NeoLife grundat</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="back-link-wrapper">
+  <a href="/neolife-kosttillskott/" class="back-link">&larr; Tillbaka till NeoLife produktöversikt</a>
+</div>
+
+<div class="article-content">
+  <div class="article-inner">
+
+    <div class="callout">
+      <h4>Sammanfattning</h4>
+      <p style="margin-bottom:0;">Vitamin D är tekniskt sett inte ett vitamin utan ett fettlösligt prohormone som metaboliseras i lever och njurar till kalcitriol — kroppens kraftfullaste sekosteroida hormon. I Sverige producerar huden otillräckliga mängder D-vitamin under höst och vinter. Forskning visar att brist är utbredd i alla åldersgrupper, med upp till 97% brist bland de äldsta. NeoLifes vitamin D-tillskott ger D3-formen — den form kroppen producerar naturligt via solljus.</p>
+    </div>
+
+    <p><em>LevNytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Innehållet är informativt och utgör inte medicinsk rådgivning.</em></p>
+
+    <h2>Innehållsförteckning</h2>
+    <ul>
+      <li><a href="#vad-ar-vitamin-d">Vad är vitamin D egentligen?</a></li>
+      <li><a href="#d2-vs-d3">D2 vs D3 — skillnaden som spelar roll</a></li>
+      <li><a href="#brist-norden">Varför brist är vanligt i Norden</a></li>
+      <li><a href="#halsorisker">Hälsorisker vid D-vitaminbrist</a></li>
+      <li><a href="#praktiska-rad">Praktiska råd för svenska konsumenter</a></li>
+      <li><a href="#faq">Vanliga frågor</a></li>
+    </ul>
+
+    <table>
+      <thead><tr><th>Fakta</th><th>Vitamin D</th></tr></thead>
+      <tbody>
+        <tr><td>Kemisk form</td><td>D3 (kolekalciferol) — kroppens naturliga form</td></tr>
+        <tr><td>Klassificering</td><td>Fettlösligt prohormone, inte tekniskt ett vitamin</td></tr>
+        <tr><td>Primär funktion</td><td>Kalciumupptag, benstomme, immunsystem</td></tr>
+        <tr><td>Viktigaste källorna</td><td>Solljus (UVB), fet fisk, berikade livsmedel</td></tr>
+        <tr><td>Nordisk utmaning</td><td>Otillräcklig UVB-strålning okt–mars i Sverige</td></tr>
+        <tr><td>Brist 51–70 år</td><td>93% uppnår inte rekommenderat intag (NHANES 2005–06)</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="vad-ar-vitamin-d">Vad är vitamin D egentligen?</h2>
+
+    <p>Vitamin D är ett fettlösligt mikronäringsämne som naturligt förekommer i mycket få livsmedel. Tekniskt sett är det inte ett vitamin — vitamin D metaboliseras i lever och njurar till kalcitriol, det kraftfullaste sekosteroida hormonet i människokroppen.</p>
+
+    <blockquote>
+      <p>Vitamin D är essentiellt för att främja kalciumupptaget i kroppen och för att upprätthålla tillräckliga kalcium- och fosfatkoncentrationer i blodet för att möjliggöra normal benmineral­isering och tillväxt. — NeoLife produktdokumentation</p>
+    </blockquote>
+
+    <p>Utan tillräckligt vitamin D kan ben bli tunna, bräckliga eller formmissbildade. D-vitamin förebygger rakitis hos barn, osteomalaci hos vuxna och, tillsammans med kalcium, osteoporos hos äldre vuxna.</p>
+
+    <h2 id="d2-vs-d3">D2 vs D3 — skillnaden som spelar roll</h2>
+
+    <p>Det finns två former av vitamin D:</p>
+
+    <ul>
+      <li><strong>Vitamin D2 (ergokalciferol)</strong> — bildas i växter från det naturliga sterolet ergosterol</li>
+      <li><strong>Vitamin D3 (kolekalciferol)</strong> — bildas i huden hos människor och djur från en naturlig form av kolesterol (7-dehydrokolesterol) vid UVB-exponering från solljus</li>
+    </ul>
+
+    <p>D3 är den form som kroppen producerar naturligt och som forskning visar är mer effektiv på att höja och bibehålla vitamin D-nivåer i blodet jämfört med D2.</p>
+
+    <h2 id="brist-norden">Varför brist är vanligt i Norden</h2>
+
+    <p>Sverige ligger på en nordlig breddgrad där UVB-strålningen under höst och vintermånaderna (oktober–mars) inte är tillräcklig för att trigga D-vitaminsyntes i huden — oavsett hur mycket tid man tillbringar utomhus. Därtill påverkar faktorer som molntäcke, smog, melanininnehåll i huden och användning av solskyddskräm D-vitaminproduktionen ytterligare.</p>
+
+    <div class="callout callout-gold">
+      <h4>Svenska vintermånader</h4>
+      <p style="margin-bottom:0;">Under svenska höst- och vintermånader kan kroppen inte producera tillräckliga mängder D-vitamin via solljus, oavsett tid utomhus. Kosttillskott anses av många experter vara det säkraste sättet att säkerställa optimalt D-vitaminintag under dessa månader.</p>
+    </div>
+
+    <p>Trots solens viktiga roll i D-vitaminsyntes är de flesta nu medvetna om att det är klokt att begränsa hudexponering mot solljus och solariesängar på grund av risken för livstidskumulativ UV-skada som kan leda till hudcancer. Dessutom minskar hudproduktionen av D-vitamin med åldern.</p>
+
+    <h3>Utbredningen av brist — data</h3>
+
+    <table>
+      <thead><tr><th>Åldersgrupp</th><th>Rekommenderat intag (IU)</th><th>Andel med brist (%)</th></tr></thead>
+      <tbody>
+        <tr><td>Barn 1–8 år</td><td>200</td><td>30–41%</td></tr>
+        <tr><td>Ungdomar 9–18 år (män)</td><td>200</td><td>47–50%</td></tr>
+        <tr><td>Vuxna 19–50 år (män)</td><td>200</td><td>55–61%</td></tr>
+        <tr><td>Vuxna 51–70 år (män)</td><td>400</td><td>93%</td></tr>
+        <tr><td>Ungdomar 14–18 år (kv)</td><td>200</td><td>75%</td></tr>
+        <tr><td>Vuxna 19–30 år (kv)</td><td>200</td><td>78%</td></tr>
+        <tr><td>71 år och äldre</td><td>600</td><td>&gt;97%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.82rem;color:var(--ink-light);margin-top:-16px;">Källa: NHANES 2005–06, Food &amp; Nutrition Board, Institute of Medicine, USA.</p>
+
+    <h2 id="halsorisker">Hälsorisker vid D-vitaminbrist</h2>
+
+    <p>Utöver försvagade ben kan D-vitaminbrist associeras med ökad mottaglighet för flera kroniska sjukdomar:</p>
+
+    <ul>
+      <li>Högt blodtryck</li>
+      <li>Cancer</li>
+      <li>Periodontal sjukdom</li>
+      <li>Multipel skleros</li>
+      <li>Kronisk smärta</li>
+      <li>Säsongsbunden affektiv störning (SAD)</li>
+      <li>Kognitiv nedsättning</li>
+      <li>Autoimmuna sjukdomar inklusive typ 1-diabetes</li>
+    </ul>
+
+    <p>Dessa associationer är dokumenterade i vetenskaplig litteratur men innebär inte att D-vitamintillskott behandlar eller förebygger dessa tillstånd. Konsultera alltid läkare vid hälsoproblem.</p>
+
+    <h2 id="praktiska-rad">Praktiska råd för svenska konsumenter</h2>
+
+    <ol>
+      <li><strong>Prioritera D-vitamin under vintern</strong> — oktober till mars i Sverige ger otillräcklig UVB-strålning för D-vitaminproduktion i huden. Tillskott under dessa månader är väl motiverat.</li>
+      <li><strong>Välj D3-formen</strong> — kolekalciferol (D3) är den form kroppen producerar naturligt och är mer effektiv än D2 på att höja blodvärden.</li>
+      <li><strong>Kombinera med kalcium och magnesium</strong> — vitamin D, kalcium och magnesium samverkar för normal benstomme. NeoLifes KalMag+D kombinerar alla tre.</li>
+      <li><strong>Riskgrupper</strong> — äldre, personer med mörk hudton, de som undviker sol och inomhusarbetare har extra hög risk för brist.</li>
+      <li><strong>Livsmedelsverkets råd</strong> — Livsmedelsverket rekommenderar D-vitamintillskott till barn, äldre och andra riskgrupper. Konsultera din läkare för personlig dosrekommendation.</li>
+    </ol>
+
+    <h2 id="faq">Vanliga frågor</h2>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Varför är vitamin D extra viktigt i Sverige?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Sverige ligger på en nordlig breddgrad där UVB-strålningen under höst och vinter inte är tillräcklig för att huden ska kunna producera vitamin D. Studier visar att upp till 93% av vuxna i åldersgruppen 51–70 år inte uppnår rekommenderat dagligt intag. Livsmedelsverket rekommenderar D-vitamintillskott till riskgrupper.</p>
+      </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Vad är skillnaden mellan vitamin D2 och D3?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Vitamin D2 bildas i växter, medan D3 bildas i huden hos människor vid UVB-exponering. D3 är den form kroppen producerar naturligt och forskning visar att den är mer effektiv på att höja och bibehålla vitamin D-nivåer i blodet.</p>
+      </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Vilka hälsorisker förknippas med D-vitaminbrist?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Utöver försvagade ben kan D-vitaminbrist associeras med högt blodtryck, cancer, multipel skleros, kronisk smärta, kognitiv nedsättning och autoimmuna sjukdomar. Hos barn kan brist leda till rakitis, hos vuxna osteomalaci.</p>
+      </div>
+    </div>
+
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Hur mycket D-vitamin är tillräckligt?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Food and Nutrition Board fastställde 200–600 IU beroende på ålder. Många hälsoexperter förespråkar idag 1 000 IU per dag för vuxna. Konsultera alltid läkare för personlig dosrekommendation.</p>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#e8f5e9 0%,#f1f8e9 100%);border:1px solid #2e7d32;padding:28px 32px;margin:32px 0;border-radius:12px;text-align:center;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2e7d32;margin-bottom:8px;">REDO ATT PROVA NEOLIFE?</p>
+      <p style="font-size:1.1em;margin-bottom:20px;color:var(--ink);">Handla som kund eller spara 20–25% som distributör</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="btn btn-green" target="_blank" rel="nofollow noopener sponsored">Kundshop &rarr;</a>
+        <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&sponsor=41-830928" class="btn" style="background:#1565c0;color:#fff;" target="_blank" rel="nofollow noopener sponsored">Bli distributör &rarr;</a>
+      </div>
+    </div>
+
+    <p style="font-size:0.85em;color:#888;border-top:1px solid var(--border);padding-top:14px;margin-top:20px;">
+      <strong>Källor:</strong><br>
+      NeoLife Vitamin D — Produktdokumentation, NeoLife International<br>
+      NHANES 2005–06, Food &amp; Nutrition Board, Institute of Medicine, USA<br>
+      Livsmedelsverket — D-vitamin och riskgrupper<br>
+      <a href="/neolife-kosttillskott/">NeoLife kosttillskott — fullständig produktöversikt</a>
+    </p>
+
+  </div>
+</div>
+
+<section class="internal-links-section">
+  <div class="container">
+    <h3>Fler NeoLife-produkter</h3>
+    <ul>
+      <li><a href="/neolife-magnesium-complex/">Magnesium Complex — Tri-Mag formula, 300 mg, vegansk</a></li>
+      <li><a href="/neolife-pro-vitality/">Pro Vitality+ — Det fyrakomponentiga grundsystemet</a></li>
+      <li><a href="/neolife-carotenoid-complex/">Carotenoid Complex — USDA-forskning, 37% immunökning</a></li>
+      <li><a href="/neolife-omega-3-plus/">Omega-3 Plus — Triglyceridform, 1 069 mg per portion</a></li>
+      <li><a href="/neolife-vetenskap/">NeoLifes vetenskapliga råd — oberoende sedan 1976</a></li>
+    </ul>
+  </div>
+</section>
+
+<section style="background:var(--white);padding:64px 0;">
+  <div style="max-width:var(--max-w);margin:0 auto;padding:0 24px;text-align:center;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);margin-bottom:16px;">Handla som kund eller spara 20–25% som distributör</h2>
+    <p style="font-size:1.05rem;color:var(--ink-muted);max-width:560px;margin:0 auto 32px;line-height:1.7;">Inga försäljningskrav. Börja som kund, utvärdera produkterna och bestäm om distributörspriset är meningsfullt för ditt hushåll.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="btn btn-primary" target="_blank" rel="nofollow noopener sponsored">Kundshop &rarr;</a>
+      <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&sponsor=41-830928" class="btn btn-green" target="_blank" rel="nofollow noopener sponsored">Bli distributör &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Lev<span>Nytt</span></div>
+      <p class="footer-tagline">Oberoende NeoLife-distributör. Vetenskapligt baserade kosttillskott och biologiskt nedbrytbar städning sedan 1958. Uppdaterad maj 2026. Sponsor-ID: 41-830928.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Forskning</h5>
+      <a href="/neolife-historia/">Historia</a>
+      <a href="/neolife-vetenskap/">Vetenskap</a>
+      <a href="/neolife-hallbarhet/">Hållbarhet</a>
+      <a href="/direktforsaljning-fakta/">Direktförsäljning</a>
+    </div>
+    <div class="footer-col">
+      <h5>Produkter</h5>
+      <a href="/neolife-pro-vitality/">Pro Vitality+</a>
+      <a href="/neolife-carotenoid-complex/">Carotenoid Complex</a>
+      <a href="/neolife-omega-3-plus/">Omega-3 Plus</a>
+      <a href="/neolife-vitamin-d/">Vitamin D</a>
+      <a href="/neolife-kosttillskott/">Alla produkter</a>
+    </div>
+    <div class="footer-col">
+      <h5>Shoppa</h5>
+      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="noopener">Kundshop</a>
+      <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&sponsor=41-830928" target="_blank" rel="noopener">Bli distributör</a>
+      <a href="/integritetspolicy">Integritetspolicy</a>
+      <a href="/neolife-affarsmojlighet">Affärsmöjlighet</a>
+      <a href="/om-oss">Om oss</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> LevNytt.se &mdash; Oberoende NeoLife-distributör</p>
+    <p class="footer-disclaimer">LevNytt.se är en oberoende NeoLife-distributörswebbplats. Informationen är avsedd för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. Individuella resultat kan variera. Vissa länkar på den här webbplatsen är affiliatelänkar. NeoLife&reg; är ett registrerat varumärke tillhörande NeoLife International. Den här webbplatsen ägs inte av och är inte kopplad till NeoLife International AB.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    var t=document.querySelector(a.getAttribute('href'));
+    if(t){a.addEventListener('click',function(e){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});});}
+  });
+</script>
+</body>
+</html>
