@@ -96,10 +96,12 @@
     .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
     .card-grid-2{grid-template-columns:repeat(2,1fr);}
     .card-grid-4{grid-template-columns:repeat(4,1fr);}
-    .card{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;text-decoration:none;color:inherit;transition:all var(--transition);display:flex;flex-direction:column;gap:12px;}
+    .card{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius-lg);text-decoration:none;color:inherit;transition:all var(--transition);display:flex;flex-direction:column;overflow:hidden;}
     .card:hover{border-color:var(--green);box-shadow:var(--shadow-md);transform:translateY(-2px);}
     .card-featured{background:linear-gradient(135deg,var(--green-dark),var(--green));border-color:transparent;color:var(--white);}
     .card-featured:hover{border-color:var(--gold-light);}
+    .card-img{width:100%;height:180px;object-fit:cover;display:block;}
+    .card-body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1;}
     .card-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);}
     .card-featured .card-tag{color:var(--gold-light);}
     .card-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.3;}
@@ -108,6 +110,8 @@
     .card-featured .card-desc{color:rgba(255,255,255,0.7);}
     .card-arrow{font-size:0.85rem;color:var(--green);font-weight:600;margin-top:auto;padding-top:8px;}
     .card-featured .card-arrow{color:var(--gold-light);}
+    /* Science articles cards keep old padding style */
+    .card-grid-4 .card{padding:24px;}
 
     /* MARKET STATS */
     .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0;}
@@ -284,45 +288,63 @@
       <div class="card-grid">
 
         <a href="/neolife-pro-vitality/" class="card card-featured">
-          <p class="card-tag">Grundsystem</p>
-          <p class="card-title">Pro Vitality+</p>
-          <p class="card-desc">Fyrakomponentsystem för cellulär näring. Tre-en-en, Carotenoid Complex, Omega-3 Plus, Essentiella Vitaminer. 68 års formuleringsvetenskap i ett dagligt paket.</p>
-          <p class="card-arrow">Läs vetenskapen &rarr;</p>
+          <img src="/pro-vitality.jpg" alt="NeoLife Pro Vitality+" class="card-img" loading="lazy" onerror="this.style.display='none'">
+          <div class="card-body">
+            <p class="card-tag">Grundsystem</p>
+            <p class="card-title">Pro Vitality+</p>
+            <p class="card-desc">Fyrakomponentsystem för cellulär näring. Tre-en-en, Carotenoid Complex, Omega-3 Plus, Essentiella Vitaminer. 68 års formuleringsvetenskap i ett dagligt paket.</p>
+            <p class="card-arrow">Läs vetenskapen &rarr;</p>
+          </div>
         </a>
 
         <a href="/neolife-carotenoid-complex/" class="card">
-          <p class="card-tag">Antioxidant · Immunförsvar</p>
-          <p class="card-title">Carotenoid Complex</p>
-          <p class="card-desc">USDA-forskning: 37% ökning av immunkapacitet på 20 dagar. 8 helfodsbaserade karotenoidkällor inkl. lykopen 1 200 mcg och lutein/zeaxantin 410 mcg.</p>
-          <p class="card-arrow">USDA-forskning &rarr;</p>
+          <img src="/carotenoid-complex.jpg" alt="NeoLife Carotenoid Complex" class="card-img" loading="lazy" onerror="this.style.display='none'">
+          <div class="card-body">
+            <p class="card-tag">Antioxidant · Immunförsvar · Kod 566</p>
+            <p class="card-title">Carotenoid Complex</p>
+            <p class="card-desc">USDA-forskning: 37% ökning av immunkapacitet på 20 dagar. 8 helfodsbaserade karotenoidkällor inkl. lykopen 1 200 mcg och lutein/zeaxantin 410 mcg per portion.</p>
+            <p class="card-arrow">USDA-forskning &rarr;</p>
+          </div>
         </a>
 
         <a href="/neolife-tre-en-en/" class="card">
-          <p class="card-tag">Cellulär · 1958</p>
-          <p class="card-title">Tre-en-en</p>
-          <p class="card-desc">Världens första fytonäringstillskott. Fullkorns­lipider och steroler från vetegroddar, risklid och sojabönor — 32 år innan begreppet fytonäringsämne ens existerade.</p>
-          <p class="card-arrow">Cellmembranforskning &rarr;</p>
+          <img src="/tre-en-en.jpg" alt="NeoLife Tre-en-en" class="card-img" loading="lazy" onerror="this.style.display='none'">
+          <div class="card-body">
+            <p class="card-tag">Cellulär näring · 1958 · Kod 510</p>
+            <p class="card-title">Tre-en-en Kornkoncentrat</p>
+            <p class="card-desc">Världens första fytonäringstillskott — 32 år innan begreppet etablerades. Fullkorns­lipider och steroler från vetegroddar, riskli och sojabönor. Texas A&amp;M 1987.</p>
+            <p class="card-arrow">Cellmembranvetenskap &rarr;</p>
+          </div>
         </a>
 
         <a href="/neolife-omega-3-plus/" class="card">
-          <p class="card-tag">Omega-3 · Triglyceridform</p>
-          <p class="card-title">Omega-3 Plus</p>
-          <p class="card-desc">Naturlig triglyceridform — 70% bättre absorption än etylesterform. Molekylärt destillerad. Tredjepartstestning av tungmetaller och PCB varje batch. Alla 8 omega-3-fettsyror.</p>
-          <p class="card-arrow">Varför form spelar roll &rarr;</p>
+          <img src="/omega-3-plus.jpg" alt="NeoLife Omega-3 Plus" class="card-img" loading="lazy" onerror="this.style.display='none'">
+          <div class="card-body">
+            <p class="card-tag">Omega-3 · Triglyceridform · Kod 929</p>
+            <p class="card-title">Omega-3 Plus</p>
+            <p class="card-desc">Naturlig triglyceridform — 70% bättre absorption. 1 069 mg omega-3 per portion: 460 mg EPA, 480 mg DHA, 50 mg DPA. Screenad för 200+ föroreningar varje batch.</p>
+            <p class="card-arrow">Triglycerid vs etylester &rarr;</p>
+          </div>
         </a>
 
         <a href="/neolife-viktkontroll/" class="card">
-          <p class="card-tag">Viktkontroll · Protein</p>
-          <p class="card-title">Viktkontroll</p>
-          <p class="card-desc">NeoLifeShake: 18g komplett protein per portion. NeoLifeBar och NeoLifeTea kompletterar programmet. GR2 glykemisk responskontroll — klinisk studie: 2,4 kg genomsnitt på 12 veckor.</p>
-          <p class="card-arrow">Programmet &rarr;</p>
+          <img src="/viktkontroll.jpg" alt="NeoLife Viktkontroll" class="card-img" loading="lazy" onerror="this.style.display='none'">
+          <div class="card-body">
+            <p class="card-tag">Viktkontroll · Protein · GR2</p>
+            <p class="card-title">Viktkontroll</p>
+            <p class="card-desc">NeoLifeShake: 18g komplett protein per portion, 5g fiber. NeoLifeBar och NeoLifeTea kompletterar programmet. GR2 glykemisk responskontroll — klinisk studie: 2,4 kg på 12 veckor.</p>
+            <p class="card-arrow">GR2-programmet &rarr;</p>
+          </div>
         </a>
 
-        <a href="/nutriance-organic/" class="card">
-          <p class="card-tag">Hudvård · COSMOS Organic</p>
-          <p class="card-title">Nutriance Organic</p>
-          <p class="card-desc">COSMOS-certifierad marin botanisk hudvård. 15 extrakt från Molènes skärgård, UNESCO-biosfär. Kliniskt bevisad: 38% rynkreduktion på 4 veckor, 40% på 30 minuter.</p>
-          <p class="card-arrow">Marinvetenskap &rarr;</p>
+        <a href="/golden-home-care/" class="card">
+          <img src="/Neolife.Home.Care.png" alt="NeoLife Golden Home Care" class="card-img" loading="lazy" onerror="this.style.display='none'">
+          <div class="card-body">
+            <p class="card-tag">Rengöring · Koncentrat · Biologiskt nedbrytbar</p>
+            <p class="card-title">Golden Home Care</p>
+            <p class="card-desc">Fosfatfri och biologiskt nedbrytbar sedan 1960-talet. 700 miljoner plastflaskor förhindrade. LDC: ~8,85 kr/liter utspätt vs ~228 kr/liter för märkesdiskmedel.</p>
+            <p class="card-arrow">Kostnadsjämförelse &rarr;</p>
+          </div>
         </a>
 
       </div>
@@ -482,9 +504,11 @@
         <a href="/neolife-pro-vitality/">Pro Vitality+</a>
         <a href="/neolife-carotenoid-complex/">Carotenoid Complex</a>
         <a href="/neolife-omega-3-plus/">Omega-3 Plus</a>
+        <a href="/neolife-magnesium-complex/">Magnesium Complex</a>
+        <a href="/neolife-vitamin-d/">Vitamin D</a>
+        <a href="/neolife-kosttillskott/">Alla produkter</a>
         <a href="/nutriance-organic/">Nutriance Organic</a>
         <a href="/golden-home-care/">Golden Home Care</a>
-        <a href="/neolife-viktkontroll/">Viktkontroll</a>
       </div>
       <div class="footer-col">
         <h5>Shoppa</h5>
