@@ -164,6 +164,25 @@
       .science-strip-inner{grid-template-columns:repeat(2,1fr);}
     }
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0.01ms!important;}html{scroll-behavior:auto;}}
+
+    /* YLÖS-NUOLI */
+    .scroll-top{position:fixed;bottom:80px;right:24px;width:44px;height:44px;background:var(--green);border:none;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:200;transition:all var(--transition);}
+    .scroll-top:hover{background:var(--green-dark);}
+    .scroll-top.visible{display:flex;}
+    .scroll-top svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.5;}
+    /* TRANSLATOR */
+    .translator-wrap{position:fixed;bottom:24px;right:24px;z-index:200;}
+    .translator-btn{background:#fff;border:1px solid var(--border);border-radius:24px;padding:8px 16px;font-size:0.82rem;font-weight:600;color:var(--ink-muted);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.12);display:flex;align-items:center;gap:6px;transition:all var(--transition);}
+    .translator-btn:hover{border-color:var(--green);color:var(--green);}
+    #google_translate_element{display:none;position:absolute;bottom:48px;right:0;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:8px;box-shadow:0 8px 32px rgba(0,0,0,0.15);}
+    #google_translate_element.open{display:block;}
+    /* VIIMEISIN JULKAISU */
+    .latest-post{background:linear-gradient(135deg,var(--gold-dark),var(--gold));padding:18px 0;}
+    .latest-post-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+    .latest-post-label{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.75);white-space:nowrap;}
+    .latest-post-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#fff;flex:1;min-width:200px;}
+    .latest-post-link{background:#fff;color:var(--gold-dark);font-size:0.85rem;font-weight:700;padding:8px 20px;border-radius:24px;text-decoration:none;white-space:nowrap;transition:all var(--transition);}
+    .latest-post-link:hover{background:var(--cream);}
   </style>
 </head>
 <body>
@@ -236,6 +255,16 @@
         <div class="science-num">DSS</div>
         <div class="science-label">Direct Selling Sweden-medlem — NeoLife på officiell medlemslista</div>
       </div>
+    </div>
+  </div>
+
+
+  <!-- VIIMEISIN JULKAISU -->
+  <div class="latest-post">
+    <div class="latest-post-inner">
+      <span class="latest-post-label">&#128197; Senaste artikeln</span>
+      <span class="latest-post-title">Super 10 — grovrengöring med industristyrka för hemmet</span>
+      <a href="/super-10/" class="latest-post-link">Läs artikeln &rarr;</a>
     </div>
   </div>
 
@@ -535,5 +564,29 @@
 <script src="/nav.js"></script>
 <script src="/nav.js"></script>
 <script src="/footer.js"></script>
+
+  <!-- YLÖS-NUOLI -->
+  <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Tillbaka till toppen">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- TRANSLATOR -->
+  <div class="translator-wrap">
+    <button class="translator-btn" onclick="document.getElementById('google_translate_element').classList.toggle('open')" aria-label="Translate">
+      &#127760; Translate
+    </button>
+    <div id="google_translate_element"></div>
+  </div>
+
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script>
+    function googleTranslateElementInit(){
+      new google.translate.TranslateElement({pageLanguage:'sv',includedLanguages:'en,fi,no,da,de,fr,es,ar,zh-CN,fa',layout:google.translate.TranslateElement.InlineLayout.SIMPLE},'google_translate_element');
+    }
+    // Ylös-nuoli
+    window.addEventListener('scroll',function(){
+      document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+    });
+  </script>
 </body>
 </html>
