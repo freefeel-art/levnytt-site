@@ -48,6 +48,7 @@
     </button>
     <div class="lnav-links" id="lnavLinks">
       <a href="/"${isActive('/')}>Hem</a>
+      <a href="/"${isActive('/')}>Hem</a>
       <a href="/neolife-historia/"${isActive('/neolife-historia/')}>Historia</a>
       <a href="/neolife-vetenskap/"${isActive('/neolife-vetenskap/')}>Vetenskap</a>
 
