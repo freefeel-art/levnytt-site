@@ -47,6 +47,7 @@
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
     <div class="lnav-links" id="lnavLinks">
+      <a href="/"${isActive('/')}>Hem</a>
       <a href="/neolife-historia/"${isActive('/neolife-historia/')}>Historia</a>
       <a href="/neolife-vetenskap/"${isActive('/neolife-vetenskap/')}>Vetenskap</a>
 
