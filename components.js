@@ -68,15 +68,13 @@
     fixLinks();
   }
 
-  // ============================================================
   // CSS
-  // ============================================================
-  var style = document.createElement('style');
-  style.textContent = '\
-    .scroll-top{position:fixed;bottom:80px;right:24px;width:44px;height:44px;background:#2D6A4F;border:none;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:9999;transition:all 0.25s;}\
-    .scroll-top:hover{background:#1B4332;}\
-    .scroll-top.visible{display:flex;}\
-    .scroll-top svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}\
-  document.body.appendChild(gtScript);
-
-})();
+// ============================================================
+var style = document.createElement('style');
+style.textContent = '\
+  .scroll-top{position:fixed;bottom:80px;right:24px;width:44px;height:44px;background:#2D6A4F;border-radius:50%;display:none;justify-content:center;align-items:center;z-index:9999;transition:all 0.3s ease;cursor:pointer;}\
+  .scroll-top:hover{background:#1B4332;}\
+  .scroll-top.visible{display:flex;}\
+  .scroll-top svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;}\
+';
+document.head.appendChild(style);
