@@ -34,7 +34,7 @@
     <div class="lf-col">
       <h5>Produkter</h5>
       <a href="/neolife-kosttillskott/">Kosttillskott</a>
-      <a href="/personlig-vard/">Personlig vård</a>
+      <a href="/personlig-vard.html">Personlig vård</a>
       <a href="/golden-home-care/">Golden Home Care</a>
       <a href="/neolife-pro-vitality/">Pro Vitality+</a>
       <a href="/neolife-carotenoid-complex/">Carotenoid Complex</a>
