@@ -1,0 +1,1234 @@
+
+==================================================
+FACT SOURCE: neolife-vetenskap.html
+==================================================
+  <meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337"/>
+  <title>NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976 | Levnytt.se</title>
+  <meta name="description" content="NeoLife Scientific Advisory Board grundat 1976 av Dr. Arthur Furst — Stanford Ph.D., toxikologins fader. Tre standarder: Renhet, Styrka, Bevis. Publicerat i AJCN, FASEB Journal, JACN. Sponsor-ID: 41-830928.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-vetenskap">
+--
+    "@type": "Article",
+    "headline": "NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976",
+    "description": "NeoLife Scientific Advisory Board grundat 1976 av Dr. Arthur Furst. Tre standarder: Renhet, Styrka, Bevis. Peer-reviewed publikationer i AJCN, FASEB Journal och JACN.",
+    "url": "https://levnytt.se/neolife-vetenskap",
+    "datePublished": "2026-05-12",
+--
+        "name": "Vad är NeoLife Scientific Advisory Board?",
+        "acceptedAnswer": {"@type": "Answer", "text": "SAB (Scientific Advisory Board) är ett oberoende vetenskapligt råd grundat 1976 av Dr. Arthur Furst för att styra NeoLifes produktutveckling. Rådet arbetar utifrån tre standarder: Renhet (Purity), Styrka (Potency) och Bevis (Proof). Inga produkter når NeoLifes sortiment utan att uppfylla alla tre. SAB-forskning publiceras i refereegranskade tidskrifter inklusive American Journal of Clinical Nutrition, FASEB Journal och Journal of the American College of Nutrition."}
+      },
+      {
+        "@type": "Question",
+        "name": "Vem var Dr. Arthur Furst?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Dr. Arthur Furst (1914–2005) tog sin fil.dr. från Stanford 1948 och erhöll ett hedersdoktorat från University of San Francisco. Han grundade Stanford Cancer Chemotherapy Laboratory och är internationellt erkänd som 'toxikologins fader'. Han etablerade NeoLifes SAB 1976 och var senior medlem i ungefär 25 år. University of San Francisco har uppkallat sin Arthur Furst Research Awards och föreläsningsserie efter honom."}
+      },
+      {
+--
+        "name": "Vad innebär de tre SAB-standarderna i praktiken?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Renhet (Purity): systematisk kontaminantscreening och helfodsbaserade ingredienskällor — inga syntetiska isolat utan dokumenterat ursprung. Styrka (Potency): kliniskt relevant dosering från helfodskällor, verifierad biotillgänglighet. Bevis (Proof): stöd från publicerad peer-reviewed forskning — inte enbart interna data. Alla tre krävs för att en produkt ska godkännas av SAB."}
+      },
+      {
+--
+        "name": "I vilka tidskrifter publiceras SAB-forskning?",
+        "acceptedAnswer": {"@type": "Answer", "text": "SAB-forskning och forskning om NeoLifes produkter publiceras regelbundet i: American Journal of Clinical Nutrition (AJCN), FASEB Journal, Journal of the American College of Nutrition (JACN) och International Journal of Toxicology. Externa samarbetspartners inkluderar USDA, UNESCO, Stanford University och University of San Francisco."}
+      },
+      {
+--
+        "name": "Vad är NeoLifes cellulära nutritionsfilosofi?",
+        "acceptedAnswer": {"@type": "Answer", "text": "NeoLifes cellulära nutritionsfilosofi utgår från att solurets arkitektur — inte bara vitamin- och mineralvärden på papper — avgör hur effektivt näring tas upp och används. Cellmembranet kräver lipider, steroler, karotenoider och omega-3 för att fungera optimalt. Denna filosofi predaterade etablerad vetenskaplig terminologi: begreppet 'biotillgänglighet' var inte allmänt använt inom nutritionsvetenskap när NeoLife redan byggde sina formuleringar kring det."}
+      }
+    ]
+--
+        <a href="/neolife-kosttillskott/">Alla produkter</a>
+        <a href="/neolife-pro-vitality/">Pro Vitality+</a>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" class="nav-cta" target="_blank" rel="noopener">Handla NeoLife &rarr;</a>
+      </div>
+--
+      </div>
+      <h1>NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976</h1>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">1976</span><span class="lbl">Grundat</span></div>
+        <div class="hero-stat"><span class="num">3</span><span class="lbl">Standarder: Renhet, Styrka, Bevis</span></div>
+        <div class="hero-stat"><span class="num">10</span><span class="lbl">Oberoende forskare</span></div>
+        <div class="hero-stat"><span class="num">AJCN</span><span class="lbl">Publicerat i</span></div>
+--
+        <h4>Sammanfattning</h4>
+        <p style="margin-bottom:0;">NeoLife Scientific Advisory Board (SAB) grundades 1976 av Dr. Arthur Furst — fil.dr. från Stanford, grundare av Stanford Cancer Chemotherapy Laboratory, internationellt erkänd som "toxikologins fader". SAB styr all NeoLife-produktutveckling utifrån tre standarder: Renhet, Styrka och Bevis. Forskning publiceras i <em>American Journal of Clinical Nutrition</em>, <em>FASEB Journal</em> och <em>Journal of the American College of Nutrition</em>. Externa samarbetspartners inkluderar USDA, UNESCO och University of San Francisco.</p>
+      </div>
+
+--
+        <ol>
+          <li><a href="#tre-standarder">De tre standarderna — Renhet, Styrka, Bevis</a></li>
+          <li><a href="#arthur-furst">Dr. Arthur Furst — grundaren av SAB</a></li>
+          <li><a href="#publikationer">Peer-reviewed publikationer och samarbeten</a></li>
+          <li><a href="#cellulär-filosofi">Cellulär nutritionsfilosofi</a></li>
+--
+
+      <h2 id="tre-standarder">De tre standarderna — Renhet, Styrka, Bevis</h2>
+
+      <p>SAB:s tre standarder är inte aspiration — de är operativa grindvaktskriterier. Ingen produkt når NeoLifes sortiment utan att ha godkänts mot alla tre.</p>
+--
+          <div class="icon">🔬</div>
+          <h4>Renhet</h4>
+          <p>Systematisk kontaminantscreening. Helfodsbaserade ingredienskällor. Inga syntetiska isolat utan dokumenterat ursprung. Varje batch testad.</p>
+        </div>
+--
+          <div class="icon">⚗️</div>
+          <h4>Styrka</h4>
+          <p>Kliniskt relevant dosering från helfodskällor. Verifierad biotillgänglighet — inte bara milligramvärden på etikett, utan vad som faktiskt tas upp.</p>
+        </div>
+--
+          <div class="icon">📄</div>
+          <h4>Bevis</h4>
+          <p>Stöd från publicerad peer-reviewed forskning — inte enbart interna data. SAB kräver extern vetenskaplig validering.</p>
+        </div>
+--
+
+      <h2 id="arthur-furst">Dr. Arthur Furst — grundaren av SAB</h2>
+
+      <img src="ArthurFurst.png"
+           alt="Dr. Arthur Furst — grundare av NeoLife Scientific Advisory Board, Stanford Ph.D., toxikologins fader"
+           class="portrait"
+           loading="lazy">
+
+      <p>Dr. Arthur Furst (1914–2005) tog sin fil.kand. från UCLA 1937, sin magister från Stanford 1940 och sin fil.dr. från Stanford 1948. Han erhöll senare ett hedersdoktorat i toxikologi från University of San Francisco — den institution som uppkallat sin Arthur Furst Research Awards och föreläsningsserie efter honom.</p>
+
+      <p>Furst grundade Stanford Cancer Chemotherapy Laboratory och tillbringade decennier i skärningspunkten mellan toxikologi och cancerpreventionsforskning. Han var en av de första forskarna att utveckla ett effektivt oralt cancerläkemedel. University of San Francisco beskriver honom som Distinguished University Professor Emeritus.</p>
+
+      <p>Internationellt är han erkänd som "toxikologins fader" — en titel som reflekterar hans pionjärarbete inom att systematiskt förstå hur kemiska ämnen påverkar biologiska system. Det var denna kompetens — att förstå vad som är säkert, vad som är effektivt och hur man bevisar det — som Jerry Brassfield anlitade honom för att tillföra NeoLife 1976.</p>
+
+      <div class="callout callout-gold">
+        <h4>Dr. Arthur Fursts akademiska meriter</h4>
+        <p style="margin-bottom:0;">A.B. Kemi, UCLA (1937)<br>
+        M.A. Stanford University (1940)<br>
+--
+        Founding Member Emeritus, NeoLife Scientific Advisory Board<br>
+        Senior SAB-medlem i ungefär 25 år (1976–ca 2001)</p>
+      </div>
+
+--
+      <ul class="journal-list">
+        <li><em>American Journal of Clinical Nutrition</em> (AJCN) — flaggskeppstudie om Carotenoid Complex, PMID: 8147336 (Carughi &amp; Hooper, 1994)</li>
+        <li><em>FASEB Journal</em> — immunfunktionsstudier</li>
+        <li><em>Journal of the American College of Nutrition</em> (JACN)</li>
+        <li><em>International Journal of Toxicology</em></li>
+        <li><em>Annals of the New York Academy of Sciences</em> — USDA immunstudie</li>
+        <li><em>Free Radical Biology and Medicine</em> — USDA oxidativ stress</li>
+      </ul>
+
+--
+          <tr>
+            <td><strong>USDA</strong> (US Department of Agriculture)</td>
+            <td>Kliniska studier på Carotenoid Complex — immunfunktion och antioxidantskydd</td>
+          </tr>
+          <tr>
+--
+            <td><strong>University of San Francisco</strong></td>
+            <td>Arthur Furst föreläsningsserie och Research Awards</td>
+          </tr>
+          <tr>
+            <td><strong>Texas A&amp;M University</strong></td>
+            <td>Tre-en-en näringsutnyttjandestudie (1987)</td>
+          </tr>
+        </tbody>
+--
+
+      <p>NeoLifes cellulära nutritionsfilosofi utgår från att solurets arkitektur — inte bara vitamin- och mineralvärden på papper — avgör hur effektivt näring tas upp och används. Cellmembranet, byggt av ett dubbelt fosfolipidlager med inbäddade steroler och transportproteiner, kräver lipider, steroler, karotenoider och omega-3-fettsyror för att fungera optimalt.</p>
+
+      <p>En diet som möter referensvärden för vitaminer och mineraler kan fortfarande leverera dessa ineffektivt om cellmembranarkitekturen är komprometterad av lipid- och sterolbrist. NeoLifes formuleringsrespons, med början 1958, var att återställa dessa saknade föreningar genom Tre-en-en — och att kombinera dem med vitaminer, mineraler, karotenoider och omega-3 i ett system utformat kring vad cellen faktiskt behöver.</p>
+
+      <p>Denna filosofi predaterade etablerad vetenskaplig terminologi. Begreppet "biotillgänglighet" var inte allmänt använt inom nutritionsvetenskap när NeoLife redan byggde sina formuleringar kring det.</p>
+--
+
+      <p>SAB:s tre standarder har format varje NeoLife-produkt sedan 1976. Konkreta exempel:</p>
+
+      <ul>
+        <li><strong>Carotenoid Complex</strong> — formulerad som bredspektrum (8 livsmedelskällor) snarare än isolerat beta-karoten, baserat på SAB:s insikt att individuella karotenoider spelar olika roller. USDA-studie bekräftade 37% immunökning på 20 dagar.</li>
+        <li><strong>Tre-en-en</strong> — världens första fytonäringstillskott 1958, specificerat av SAB baserat på insikten om spannmålsförädlingens borttagande av biologiskt aktiva fraktioner.</li>
+        <li><strong>Omega-3 Plus</strong> — 8 standardiserade fettsyror snarare än bara EPA+DHA, baserat på SAB:s helfodsfilosofi. Molekylär särkiljningsprocess för renhet.</li>
+        <li><strong>Pro Vitality+</strong> — fyrakomponentsystem specificerat av SAB för att adressera de fyra primära cellulära näringsgapen simultant.</li>
+      </ul>
+
+--
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">SAB är ett oberoende vetenskapligt råd grundat 1976 av Dr. Arthur Furst. Rådet styr NeoLifes produktutveckling utifrån tre standarder: Renhet (Purity), Styrka (Potency) och Bevis (Proof). Forskning publiceras i AJCN, FASEB Journal, JACN och International Journal of Toxicology. Externa samarbetspartners inkluderar USDA, UNESCO, Stanford och University of San Francisco.</p>
+        </div>
+      </div>
+--
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Vem var Dr. Arthur Furst?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Dr. Arthur Furst (1914–2005) tog sin fil.dr. från Stanford 1948. Han grundade Stanford Cancer Chemotherapy Laboratory och är internationellt erkänd som "toxikologins fader". Han etablerade NeoLifes SAB 1976 och var senior medlem i ungefär 25 år. USF har uppkallat sin Arthur Furst Research Awards efter honom.</p>
+        </div>
+      </div>
+--
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Renhet: systematisk kontaminantscreening och helfodsbaserade ingredienskällor. Styrka: kliniskt relevant dosering med verifierad biotillgänglighet. Bevis: stöd från publicerad peer-reviewed forskning — inte enbart interna data. Alla tre krävs för att en produkt ska godkännas av SAB.</p>
+        </div>
+      </div>
+--
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">American Journal of Clinical Nutrition (AJCN), FASEB Journal, Journal of the American College of Nutrition (JACN), International Journal of Toxicology, Annals of the New York Academy of Sciences och Free Radical Biology and Medicine. USDA-samarbetet resulterade i publikationer om Carotenoid Complex (PMID: 8147336, 1994).</p>
+        </div>
+      </div>
+--
+        <a href="https://pubmed.ncbi.nlm.nih.gov/8147336/" target="_blank" rel="noopener">Carughi &amp; Hooper (1994) — American Journal of Clinical Nutrition, PMID: 8147336</a><br>
+        <a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a><br>
+        <a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning</a><br>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
+      </p>
+--
+      <ul>
+        <li><a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a></li>
+        <li><a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning på 20 dagar</a></li>
+        <li><a href="/neolife-tre-en-en">Tre-en-en — Världens första fytonäringstillskott sedan 1958</a></li>
+        <li><a href="/neolife-pro-vitality/">Pro Vitality+ — Det fyrakomponentbaserade grundsystemet</a></li>
+        <li><a href="/neolife-hallbarhet/">NeoLife Hållbarhet — Vetenskapsbaserade miljöstandarder</a></li>
+      </ul>
+
+==================================================
+FACT SOURCE: neolife-historia.html
+==================================================
+  <meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337"/>
+  <title>NeoLifes historia: Från 1958 till global cellulär nutrition | Levnytt.se</title>
+  <meta name="description" content="NeoLife grundat 1958 av Jerry Brassfield. Tre-en-en — världens första fytonäringstillskott. SAB grundat 1976 av Dr. Arthur Furst. Jim Rohn, Tony Robbins och Mark Hughes kopplingen. 68 år av kontinuerlig drift.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-historia">
+--
+    "@type": "Article",
+    "headline": "NeoLifes historia: Från 1958 till global cellulär nutrition",
+    "description": "NeoLife grundat 1958 av Jerry Brassfield. Tre-en-en världens första fytonäringstillskott. SAB 1976 av Dr. Arthur Furst. Jim Rohn, Tony Robbins, Mark Hughes kopplingen.",
+    "url": "https://levnytt.se/neolife-historia",
+    "datePublished": "2026-05-12",
+--
+        "name": "Vem grundade NeoLife och när?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Jerry Brassfield grundade GNLD (Golden Neo-Life Diamite) 1958 i Fremont, Kalifornien. Han började distribuera näringsprodukter person till person och byggde upp företaget till en global direktförsäljningsverksamhet. NeoLife-namnet, som betyder 'new life', slogs senare samman med hans andra företag till NeoLife International. Grundarfilosofin — 'based in nature, backed by science' — har förblivit densamma under 68 år."}
+      },
+      {
+--
+        "name": "Vilken koppling hade Jim Rohn till NeoLife?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Jim Rohn gick med i Jerry Brassfields NeoLife-distributionsnätverk vid 37 års ålder. Les Brown var också i teamet. Jim Rohn rekryterade sedan Tony Robbins. Zig Ziglar registrerade sig. Mark Hughes lämnade Brassfields nätverk och använde vad han lärt sig för att grunda Herbalife. När Jim Rohn ville lämna för att bli heltidstalare gav Brassfield honom hela Adventures in Achievement-biblioteket de hade byggt tillsammans — utan kostnad."}
+      },
+      {
+        "@type": "Question",
+        "name": "Vad är Tre-en-en och varför var det betydelsefullt 1958?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Tre-en-en Kornkoncentrat — utvunnet från vetegroddar, riskli och sojabönor — introducerades av NeoLife 1958 som världens första fytonäringstillskott. Begreppet 'fytonäringsämne' etablerades inte i mainstream nutritionsvetenskap förrän på 1990-talet — 32 år senare. Texas A&M University-forskning 1987 dokumenterade förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering."}
+      },
+      {
+--
+        "name": "Vad är NeoLife Scientific Advisory Board?",
+        "acceptedAnswer": {"@type": "Answer", "text": "SAB är ett oberoende vetenskapligt råd grundat 1976 av Dr. Arthur Furst för att styra NeoLifes produktutveckling utifrån tre standarder: Renhet, Styrka och Bevis. SAB-forskning publiceras i American Journal of Clinical Nutrition och FASEB Journal. Externa samarbetspartners inkluderar USDA, UNESCO, Stanford University och University of San Francisco."}
+      },
+      {
+        "@type": "Question",
+        "name": "Vem var Jerry Brassfield?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Jerry Brassfield (född 9 april 1940, Porterville, Kalifornien) grundade NeoLife 1958 vid 19 års ålder med 50 dollar lånade av sin bror. Han byggde NeoLife genom två misslyckade företag innan det tredje — NeoLife — aldrig misslyckades. Hans grundarfilosofi formades av personliga hälsoerfarenheter och en övertygelse om att näring på cellnivå, inte minimala referensvärden, var den rätta utgångspunkten."}
+      }
+    ]
+--
+        <a href="/neolife-kosttillskott/">Alla produkter</a>
+        <a href="/neolife-pro-vitality/">Pro Vitality+</a>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" class="nav-cta" target="_blank" rel="noopener">Handla NeoLife &rarr;</a>
+      </div>
+--
+      </div>
+      <h1>NeoLifes historia: Från 1958 till global cellulär nutrition</h1>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">1958</span><span class="lbl">Grundat</span></div>
+        <div class="hero-stat"><span class="num">68</span><span class="lbl">År i kontinuerlig drift</span></div>
+        <div class="hero-stat"><span class="num">1976</span><span class="lbl">SAB grundat</span></div>
+        <div class="hero-stat"><span class="num">50+</span><span class="lbl">Globala marknader</span></div>
+      </div>
+--
+    <img src="/images/neolife-history.jpg"
+         alt="NeoLife historia — vintage produktflaska från 1950-talet, NeoLife grundat 1958 av Jerry Brassfield"
+         width="100%"
+         style="border-radius:12px;display:block;"
+--
+        <h4>Sammanfattning</h4>
+        <p style="margin-bottom:0;">NeoLife grundades 1958 av Jerry Brassfield i Fremont, Kalifornien — nästan sju decennier innan "biotillgänglighet", "helfodsbaserat" och "radikal transparens" blev branschstandarder. Tre-en-en, introducerat samma år, var världens första fytonäringstillskott — 32 år innan begreppet etablerades. 1976 grundade Dr. Arthur Furst — Stanford fil.dr., grundare av Stanford Cancer Chemotherapy Laboratory, internationellt erkänd som "toxikologins fader" — Scientific Advisory Board på tre standarder: Renhet, Styrka, Bevis. SAB-forskning har sedan publicerats i <em>American Journal of Clinical Nutrition</em>, <em>FASEB Journal</em> och <em>JACN</em>, i samarbete med USDA, UNESCO och University of San Francisco.</p>
+      </div>
+
+      <p style="font-size:0.9rem;font-style:italic;color:var(--ink-light);">Levnytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Denna sida spårar NeoLifes dokumenterade historia från 1958 till 2026 med hjälp av företagsmaterial, universitetskällor och peer-reviewed publikationer. Där information kommer från företagskällor anges det.</p>
+
+      <div class="toc">
+--
+        <ol>
+          <li><a href="#grundaren">Jerry Brassfields berättelse — 50 dollar och en vision</a></li>
+          <li><a href="#jim-rohn">Jim Rohn, Tony Robbins och Mark Hughes kopplingen</a></li>
+          <li><a href="#1958">1958 — Tre-en-en och Formula IV</a></li>
+          <li><a href="#tidslinje">Historisk tidslinje 1958–2026</a></li>
+          <li><a href="#filosofi">Cellulär nutritionsfilosofi — före sin tid</a></li>
+          <li><a href="#faq">Vanliga frågor</a></li>
+--
+
+      <h2 id="grundaren">Jerry Brassfields berättelse — 50 dollar och en vision</h2>
+
+      <p>Innan NeoLife blev ett globalt företag med peer-reviewed forskning i <em>American Journal of Clinical Nutrition</em> och ett vetenskapligt råd grundat av en Stanford-fil.dr., började det med en 19-åring i Porterville, Kalifornien som lånade 50 dollar av sin bror.</p>
+
+      <p>Jerry Brassfield (född 9 april 1940) gick på ett näringspresentationsmöte med sin bror Bob i Porterville. Bob tjänade 70 cent i timmen på att reparera TV-rör. Han lånade Jerry anmälningsavgiften — motsvarande ungefär 400 kronor i dagens pengar — och Jerry registrerade honom som sin första distributör. Den initiala visionen var inte global. Det var Porterville till Lindsey — en mil. Sedan Strathmore, Terra Bella, Cotton Center. Visalia var storstaden.</p>
+
+      <blockquote>
+        <p>"Det finns inget sätt jag kunde ha föreställt mig var vi är idag. Det var helt enkelt inte möjligt. Om någon ens hade sagt det till mig hade det förmodligen skrämt mig."</p>
+        <cite style="display:block;margin-top:10px;font-size:0.85rem;font-style:normal;">— Jerry Brassfield, NeoLifes grundare</cite>
+      </blockquote>
+
+--
+
+      <p>Brassfield växte upp med astma och hösnuva i San Joaquin Valley. Hans mor introducerade honom för näringskosttillskott. Hans fars historia var mer dramatisk — en kost av stekt kyckling och hemlagat smör hade gjort honom allvarligt sjuk. Lokala läkare kunde inte hjälpa. Brassfield fick in honom på Stanford. Interventionen var enkel: de slutade med kosten. "Allt de gjorde var att sluta stoppa i honom min mors mat — och det botade honom," sade Brassfield. Stanford-erfarenheten — att mat i sig, inte medicinering, var den primära variabeln — blev en del av den filosofiska grunden för NeoLifes cellulära nutritionsansats.</p>
+
+      <h2 id="jim-rohn">Jim Rohn, Tony Robbins och Mark Hughes kopplingen</h2>
+--
+        <p>"Jag kallar det ett misstag — det är det jag verkligen missade."</p>
+        <cite style="display:block;margin-top:10px;font-size:0.85rem;font-style:normal;">— Jerry Brassfield, om Mark Hughes som lämnade för att grunda Herbalife</cite>
+      </blockquote>
+
+      <h2 id="1958">1958 — Tre-en-en och Formula IV</h2>
+
+      <p>1958 introducerade NeoLife två produkter som definierade företagets riktning för de följande 68 åren:</p>
+
+      <p><strong>Tre-en-en Kornkoncentrat</strong> — utvunnet från vetegroddar, riskli och sojabönor — lanserades som världens första fytonäringstillskott. Begreppet "fytonäringsämne" etablerades inte i mainstream nutritionsvetenskap förrän på 1990-talet. Tre-en-en predaterade den vetenskapliga konsensensen med 32 år.</p>
+
+      <p><strong>Formula IV</strong> — det första multifaktorkosttillskottet att kombinera vitaminer, mineraler, enzymer och kornderiverade lipider och steroler i en enda formulering. Principen: nutrition bör utvärderas baserat på hur den fungerar på cellnivå, inte enbart om den uppfyller minimala referensvärden.</p>
+
+      <h2 id="tidslinje">Historisk tidslinje 1958–2026</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">1958</div>
+          <div class="timeline-title">NeoLife grundas — Formula IV och Tre-en-en lanseras</div>
+          <div class="timeline-desc">Jerry Brassfield grundar GNLD i Fremont, Kalifornien. Formula IV — första multifaktortillskottet med kornlipider. Tre-en-en — världens första fytonäringstillskott.</div>
+        </div>
+        <div class="timeline-item">
+--
+        <div class="timeline-item">
+          <div class="timeline-year">1976</div>
+          <div class="timeline-title">Scientific Advisory Board grundas av Dr. Arthur Furst</div>
+          <div class="timeline-desc">Dr. Arthur Furst — Stanford fil.dr., grundare av Stanford Cancer Chemotherapy Laboratory, "toxikologins fader" — etablerar SAB på tre standarder: Renhet, Styrka, Bevis.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1987</div>
+          <div class="timeline-title">Texas A&amp;M University — Tre-en-en-studie</div>
+          <div class="timeline-desc">Sju veckors djurstudie dokumenterar förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering. Bättre tillväxt, hjärt-kärlsystem och binjurefunktion.</div>
+        </div>
+--
+          <div class="timeline-year">1994</div>
+          <div class="timeline-title">USDA-studie publiceras i AJCN — PMID: 8147336</div>
+          <div class="timeline-desc">Carughi &amp; Hooper publicerar kliniska resultat för Carotenoid Complex i American Journal of Clinical Nutrition: 37% ökning av immunkapacitet på 20 dagar.</div>
+        </div>
+        <div class="timeline-item">
+--
+    <img src="/images/ArthurFurst.png"
+         alt="Dr. Arthur Furst — grundare av NeoLife Scientific Advisory Board 1976, Stanford PhD, toxikologins fader"
+         loading="lazy">
+    <figcaption>Dr. Arthur Furst (1914–2005) — Stanford fil.dr., grundare av Stanford Cancer Chemotherapy Laboratory. Grundade NeoLife Scientific Advisory Board 1976 på tre standarder: Renhet, Styrka och Bevis.</figcaption>
+  </figure>
+
+--
+
+      <p>NeoLifes cellulära nutritionsfilosofi höll fast vid att solurets arkitektur — inte bara vitamin- och mineralvärden på papper — avgör hur effektivt näring tas upp. En diet som möter referensvärden kan fortfarande leverera dessa ineffektivt om cellmembranets lipid- och sterolstruktur är komprometterad.</p>
+
+      <div class="callout callout-gold">
+--
+        <p style="margin-bottom:0;">NeoLifes 68-åriga historia representerar en konsekvent tillämpning av en enda princip: att nutrition bör utvärderas baserat på cellbiologi snarare än minimala regulatoriska trösklar.<br><br>
+        Formula IV (1958) — första multifaktortillskottet.<br>
+        Tre-en-en (1958) — världens första fytonäringstillskott, 32 år innan begreppet etablerades.<br>
+        Golden Home Care (1960-talet) — biologiskt nedbrytbara koncentrat decennier innan regulatoriska mandat.<br>
+        SAB (1976) — grundat av Dr. Arthur Furst, Stanford fil.dr., på Renhet, Styrka och Bevis.<br>
+        68 år. En filosofi. Ett forskningsrekord som håller.</p>
+      </div>
+--
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Jerry Brassfield grundade GNLD (Golden Neo-Life Diamite) 1958 i Fremont, Kalifornien vid 19 års ålder med 50 dollar lånade av sin bror. Han byggde NeoLife genom två misslyckade företag innan det tredje aldrig misslyckades. NeoLife-namnet, som betyder "new life", slogs samman med hans andra företag till NeoLife International. Grundarfilosofin — "based in nature, backed by science" — har förblivit densamma under 68 år.</p>
+        </div>
+      </div>
+--
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Vad är Tre-en-en och varför var det betydelsefullt 1958?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Tre-en-en Kornkoncentrat — från vetegroddar, riskli och soja — introducerades 1958 som världens första fytonäringstillskott. Begreppet "fytonäringsämne" etablerades inte förrän på 1990-talet — 32 år senare. Texas A&amp;M University-forskning 1987 dokumenterade förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering.</p>
+        </div>
+      </div>
+--
+        <a href="https://pubmed.ncbi.nlm.nih.gov/8147336/" target="_blank" rel="noopener">Carughi &amp; Hooper (1994) — American Journal of Clinical Nutrition, PMID: 8147336</a><br>
+        <a href="/neolife-vetenskap">NeoLife Vetenskapliga rådet — Oberoende vetenskap sedan 1976</a><br>
+        <a href="/neolife-tre-en-en">Tre-en-en — Världens första fytonäringstillskott sedan 1958</a><br>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
+      </p>
+--
+      <ul>
+        <li><a href="/neolife-vetenskap">Vetenskapliga rådet — Oberoende vetenskap sedan 1976</a></li>
+        <li><a href="/neolife-tre-en-en">Tre-en-en — Världens första fytonäringstillskott</a></li>
+        <li><a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning</a></li>
+        <li><a href="/neolife-hallbarhet/">NeoLife Hållbarhet — Vetenskapsbaserade miljöstandarder</a></li>
+        <li><a href="/direktforsaljning-fakta">MLM vs pyramidspel — Juridiskt ramverk</a></li>
+
+==================================================
+FACT SOURCE: neolife-pro-vitality.html
+==================================================
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeoLife Pro Vitality+: Det fyrkomponentiga grundsystemet | LevNytt.se</title>
+  <meta name="description" content="Pro Vitality+ kombinerar Tre-en-en, Carotenoid Complex, Omega-3 Plus och Formula IV Plus i ett system. USDA: 37% immunökning på 20 dagar. Triglyceridform omega-3: 70% bättre absorption. Sponsor-ID: 41-830928.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-pro-vitality/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"NeoLife Pro Vitality+: Det fyrkomponentiga grundsystemet för cellulär näring","url":"https://levnytt.se/neolife-pro-vitality/","datePublished":"2026-05-10","dateModified":"2026-05-15","author":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Vad ingår i Pro Vitality+?","acceptedAnswer":{"@type":"Answer","text":"Pro Vitality+ består av fyra komponenter: Tre-en-en Grain Concentrates, Carotenoid Complex, Omega 3 Plus (triglyceridform) och Formula IV Plus. Systemet adresserar fyra distinkta cellulära näringsbehov simultant."}},{"@type":"Question","name":"Vad är triglyceridform omega-3?","acceptedAnswer":{"@type":"Answer","text":"Omega-3 i triglyceridform absorberas 70% bättre än etylesterformen som de flesta fiskoljetillskott använder. NeoLifes Omega 3 Plus levererar alla åtta omega-3-fettsyror i triglyceridform, testad mot 200+ föroreningar."}},{"@type":"Question","name":"Vad visade USDA-forskningen?","acceptedAnswer":{"@type":"Answer","text":"USDA dokumenterade 37% ökning av immunkapacitet på 20 dagar, förstärkt NK-cells- och lymfocytaktivitet. Publicerat i American Journal of Clinical Nutrition (PMID: 8147336)."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hem","item":"https://levnytt.se/"},{"@type":"ListItem","position":2,"name":"NeoLife kosttillskott","item":"https://levnytt.se/neolife-kosttillskott/"},{"@type":"ListItem","position":3,"name":"Pro Vitality+","item":"https://levnytt.se/neolife-pro-vitality/"}]}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+--
+      <a href="/neolife-kosttillskott/">NeoLife kosttillskott</a><span class="sep">/</span>
+      <span class="current">Pro Vitality+</span>
+    </div>
+    <h1>NeoLife Pro Vitality+: Det fyrkomponentiga grundsystemet för cellulär näring</h1>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">37%</span><span class="lbl">Immunökning (USDA)</span></div>
+      <div class="hero-stat"><span class="num">70%</span><span class="lbl">Bättre omega-3 absorption</span></div>
+      <div class="hero-stat"><span class="num">4</span><span class="lbl">Komponenter i ett</span></div>
+      <div class="hero-stat"><span class="num">1958</span><span class="lbl">NeoLife grundat</span></div>
+    </div>
+  </div>
+--
+  <img src="/images/pro-vitality.jpg"
+       alt="NeoLife Pro Vitality+ — fyrakomponentsystem för cellulär näring"
+       width="100%"
+       style="border-radius:12px;display:block;"
+--
+      <h4>Sammanfattning</h4>
+      <p style="margin-bottom:0;">Pro Vitality+ är NeoLifes flaggskeppssystem — fyra komponenter som adresserar distinkta cellulära näringsbehov simultant: Tre-en-en (spannmålslipider för cellmembranfunktion, 1958), Carotenoid Complex (USDA: 37% immunökning på 20 dagar, PMID: 8147336), Omega 3 Plus (triglyceridform omega-3 — 70% bättre absorption, testad mot 200+ föroreningar) och Formula IV Plus (SAB-doserat multivitamin- och mineralkomplex). Det är ett system — inte ett enskilt tillskott.</p>
+    </div>
+
+--
+    <h2>Varför ett system — inte ett enskilt tillskott</h2>
+    <p>De flesta multivitaminer bygger på ett enda antagande: att näringsbehov handlar om att tillhandahålla vitaminer och mineraler. NeoLife Scientific Advisory Board identifierade ett fundamentalt problem med det antagandet år 1958 — och har byggt produktfilosofin kring svaret sedan dess.</p>
+    <p>Problemet är att cellen inte kan absorbera och använda näringsämnen effektivt om cellmembranets arkitektur är komprometterad. Och cellmembranets arkitektur beror på lipid- och sterolsammansättning — en kategori föreningar som nästan alla multivitaminer ignorerar helt.</p>
+
+    <table>
+--
+      <tbody>
+        <tr><td><strong>Tre-en-en</strong></td><td>Cellmembranstöd — lipider och steroler</td><td>Världens första fytonutrienttillskott (1958); Texas A&M 1987</td></tr>
+        <tr><td><strong>Carotenoid Complex</strong></td><td>Antioxidant- och immunfunktion</td><td>USDA: 37% immunökning på 20 dagar; PMID: 8147336</td></tr>
+        <tr><td><strong>Omega 3 Plus</strong></td><td>Cellmembranfluiditet — nerv och immunsystem</td><td>Triglyceridform: 70% bättre absorption; alla 8 omega-3-fettsyror</td></tr>
+        <tr><td><strong>Formula IV Plus</strong></td><td>Vitaminer och mineraler — klinisk dosering</td><td>SAB-doserat vid klinisk relevans</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Komponent 1: Tre-en-en — Cellmembranets fundament</h2>
+    <p>Tre-en-en Grain Concentrates introducerades 1958 som världens första fytonutrienttillskott — 32 år innan termen "fytonutrient" kom in i mainstream-nutritionsvetenskap. Framtaget ur vetegroddar, riskli och sojabönor.</p>
+    <p>Texas A&M University-forskning (1987) dokumenterade att Tre-en-en-gruppen uppvisade bättre tillväxt, utveckling och kardiovaskulär funktion vid samma kaloriintag — tolkat som förbättrad näringsutnyttjandeeffektivitet.</p>
+    <p style="font-size:0.9rem;color:var(--ink-light);font-style:italic;">Notering: Texas A&M-studien är ett djurförsök (Wistar-råttor), inte en human klinisk studie.</p>
+
+    <h2>Komponent 2: Carotenoid Complex — USDA-partnerad immunforskning</h2>
+    <p>USDA-forskare genomförde kliniska studier oberoende och publicerade resultaten i peer-granskade tidskrifter. Studierna dokumenterade 37% ökning av immunkapacitet på 20 dagar, förstärkt aktivitet hos NK-celler och lymfocyter, samt effektivt antioxidantskydd av blodlipider.</p>
+    <p>Resultaten publicerades i <em>American Journal of Clinical Nutrition</em> (PMID: 8147336) och <em>Annals of the New York Academy of Sciences</em>.</p>
+
+    <h2>Komponent 3: Omega 3 Plus — Triglyceridform och ren källa</h2>
+    <p>De flesta fiskoljetillskott på marknaden är etylestrar — en bearbetad form som absorberas sämre. Triglyceridform omega-3 har i kliniska studier visat 70% bättre absorption. Omega 3 Plus levererar alla åtta omega-3-fettsyror, testad mot över 200 möjliga föroreningar via molekyldestillation.</p>
+
+    <div class="callout">
+      <h4>Renhet: Noll-toleransfilosofi</h4>
+      <p style="margin-bottom:0;">Omega 3 Plus testas mot över 200 möjliga föroreningar — tungmetaller, PCB, dioxiner och andra miljögifter som koncentreras i marina livsmedelskedjor. SAB:s Renhet-standard i praktiken.</p>
+    </div>
+
+    <h2>Komponent 4: Formula IV Plus — SAB-doserat multivitaminkomplex</h2>
+    <p>Formula IV Plus levererar vitaminer och mineraler doserade vid klinisk relevans snarare än minimala referensintag — ett direkt resultat av SAB:s Potens-standard. Det är skillnaden mellan att förhindra brist och att stödja optimal funktion.</p>
+
+    <h2>Systemlogiken: Varför fyra komponenter</h2>
+--
+      <h4>Den kausalkedja som SAB byggde</h4>
+      <p style="margin-bottom:0;">Tre-en-en skapar membranet som absorberar. Carotenoid Complex skyddar och stödjer immunsystemet. Omega 3 Plus kompletterar membranets fettsyreprofil. Formula IV Plus tillhandahåller de byggstenar systemet kräver. Det är en vetenskaplig arkitektur — 68 år i görningen.</p>
+    </div>
+
+--
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Vad ingår i Pro Vitality+?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Fyra komponenter: Tre-en-en (cellmembranstöd), Carotenoid Complex (immunfunktion, USDA-studerad), Omega 3 Plus (triglyceridform omega-3) och Formula IV Plus (SAB-doserat multivitamin). Kod 962 — 30 sacheer.</p>
+      </div>
+    </div>
+--
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Hur skiljer sig Pro Vitality+ från ett vanligt multivitamin?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Ett vanligt multivitamin tillhandahåller vitaminer och mineraler vid minimala referensintag. Pro Vitality+ adresserar fyra distinkta nivåer: cellmembranstöd, bredspektrumantioxidant- och immunfunktion, triglyceridform omega-3 och SAB-doserade vitaminer och mineraler. Det är ett system, inte ett enskilt tillskott.</p>
+      </div>
+    </div>
+--
+      <a href="https://pubmed.ncbi.nlm.nih.gov/8147336/" target="_blank" rel="noopener">Carughi &amp; Hooper (1994) — American Journal of Clinical Nutrition, PMID: 8147336</a><br>
+      <a href="/neolife-vetenskap/">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a><br>
+      <a href="/neolife-historia/">NeoLife Historia — Från 1958 till idag</a>
+    </p>
+
+--
+    <ul>
+      <li><a href="/neolife-carotenoid-complex/">Carotenoid Complex — USDA-studerad, 37% immunökning</a></li>
+      <li><a href="/neolife-omega-3-plus/">Omega-3 Plus — Triglyceridform, 70% bättre absorption</a></li>
+      <li><a href="/neolife-tre-en-en/">Tre-en-en — Världens första fytonutrienttillskott</a></li>
+      <li><a href="/neolife-kosttillskott/">Alla NeoLife kosttillskott</a></li>
+    </ul>
+--
+  <div style="max-width:var(--max-w);margin:0 auto;padding:0 24px;text-align:center;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);margin-bottom:16px;">Beställ Pro Vitality+</h2>
+    <p style="font-size:1.05rem;color:var(--ink-muted);max-width:560px;margin:0 auto 32px;line-height:1.7;">Handla som kund eller spara 20–25% som distributör. Inga försäljningskrav.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+
+==================================================
+FACT SOURCE: neolife-tre-en-en.html
+==================================================
+  <meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337"/>
+  <title>NeoLife Tre-en-en: Världens första fytonäringstillskott sedan 1958 | Levnytt.se</title>
+  <meta name="description" content="NeoLife Tre-en-en Kornkoncentrat — lipider och steroler från vetegroddar, riskli och soja. Världens första fytonäringstillskott 1958. Texas A&M-forskning 1987. Cellmembranvetenskap förklarad.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-tre-en-en">
+
+  <script type="application/ld+json">
+--
+    "@type": "Article",
+    "headline": "NeoLife Tre-en-en: Världens första fytonäringstillskott sedan 1958",
+    "description": "Detaljerad genomgång av NeoLife Tre-en-en Kornkoncentrat — cellmembranvetenskap, ingredienser, Texas A&M-forskning och historisk bakgrund.",
+    "url": "https://levnytt.se/neolife-tre-en-en",
+    "datePublished": "2026-05-12",
+    "dateModified": "2026-05-12",
+--
+        "@type": "Question",
+        "name": "Vad är NeoLife Tre-en-en?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Tre-en-en Kornkoncentrat är ett tillskott av lipider och steroler från tre fullkornkällor: vetegroddar, riskli och sojabönor. Det lanserades av NeoLife 1958 och är dokumenterat som världens första fytonäringstillskott — 32 år innan begreppet fytonäringsämne ens etablerades inom nutritionsvetenskapen. Produkten levererar beta-sitosterol, gamma-oryzanol, stigmasterol, campesterol och oktakosanol."}
+      },
+      {
+        "@type": "Question",
+        "name": "Varför behöver cellmembran lipider och steroler?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Cellmembran är uppbyggda av ett dubbelt fosfolipidlager med inbäddade steroler (framför allt kolesterol och fytosteroler). Lipider och steroler håller membranet flytande och flexibelt. När membranet saknar dessa ämnen styvnar det — transportproteiner fungerar sämre, näring tar sig svårare in i cellen och avfallsprodukter ansamlas. Modern spannmålsförädling tar bort lipid- och sterolfraktionen som finns i kli- och groddskiktet."}
+      },
+      {
+        "@type": "Question",
+        "name": "Vad visar Texas A&M-forskningen om Tre-en-en?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Texas A&M University genomförde 1987 en sju veckors studie där den vanliga lipidfraktionen i kosten ersattes med Tre-en-en-koncentrat. Trots samma kalorimängd visade Tre-en-en-gruppen bättre tillväxt, snabbare mognad, mer utvecklade hjärt-kärlsystem och högre binjurefunktion jämfört med kontrollgruppen. Resultaten tolkades som förbättrad näringsutnyttjandeeffektivitet på cellnivå. Detta var ett djurförsök, inte en humanklin studie."}
+      },
+      {
+        "@type": "Question",
+        "name": "Vilka ingredienser innehåller Tre-en-en?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Tre-en-en levererar lipider och steroler från tre källor: vetegroddar (omega-6, omega-3, oktakosanol, glykolipider, fytosteroler), riskli (gamma-oryzanol, fytosteroler, tokotrienoler) och sojabönor (fosfolipider, beta-sitosterol, kampesterol, stigmasterol, lecitin, oktakosanol). Kapslarna är naturligt klorofyllfärgade, kallpressade och kallprocessade för att bevara näringsvärdet. Innehåller naturligt E-vitamin för fytonutrientskydd."}
+      },
+      {
+        "@type": "Question",
+        "name": "Hur tar man Tre-en-en och hur länge håller en förpackning?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Tre-en-en levereras i mjuka gelatinkapslar (120 kapslar, kod 927). Rekommenderad dos enligt NeoLife är att följa anvisningarna på förpackningen. Produkten är en del av Pro Vitality+-systemet som kombinerar Tre-en-en med Carotenoid Complex, Omega-3 Plus och essentiella vitaminer och mineraler."}
+      },
+      {
+        "@type": "Question",
+        "name": "Varför lanserades Tre-en-en 32 år före begreppet fytonäringsämne?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Jerry Brassfield och NeoLifes tidiga formulerare identifierade att spannmålsförädling tog bort biologiskt aktiva fraktioner från baslivsmedel. Begreppet 'fytonäringsämne' (phytonutrient) etablerades inte i mainstream nutritionsvetenskap förrän på 1990-talet. Tre-en-en bygger på samma princip — att bioaktiva växtkemikalier utanför vitaminer och mineraler spelar en roll i human hälsa — men formulerades och lanserades 1958."}
+      }
+    ]
+--
+      {"@type": "ListItem", "position": 2, "name": "NeoLife produkter", "item": "https://levnytt.se/neolife-kosttillskott/"},
+      {"@type": "ListItem", "position": 3, "name": "Tre-en-en", "item": "https://levnytt.se/neolife-tre-en-en"}
+    ]
+  }
+--
+        <a href="/neolife-kosttillskott/">Alla produkter</a>
+        <a href="/neolife-tre-en-en" class="active">Tre-en-en</a>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" class="nav-cta" target="_blank" rel="noopener">Handla NeoLife &rarr;</a>
+      </div>
+--
+        <a href="/neolife-kosttillskott/">NeoLife produkter</a><span class="sep">/</span>
+        <span class="current">Tre-en-en</span>
+      </div>
+      <h1>NeoLife Tre-en-en: Världens första fytonärings&shy;tillskott — sedan 1958</h1>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">1958</span><span class="lbl">Lanserades</span></div>
+        <div class="hero-stat"><span class="num">32</span><span class="lbl">År före begreppet</span></div>
+        <div class="hero-stat"><span class="num">3</span><span class="lbl">Fullkornkällor</span></div>
+        <div class="hero-stat"><span class="num">1987</span><span class="lbl">Texas A&M-studie</span></div>
+      </div>
+    </div>
+--
+    <img src="/images/neolifetreenen.jpg"
+         alt="NeoLife Tre-en-en Kornkoncentrat — 120 kapslar, lipider och steroler från vetegroddar, riskli och soja, världens första fytonäringstillskott 1958"
+         width="100%"
+         style="border-radius:12px;display:block;"
+--
+        <h4>Sammanfattning</h4>
+        <p style="margin-bottom:0;">NeoLife Tre-en-en Kornkoncentrat lanserades 1958 — 32 år innan begreppet "fytonäringsämne" etablerades inom nutritionsvetenskapen. Produkten levererar lipider och steroler från vetegroddar, riskli och soja: beta-sitosterol, gamma-oryzanol, stigmasterol, campesterol och oktakosanol. Texas A&M University dokumenterade 1987 förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering. Tre-en-en ingår som cellulär grund i Pro Vitality+-systemet.</p>
+      </div>
+
+--
+        <ol>
+          <li><a href="#cellmembran">Varför cellmembran behöver lipider och steroler</a></li>
+          <li><a href="#historia">1958 — 32 år före begreppet</a></li>
+          <li><a href="#texas-am">Texas A&M University-forskning 1987</a></li>
+          <li><a href="#ingredienser">Ingredienser från tre fullkornkällor</a></li>
+          <li><a href="#pro-vitality">Tre-en-en i Pro Vitality+-systemet</a></li>
+          <li><a href="#svenska-kosten">Modern spannmålsförädling och svenska kostvanor</a></li>
+          <li><a href="#faq">Vanliga frågor</a></li>
+--
+
+      <h2 id="cellmembran">Varför cellmembran behöver lipider och steroler</h2>
+
+      <p>Varje cell i kroppen omges av ett cellmembran — ett dubbelt fosfolipidlager med inbäddade proteiner och steroler. Membranets funktion är kritisk: det reglerar vad som tar sig in i cellen (näring, signalmolekyler) och vad som lämnar den (avfallsprodukter, metaboliter).</p>
+
+      <p>För att membranet ska fungera optimalt måste det vara flytande och flexibelt — inte styvt. Steroler, framför allt kolesterol hos djur och fytosteroler hos växter, reglerar denna fluiditet. Lipider som fosfolipider och glykolipider är själva byggstenar i membranets dubbellager.</p>
+--
+      <blockquote>
+        <p>"Fetter och steroler är naturliga beståndsdelar i fullkorn och viktiga komponenter i våra cellmembran. Tyvärr kan bearbetningen av spannmål ta bort lipider, steroler och andra viktiga näringsämnen från de livsmedel som utgör våra basvaror."</p>
+        <cite style="display:block;margin-top:10px;font-size:0.85rem;font-style:normal;">— NeoLife Tre-en-en produktinformation (Svenska marknaden)</cite>
+      </blockquote>
+
+      <p>När cellmembranet saknar tillräckliga mängder lipider och steroler styvnar det. Transportproteiner som sitter inbäddade i membranet fungerar sämre — näring tar sig svårare in i cellen och avfallsprodukter ansamlas. NeoLife formulerade Tre-en-en för att komplettera den lipid- och sterolfraktion som modern spannmålsförädling tar bort.</p>
+
+      <h2 id="historia">1958 — 32 år före begreppet fytonäringsämne</h2>
+
+      <p>Jerry Brassfield grundade GNLD (Golden Neo-Life Diamite) 1958 i Fremont, Kalifornien. Samma år lanserades Tre-en-en Kornkoncentrat — baserat på observationen att industriell spannmålsförädling systematiskt tar bort det biologiskt aktiva kli- och groddskiktet från vete och ris.</p>
+
+      <p>Det som Brassfield och NeoLifes tidiga formulerare identifierade som nutritionellt viktigt — bioaktiva växtkemikalier utanför vitaminer och mineraler — fick inte ett etablerat vetenskapligt namn förrän på 1990-talet. Begreppet "phytonutrient" (fytonäringsämne) kom in i mainstream nutritionsvetenskap drygt 30 år efter att Tre-en-en redan var på marknaden.</p>
+
+      <div class="callout callout-gold">
+        <h4>Historisk tidslinje</h4>
+        <p style="margin-bottom:0;">1958 — Tre-en-en lanseras av NeoLife som världens första fytonäringstillskott.<br>
+        1987 — Texas A&M University dokumenterar förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering.<br>
+        1990-talet — Begreppet "fytonäringsämne" etableras inom mainstream nutritionsvetenskap.<br>
+        2026 — Tre-en-en ingår i Pro Vitality+-systemet som säljs i Sverige via se.neolifeshop.com.</p>
+      </div>
+
+      <h2 id="texas-am">Texas A&M University-forskning 1987</h2>
+
+      <p>1987 genomförde forskare vid Texas A&M University en sju veckors studie där den vanliga lipidfraktionen i försöksdjurens kost ersattes med Tre-en-en-koncentrat. Kontrollgruppen fick identisk kost med konventionella lipider.</p>
+
+      <table>
+--
+            <th>Mätvariabel</th>
+            <th>Tre-en-en-grupp</th>
+            <th>Kontrollgrupp</th>
+          </tr>
+--
+
+      <p style="font-size:0.85rem;color:var(--ink-light);">Obs: Texas A&M-studien var ett djurförsök, inte en humanklinisk studie. Resultaten kan inte direkt extrapoleras till människor, men de dokumenterar mekanismen för kornlipiders roll i cellulär näring.</p>
+
+      <h2 id="ingredienser">Ingredienser från tre fullkornkällor</h2>
+
+      <p>Tre-en-en levererar en komplett lipid- och sterolprofil från tre kallpressade och kallprocessade fullkornkällor. Kapslarna är naturligt klorofyllfärgade och innehåller naturligt E-vitamin för fytonutrientskydd.</p>
+
+      <div class="ingredient-grid">
+--
+          <ul>
+            <li>Omega-6 och omega-3 fettsyror</li>
+            <li>Oktakosanol</li>
+            <li>Glykolipider</li>
+--
+
+      <h2 id="pro-vitality">Tre-en-en i Pro Vitality+-systemet</h2>
+
+      <p>NeoLife positionerar Tre-en-en som den cellulära grunden i <a href="/neolife-pro-vitality/">Pro Vitality+</a> — ett fyrakomponentsystem för daglig cellular näring. De fyra komponenterna adresserar olika aspekter av cellulär näring:</p>
+
+      <table>
+--
+          <tr>
+            <td><strong>Tre-en-en</strong></td>
+            <td>Cellmembranets lipid- och sterolfraktion — fluiditet och transport</td>
+          </tr>
+          <tr>
+            <td><strong>Carotenoid Complex</strong></td>
+            <td>Antioxidantskydd i cellulära lipider — 8 hela livsmedelskällor</td>
+          </tr>
+          <tr>
+            <td><strong>Omega-3 Plus</strong></td>
+            <td>Triglyceridform omega-3 — 70% bättre absorption än etylesterform</td>
+          </tr>
+          <tr>
+--
+
+      <p>Tre-en-en kompletterar den lipid- och sterolfraktion som industriell spannmålsförädling tar bort — inte som ersättning för fullkorn, utan som ett precist komplement för de som vill säkerställa att denna fraktion inte saknas i kosten.</p>
+
+      <h2 id="faq">Vanliga frågor om Tre-en-en</h2>
+
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Vad är NeoLife Tre-en-en?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Tre-en-en Kornkoncentrat är ett tillskott av lipider och steroler från vetegroddar, riskli och soja. Det lanserades 1958 och är dokumenterat som världens första fytonäringstillskott — 32 år innan begreppet etablerades. Produkten levererar beta-sitosterol, gamma-oryzanol, stigmasterol, campesterol och oktakosanol i kallpressade, naturligt klorofyllfärgade kapslar.</p>
+        </div>
+      </div>
+--
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Varför behöver cellmembran lipider och steroler?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Cellmembran är uppbyggda av fosfolipider och steroler. Lipiderna bildar membranet och sterolerna reglerar dess fluiditet. När membranet saknar dessa ämnen styvnar det — transportproteiner fungerar sämre, näring tar sig svårare in och avfallsprodukter ansamlas. Modern spannmålsförädling tar bort dessa fraktioner från vitt mjöl och vitt ris.</p>
+        </div>
+      </div>
+--
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Vad visar Texas A&M-forskningen?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Texas A&M University genomförde 1987 en 7 veckors studie. Tre-en-en-gruppen visade bättre tillväxt, snabbare mognad, mer utvecklade hjärt-kärlsystem och högre binjurefunktion jämfört med kontrollgruppen — trots identisk kalorimängd. Resultaten tolkades som förbättrad näringsutnyttjandeeffektivitet. Obs: detta var ett djurförsök, inte en humanklinisk studie.</p>
+        </div>
+      </div>
+--
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Tre-en-en innehåller: beta-sitosterol (från soja), gamma-oryzanol (från riskli), stigmasterol (från soja), campesterol (från soja och vetegroddar), oktakosanol (från vetegroddar och soja), fosfolipider, glykolipider, tokotrienoler och naturligt E-vitamin. Alla råvaror är kallpressade och kallprocessade.</p>
+        </div>
+      </div>
+--
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Vad är skillnaden mellan Tre-en-en och vanlig fullkornmat?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Fullkornmat innehåller kornlipider och steroler naturligt — i kliskiktet och grodden. Tre-en-en är ett koncentrat av just dessa fraktioner, extraherat och levererat i en standardiserad, mätbar dos. Det ersätter inte fullkorn i kosten, utan kompletterar den specifika lipid- och sterolfraktion som är svår att konsekvent få tillräckliga mängder av enbart via maten.</p>
+        </div>
+      </div>
+--
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Var köper jag Tre-en-en i Sverige?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Produkten säljs inte i detaljhandeln. Beställning via se.neolifeshop.com. Som kund betalar du ordinarie pris. Som återförsäljare (NeoLife Promoter) sparar du 20–25%. Registrering via Sponsor-ID 41-830928 på se.neolifeshop.com/enrollment?sponsorId=41-830928.</p>
+--
+        <svg viewBox="0 0 680 760" xmlns="http://www.w3.org/2000/svg" role="img" width="100%" style="display:block;border-radius:12px;overflow:hidden;">
+          <title>Tre-en-en — Cellmembranvetenskap, ingredienser och historisk tidslinje</title>
+          <desc>Infografiikka: Cellmembranbehov, 3 livsmedelskällor, Texas A&M 1987, tidslinje 1958–idag.</desc>
+
+          <!-- Header -->
+          <rect x="0" y="0" width="680" height="180" fill="#1B4332" rx="16"/>
+          <text x="340" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#E8C870">Tre-en-en Kornkoncentrat</text>
+          <text x="340" y="82" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="rgba(255,255,255,0.75)">Världens första fytonäringstillskott — sedan 1958</text>
+          <line x1="60" y1="100" x2="620" y2="100" stroke="#C8962E" stroke-width="1" opacity="0.4"/>
+          <text x="170" y="135" text-anchor="middle" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#E8C870">1958</text>
+          <text x="170" y="158" text-anchor="middle" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.6)">LANSERADES</text>
+          <line x1="340" y1="115" x2="340" y2="170" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+--
+
+          <!-- Cellmembran-sektion -->
+          <rect x="20" y="196" width="640" height="100" rx="12" fill="#F0EBDD" stroke="#E0D8C8" stroke-width="1"/>
+          <text x="340" y="222" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#8B6914" letter-spacing="0.08em">VARFÖR CELLMEMBRAN BEHÖVER LIPIDER OCH STEROLER</text>
+          <rect x="40" y="232" width="180" height="48" rx="6" fill="#fff" stroke="#E0D8C8" stroke-width="1"/>
+          <text x="130" y="252" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#A32D2D">Utan lipider/steroler</text>
+--
+          <rect x="280" y="232" width="180" height="48" rx="6" fill="#fff" stroke="#E0D8C8" stroke-width="1"/>
+          <text x="370" y="252" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#2D6A4F">Med Tre-en-en</text>
+          <text x="370" y="266" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#555">Membranet förblir flytande</text>
+          <text x="370" y="278" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#888">Näring in · Avfall ut effektivt</text>
+--
+          <text x="120" y="382" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#fff">VETEGRODDAR</text>
+          <text x="36" y="408" font-family="sans-serif" font-size="10" fill="#555">· Omega-6 och omega-3</text>
+          <text x="36" y="422" font-family="sans-serif" font-size="10" fill="#555">· Oktakosanol</text>
+          <text x="36" y="436" font-family="sans-serif" font-size="10" fill="#555">· Glykolipider</text>
+--
+
+          <!-- Texas A&M -->
+          <rect x="20" y="492" width="640" height="80" rx="12" fill="#F0EBDD" stroke="#E0D8C8" stroke-width="1"/>
+          <text x="340" y="518" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#8B6914" letter-spacing="0.08em">TEXAS A&amp;M UNIVERSITY 1987 — DJURSTUDIE</text>
+          <text x="60" y="542" font-family="sans-serif" font-size="11" fill="#555">Tre-en-en-grupp vs kontroll (identisk kalorimängd):</text>
+          <text x="60" y="558" font-family="sans-serif" font-size="11" fill="#2D6A4F" font-weight="700">Bättre tillväxt · Mer utvecklat hjärt-kärlsystem · Högre binjurefunktion</text>
+          <text x="60" y="572" font-family="sans-serif" font-size="10" fill="#888" font-style="italic">Tolkning: förbättrad näringsutnyttjandeeffektivitet på cellnivå</text>
+--
+          <text x="36" y="608" font-family="sans-serif" font-size="10" fill="#888" font-style="italic">Källa: NeoLife produktdokumentation · Texas A&amp;M University 1987 (djurstudie) · levnytt.se</text>
+          <text x="36" y="624" font-family="sans-serif" font-size="10" fill="#888" font-style="italic">Tre-en-en lanserades 1958. Begreppet "fytonäringsämne" etablerades på 1990-talet — 32 år senare.</text>
+          <text x="644" y="624" text-anchor="end" font-family="Georgia,serif" font-size="12" font-weight="700" fill="#C8962E">levnytt.se</text>
+        </svg>
+--
+        <p style="font-size:0.85rem;font-weight:600;color:#2e7d32;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Redo att prova?</p>
+        <p style="font-size:1.1em;margin-bottom:20px;color:var(--ink);">Handla Tre-en-en som kund eller spara 20–25% som återförsäljare.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a href="https://se.neolifeshop.com/?sponsorId=41-830928" style="display:inline-block;background:#2e7d32;color:#fff;padding:12px 28px;border-radius:6px;text-decoration:none;font-weight:600;" target="_blank" rel="nofollow noopener sponsored">Handla som kund &rarr;</a>
+--
+        <strong>Källor och referenser:</strong><br>
+        <a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a><br>
+        <a href="/neolife-vetenskap/">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a><br>
+        <a href="https://www.livsmedelsverket.se/matvanor-halsa--miljo/kostrad-och-matvanor/rad-om-mat/fullkorn" target="_blank" rel="noopener">Livsmedelsverket — Kostråd om fullkorn</a><br>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
+--
+      <ul>
+        <li><a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a></li>
+        <li><a href="/neolife-vetenskap/">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a></li>
+        <li><a href="/neolife-pro-vitality/">Pro Vitality+ — Det fyrakomponentbaserade grundsystemet</a></li>
+        <li><a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning</a></li>
+        <li><a href="/neolife-kosttillskott/">Alla NeoLife produkter — Komplett översikt</a></li>
+      </ul>
+
+==================================================
+FACT SOURCE: neolife-formula-iv.html
+==================================================
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeoLife Formula IV och Formula IV Plus: Världens första multifaktorstillskott | LevNytt.se</title>
+  <meta name="description" content="NeoLife Formula IV (Kod 576) och Formula IV Plus (Kod 691) – vitaminer, mineraler och Tre-en-en kornkoncentrat sedan 1958. Oberoende faktagranskning.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-formula-iv/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="NeoLife Formula IV och Formula IV Plus: Världens första multifaktorstillskott | LevNytt.se">
+  <meta property="og:url" content="https://levnytt.se/neolife-formula-iv/">
+  <meta property="og:site_name" content="LevNytt">
+--
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"NeoLife Formula IV och Formula IV Plus: Världens första multifaktorstillskott","url":"https://levnytt.se/neolife-formula-iv/","datePublished":"2026-05-14","dateModified":"2026-05-14","author":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hem","item":"https://levnytt.se/"},{"@type":"ListItem","position":2,"name":"NeoLife kosttillskott","item":"https://levnytt.se/neolife-kosttillskott/"},{"@type":"ListItem","position":3,"name":"Formula IV & Formula IV Plus","item":"https://levnytt.se/neolife-formula-iv/"}]}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+--
+      <a href="/neolife-kosttillskott/">Alla produkter</a>
+      <a href="/neolife-formula-iv/" class="active">Formula IV & Formula IV Plus</a>
+      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="nav-cta" target="_blank" rel="noopener">Handla NeoLife &rarr;</a>
+    </div>
+--
+      <a href="/neolife-kosttillskott/">NeoLife produkter</a><span class="sep">/</span>
+      <span class="current">Formula IV & Formula IV Plus</span>
+    </div>
+    <h1>Formula IV & Formula IV Plus</h1>
+    <div class="hero-stats"><div><div class="hero-stat-num">1958</div><div class="hero-stat-label">Världens första multifaktor</div></div><div><div class="hero-stat-num">3</div><div class="hero-stat-label">Komponenter: vit+min+korn</div></div><div><div class="hero-stat-num">0</div><div class="hero-stat-label">Järn i Formula IV Plus</div></div></div>
+  </div>
+</section>
+--
+  <div class="article-inner">
+    <div class="callout"><h4>Sammanfattning</h4><p style="margin-bottom:0;">NeoLife Formula IV (Kod 576, 100 kapslar) introducerades 1958 som världens första kosttillskott som kombinerade vitaminer, mineraler och kornkoncentrat i en enda formula. Formula IV Plus (Kod 691) är den järnfria uppgraderingen med mer Tre-en-en och MULTI i blisterförpackningar — för dem som redan får i sig tillräckligt järn via kosten.</p></div>
+    <p><em>LevNytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Innehållet är informativt och utgör inte medicinsk rådgivning.</em></p>
+    <h2>Historien bakom Formula IV</h2>
+    <p>Mellan åren 1920 och 1959 började forskare identifiera och dokumentera sambandet mellan kost och välbefinnande. De upptäckte snart vikten av att undvika brist på ämnen som kallas vitaminer — detta var början på näringsvetenskapen. Formula IV, introducerad 1958, var det första kosttillskottet som tillgodosåg flera olika områden samtidigt: vitaminer, mineraler och kornkoncentrat.</p>
+    <blockquote><p>Formula IV som utvecklades på 1950-talet var det första kosttillskottet som tillgodosåg flera olika områden samtidigt — vitaminer, mineraler och kornkoncentrat. — NeoLife produktdokumentation 04/26 SE</p></blockquote>
+    <h2>Formula IV vs Formula IV Plus</h2>
+    <table><thead><tr><th>Egenskap</th><th>Formula IV (Kod 576)</th><th>Formula IV Plus (Kod 691)</th></tr></thead><tbody>
+    <tr><td>Format</td><td>100 kapslar</td><td>60 portioner (blisterpack: 60 Tre-en-en + 60 MULTI)</td></tr>
+    <tr><td>Tre-en-en</td><td>Ingår</td><td>En hel portion — mer än Formula IV</td></tr>
+    <tr><td>Järn</td><td>Ingår</td><td>Innehåller INGET JÄRN</td></tr>
+    <tr><td>Extra mineraler</td><td>Standard</td><td>Extra mineraler</td></tr>
+--
+    </tbody></table>
+    <h2>Tre-en-en — grunden i formeln</h2>
+    <p>Båda produkterna är baserade på Tre-en-en Kornkoncentrat — vetegroddar, riskli och sojabönor — världens första fytonäringstillskott, introducerat av NeoLife 1958. Tre-en-en tillför lipider och steroler som moderna bearbetningsmetoder tagit bort från spannmål.</p>
+    <h2>Praktiska råd</h2>
+    <ol>
+    <li><strong>Järnfri variant</strong> — Formula IV Plus passar dem som redan får i sig tillräckligt järn via kost eller andra tillskott.</li>
+    <li><strong>Blisterformat</strong> — Formula IV Plus i blisterförpackningar är enkelt att ta med och räkna portioner.</li>
+    <li><strong>Grundläggande system</strong> — båda är kompletta kosttillskott som kan tas som bas, utan att kombinera många olika produkter.</li>
+    </ol>
+    <h2>Vanliga frågor</h2>
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name">Vad är skillnaden mellan Formula IV och Formula IV Plus?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Formula IV (Kod 576) innehåller järn och kommer i kapslar. Formula IV Plus (Kod 691) är järnfri, innehåller mer Tre-en-en och extra mineraler, och levereras i blisterförpackningar med separata Tre-en-en kapslar och MULTI tabletter.</p></div></div>
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name">Varför var Formula IV revolutionerande 1958?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Formula IV var det första kosttillskottet att kombinera vitaminer, mineraler och kornkoncentrat (lipider och steroler från fullkorn) i en enda formula — en approach som föregick modern näringsforskning med decennier.</p></div></div>
+    <div style="background:linear-gradient(135deg,#e8f5e9 0%,#f1f8e9 100%);border:1px solid #2e7d32;padding:28px 32px;margin:32px 0;border-radius:12px;text-align:center;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2e7d32;margin-bottom:8px;">REDO ATT PROVA NEOLIFE?</p>
+--
+    </div>
+    <p style="font-size:0.85em;color:#888;border-top:1px solid #E0D8C8;padding-top:14px;margin-top:20px;"><strong>Källor:</strong><br>NeoLife Formula IV — Snabba fakta, neolifeshop.com, 04/26 SE<br>NeoLife Formula IV Plus — Snabba fakta, neolifeshop.com, 04/26 SE<br><a href="/neolife-kosttillskott/" style="color:#2D6A4F;">NeoLife kosttillskott — fullständig produktöversikt</a></p>
+  </div>
+</div>
+--
+<li><a href="/neolife-vitamin-e/">Vitamin E — naturligt antioxidantstöd</a></li>
+<li><a href="/neolife-tre-en-en/">Tre-en-en — NeoLifes kornkoncentrat</a></li>
+<li><a href="/neolife-pro-vitality/">Pro Vitality+ — grundsystemet</a></li>
+<li><a href="/neolife-carotenoid-complex/">Carotenoid Complex — fytonäringsämnen</a></li>
+</ul>
+  </div>
+
+==================================================
+FACT SOURCE: neolife-omega-3-plus.html
+==================================================
+  <meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337"/>
+  <title>NeoLife Omega-3 Plus: 8 omega-3-fettsyror, testad för 200+ föroreningar | Levnytt.se</title>
+  <meta name="description" content="NeoLife Omega-3 Plus — 1 069 mg omega-3 per portion, 8 fettsyror inkl. 460 mg EPA och 480 mg DHA. Testad för över 200 föroreningar. 100% hållbart fångad fisk. Sponsor-ID: 41-830928.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-omega-3-plus">
+
+  <script type="application/ld+json">
+--
+    "@type": "Article",
+    "headline": "NeoLife Omega-3 Plus: 8 omega-3-fettsyror, testad för 200+ föroreningar",
+    "description": "Detaljerad genomgång av NeoLife Omega-3 Plus — fettsyraprofil, reningprocess, hållbarhet och vetenskaplig bakgrund.",
+    "url": "https://levnytt.se/neolife-omega-3-plus",
+    "datePublished": "2026-05-12",
+    "dateModified": "2026-05-12",
+--
+        "@type": "Question",
+        "name": "Vad innehåller NeoLife Omega-3 Plus?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Omega-3 Plus levererar 1 069 mg omega-3-fettsyror per portion (3 softgel-kapslar): 460 mg EPA, 480 mg DHA, 50 mg DPA samt 80 mg av fem andra omega-3-fettsyror — totalt 8 standardiserade omega-3-fettsyror. Produkten är formulerad med olja från 100% hållbart fångad fisk, testad för över 200 potentiella föroreningar inklusive PCB, bekämpningsmedel och tungmetaller."}
+      },
+      {
+--
+        "@type": "Question",
+        "name": "Hur testas Omega-3 Plus för föroreningar?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Omega-3 Plus screenas för över 200 potentiella föroreningar, inklusive PCB, bekämpningsmedel och giftiga tungmetaller som kvicksilver och bly. NeoLife använder en egenutvecklad molekylär särkiljningsprocess — en avancerad teknik som selektivt förstärker viktiga näringsmolekyler samtidigt som oönskade föreningar minimeras eller tas bort."}
+      },
+      {
+        "@type": "Question",
+        "name": "Varför är 8 omega-3-fettsyror bättre än bara EPA och DHA?",
+        "acceptedAnswer": {"@type": "Answer", "text": "De flesta fiskoljor standardiseras enbart på EPA och DHA. Omega-3 Plus levererar standardiserade mängder av alla 8 omega-3-fettsyror som finns i fet fisk — inklusive DPA (50 mg), som forskning visar kan ha unika biologiska roller utöver EPA och DHA. Hela fettsyraprofilen speglar vad du faktiskt får i dig när du äter en portion fet fisk."}
+      },
+      {
+        "@type": "Question",
+        "name": "Hur hållbart är fisket bakom Omega-3 Plus?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Omega-3 Plus är formulerad med olja från 100% hållbart fångad fisk. Oljorna är certifierade av betrodda tredjepartsorganisationer för miljöansvar. NeoLife anger att de ligger i framkant vad gäller global hållbarhet inom fiskolja."}
+      },
+      {
+        "@type": "Question",
+        "name": "Hur mycket omega-3 är en portion Omega-3 Plus?",
+        "acceptedAnswer": {"@type": "Answer", "text": "En portion om 3 softgel-kapslar ger 1 069 mg omega-3-fettsyror totalt — vilket Omega-3 Plus uppger motsvarar ungefär en portion fet fisk. Förpackningen innehåller 90 kapslar (kod 929, nettovikt 92,34 g), vilket ger 30 portioner."}
+      }
+    ]
+--
+      {"@type": "ListItem", "position": 2, "name": "NeoLife produkter", "item": "https://levnytt.se/neolife-kosttillskott/"},
+      {"@type": "ListItem", "position": 3, "name": "Omega-3 Plus", "item": "https://levnytt.se/neolife-omega-3-plus"}
+    ]
+  }
+--
+        <a href="/neolife-kosttillskott/">Alla produkter</a>
+        <a href="/neolife-omega-3-plus" class="active">Omega-3 Plus</a>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" class="nav-cta" target="_blank" rel="noopener">Handla NeoLife &rarr;</a>
+      </div>
+--
+        <a href="/neolife-kosttillskott/">NeoLife produkter</a><span class="sep">/</span>
+        <span class="current">Omega-3 Plus</span>
+      </div>
+      <h1>NeoLife Omega-3 Plus: 8 omega-3-fettsyror, testad för 200+ föroreningar</h1>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">1 069</span><span class="lbl">mg omega-3 per portion</span></div>
+        <div class="hero-stat"><span class="num">8</span><span class="lbl">Fettsyror standardiserade</span></div>
+        <div class="hero-stat"><span class="num">200+</span><span class="lbl">Föroreningar testade</span></div>
+--
+  <div style="max-width:800px;margin:32px auto 0;padding:0 24px;">
+    <img src="/images/omega-3-plus.jpg"
+         alt="NeoLife Omega-3 Plus — 90 softgel-kapslar, 8 omega-3-fettsyror, testad för 200+ föroreningar, 100% hållbart fångad fisk"
+         width="100%"
+         style="border-radius:12px;display:block;"
+--
+        <h4>Sammanfattning</h4>
+        <p style="margin-bottom:0;">NeoLife Omega-3 Plus levererar 1 069 mg omega-3-fettsyror per portion (3 kapslar): 460 mg EPA, 480 mg DHA, 50 mg DPA och 80 mg av fem andra omega-3-fettsyror — totalt 8 standardiserade fettsyror. Produkten screenas för över 200 föroreningar inklusive PCB, bekämpningsmedel och tungmetaller. Oljan kommer från 100% hållbart fångad fisk med tredjepartscertifiering. EPA och DHA bidrar till hjärtats normala funktion; DHA bidrar till normal hjärnfunktion och synförmåga (EFSA-godkända påståenden).</p>
+      </div>
+
+--
+        <ol>
+          <li><a href="#varfor-omega3">Varför omega-3 från fisk?</a></li>
+          <li><a href="#fettsyraprofil">Fettsyraprofil — 8 standardiserade omega-3</a></li>
+          <li><a href="#rening">Reningsprocess och föroreningskontroll</a></li>
+          <li><a href="#hallbarhet">Hållbarhet och fiskekällor</a></li>
+          <li><a href="#pro-vitality">Omega-3 Plus i Pro Vitality+-systemet</a></li>
+          <li><a href="#svenska-kosten">Omega-3 och svenska kostvanor</a></li>
+          <li><a href="#faq">Vanliga frågor</a></li>
+        </ol>
+--
+
+      <h2 id="varfor-omega3">Varför omega-3 från fisk?</h2>
+
+      <p>Omega-3-fettsyror är fleromättade fettsyror som spelar centrala roller i hjärt-kärlhälsa, hjärnfunktion och synförmåga. Fet fisk — makrill, ansjovis, lax — är de rikaste naturliga källorna till de långkedjiga formerna EPA (eikosapentaensyra) och DHA (dokosahexaensyra).</p>
+
+      <p>De flesta nutritionsexperter rekommenderar 2–3 portioner fet fisk per vecka. Livsmedelsverket rekommenderar fisk 2–3 gånger i veckan, varav minst en gång fet fisk. Studier visar att de flesta svenska konsumenter inte når dessa nivåer — delvis på grund av oro för föroreningar i fisk, delvis av kostpreferenser.</p>
+--
+      <blockquote>
+        <p>"Det har länge varit känt och bevisat att omega-3-fettsyror spelar en avgörande roll i människans kost. I synnerhet EPA och DHA, som finns i fiskolja, har undersökts väl."</p>
+        <cite style="display:block;margin-top:10px;font-size:0.85rem;font-style:normal;">— NeoLife Omega-3 Plus produktinformation</cite>
+      </blockquote>
+
+--
+
+      <h2 id="fettsyraprofil">Fettsyraprofil — 8 standardiserade omega-3</h2>
+
+      <p>De flesta fiskoljor på marknaden standardiseras enbart på EPA och DHA. Omega-3 Plus levererar standardiserade mängder av alla 8 omega-3-fettsyror som finns naturligt i fet fisk — vilket speglar hela fettsyraprofilen du faktiskt får i dig från en portion fisk.</p>
+
+      <div class="fa-grid">
+--
+          <div class="amount">80 mg</div>
+          <div class="note">Hela omega-3-spektrumet</div>
+        </div>
+      </div>
+--
+          <tr>
+            <td><strong>5 övriga omega-3</strong></td>
+            <td>80 mg</td>
+            <td>Komplett spektrum som i fet fisk</td>
+--
+          <tr>
+            <td><strong>Totalt omega-3</strong></td>
+            <td><strong>1 069 mg</strong></td>
+            <td>≈ en portion fet fisk</td>
+--
+
+      <p>En av de vanligaste orsakerna till att konsumenter undviker fisk och fiskolja är oro för tungmetaller, PCB och andra föroreningar. Omega-3 Plus adresserar detta med en egenutvecklad reningsprocess och extensiv tredjepartstestning.</p>
+
+      <h3>Molekylär särkiljning</h3>
+
+      <p>NeoLife använder en egenutvecklad "molekylär särkiljnings"-process — en avancerad teknik som selektivt förstärker viktiga näringsmolekyler (omega-3-fettsyrorna) samtidigt som oönskade föreningar minimeras eller tas bort. Resultatet är en koncentrerad, ren olja med standardiserade fettsyranivåer.</p>
+
+      <div class="callout callout-gold">
+        <h4>Vad screenas produkten för?</h4>
+        <p style="margin-bottom:0;">Omega-3 Plus screenas för <strong>över 200 potentiella föroreningar</strong>, inklusive:<br>
+        — PCB (polyklorerade bifenyler)<br>
+        — Bekämpningsmedel<br>
+--
+
+      <p>Omega-3 Plus är formulerad med olja från 100% hållbart fångad fisk. NeoLife anger att oljorna är certifierade av betrodda tredjepartsorganisationer för miljöansvar, och att företaget arbetar aktivt med global hållbarhet inom fiskolja.</p>
+
+      <p>Överfiske och miljöförändringar har haft en betydande inverkan på hållbarheten hos vilda fiskpopulationer. NeoLifes certifierade sourcing är ett svar på dessa utmaningar — utan att kompromissa med fettsyraprofil eller renhet.</p>
+
+      <h2 id="pro-vitality">Omega-3 Plus i Pro Vitality+-systemet</h2>
+
+      <p>Omega-3 Plus ingår som en av fyra komponenter i <a href="/neolife-pro-vitality/">Pro Vitality+</a> — NeoLifes system för daglig cellulär näring. De fyra komponenterna kompletterar varandra på cellnivå:</p>
+
+      <table>
+--
+          <tr>
+            <td><a href="/neolife-tre-en-en">Tre-en-en</a></td>
+            <td>Lipider och steroler — cellmembranets fluiditet och transport</td>
+          </tr>
+          <tr>
+            <td><a href="/neolife-carotenoid-complex">Carotenoid Complex</a></td>
+            <td>Antioxidantskydd i cellulära lipider — 8 hela livsmedelskällor</td>
+          </tr>
+          <tr>
+            <td><strong>Omega-3 Plus</strong></td>
+            <td>Långkedjiga omega-3 — hjärta, hjärna, syn, cellfunktion</td>
+          </tr>
+          <tr>
+--
+
+      <h2 id="svenska-kosten">Omega-3 och svenska kostvanor</h2>
+
+      <p>Livsmedelsverket rekommenderar fisk 2–3 gånger i veckan, varav minst en gång fet fisk. Nordiska näringsstudier visar att genomsnittlig fiskkonsumtion i Sverige ligger under dessa rekommendationer. Bland de vanligaste orsakerna: smakpreferenser, pris och oro för föroreningar i fisk.</p>
+
+      <p>En portion (3 kapslar) Omega-3 Plus uppger sig motsvara ungefär en portion fet fisk vad gäller omega-3-innehåll — utan de föroreningsrisker som kan förknippas med konsumtion av stor, viltfångad fisk som tonfisk och svärdfisk.</p>
+
+      <h2 id="faq">Vanliga frågor om Omega-3 Plus</h2>
+
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Vad innehåller NeoLife Omega-3 Plus?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Omega-3 Plus levererar 1 069 mg omega-3-fettsyror per portion (3 kapslar): 460 mg EPA, 480 mg DHA, 50 mg DPA och 80 mg av fem andra omega-3-fettsyror. Totalt 8 standardiserade omega-3. Olja från 100% hållbart fångad fisk, testad för över 200 föroreningar. Förpackning: 90 kapslar (kod 929).</p>
+        </div>
+      </div>
+--
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Omega-3 Plus screenas för över 200 potentiella föroreningar inklusive PCB, bekämpningsmedel, kvicksilver och bly. NeoLife använder en egenutvecklad molekylär särkiljningsprocess som förstärker omega-3-fettsyrorna och minimerar eller tar bort oönskade föreningar.</p>
+        </div>
+      </div>
+--
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">De flesta fiskoljor standardiseras enbart på EPA och DHA. Omega-3 Plus levererar hela fettsyraprofilen från fet fisk — inklusive DPA och fem andra omega-3 — totalt 8 fettsyror. Detta speglar vad du faktiskt får i dig när du äter en portion fet fisk, snarare än ett selektivt koncentrat.</p>
+        </div>
+      </div>
+--
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Omega-3 Plus är formulerad med olja från 100% hållbart fångad fisk. Oljorna är certifierade av betrodda tredjepartsorganisationer för miljöansvar. NeoLife anger att de arbetar aktivt med global hållbarhet inom fiskolja.</p>
+        </div>
+      </div>
+--
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 itemprop="name">Var köper jag Omega-3 Plus i Sverige?</h3>
+        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">Produkten säljs inte i detaljhandeln. Beställning via se.neolifeshop.com. Som kund betalar du ordinarie pris. Som återförsäljare (NeoLife Promoter) sparar du 20–25%. Registrering via Sponsor-ID 41-830928 på se.neolifeshop.com/enrollment?sponsorId=41-830928.</p>
+--
+        <svg viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg" role="img" width="100%" style="display:block;border-radius:12px;overflow:hidden;">
+          <title>Omega-3 Plus — fettsyraprofil, rening och jämförelse</title>
+          <desc>Infografiikka: 8 omega-3-fettsyror per portion, 200+ föroreningar testade, hållbarhetscertifiering.</desc>
+
+          <!-- Header -->
+          <rect x="0" y="0" width="680" height="180" fill="#1B4332" rx="16"/>
+          <text x="340" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#E8C870">Omega-3 Plus</text>
+          <text x="340" y="82" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="rgba(255,255,255,0.75)">8 standardiserade omega-3-fettsyror från hållbart fångad fisk</text>
+          <line x1="60" y1="100" x2="620" y2="100" stroke="#C8962E" stroke-width="1" opacity="0.4"/>
+          <text x="170" y="135" text-anchor="middle" font-family="Georgia,serif" font-size="32" font-weight="700" fill="#E8C870">1 069</text>
+          <text x="170" y="158" text-anchor="middle" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.6)">MG OMEGA-3 PER PORTION</text>
+          <line x1="340" y1="115" x2="340" y2="170" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <text x="340" y="135" text-anchor="middle" font-family="Georgia,serif" font-size="36" font-weight="700" fill="#E8C870">200+</text>
+--
+          <text x="36" y="348" font-family="sans-serif" font-size="11" font-weight="700" fill="#1A1A1A">Totalt</text>
+          <text x="100" y="348" font-family="sans-serif" font-size="11" font-weight="700" fill="#2D6A4F">1 069 mg omega-3 ≈ en portion fet fisk</text>
+
+          <!-- EFSA-påståenden -->
+--
+          <text x="120" y="498" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#2D6A4F">MOLEKYLÄR SÄRKILJNING</text>
+          <text x="120" y="514" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#555">Förstärker omega-3</text>
+          <text x="120" y="528" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#555">Minimerar föroreningar</text>
+          <text x="120" y="548" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#888" font-style="italic">Egenutvecklad process</text>
+--
+          <rect x="20" y="572" width="640" height="1" fill="#E0D8C8"/>
+          <text x="36" y="592" font-family="sans-serif" font-size="10" fill="#888" font-style="italic">Källa: NeoLife Omega-3 Plus produktdokumentation · EFSA omega-3 hälsopåståenden · levnytt.se</text>
+          <text x="36" y="608" font-family="sans-serif" font-size="10" fill="#888" font-style="italic">Förpackning: 90 softgel-kapslar (kod 929). EPA+DHA bidrar till hjärtats normala funktion vid 250 mg/dag.</text>
+          <text x="644" y="608" text-anchor="end" font-family="Georgia,serif" font-size="12" font-weight="700" fill="#C8962E">levnytt.se</text>
+--
+        <p style="font-size:0.85rem;font-weight:600;color:#2e7d32;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Redo att prova?</p>
+        <p style="font-size:1.1em;margin-bottom:20px;color:var(--ink);">Handla Omega-3 Plus som kund eller spara 20–25% som återförsäljare.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a href="https://se.neolifeshop.com/?sponsorId=41-830928" style="display:inline-block;background:#2e7d32;color:#fff;padding:12px 28px;border-radius:6px;text-decoration:none;font-weight:600;" target="_blank" rel="nofollow noopener sponsored">Handla som kund &rarr;</a>
+--
+        <strong>Källor och referenser:</strong><br>
+        <a href="https://www.efsa.europa.eu/en/topics/topic/omega-3-fatty-acids" target="_blank" rel="noopener">EFSA — Omega-3 fatty acids hälsopåståenden</a><br>
+        <a href="https://www.livsmedelsverket.se/matvanor-halsa--miljo/kostrad-och-matvanor/rad-om-mat/fisk-och-skaldjur" target="_blank" rel="noopener">Livsmedelsverket — Kostråd om fisk</a><br>
+        <a href="/neolife-pro-vitality/">Pro Vitality+ — Det fyrakomponentbaserade grundsystemet</a><br>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
+      </p>
+--
+      <ul>
+        <li><a href="/neolife-pro-vitality/">Pro Vitality+ — Det fyrakomponentbaserade grundsystemet</a></li>
+        <li><a href="/neolife-tre-en-en">Tre-en-en — Världens första fytonäringstillskott sedan 1958</a></li>
+        <li><a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning</a></li>
+        <li><a href="/neolife-vetenskap/">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a></li>
+        <li><a href="/neolife-kosttillskott/">Alla NeoLife produkter — Komplett översikt</a></li>
+      </ul>
+
+==================================================
+FACT SOURCE: neolife-carotenoid-complex.html
+==================================================
+  <meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337"/>
+  <title>NeoLife Carotenoid Complex: USDA-forskning, 37% immunökning på 20 dagar | LevNytt.se</title>
+  <meta name="description" content="NeoLife Carotenoid Complex — brett spektrum av karotenoider från hela livsmedel. USDA-klinisk studie: 37% ökning av immunkapacitet på 20 dagar. Lykopin, lutein, beta-karoten. Sponsor-ID: 41-830928.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-carotenoid-complex/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"NeoLife Carotenoid Complex: USDA-forskning och 37% immunökning på 20 dagar","url":"https://levnytt.se/neolife-carotenoid-complex/","datePublished":"2026-05-12","dateModified":"2026-05-15","author":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Vad är NeoLife Carotenoid Complex?","acceptedAnswer":{"@type":"Answer","text":"Carotenoid Complex är ett bredspektrumtillskott med karotenoider utvunna ur hela livsmedel — tomater, morötter, spenat, röd paprika, jordgubbar, aprikoser och persikor. Tre kapslar per dag ger karotenoidvärdet av en portion karotenoidrika frukter och grönsaker. Produkten är kliniskt studerad av USDA och visad öka immunkapaciteten med 37% på 20 dagar."}},{"@type":"Question","name":"Vad visar USDA-studien om Carotenoid Complex?","acceptedAnswer":{"@type":"Answer","text":"USDA-forskare genomförde kliniska studier som publicerades i refereegranskade vetenskapliga tidskrifter (PMID: 8147336, American Journal of Clinical Nutrition, 1994). Studien visade att Carotenoid Complex ökade immunkapaciteten med 37% på 20 dagar. Naturliga mördarceller och lymfocyter förstärktes dramatiskt."}},{"@type":"Question","name":"Vilka karotenoider ingår i Carotenoid Complex?","acceptedAnswer":{"@type":"Answer","text":"Varje portion (3 kapslar) innehåller: Vitamin A som beta- och alfakaroten 2 250 mcg (250% av DRI), Vitamin E 12 mg, Lykopin 1 200 mcg, Lutein/Zeaxantin 410 mcg, samt Carotenoid Complex-blandning 900 mg."}},{"@type":"Question","name":"Var köper jag Carotenoid Complex i Sverige?","acceptedAnswer":{"@type":"Answer","text":"Produkten säljs inte i detaljhandeln. Beställning via se.neolifeshop.com med Sponsor-ID 41-830928. Som kund betalar du ordinarie pris, som återförsäljare sparar du 20–25%."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hem","item":"https://levnytt.se/"},{"@type":"ListItem","position":2,"name":"NeoLife kosttillskott","item":"https://levnytt.se/neolife-kosttillskott/"},{"@type":"ListItem","position":3,"name":"Carotenoid Complex","item":"https://levnytt.se/neolife-carotenoid-complex/"}]}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+--
+      <a href="/neolife-kosttillskott/">NeoLife kosttillskott</a><span class="sep">/</span>
+      <span class="current">Carotenoid Complex</span>
+    </div>
+    <h1>NeoLife Carotenoid Complex: Bredspektrum karotenoid&shy;tillskott från hela livsmedel</h1>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">37%</span><span class="lbl">Immunökning (USDA)</span></div>
+      <div class="hero-stat"><span class="num">20</span><span class="lbl">Dagar i klinisk studie</span></div>
+      <div class="hero-stat"><span class="num">8</span><span class="lbl">Hela livsmedelskällor</span></div>
+      <div class="hero-stat"><span class="num">1958</span><span class="lbl">NeoLife grundat</span></div>
+    </div>
+  </div>
+--
+<div style="max-width:800px;margin:32px auto 0;padding:0 24px;">
+  <img src="/images/carotenoid-complex.jpg"
+       alt="NeoLife Carotenoid Complex — 90 mjukkapslar, USDA-kliniskt studerad, +37% immunkapacitet på 20 dagar"
+       width="100%"
+       style="border-radius:12px;display:block;"
+--
+      <h4>Sammanfattning</h4>
+      <p style="margin-bottom:0;">NeoLife Carotenoid Complex är ett bredspektrumtillskott med karotenoider från åtta hela livsmedelskällor. USDA-forskare publicerade kliniska resultat (PMID: 8147336, <em>American Journal of Clinical Nutrition</em>, 1994) som visade 37% ökning av immunkapacitet på 20 dagar. Tre kapslar ger karotenoidvärdet av en portion frukt och grönsaker — inte bara beta-karoten, utan hela familjen av karotenoider inklusive lykopin (1 200 mcg) och lutein/zeaxantin (410 mcg).</p>
+    </div>
+
+--
+        <li><a href="#varfor-karotenoider">Varför karotenoider?</a></li>
+        <li><a href="#usda-studie">USDA-klinisk studie och resultat</a></li>
+        <li><a href="#ingredienser">Ingredienser och näringsfakta</a></li>
+        <li><a href="#bredspektrum">Bredspektrum kontra enbart beta-karoten</a></li>
+--
+
+    <h2 id="usda-studie">USDA-klinisk studie och resultat</h2>
+    <p>Det amerikanska jordbruksdepartementet (USDA) genomförde kliniska studier specifikt på NeoLife Carotenoid Complex och publicerade resultaten i refereegranskade vetenskapliga tidskrifter.</p>
+    <table>
+      <thead><tr><th>Studieparameter</th><th>Resultat</th><th>Källa</th></tr></thead>
+      <tbody>
+        <tr><td>Ökning av immunkapacitet</td><td><strong>37%</strong> på 20 dagar</td><td>USDA / PMID: 8147336</td></tr>
+        <tr><td>Naturliga mördarceller (NK-celler)</td><td>Dramatisk förstärkning</td><td>USDA klinisk studie</td></tr>
+        <tr><td>Lymfocyter</td><td>Förbättrat immunsvar</td><td>USDA klinisk studie</td></tr>
+        <tr><td>Antioxidantskydd i blodlipider</td><td>Effektivt skydd verifierat</td><td>USDA / AJCN 1994</td></tr>
+        <tr><td>Studiepublikation</td><td>American Journal of Clinical Nutrition</td><td>Carughi &amp; Hooper, 1994</td></tr>
+      </tbody>
+--
+        <tr><td>Lutein/Zeaxantin</td><td>410 mcg</td><td>†</td></tr>
+        <tr><td>Carotenoid Complex-blandning</td><td>900 mg</td><td>†</td></tr>
+      </tbody>
+    </table>
+--
+      <div class="ingredient-chip"><strong>Antioxidanter</strong>Spenatoleoresin</div>
+      <div class="ingredient-chip"><strong>Flavonoider</strong>Jordgubbskoncentrat</div>
+      <div class="ingredient-chip"><strong>Karotenoider</strong>Aprikoskoncentrat</div>
+      <div class="ingredient-chip"><strong>Karotenoider</strong>Persikokoncentrat</div>
+--
+    <div class="callout callout-gold">
+      <h4>Vad USDA-studien faktiskt mätte</h4>
+      <p style="margin-bottom:0;">USDA-studien använde <em>hela Carotenoid Complex-formeln</em> — inte isolerat beta-karoten. Resultaten (37% immunökning) reflekterar effekten av det kombinerade spektrumet från hela livsmedelskällor.</p>
+    </div>
+
+    <h2 id="sab">NeoLife Scientific Advisory Board</h2>
+    <p>NeoLifes vetenskapliga rådgivningsnämnd (SAB) grundades 1976 av Dr. Arthur Furst — fil.dr. från Stanford, erkänd som "toxikologins fader". SAB styr all produktutveckling utifrån tre standarder: Renhet, Styrka och Bevis. SAB-forskning har publicerats i <em>American Journal of Clinical Nutrition</em>, <em>FASEB Journal</em> och <em>Journal of the American College of Nutrition</em>.</p>
+
+    <h2 id="svenska-kosten">Karotenoider och svenska kostvanor</h2>
+    <p>Livsmedelsverkets kostundersökningar visar att svenska konsumenter äter i genomsnitt 250–350 gram frukt och grönsaker per dag — klart under de rekommenderade 500 grammen. Nordiska vintermånader förstärker problemet ytterligare.</p>
+    <p>En portion (3 kapslar) Carotenoid Complex ger karotenoidvärdet av en portion karotenoidrika frukter och grönsaker — ett praktiskt komplement för den som inte konsekvent når rekommenderade mängder.</p>
+
+    <h2 id="faq">Vanliga frågor</h2>
+--
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Vad är NeoLife Carotenoid Complex?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Carotenoid Complex är ett bredspektrumtillskott med karotenoider från åtta hela livsmedelskällor. Kliniskt studerad av USDA — 37% immunökning på 20 dagar (PMID: 8147336). 90 mjukkapslar, Kod 566.</p>
+      </div>
+    </div>
+--
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Hur tar man Carotenoid Complex?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Rekommenderad dos är 1–3 mjukkapslar dagligen. En förpackning innehåller 90 kapslar — vid 3 kapslar per dag räcker den 30 dagar.</p>
+--
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <h3 itemprop="name">Var köper jag Carotenoid Complex i Sverige?</h3>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <p itemprop="text">Via se.neolifeshop.com med Sponsor-ID 41-830928. Säljs inte i detaljhandeln. Som kund betalar du ordinarie pris — som distributör sparar du 20–25%.</p>
+--
+      <a href="https://pubmed.ncbi.nlm.nih.gov/8147336/" target="_blank" rel="noopener">Carughi &amp; Hooper (1994) — American Journal of Clinical Nutrition, PMID: 8147336</a><br>
+      <a href="/neolife-vetenskap/">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a><br>
+      <a href="https://www.livsmedelsverket.se/" target="_blank" rel="noopener">Livsmedelsverket — Kostråd om frukt och grönsaker</a>
+    </p>
+--
+    <ul>
+      <li><a href="/neolife-pro-vitality/">Pro Vitality+ — Fyrakomponentsystemet med Carotenoid Complex</a></li>
+      <li><a href="/neolife-flavonoid-complex/">Flavonoid Complex — Alla fem flavonoidklasser från 11 källor</a></li>
+      <li><a href="/neolife-betaguard/">Betaguard — Bredspektrum antioxidant med 8 aktiva ämnen</a></li>
+      <li><a href="/neolife-vitamin-e/">Vitamin E Plus — Hela E-familjen, tokoferoler och tokotrienoler</a></li>
+
+==================================================
+FACT SOURCE: neolife-flavonoid-complex.html
+==================================================
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeoLife Flavonoid Complex: Alla flavonoidklasser från 11 livsmedelskällor | LevNytt.se</title>
+  <meta name="description" content="NeoLife Flavonoid Complex – flavoner, flavanoler, antocyaniner och katekiner från tranbär, grönkål, grönt te, blåbär m.fl. Kod 790.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+  <link rel="canonical" href="https://levnytt.se/neolife-flavonoid-complex/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="NeoLife Flavonoid Complex: Alla flavonoidklasser från 11 livsmedelskällor | LevNytt.se">
+  <meta property="og:url" content="https://levnytt.se/neolife-flavonoid-complex/">
+  <meta property="og:site_name" content="LevNytt">
+  <meta property="og:locale" content="sv_SE">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"NeoLife Flavonoid Complex: Alla flavonoidklasser från 11 livsmedelskällor","url":"https://levnytt.se/neolife-flavonoid-complex/","datePublished":"2026-05-14","dateModified":"2026-05-14","author":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hem","item":"https://levnytt.se/"},{"@type":"ListItem","position":2,"name":"NeoLife kosttillskott","item":"https://levnytt.se/neolife-kosttillskott/"},{"@type":"ListItem","position":3,"name":"Flavonoid Complex","item":"https://levnytt.se/neolife-flavonoid-complex/"}]}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+--
+      <a href="/neolife-kosttillskott/">Alla produkter</a>
+      <a href="/neolife-flavonoid-complex/" class="active">Flavonoid Complex</a>
+      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="nav-cta" target="_blank" rel="noopener">Handla NeoLife &rarr;</a>
+    </div>
+--
+      <a href="/neolife-kosttillskott/">NeoLife produkter</a><span class="sep">/</span>
+      <span class="current">Flavonoid Complex</span>
+    </div>
+    <h1>NeoLife Flavonoid Complex: Alla flavonoidklasser från hela livsmedel</h1>
+    <div class="hero-stats"><div><div class="hero-stat-num">4000+</div><div class="hero-stat-label">Kända flavonoider i naturen</div></div><div><div class="hero-stat-num">11</div><div class="hero-stat-label">Livsmedelskällor</div></div><div><div class="hero-stat-num">60</div><div class="hero-stat-label">Tabletter · Kod 790</div></div><div><div class="hero-stat-num">5</div><div class="hero-stat-label">Flavonoidklasser</div></div></div>
+  </div>
+</section>
+--
+  <div class="article-inner">
+    <div class="callout"><h4>Sammanfattning</h4><p style="margin-bottom:0;">NeoLife Flavonoid Complex (Kod 790) innehåller flavonoider som representerar alla fem flavonoidklasser — flavoner, flavanoler, flavanoner, antocyaniner och katekiner — från 11 hela livsmedelskällor: tranbär, grönkål, grönt te, rödbetor, fläderbär, hallon, blåbär, röda och svarta vindruvor, apelsiner och citroner. Kompletterat med naturligt C-vitamin.</p></div>
+    <p><em>LevNytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Innehållet är informativt och utgör inte medicinsk rådgivning.</em></p>
+    <h2>Vad är flavonoider?</h2>
+    <p>Flavonoider är en stor fytokemisk familj med över 4 000 identifierade föreningar. De ger blå, lila och smaragdgröna färger i naturen — blommornas levfulla kulörer. Till skillnad från karotenoider som är fettlösliga, upplöses flavonoider huvudsakligen i vatten och tillhör polyfenolfamiljen.</p>
+    <blockquote><p>Flavonoider representerar en annan stor fytokemifamilj. Över 4 000 flavonoider har identifierats — trots att bara någon enstaka procent av alla växter har testats. — NeoLife produktdokumentation 04/26 SE</p></blockquote>
+    <h2>Fem flavonoidklasser — alla täckta</h2>
+    <table><thead><tr><th>Flavonoidklass</th><th>Typiska källor</th></tr></thead><tbody>
+    <tr><td>Flavoner</td><td>Selleri, persilja, citrusfrukter</td></tr>
+    <tr><td>Flavanoler (katekiner)</td><td>Grönt te, kakao, äpplen</td></tr>
+--
+    <ol>
+    <li><strong>Bred täckning</strong> — en tablett ger det näringsvärde som motsvarar en flavonoidrik portion frukt och grönsaker.</li>
+    <li><strong>Vattenlösliga</strong> — kan tas utan fett i målet, till skillnad från fettlösliga tillskott.</li>
+    <li><strong>Komplement till Carotenoid Complex</strong> — tillsammans täcker de de viktigaste fytonäringsämnenas spektrum.</li>
+    </ol>
+    <h2>Vanliga frågor</h2>
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name">Vad är flavonoider och varför är de viktiga?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Flavonoider är en stor fytokemisk familj med över 4 000 identifierade föreningar. De förekommer naturligt i frukt, grönsaker, te och vin. Hälsomyndigheter rekommenderar ett högt intag av varierade frukter och grönsaker, inklusive sådana rika på flavonoider.</p></div></div>
+    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name">Vilka källor ingår i Flavonoid Complex?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">11 hela livsmedelskällor: tranbär, grönkål, grönt te, rödbetor, fläderbär, hallon, blåbär, röda och svarta vindruvor, apelsiner och citroner — plus naturligt C-vitamin. Kod 790, 60 tabletter.</p></div></div>
+    <div style="background:linear-gradient(135deg,#e8f5e9 0%,#f1f8e9 100%);border:1px solid #2e7d32;padding:28px 32px;margin:32px 0;border-radius:12px;text-align:center;">
+      <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2e7d32;margin-bottom:8px;">REDO ATT PROVA NEOLIFE?</p>
+--
+    </div>
+    <p style="font-size:0.85em;color:#888;border-top:1px solid #E0D8C8;padding-top:14px;margin-top:20px;"><strong>Källor:</strong><br>NeoLife Flavonoid Complex — Snabba fakta, neolifeshop.com, 04/26 SE<br><a href="/neolife-kosttillskott/" style="color:#2D6A4F;">NeoLife kosttillskott — fullständig produktöversikt</a></p>
+  </div>
+</div>
+--
+    <ul>
+      <li><a href="/neolife-pro-vitality/">Pro Vitality+ — Det fyrakomponentiga grundsystemet</a></li>
+      <li><a href="/neolife-carotenoid-complex/">Carotenoid Complex — USDA-forskning, 37% immunökning</a></li>
+      <li><a href="/neolife-omega-3-plus/">Omega-3 Plus — Triglyceridform, 1 069 mg per portion</a></li>
+      <li><a href="/neolife-magnesium-complex/">Magnesium Complex — Tri-Mag, 300 mg, vegansk</a></li>
+      <li><a href="/neolife-vitamin-d/">Vitamin D — D3-formen, särskilt viktigt i Norden</a></li>
