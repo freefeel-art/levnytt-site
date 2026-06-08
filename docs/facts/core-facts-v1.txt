@@ -1,0 +1,152 @@
+
+==================================================
+SOURCE: neolife-vetenskap.html
+==================================================
+8:  <title>NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976 | Levnytt.se</title>
+9:  <meta name="description" content="NeoLife Scientific Advisory Board grundat 1976 av Dr. Arthur Furst — Stanford Ph.D., toxikologins fader. Tre standarder: Renhet, Styrka, Bevis. Publicerat i AJCN, FASEB Journal, JACN. Sponsor-ID: 41-830928.">
+203:      <h1>NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976</h1>
+239:      <h2 id="tre-standarder">De tre standarderna — Renhet, Styrka, Bevis</h2>
+266:      <h2 id="arthur-furst">Dr. Arthur Furst — grundaren av SAB</h2>
+291:      <h2 id="publikationer">Peer-reviewed publikationer och samarbeten</h2>
+304:      <h3>Externa samarbetspartners</h3>
+337:      <h2 id="cellulär-filosofi">Cellulär nutritionsfilosofi</h2>
+345:      <h2 id="produktpåverkan">SAB:s påverkan på NeoLife-produkterna</h2>
+356:      <h2 id="faq">Vanliga frågor om Vetenskapliga rådet</h2>
+359:        <h3 itemprop="name">Vad är NeoLife Scientific Advisory Board?</h3>
+366:        <h3 itemprop="name">Vem var Dr. Arthur Furst?</h3>
+373:        <h3 itemprop="name">Vad innebär de tre standarderna?</h3>
+380:        <h3 itemprop="name">I vilka tidskrifter publiceras SAB-forskning?</h3>
+399:      <h3>Mer om NeoLife</h3>
+
+==================================================
+SOURCE: neolife-historia.html
+==================================================
+8:  <title>NeoLifes historia: Från 1958 till global cellulär nutrition | Levnytt.se</title>
+9:  <meta name="description" content="NeoLife grundat 1958 av Jerry Brassfield. Tre-en-en — världens första fytonäringstillskott. SAB grundat 1976 av Dr. Arthur Furst. Jim Rohn, Tony Robbins och Mark Hughes kopplingen. 68 år av kontinuerlig drift.">
+203:      <h1>NeoLifes historia: Från 1958 till global cellulär nutrition</h1>
+247:      <h2 id="grundaren">Jerry Brassfields berättelse — 50 dollar och en vision</h2>
+258:      <h3>Två konkurser innan företaget som aldrig misslyckades</h3>
+262:      <h3>Hälsan var personlig — och Stanford-läxan</h3>
+266:      <h2 id="jim-rohn">Jim Rohn, Tony Robbins och Mark Hughes kopplingen</h2>
+285:      <h2 id="1958">1958 — Tre-en-en och Formula IV</h2>
+293:      <h2 id="tidslinje">Historisk tidslinje 1958–2026</h2>
+351:      <h2 id="filosofi">Cellulär nutritionsfilosofi — före sin tid</h2>
+365:      <h2 id="faq">Vanliga frågor om NeoLifes historia</h2>
+368:        <h3 itemprop="name">Vem grundade NeoLife och när?</h3>
+375:        <h3 itemprop="name">Vilken koppling hade Jim Rohn till NeoLife?</h3>
+382:        <h3 itemprop="name">Vad är Tre-en-en och varför var det betydelsefullt 1958?</h3>
+389:        <h3 itemprop="name">När etablerades NeoLife i Sverige?</h3>
+408:      <h3>Mer om NeoLife</h3>
+
+==================================================
+SOURCE: neolife-pro-vitality.html
+==================================================
+8:  <title>NeoLife Pro Vitality+: Det fyrkomponentiga grundsystemet | LevNytt.se</title>
+9:  <meta name="description" content="Pro Vitality+ kombinerar Tre-en-en, Carotenoid Complex, Omega-3 Plus och Formula IV Plus i ett system. USDA: 37% immunökning på 20 dagar. Triglyceridform omega-3: 70% bättre absorption. Sponsor-ID: 41-830928.">
+83:    <h1>NeoLife Pro Vitality+: Det fyrkomponentiga grundsystemet för cellulär näring</h1>
+115:    <h2>Varför ett system — inte ett enskilt tillskott</h2>
+129:    <h2>Komponent 1: Tre-en-en — Cellmembranets fundament</h2>
+134:    <h2>Komponent 2: Carotenoid Complex — USDA-partnerad immunforskning</h2>
+138:    <h2>Komponent 3: Omega 3 Plus — Triglyceridform och ren källa</h2>
+146:    <h2>Komponent 4: Formula IV Plus — SAB-doserat multivitaminkomplex</h2>
+149:    <h2>Systemlogiken: Varför fyra komponenter</h2>
+155:    <h2>Vanliga frågor</h2>
+158:      <h3 itemprop="name">Vad ingår i Pro Vitality+?</h3>
+165:      <h3 itemprop="name">Hur skiljer sig Pro Vitality+ från ett vanligt multivitamin?</h3>
+183:    <h3>Relaterade produkter</h3>
+195:    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);margin-bottom:16px;">Beställ Pro Vitality+</h2>
+
+==================================================
+SOURCE: neolife-tre-en-en.html
+==================================================
+8:  <title>NeoLife Tre-en-en: Världens första fytonäringstillskott sedan 1958 | Levnytt.se</title>
+9:  <meta name="description" content="NeoLife Tre-en-en Kornkoncentrat — lipider och steroler från vetegroddar, riskli och soja. Världens första fytonäringstillskott 1958. Texas A&M-forskning 1987. Cellmembranvetenskap förklarad.">
+207:      <h1>NeoLife Tre-en-en: Världens första fytonärings&shy;tillskott — sedan 1958</h1>
+252:      <h2 id="cellmembran">Varför cellmembran behöver lipider och steroler</h2>
+265:      <h2 id="historia">1958 — 32 år före begreppet fytonäringsämne</h2>
+279:      <h2 id="texas-am">Texas A&M University-forskning 1987</h2>
+326:      <h2 id="ingredienser">Ingredienser från tre fullkornkällor</h2>
+362:      <h2 id="pro-vitality">Tre-en-en i Pro Vitality+-systemet</h2>
+393:      <h2 id="svenska-kosten">Modern spannmålsförädling och svenska kostvanor</h2>
+401:      <h2 id="faq">Vanliga frågor om Tre-en-en</h2>
+404:        <h3 itemprop="name">Vad är NeoLife Tre-en-en?</h3>
+411:        <h3 itemprop="name">Varför behöver cellmembran lipider och steroler?</h3>
+418:        <h3 itemprop="name">Vad visar Texas A&M-forskningen?</h3>
+425:        <h3 itemprop="name">Vilka specifika steroler och lipider ingår?</h3>
+432:        <h3 itemprop="name">Vad är skillnaden mellan Tre-en-en och vanlig fullkornmat?</h3>
+439:        <h3 itemprop="name">Var köper jag Tre-en-en i Sverige?</h3>
+448:          <title>Tre-en-en — Cellmembranvetenskap, ingredienser och historisk tidslinje</title>
+552:      <h3>Mer om NeoLife</h3>
+
+==================================================
+SOURCE: neolife-formula-iv.html
+==================================================
+8:  <title>NeoLife Formula IV och Formula IV Plus: Världens första multifaktorstillskott | LevNytt.se</title>
+9:  <meta name="description" content="NeoLife Formula IV (Kod 576) och Formula IV Plus (Kod 691) – vitaminer, mineraler och Tre-en-en kornkoncentrat sedan 1958. Oberoende faktagranskning.">
+126:    <h1>Formula IV & Formula IV Plus</h1>
+137:    <h2>Historien bakom Formula IV</h2>
+140:    <h2>Formula IV vs Formula IV Plus</h2>
+148:    <h2>Tre-en-en — grunden i formeln</h2>
+150:    <h2>Praktiska råd</h2>
+156:    <h2>Vanliga frågor</h2>
+157:    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name">Vad är skillnaden mellan Formula IV och Formula IV Plus?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Formula IV (Kod 576) innehåller järn och kommer i kapslar. Formula IV Plus (Kod 691) är järnfri, innehåller mer Tre-en-en och extra mineraler, och levereras i blisterförpackningar med separata Tre-en-en kapslar och MULTI tabletter.</p></div></div>
+158:    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name">Varför var Formula IV revolutionerande 1958?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Formula IV var det första kosttillskottet att kombinera vitaminer, mineraler och kornkoncentrat (lipider och steroler från fullkorn) i en enda formula — en approach som föregick modern näringsforskning med decennier.</p></div></div>
+172:    <h3>Fler NeoLife-produkter</h3>
+184:    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:700;color:#1A1A1A;margin-bottom:16px;">Handla som kund eller spara 20–25% som distributör</h2>
+
+==================================================
+SOURCE: neolife-omega-3-plus.html
+==================================================
+8:  <title>NeoLife Omega-3 Plus: 8 omega-3-fettsyror, testad för 200+ föroreningar | Levnytt.se</title>
+9:  <meta name="description" content="NeoLife Omega-3 Plus — 1 069 mg omega-3 per portion, 8 fettsyror inkl. 460 mg EPA och 480 mg DHA. Testad för över 200 föroreningar. 100% hållbart fångad fisk. Sponsor-ID: 41-830928.">
+208:      <h1>NeoLife Omega-3 Plus: 8 omega-3-fettsyror, testad för 200+ föroreningar</h1>
+253:      <h2 id="varfor-omega3">Varför omega-3 från fisk?</h2>
+266:      <h2 id="fettsyraprofil">Fettsyraprofil — 8 standardiserade omega-3</h2>
+332:      <h2 id="rening">Reningsprocess och föroreningskontroll</h2>
+336:      <h3>Molekylär särkiljning</h3>
+350:      <h2 id="hallbarhet">Hållbarhet och fiskekällor</h2>
+356:      <h2 id="pro-vitality">Omega-3 Plus i Pro Vitality+-systemet</h2>
+387:      <h2 id="svenska-kosten">Omega-3 och svenska kostvanor</h2>
+393:      <h2 id="faq">Vanliga frågor om Omega-3 Plus</h2>
+396:        <h3 itemprop="name">Vad innehåller NeoLife Omega-3 Plus?</h3>
+403:        <h3 itemprop="name">Vad bidrar EPA och DHA till?</h3>
+410:        <h3 itemprop="name">Hur testas produkten för föroreningar?</h3>
+417:        <h3 itemprop="name">Varför är 8 fettsyror bättre än bara EPA och DHA?</h3>
+424:        <h3 itemprop="name">Är fisket hållbart?</h3>
+431:        <h3 itemprop="name">Var köper jag Omega-3 Plus i Sverige?</h3>
+440:          <title>Omega-3 Plus — fettsyraprofil, rening och jämförelse</title>
+544:      <h3>Mer om NeoLife</h3>
+
+==================================================
+SOURCE: neolife-carotenoid-complex.html
+==================================================
+8:  <title>NeoLife Carotenoid Complex: USDA-forskning, 37% immunökning på 20 dagar | LevNytt.se</title>
+9:  <meta name="description" content="NeoLife Carotenoid Complex — brett spektrum av karotenoider från hela livsmedel. USDA-klinisk studie: 37% ökning av immunkapacitet på 20 dagar. Lykopin, lutein, beta-karoten. Sponsor-ID: 41-830928.">
+98:    <h1>NeoLife Carotenoid Complex: Bredspektrum karotenoid&shy;tillskott från hela livsmedel</h1>
+143:    <h2 id="varfor-karotenoider">Varför karotenoider?</h2>
+151:    <h2 id="usda-studie">USDA-klinisk studie och resultat</h2>
+164:    <h2 id="ingredienser">Ingredienser och näringsfakta</h2>
+188:    <h2 id="bredspektrum">Bredspektrum kontra enbart beta-karoten</h2>
+201:    <h2 id="sab">NeoLife Scientific Advisory Board</h2>
+204:    <h2 id="svenska-kosten">Karotenoider och svenska kostvanor</h2>
+208:    <h2 id="faq">Vanliga frågor</h2>
+211:      <h3 itemprop="name">Vad är NeoLife Carotenoid Complex?</h3>
+218:      <h3 itemprop="name">Hur tar man Carotenoid Complex?</h3>
+225:      <h3 itemprop="name">Var köper jag Carotenoid Complex i Sverige?</h3>
+252:    <h3>Relaterade produkter</h3>
+
+==================================================
+SOURCE: neolife-flavonoid-complex.html
+==================================================
+8:  <title>NeoLife Flavonoid Complex: Alla flavonoidklasser från 11 livsmedelskällor | LevNytt.se</title>
+9:  <meta name="description" content="NeoLife Flavonoid Complex – flavoner, flavanoler, antocyaniner och katekiner från tranbär, grönkål, grönt te, blåbär m.fl. Kod 790.">
+126:    <h1>NeoLife Flavonoid Complex: Alla flavonoidklasser från hela livsmedel</h1>
+137:    <h2>Vad är flavonoider?</h2>
+140:    <h2>Fem flavonoidklasser — alla täckta</h2>
+148:    <h2>De 11 hela livsmedelskällorna</h2>
+150:    <h2>Praktiska råd</h2>
+156:    <h2>Vanliga frågor</h2>
+157:    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name">Vad är flavonoider och varför är de viktiga?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Flavonoider är en stor fytokemisk familj med över 4 000 identifierade föreningar. De förekommer naturligt i frukt, grönsaker, te och vin. Hälsomyndigheter rekommenderar ett högt intag av varierade frukter och grönsaker, inklusive sådana rika på flavonoider.</p></div></div>
+158:    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name">Vilka källor ingår i Flavonoid Complex?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">11 hela livsmedelskällor: tranbär, grönkål, grönt te, rödbetor, fläderbär, hallon, blåbär, röda och svarta vindruvor, apelsiner och citroner — plus naturligt C-vitamin. Kod 790, 60 tabletter.</p></div></div>
+172:    <h3>Fler NeoLife-produkter</h3>
+184:    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:700;color:#1A1A1A;margin-bottom:16px;">Handla som kund eller spara 20–25% som distributör</h2>

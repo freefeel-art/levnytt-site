@@ -30,6 +30,9 @@
   .lnav-dropdown-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#888;padding:6px 14px 2px;}
   .lnav-cta{background:#2D6A4F!important;color:#fff!important;font-weight:600!important;padding:8px 18px!important;}
   .lnav-cta:hover{background:#1B4332!important;color:#fff!important;}
+  .lnav-savings{background:#D4A017!important;color:#111!important;}
+  .lnav-savings:hover{background:#B8860B!important;color:#111!important;}
+
   .lnav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
   .lnav-hamburger svg{width:24px;height:24px;stroke:#1A1A1A;}
   @media(max-width:900px){
@@ -73,6 +76,7 @@
 
       <a href="/neolife-affarsmojlighet/"${isActive('/neolife-affarsmojlighet/')}>Affärsmöjlighet</a>
       <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="lnav-cta" target="_blank" rel="noopener">Handla NeoLife &rarr;</a>
+      <a href="/finns-det-billigare-alternativ/" class="lnav-cta lnav-savings">Spara Pengar?</a>
     </div>
   </div>
 </nav>`;

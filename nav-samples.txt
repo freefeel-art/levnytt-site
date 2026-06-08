@@ -1,0 +1,359 @@
+./levnytt-se-master-template.html-
+./levnytt-se-master-template.html-  <!-- NAV — vaihda NAV_ID uniikiksi per sivu, merkitse active-sivu -->
+./levnytt-se-master-template.html:  <nav>
+./levnytt-se-master-template.html-    <div class="nav-inner">
+./levnytt-se-master-template.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./levnytt-se-master-template.html-      <button class="nav-hamburger" onclick="document.getElementById('NAV_ID').classList.toggle('open')" aria-label="Meny">
+./levnytt-se-master-template.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./levnytt-se-master-template.html-      </button>
+--
+./neolife-elevate.html-<body>
+./neolife-elevate.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; verifierade fakta, ingen överdrift.</div>
+./neolife-elevate.html:  <nav>
+./neolife-elevate.html-    <div class="nav-inner">
+./neolife-elevate.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-elevate.html-      <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Meny">
+./neolife-elevate.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-elevate.html-      </button>
+--
+./ekologisk-stadning-greenwashing.html-<body>
+./ekologisk-stadning-greenwashing.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta.</div>
+./ekologisk-stadning-greenwashing.html:  <nav><div class="nav-inner">
+./ekologisk-stadning-greenwashing.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./ekologisk-stadning-greenwashing.html-    <button class="nav-hamburger" onclick="document.getElementById('navEKO').classList.toggle('open')" aria-label="Meny"><svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+./ekologisk-stadning-greenwashing.html-    <div class="nav-links" id="navEKO">
+./ekologisk-stadning-greenwashing.html-      <a href="/neolife-historia">Historia</a><a href="/neolife-vetenskap">Vetenskap</a>
+./ekologisk-stadning-greenwashing.html-      <a href="/neolife-carotenoid-complex">Carotenoid</a><a href="/neolife-omega-3-plus">Omega-3</a>
+--
+./super-10.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; verifierade fakta, ingen överdrift.</div>
+./super-10.html-
+./super-10.html:  <nav>
+./super-10.html-    <div class="nav-inner">
+./super-10.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./super-10.html-      <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Meny">
+./super-10.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./super-10.html-      </button>
+--
+./neolife-historia.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-historia.html-
+./neolife-historia.html:  <nav>
+./neolife-historia.html-    <div class="nav-inner">
+./neolife-historia.html-      <a href="/" class="nav-brand">LevNytt</a>
+./neolife-historia.html-      <button class="nav-hamburger" onclick="document.getElementById('navHIS').classList.toggle('open')" aria-label="Meny">
+./neolife-historia.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-historia.html-      </button>
+--
+./neolife-chelated-zinc.html-<body>
+./neolife-chelated-zinc.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-chelated-zinc.html:<nav>
+./neolife-chelated-zinc.html-  <div class="nav-inner">
+./neolife-chelated-zinc.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-chelated-zinc.html-    <button class="nav-hamburger" onclick="document.getElementById('navZinc').classList.toggle('open')" aria-label="Meny">
+./neolife-chelated-zinc.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-chelated-zinc.html-    </button>
+--
+./index.html-  </div>
+./index.html-
+./index.html:  <nav>
+./index.html-    <div class="nav-inner">
+./index.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./index.html-      <button class="nav-hamburger" onclick="document.getElementById('navMain').classList.toggle('open')" aria-label="Meny">
+./index.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./index.html-      </button>
+--
+./varfor-fiskolja-inte-ar-likvardigt.html-<body>
+./varfor-fiskolja-inte-ar-likvardigt.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta.</div>
+./varfor-fiskolja-inte-ar-likvardigt.html:  <nav><div class="nav-inner">
+./varfor-fiskolja-inte-ar-likvardigt.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./varfor-fiskolja-inte-ar-likvardigt.html-    <button class="nav-hamburger" onclick="document.getElementById('navFISK').classList.toggle('open')" aria-label="Meny"><svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+./varfor-fiskolja-inte-ar-likvardigt.html-    <div class="nav-links" id="navFISK">
+./varfor-fiskolja-inte-ar-likvardigt.html-      <a href="/neolife-historia">Historia</a><a href="/neolife-vetenskap">Vetenskap</a>
+./varfor-fiskolja-inte-ar-likvardigt.html-      <a href="/neolife-carotenoid-complex">Carotenoid</a><a href="/neolife-omega-3-plus">Omega-3</a>
+--
+./neolife-hallbarhet.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-hallbarhet.html-
+./neolife-hallbarhet.html:  <nav>
+./neolife-hallbarhet.html-    <div class="nav-inner">
+./neolife-hallbarhet.html-      <a href="/" class="nav-brand">Levnytt<span>.se</span></a>
+./neolife-hallbarhet.html-      <button class="nav-hamburger" onclick="document.getElementById('navHL').classList.toggle('open')" aria-label="Meny">
+./neolife-hallbarhet.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-hallbarhet.html-      </button>
+--
+./neolife-vitamin-e.html-<body>
+./neolife-vitamin-e.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; verifierade fakta, ingen överdrift.</div>
+./neolife-vitamin-e.html:  <nav>
+./neolife-vitamin-e.html-    <div class="nav-inner">
+./neolife-vitamin-e.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-vitamin-e.html-      <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Meny">
+./neolife-vitamin-e.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-vitamin-e.html-      </button>
+--
+./integritetspolicy.html-</head>
+./integritetspolicy.html-<body>
+./integritetspolicy.html:  <nav>
+./integritetspolicy.html-    <div class="nav-inner">
+./integritetspolicy.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./integritetspolicy.html-      <button class="nav-hamburger" onclick="document.getElementById('navINT').classList.toggle('open')" aria-label="Meny">
+./integritetspolicy.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./integritetspolicy.html-      </button>
+--
+./neolife-cruciferous-plus.html-<body>
+./neolife-cruciferous-plus.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-cruciferous-plus.html:<nav>
+./neolife-cruciferous-plus.html-  <div class="nav-inner">
+./neolife-cruciferous-plus.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-cruciferous-plus.html-    <button class="nav-hamburger" onclick="document.getElementById('navCruc').classList.toggle('open')" aria-label="Meny">
+./neolife-cruciferous-plus.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-cruciferous-plus.html-    </button>
+--
+./vaxtbaserade-steroler-dagligen.html-<body>
+./vaxtbaserade-steroler-dagligen.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta.</div>
+./vaxtbaserade-steroler-dagligen.html:  <nav><div class="nav-inner">
+./vaxtbaserade-steroler-dagligen.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./vaxtbaserade-steroler-dagligen.html-    <button class="nav-hamburger" onclick="document.getElementById('navVAX').classList.toggle('open')" aria-label="Meny"><svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+./vaxtbaserade-steroler-dagligen.html-    <div class="nav-links" id="navVAX">
+./vaxtbaserade-steroler-dagligen.html-      <a href="/neolife-historia">Historia</a><a href="/neolife-vetenskap">Vetenskap</a>
+./vaxtbaserade-steroler-dagligen.html-      <a href="/neolife-carotenoid-complex">Carotenoid</a><a href="/neolife-omega-3-plus">Omega-3</a>
+--
+./neolife-affarsmojlighet.html-<body>
+./neolife-affarsmojlighet.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-affarsmojlighet.html:  <nav>
+./neolife-affarsmojlighet.html-    <div class="nav-inner">
+./neolife-affarsmojlighet.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-affarsmojlighet.html-      <button class="nav-hamburger" onclick="document.getElementById('navAFF').classList.toggle('open')" aria-label="Meny">
+./neolife-affarsmojlighet.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-affarsmojlighet.html-      </button>
+--
+./neolife-viktkontroll.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-viktkontroll.html-
+./neolife-viktkontroll.html:  <nav>
+./neolife-viktkontroll.html-    <div class="nav-inner">
+./neolife-viktkontroll.html-      <a href="/" class="nav-brand">LevNytt</a>
+./neolife-viktkontroll.html-      <button class="nav-hamburger" onclick="document.getElementById('navVK').classList.toggle('open')" aria-label="Meny">
+./neolife-viktkontroll.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-viktkontroll.html-      </button>
+--
+./karotenoid-tillskott-vs-mat.html-<body>
+./karotenoid-tillskott-vs-mat.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta.</div>
+./karotenoid-tillskott-vs-mat.html:  <nav><div class="nav-inner">
+./karotenoid-tillskott-vs-mat.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./karotenoid-tillskott-vs-mat.html-    <button class="nav-hamburger" onclick="document.getElementById('navFYT').classList.toggle('open')" aria-label="Meny"><svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+./karotenoid-tillskott-vs-mat.html-    <div class="nav-links" id="navFYT">
+./karotenoid-tillskott-vs-mat.html-      <a href="/neolife-historia">Historia</a><a href="/neolife-vetenskap">Vetenskap</a>
+./karotenoid-tillskott-vs-mat.html-      <a href="/neolife-carotenoid-complex">Carotenoid</a><a href="/neolife-omega-3-plus">Omega-3</a>
+--
+./viktuppgang-klimakteriet.html-<body>
+./viktuppgang-klimakteriet.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta.</div>
+./viktuppgang-klimakteriet.html:  <nav><div class="nav-inner">
+./viktuppgang-klimakteriet.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./viktuppgang-klimakteriet.html-    <button class="nav-hamburger" onclick="document.getElementById('navVIK').classList.toggle('open')" aria-label="Meny"><svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+./viktuppgang-klimakteriet.html-    <div class="nav-links" id="navVIK">
+./viktuppgang-klimakteriet.html-      <a href="/neolife-historia">Historia</a><a href="/neolife-vetenskap">Vetenskap</a>
+./viktuppgang-klimakteriet.html-      <a href="/neolife-carotenoid-complex">Carotenoid</a><a href="/neolife-omega-3-plus">Omega-3</a>
+--
+./neolife-magnesium-complex.html-  </div>
+./neolife-magnesium-complex.html-
+./neolife-magnesium-complex.html:  <nav>
+./neolife-magnesium-complex.html-    <div class="nav-inner">
+./neolife-magnesium-complex.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-magnesium-complex.html-      <button class="nav-hamburger" onclick="document.getElementById('navMag').classList.toggle('open')" aria-label="Meny">
+./neolife-magnesium-complex.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-magnesium-complex.html-      </button>
+--
+./neolife-resp-x.html-<body>
+./neolife-resp-x.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-resp-x.html:<nav>
+./neolife-resp-x.html-  <div class="nav-inner">
+./neolife-resp-x.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-resp-x.html-    <button class="nav-hamburger" onclick="document.getElementById('navResp').classList.toggle('open')" aria-label="Meny">
+./neolife-resp-x.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-resp-x.html-    </button>
+--
+./neolife-tre-en-en.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-tre-en-en.html-
+./neolife-tre-en-en.html:  <nav>
+./neolife-tre-en-en.html-    <div class="nav-inner">
+./neolife-tre-en-en.html-      <a href="/" class="nav-brand">LevNytt</a>
+./neolife-tre-en-en.html-      <button class="nav-hamburger" onclick="document.getElementById('navTEE').classList.toggle('open')" aria-label="Meny">
+./neolife-tre-en-en.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-tre-en-en.html-      </button>
+--
+./neolife-shake-bar-tea.html-<body>
+./neolife-shake-bar-tea.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-shake-bar-tea.html:<nav>
+./neolife-shake-bar-tea.html-  <div class="nav-inner">
+./neolife-shake-bar-tea.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-shake-bar-tea.html-    <button class="nav-hamburger" onclick="document.getElementById('navSBT').classList.toggle('open')" aria-label="Meny">
+./neolife-shake-bar-tea.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-shake-bar-tea.html-    </button>
+--
+./neolife-vetenskap.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-vetenskap.html-
+./neolife-vetenskap.html:  <nav>
+./neolife-vetenskap.html-    <div class="nav-inner">
+./neolife-vetenskap.html-      <a href="/" class="nav-brand">LevNytt</a>
+./neolife-vetenskap.html-      <button class="nav-hamburger" onclick="document.getElementById('navSAB').classList.toggle('open')" aria-label="Meny">
+./neolife-vetenskap.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-vetenskap.html-      </button>
+--
+./neolife-vitamin-d.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-vitamin-d.html-
+./neolife-vitamin-d.html:<nav>
+./neolife-vitamin-d.html-  <div class="nav-inner">
+./neolife-vitamin-d.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-vitamin-d.html-    <button class="nav-hamburger" onclick="document.getElementById('navVD').classList.toggle('open')" aria-label="Meny">
+./neolife-vitamin-d.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-vitamin-d.html-    </button>
+--
+./neolife-botanical-balance.html-<body>
+./neolife-botanical-balance.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-botanical-balance.html:<nav>
+./neolife-botanical-balance.html-  <div class="nav-inner">
+./neolife-botanical-balance.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-botanical-balance.html-    <button class="nav-hamburger" onclick="document.getElementById('navBota').classList.toggle('open')" aria-label="Meny">
+./neolife-botanical-balance.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-botanical-balance.html-    </button>
+--
+./neolife-upbeet.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; verifierade fakta, ingen överdrift.</div>
+./neolife-upbeet.html-
+./neolife-upbeet.html:  <nav>
+./neolife-upbeet.html-    <div class="nav-inner">
+./neolife-upbeet.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-upbeet.html-      <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Meny">
+./neolife-upbeet.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-upbeet.html-      </button>
+--
+./om-oss.html-<body>
+./om-oss.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./om-oss.html:  <nav>
+./om-oss.html-    <div class="nav-inner">
+./om-oss.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./om-oss.html-      <button class="nav-hamburger" onclick="document.getElementById('navOM').classList.toggle('open')" aria-label="Meny">
+./om-oss.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./om-oss.html-      </button>
+--
+./personlig-vard.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./personlig-vard.html-
+./personlig-vard.html:<nav>
+./personlig-vard.html-  <div class="nav-inner">
+./personlig-vard.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./personlig-vard.html-    <button class="nav-hamburger" onclick="document.getElementById('navPV').classList.toggle('open')" aria-label="Meny">
+./personlig-vard.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./personlig-vard.html-    </button>
+--
+./neolife-flavonoid-complex.html-<body>
+./neolife-flavonoid-complex.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-flavonoid-complex.html:<nav>
+./neolife-flavonoid-complex.html-  <div class="nav-inner">
+./neolife-flavonoid-complex.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-flavonoid-complex.html-    <button class="nav-hamburger" onclick="document.getElementById('navFlav').classList.toggle('open')" aria-label="Meny">
+./neolife-flavonoid-complex.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-flavonoid-complex.html-    </button>
+--
+./neolife-omega-3-plus.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-omega-3-plus.html-
+./neolife-omega-3-plus.html:  <nav>
+./neolife-omega-3-plus.html-    <div class="nav-inner">
+./neolife-omega-3-plus.html-      <a href="/" class="nav-brand">LevNytt</a>
+./neolife-omega-3-plus.html-      <button class="nav-hamburger" onclick="document.getElementById('navO3').classList.toggle('open')" aria-label="Meny">
+./neolife-omega-3-plus.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-omega-3-plus.html-      </button>
+--
+./neolife-acidophilus-plus.html-<body>
+./neolife-acidophilus-plus.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-acidophilus-plus.html:<nav>
+./neolife-acidophilus-plus.html-  <div class="nav-inner">
+./neolife-acidophilus-plus.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-acidophilus-plus.html-    <button class="nav-hamburger" onclick="document.getElementById('navAcid').classList.toggle('open')" aria-label="Meny">
+./neolife-acidophilus-plus.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-acidophilus-plus.html-    </button>
+--
+./neolife-garlic-allium-complex.html-<body>
+./neolife-garlic-allium-complex.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-garlic-allium-complex.html:<nav>
+./neolife-garlic-allium-complex.html-  <div class="nav-inner">
+./neolife-garlic-allium-complex.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-garlic-allium-complex.html-    <button class="nav-hamburger" onclick="document.getElementById('navGarl').classList.toggle('open')" aria-label="Meny">
+./neolife-garlic-allium-complex.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-garlic-allium-complex.html-    </button>
+--
+./neolife-betaguard.html-<body>
+./neolife-betaguard.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-betaguard.html:<nav>
+./neolife-betaguard.html-  <div class="nav-inner">
+./neolife-betaguard.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-betaguard.html-    <button class="nav-hamburger" onclick="document.getElementById('navBtag').classList.toggle('open')" aria-label="Meny">
+./neolife-betaguard.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-betaguard.html-    </button>
+--
+./neolife-coq10.html-<body>
+./neolife-coq10.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-coq10.html:<nav>
+./neolife-coq10.html-  <div class="nav-inner">
+./neolife-coq10.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-coq10.html-    <button class="nav-hamburger" onclick="document.getElementById('navCoQ').classList.toggle('open')" aria-label="Meny">
+./neolife-coq10.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-coq10.html-    </button>
+--
+./zeaxantin-immunforsvar-2025.html-<body>
+./zeaxantin-immunforsvar-2025.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta.</div>
+./zeaxantin-immunforsvar-2025.html:  <nav><div class="nav-inner">
+./zeaxantin-immunforsvar-2025.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./zeaxantin-immunforsvar-2025.html-    <button class="nav-hamburger" onclick="document.getElementById('navZEA').classList.toggle('open')" aria-label="Meny"><svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+./zeaxantin-immunforsvar-2025.html-    <div class="nav-links" id="navZEA">
+./zeaxantin-immunforsvar-2025.html-      <a href="/neolife-historia">Historia</a><a href="/neolife-vetenskap">Vetenskap</a>
+./zeaxantin-immunforsvar-2025.html-      <a href="/neolife-carotenoid-complex">Carotenoid</a><a href="/neolife-omega-3-plus">Omega-3</a>
+--
+./neolife-formula-iv.html-<body>
+./neolife-formula-iv.html-<div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./neolife-formula-iv.html:<nav>
+./neolife-formula-iv.html-  <div class="nav-inner">
+./neolife-formula-iv.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./neolife-formula-iv.html-    <button class="nav-hamburger" onclick="document.getElementById('navFrmIV').classList.toggle('open')" aria-label="Meny">
+./neolife-formula-iv.html-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./neolife-formula-iv.html-    </button>
+--
+./fytosteroler-cellmembran.html-<body>
+./fytosteroler-cellmembran.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta.</div>
+./fytosteroler-cellmembran.html:  <nav><div class="nav-inner">
+./fytosteroler-cellmembran.html-    <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./fytosteroler-cellmembran.html-    <button class="nav-hamburger" onclick="document.getElementById('navFYT').classList.toggle('open')" aria-label="Meny"><svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+./fytosteroler-cellmembran.html-    <div class="nav-links" id="navFYT">
+./fytosteroler-cellmembran.html-      <a href="/neolife-historia">Historia</a><a href="/neolife-vetenskap">Vetenskap</a>
+./fytosteroler-cellmembran.html-      <a href="/neolife-carotenoid-complex">Carotenoid</a><a href="/neolife-omega-3-plus">Omega-3</a>
+--
+./ala-vs-epa-vs-dha.html-<body>
+./ala-vs-epa-vs-dha.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./ala-vs-epa-vs-dha.html:  <nav>
+./ala-vs-epa-vs-dha.html-    <div class="nav-inner">
+./ala-vs-epa-vs-dha.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./ala-vs-epa-vs-dha.html-      <button class="nav-hamburger" onclick="document.getElementById('navALA').classList.toggle('open')" aria-label="Meny">
+./ala-vs-epa-vs-dha.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./ala-vs-epa-vs-dha.html-      </button>
+--
+./golden-home-care.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; verifierade fakta, aktuella priser, ingen överdrift.</div>
+./golden-home-care.html-
+./golden-home-care.html:  <nav>
+./golden-home-care.html-    <div class="nav-inner">
+./golden-home-care.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./golden-home-care.html-      <button class="nav-hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Meny">
+./golden-home-care.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./golden-home-care.html-      </button>
+--
+./404.html-</head>
+./404.html-<body>
+./404.html:  <nav>
+./404.html-    <div class="nav-inner">
+./404.html-      <a href="/" class="nav-brand">Lev<span>Nytt</span></a>
+./404.html-      <button class="nav-hamburger" onclick="document.getElementById('nav404').classList.toggle('open')" aria-label="Meny">
+./404.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./404.html-      </button>
+--
+./direktforsaljning-fakta.html-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+./direktforsaljning-fakta.html-
+./direktforsaljning-fakta.html:  <nav>
+./direktforsaljning-fakta.html-    <div class="nav-inner">
+./direktforsaljning-fakta.html-      <a href="/" class="nav-brand">LevNytt</a>
+./direktforsaljning-fakta.html-      <button class="nav-hamburger" onclick="document.getElementById('navDS').classList.toggle('open')" aria-label="Meny">
+./direktforsaljning-fakta.html-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+./direktforsaljning-fakta.html-      </button>

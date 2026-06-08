@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finns det billigare alternativ? | LevNytt.se</title>
+    <meta name="description" content="Ett lågt inköpspris är inte alltid samma sak som låg kostnad per användning. Räkna ut ditt verkliga pris och se när ett medlemskap lönar sig.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors */
+            --gold: #C8962E;
+            --gold-light: #E8C870;
+            --gold-dark: #8B6914;
+            --green: #2D6A4F;
+            --green-light: #40916C;
+            --green-dark: #1B4332;
+            --cream: #FBF8F0;
+            --cream-dark: #F0EBDD;
+            --ink: #1A1A1A;
+            --ink-muted: #555555;
+            --ink-light: #888888;
+            --white: #FFFFFF;
+            --border: #E0D8C8;
+            
+            /* Shadows & Radius */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+            --radius: 12px;
+            --radius-lg: 24px;
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            
+            /* Layout */
+            --max-w: 1000px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background-color: var(--cream);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-alt {
+            background-color: var(--white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--ink-muted);
+            max-width: 680px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+            padding: 100px 24px;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(232, 200, 112, 0.15), transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Video Section */
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--cream-dark);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-muted);
+            font-weight: 600;
+            border: 2px dashed var(--border);
+            margin-top: 32px;
+        }
+
+        /* Calculator 1 Styles */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 48px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        .calc-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition), transform var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .calc-header {
+            margin-bottom: 32px;
+            text-align: center;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--cream-dark);
+        }
+
+        .product-name {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--green-dark);
+        }
+
+        .input-group {
+            margin-bottom: 32px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .price-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background-color: var(--cream);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            transition: border-color var(--transition), box-shadow var(--transition);
+            outline: none;
+            -moz-appearance: textfield;
+        }
+
+        .price-input::-webkit-outer-spin-button,
+        .price-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .price-input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
+            background-color: var(--white);
+        }
+
+        .currency-symbol {
+            position: absolute;
+            right: 20px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--ink-muted);
+            pointer-events: none;
+        }
+
+        .volume-info {
+            background-color: var(--cream);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .volume-row {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: var(--ink-muted);
+        }
+
+        .volume-row .operator {
+            width: 24px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            text-align: center;
+            margin-right: 12px;
+        }
+
+        .volume-row.total {
+            border-top: 2px solid var(--border);
+            margin-top: 8px;
+            padding-top: 16px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .volume-row.total .operator {
+            color: var(--green);
+        }
+
+        .volume-row.total .volume-value {
+            color: var(--green-dark);
+        }
+
+        .result-box {
+            margin-top: auto;
+            text-align: center;
+            padding-top: 24px;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .result-value-wrapper {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .result-value {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--green);
+            line-height: 1;
+            transition: color var(--transition);
+        }
+
+        .result-currency {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--ink-muted);
+        }
+
+        /* Educational Section */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .edu-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .edu-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .edu-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--green-dark);
+            margin-bottom: 16px;
+        }
+
+        .edu-card p {
+            color: var(--ink-muted);
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+
+        .edu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .edu-list li {
+            font-size: 1rem;
+            color: var(--ink-muted);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .edu-list li::before {
+            content: "✦";
+            color: var(--gold);
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        /* Calculator 2 Styles */
+        .calc-card-wide {
+            max-width: 800px;
+            margin: 0 auto 48px;
+        }
+
+        .input-group-center {
+            text-align: center;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            padding: 20px 0;
+            margin-bottom: 16px;
+        }
+
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--cream-dark);
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--green);
+            cursor: pointer;
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.1s;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--green);
+            cursor: pointer;
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.1s;
+        }
+
+        .range-slider::-moz-range-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .slider-value-display {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .slider-value-unit {
+            font-size: 1.1rem;
+            color: var(--ink-muted);
+            font-weight: 500;
+        }
+
+        .results-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            background: var(--cream);
+            padding: 32px;
+            border-radius: var(--radius);
+        }
+
+        @media (min-width: 600px) {
+            .results-grid-2 {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
+        .result-item-2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .result-item-2.highlight {
+            border-top: 2px solid var(--border);
+            padding-top: 24px;
+        }
+
+        @media (min-width: 600px) {
+            .result-item-2.highlight {
+                border-top: none;
+                border-left: 2px solid var(--border);
+                padding-top: 0;
+                padding-left: 32px;
+            }
+        }
+
+        .result-item-2 .result-value {
+            font-size: 2rem;
+        }
+
+        .result-item-2.highlight .result-value {
+            font-size: 3.5rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .option-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            text-align: center;
+            transition: transform var(--transition), box-shadow var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .option-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold);
+        }
+
+        .option-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--green);
+            font-size: 1.5rem;
+        }
+
+        .option-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 12px;
+        }
+
+        .option-desc {
+            font-size: 0.95rem;
+            color: var(--ink-muted);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .option-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--green);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .option-link:hover {
+            color: var(--gold-dark);
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 20px 24px;
+            background: none;
+            border: none;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--gold);
+            transition: transform var(--transition);
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition), padding var(--transition);
+            color: var(--ink-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 24px 24px;
+            max-height: 500px;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius);
+            transition: all var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--green);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--ink);
+            border-color: var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold-dark);
+            background-color: var(--white);
+        }
+
+        /* Error state */
+        .price-input.error { border-color: #e74c3c; }
+        .result-value.error { color: var(--ink-light); font-size: 2rem; }
+    </style>
+</head>
+<body>
+
+    <script src="/nav.js"></script>
+
+    <!-- 1. Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>Finns det billigare alternativ?</h1>
+            <div class="intro-text" style="color: rgba(255, 255, 255, 0.85);">
+                <p>Ett lågt inköpspris är inte alltid samma sak som en låg kostnad per användning.</p>
+                <p>Upptäck hur dryga produkter och rätt medlemskap kan göra att det som verkar dyrt faktiskt blir billigare över tid.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Value of Money Video Section -->
+    <section class="section">
+        <div class="container">
+            <div class="video-container">
+                <header class="section-header" style="margin-bottom: 24px;">
+                    <span class="section-label">Värde för pengarna</span>
+                    <h2 class="section-title">Koncentrat vs Färdigblandat</h2>
+                    <div class="section-desc">
+                        <p>Koncentrerade produkter som späds ut hemma minskar både plastavfall och kostnad per användning.</p>
+                        <p>Se hur Golden Home Care fungerar i praktiken och varför ett högre inköpspris ofta blir billigare över tid.</p>
+                    </div>
+                </header>
+                <div class="video-placeholder">
+                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/qNA8AtBTLKY?controls=0" title="Value of Money" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Calculator #1 -->
+    <section class="section section-alt">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title">Vad kostar det egentligen per användning?</h2>
+                <div class="intro-text">
+                    <p>Många jämför priset på flaskan. Färre jämför kostnaden för den färdiga produkten.</p>
+                    <p>Med koncentrerade produkter får du betydligt mer färdigt rengöringsmedel än vad flaskans storlek först antyder.</p>
+                </div>
+            </header>
+
+            <div class="calculator-grid">
+                <!-- LDC Calculator -->
+                <div class="calc-card">
+                    <div class="calc-header">
+                        <h3 class="product-name">LDC</h3>
+                    </div>
+                    <div class="input-group">
+                        <label for="ldc-price" class="input-label">Pris för 1 liter koncentrat</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="ldc-price" class="price-input" value="250" step="1" min="0" placeholder="0" aria-label="Pris för LDC koncentrat">
+                            <span class="currency-symbol">kr</span>
+                        </div>
+                    </div>
+                    <div class="volume-info">
+                        <div class="volume-row">
+                            <span class="operator"></span>
+                            <span>1 liter koncentrat</span>
+                        </div>
+                        <div class="volume-row">
+                            <span class="operator">+</span>
+                            <span>5 liter vatten</span>
+                        </div>
+                        <div class="volume-row total">
+                            <span class="operator">=</span>
+                            <span class="volume-value">6 liter färdig produkt</span>
+                        </div>
+                    </div>
+                    <div class="result-box">
+                        <span class="result-label">Kostnad per färdig liter</span>
+                        <div class="result-value-wrapper">
+                            <span id="ldc-result" class="result-value">0</span>
+                            <span class="result-currency">kr</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Super 10 Calculator -->
+                <div class="calc-card">
+                    <div class="calc-header">
+                        <h3 class="product-name">Super 10</h3>
+                    </div>
+                    <div class="input-group">
+                        <label for="super10-price" class="input-label">Pris för 1 liter koncentrat</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="super10-price" class="price-input" value="250" step="1" min="0" placeholder="0" aria-label="Pris för Super 10 koncentrat">
+                            <span class="currency-symbol">kr</span>
+                        </div>
+                    </div>
+                    <div class="volume-info">
+                        <div class="volume-row">
+                            <span class="operator"></span>
+                            <span>1 liter koncentrat</span>
+                        </div>
+                        <div class="volume-row">
+                            <span class="operator">+</span>
+                            <span>10 liter vatten</span>
+                        </div>
+                        <div class="volume-row total">
+                            <span class="operator">=</span>
+                            <span class="volume-value">11 liter färdig produkt</span>
+                        </div>
+                    </div>
+                    <div class="result-box">
+                        <span class="result-label">Kostnad per färdig liter</span>
+                        <div class="result-value-wrapper">
+                            <span id="super10-result" class="result-value">0</span>
+                            <span class="result-currency">kr</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Educational Section -->
+    <section class="section">
+        <div class="container">
+            <header class="section-header">
+                <span class="section-label">Perspektiv</span>
+                <h2 class="section-title">När blir dyrt billigt?</h2>
+                <p class="section-desc">Att förstå skillnaden mellan vad du köper och vad du faktiskt använder är nyckeln till att se det verkliga värdet över tid.</p>
+            </header>
+
+            <div class="edu-grid">
+                <div class="edu-card">
+                    <h3>Färdigblandat i butik</h3>
+                    <p>De flesta rengöringsprodukter du köper i butik består till största delen av vatten. Du betalar för:</p>
+                    <ul class="edu-list">
+                        <li>Vatten som transporteras långa sträckor</li>
+                        <li>Stora plastförpackningar som snabbt förbrukas</li>
+                        <li>En produkt som ofta tar slut snabbt</li>
+                    </ul>
+                </div>
+                <div class="edu-card" style="border-top: 4px solid var(--green);">
+                    <h3>Koncentrat för hemmet</h3>
+                    <p>NeoLife levererar de aktiva ingredienserna. Du tillsätter vattnet hemma. Detta innebär:</p>
+                    <ul class="edu-list">
+                        <li>Betydligt lägre kostnad per användning</li>
+                        <li>Färre plastflaskor att återvinna</li>
+                        <li>Produkter som är prisvärda och räcker länge</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Calculator #2 -->
+    <section class="section section-alt">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title">När lönar sig medlemskapet?</h2>
+                <div class="intro-text">
+                    <p>De flesta börjar inte för att sälja.</p>
+                    <p>De börjar för att spara pengar på produkter de redan använder.</p>
+                    <p>Med regelbundna inköp kan skillnaden mellan kundpris och återförsäljarpris bli betydande över tid.</p>
+                </div>
+            </header>
+
+            <div class="calc-card calc-card-wide">
+                <div class="input-group input-group-center">
+                    <label for="monthly-purchase" class="input-label">Din uppskattade månatliga konsumtion (kundpris)</label>
+                    
+                    <div class="slider-value-display">
+                        <span id="purchase-display">1 000</span>
+                        <span class="slider-value-unit">kr / månad</span>
+                    </div>
+
+                    <div class="slider-wrapper">
+                        <input type="range" id="monthly-purchase" class="range-slider" min="250" max="3000" step="250" value="1000" aria-label="Månatlig konsumtion">
+                    </div>
+                </div>
+
+                <div class="results-grid-2">
+                    <div class="result-item-2">
+                        <span class="result-label">Månatlig besparing (ca 20%)</span>
+                        <div class="result-value-wrapper">
+                            <span id="monthly-savings" class="result-value">200</span>
+                            <span class="result-currency">kr</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-item-2 highlight">
+                        <span class="result-label">Årlig besparing</span>
+                        <div class="result-value-wrapper">
+                            <span id="annual-savings" class="result-value">2 400</span>
+                            <span class="result-currency">kr</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Three Choices Section -->
+    <section class="section">
+        <div class="container">
+            <header class="section-header">
+                <span class="section-label">Dina val</span>
+                <h2 class="section-title">Tre sätt att använda NeoLife</h2>
+                <p class="section-desc">NeoLifes modell är flexibel. Du väljer själv vilken nivå som passar dig och ditt hushåll bäst.</p>
+            </header>
+
+            <div class="cards-grid">
+     <div class="option-card">
+        <div class="option-icon">🛒</div>
+        <h3 class="option-title">Kund</h3>
+        <p class="option-desc">För dig som vill köpa produkter för eget bruk. Du handlar direkt via webbshoppen till ordinarie pris och får produkterna hemlevererade. Inga bindningstider eller krav.</p>
+        <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928"
+           class="option-link"
+           target="_blank"
+           rel="noopener">
+           &rarr; Handla i webbshoppen
+        </a>
+    </div>
+
+    <div class="option-card">
+        <div class="option-icon">🏷️</div>
+        <h3 class="option-title">Återförsäljare</h3>
+        <p class="option-desc">För dig som använder produkterna regelbundet. Du betalar en årlig registreringsavgift och får rabatt på alla inköp. Inga krav på att sälja till andra.</p>
+        <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&sponsorId=41-830928"
+           class="option-link"
+           target="_blank"
+           rel="noopener">
+           &rarr; Bli återförsäljare
+        </a>
+    </div>
+
+    <div class="option-card">
+        <div class="option-icon">💼</div>
+        <h3 class="option-title">Verksamhet</h3>
+        <p class="option-desc">För dig som vill rekommendera produkterna vidare och bygga en kundbas över tid. Du väljer själv hur aktiv du vill vara och i vilken takt du vill utveckla verksamheten.</p>
+        <a href="https://levnytt.se/neolife-affarsmojlighet"
+           class="option-link">
+           &rarr; Läs mer om affärsmöjligheten
+        </a>
+    </div>
+</div>
+</div>
+    </section>
+
+    <!-- 7. FAQ -->
+    <section class="section section-alt">
+        <div class="container">
+            <header class="section-header">
+                <span class="section-label">FAQ</span>
+                <h2 class="section-title">Vanliga frågor</h2>
+            </header>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">Finns det billigare alternativ?</button>
+                    <div class="faq-answer">
+                        <p>Det beror på hur man räknar. Om du bara tittar på inköpspriset för en flaska i butiken kan det verka billigare. Men om du räknar på kostnaden per användning (t.ex. pris per färdig liter utspätt rengöringsmedel) är koncentrerade produkter ofta betydligt mer prisvärda över tid.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Är dyrare produkter alltid dyrare?</button>
+                    <div class="faq-answer">
+                        <p>Nej. En produkt som kostar mer i inköp men räcker tre gånger så länge är i slutändan billigare. Det är därför vi fokuserar på kostnad per användning snarare än pris per förpackning.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Vad betyder pris per användning?</button>
+                    <div class="faq-answer">
+                        <p>Det är den faktiska kostnaden varje gång du använder produkten. För LDC innebär det att du delar priset för koncentratet med 6, eftersom en liter koncentrat ger sex liter färdigt diskmedel.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Hur länge räcker Golden Home Care?</button>
+                    <div class="faq-answer">
+                        <p>Det beror på hur mycket du städar, men för ett normalt hushåll räcker en liter LDC eller Super 10 ofta i flera månader, ibland upp till ett halvår, eftersom de späds ut kraftigt.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">När lönar sig ett medlemskap?</button>
+                    <div class="faq-answer">
+                        <p>Ett medlemskap som återförsäljare lönar sig så snart din årliga besparing (rabatten på dina inköp) överstiger den årliga registreringsavgiften. För de flesta som använder produkterna regelbundet nås denna punkt snabbt.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Vad är skillnaden mellan kund och återförsäljare?</button>
+                    <div class="faq-answer">
+                        <p>En kund handlar till ordinarie pris utan avgifter. En återförsäljare betalar en årlig avgift för att få handla till rabatterat pris. Båda beställer direkt från NeoLife. Du behöver inte sälja produkter bara för att du är registrerad som återförsäljare.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. CTA -->
+    <section class="section" style="text-align: center;">
+        <div class="container">
+            <h2 class="section-title">Vilket alternativ passar dig?</h2>
+            <p class="section-desc" style="margin-bottom: 32px;">Du väljer själv om du vill handla som kund, använda återförsäljarpriser eller utforska verksamhetsmöjligheten vidare.</p>
+            
+            <div class="btn-group">
+                <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&sponsor=41-830928" class="btn btn-primary" target="_blank" rel="nofollow noopener sponsored">Bli återförsäljare</a>
+                <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="btn btn-outline" target="_blank" rel="nofollow noopener sponsored">Handla i webbshoppen</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="/footer.js"></script>
+    <script src="/components.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Calculator 1 Logic ---
+            const ldcInput = document.getElementById('ldc-price');
+            const ldcResult = document.getElementById('ldc-result');
+            const super10Input = document.getElementById('super10-price');
+            const super10Result = document.getElementById('super10-result');
+
+            const LDC_YIELD = 6;
+            const SUPER10_YIELD = 11;
+
+            function formatCurrency(number) {
+                return new Intl.NumberFormat('sv-SE', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(number);
+            }
+
+            function calculateCalc1() {
+                const ldcPrice = parseFloat(ldcInput.value);
+                const super10Price = parseFloat(super10Input.value);
+                
+                if (isNaN(ldcPrice) || ldcPrice < 0) {
+                    ldcResult.textContent = "—";
+                    ldcResult.classList.add('error');
+                    ldcInput.classList.add('error');
+                } else {
+                    ldcInput.classList.remove('error');
+                    ldcResult.classList.remove('error');
+                    const ldcPerLiter = ldcPrice / LDC_YIELD;
+                    ldcResult.textContent = formatCurrency(ldcPerLiter);
+                }
+
+                if (isNaN(super10Price) || super10Price < 0) {
+                    super10Result.textContent = "—";
+                    super10Result.classList.add('error');
+                    super10Input.classList.add('error');
+                } else {
+                    super10Input.classList.remove('error');
+                    super10Result.classList.remove('error');
+                    const super10PerLiter = super10Price / SUPER10_YIELD;
+                    super10Result.textContent = formatCurrency(super10PerLiter);
+                }
+            }
+
+            ldcInput.addEventListener('input', calculateCalc1);
+            super10Input.addEventListener('input', calculateCalc1);
+            calculateCalc1();
+
+            // --- Calculator 2 Logic ---
+            const purchaseSlider = document.getElementById('monthly-purchase');
+            const purchaseDisplay = document.getElementById('purchase-display');
+            const monthlySavingsDisplay = document.getElementById('monthly-savings');
+            const annualSavingsDisplay = document.getElementById('annual-savings');
+
+            const SAVINGS_RATE = 0.20;
+
+            function formatCurrencyNoDecimals(number) {
+                return new Intl.NumberFormat('sv-SE', {
+                    maximumFractionDigits: 0
+                }).format(number);
+            }
+
+            function calculateCalc2() {
+                const monthlyPurchase = parseInt(purchaseSlider.value, 10);
+                
+                purchaseDisplay.textContent = formatCurrencyNoDecimals(monthlyPurchase);
+
+                const monthlySavings = monthlyPurchase * SAVINGS_RATE;
+                const annualSavings = monthlySavings * 12;
+
+                monthlySavingsDisplay.textContent = formatCurrencyNoDecimals(monthlySavings);
+                annualSavingsDisplay.textContent = formatCurrencyNoDecimals(annualSavings);
+            }
+
+            purchaseSlider.addEventListener('input', calculateCalc2);
+            calculateCalc2();
+
+            // --- FAQ Accordion Logic ---
+            document.querySelectorAll('.faq-question').forEach(button => {
+                button.addEventListener('click', () => {
+                    const faqItem = button.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
