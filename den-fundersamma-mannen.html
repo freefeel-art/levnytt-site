@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Den Fundersamma Mannen – Jarmo Halonen | LevNytt</title>
+<meta name="description" content="Mannen bakom LevNytt. Jarmo Halonen – från Finland till Sverige, från lastbilsförare till innehållsskapare. En ärlig berättelse om arbete, återhämtning och långsiktigt tänkande.">
+<link rel="canonical" href="https://levnytt.se/den-fundersamma-mannen/">
+<meta property="og:title" content="Den Fundersamma Mannen – Jarmo Halonen | LevNytt">
+<meta property="og:description" content="Mannen bakom LevNytt. En ärlig berättelse om arbete, återhämtning och långsiktigt tänkande.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://levnytt.se/den-fundersamma-mannen/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #1a1a18;
+  --stone: #4a4a44;
+  --pebble: #8a8a80;
+  --mist: #e8e6df;
+  --cream: #f5f3ee;
+  --page: #faf9f6;
+  --forest: #2d4a35;
+  --forest-light: #3d6147;
+  --amber: #c8882a;
+  --amber-pale: #f5e8cc;
+  --rule: rgba(26,26,24,0.12);
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 18px; scroll-behavior: smooth; }
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: rgba(250,249,246,0.95);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+.masthead-logo {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--forest);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.masthead-nav { display: flex; gap: 2rem; }
+.masthead-nav a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.masthead-nav a:hover { color: var(--forest); }
+
+/* ── HERO ── */
+.hero {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 5rem 2rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: end;
+}
+.hero-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background: var(--amber);
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--stone);
+  max-width: 44ch;
+  line-height: 1.65;
+}
+.hero-avatar {
+  width: 160px;
+  height: 200px;
+  background: var(--mist);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+/* Suggested: replace with <img src="/images/jarmo-halonen.webp" alt="Jarmo Halonen"> */
+.hero-avatar svg {
+  width: 80px;
+  height: 80px;
+  opacity: 0.35;
+}
+.avatar-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(45,74,53,0.85);
+  color: #fff;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.6rem;
+  text-align: center;
+}
+/* IMAGE PLACEMENT NOTE:
+   Hero avatar: portrait photo of Jarmo Halonen (not a product image).
+   Suggested: candid shot, outdoors or at desk, natural light.
+   Replace .hero-avatar div with:
+   <img src="/images/jarmo-halonen-portrait.webp" alt="Jarmo Halonen, grundare av LevNytt" style="width:160px;height:200px;object-fit:cover;border-radius:4px;">
+*/
+
+.hero-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--rule);
+  margin-top: 2rem;
+}
+
+/* ── JOURNEY BAR ── */
+.journey-bar {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.journey-bar::-webkit-scrollbar { display: none; }
+.journey-step {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+.journey-node {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pebble);
+  white-space: nowrap;
+  padding: 0.3rem 0;
+  transition: color 0.2s;
+  cursor: default;
+}
+.journey-node.active { color: var(--forest); }
+.journey-arrow {
+  width: 2rem;
+  height: 1px;
+  background: var(--rule);
+  margin: 0 0.5rem;
+  flex-shrink: 0;
+  position: relative;
+}
+.journey-arrow::after {
+  content: '›';
+  position: absolute;
+  right: -4px;
+  top: -9px;
+  color: var(--pebble);
+  font-size: 0.8rem;
+}
+
+/* ── MAIN LAYOUT ── */
+.page-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+/* ── SECTION ── */
+.section {
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1.5rem;
+}
+.section h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+.section p {
+  color: var(--stone);
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+}
+.section p:last-child { margin-bottom: 0; }
+.section p strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ── PULL QUOTE ── */
+.pull-quote {
+  margin: 2.5rem 0;
+  padding: 2rem 2.5rem;
+  background: var(--cream);
+  border-left: 3px solid var(--forest);
+  position: relative;
+}
+.pull-quote::before {
+  content: '"';
+  font-family: var(--serif);
+  font-size: 5rem;
+  color: var(--forest);
+  opacity: 0.15;
+  position: absolute;
+  top: -1rem;
+  left: 1.5rem;
+  line-height: 1;
+}
+.pull-quote p {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--forest) !important;
+  line-height: 1.5;
+  margin: 0 !important;
+}
+.pull-quote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pebble);
+}
+
+/* ── TIMELINE BLOCK ── */
+.timeline {
+  margin: 2rem 0;
+  display: grid;
+  gap: 0;
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 1.5rem;
+  position: relative;
+  padding-bottom: 2rem;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: calc(5rem - 0.5rem - 1px);
+  top: 0.5rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-year {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--forest);
+  letter-spacing: 0.04em;
+  padding-top: 0.15rem;
+  text-align: right;
+}
+.timeline-dot {
+  position: absolute;
+  left: calc(5rem - 0.5rem - 4px);
+  top: 0.4rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--forest);
+  border: 2px solid var(--page);
+  box-shadow: 0 0 0 1px var(--forest);
+}
+.timeline-content h3 {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.timeline-content p {
+  font-size: 0.9rem;
+  color: var(--stone);
+  margin: 0;
+}
+
+/* ── VALUES GRID ── */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.value-card {
+  padding: 1.5rem;
+  background: var(--cream);
+  border-radius: 3px;
+}
+.value-card .value-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+.value-card h3 {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.value-card p {
+  font-size: 0.82rem;
+  color: var(--stone);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ── IMAGE PLACEMENT BLOCK ── */
+.image-placeholder {
+  width: 100%;
+  background: var(--mist);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 3rem 1rem;
+  margin: 2rem 0;
+  color: var(--pebble);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px dashed var(--rule);
+}
+.image-placeholder svg { opacity: 0.4; }
+
+/* ── LINKS CALLOUT ── */
+.links-callout {
+  background: var(--amber-pale);
+  border-radius: 3px;
+  padding: 1.5rem 2rem;
+  margin: 2.5rem 0;
+}
+.links-callout h3 {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.links-callout ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+.links-callout li::before {
+  content: '→ ';
+  color: var(--amber);
+  font-weight: 500;
+}
+.links-callout a {
+  color: var(--forest);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.links-callout a:hover { text-decoration: underline; }
+
+/* ── NEOLIFE SECTION SPECIAL ── */
+.forest-band {
+  background: var(--forest);
+  margin: 0 -2rem;
+  padding: 3rem 2rem;
+  color: rgba(255,255,255,0.85);
+}
+.forest-band .section-label { color: rgba(255,255,255,0.5); }
+.forest-band h2 { color: #fff; }
+.forest-band p { color: rgba(255,255,255,0.8) !important; }
+.forest-band strong { color: #fff !important; }
+.forest-band .pull-quote {
+  background: rgba(255,255,255,0.08);
+  border-left-color: rgba(255,255,255,0.4);
+}
+.forest-band .pull-quote p { color: rgba(255,255,255,0.95) !important; }
+.forest-band .pull-quote cite { color: rgba(255,255,255,0.45); }
+
+/* ── AI SECTION ── */
+.ink-band {
+  background: var(--ink);
+  margin: 0 -2rem;
+  padding: 3rem 2rem;
+}
+.ink-band .section-label { color: var(--amber); }
+.ink-band h2 { color: #fff; }
+.ink-band p { color: rgba(255,255,255,0.72) !important; }
+.ink-band strong { color: rgba(255,255,255,0.95) !important; }
+
+/* ── CLOSING CTA ── */
+.closing {
+  padding: 4rem 0 2rem;
+  text-align: center;
+}
+.closing h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+.closing p {
+  color: var(--stone);
+  max-width: 44ch;
+  margin: 0 auto 2rem;
+}
+.btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: var(--forest);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--forest-light); }
+.btn-ghost {
+  border: 1px solid var(--rule);
+  color: var(--stone);
+}
+.btn-ghost:hover { border-color: var(--forest); color: var(--forest); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hero { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-avatar { width: 100%; height: 200px; }
+  .masthead-nav { display: none; }
+  .forest-band, .ink-band { margin: 0 -1rem; padding: 2.5rem 1rem; }
+  .page-wrap { padding: 0 1rem 4rem; }
+  .hero { padding: 3rem 1rem 2rem; }
+}
+
+/* ── FADE IN ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero-subtitle, .hero-eyebrow {
+  animation: fadeUp 0.7s ease both;
+}
+.hero-eyebrow { animation-delay: 0.05s; }
+.hero h1      { animation-delay: 0.15s; }
+.hero-subtitle{ animation-delay: 0.25s; }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://levnytt.se/den-fundersamma-mannen/#jarmo",
+      "name": "Jarmo Halonen",
+      "jobTitle": "Grundare, LevNytt",
+      "url": "https://levnytt.se/den-fundersamma-mannen/",
+      "description": "Jarmo Halonen är grundaren av LevNytt – en plattform för fakta, långsiktigt tänkande och välgrundade beslut inom hälsa, näring och personlig utveckling.",
+      "knowsAbout": ["näring", "NeoLife", "personlig utveckling", "långsiktigt tänkande", "AI-assisterat innehåll"]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://levnytt.se/den-fundersamma-mannen/",
+      "url": "https://levnytt.se/den-fundersamma-mannen/",
+      "name": "Den Fundersamma Mannen – Jarmo Halonen | LevNytt",
+      "description": "Mannen bakom LevNytt. Jarmo Halonen – från Finland till Sverige, från lastbilsförare till innehållsskapare. En ärlig berättelse om arbete, återhämtning och långsiktigt tänkande.",
+      "inLanguage": "sv",
+      "about": {"@id": "https://levnytt.se/den-fundersamma-mannen/#jarmo"},
+      "dateModified": "2025-06-07",
+      "publisher": {
+        "@type": "Organization",
+        "name": "LevNytt",
+        "url": "https://levnytt.se"
+      }
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <a href="https://levnytt.se/" class="masthead-logo">LevNytt</a>
+  <nav class="masthead-nav">
+    <a href="https://levnytt.se/neolife-vetenskap/">Vetenskap</a>
+    <a href="https://levnytt.se/neolife-historia/">Historia</a>
+    <a href="https://levnytt.se/produkter/">Produkter</a>
+    <a href="https://levnytt.se/om-oss/">Om oss</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="page-title">
+  <div>
+    <p class="hero-eyebrow">Mannen bakom LevNytt</p>
+    <h1 id="page-title">Den Fundersamma&nbsp;Mannen</h1>
+    <p class="hero-subtitle">Inte en guru. Inte en coach. Inte en säljare. Bara en person som ställer frågor, studerar fakta och delar det han lärt sig.</p>
+  </div>
+  <div>
+    <!-- IMAGE PLACEMENT: Portrait photo of Jarmo Halonen -->
+    <!-- Replace this block with: <img src="/images/jarmo-halonen-portrait.webp" alt="Jarmo Halonen, grundare av LevNytt" style="width:160px;height:200px;object-fit:cover;border-radius:4px;"> -->
+    <div class="hero-avatar">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="22" r="12" fill="var(--stone)"/>
+        <path d="M8 56c0-13.255 10.745-24 24-24s24 10.745 24 24" fill="var(--stone)"/>
+      </svg>
+      <span class="avatar-caption">Jarmo Halonen</span>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- JOURNEY BAR -->
+<nav class="journey-bar" aria-label="Livets etapper">
+  <div class="journey-step"><span class="journey-node">Finland</span></div>
+  <div class="journey-arrow"></div>
+  <div class="journey-step"><span class="journey-node">Sverige</span></div>
+  <div class="journey-arrow"></div>
+  <div class="journey-step"><span class="journey-node">Transport</span></div>
+  <div class="journey-arrow"></div>
+  <div class="journey-step"><span class="journey-node">Företagande</span></div>
+  <div class="journey-arrow"></div>
+  <div class="journey-step"><span class="journey-node">Vändpunkten</span></div>
+  <div class="journey-arrow"></div>
+  <div class="journey-step"><span class="journey-node">Hälsa & Näring</span></div>
+  <div class="journey-arrow"></div>
+  <div class="journey-step"><span class="journey-node">NeoLife</span></div>
+  <div class="journey-arrow"></div>
+  <div class="journey-step"><span class="journey-node active">LevNytt</span></div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="page-wrap">
+
+  <!-- 1. RÖTTERNA -->
+  <section id="rotterna" class="section" aria-labelledby="h2-rotterna">
+    <p class="section-label">Bakgrund</p>
+    <h2 id="h2-rotterna">Från Finland till Sverige</h2>
+
+    <p>Jarmo Halonen är född i Finland. Han har bott i Sverige i mer än tjugo år. Det är inte en resa som handlade om att fly någonting – det handlade om att söka möjligheter, hitta arbete och bygga ett liv med egna händer.</p>
+
+    <p>Arbetslivet tog honom in i <strong>transportbranschen</strong>. Lastbilskörning. Tidiga mornar, långa rutter, mycket tid med sina egna tankar. Det är en tillvaro som lär en att värdera enkelhet och struktur. Man kan inte fiffla med leveranstider. Man kan inte improvisera med säkerhet. Antingen fungerar det eller gör det inte.</p>
+
+    <p>Den praktiska mentalitet som grew fram under de åren – vad fungerar egentligen, varför, och fortsätter det att fungera över tid? – präglar fortfarande hur Jarmo tänker om hälsa, näring och beslut i allmänhet.</p>
+
+    <!-- IMAGE PLACEMENT: Kartsymbol eller landsbygdsfoto (Finland/Sverige). Ej produktbild. -->
+    <div class="image-placeholder" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Bildplats: Landskap eller karta – Finland / Sverige
+    </div>
+
+    <p>Att flytta till ett nytt land innebär att man relativt snabbt lär sig vad som är viktigt och vad som inte är det. Språk, relationer, ekonomisk stabilitet. <strong>Det finns inte utrymme för onödig komplexitet när man bygger från grunden.</strong></p>
+
+    <div class="pull-quote">
+      <p>Håll det enkelt. Enkla principer, konsekvent tillämpade över tid, skapar de bästa långsiktiga resultaten.</p>
+      <cite>— Jarmo Halonen, LevNytt</cite>
+    </div>
+  </section>
+
+  <!-- 2. ARBETE OCH FÖRETAGANDE -->
+  <section id="foretagande" class="section" aria-labelledby="h2-foretagande">
+    <p class="section-label">Yrkeslivet</p>
+    <h2 id="h2-foretagande">Arbete, ansvar och nätverksmarknadsföring</h2>
+
+    <p>Efter åren i transportbranschen rörde sig Jarmo mot eget företagande och nätverksmarknadsföring. Det är en värld med ett dåligt rykte – mycket av det förtjänat. Rekryteringsretorik, inkomstlöften och hype är vanliga inslag. Det är också en värld där de som lyckas på lång sikt sällan är de som skriker högst.</p>
+
+    <p>Erfarenheten lärde Jarmo en sak tydligare än de flesta kurser: <strong>det spelar ingen roll hur bra ett erbjudande låter om det inte levererar verkligt värde över tid.</strong> Och det spelar ingen roll hur ambitiöst ett mål är om man inte kan hantera sina känslor längs vägen.</p>
+
+    <div class="timeline" role="list">
+      <div class="timeline-item" role="listitem">
+        <span class="timeline-year">Tidigt</span>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-content">
+          <h3>Transport och lastbilskörning</h3>
+          <p>Praktisk erfarenhet av struktur, ansvar och konsekvens. En miljö som inte tolererar genvägar.</p>
+        </div>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <span class="timeline-year">Senare</span>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-content">
+          <h3>Nätverksmarknadsföring och eget företagande</h3>
+          <p>Insikten om att långsiktigt värde alltid slår kortsiktig hype – och att emotionell kontroll är avgörande.</p>
+        </div>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <span class="timeline-year">2020</span>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-content">
+          <h3>Vändpunkten</h3>
+          <p>Nykterhet, struktur och en djupare förståelse för vad som faktiskt driver långsiktig förändring.</p>
+        </div>
+      </div>
+      <div class="timeline-item" role="listitem">
+        <span class="timeline-year">Nu</span>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-content">
+          <h3>LevNytt och AI-assisterat innehållsskapande</h3>
+          <p>En plattform byggd på fakta, erfarenhet och ett genuint intresse för välgrundade beslut.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Nätverksmarknadsföringen gav också en förståelse för den psykologiska sidan av beslut. Hur lätt det är att motivera dåliga val. Hur svårt det är att vara tålmodig när ingen ser på. Det är lärdomar som återkommer – i hälsa, i investeringstänkande, i hur man bygger vad som helst som är tänkt att hålla.</p>
+
+    <div class="links-callout">
+      <h3>Läs mer om LevNytts perspektiv</h3>
+      <ul>
+        <li><a href="https://levnytt.se/om-oss/">Om LevNytt och vår filosofi</a></li>
+        <li><a href="https://levnytt.se/neolife-vetenskap/">Varför vi fokuserar på vetenskap, inte hype</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. VÄNDPUNKTEN -->
+  <section id="vandpunkten" class="section" aria-labelledby="h2-vandpunkten">
+    <p class="section-label">2020</p>
+    <h2 id="h2-vandpunkten">Nykterhet och det som förändrade allt</h2>
+
+    <p>År 2020 slutade Jarmo dricka alkohol efter flera år av beroende. Det är en mening som kräver lite utrymme att landa i – den rymmer mer än vad orden direkt säger.</p>
+
+    <p>Det handlade inte om ett beslut fattat en måndag morgon. Det handlade om att till slut erkänna att någonting inte fungerade, att söka stöd, och att börja göra annorlunda – dag för dag. <strong>Inga genvägar. Ingen quick fix. Bara struktur, mentorskap, ansvarighet och tid.</strong></p>
+
+    <div class="pull-quote">
+      <p>Det svåraste är sällan att lära sig vad man ska göra. Det svåraste är att hantera sina känslor medan man gör det.</p>
+      <cite>— Personlig reflektion, inspirerad av idéer om tålamod och långsiktigt beslutsfattande</cite>
+    </div>
+
+    <p>Återhämtningen befäste principer som Jarmo intellektuellt förstod men nu fick uppleva på djupet. Att meningsfull förändring sällan sker snabbt. Att framsteg byggs av små handlingar upprepade konsekvent. Att omgivningens stöd spelar roll. Att emotionell medvetenhet inte är ett tecken på svaghet utan en förutsättning för att fatta bra beslut.</p>
+
+    <p>De här insikterna skapar en tydlig linje som går rakt igenom LevNytts sätt att resonera om hälsa, näring och personlig utveckling. Det finns inga mirakelkurer. Det finns inte heller anledning att förenkla bort det som faktiskt är komplicerat. Men enkla principer, konsekvent tillämpade, har en kraft som de flesta underskattar.</p>
+
+    <!-- IMAGE PLACEMENT: Naturbild, lugnt landskap. Symbol för eftertanke och nytänk. Ej produktbild. -->
+    <div class="image-placeholder" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
+      Bildplats: Lugnt naturmotiv – symbolik för reflektion och tid
+    </div>
+  </section>
+
+  <!-- 4. HÄLSA OCH NÄRING -->
+  <section id="halsa-naring" class="section" aria-labelledby="h2-halsa">
+    <p class="section-label">Hälsa och näring</p>
+    <h2 id="h2-halsa">Varför hälsa? Varför näring?</h2>
+
+    <p>Intresset för hälsa och näring kom inte från en kampanj eller ett säljargument. Det kom från en enkel fråga: <em>om jag tar ansvar för mina beslut och tänker långsiktigt – vad borde jag egentligen veta om hur kroppen fungerar?</em></p>
+
+    <p>Det är en fråga som leder till ett djuphav av information – mycket av den motsägelsefull, mycket av den marknadsförd mer än dokumenterad. Jarmos bakgrund i att söka svar istället för att nöja sig med ytan naturligt drev honom mot vetenskapliga källor, forskning och en nykter analys av vad som faktiskt stöds av evidens.</p>
+
+    <p><strong>Inte det som låter bäst. Det som stämmer bäst.</strong></p>
+
+    <div class="values-grid" role="list">
+      <div class="value-card" role="listitem">
+        <div class="value-icon" aria-hidden="true">🔬</div>
+        <h3>Fakta före hype</h3>
+        <p>Vad säger forskningen egentligen? Inte vad säger reklamen.</p>
+      </div>
+      <div class="value-card" role="listitem">
+        <div class="value-icon" aria-hidden="true">⏳</div>
+        <h3>Långsiktigt tänkande</h3>
+        <p>Vad fungerar konsekvent över tid – inte bara de första veckorna.</p>
+      </div>
+      <div class="value-card" role="listitem">
+        <div class="value-icon" aria-hidden="true">⚖️</div>
+        <h3>Värde före pris</h3>
+        <p>Den rätta frågan är inte "vad kostar det?" utan "vilket värde skapar det?"</p>
+      </div>
+      <div class="value-card" role="listitem">
+        <div class="value-icon" aria-hidden="true">🧭</div>
+        <h3>Bättre beslut</h3>
+        <p>Bättre information leder till bättre beslut. Det är hela poängen.</p>
+      </div>
+    </div>
+
+    <p>Det är också en sfär där den personliga erfarenheten av återhämtning spelar in. Att uppleva vad struktur, kost och medvetenhet faktiskt gör – inte som teori utan som praktik – ger en annan typ av förankring än vad läroböcker kan erbjuda. Jarmo skriver inte om hälsa som en åskådare.</p>
+  </section>
+
+  <!-- 5. NEOLIFE (dark band) -->
+  <section id="neolife" aria-labelledby="h2-neolife">
+    <div class="forest-band">
+      <p class="section-label">NeoLife</p>
+      <h2 id="h2-neolife">Hur NeoLife kom in i bilden</h2>
+
+      <p>NeoLife introducerades för Jarmo inte som ett affärserbjudande utan som en fråga: vad finns det för vetenskaplig grund bakom de här produkterna, och varför har de funnits i över sextio år?</p>
+
+      <p>Svaret på den frågan ledde till ett genuint intresse. <strong>NeoLife på LevNytt presenteras inte som ett säljargument utan som ett studieobjekt</strong> – ett företag med lång historia, ett tydligt vetenskapligt ramverk och produkter vars värde bör bedömas på basis av evidens, inte marknadsföring.</p>
+
+      <div class="pull-quote">
+        <p>Det som skiljer ett genuint värdefullt företag från ett hype-drivet är att det tål granskning. Det är det enda testet som spelar roll på lång sikt.</p>
+        <cite>— Jarmo Halonen, LevNytt</cite>
+      </div>
+
+      <p>På LevNytt hittar du information om NeoLifes vetenskapliga råd, deras forskningstradition och de enskilda produkternas innehåll och bakgrund. Du hittar inte inkomstlöften eller rekryteringsretorik. <strong>Fokus är på förståelse, inte konvertering.</strong></p>
+
+      <div class="links-callout" style="background:rgba(255,255,255,0.12);border:none;">
+        <h3 style="color:#fff;">Utforska NeoLife på LevNytt</h3>
+        <ul>
+          <li><a href="https://levnytt.se/neolife-vetenskap/" style="color:rgba(255,255,255,0.9);">NeoLife och vetenskapen</a></li>
+          <li><a href="https://levnytt.se/neolife-historia/" style="color:rgba(255,255,255,0.9);">NeoLifes historia</a></li>
+          <li><a href="https://levnytt.se/produkter/" style="color:rgba(255,255,255,0.9);">Produktöversikt</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. AI-ASSISTERAT (dark band) -->
+  <section id="ai-publicering" aria-labelledby="h2-ai">
+    <div class="ink-band">
+      <p class="section-label">Metod</p>
+      <h2 id="h2-ai">AI-assisterat innehållsskapande</h2>
+
+      <p>LevNytt använder AI som ett verktyg – inte som en ersättning för eftertanke. Varje artikel börjar med en fråga som är värd att ställa, fortsätter med faktainhämtning från trovärdiga källor, och avslutas med ett mänskligt omdöme om vad som faktiskt är relevant och vad som inte är det.</p>
+
+      <p>Det är en arbetsmodell som kräver att man är tydlig med vad AI är bra på – att strukturera, formulera och hitta mönster i stora mängder information – <strong>och vad det inte kan ersätta: personlig erfarenhet, etiskt omdöme och förmågan att avgöra vad som är sant.</strong></p>
+
+      <p>Transparens är en del av LevNytts identitet. Innehållet är AI-assisterat. Perspektiven är Jarmos egna. Skillnaden är viktig att hålla klar.</p>
+    </div>
+  </section>
+
+  <!-- 7. VARFÖR LEVNYTT -->
+  <section id="varfor-levnytt" class="section" aria-labelledby="h2-varfor">
+    <p class="section-label">Plattformen</p>
+    <h2 id="h2-varfor">Varför LevNytt finns</h2>
+
+    <p>LevNytt skapades inte för att sälja produkter. Det skapades för att hjälpa människor att fatta bättre beslut.</p>
+
+    <p>Det är en distinktion som låter enkel men som i praktiken förändrar allt – vad man skriver, hur man skriver det, vad man inkluderar och vad man väljer att utelämna. En plattform inriktad på konverteringar har ett annat förhållande till sanningen än en plattform inriktad på förtroende.</p>
+
+    <div class="pull-quote">
+      <p>Den primära frågan är inte "vad ska jag köpa?" – den primära frågan är "hur kan jag fatta bättre långsiktiga beslut?"</p>
+      <cite>— LevNyttss kärnfilosofi</cite>
+    </div>
+
+    <p>LevNytt är inte ett avslutat projekt. Det är en plattform under utveckling, byggd kring lärande, delning och kontinuerlig förbättring. Målet är inte perfektion. Målet är framsteg – och ärlighet om var gränserna för den egna kunskapen går.</p>
+
+    <!-- IMAGE PLACEMENT: Infografik eller illustrativ bild av LevNyttss filosofi / beslutsträd -->
+    <div class="image-placeholder" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Bildplats: Infografik – LevNyttss filosofi och beslutsprocess
+    </div>
+
+    <div class="links-callout">
+      <h3>Utforska LevNytt</h3>
+      <ul>
+        <li><a href="https://levnytt.se/om-oss/">Om LevNytt</a></li>
+        <li><a href="https://levnytt.se/neolife-vetenskap/">Vetenskap och forskning</a></li>
+        <li><a href="https://levnytt.se/neolife-historia/">NeoLifes historia</a></li>
+        <li><a href="https://levnytt.se/produkter/">Produkter</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <h2>Inga genvägar. Bara fakta, erfarenhet och tid.</h2>
+    <p>Det är vad LevNytt är byggt på. Välkommen att utforska.</p>
+    <div class="btn-group">
+      <a href="https://levnytt.se/neolife-vetenskap/" class="btn btn-primary">Vetenskap och forskning</a>
+      <a href="https://levnytt.se/om-oss/" class="btn btn-ghost">Om LevNytt</a>
+    </div>
+    <p style="margin-top:2.5rem;font-size:0.72rem;color:var(--pebble);letter-spacing:0.06em;">
+      Senast uppdaterad: juni 2025 &nbsp;·&nbsp; <a href="https://levnytt.se/" style="color:var(--pebble);">LevNytt</a>
+    </p>
+  </div>
+
+</main>
+
+<!--
+╔══════════════════════════════════════════════════════════╗
+║           REDAKTIONELLA ANTECKNINGAR – EJ PUBLICERA     ║
+╠══════════════════════════════════════════════════════════╣
+║                                                          ║
+║  BILDPLATSER (3 st):                                     ║
+║  1. Hero-avatar: Porträttfoto av Jarmo Halonen.          ║
+║     Ersätt .hero-avatar-div med <img>-tagg.              ║
+║     Naturligt ljus, ej produktbild, ej posad studio.     ║
+║                                                          ║
+║  2. Sektion "Rötterna": Karta el. landsbygdsfoto         ║
+║     (Finland / Sverige). Symbolisk, ej saljerande.       ║
+║                                                          ║
+║  3. Sektion "Vändpunkten": Lugnt naturmotiv.             ║
+║     Symbolik för eftertanke och förändring.              ║
+║                                                          ║
+║  4. Sektion "Varför LevNytt": AI-genererad infografik    ║
+║     om beslutsprocessen / filosofin.                     ║
+║                                                          ║
+║  FÖRESLAGNA PULL QUOTES (färdiga att lyfta):             ║
+║  – "Håll det enkelt. Enkla principer konsekvent           ║
+║     tillämpade skapar de bästa långsiktiga resultaten."  ║
+║  – "Det svåraste är sällan att lära sig vad man          ║
+║     ska göra..."                                         ║
+║  – "Den primära frågan är inte 'vad ska jag köpa?'"      ║
+║                                                          ║
+║  INTERNA LÄNKAR INKLUDERADE:                             ║
+║  – /neolife-vetenskap/                                   ║
+║  – /neolife-historia/                                    ║
+║  – /produkter/                                           ║
+║  – /om-oss/                                              ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+-->
+
+</body>
+</html>
