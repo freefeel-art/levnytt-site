@@ -1,0 +1,51 @@
+{
+  "canonical_id": "entity_formula_iv",
+  "locale": "sv",
+  "content_type": "products",
+  "slug": "formula-iv",
+
+  "title": "NeoLife Formula IV Plus — vitaminer, mineraler och Tre-en-en i ett system",
+  "summary": "Formula IV introducerades 1958 som världens första multifaktortillskott. Formula IV Plus kombinerar vitaminer, mineraler och Tre-en-en kornkoncentrat i ett system utvecklat för cellulär näring och näringssynergi.",
+
+  "shop_path": "/i/shop/nutrition/formula-iv-plus.html",
+
+  "body": [
+    {
+      "type": "paragraph",
+      "content": "Formula IV introducerades 1958 som det första kosttillskottet som kombinerade vitaminer, mineraler och kornkoncentrat i en enda formula. Konceptet byggde på att flera näringsämnen samverkar biologiskt snarare än att fungera isolerat."
+    },
+    {
+      "type": "paragraph",
+      "content": "Den moderna Formula IV Plus bygger vidare på samma princip om näringssynergi. Formulan kombinerar vitaminer, mineraler och Tre-en-en kornkoncentrat för att tillföra flera kategorier av näringsämnen inom ett och samma system."
+    },
+    {
+      "type": "paragraph",
+      "content": "Tre-en-en tillför växtbaserade lipider och steroler från vetegroddar, riskli och soja. Dessa komponenter är kopplade till cellmembranens struktur och utgör en central del av NeoLifes syn på cellulär näring."
+    },
+    {
+      "type": "paragraph",
+      "content": "Formula IV Plus är den järnfria versionen av Formula IV och innehåller dessutom en större mängd Tre-en-en än originalformulan. Produkten riktar sig till personer som redan får tillräckligt med järn genom kost eller andra tillskott."
+    },
+    {
+      "type": "paragraph",
+      "content": "Formula IV Plus utgör en av fyra komponenter i Pro Vitality+ tillsammans med Tre-en-en, Omega-3 Plus och Carotenoid Complex. De fyra komponenterna adresserar olika delar av den cellulära näringsmodellen."
+    }
+  ],
+
+  "evidence": [
+    "NeoLife Formula IV – produktdokumentation 04/26 SE",
+    "NeoLife Formula IV Plus – produktdokumentation 04/26 SE"
+  ],
+
+  "related_entities": [
+    "entity_tre_en_en",
+    "entity_vitamins",
+    "entity_cellular_nutrition",
+    "entity_nutrient_synergy",
+    "entity_pro_vitality"
+  ],
+
+  "related_articles": [
+    "article_cellular_nutrition_foundations"
+  ]
+}
