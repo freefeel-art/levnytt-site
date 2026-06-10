@@ -373,6 +373,11 @@ a:hover { color: var(--gold-dark); }
   font-size: 18px;
   color: var(--white);
 }
+.cluster-card-header a {
+  text-decoration: none;
+  color: inherit;
+}
+.cluster-card-header a:hover { color: var(--gold-light); }
 .cluster-card-body { padding: 20px 22px; }
 .cluster-card-body p {
   font-size: 14px;
@@ -665,10 +670,10 @@ a:hover { color: var(--gold-dark); }
     <div class="cluster-grid">
 
       <!-- Kosttillskott -->
-      <a href="https://levnytt.se/neolife-kosttillskott" class="cluster-card">
+      <div class="cluster-card">
         <div class="cluster-card-header">
           <span class="cluster-card-label">Hälsa &amp; näring</span>
-          <span class="cluster-card-title">Kosttillskott</span>
+          <a href="https://levnytt.se/neolife-kosttillskott" class="cluster-card-title">Kosttillskott</a>
         </div>
         <div class="cluster-card-body">
           <p>Vitaminer, mineraler, antioxidanter och fettsyror – vad forskning säger om dem, hur man utvärderar kvalitet och vilka faktorer som faktiskt påverkar effekten.</p>
@@ -684,13 +689,13 @@ a:hover { color: var(--gold-dark); }
             <li><a href="https://levnytt.se/naringsbrist-symptom">Näringsbrist – symptom att känna igen</a></li>
           </ul>
         </div>
-      </a>
+      </div>
 
       <!-- Hem & Städ -->
-      <a href="https://levnytt.se/golden-home-care" class="cluster-card">
+      <div class="cluster-card">
         <div class="cluster-card-header gold">
           <span class="cluster-card-label">Hushåll &amp; ekonomi</span>
-          <span class="cluster-card-title">Golden Home Care</span>
+          <a href="https://levnytt.se/golden-home-care" class="cluster-card-title">Golden Home Care</a>
         </div>
         <div class="cluster-card-body">
           <p>Koncentrerade rengörings- och hushållsprodukter analyserade utifrån faktisk kostnad per användning, miljöprestanda och jämförelse med butiksalternativ.</p>
@@ -703,10 +708,10 @@ a:hover { color: var(--gold-dark); }
       </a>
 
       <!-- Forskning & Företag -->
-      <a href="https://levnytt.se/neolife-historia" class="cluster-card">
+      <div class="cluster-card">
         <div class="cluster-card-header teal">
           <span class="cluster-card-label">Kontext &amp; trovärdighet</span>
-          <span class="cluster-card-title">NeoLife Forskning</span>
+          <a href="https://levnytt.se/neolife-historia" class="cluster-card-title">NeoLife Forskning</a>
         </div>
         <div class="cluster-card-body">
           <p>Vem är NeoLife, vad säger deras vetenskapliga grund, hur fungerar direktförsäljningsmodellen – och vad innebär det för dig som konsument?</p>
@@ -717,7 +722,7 @@ a:hover { color: var(--gold-dark); }
             <li><a href="https://levnytt.se/direktforsaljning-fakta">Direktförsäljning – fakta och myter</a></li>
           </ul>
         </div>
-      </a>
+      </div>
 
     </div>
   </div>
