@@ -289,12 +289,9 @@ body {
         <ul class="footer-nav">
           <li><a href="https://levnytt.se/om-oss">Om Oss</a></li>
           <li><a href="https://levnytt.se/den-fundersamma-mannen">Den Fundersamma Mannen</a></li>
-          <!-- Activate when /var-metod is published -->
-          <li><span class="footer-link-inactive">Vår Metod</span></li>
-          <!-- Activate when /forsknings-faq is published -->
-          <li><span class="footer-link-inactive">Forsknings-FAQ</span></li>
-          <!-- Activate when /levnytt-principer is published -->
-          <li><span class="footer-link-inactive">LevNytt Principer</span></li>
+          <li><a href="https://levnytt.se/var-metod">Vår Metod</a></li>
+          <li><a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a></li>
+          <li><a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a></li>
         </ul>
       </div>
 
