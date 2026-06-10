@@ -219,6 +219,48 @@ a:hover { color: var(--gold-dark); }
 }
 .btn-secondary:hover { border-color: var(--gold-light); color: var(--gold-light); }
 
+/* ── LATEST ARTICLE BANNER ───────────────────────────────────────── */
+.latest-post { background: var(--gold); padding: 18px 0; }
+.latest-post-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.latest-post-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+}
+.latest-post-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  flex: 1;
+  min-width: 200px;
+}
+.latest-post-link {
+  background: #fff;
+  color: var(--gold-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 24px;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.2s;
+}
+.latest-post-link:hover { background: var(--cream); color: var(--gold-dark); }
+
 /* ── SECTION SHARED ──────────────────────────────────────────────── */
 .section { padding: 72px 0; }
 .section-alt { background: var(--white); }
@@ -252,7 +294,7 @@ a:hover { color: var(--gold-dark); }
 /* ── DECISION HUB ────────────────────────────────────────────────── */
 .decision-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
 }
 .decision-card {
@@ -294,6 +336,7 @@ a:hover { color: var(--gold-dark); }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  align-items: start;
 }
 .cluster-card {
   background: var(--white);
@@ -395,7 +438,7 @@ a:hover { color: var(--gold-dark); }
 /* ── AUTHORITY SECTION ───────────────────────────────────────────── */
 .authority-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
 }
 .authority-card {
@@ -546,6 +589,15 @@ a:hover { color: var(--gold-dark); }
     </div>
   </div>
 </header>
+
+<!-- ── LATEST ARTICLE BANNER ─────────────────────────────────────── -->
+<div class="latest-post" role="note" aria-label="Senaste artikeln">
+  <div class="latest-post-inner">
+    <span class="latest-post-label">Senaste artikeln</span>
+    <span class="latest-post-title">Varför är jag trött hela tiden? 8 vanliga orsaker förklarade</span>
+    <a href="/varfor-ar-jag-trott-hela-tiden" class="latest-post-link">Läs artikeln →</a>
+  </div>
+</div>
 
 <!-- ── DECISION HUB ─────────────────────────────────────────────── -->
 <section class="section" id="beslutshub">
