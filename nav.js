@@ -63,6 +63,7 @@
         <div class="lnav-dropdown-menu" id="lnavDropMenu">
           <p class="lnav-dropdown-label">Kosttillskott</p>
           <a href="/neolife-pro-vitality/"${isActive('/neolife-pro-vitality/')}>Pro Vitality+</a>
+          <a href="/multivitamin-kvinnor-over-40/"${isActive('/multivitamin-kvinnor-over-40/')}>Multivitamin för kvinnor över 40</a>
           <a href="/neolife-kosttillskott/"${isActive('/neolife-kosttillskott/')}>Alla kosttillskott</a>
           <div class="lnav-dropdown-divider"></div>
           <p class="lnav-dropdown-label">Personlig vård</p>
