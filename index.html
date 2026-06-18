@@ -336,7 +336,6 @@ a:hover { color: var(--gold-dark); }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  align-items: start;
 }
 .cluster-card {
   background: var(--white);
@@ -344,7 +343,9 @@ a:hover { color: var(--gold-dark); }
   border-radius: var(--radius);
   overflow: hidden;
   text-decoration: none;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   transition: box-shadow 0.2s, transform 0.18s;
 }
 .cluster-card:hover {
@@ -373,10 +374,14 @@ a:hover { color: var(--gold-dark); }
 }
 .cluster-card-header a {
   text-decoration: none;
-  color: inherit;
 }
 .cluster-card-header a:hover { color: var(--gold-light); }
-.cluster-card-body { padding: 20px 22px; }
+.cluster-card-body {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .cluster-card-body p {
   font-size: 14px;
   color: var(--ink-muted);
@@ -407,7 +412,7 @@ a:hover { color: var(--gold-dark); }
 .cluster-links li a:hover { color: var(--gold-dark); }
 .cluster-card-more {
   display: inline-block;
-  margin-top: 4px;
+  margin-top: auto;
   font-size: 12.5px;
   font-weight: 600;
   color: var(--gold-dark);
@@ -634,6 +639,7 @@ a:hover { color: var(--gold-dark); }
             <li><a href="https://levnytt.se/ekologisk-stadning-greenwashing">Ekologisk städning och greenwashing</a></li>
             <li><a href="https://levnytt.se/super-10">Super 10 – grovrengöringsmedel</a></li>
           </ul>
+          <a href="https://levnytt.se/golden-home-care" class="cluster-card-more">Visa alla artiklar →</a>
         </div>
       </div>
 
@@ -651,6 +657,7 @@ a:hover { color: var(--gold-dark); }
             <li><a href="https://levnytt.se/neolife-hallbarhet">NeoLife Hållbarhet</a></li>
             <li><a href="https://levnytt.se/direktforsaljning-fakta">Direktförsäljning – fakta och myter</a></li>
           </ul>
+          <a href="https://levnytt.se/neolife-historia" class="cluster-card-more">Visa alla artiklar →</a>
         </div>
       </div>
 
