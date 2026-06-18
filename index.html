@@ -356,8 +356,6 @@ a:hover { color: var(--gold-dark); }
   padding: 18px 22px;
   border-bottom: 3px solid var(--gold);
 }
-.cluster-card-header.gold { background: linear-gradient(135deg, #6B4F08, #8A6E08); }
-.cluster-card-header.teal { background: linear-gradient(135deg, #1B4332, #2D6A4F); }
 .cluster-card-label {
   font-size: 10px;
   font-weight: 700;
@@ -407,38 +405,18 @@ a:hover { color: var(--gold-dark); }
   flex-shrink: 0;
 }
 .cluster-links li a:hover { color: var(--gold-dark); }
-
-/* ── PHILOSOPHY STRIP ────────────────────────────────────────────── */
-.philosophy-strip {
-  background: var(--green-dark);
-  padding: 52px 0;
-  border-top: 3px solid var(--gold);
-  border-bottom: 3px solid var(--gold);
-}
-.philosophy-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  justify-content: center;
-  gap: 0 56px;
-  flex-wrap: wrap;
-}
-.philosophy-line {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(16px, 2.5vw, 21px);
-  color: rgba(255,255,255,0.62);
+.cluster-card-more {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  text-decoration: none;
   font-style: italic;
-  line-height: 1.5;
 }
-.philosophy-line::before {
-  content: '— ';
-  color: var(--gold);
-  font-style: normal;
-}
-@media (max-width: 600px) {
-  .philosophy-inner { flex-direction: column; gap: 16px; }
-}
+.cluster-card-more:hover { color: var(--green-dark); }
+
+
 
 /* ── FOOTER ──────────────────────────────────────────────────────── */
 .site-footer {
@@ -562,8 +540,8 @@ a:hover { color: var(--gold-dark); }
 <div class="latest-post" role="note" aria-label="Senaste artikeln">
   <div class="latest-post-inner">
     <span class="latest-post-label">Senaste artikeln</span>
-    <span class="latest-post-title">Varför är jag trött hela tiden? 8 vanliga orsaker förklarade</span>
-    <a href="/varfor-ar-jag-trott-hela-tiden" class="latest-post-link">Läs artikeln →</a>
+    <span class="latest-post-title">Multivitamin för kvinnor över 40</span>
+    <a href="/multivitamin-kvinnor-over-40" class="latest-post-link">Läs artikeln →</a>
   </div>
 </div>
 
@@ -615,14 +593,6 @@ a:hover { color: var(--gold-dark); }
   </div>
 </section>
 
-<!-- ── PHILOSOPHY STRIP ──────────────────────────────────────────── -->
-<div class="philosophy-strip" role="complementary" aria-label="LevNytts principer">
-  <div class="philosophy-inner">
-    <span class="philosophy-line">Fakta före hype.</span>
-    <span class="philosophy-line">Värde före pris.</span>
-    <span class="philosophy-line">Förstå först. Bestäm sedan.</span>
-  </div>
-</div>
 
 <!-- ── CONTENT CLUSTERS ──────────────────────────────────────────── -->
 <section class="section section-alt">
@@ -642,22 +612,18 @@ a:hover { color: var(--gold-dark); }
           <p>Vitaminer, mineraler, antioxidanter och fettsyror – vad forskning säger om dem, hur man utvärderar kvalitet och vilka faktorer som faktiskt påverkar effekten.</p>
           <ul class="cluster-links">
             <li><a href="https://levnytt.se/varfor-ar-jag-trott-hela-tiden">Varför är jag trött hela tiden?</a></li>
-            <li><a href="https://levnytt.se/naringsbrist">Näringsbrist – vad det är och vad du kan göra</a></li>
+            <li><a href="https://levnytt.se/multivitamin-kvinnor-over-40">Multivitamin för kvinnor över 40</a></li>
             <li><a href="https://levnytt.se/ala-vs-epa-vs-dha">ALA vs EPA vs DHA – vad är skillnaden?</a></li>
             <li><a href="https://levnytt.se/neolife-pro-vitality">Pro Vitality+</a></li>
-            <li><a href="https://levnytt.se/neolife-carotenoid-complex">Carotenoid Complex</a></li>
-            <li><a href="https://levnytt.se/varfor-fiskolja-inte-ar-likvardigt">Varför fiskolja inte är likvärdigt</a></li>
-            <li><a href="https://levnytt.se/zeaxantin-immunforsvar-2025">Zeaxantin och immunförsvaret 2025</a></li>
-            <li><a href="https://levnytt.se/viktuppgang-klimakteriet">Viktuppgång i klimakteriet</a></li>
-            <li><a href="https://levnytt.se/multivitamin-kvinnor-over-40">Multivitamin för kvinnor över 40</a></li>
-            <li><a href="https://levnytt.se/naringsbrist-symptom">Näringsbrist – symptom att känna igen</a></li>
+            <li><a href="https://levnytt.se/naringsbrist">Näringsbrist – vad det är och vad du kan göra</a></li>
           </ul>
+          <a href="https://levnytt.se/neolife-kosttillskott" class="cluster-card-more">Visa alla artiklar →</a>
         </div>
       </div>
 
       <!-- Hem & Städ -->
       <div class="cluster-card">
-        <div class="cluster-card-header gold">
+        <div class="cluster-card-header">
           <span class="cluster-card-label">Hushåll &amp; ekonomi</span>
           <a href="https://levnytt.se/golden-home-care" class="cluster-card-title">Golden Home Care</a>
         </div>
@@ -673,7 +639,7 @@ a:hover { color: var(--gold-dark); }
 
       <!-- Forskning & Företag -->
       <div class="cluster-card">
-        <div class="cluster-card-header teal">
+        <div class="cluster-card-header">
           <span class="cluster-card-label">Kontext &amp; trovärdighet</span>
           <a href="https://levnytt.se/neolife-historia" class="cluster-card-title">NeoLife Forskning</a>
         </div>
