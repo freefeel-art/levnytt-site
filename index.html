@@ -66,49 +66,6 @@ a:hover { color: var(--gold-dark); }
 .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
 .text-container { max-width: var(--text-width); margin: 0 auto; padding: 0 24px; }
 
-/* ── SITE NAV ────────────────────────────────────────────────────── */
-.site-nav {
-  background: var(--green-dark);
-  border-bottom: 2px solid rgba(184,150,12,0.35);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 58px;
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--white);
-  text-decoration: none;
-  letter-spacing: -0.01em;
-}
-.nav-logo span { color: var(--gold); }
-.nav-links {
-  display: flex;
-  gap: 28px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 13.5px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.78);
-  text-decoration: none;
-  transition: color 0.18s;
-  letter-spacing: 0.01em;
-}
-.nav-links a:hover { color: var(--gold-light); }
-@media (max-width: 700px) {
-  .nav-links { display: none; }
-}
 
 /* ── HERO ─────────────────────────────────────────────────────────── */
 .hero {
@@ -508,19 +465,7 @@ a:hover { color: var(--gold-dark); }
 </head>
 <body>
 
-<!-- ── SITE NAV ─────────────────────────────────────────────────── -->
-<nav class="site-nav" aria-label="Huvudnavigering">
-  <div class="nav-inner">
-    <a href="https://levnytt.se" class="nav-logo">Lev<span>Nytt</span></a>
-    <ul class="nav-links">
-      <li><a href="https://levnytt.se/neolife-historia">Forskning</a></li>
-      <li><a href="https://levnytt.se/neolife-kosttillskott">Produkter</a></li>
-      <li><a href="https://levnytt.se/golden-home-care">Hem &amp; Städ</a></li>
-      <li><a href="https://levnytt.se/finns-det-billigare-alternativ">Sparanalys</a></li>
-      <li><a href="https://levnytt.se/om-oss">Om LevNytt</a></li>
-    </ul>
-  </div>
-</nav>
+<div id="site-nav"></div><script src="/nav.js" defer></script>
 
 <!-- ── HERO ─────────────────────────────────────────────────────── -->
 <header class="hero">
