@@ -59,6 +59,11 @@
   status = 200
 
 [[redirects]]
+  from = "/nya-kostrad-65-plus-d-vitamin-magnesium"
+  to = "/content/articles/nya-kostrad-65-plus-d-vitamin-magnesium.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
