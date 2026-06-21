@@ -11,9 +11,19 @@
 <meta property="og:description" content="Vad är LevNytt, varför finns det och vad täcker det? Fakta före hype.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://levnytt.se/om-oss">
+<meta property="og:site_name" content="LevNytt">
+<meta property="og:image" content="https://levnytt.se/images/og/default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LevNytt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Om LevNytt — Kunskapsplattform för välgrundade beslut">
+<meta name="twitter:description" content="Vad är LevNytt, varför finns det och vad täcker det? Fakta före hype.">
+<meta name="twitter:image" content="https://levnytt.se/images/og/default.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/pillar.css">
 
 <script type="application/ld+json">
 {
@@ -151,7 +161,7 @@ body {
 }
 
 /* ── HERO ── */
-.hero {
+.om-hero {
   background: var(--forest);
   color: #fff;
 }
@@ -178,7 +188,7 @@ body {
   height: 1px;
   background: var(--gold-light);
 }
-.hero h1 {
+.om-hero h1 {
   font-family: var(--serif);
   font-size: clamp(2rem, 4.5vw, 3.2rem);
   line-height: 1.15;
@@ -215,7 +225,7 @@ body {
 }
 
 /* ── STATS ROW ── */
-.stats-row {
+.om-stats-row {
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
@@ -238,7 +248,7 @@ body {
   display: block;
   margin-bottom: 0.3rem;
 }
-.stat-label {
+.om-stat-label {
   font-size: 0.78rem;
   color: var(--stone);
   line-height: 1.4;
@@ -258,7 +268,7 @@ body {
   margin: 2.5rem auto 0;
   padding: 0 2rem;
 }
-.tier-box {
+.om-tier-box {
   border: 1px solid var(--rule-mid);
   border-radius: 4px;
   background: var(--page);
@@ -623,7 +633,7 @@ body {
 }
 
 /* ── AUTHOR BOX ── */
-.author-box {
+.om-author-box {
   display: flex;
   align-items: flex-start;
   gap: 1.25rem;
@@ -742,8 +752,8 @@ body {
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
   .masthead-nav { display: none; }
-  .stats-row { grid-template-columns: 1fr 1fr; }
-  .stats-row .stat-cell:last-child { grid-column: 1/-1; border-right: none; border-top: 1px solid var(--rule); }
+  .om-stats-row { grid-template-columns: 1fr 1fr; }
+  .om-stats-row .stat-cell:last-child { grid-column: 1/-1; border-right: none; border-top: 1px solid var(--rule); }
   .do-table { grid-template-columns: 1fr; }
   .related-grid { grid-template-columns: 1fr; }
   .featured { grid-template-columns: 1fr; }
@@ -751,7 +761,7 @@ body {
   .tier-wrap { padding: 0 1rem; }
   .page-wrap { padding: 0 1rem 4rem; }
   .hero-inner { padding: 2.5rem 1rem 2rem; }
-  .stats-row { margin: 0 1rem; }
+  .om-stats-row { margin: 0 1rem; }
 }
 </style>
 </head>
@@ -774,7 +784,7 @@ body {
 </header>
 
 <!-- HERO -->
-<section class="hero" aria-labelledby="page-h1">
+<section class="om-hero" aria-labelledby="page-h1">
   <div class="hero-inner">
     <p class="hero-eyebrow">Om plattformen</p>
     <h1 id="page-h1">Vad är LevNytt och varför finns det?</h1>
@@ -793,27 +803,27 @@ body {
 </section>
 
 <!-- STATS ROW -->
-<div class="stats-row" role="list" aria-label="Nyckeltal">
+<div class="om-stats-row" role="list" aria-label="Nyckeltal">
   <div class="stat-cell" role="listitem">
     <span class="stat-num">30</span>
-    <span class="stat-label">År av NeoLife-kännedom</span>
+    <span class="om-stat-label">År av NeoLife-kännedom</span>
     <span class="stat-note">Sedan boomen i Finland 1996</span>
   </div>
   <div class="stat-cell" role="listitem">
     <span class="stat-num">2018</span>
-    <span class="stat-label">Aktiv distributör sedan</span>
+    <span class="om-stat-label">Aktiv distributör sedan</span>
     <span class="stat-note">Registrerad i Sverige</span>
   </div>
   <div class="stat-cell" role="listitem">
     <span class="stat-num">2026</span>
-    <span class="stat-label">LevNytt lanserades</span>
+    <span class="om-stat-label">LevNytt lanserades</span>
     <span class="stat-note">Plattformen är under aktiv utveckling</span>
   </div>
 </div>
 
 <!-- TIER BOX -->
 <div class="tier-wrap" aria-label="LevNytts ekosystem">
-  <div class="tier-box">
+  <div class="om-tier-box">
     <div class="tier-head">
       <span class="tier-head-label">Du befinner dig i LevNytts ekosystem</span>
     </div>
@@ -970,7 +980,7 @@ body {
   </div>
 
   <!-- JOURNEY BLOCK -->
-  <nav class="journey" aria-label="Vad gör jag härnäst?">
+  <div class="journey" role="navigation" aria-label="Vad gör jag härnäst?">
     <div class="journey-head">
       <span class="journey-head-title">Vad händer härnäst?</span>
       <span class="journey-head-sub">Välj den väg som matchar var du är i din forskning.</span>
@@ -998,7 +1008,7 @@ body {
     <div class="journey-footer">
       <p>Ingen brådska. Ingen press. Läs i den ordning som passar dig bäst.</p>
     </div>
-  </nav>
+  </div>
 
   <!-- RELATED CARDS -->
   <div class="related-section" aria-label="Läs vidare">
@@ -1023,7 +1033,7 @@ body {
   </div>
 
   <!-- AUTHOR BOX -->
-  <div class="author-box" aria-label="Om grundaren">
+  <div class="om-author-box" aria-label="Om grundaren">
     <div class="author-avatar" aria-hidden="true">JH</div>
     <div>
       <span class="author-name">Jarmo Halonen — grundare av LevNytt</span>
