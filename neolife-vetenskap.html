@@ -9,6 +9,19 @@
   <meta name="description" content="NeoLife Scientific Advisory Board grundat 1976 av Dr. Arthur Furst — Stanford Ph.D., toxikologins fader. Tre standarder: Renhet, Styrka, Bevis. Publicerat i AJCN, FASEB Journal, JACN. Sponsor-ID: 41-830928.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
   <link rel="canonical" href="https://levnytt.se/neolife-vetenskap">
+  <meta property="og:title" content="NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976">
+  <meta property="og:description" content="NeoLife Scientific Advisory Board grundat 1976 av Dr. Arthur Furst — Stanford Ph.D., toxikologins fader. Tre standarder: Renhet, Styrka, Bevis.">
+  <meta property="og:url" content="https://levnytt.se/neolife-vetenskap">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LevNytt">
+  <meta property="og:image" content="https://levnytt.se/images/og/default.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="LevNytt">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976">
+  <meta name="twitter:description" content="NeoLife Scientific Advisory Board grundat 1976 av Dr. Arthur Furst. Tre standarder: Renhet, Styrka, Bevis.">
+  <meta name="twitter:image" content="https://levnytt.se/images/og/default.jpg">
 
   <script type="application/ld+json">
   {
@@ -74,43 +87,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --gold:#C8962E;--gold-light:#E8C870;--gold-dark:#8B6914;
-      --green:#2D6A4F;--green-light:#40916C;--green-dark:#1B4332;
-      --cream:#FBF8F0;--cream-dark:#F0EBDD;
-      --ink:#1A1A1A;--ink-muted:#555555;--ink-light:#888888;
-      --white:#FFFFFF;--border:#E0D8C8;
-      --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
-      --radius:8px;--max-w:1200px;--transition:0.25s cubic-bezier(0.4,0,0.2,1);
+  <link rel="stylesheet" href="/pillar.css">
+<style>
+:root {
+      --ink-light:#888888;
+      --max-w:1200px;
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
-    body{font-family:'Inter',-apple-system,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;}
-    nav{position:sticky;top:0;z-index:100;background:rgba(251,248,240,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
-    .nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:var(--gold-dark);text-decoration:none;}
-    .nav-brand span{color:var(--green);}
-    .nav-links{display:flex;gap:8px;align-items:center;}
-    .nav-links a{font-size:0.85rem;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all var(--transition);}
-    .nav-links a:hover{color:var(--ink);background:var(--cream-dark);}
-    .nav-links a.active{color:var(--gold-dark);font-weight:700;}
-    .nav-cta{background:var(--green)!important;color:var(--white)!important;font-weight:600!important;padding:8px 18px!important;}
-    .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
-    .nav-hamburger svg{width:24px;height:24px;stroke:var(--ink);}
     .freshness-banner{background:linear-gradient(135deg,var(--green-dark),var(--green));color:var(--white);text-align:center;padding:10px 24px;font-size:0.82rem;font-weight:500;}
     .freshness-banner strong{color:var(--gold-light);}
-    .hero{position:relative;min-height:320px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#1B4332 0%,#2D6A4F 40%,#40916C 100%);}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,67,50,0.85) 0%,rgba(45,106,79,0.7) 50%,rgba(200,150,46,0.3) 100%);}
-    .hero-content{position:relative;z-index:2;max-width:var(--max-w);margin:0 auto;padding:64px 24px;width:100%;}
+    .historia-hero{position:relative;min-height:320px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#1B4332 0%,#2D6A4F 40%,#40916C 100%);}
+    .historia-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,67,50,0.85) 0%,rgba(45,106,79,0.7) 50%,rgba(200,150,46,0.3) 100%);}
+    .historia-hero-content{position:relative;z-index:2;max-width:var(--max-w);margin:0 auto;padding:64px 24px;width:100%;}
     .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:0.85rem;flex-wrap:wrap;}
     .breadcrumb a{color:var(--gold-light);text-decoration:none;font-weight:500;}
     .breadcrumb .sep{color:rgba(255,255,255,0.4);}
     .breadcrumb .current{color:rgba(255,255,255,0.8);}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:700;color:var(--white);line-height:1.15;max-width:720px;letter-spacing:-0.02em;}
-    .hero-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;}
-    .hero-stat .num{font-size:2rem;font-weight:800;color:var(--gold-light);display:block;}
-    .hero-stat .lbl{font-size:0.78rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.05em;}
+    .historia-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:700;color:var(--white);line-height:1.15;max-width:720px;letter-spacing:-0.02em;}
+    .historia-hero-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;}
+    .historia-hero-stat .num{font-size:2rem;font-weight:800;color:var(--gold-light);display:block;}
+    .historia-hero-stat .lbl{font-size:0.78rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.05em;}
     .article-content{padding:64px 0 80px;}
     .article-inner{max-width:800px;margin:0 auto;padding:0 24px;}
     .article-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--ink);line-height:1.25;margin:48px 0 16px;letter-spacing:-0.02em;}
@@ -156,19 +151,9 @@
     .internal-links-section li{margin-bottom:10px;}
     .internal-links-section a{color:var(--gold);text-decoration:none;font-weight:500;}
     .internal-links-section a:hover{color:var(--green);text-decoration:underline;}
-    footer{background:var(--ink);color:rgba(255,255,255,0.6);padding:56px 0 32px;}
-    .footer-grid{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
-    .footer-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--white);margin-bottom:12px;}
-    .footer-brand span{color:var(--gold-light);}
-    .footer-tagline{font-size:0.85rem;line-height:1.6;max-width:280px;}
-    .footer-col h5{color:var(--white);font-size:0.82rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
-    .footer-col a{display:block;color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.88rem;padding:4px 0;}
-    .footer-col a:hover{color:var(--gold-light);}
-    .footer-bottom{max-width:var(--max-w);margin:0 auto;padding:24px 24px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:0.78rem;}
-    .footer-disclaimer{margin-top:16px;font-size:0.72rem;color:rgba(255,255,255,0.35);line-height:1.6;}
     .portrait{float:right;margin:0 0 24px 32px;width:220px;border-radius:var(--radius);border:1px solid var(--border);}
-    @media(max-width:900px){.nav-links{display:none;}.nav-hamburger{display:block;}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:16px 24px;box-shadow:var(--shadow-lg);}.footer-grid{grid-template-columns:1fr 1fr;}.hero-stats{gap:20px;}.standard-grid{grid-template-columns:1fr;}.portrait{float:none;width:100%;margin:0 0 24px 0;}}
-    @media(max-width:600px){.footer-grid{grid-template-columns:1fr;}.hero{min-height:260px;}}
+    @media(max-width:900px){.historia-hero-stats{gap:20px;}.standard-grid{grid-template-columns:1fr;}.portrait{float:none;width:100%;margin:0 0 24px 0;}}
+    @media(max-width:600px){.historia-hero{min-height:260px;}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0.01ms!important;}}
   </style>
 </head>
@@ -176,20 +161,20 @@
 
   <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
 
-  <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
+  <section class="historia-hero">
+    <div class="historia-hero-overlay"></div>
+    <div class="historia-hero-content">
       <div class="breadcrumb">
         <a href="/">Hem</a><span class="sep">/</span>
         <a href="/neolife-kosttillskott/">NeoLife</a><span class="sep">/</span>
         <span class="current">Vetenskapliga rådet</span>
       </div>
       <h1>NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976</h1>
-      <div class="hero-stats">
-        <div class="hero-stat"><span class="num">1976</span><span class="lbl">Grundat</span></div>
-        <div class="hero-stat"><span class="num">3</span><span class="lbl">Standarder: Renhet, Styrka, Bevis</span></div>
-        <div class="hero-stat"><span class="num">10</span><span class="lbl">Oberoende forskare</span></div>
-        <div class="hero-stat"><span class="num">AJCN</span><span class="lbl">Publicerat i</span></div>
+      <div class="historia-hero-stats">
+        <div class="historia-hero-stat"><span class="num">1976</span><span class="lbl">Grundat</span></div>
+        <div class="historia-hero-stat"><span class="num">3</span><span class="lbl">Standarder: Renhet, Styrka, Bevis</span></div>
+        <div class="historia-hero-stat"><span class="num">10</span><span class="lbl">Oberoende forskare</span></div>
+        <div class="historia-hero-stat"><span class="num">AJCN</span><span class="lbl">Publicerat i</span></div>
       </div>
     </div>
   </section>
