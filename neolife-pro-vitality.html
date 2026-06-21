@@ -25,132 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-:root{--gold:#E8B340;--gold-light:#F5E6A3;--gold-dark:#8A6E08;--green:#2D6A4F;--green-light:#D8F3DC;--green-dark:#1B4332;--cream:#FAF7F0;--cream-dark:#EDE8DC;--white:#FFFFFF;--ink:#1A1A1A;--ink-muted:#555550;--border:#DDD8CE;--red-light:#FFF0EE;--red-accent:#C0392B;--amber-light:#FFFBEB;--amber:#D97706;--radius:10px;--max-width:820px;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.75;font-size:17px;}
-h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.3;}
-a{color:var(--green-dark);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
-a:hover{color:var(--gold-dark);}
-.container{max-width:var(--max-width);margin:0 auto;padding:0 24px;}
-.site-nav{position:sticky;top:0;z-index:100;background:rgba(250,247,240,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
-.nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:var(--ink);text-decoration:none;letter-spacing:-0.01em;}
-.nav-brand span{color:var(--green);}
-.nav-links{display:flex;gap:4px;align-items:center;}
-.nav-links a{font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:6px 12px;border-radius:6px;transition:color 0.2s,background 0.2s;}
-.nav-links a:hover{color:var(--ink);background:var(--cream-dark);}
-.nav-cta{background:var(--green)!important;color:var(--white)!important;font-weight:600!important;padding:8px 18px!important;border-radius:6px!important;}
-.nav-cta:hover{background:var(--green-dark)!important;}
-.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
-.nav-hamburger svg{width:24px;height:24px;stroke:var(--ink);}
-.breadcrumbs{background:var(--white);border-bottom:1px solid var(--border);padding:12px 0;font-size:13px;color:var(--ink-muted);}
-.breadcrumbs a{color:var(--ink-muted);text-decoration:none;}
-.breadcrumbs a:hover{color:var(--green);}
-.breadcrumbs span{margin:0 6px;}
-.hero{background:linear-gradient(145deg,#0d2218 0%,var(--green-dark) 60%,#20503a 100%);color:var(--white);padding:64px 0 56px;overflow:hidden;}
-.hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;font-family:'Inter',sans-serif;}
-.hero h1{font-size:clamp(24px,4.5vw,42px);font-weight:700;color:var(--white);margin-bottom:20px;max-width:680px;}
-.hero-intro{font-size:18px;color:rgba(255,255,255,0.85);max-width:620px;margin-bottom:28px;line-height:1.65;}
-.hero-meta{font-size:13px;color:rgba(255,255,255,0.6);display:flex;gap:20px;flex-wrap:wrap;}
-.hero-meta strong{color:rgba(255,255,255,0.85);}
-.stats-row{background:var(--white);border-bottom:3px solid var(--gold);padding:32px 0;}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:24px;text-align:center;}
-.stat-number{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--green-dark);display:block;}
-.stat-label{font-size:13px;color:var(--ink-muted);margin-top:4px;line-height:1.4;}
-.stat-source{font-size:11px;color:#bbb;margin-top:3px;}
-.authority-nav{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;}
-.authority-nav .container{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;}
-.authority-nav-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);font-family:'Inter',sans-serif;flex-shrink:0;}
-.authority-nav a{font-size:13px;color:var(--green-dark);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;}
-.authority-nav a:hover{border-bottom-color:var(--green);}
-.article-wrap{padding:56px 0 64px;}
-.ia-punchline{background:var(--green-dark);color:var(--white);border-radius:var(--radius);padding:28px 32px;margin-bottom:40px;border-left:5px solid var(--gold);}
-.ia-punchline p{font-size:18px;line-height:1.65;margin:0;}
-.ia-punchline strong{color:var(--gold-light);}
-.ia-takeaways{background:var(--cream-dark);border-radius:var(--radius);padding:28px 32px;margin-bottom:48px;border:1px solid var(--border);}
-.ia-takeaways h2{font-size:13px;color:var(--green-dark);margin-bottom:16px;font-family:'Inter',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;}
-.ia-takeaways ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.ia-takeaways li{padding-left:28px;position:relative;font-size:15.5px;line-height:1.55;}
-.ia-takeaways li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;}
-.article-body h2{font-size:clamp(21px,3.5vw,27px);color:var(--green-dark);margin:52px 0 20px;padding-top:8px;border-top:2px solid var(--border);}
-.article-body h2:first-of-type{margin-top:0;border-top:none;}
-.article-body h3{font-size:19px;color:var(--ink);margin:32px 0 12px;}
-.article-body p{margin-bottom:18px;}
-.article-body p:last-child{margin-bottom:0;}
-.callout{border-radius:var(--radius);padding:22px 26px;margin:28px 0;}
-.callout-standard{background:var(--green-light);border-left:4px solid var(--green);}
-.callout-gold{background:var(--gold-light);border-left:4px solid var(--gold);}
-.callout-amber{background:var(--amber-light);border-left:4px solid var(--amber);}
-.callout-title{font-family:'Inter',sans-serif;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
-.callout-standard .callout-title{color:var(--green-dark);}
-.callout-gold .callout-title{color:var(--gold-dark);}
-.callout-amber .callout-title{color:var(--amber);}
-.callout p{margin:0;font-size:15.5px;line-height:1.65;}
-/* COMPONENT CARDS */
-.component-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:28px 0;}
-.component-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;border-top:3px solid var(--green);}
-.component-card.gold-top{border-top-color:var(--gold);}
-.component-card.amber-top{border-top-color:var(--amber);}
-.component-name{font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:var(--green-dark);margin-bottom:4px;}
-.component-desc{font-size:13.5px;color:var(--ink);line-height:1.5;margin-bottom:8px;}
-.component-link{font-size:12px;color:var(--green-dark);}
-.table-wrap{overflow-x:auto;margin:28px 0;border-radius:var(--radius);border:1px solid var(--border);}
-table{width:100%;border-collapse:collapse;font-size:15px;}
-thead{background:var(--green-dark);color:var(--white);}
-thead th{padding:14px 18px;text-align:left;font-weight:600;font-size:13px;letter-spacing:0.04em;}
-tbody tr:nth-child(even){background:var(--cream);}
-tbody tr:nth-child(odd){background:var(--white);}
-tbody td{padding:12px 18px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
-tbody tr:last-child td{border-bottom:none;}
-.tier-section{margin:56px 0 40px;padding:36px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.tier-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:20px;font-family:'Inter',sans-serif;}
-.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;}
-.tier-box{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--white);text-decoration:none;transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;display:block;}
-.tier-box:hover{border-color:var(--gold);box-shadow:0 3px 16px rgba(232,179,64,0.22);transform:translateY(-1px);}
-.tier-box-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:4px;display:block;font-family:'Inter',sans-serif;}
-.tier-box-title{font-size:14px;font-weight:600;color:var(--green-dark);font-family:'Inter',sans-serif;}
-.cta-block{background:linear-gradient(135deg,var(--green-dark),#0d2218);border-radius:var(--radius);padding:36px 40px;margin:48px 0;color:var(--white);text-align:center;}
-.cta-block h3{font-size:22px;color:var(--white);margin-bottom:12px;}
-.cta-block p{color:rgba(255,255,255,0.8);margin-bottom:24px;font-size:16px;}
-.cta-btn{display:inline-block;background:var(--gold);color:var(--white);padding:14px 32px;border-radius:6px;font-weight:600;text-decoration:none;font-size:15px;font-family:'Inter',sans-serif;}
-.cta-btn:hover{background:var(--gold-dark);color:var(--white);}
-.faq-section{margin:48px 0;}
-details{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;background:var(--white);overflow:hidden;}
-summary{padding:18px 22px;font-weight:600;cursor:pointer;font-size:16px;display:flex;justify-content:space-between;align-items:center;list-style:none;color:var(--green-dark);font-family:'Inter',sans-serif;}
-summary::after{content:'+';font-size:20px;color:var(--gold);font-weight:300;flex-shrink:0;margin-left:12px;}
-details[open] summary::after{content:'−';}
-.faq-answer{padding:16px 22px 20px;font-size:15.5px;line-height:1.65;border-top:1px solid var(--cream-dark);}
-.faq-answer p{margin-bottom:12px;}
-.faq-answer p:last-child{margin-bottom:0;}
-.author-box{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin:48px 0 32px;display:flex;gap:20px;align-items:flex-start;}
-.author-avatar{width:56px;height:56px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:2px solid var(--border);}
-.author-info{flex:1;}
-.author-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:4px;display:block;font-family:'Inter',sans-serif;}
-.author-info strong{display:block;font-size:15px;color:var(--ink);margin-bottom:4px;}
-.author-info span{font-size:13.5px;color:var(--ink-muted);line-height:1.5;}
-.method-note{font-size:13px;color:var(--ink-muted);border-top:1px solid var(--border);padding-top:16px;margin-top:16px;line-height:1.55;}
-.last-updated{font-size:13px;color:var(--ink-muted);margin-bottom:40px;}
-.journey-block{background:var(--cream-dark);border-radius:var(--radius);padding:28px 32px;margin:48px 0 0;border:1px solid var(--border);}
-.journey-label{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:16px;}
-.journey-steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
-.journey-step{font-size:13.5px;color:var(--green-dark);font-weight:500;font-family:'Inter',sans-serif;}
-.journey-arrow{color:var(--gold);font-size:16px;}
-.site-footer{background:var(--green-dark);color:rgba(255,255,255,0.65);padding:56px 0 32px;margin-top:64px;}
-.footer-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
-.footer-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--white);margin-bottom:12px;}
-.footer-brand span{color:var(--gold-light);}
-.footer-tagline{font-size:0.82rem;line-height:1.6;max-width:260px;margin-bottom:12px;}
-.footer-philosophy{font-size:0.82rem;line-height:1.7;color:rgba(255,255,255,0.45);font-style:italic;}
-.footer-col h5{font-family:'Inter',sans-serif;color:var(--white);font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;}
-.footer-col a{display:block;color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.875rem;padding:4px 0;transition:color 0.2s;}
-.footer-col a:hover{color:var(--gold-light);}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;font-size:0.78rem;color:rgba(255,255,255,0.35);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px;}}
-@media(max-width:768px){.nav-hamburger{display:block;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:16px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.10);gap:4px;}.nav-links.open{display:flex;}.nav-links a{width:100%;}}
-@media(max-width:600px){.hero{padding:44px 0 40px;}.stats-grid{grid-template-columns:1fr 1fr;}.component-grid{grid-template-columns:1fr;}.tier-grid{grid-template-columns:1fr 1fr;}.cta-block{padding:28px 22px;}.author-box{flex-direction:column;}.ia-punchline,.ia-takeaways{padding:20px 20px;}.footer-grid{grid-template-columns:1fr;gap:24px;}.footer-bottom{flex-direction:column;gap:6px;}.journey-steps{flex-direction:column;align-items:flex-start;}}
-</style>
+<link rel="stylesheet" href="/pillar.css">
 
 <script type="application/ld+json">
 {
@@ -179,7 +54,7 @@ details[open] summary::after{content:'−';}
         {"@type":"Question","name":"Vad är Formula IV?","acceptedAnswer":{"@type":"Answer","text":"Formula IV (produktkod 576) är NeoLifes flaggskeppsmultivitamin, som ingår i Pro Vitality+-sacheten. Det innehåller ett komplett spektrum av vitaminer och mineraler formulerade med helfodsbaserade källor och chelat-mineraler för bättre absorption. Det är en av de komponenter som har en lång forskningshistorik inom NeoLifes produktportfölj."}},
         {"@type":"Question","name":"Hur skiljer sig Pro Vitality+ från ett vanligt multivitamin?","acceptedAnswer":{"@type":"Answer","text":"Ett vanligt multivitamin täcker vitaminer och mineraler men inkluderar sällan omega-3-fettsyror, karotenoidspektrum från helfodsbaserade källor eller spannmålslipider. Pro Vitality+ kombinerar fyra separata produktkategorier i en daglig sachet. Det är en bredare ansats till daglig grundnäring än ett enstaka multivitamin — men det är inte ett substitut för läkarens råd eller en varierad kost."}},
         {"@type":"Question","name":"Är Pro Vitality+ lämplig för veganer?","acceptedAnswer":{"@type":"Answer","text":"Nej. Pro Vitality+ innehåller Omega-3 Plus som är baserad på laxolja — en animalisk källa. Den är därmed inte lämplig för veganer. Vegetarianer som tolererar fiskolja kan överväga den, men bör kontrollera alla ingredienser. För veganer finns algolja som ett alternativ till fiskoljebaserade omega-3-preparat."}},
-        {"@type":"Question","name":"Hur tas Pro Vitality+ och vad kostar det?","acceptedAnswer":{"@type":"Answer","text":"Pro Vitality+ tas som en sachet per dag, lämpligen i samband med måltid. Förpackningen innehåller 30 sachéer — en månads förbrukning. Prisinformation finns i <a href="https://levnytt.se/finns-det-billigare-alternativ">sparanalysen</a> — inklusive kostnad per dag och distributörspris."}}
+        {"@type":"Question","name":"Hur tas Pro Vitality+?","acceptedAnswer":{"@type":"Answer","text":"Pro Vitality+ tas som en sachet per dag, lämpligen i samband med måltid. Förpackningen innehåller 30 sachéer — en månads förbrukning."}}
       ]
     },
     {
@@ -196,24 +71,7 @@ details[open] summary::after{content:'−';}
 </head>
 <body>
 
-<nav class="site-nav" aria-label="Huvudnavigation">
-  <div class="nav-inner">
-    <a href="https://levnytt.se/" class="nav-brand">Lev<span>Nytt</span></a>
-    <button class="nav-hamburger" onclick="document.getElementById('navMain').classList.toggle('open')" aria-label="Öppna meny" aria-expanded="false">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-    <div class="nav-links" id="navMain" role="menubar">
-      <a href="https://levnytt.se/neolife-historia/" role="menuitem">Historia</a>
-      <a href="https://levnytt.se/neolife-vetenskap/" role="menuitem">Vetenskap</a>
-      <a href="https://levnytt.se/neolife-hallbarhet/" role="menuitem">Hållbarhet</a>
-      <a href="https://levnytt.se/neolife-kosttillskott/" role="menuitem">Kosttillskott</a>
-      <a href="https://levnytt.se/golden-home-care/" role="menuitem">Städning</a>
-      <a href="https://levnytt.se/finns-det-billigare-alternativ/" class="nav-cta" role="menuitem">Spara Pengar?</a>
-    </div>
-  </div>
-</nav>
-
-<nav class="breadcrumbs" aria-label="Brödsmulor">
+<div class="breadcrumbs" role="navigation" aria-label="Brödsmulor">
   <div class="container">
     <a href="https://levnytt.se">LevNytt</a>
     <span>›</span>
@@ -221,7 +79,7 @@ details[open] summary::after{content:'−';}
     <span>›</span>
     Dagligt näringssystem
   </div>
-</nav>
+</div>
 
 <header class="hero">
   <div class="container">
@@ -263,7 +121,7 @@ details[open] summary::after{content:'−';}
   </div>
 </section>
 
-<nav class="authority-nav">
+<div class="authority-nav" role="navigation">
   <div class="container">
     <span class="authority-nav-label">Om LevNytt</span>
     <a href="https://levnytt.se/om-oss">Om oss</a>
@@ -272,7 +130,7 @@ details[open] summary::after{content:'−';}
     <a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a>
     <a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a>
   </div>
-</nav>
+</div>
 
 <main class="article-wrap">
   <div class="container">
@@ -365,17 +223,9 @@ details[open] summary::after{content:'−';}
       <h2>Är Pro Vitality+ rätt för dig?</h2>
       <p>Det är en fråga LevNytt inte besvarar åt dig — och av principiella skäl. Vi är inte läkare, och en bedömning av vad som är rätt tillskott kräver kunskap om din kostprofil, ditt hälsotillstånd och eventuella mediciner. Det vi kan göra är att ge dig ett faktaunderlag. <a href="https://www.1177.se/sjukdomar--besvar/hjarta-och-blodkarlssjukdomar/levnadsvanor-och-hjart-och-karlsjukdom/kostrad-for-ett-friskare-hjarta/" rel="noopener" target="_blank">1177 Vårdguiden rekommenderar</a> en varierad kost som grund för all hälsostrategi, med tillskott som komplement vid behov — inte som substitut.</p>
       <p>Pro Vitality+ är ett system formulerat för daglig grundnäring som komplement till en varierad kost. Det är inte utformat för specifika medicinska tillstånd. Det är inte lämpligt för veganer (laxolja). Det är ett praktiskt alternativ för den som vill ha en bred daglig näringsbas i ett leveranssystem utan att hantera fyra separata produkter.</p>
-      <p>Om du är nyfiken på vad daglig grundnäring kostar per dag — och hur det jämförs med att köpa komponenterna separat — finns <a href="https://levnytt.se/finns-det-billigare-alternativ">vår sparanalys</a> som ett konkret verktyg för den beräkningen.</p>
-
       <div class="callout callout-amber">
         <p class="callout-title">Kombinationseffekter är inte studerade som system</p>
         <p>Forskningen bakom Pro Vitality+-komponenterna gäller dem var för sig. Det finns inga publicerade kliniska prövningar av systemet som helhet — kombination av de fyra i en sachet är ett leveransbeslut, inte ett forskningsresultat. Det är viktigt att skilja på de enskilda komponenternas evidensbas och systemets evidensbas som kombination.</p>
-      </div>
-
-      <div class="cta-block">
-        <h3>Vad kostar daglig grundnäring per dag?</h3>
-        <p>LevNytt har räknat ut det konkret — och jämfört med att köpa komponenterna separat och med alternativ på marknaden.</p>
-        <a href="https://levnytt.se/finns-det-billigare-alternativ" class="cta-btn">Se sparanalysen →</a>
       </div>
 
       <div class="tier-section">
@@ -409,10 +259,6 @@ details[open] summary::after{content:'−';}
             <span class="tier-box-label">Komponent</span>
             <span class="tier-box-title">Tre-en-en</span>
           </a>
-          <a href="https://levnytt.se/finns-det-billigare-alternativ" class="tier-box">
-            <span class="tier-box-label">Verktyg</span>
-            <span class="tier-box-title">Sparanalys</span>
-          </a>
         </div>
       </div>
 
@@ -424,7 +270,7 @@ details[open] summary::after{content:'−';}
         <details><summary>Vad är Formula IV?</summary><div class="faq-answer"><p>Formula IV (produktkod 576) är NeoLifes komprehensiva multivitamin och mineralpreparat som ingår i Pro Vitality+-sacheten. Det innehåller ett komplett spektrum av vitaminer och mineraler med chelat-mineraler för bättre absorption. Du kan köpa Formula IV som separat produkt om du inte behöver hela Pro Vitality+-systemet.</p></div></details>
         <details><summary>Hur skiljer sig Pro Vitality+ från ett vanligt multivitamin?</summary><div class="faq-answer"><p>Ett vanligt multivitamin täcker vitaminer och mineraler men inkluderar sällan omega-3-fettsyror, karotenoidspektrum från helfodsbaserade källor eller spannmålslipider. Pro Vitality+ kombinerar fyra separata produktkategorier i en dagssachet — en bredare ansats till daglig grundnäring. Det är inte ett substitut för medicinsk rådgivning eller en varierad kost.</p></div></details>
         <details><summary>Är Pro Vitality+ lämplig för veganer?</summary><div class="faq-answer"><p>Nej. Pro Vitality+ innehåller Omega-3 Plus som är baserad på laxolja — en animalisk källa. Den är därmed inte lämplig för veganer. För veganer finns <a href="https://pubmed.ncbi.nlm.nih.gov/34693433/" rel="noopener" target="_blank">algolja som ett evidensbaserat alternativ</a> till fiskoljebaserade omega-3-preparat — alger producerar EPA och DHA direkt utan fisk som mellanled.</p></div></details>
-        <details><summary>Hur tas Pro Vitality+ och vad kostar det?</summary><div class="faq-answer"><p>Pro Vitality+ tas som en sachet per dag i samband med måltid. Förpackningen innehåller 30 sachéer — en månads förbrukning. Se <a href="https://levnytt.se/finns-det-billigare-alternativ">vår sparanalys</a> för aktuell kostnad per dag och jämförelser. EFSA rekommenderar <a href="https://efsa.onlinelibrary.wiley.com/doi/abs/10.2903/j.efsa.2012.2847" rel="noopener" target="_blank">250 mg EPA+DHA per dag</a> för normal hjärtfunktion.</p></div></details>
+        <details><summary>Hur tas Pro Vitality+?</summary><div class="faq-answer"><p>Pro Vitality+ tas som en sachet per dag i samband med måltid. Förpackningen innehåller 30 sachéer — en månads förbrukning. EFSA rekommenderar <a href="https://efsa.onlinelibrary.wiley.com/doi/abs/10.2903/j.efsa.2012.2847" rel="noopener" target="_blank">250 mg EPA+DHA per dag</a> för normal hjärtfunktion.</p></div></details>
       </div>
 
       <div class="author-box">
@@ -437,7 +283,7 @@ details[open] summary::after{content:'−';}
         </div>
       </div>
 
-      <p class="last-updated">Senast uppdaterad: 15 juni 2026. Pris: NeoLife prislista SE, april 2026. Forskning: Am J Clin Nutr 1997, Prostaglandins Leukot EFA 2010, PubMed.</p>
+      <p class="last-updated">Senast uppdaterad: 15 juni 2026. Forskning: Am J Clin Nutr 1997, Prostaglandins Leukot EFA 2010, PubMed.</p>
 
       <div class="journey-block">
         <p class="journey-label">Utforska komponenterna var för sig</p>
@@ -458,6 +304,7 @@ details[open] summary::after{content:'−';}
   </div>
 </main>
 
+<script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
 </body>
 </html>
