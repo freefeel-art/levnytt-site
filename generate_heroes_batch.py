@@ -4,9 +4,11 @@ Genererar hero-bilder för tre artiklar via KIE.ai GPT Image 2.
 Sparar PNG-originalen till images/originals/ för visuell verifiering,
 konverterar sedan till WebP och bäddar in base64 i HTML.
 """
-import json, urllib.request, urllib.error, base64, sys, pathlib, re, time, io
+import json, urllib.request, urllib.error, base64, sys, pathlib, re, time, io, os
 
-KIE_API_KEY  = "b074c4f67699d7197affce9047d6b99f"
+KIE_API_KEY = os.environ.get("KIE_API_KEY")
+if not KIE_API_KEY:
+    sys.exit("FEL: miljövariabeln KIE_API_KEY är inte satt. Kör t.ex.\n  export KIE_API_KEY='din-nya-nyckel'\nfore du startar scriptet.")
 CREATE_URL   = "https://api.kie.ai/api/v1/jobs/createTask"
 POLL_URL     = "https://api.kie.ai/api/v1/jobs/recordInfo"
 ARTICLES_DIR = pathlib.Path(__file__).parent / "content" / "articles"

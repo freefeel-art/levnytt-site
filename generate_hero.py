@@ -10,9 +10,11 @@ API (docs.kie.ai):
   POST https://api.kie.ai/api/v1/jobs/createTask  → taskId
   GET  https://api.kie.ai/api/v1/jobs/recordInfo?taskId=... → state + resultJson
 """
-import json, urllib.request, urllib.error, base64, sys, pathlib, re, time
+import json, urllib.request, urllib.error, base64, sys, pathlib, re, time, os
 
-KIE_API_KEY  = "b074c4f67699d7197affce9047d6b99f"
+KIE_API_KEY = os.environ.get("KIE_API_KEY")
+if not KIE_API_KEY:
+    sys.exit("FEL: miljövariabeln KIE_API_KEY är inte satt. Kör t.ex.\n  export KIE_API_KEY='din-nya-nyckel'\nfore du startar scriptet.")
 CREATE_URL   = "https://api.kie.ai/api/v1/jobs/createTask"
 POLL_URL     = "https://api.kie.ai/api/v1/jobs/recordInfo"
 
