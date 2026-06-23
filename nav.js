@@ -69,7 +69,6 @@
           <div class="lnav-dropdown-divider"></div>
           <p class="lnav-dropdown-label">Personlig vård</p>
           <a href="/personlig-vard/"${isActive('/personlig-vard/')}>Personlig vård — översikt</a>
-          <a href="/personlig-vard.html"${isActive('/personlig-vard.html')}>Personlig vård</a>
           <div class="lnav-dropdown-divider"></div>
           <p class="lnav-dropdown-label">Hem & Städning</p>
           <a href="/golden-home-care/"${isActive('/golden-home-care/')}>Golden Home Care</a>
