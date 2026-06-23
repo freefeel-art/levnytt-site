@@ -29,8 +29,8 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://levnytt.se/neolife-hallbarhet</loc>
-    <lastmod>2026-05-16</lastmod>
+    <loc>https://levnytt.se/neolife-hallbarhet/</loc>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -79,8 +79,8 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://levnytt.se/golden-home-care</loc>
-    <lastmod>2026-05-16</lastmod>
+    <loc>https://levnytt.se/golden-home-care/</loc>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -96,6 +96,184 @@
     <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-shake-bar-tea/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-affarsmojlighet</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-acidophilus-plus/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-elevate/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-fibre-tablets/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-sustained-vitamin-c/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ÖVRIGA NEOLIFE-PRODUKTSIDOR (äldre artikelmall, fanns redan publicerade men saknades i sitemap) -->
+  <url>
+    <loc>https://levnytt.se/multivitamin-kvinnor-over-40</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-betaguard</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-botanical-balance</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-chelated-zinc</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-coq10</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-cruciferous-plus</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-flavonoid-complex</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-formula-iv</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-garlic-allium-complex</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-kalmag-plus-d</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-magnesium-complex</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-resp-x</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-upbeet</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-vitamin-d</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-vitamin-e</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-tre-en-en-cellnaring</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- OBS: neolife-all-c och neolife-vita-squares MEDVETET UTESLUTNA (beslut 2026-06-23).
+       Två konkurrerande filer per URL (rot-.html = faktaartikel, mapp/index.html = produktkatalogsida).
+       Båda filerna lämnas orörda på disk. Uteslutna ur sitemap tills det är klarlagt vilken fil
+       som faktiskt serveras på live-domänen (Cloudflare-migrering ännu overifierad) och vilken
+       som ska vara den enda kvarvarande versionen. -->
+
+  <!-- HUDVÅRD-KLUSTRETS ARTIKLAR (fanns redan i content/articles/, saknades i sitemap) -->
+  <url>
+    <loc>https://levnytt.se/vad-ar-niacinamid</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/c-vitamin-tillskott-vs-serum-huden</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/retinol-pa-sommaren</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/lutein-zeaxantin-huden</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/hudtecken-naringsbrist</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/ar-miljovanliga-rengoringsmedel-lika-effektiva</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <!-- VETENSKAPSARTIKLAR -->
   <url>
