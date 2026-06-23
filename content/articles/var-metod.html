@@ -10,9 +10,14 @@
 <meta property="og:description" content="Hur LevNytt utvärderar källor, tolkar forskning och hanterar kommersiella relationer. En transparent redovisning av vår redaktionella metod.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://levnytt.se/var-metod">
+<meta property="og:image" content="https://levnytt.se/images/og/default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LevNytt">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/pillar.css">
 
 <script type="application/ld+json">
 {
@@ -121,22 +126,6 @@
 </script>
 
 <style>
-:root {
-  --gold: #B8972E;
-  --gold-light: #F5EDD6;
-  --gold-dark: #8C6E1A;
-  --green: #2E6B3E;
-  --green-light: #EAF2EC;
-  --green-dark: #1A4726;
-  --cream: #FAFAF7;
-  --cream-dark: #F0EFE8;
-  --white: #FFFFFF;
-  --ink: #1A1A18;
-  --ink-muted: #5C5C52;
-  --border: #E2E0D6;
-  --radius: 8px;
-  --max: 820px;
-}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;-webkit-text-size-adjust:100%;}
 body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--cream);line-height:1.75;}
@@ -149,7 +138,7 @@ h3{font-size:1.1rem;font-weight:600;margin-bottom:0.4rem;}
 p{margin-bottom:1rem;font-size:1rem;}
 ul,ol{margin:0 0 1rem 1.25rem;}
 li{margin-bottom:0.4rem;}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+.wrap{max-width:var(--max-width);margin:0 auto;padding:0 1.25rem;}
 
 /* ─── Breadcrumbs ─── */
 .breadcrumbs{background:var(--white);border-bottom:1px solid var(--border);padding:0.6rem 0;font-size:0.82rem;color:var(--ink-muted);}
@@ -293,12 +282,21 @@ tbody tr:nth-child(odd){background:var(--white);}
 td{padding:0.7rem 1rem;border-bottom:1px solid var(--border);vertical-align:top;}
 tbody tr:last-child td{border-bottom:none;}
 
+@media(max-width:900px){
+  .source-grid{grid-template-columns:1fr 1fr;}
+  .journey-paths{grid-template-columns:1fr 1fr;}
+}
 @media(max-width:600px){
   .stats-row{grid-template-columns:repeat(2,1fr);}
   .tier-row{grid-template-columns:repeat(2,1fr);}
   .ev-row{grid-template-columns:2.5rem 1fr;}
   .ev-badge{display:none;}
   .hero{padding:2.5rem 0 2rem;}
+  .source-grid{grid-template-columns:1fr;}
+  .journey-paths{grid-template-columns:1fr;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:0.01ms!important;}
 }
 </style>
 </head>
