@@ -10,9 +10,14 @@
 <meta property="og:description" content="De fem principerna som styr allt LevNytt publicerar. Vad de innebär i praktiken — med konkreta exempel.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://levnytt.se/levnytt-principer">
+<meta property="og:image" content="https://levnytt.se/images/og/default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LevNytt">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/pillar.css">
 
 <script type="application/ld+json">
 {
@@ -114,21 +119,7 @@
 
 <style>
 :root {
-  --gold: #B8972E;
-  --gold-light: #F5EDD6;
-  --gold-dark: #8C6E1A;
-  --green: #2E6B3E;
-  --green-light: #EAF2EC;
-  --green-dark: #1A4726;
-  --cream: #FAFAF7;
-  --cream-dark: #F0EFE8;
-  --white: #FFFFFF;
-  --ink: #1A1A18;
-  --ink-muted: #5C5C52;
-  --border: #E2E0D6;
-  --radius: 8px;
-  --max: 820px;
-  /* Principle accent colors */
+  /* Principle accent colors — page-specific, not in pillar.css */
   --p1: #2E6B3E;
   --p2: #1A5C8A;
   --p3: #7A4A9E;
@@ -153,7 +144,7 @@ p{margin-bottom:1rem;font-size:1rem;}
 ul,ol{margin:0 0 1rem 1.25rem;}
 li{margin-bottom:0.4rem;}
 strong{font-weight:600;}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 1.25rem;}
+.wrap{max-width:var(--max-width);margin:0 auto;padding:0 1.25rem;}
 
 /* ─── Breadcrumbs ─── */
 .breadcrumbs{background:var(--white);border-bottom:1px solid var(--border);padding:0.6rem 0;font-size:0.82rem;color:var(--ink-muted);}
@@ -335,12 +326,19 @@ details[open] summary::after{content:"−";}
 .ed-cred{font-size:0.84rem;color:var(--ink-muted);margin-top:0.2rem;}
 .ed-note{font-size:0.81rem;color:var(--ink-muted);border-top:1px solid var(--border);margin-top:0.7rem;padding-top:0.7rem;line-height:1.55;}
 
+@media(max-width:900px){
+  .do-dont{grid-template-columns:1fr 1fr;}
+  .principle-summary{grid-template-columns:repeat(5,1fr);}
+}
 @media(max-width:620px){
   .stats-row{grid-template-columns:repeat(2,1fr);}
   .tier-row{grid-template-columns:repeat(2,1fr);}
   .do-dont{grid-template-columns:1fr;}
   .principle-summary{grid-template-columns:repeat(3,1fr);}
   .ps-item{padding:0.7rem 1rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:0.01ms!important;}
 }
 </style>
 </head>
