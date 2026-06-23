@@ -1,15 +1,15 @@
 # LevNytt.se — Projektimuistio
 
-Päivitetty: 2026-05-16
+Päivitetty: 2026-06-23
 
 ---
 
 ## Repo ja hosting
 
 - **GitHub repo:** `freefeel-art/levnytt-site`
-- **Hosting:** Netlify — deployaa automaattisesti git pushin jälkeen
+- **Hosting:** Cloudflare Pages — deployaa automaattisesti git pushin jälkeen (migroitu Netlifystä 20.6.2026)
 - **Domain:** levnytt.se
-- **Tiedostomuoto:** `.html`-päätteellä, Netlify tarjoilee ilman päätettä URLissa
+- **Tiedostomuoto:** `.html`-päätteellä, Cloudflare Pages tarjoilee ilman päätettä URLissa (via _redirects)
   - `golden-home-care.html` → `levnytt.se/golden-home-care/`
   - `super-10.html` → `levnytt.se/super-10/`
 
