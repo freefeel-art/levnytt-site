@@ -53,8 +53,14 @@
 
 .tier-box-inactive { opacity: 0.45; pointer-events: none; cursor: default; }
 
+@media (max-width: 900px) {
+  .carot-grid { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 600px) {
   .carot-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition-duration: 0.01ms !important; }
 }
 </style>
 
