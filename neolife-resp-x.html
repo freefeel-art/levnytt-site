@@ -20,17 +20,7 @@ h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.3;}
 a{color:var(--green-dark);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
 a:hover{color:var(--gold-dark);}
 .container{max-width:var(--max-width);margin:0 auto;padding:0 24px;}
-.site-nav{position:sticky;top:0;z-index:100;background:rgba(250,247,240,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
-.nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:var(--ink);text-decoration:none;letter-spacing:-0.01em;}
-.nav-brand span{color:var(--green);}
-.nav-links{display:flex;gap:4px;align-items:center;}
-.nav-links a{font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:6px 12px;border-radius:6px;transition:color 0.2s,background 0.2s;}
-.nav-links a:hover{color:var(--ink);background:var(--cream-dark);}
-.nav-cta{background:var(--green)!important;color:var(--white)!important;font-weight:600!important;padding:8px 18px!important;border-radius:6px!important;}
-.nav-cta:hover{background:var(--green-dark)!important;}
-.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
-.nav-hamburger svg{width:24px;height:24px;stroke:var(--ink);}
+
 .breadcrumbs{background:var(--white);border-bottom:1px solid var(--border);padding:12px 0;font-size:13px;color:var(--ink-muted);}
 .breadcrumbs a{color:var(--ink-muted);text-decoration:none;}
 .breadcrumbs span{margin:0 6px;}
@@ -128,7 +118,6 @@ details[open] summary::after{content:'−';}
 .footer-col a:hover{color:var(--gold-light);}
 .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;font-size:0.78rem;color:rgba(255,255,255,0.35);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px;}}
-@media(max-width:768px){.nav-hamburger{display:block;}.nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:16px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.10);gap:4px;}.nav-links.open{display:flex;}.nav-links a{width:100%;}}
 @media(max-width:600px){.hero{padding:44px 0 40px;}.stats-grid{grid-template-columns:1fr 1fr;}.tier-grid{grid-template-columns:1fr 1fr;}.cta-block{padding:28px 22px;}.author-box{flex-direction:column;}.ia-punchline,.ia-takeaways{padding:20px 20px;}.footer-grid{grid-template-columns:1fr;gap:24px;}.footer-bottom{flex-direction:column;gap:6px;}.journey-steps{flex-direction:column;align-items:flex-start;}}
 </style>
 <script type="application/ld+json">
@@ -146,24 +135,8 @@ details[open] summary::after{content:'−';}
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LevNytt","item":"https://levnytt.se"},{"@type":"ListItem","position":2,"name":"Vitaminer & Mineraler","item":"https://levnytt.se/neolife-kosttillskott"},{"@type":"ListItem","position":3,"name":"Resp-X","item":"https://levnytt.se/neolife-resp-x"}]}]}
 </script>
 </head><body>
-<nav class="site-nav" aria-label="Huvudnavigation">
-  <div class="nav-inner">
-    <a href="https://levnytt.se/" class="nav-brand">Lev<span>Nytt</span></a>
-    <button class="nav-hamburger" onclick="document.getElementById('navMain').classList.toggle('open')" aria-label="Öppna meny" aria-expanded="false">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-    <div class="nav-links" id="navMain" role="menubar">
-      <a href="https://levnytt.se/neolife-historia/" role="menuitem">Historia</a>
-      <a href="https://levnytt.se/neolife-vetenskap/" role="menuitem">Vetenskap</a>
-      <a href="https://levnytt.se/neolife-hallbarhet/" role="menuitem">Hållbarhet</a>
-      <a href="https://levnytt.se/neolife-kosttillskott/" role="menuitem">Kosttillskott</a>
-      <a href="https://levnytt.se/golden-home-care/" role="menuitem">Städning</a>
-      <a href="https://levnytt.se/finns-det-billigare-alternativ/" class="nav-cta" role="menuitem">Spara Pengar?</a>
-    </div>
-  </div>
-</nav>
 
-<nav class="breadcrumbs" aria-label="Brödsmulor"><div class="container"><a href="https://levnytt.se">LevNytt</a><span>›</span><a href="https://levnytt.se/neolife-kosttillskott">Vitaminer &amp; Mineraler</a><span>›</span>Resp-X</div></nav>
+<div class="breadcrumbs" role="navigation" aria-label="Brödsmulor"><div class="container"><a href="https://levnytt.se">LevNytt</a><span>›</span><a href="https://levnytt.se/neolife-kosttillskott">Vitaminer &amp; Mineraler</a><span>›</span>Resp-X</div></div>
 <header class="hero"><div class="container">
   <p class="hero-eyebrow">Luftvägshälsa · Immunförsvar · Älderbär · Örter</p>
   <h1>Vad stödjer andningsvägars funktion — och vad säger forskningen?</h1>
@@ -176,7 +149,7 @@ details[open] summary::after{content:'−';}
   <div><span class="stat-number">EMA</span><span class="stat-label">erkänt marshmallowrot för traditionell användning vid halsbesvär</span><span class="stat-source">EMA, HMPC</span></div>
   <div><span class="stat-number">90</span><span class="stat-label">tabletter per förpackning NeoLife Resp-X (kod 820)</span><span class="stat-source">Produktspecifikation</span></div>
 </div></div></section>
-<nav class="authority-nav"><div class="container"><span class="authority-nav-label">Om LevNytt</span><a href="https://levnytt.se/om-oss">Om oss</a><a href="https://levnytt.se/den-fundersamma-mannen">Den Fundersamma Mannen</a><a href="https://levnytt.se/var-metod">Vår Metod</a><a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a><a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a></div></nav>
+<div class="authority-nav" role="navigation"><div class="container"><span class="authority-nav-label">Om LevNytt</span><a href="https://levnytt.se/om-oss">Om oss</a><a href="https://levnytt.se/den-fundersamma-mannen">Den Fundersamma Mannen</a><a href="https://levnytt.se/var-metod">Vår Metod</a><a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a><a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a></div></div>
 <main class="article-wrap"><div class="container">
   <div class="ia-punchline"><p>Vad stödjer luftvägshälsa? — <strong>C-vitamin och zink har EFSA-godkända påståenden om bidrag till normal immunfunktion. Älderbär har RCT-evidens för kortare förkylningsvaraktighet.</strong> Viktigt perspektiv: stöd för immunfunktion är inte detsamma som behandling av infektion — det är ett fördelaktigt utgångsläge, inget mer.</p></div>
   <div class="ia-takeaways">
@@ -237,5 +210,6 @@ details[open] summary::after{content:'−';}
     </div>
   </div></div>
 </main>
+<script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
 </body></html>

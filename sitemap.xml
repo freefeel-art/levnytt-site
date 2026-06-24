@@ -232,11 +232,22 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- OBS: neolife-all-c och neolife-vita-squares MEDVETET UTESLUTNA (beslut 2026-06-23).
-       Två konkurrerande filer per URL (rot-.html = faktaartikel, mapp/index.html = produktkatalogsida).
-       Båda filerna lämnas orörda på disk. Uteslutna ur sitemap tills det är klarlagt vilken fil
-       som faktiskt serveras på live-domänen (Cloudflare-migrering ännu overifierad) och vilken
-       som ska vara den enda kvarvarande versionen. -->
+  <!-- TIDIGARE UTESLUTNA, NU ÅTERINKLUDERADE 2026-06-24:
+       neolife-all-c och neolife-vita-squares — Cloudflare Pages serverar de platta
+       .html-filerna (informational-article-innehåll) på dessa clean URLs, INTE
+       konkurrerande dir/index.html-filerna. Verifierat manuellt via inkognitobläddrare. -->
+  <url>
+    <loc>https://levnytt.se/neolife-all-c</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-vita-squares</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <!-- HUDVÅRD-KLUSTRETS ARTIKLAR (fanns redan i content/articles/, saknades i sitemap) -->
   <url>
