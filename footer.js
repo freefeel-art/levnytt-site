@@ -34,12 +34,12 @@
       <nav class="lfoot-nav" aria-label="Sidfot navigation">
         <a href="https://levnytt.se/neolife-historia">Historia</a>
         <a href="https://levnytt.se/neolife-vetenskap">Vetenskap</a>
-        <a href="https://levnytt.se/neolife-hallbarhet">Hållbarhet</a>
+        <a href="https://levnytt.se/neolife-hallbarhet/">Hållbarhet</a>
         <a href="https://levnytt.se/direktforsaljning-fakta">Direktförsäljning</a>
         <a href="https://levnytt.se/neolife-affarsmojlighet">Affärsmöjlighet</a>
         <a href="https://levnytt.se/neolife-kosttillskott">Kosttillskott</a>
         <a href="https://levnytt.se/personlig-vard">Personlig Vård</a>
-        <a href="https://levnytt.se/golden-home-care">Golden Home Care</a>
+        <a href="https://levnytt.se/golden-home-care/">Golden Home Care</a>
         <a href="https://levnytt.se/neolife-pro-vitality">Pro Vitality+</a>
         <a href="https://levnytt.se/neolife-carotenoid-complex">Carotenoid Complex</a>
         <a href="https://levnytt.se/neolife-omega-3-plus">Omega-3 Plus</a>
