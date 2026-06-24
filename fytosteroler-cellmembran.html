@@ -50,23 +50,6 @@ a:hover{color:var(--gold-dark);}
 .container{max-width:var(--max-width);margin:0 auto;padding:0 24px;}
 
 /* NAV */
-.site-nav{position:sticky;top:0;z-index:100;background:rgba(250,247,240,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
-.nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:var(--ink);text-decoration:none;letter-spacing:-0.01em;}
-.nav-brand span{color:var(--green);}
-.nav-links{display:flex;gap:4px;align-items:center;}
-.nav-links a{font-family:'Inter',sans-serif;font-size:0.875rem;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:6px 12px;border-radius:6px;transition:color 0.2s,background 0.2s;}
-.nav-links a:hover{color:var(--ink);background:var(--cream-dark);}
-.nav-cta{background:var(--green)!important;color:var(--white)!important;font-weight:600!important;padding:8px 18px!important;border-radius:6px!important;}
-.nav-cta:hover{background:var(--green-dark)!important;}
-.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
-.nav-hamburger svg{width:24px;height:24px;stroke:var(--ink);}
-@media(max-width:768px){
-  .nav-hamburger{display:block;}
-  .nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:16px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.10);gap:4px;}
-  .nav-links.open{display:flex;}
-  .nav-links a{width:100%;}
-}
 
 /* BREADCRUMBS */
 .breadcrumbs{background:var(--white);border-bottom:1px solid var(--border);padding:12px 0;font-size:13px;color:var(--ink-muted);}
@@ -87,8 +70,8 @@ a:hover{color:var(--gold-dark);}
 .stats-row{background:var(--white);border-bottom:3px solid var(--gold);padding:32px 0;}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:24px;text-align:center;}
 .stat-number{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--green-dark);display:block;}
-.stat-label{font-size:13px;color:var(--ink-muted);margin-top:4px;line-height:1.4;}
-.stat-source{font-size:11px;color:#bbb;margin-top:3px;}
+.stat-label{display:block;font-size:13px;color:var(--ink-muted);margin-top:4px;line-height:1.4;}
+.stat-source{display:block;font-size:11px;color:#bbb;margin-top:3px;}
 
 /* AUTHORITY NAV */
 .authority-nav{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;}
@@ -265,25 +248,9 @@ details[open] summary::after{content:'−';}
 <body>
 
 <!-- NAVBAR -->
-<nav class="site-nav" aria-label="Huvudnavigation">
-  <div class="nav-inner">
-    <a href="https://levnytt.se/" class="nav-brand">Lev<span>Nytt</span></a>
-    <button class="nav-hamburger" onclick="document.getElementById('navMain').classList.toggle('open')" aria-label="Öppna meny" aria-expanded="false">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-    <div class="nav-links" id="navMain" role="menubar">
-      <a href="https://levnytt.se/neolife-historia/" role="menuitem">Historia</a>
-      <a href="https://levnytt.se/neolife-vetenskap/" role="menuitem">Vetenskap</a>
-      <a href="https://levnytt.se/neolife-hallbarhet/" role="menuitem">Hållbarhet</a>
-      <a href="https://levnytt.se/neolife-kosttillskott/" role="menuitem">Kosttillskott</a>
-      <a href="https://levnytt.se/golden-home-care/" role="menuitem">Städning</a>
-      <a href="https://levnytt.se/finns-det-billigare-alternativ/" class="nav-cta" role="menuitem">Spara Pengar?</a>
-    </div>
-  </div>
-</nav>
 
 <!-- BREADCRUMBS -->
-<nav class="breadcrumbs" aria-label="Brödsmulor">
+<div class="breadcrumbs" role="navigation" aria-label="Brödsmulor">
   <div class="container">
     <a href="https://levnytt.se">LevNytt</a>
     <span>›</span>
@@ -291,7 +258,7 @@ details[open] summary::after{content:'−';}
     <span>›</span>
     Fytosteroler och cellmembranet
   </div>
-</nav>
+</div>
 
 <!-- HERO -->
 <header class="hero">
@@ -336,7 +303,7 @@ details[open] summary::after{content:'−';}
 </section>
 
 <!-- AUTHORITY NAV -->
-<nav class="authority-nav">
+<div class="authority-nav" role="navigation">
   <div class="container">
     <span class="authority-nav-label">Om LevNytt</span>
     <a href="https://levnytt.se/om-oss">Om oss</a>
@@ -345,7 +312,7 @@ details[open] summary::after{content:'−';}
     <a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a>
     <a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a>
   </div>
-</nav>
+</div>
 
 <!-- ARTICLE -->
 <main class="article-wrap">
@@ -508,6 +475,7 @@ details[open] summary::after{content:'−';}
 </main>
 
 <!-- FOOTER -->
+<script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
 </body>
 </html>

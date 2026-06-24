@@ -70,8 +70,8 @@ a:hover { color: var(--gold-dark); }
 .stats-row { background: var(--white); border-bottom: 3px solid var(--gold); padding: 32px 0; }
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 24px; text-align: center; }
 .stat-number { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: var(--green-dark); display: block; }
-.stat-label { font-size: 13px; color: var(--ink-muted); margin-top: 4px; line-height: 1.4; }
-.stat-source { font-size: 11px; color: #bbb; margin-top: 3px; }
+.stat-label { display: block; font-size: 13px; color: var(--ink-muted); margin-top: 4px; line-height: 1.4; }
+.stat-source { display: block; font-size: 11px; color: #bbb; margin-top: 3px; }
 
 /* AUTHORITY NAV */
 .authority-nav { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; }
@@ -309,7 +309,7 @@ details[open] summary::after { content: '−'; }
 <body>
 
 <!-- BREADCRUMBS -->
-<nav class="breadcrumbs" aria-label="Brödsmulor">
+<div class="breadcrumbs" role="navigation" aria-label="Brödsmulor">
   <div class="container">
     <a href="https://levnytt.se">LevNytt</a>
     <span>›</span>
@@ -317,7 +317,7 @@ details[open] summary::after { content: '−'; }
     <span>›</span>
     Zeaxantin och immunförsvar
   </div>
-</nav>
+</div>
 
 <!-- HERO -->
 <header class="hero">
@@ -362,7 +362,7 @@ details[open] summary::after { content: '−'; }
 </section>
 
 <!-- AUTHORITY NAV -->
-<nav class="authority-nav">
+<div class="authority-nav" role="navigation">
   <div class="container">
     <span class="authority-nav-label">Om LevNytt</span>
     <a href="https://levnytt.se/om-oss">Om oss</a>
@@ -371,7 +371,7 @@ details[open] summary::after { content: '−'; }
     <a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a>
     <a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a>
   </div>
-</nav>
+</div>
 
 <!-- ARTICLE -->
 <main class="article-wrap">
@@ -667,6 +667,7 @@ details[open] summary::after { content: '−'; }
   </div><!-- /container -->
 </main>
 
+<script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
 </body>
 </html>
