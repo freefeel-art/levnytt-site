@@ -93,10 +93,12 @@ img{height:auto;}  /* mandatory: never set width:100% on an <img> without this â
 .callout-standard{background:var(--green-light);border-left:4px solid var(--green);}
 .callout-gold{background:var(--gold-light);border-left:4px solid var(--gold);}
 .callout-amber{background:var(--amber-light);border-left:4px solid var(--amber);}
+.callout-warning{background:var(--red-light);border-left:4px solid var(--red-accent);}
 .callout-title{font-family:'Inter',sans-serif;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
 .callout-standard .callout-title{color:var(--green-dark);}
 .callout-gold .callout-title{color:var(--gold-dark);}
 .callout-amber .callout-title{color:var(--amber);}
+.callout-warning .callout-title{color:var(--red-accent);}
 .callout p{margin:0;font-size:15.5px;line-height:1.65;}
 
 /* COMPONENT CARDS (e.g. Pro Vitality's 4 sub-products) */
