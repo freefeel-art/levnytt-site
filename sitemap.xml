@@ -232,11 +232,21 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- OBS: neolife-all-c och neolife-vita-squares MEDVETET UTESLUTNA (beslut 2026-06-23).
-       Två konkurrerande filer per URL (rot-.html = faktaartikel, mapp/index.html = produktkatalogsida).
-       Båda filerna lämnas orörda på disk. Uteslutna ur sitemap tills det är klarlagt vilken fil
-       som faktiskt serveras på live-domänen (Cloudflare-migrering ännu overifierad) och vilken
-       som ska vara den enda kvarvarande versionen. -->
+  <!-- LÖST 2026-06-24: neolife-all-c och neolife-vita-squares. Cloudflare Pages bekräftat
+       att rot-.html vinner över mapp/index.html för clean URLs. De konkurrerande
+       mapp/index.html-filerna är borttagna från repot. Återinförda i sitemap nedan. -->
+  <url>
+    <loc>https://levnytt.se/neolife-all-c</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/neolife-vita-squares</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <!-- HUDVÅRD-KLUSTRETS ARTIKLAR (fanns redan i content/articles/, saknades i sitemap) -->
   <url>
@@ -422,6 +432,20 @@
   <url>
     <loc>https://levnytt.se/nya-kostrad-65-plus-d-vitamin-magnesium</loc>
     <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- VITAMINER & MINERALER-KLUSTRET: nya informationsartiklar -->
+  <url>
+    <loc>https://levnytt.se/vad-ar-kostfiber</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://levnytt.se/vad-ar-probiotika</loc>
+    <lastmod>2026-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
