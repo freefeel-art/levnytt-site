@@ -24,25 +24,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="/pillar.css">
 <style>
-:root {
-  --gold: #B8960C;
-  --gold-light: #F5E6A3;
-  --gold-dark: #8A6E08;
-  --green: #2D6A4F;
-  --green-light: #D8F3DC;
-  --green-dark: #1B4332;
-  --cream: #FAF7F0;
-  --cream-dark: #EDE8DC;
-  --white: #FFFFFF;
-  --ink: #1A1A1A;
-  --ink-muted: #555550;
-  --border: #DDD8CE;
-  --red-light: #FFF0EE;
-  --red-accent: #C0392B;
-  --radius: 10px;
-  --max-width: 820px;
-}
+
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -526,7 +510,7 @@ overflow:hidden;}
   .author-box { flex-direction: column; }
   .ia-punchline, .ia-takeaways { padding: 20px 20px; }
 }
-</style>
+@media(max-width:900px){}@media(max-width:768px){}@media(max-width:600px){}</style>
 
 <script type="application/ld+json">
 {
@@ -1046,7 +1030,8 @@ overflow:hidden;}
   </div><!-- /container -->
 </main>
 
-<script src="/nav.js"></script>
+<script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
+<script src="/components.js" defer></script>
 </body>
 </html>

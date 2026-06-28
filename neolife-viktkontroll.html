@@ -80,15 +80,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --gold:#C8962E;--gold-light:#E8C870;--gold-dark:#8B6914;
-      --green:#2D6A4F;--green-light:#40916C;--green-dark:#1B4332;
-      --cream:#FBF8F0;--cream-dark:#F0EBDD;
-      --ink:#1A1A1A;--ink-muted:#555555;--ink-light:#888888;
-      --white:#FFFFFF;--border:#E0D8C8;
-      --shadow-lg:0 8px 32px rgba(0,0,0,0.12);
-      --radius:8px;--max-w:1200px;--transition:0.25s cubic-bezier(0.4,0,0.2,1);
-    }
+    
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
     body{font-family:'Inter',-apple-system,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;}
@@ -177,6 +169,8 @@
     @media(max-width:600px){.footer-grid{grid-template-columns:1fr;}.hero{min-height:260px;}.product-grid{grid-template-columns:1fr;}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0.01ms!important;}}
   </style>
+<link rel="stylesheet" href="/pillar.css">
+<meta property="og:image" content="https://levnytt.se/images/og/default.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="LevNytt — En oberoende NeoLife-distributör">
 </head>
 <body>
 
@@ -469,6 +463,6 @@
   </script>
 <script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
-  <script src="/components.js"></script>
+  <script src="/components.js" defer></script>
 </body>
 </html>

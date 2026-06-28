@@ -154,6 +154,7 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 | Author photo | Emoji avatar replaced with real photo across all linked pages | Jun 2026 |
 | Wave 3A | A batch of vitamin product pages migrated to production standard | Jun 2026, `f45c9e5` |
 | New articles | `vad-ar-vitamin-b12`, `hur-fungerar-natverksmarknadsforing-egentligen`, `vad-ar-probiotika`, `vad-ar-kostfiber` | Jun 2026 |
+| Wave 3B / Sprint 6 | All informational articles migrated to production standard: `pillar.css`, no inline `:root`, 3 breakpoints, `og:image`, `components.js` with `defer` | Jun 2026 |
 
 ---
 
@@ -174,10 +175,6 @@ Pages that currently exist only as informational articles and are candidates for
 | `neolife-coq10.html` | `/neolife-coq10/` |
 | `personlig-vard.html` | `/nutriance-organic/` (expansion pending) |
 | *(does not exist)* | `/neolife-sport/` |
-
-### 2. Informational article production-standard migration
-
-A batch of informational articles were migrated to `nav.js` but have not been audited for full design-system compliance (`pillar.css`, OG image, 3 breakpoints, no inline `:root`). Wave 3A addressed a portion of these. Remaining pages are unaudited.
 
 ### 3. Trailing-slash canonical inconsistencies
 
