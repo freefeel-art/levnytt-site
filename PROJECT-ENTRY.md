@@ -28,6 +28,46 @@ If documentation and repository disagree:
 
 ---
 
+## Skill Loading (Mandatory)
+
+Before starting any implementation work, explicitly load every Claude/OpenCode skill that is relevant to the current sprint.
+
+Skills are **not loaded automatically**. Even if the repository or filesystem contains the skill, its instructions are **not available** until the skill is explicitly loaded with the skill tool.
+
+Repository documentation remains the Source of Truth, but skills contain implementation workflows, migration rules, design guidance, checklists, and engineering constraints that must be available before implementation begins.
+
+Typical skills include:
+
+- `pillar-page-template`
+- `informational-article`
+- `astro-builder`
+- `direct-sales-reddit-research`
+- `olsp-authority-article`
+- `search-gap-research`
+- `supplement-reddit-research`
+
+### Mandatory workflow
+
+1. Read:
+   - `PROJECT-ENTRY.md`
+   - `PROJECT-STATUS.md`
+   - `CURRENT-SPRINT.md`
+   - `DECISIONS.md`
+
+2. Determine which skills are required for the current sprint.
+
+3. Explicitly load every required skill using the skill tool.
+
+4. Confirm that the skills are active before making any implementation decisions.
+
+5. Only then begin implementation.
+
+If a relevant skill exists but has not been loaded, stop and load it before continuing.
+
+This is a mandatory project rule for every future sprint.
+
+---
+
 ## Source of Truth hierarchy
 
 | Priority | Source | Authoritative for |
@@ -47,10 +87,11 @@ The repository is never modified to match outdated documentation. Documentation 
 ### Starting a session
 
 1. Read the four required documents above (in order).
-2. Check `CURRENT-SPRINT.md` — is a sprint active?
+2. Determine which skills are required for the current sprint and load them with the skill tool (see **Skill Loading** above).
+3. Check `CURRENT-SPRINT.md` — is a sprint active?
    - **Yes:** implement the active sprint. Do not introduce unrelated work.
    - **No:** ask the project owner what to start next.
-3. If the repository state appears to conflict with `PROJECT-STATUS.md`, verify before acting. Report the conflict. Do not invent a resolution.
+4. If the repository state appears to conflict with `PROJECT-STATUS.md`, verify before acting. Report the conflict. Do not invent a resolution.
 
 ### Doing work
 
