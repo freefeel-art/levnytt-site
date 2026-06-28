@@ -449,4 +449,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- DIREKTFÖRSÄLJNING-KLUSTRET: informationsartiklar -->
+  <url>
+    <loc>https://levnytt.se/hur-fungerar-natverksmarknadsforing-egentligen</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
