@@ -457,4 +457,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- KOST & NÄRING-KLUSTRET: informationsartiklar -->
+  <url>
+    <loc>https://levnytt.se/vad-ar-vitamin-b12</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
