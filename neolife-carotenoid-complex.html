@@ -51,7 +51,12 @@
 .research-box p { font-size: 14.5px; color: var(--ink); margin: 0; line-height: 1.6; }
 .research-box cite { font-size: 12px; color: var(--ink-muted); display: block; margin-top: 10px; font-style: normal; }
 
-.tier-box-inactive { opacity: 0.45; pointer-events: none; cursor: default; }
+.ia-cta{background:linear-gradient(135deg,var(--green-dark),#0d2218);border-radius:var(--radius);padding:36px 40px;margin:48px 0;color:var(--white);text-align:center;}
+.ia-cta h3{font-size:22px;color:var(--white);margin-bottom:12px;}
+.ia-cta p{color:rgba(255,255,255,0.8);margin-bottom:24px;font-size:16px;}
+.ia-cta-btn{display:inline-block;background:var(--gold);color:var(--white);padding:14px 32px;border-radius:6px;font-weight:600;text-decoration:none;font-size:15px;font-family:'Inter',sans-serif;}
+.ia-cta-btn:hover{background:var(--gold-dark);color:var(--white);}
+@media(max-width:600px){.ia-cta{padding:28px 22px;}}
 
 @media (max-width: 900px) {
   .carot-grid { grid-template-columns: 1fr 1fr; }
@@ -423,11 +428,10 @@
       </div>
       <p style="font-size:13px;color:var(--ink-muted);margin-top:-16px;">Tabellen baseras på tillverkarens produktspecifikation. Exakta mängder per ingrediens kan variera — se produktetiketten.</p>
 
-      <!-- CTA -->
-      <div class="cta-block">
+      <div class="ia-cta">
         <h3>Behöver man ett karotenoidtillskott om man äter bra?</h3>
         <p>Det beror på vad "äta bra" innebär, hur kroppen absorberar och vad man vill uppnå. LevNytt undersöker frågan om tillskott kontra kost utan att ta ställning i förväg.</p>
-        <a href="https://levnytt.se/karotenoid-tillskott-vs-mat" class="cta-btn">Karotenoid tillskott vs mat →</a>
+        <a href="https://levnytt.se/karotenoid-tillskott-vs-mat" class="ia-cta-btn">Karotenoid tillskott vs mat →</a>
       </div>
 
       <!-- FAQ -->
@@ -475,37 +479,6 @@
             <p>Lutein och zeaxantin är de enda karotenoiderna som finns i ögonets gula fläck (macula) och lins. De fungerar som ett naturligt blåljusfilter och antioxidanter som skyddar mot oxidativ skada. Forskning har visat att högre kostintag av lutein och zeaxantin är associerat med lägre risk för åldersrelaterad makuladegeneration (AMD), en av de vanligaste orsakerna till synförsämring hos äldre. Lutein och zeaxantin kan inte syntetiseras av kroppen och måste tillföras via kost eller tillskott. För fördjupad information om zeaxantin och immunförsvar, se <a href="https://levnytt.se/zeaxantin-immunforsvar-2025">vår artikel om zeaxantin</a>.</p>
           </div>
         </details>
-      </div>
-
-      <!-- TIER BOXES -->
-      <div class="tier-section">
-        <p class="tier-label">Relaterade resurser på LevNytt</p>
-        <div class="tier-grid">
-          <a href="https://levnytt.se/karotenoid-tillskott-vs-mat" class="tier-box">
-            <span class="tier-box-label">Artikel</span>
-            <span class="tier-box-title">Karotenoid tillskott vs mat</span>
-          </a>
-          <a href="https://levnytt.se/zeaxantin-immunforsvar-2025" class="tier-box">
-            <span class="tier-box-label">Artikel</span>
-            <span class="tier-box-title">Zeaxantin och immunförsvar</span>
-          </a>
-          <a href="https://levnytt.se/neolife-betaguard" class="tier-box">
-            <span class="tier-box-label">Produkt</span>
-            <span class="tier-box-title">NeoLife Beta Guard</span>
-          </a>
-          <a href="https://levnytt.se/neolife-vetenskap" class="tier-box">
-            <span class="tier-box-label">Om NeoLife</span>
-            <span class="tier-box-title">NeoLife och forskning</span>
-          </a>
-          <a href="https://levnytt.se/ar-dyra-kosttillskott-verkligen-battre" class="tier-box">
-            <span class="tier-box-label">Artikel</span>
-            <span class="tier-box-title">Är dyra kosttillskott bättre?</span>
-          </a>
-          <span class="tier-box tier-box-inactive">
-            <span class="tier-box-label">Artikel</span>
-            <span class="tier-box-title">Betakaroten och A-vitamin (kommer)</span>
-          </span>
-        </div>
       </div>
 
       <!-- AUTHOR BOX -->
