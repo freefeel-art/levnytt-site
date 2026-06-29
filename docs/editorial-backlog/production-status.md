@@ -25,7 +25,7 @@
 | 15 | Magnesium för sömn | Magnesium | 76 | **Generated** | `content/articles/magnesium-for-somn.html` |
 | 16 | Magnesiumbrist — symptom, tester | Magnesium | 74 | **Published** | `magnesiumbrist-symptom-tester.html` |
 | 17 | Probiotika dosering och timing | Probiotics | 74 | **Published** | `probiotika-dosering-timing.html` |
-| 18 | D-vitamin och solen | Vitamin D | 73 | **Generated** | `content/articles/d-vitamin-och-solen.html` |
+| 18 | D-vitamin och solen | Vitamin D | 73 | **Published** | `d-vitamin-och-solen.html` |
 | 19 | Multivitamin för barn | Multivitamin | 72 | **Generated** | `content/articles/multivitamin-for-barn.html` |
 | 20 | Fiberrika livsmedel | Fiber | 72 | **Generated** | `content/articles/fiberrika-livsmedel.html` |
 | 21 | D-vitamin för immunförsvaret | Vitamin D | 71 | **Generated** | `content/articles/d-vitamin-immunforsvaret.html` |
