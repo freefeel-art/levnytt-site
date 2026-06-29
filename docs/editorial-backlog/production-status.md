@@ -27,7 +27,7 @@
 | 17 | Probiotika dosering och timing | Probiotics | 74 | **Generated** | `content/articles/probiotika-dosering-timing.html` |
 | 18 | D-vitamin och solen | Vitamin D | 73 | **Generated** | `content/articles/d-vitamin-och-solen.html` |
 | 19 | Multivitamin för barn | Multivitamin | 72 | **Generated** | `content/articles/multivitamin-for-barn.html` |
-| 20 | Fiberrika livsmedel | Fiber | 72 | Skipped | Absorbed into portal guide (#5) |
+| 20 | Fiberrika livsmedel | Fiber | 72 | **Generated** | `content/articles/fiberrika-livsmedel.html` |
 | 21 | D-vitamin för immunförsvaret | Vitamin D | 71 | **Generated** | `content/articles/d-vitamin-immunforsvaret.html` |
 | 22 | Magnesium och stress | Magnesium | 70 | **Generated** | `content/articles/magnesium-och-stress.html` |
 | 23 | Fibrer och tarmflora (prebiotisk effekt) | Fiber | 70 | **Generated** | `content/articles/fibrer-tarmflora-prebiotisk.html` |
@@ -71,6 +71,7 @@
 | 17 | `probiotika-dosering-timing.html` | ✅ PASS | — |
 | 18 | `d-vitamin-och-solen.html` | ✅ PASS | — |
 | 19 | `multivitamin-for-barn.html` | ✅ PASS | — |
+| 20 | `fiberrika-livsmedel.html` | ✅ PASS | — |
 | 21 | `d-vitamin-immunforsvaret.html` | ✅ PASS | — |
 | 22 | `magnesium-och-stress.html` | ✅ PASS | — |
 | 23 | `fibrer-tarmflora-prebiotisk.html` | ✅ PASS | — |
@@ -83,7 +84,7 @@
 
 | Total items | Generated | Pending | Skipped | Coverage Rate |
 |-------------|-----------|---------|---------|---------------|
-| 25 | **24** | **0** | **1** | **96 %** |
+| 25 | **25** | **0** | **0** | **100 %** |
 
 ### By topic
 
@@ -93,7 +94,7 @@
 | Magnesium | 6 | 6 | 0 | 0 |
 | Probiotics | 4 | 4 | 0 | 0 |
 | Vitamin D | 5 | 5 | 0 | 0 |
-| Fiber | 5 | 4 | 0 | 1 |
+| Fiber | 5 | 5 | 0 | 0 |
 
 ### By priority
 
@@ -133,26 +134,20 @@
 | 17 | `content/articles/probiotika-dosering-timing.html` | `/probiotika-dosering-timing` | Batch 2 |
 | 18 | `content/articles/d-vitamin-och-solen.html` | `/d-vitamin-och-solen` | Batch 2 |
 | 19 | `content/articles/multivitamin-for-barn.html` | `/multivitamin-for-barn` | Batch 2 |
+| 20 | `content/articles/fiberrika-livsmedel.html` | `/fiberrika-livsmedel` | Batch 2 |
 | 21 | `content/articles/d-vitamin-immunforsvaret.html` | `/d-vitamin-immunforsvaret` | Batch 2 |
 | 22 | `content/articles/magnesium-och-stress.html` | `/magnesium-och-stress` | Batch 2 |
 | 23 | `content/articles/fibrer-tarmflora-prebiotisk.html` | `/fibrer-tarmflora-prebiotisk` | Batch 2 |
 | 24 | `content/articles/billig-dyr-multivitamin.html` | `/billig-dyr-multivitamin` | Batch 2 |
 | 25 | `content/articles/magnesium-d-vitamin-kombination.html` | `/magnesium-d-vitamin-kombination` | Batch 2 |
 
-### Skipped
-
-| # | Cluster | Score | Reason |
-|---|---------|-------|--------|
-| 20 | Fiberrika livsmedel | 72 | Backlog analysis: "Best as part of portal article rather than standalone" — content delivered via #5 |
-
 ---
 
 ## Notes
 
-- **24/25** backlog items generated (96 % coverage).
+- **25/25** backlog items generated (100 % coverage).
 - **All Priority A items** (11 of 11) are complete.
 - **All Priority B items** (13 of 13) are complete.
-- **Batch 2** generated 16 new articles covering the remaining backlog.
+- **Item #20 (Fiberrika livsmedel)** was originally skipped and absorbed into the portal guide. After review, it was restored as a standalone article — the focused listicle format targets specific long-tail queries ("fiberrika livsmedel", "topp 10 fiberkällor") that the portal guide cannot fully optimize for, and adds a comprehensive comparison table that strengthens the fiber content cluster.
 - **3 Session 1 portal guides** lack GSV/Pinterest meta (not part of the template at that time).
-- **1 item skipped** (#20 Fiberrika livsmedel) — content absorbed into portal guide.
-- **Backlog is now complete.** Next batch topics recommended: Zinc, CoQ10, Collagen, Immunity, Longevity.
+- **Backlog is complete.** Next batch topics recommended: Zinc, CoQ10, Collagen, Immunity, Longevity.
