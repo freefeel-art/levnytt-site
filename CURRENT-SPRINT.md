@@ -9,44 +9,29 @@ See `PROJECT-ENTRY.md` for workflow. See `PROJECT-STATUS.md` for the open backlo
 
 ## Sprint status
 
-**Completed.** Sprint 8 — Tre-en-en pillar page upgrade.
+**Completed.** Sprints 9–12 — Pillar page pipeline (Elevate, UpBeet, CoQ10, Personlig vård).
 
 ---
 
 ## Sprint objective
 
-Upgrade `neolife-tre-en-en.html` from informational article to full pillar page status.
+Upgrade the four remaining planned pillar pages from the backlog.
 
 ---
 
 ## Tasks
 
-- [x] Load `pillar-page-template` skill
-- [x] Define sprint in CURRENT-SPRINT.md
-- [x] Read full file
-- [x] Run pre-flight audit (13/13 already — no structural failures)
-- [x] Fix OG/Twitter meta tags (were missing entirely)
-- [x] Fix JSON-LD author: Organization → Person (Jarmo Halonen)
-- [x] Fix BreadcrumbList: dead `/neolife-hub/` → `/neolife-kosttillskott`
-- [x] Fix visible breadcrumb: same correction
-- [x] Remove cost/savings % from CTA block (`SKILL.md §0` violation)
-- [x] Remove cost/savings % from FAQ answer (`SKILL.md §0` violation)
-- [x] Replace distributor recruitment CTA with neutral shop CTA
-- [x] Final audit: 13/13 confirmed
-- [x] Visual review before commit
-- [x] Commit (`c05c51d`)
+- [x] Sprint 9: `neolife-elevate.html` — add og:description, fix JSON-LD author, remove cost/distributor CTA
+- [x] Sprint 10: `neolife-upbeet.html` — add verification meta tags, remove cost CTA
+- [x] Sprint 11: `neolife-coq10.html` — add verification meta tags, remove cost references
+- [x] Sprint 12: `personlig-vard.html` — add author URL to JSON-LD (already well-formed)
 - [x] Update PROJECT-STATUS.md
 
 ---
 
 ## Completion criteria
 
-All met:
-- 13/13 audit score ✓
-- Content-policy violations (savings %) removed ✓
-- OG/Twitter meta present ✓
-- JSON-LD author correct ✓
-- Breadcrumbs correct ✓
+All met. All four pages pass 13/13 audit. All cost/policy violations removed. Pillar table updated.
 
 ---
 
@@ -58,7 +43,7 @@ None.
 
 ## Next action
 
-Sprint 8 complete. Next sprint: `neolife-elevate.html` (next in backlog).
+Pipeline complete. Remaining backlog: `/neolife-sport/` (page does not exist yet — requires new content creation, not migration).
 
 ---
 
