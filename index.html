@@ -206,6 +206,43 @@ a:hover { color: var(--gold-dark); }
 }
 .latest-post-link:hover { background: var(--cream); color: var(--gold-dark); }
 
+/* ── LATEST ARTICLES GRID ───────────────────────────────────────── */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.article-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.18s;
+}
+.article-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(184,150,12,0.14);
+  transform: translateY(-2px);
+}
+.article-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.article-card-meta {
+  font-size: 12px;
+  color: var(--ink-muted);
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  font-family: 'Inter', sans-serif;
+}
+
 /* ── SECTION SHARED ──────────────────────────────────────────────── */
 .section { padding: 72px 0; }
 .section-alt { background: var(--white); }
@@ -481,13 +518,70 @@ a:hover { color: var(--gold-dark); }
 </header>
 
 <!-- ── LATEST ARTICLE BANNER ─────────────────────────────────────── -->
+<!-- HP:LATEST-BANNER -->
 <div class="latest-post" role="note" aria-label="Senaste artikeln">
   <div class="latest-post-inner">
     <span class="latest-post-label">Senaste artikeln</span>
-    <span class="latest-post-title">Vad är probiotika — och vad säger forskningen egentligen?</span>
-    <a href="/vad-ar-probiotika" class="latest-post-link">Läs artikeln →</a>
+    <span class="latest-post-title">D-vitamin för immunförsvaret — vad säger forskningen?</span>
+    <a href="/d-vitamin-immunforsvaret" class="latest-post-link" target="_blank" rel="noopener noreferrer">Läs artikeln →</a>
   </div>
 </div>
+<!-- /HP:LATEST-BANNER -->
+
+<!-- ── LATEST ARTICLES ──────────────────────────────────────────── -->
+<!-- HP:LATEST-LIST -->
+<section class="section section-alt" id="senaste-artiklar">
+  <div class="container">
+    <span class="section-label">Senaste publicerat</span>
+    <h2 class="section-heading">Senaste artiklarna</h2>
+    <p class="section-intro">De senaste konsumentguiderna och artikelarna från LevNytt.</p>
+    <div class="articles-grid">
+    <a href="/d-vitamin-immunforsvaret" class="article-card" target="_blank" rel="noopener noreferrer">
+      <span class="article-card-title">D-vitamin för immunförsvaret — vad säger forskningen?</span>
+      <span class="article-card-meta">
+        <span>29 juni 2026</span>
+        <span>8 min läsning</span>
+      </span>
+    </a>
+    <a href="/multivitamin-for-man" class="article-card" target="_blank" rel="noopener noreferrer">
+      <span class="article-card-title">Multivitamin för män — vilka vitaminer behöver män?</span>
+      <span class="article-card-meta">
+        <span>29 juni 2026</span>
+        <span>10 min läsning</span>
+      </span>
+    </a>
+    <a href="/multivitamin-for-kvinnor" class="article-card" target="_blank" rel="noopener noreferrer">
+      <span class="article-card-title">Multivitamin för kvinnor — vad behöver kvinnor extra av?</span>
+      <span class="article-card-meta">
+        <span>29 juni 2026</span>
+        <span>10 min läsning</span>
+      </span>
+    </a>
+    <a href="/magnesium-d-vitamin-kombination" class="article-card" target="_blank" rel="noopener noreferrer">
+      <span class="article-card-title">Magnesium och D-vitamin — varför de fungerar bäst tillsammans</span>
+      <span class="article-card-meta">
+        <span>29 juni 2026</span>
+        <span>11 min läsning</span>
+      </span>
+    </a>
+    <a href="/d-vitamin-och-solen" class="article-card" target="_blank" rel="noopener noreferrer">
+      <span class="article-card-title">D-vitamin och solen — hur mycket sol behövs i Sverige?</span>
+      <span class="article-card-meta">
+        <span>29 juni 2026</span>
+        <span>8 min läsning</span>
+      </span>
+    </a>
+    <a href="/probiotika-dosering-timing" class="article-card" target="_blank" rel="noopener noreferrer">
+      <span class="article-card-title">Probiotika dosering och timing — hur mycket CFU behövs egentligen?</span>
+      <span class="article-card-meta">
+        <span>29 juni 2026</span>
+        <span>7 min läsning</span>
+      </span>
+    </a>
+    </div>
+  </div>
+</section>
+<!-- /HP:LATEST-LIST -->
 
 <!-- ── DECISION HUB ─────────────────────────────────────────────── -->
 <section class="section" id="beslutshub">
