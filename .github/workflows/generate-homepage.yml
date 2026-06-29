@@ -1,0 +1,33 @@
+name: Generate Homepage
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run homepage generator
+        run: python3 scripts/generate-homepage.py
+
+      - name: Commit updated homepage if changed
+        run: |
+          if ! git diff --quiet index.html; then
+            git config user.name 'github-actions[bot]'
+            git config user.email 'github-actions[bot]@users.noreply.github.com'
+            git add index.html
+            git commit -m "chore: auto-update homepage [skip ci]"
+            git push
+          else
+            echo "No changes to homepage — skipping commit"
+          fi
