@@ -9,35 +9,39 @@ See `PROJECT-ENTRY.md` for workflow. See `PROJECT-STATUS.md` for the open backlo
 
 ## Sprint status
 
-**Completed.** Sprint 6 — Wave 3B: Informational article production-standard migration.
+**Completed.** Sprint 7 — Formula IV pillar page upgrade.
 
 ---
 
 ## Sprint objective
 
-Audit all informational articles for production-standard compliance and migrate every non-compliant page to pass the required checks.
+Upgrade `neolife-formula-iv.html` from informational article to full pillar page status.
 
 ---
 
 ## Tasks
 
-- [x] Define sprint in CURRENT-SPRINT.md
-- [x] Audit all informational articles — produce a pass/fail list
-- [x] Migrate each non-compliant article to production standard
-- [x] Verify each migrated page passes all required checks
-- [x] Update PROJECT-STATUS.md milestones
-- [x] Create SPRINT-6-REPORT.md
+- [x] Load `pillar-page-template` skill
+- [x] Read full file and run pre-flight audit
+- [x] Identify issues (cost CTA violation; missing verification meta tags)
+- [x] Get owner decision on CTA fix (confirmed: remove)
+- [x] Add Google/Pinterest verification meta tags
+- [x] Remove cost CTA; replace with neutral product CTA
+- [x] JSON-LD schema — confirmed unchanged (existing `@type: Article` matches all other named pillar pages)
+- [x] Run final audit — 13/13
+- [x] Visual review before commit
+- [x] Commit (`c9cf841`)
+- [x] Update PROJECT-STATUS.md
 
 ---
 
 ## Completion criteria
 
-All met. Every informational article (55 pages):
-1. Links `pillar.css` ✓
-2. Has no inline `:root` token block ✓
-3. Has at least 3 `@media` breakpoints ✓
-4. Has `<meta property="og:image">` ✓
-5. Loads `nav.js`, `footer.js`, `components.js` with `defer` ✓
+All met:
+- Verification meta tags added ✓
+- Content-policy violation (cost CTA) removed ✓
+- 13/13 audit score ✓
+- No copy, URL, slug, title, or meta description changed ✓
 
 ---
 
@@ -49,7 +53,7 @@ None.
 
 ## Next action
 
-Sprint 6 is complete. Project owner: open the next sprint from `PROJECT-STATUS.md → Open backlog`.
+Sprint 7 complete. Project owner: open the next sprint from `PROJECT-STATUS.md → Open backlog`.
 
 ---
 
