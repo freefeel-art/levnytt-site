@@ -254,3 +254,81 @@ Every backlog must end with a ranked summary table that includes:
 Sort the table by Publication Score descending. The top 3–5 entries are the immediate editorial backlog.
 
 The Publication Score makes it immediately obvious which articles to publish next without requiring manual prioritization.
+
+---
+
+## Batch Mode
+
+The skill may receive multiple seed topics instead of one.
+
+**Example:**
+
+```
+Omega-3
+Magnesium
+Probiotics
+Vitamin D
+Protein
+Weight management
+```
+
+### Batch Mode Workflow
+
+1. Run the complete Question Gap workflow independently for each seed topic.
+2. Produce one editorial backlog per topic (saved as `/docs/editorial-backlog/<topic-slug>-gap.md`).
+3. Merge all clusters into a single **Global Editorial Backlog**.
+4. Remove duplicate or overlapping opportunities across topics. When two clusters from different topics overlap (e.g. "Magnesium for sleep" and "Sleep supplements"), keep the stronger cluster based on Publication Score.
+5. Rank the Global Editorial Backlog by Publication Score descending.
+6. Recommend the best **10 publication opportunities** across the entire LevNytt ecosystem.
+
+### Batch Mode Output
+
+#### Individual Topic Backlogs
+
+One file per topic following the standard output format:
+
+```
+/docs/editorial-backlog/omega-3-gap.md
+/docs/editorial-backlog/magnesium-gap.md
+/docs/editorial-backlog/probiotics-gap.md
+...
+```
+
+Each file contains its own Summary Table.
+
+#### Global Editorial Backlog
+
+A single merged file:
+
+```
+/docs/editorial-backlog/global-batch-<YYYY-MM-DD>-gap.md
+```
+
+Contains all unique clusters across all topics, sorted by Publication Score descending, with duplicates removed.
+
+#### Top 10 Publication Queue
+
+At the end of the Global Editorial Backlog, include:
+
+```
+## Top 10 Publication Queue
+
+| Rank | Cluster | Topic | Publication Score | Recommendation |
+|------|---------|-------|-----------------|----------------|
+| 1 | Creatine guide | Kosttillskott | 95/100 | Write now |
+| 2 | Omega-3 evidence guide | Omega-3 | 92/100 | Write now |
+| 3 | ... | ... | ... | ... |
+```
+
+The top 10 defines the editorial priority for the next quarter.
+
+### When to Use Batch Mode
+
+| Scenario | Mode |
+|----------|------|
+| Single article research | Single-topic workflow |
+| Quarterly content planning | Batch Mode |
+| New site section or cluster strategy | Batch Mode |
+| Competitive gap analysis across a niche | Batch Mode |
+
+Batch Mode is intended for quarterly content planning rather than single article discovery.
