@@ -4,6 +4,22 @@
 
 ---
 
+## Executive Summary
+
+| | |
+|---|---|
+| **Project** | LevNytt.se |
+| **Mission** | Sweden's evidence-based NeoLife knowledge platform |
+| **Status** | 🟢 Production Stable |
+| **Phase** | Maintenance + Feature Development |
+| **Public Pages** | 55 |
+| **Audit Compliance** | 55 / 55 pages pass the 13/13 production audit |
+| **Migration** | ✅ Complete |
+| **Deployment** | Cloudflare Pages (automatic deployment) |
+| **Next Focus** | Content Expansion & Feature Development |
+
+---
+
 ## Project Health
 
 | Status | Value |
@@ -28,14 +44,14 @@
 
 ## Engineering Principles
 
-- **Repository is the single source of truth** — all changes flow through git
-- **Documentation describes the repository** — keep docs in sync with code
+- **Repository is the source of truth** — all changes flow through git
+- **Documentation reflects the repository** — keep docs in sync with the codebase
 - **Skills are the implementation authority** — use the pillar-page-template skill for migrations, informational-article skill for new content
-- **Verify before implementing** — audit every page before and after migration
+- **Verify before implementing** — audit every page before making changes
 - **One completed page = one commit** — clean, atomic git history
 - **Audit before and after every migration** — run `audit_pillar_page.py` on both sides
 - **Prefer autonomous execution** — the AI should act on instructions without asking for permission on routine tasks
-- **Ask only when business or strategy decisions are required** — branding, legal, content strategy, SEO strategy
+- **Ask only when business, branding, legal, SEO strategy or content strategy decisions are required** — the AI escalates these; everything else is routine
 
 ---
 
@@ -119,6 +135,7 @@ Root-level `.html` files are served directly by Cloudflare Pages Pretty URLs (no
 | **Documentation system** | ✅ Operational — `PROJECT-STATUS.md`, `CURRENT-SPRINT.md`, `docs/reports/` |
 | **Sprint workflow** | ✅ Operational — sprint-based migration cadence |
 | **Autonomous execution** | ✅ Operational — AI executes routine migrations without manual approval |
+| **Deployment pipeline** | ✅ Operational — Cloudflare Pages auto-deploys on `git push` |
 
 ---
 
