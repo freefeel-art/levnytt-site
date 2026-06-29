@@ -42,6 +42,16 @@
 
 ---
 
+## Vision
+
+Become Sweden's most trusted independent NeoLife knowledge platform by publishing evidence-based, transparent, and decision-oriented content.
+
+LevNytt exists to help people understand before they decide.
+
+Every article, pillar page and decision tool should increase trust through facts, research and transparency rather than marketing claims.
+
+---
+
 ## Engineering Principles
 
 - **Repository is the source of truth** — all changes flow through git
@@ -52,6 +62,19 @@
 - **Audit before and after every migration** — run `audit_pillar_page.py` on both sides
 - **Prefer autonomous execution** — the AI should act on instructions without asking for permission on routine tasks
 - **Ask only when business, branding, legal, SEO strategy or content strategy decisions are required** — the AI escalates these; everything else is routine
+
+---
+
+## Definition of Done
+
+A page is considered complete only when:
+
+- it passes the 13/13 production audit
+- it follows the Gen 3 design system
+- all required project skills have been applied
+- documentation has been updated
+- changes have been committed and pushed
+- deployment has completed successfully
 
 ---
 
@@ -136,6 +159,27 @@ Root-level `.html` files are served directly by Cloudflare Pages Pretty URLs (no
 | **Sprint workflow** | ✅ Operational — sprint-based migration cadence |
 | **Autonomous execution** | ✅ Operational — AI executes routine migrations without manual approval |
 | **Deployment pipeline** | ✅ Operational — Cloudflare Pages auto-deploys on `git push` |
+
+---
+
+## AI Session Workflow
+
+Every AI implementation session follows this workflow:
+
+1. Read PROJECT-ENTRY.md
+2. Read PROJECT-STATUS.md
+3. Read CURRENT-SPRINT.md
+4. Read DECISIONS.md
+5. Load all required project skills
+6. Verify before implementing
+7. Complete the sprint
+8. Update documentation
+9. Commit
+10. Push
+
+Routine implementation decisions should be made autonomously.
+
+Ask the user only when business, branding, legal, SEO strategy or content strategy decisions are required.
 
 ---
 
@@ -282,6 +326,25 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 - Core Web Vitals tuning
 - Accessibility improvements (contrast checks, ARIA labels, keyboard navigation)
 - Trailing-slash canonical cleanup
+
+---
+
+## Current Milestone
+
+Phase 2 — Content Expansion & Topical Authority
+
+Primary objectives:
+
+- Expand the pillar page network.
+- Publish high-quality informational articles.
+- Build the Product Entity System.
+- Improve internal linking and topical authority.
+- Develop interactive tools and comparison pages.
+- Continue improving performance, accessibility and user experience.
+
+The Gen 3 migration project is complete.
+
+Future development focuses on expanding the platform rather than rebuilding existing pages.
 
 ---
 
