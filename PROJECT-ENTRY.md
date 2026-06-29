@@ -36,6 +36,8 @@ Skills are **not loaded automatically**. Even if the repository or filesystem co
 
 Repository documentation remains the Source of Truth, but skills contain implementation workflows, migration rules, design guidance, checklists, and engineering constraints that must be available before implementation begins.
 
+Skills are the implementation authority for their respective tasks and must be loaded before implementation begins.
+
 Typical skills include:
 
 - `pillar-page-template`
@@ -68,17 +70,55 @@ This is a mandatory project rule for every future sprint.
 
 ---
 
-## Autonomous Execution (Mandatory)
+## Autonomous Sprint Selection
 
-After loading the required project documents and skills:
+If CURRENT-SPRINT.md contains no active sprint:
 
-- If no sprint is active, automatically continue with the next planned sprint according to the project documentation.
-- If multiple implementation candidates exist, select the highest-priority recommended item without asking the user.
-- Resolve all routine implementation decisions using the repository, project documentation, and loaded skills.
-- Do not interrupt the user for decisions that can be resolved from documented project rules.
-- Ask the user only when a business, content, branding, SEO strategy, legal, or other user-owned decision is required, or when documentation is contradictory or ambiguous.
+- Continue with the highest-priority backlog item.
+- Do not stop simply because no sprint is defined.
 
-This rule is mandatory for all future sprints.
+If several candidates exist:
+
+- Choose the recommended highest-priority item automatically.
+
+Only ask the user when the decision is a business, branding, legal, content strategy, SEO strategy, or other user-owned decision.
+
+Routine implementation decisions should be made autonomously.
+
+---
+
+## Sprint Workflow
+
+For every sprint:
+
+1. Read the complete target page.
+2. Run the required audit.
+3. Apply fixes.
+4. Perform a visual review.
+5. Re-run the audit.
+6. Commit the page.
+7. Push.
+8. Update PROJECT-STATUS.md and CURRENT-SPRINT.md.
+9. Report completed work.
+
+One page = one commit.
+
+---
+
+## Session Management
+
+Prefer short implementation sessions.
+
+When a sprint is completed, recommend starting a new session instead of continuing indefinitely.
+
+Resume work by reading:
+
+- PROJECT-ENTRY.md
+- PROJECT-STATUS.md
+- CURRENT-SPRINT.md
+- DECISIONS.md
+
+Then load the required skills before implementation begins.
 
 ---
 
@@ -104,7 +144,7 @@ The repository is never modified to match outdated documentation. Documentation 
 2. Determine which skills are required for the current sprint and load them with the skill tool (see **Skill Loading** above).
 3. Check `CURRENT-SPRINT.md` — is a sprint active?
    - **Yes:** implement the active sprint. Do not introduce unrelated work.
-   - **No:** select the highest-priority item from `PROJECT-STATUS.md → Open backlog` and open it as the next sprint. See **Autonomous Execution** above.
+   - **No:** select the highest-priority item from `PROJECT-STATUS.md → Open backlog` and open it as the next sprint. See **Autonomous Sprint Selection** above.
 4. If the repository state appears to conflict with `PROJECT-STATUS.md`, verify before acting. Report the conflict. Do not invent a resolution.
 
 ### Doing work
