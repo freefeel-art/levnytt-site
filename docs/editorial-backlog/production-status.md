@@ -32,7 +32,7 @@
 | 22 | Magnesium och stress | Magnesium | 70 | **Published** | `magnesium-och-stress.html` |
 | 23 | Fibrer och tarmflora (prebiotisk effekt) | Fiber | 70 | **Published** | `fibrer-tarmflora-prebiotisk.html` |
 | 24 | Billig vs dyr multivitamin | Multivitamin | 69 | **Published** | `billig-dyr-multivitamin.html` |
-| 25 | Magnesium och D-vitamin — kombination | Magnesium | 68 | **Generated** | `content/articles/magnesium-d-vitamin-kombination.html` |
+| 25 | Magnesium och D-vitamin — kombination | Magnesium | 68 | **Published** | `magnesium-d-vitamin-kombination.html` |
 
 ---
 
