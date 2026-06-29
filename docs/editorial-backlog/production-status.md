@@ -18,7 +18,7 @@
 | 8 | Probiotika för magen — IBS, uppblåsthet, förstoppning | Probiotics | 86 | **Published** | `probiotika-for-magen-ibs.html` |
 | 9 | Multivitamin för kvinnor | Multivitamin | 85 | **Published** | `multivitamin-for-kvinnor.html` |
 | 10 | D-vitaminbrist i Sverige | Vitamin D | 85 | **Published** | `d-vitaminbrist-sverige.html` |
-| 11 | Fibrer för magen — mot förstoppning | Fiber | 84 | **Generated** | `content/articles/fibrer-for-magen-forstoppning.html` |
+| 11 | Fibrer för magen — mot förstoppning | Fiber | 84 | **Published** | `fibrer-for-magen-forstoppning.html` |
 | 12 | Probiotika och prebiotika — skillnad och samband | Probiotics | 78 | **Generated** | `content/articles/probiotika-prebiotika-skillnad.html` |
 | 13 | Multivitamin för män | Multivitamin | 78 | **Generated** | `content/articles/multivitamin-for-man.html` |
 | 14 | Fibrer för viktminskning | Fiber | 77 | **Generated** | `content/articles/fibrer-for-viktminskning.html` |
