@@ -151,3 +151,16 @@
 - **Item #20 (Fiberrika livsmedel)** was originally skipped and absorbed into the portal guide. After review, it was restored as a standalone article — the focused listicle format targets specific long-tail queries ("fiberrika livsmedel", "topp 10 fiberkällor") that the portal guide cannot fully optimize for, and adds a comprehensive comparison table that strengthens the fiber content cluster.
 - **3 Session 1 portal guides** lack GSV/Pinterest meta (not part of the template at that time).
 - **Backlog is complete.** Next batch topics recommended: Zinc, CoQ10, Collagen, Immunity, Longevity.
+
+---
+
+## Publication Pipeline V1 — Additional Published Articles
+
+Articles published via Publication Agent V1.0 (2026-06-29) that were in `content/articles/` source but not originally listed as distinct batch items in the main table above:
+
+| File | Canonical URL | Notes |
+|---|---|---|
+| `varfor-tar-d-vitamin-slut-pa-ditt-magnesium.html` | `/varfor-tar-d-vitamin-slut-pa-ditt-magnesium` | Published 2026-06-29. Covers magnesium-gap Cluster 7 / vitamin-d-gap Cluster 6 (Update Existing topic). |
+| `magnesium-for-somn.html` | `/magnesium-for-somn` | Published 2026-06-29. Satellite to existing `/magnesiumglycinat-och-somn.html`. |
+| `magnesium-d-vitamin-kombination.html` | `/magnesium-d-vitamin-kombination` | Published 2026-06-29. Covers global-batch #25. |
+| `magnesiumformer-vilken-valja.html` | `/magnesiumformer-vilken-valja` | Published 2026-06-29. Covers global-batch #6 (also listed above as row 6 — Updated to Published). |
