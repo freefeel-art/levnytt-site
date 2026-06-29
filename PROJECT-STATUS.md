@@ -1,7 +1,7 @@
 # PROJECT-STATUS.md
 # LevNytt.se — Current Project Status
 
-Last updated: 2026-06-28
+Last updated: 2026-06-29
 
 See `PROJECT-ENTRY.md` for the reading order and workflow. See `DECISIONS.md` for engineering conventions.
 
@@ -26,7 +26,7 @@ See `PROJECT-ENTRY.md` for the reading order and workflow. See `DECISIONS.md` fo
 | Layer | Technology |
 |---|---|
 | Pages | Vanilla HTML5 — hand-authored `.html` files |
-| Styling | `pillar.css` (shared design system) + legacy inline `<style>` blocks on older pages |
+| Styling | `pillar.css` (shared design system) + page-specific `<style>` blocks on select pages |
 | Shared components | `nav.js`, `footer.js`, `components.js` — self-injecting IIFEs, loaded with `defer` |
 | Routing | Cloudflare Pages "Pretty URLs" + `_redirects` file |
 | SEO | Hand-maintained `sitemap.xml`, JSON-LD schemas per page |
@@ -111,7 +111,7 @@ levnytt-site/
 
 ### Tier 1: Pillar pages
 
-Highest-priority SEO pages. All pass the 13/13 audit checklist as of 2026-06-28.
+Highest-priority SEO pages. All pass the 13/13 audit checklist as of 2026-06-29.
 
 | Page | URL |
 |---|---|
@@ -181,43 +181,22 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 | Sprint 26 | `neolife-sustained-vitamin-c/` migrated to Gen 3 (8/13→13/13): same pattern as Sprint 25 | Jun 2026, `b9d14c4` |
 | Sprint 27 | `integritetspolicy.html` migrated to Gen 3 (10/13→13/13): last Gen 1 page | Jun 2026, `b5196cc` |
 | Sprint 28 | 30 Gen 2 pages: batch-added verification meta tags (google-site-verification + p:domain_verify) | Jun 2026 |
-| Sprint 14 | `neolife-kosttillskott/index.html` (hub page) migrated to Gen 3: added `defer` to `components.js`. Pre: 13/13 → Post: 13/13 | Jun 2026, `3cafa90` |
-| Sprint 15 | `neolife-pro-vitality.html` migrated to Gen 3: added verification meta tags and `components.js` with defer. Pre: 13/13 → Post: 13/13 | Jun 2026, `e97fdad` |
-| Sprint 16 | `neolife-carotenoid-complex.html` migrated to Gen 3: added verification meta tags and `components.js` with defer. Pre: 13/13 → Post: 13/13 | Jun 2026, `098139e` |
-| Sprint 17 | `neolife-omega-3-plus.html` migrated to Gen 3: added verification meta tags and `components.js` with defer. Pre: 13/13 → Post: 13/13 | Jun 2026, `46192b6` |
+| **Gen 3 Migration Complete** | All 55 public pages at Gen 3 (13/13 audit). No remaining migration backlog. Project moves to Maintenance + Feature Development. | Jun 2026 |
 
 ---
 
-## Open backlog (no active sprint)
+## Project Phase: Maintenance + Feature Development
 
-These items are documented but unscheduled. They become sprint candidates when the project owner opens a new sprint.
+The Gen 3 migration is **complete**. All 55 public pages pass 13/13 audit. Future work focuses on content expansion, feature development, and incremental polish.
 
-### 1. Future pillar pages
+### Future work candidates
 
-Pages that currently exist only as informational articles and are candidates for full pillar treatment:
-
-| Current file | Target URL |
-|---|---|
-| *(does not exist)* | `/neolife-sport/` |
-
-### 2. Gen 1 → Gen 3 page migrations
-
-All Gen 1 pages have been migrated to Gen 3 (13/13 audit compliance). No more Gen 1 pages remain.
-
-| Page | Current issues | Priority |
+| Area | Description | Priority |
 |---|---|---|
-All 10 Gen 1 pages migrated to Gen 3. All 30 Gen 2 pages updated with verification meta tags. **All pages now at Gen 3 compliance (13/13). No remaining migration backlog.**
+| Content expansion | New articles, product pages, or informational guides | Medium |
+| Product entity system | Structured product data via `content/products/` schema | Low |
+| Trailing-slash canonical cleanup | Align canonical URLs with sitemap entries | Low |
+| Performance optimization | Image optimization, lazy loading audit, Core Web Vitals | Low |
+| Accessibility improvements | Contrast checks, ARIA labels, keyboard navigation | Low |
 
-### 3. Trailing-slash canonical inconsistencies
-
-Several root-level pages have a trailing-slash canonical but a non-trailing-slash sitemap entry (and vice versa). Functionally served correctly by Cloudflare Pretty URLs but technically inconsistent. Low urgency.
-
-### 4. Product entity system
-
-Only one product entity is defined (`content/products/entity_formula_iv/sv.json`). The system is nascent with no active development.
-
----
-
-## Active sprint
-
-See `CURRENT-SPRINT.md`.
+See `CURRENT-SPRINT.md` for active sprint status.

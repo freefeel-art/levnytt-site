@@ -1,54 +1,45 @@
 # CURRENT-SPRINT.md
-# LevNytt.se — Active Sprint
+# LevNytt.se — Project Phase
 
 Last updated: 2026-06-29
 
-See `PROJECT-ENTRY.md` for workflow. See `PROJECT-STATUS.md` for the open backlog.
+---
+
+## Phase: Maintenance + Feature Development
+
+The Gen 3 migration project is **complete**.
+
+- **55/55** public pages migrated to Gen 3
+- **55/55** pages pass the 13/13 audit checklist
+- **0** remaining migration backlog items
+
+All pages now share:
+- `pillar.css` (shared design system)
+- `nav.js` / `footer.js` / `components.js` with `defer`
+- Verification meta tags (Google + Pinterest)
+- Page-specific `og:image`
+- At least 3 responsive breakpoints
+- Google Fonts (Playfair Display + Inter)
 
 ---
 
-## Sprint status
+## Future work
 
-**No active sprint.** Sprints 13–17 completed in session 2026-06-29.
+No active sprint. When a new sprint opens, candidates include:
 
----
-
-## Completed sprints this session
-
-| Sprint | Page | Fix | Commit |
-|--------|------|-----|--------|
-| 13 | `index.html` | Full Gen 1→3 migration (pillar.css, components.js, verification, og:image, breakpoints) | `7a3d7cb` |
-| 14 | `neolife-kosttillskott/index.html` | Added defer to components.js | `3cafa90` |
-| 15 | `neolife-pro-vitality.html` | Added verification meta + components.js | `e97fdad` |
-| 16 | `neolife-carotenoid-complex.html` | Added verification meta + components.js | `098139e` |
-| 17 | `neolife-omega-3-plus.html` | Added verification meta + components.js | `46192b6` |
-
----
-
-## Remaining Gen 1 pages (highest priority)
-
-| Page | Issues |
-|------|--------|
-| `neolife-historia.html` | inline `:root`, components.js without defer |
-| `neolife-vetenskap.html` | inline `:root`, components.js without defer |
-| `neolife-hallbarhet.html` | no pillar.css, inline `:root`, components.js without defer, no og:image |
-| `neolife-affarsmojlighet.html` | inline `:root`, components.js without defer |
-| `om-oss.html` | inline `:root`, missing components.js |
-| `golden-home-care.html` | inline `:root`, components.js without defer |
-| `neolife-fibre-tablets/` | no pillar.css, inline `:root`, no defer |
-| `neolife-sustained-vitamin-c/` | no pillar.css, inline `:root`, no defer |
-
----
-
-## Next action
-
-Recommended: start a new session, load `pillar-page-template` skill, and continue with `neolife-historia.html` — highest-priority remaining Gen 1 page.
+| Area | Description |
+|---|---|
+| **Content expansion** | New articles, product pages, informational guides |
+| **Product entity system** | Structured product data via `content/products/` schema |
+| **Canonical cleanup** | Align trailing-slash canonical URLs with sitemap entries |
+| **Performance** | Image optimization, lazy loading, Core Web Vitals |
+| **Accessibility** | Contrast checks, ARIA labels, keyboard navigation |
 
 ---
 
 ## Sprint template
 
-When opening a new sprint, replace the sections above with:
+When opening a new sprint, use:
 
 ```
 ## Sprint status
@@ -64,9 +55,6 @@ Active.
 ## Completion criteria
 [Specific, verifiable conditions that define "done".]
 
-## Blockers
-[Anything preventing progress, or "None".]
-
 ## Next action
-[Exactly what to do next — specific enough to act on immediately.]
+[Exactly what to do next.]
 ```
