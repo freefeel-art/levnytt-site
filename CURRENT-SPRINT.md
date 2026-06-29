@@ -1,7 +1,7 @@
 # CURRENT-SPRINT.md
 # LevNytt.se — Active Sprint
 
-Last updated: 2026-06-28
+Last updated: 2026-06-29
 
 See `PROJECT-ENTRY.md` for workflow. See `PROJECT-STATUS.md` for the open backlog.
 
@@ -9,29 +9,37 @@ See `PROJECT-ENTRY.md` for workflow. See `PROJECT-STATUS.md` for the open backlo
 
 ## Sprint status
 
-**Completed.** Sprints 9–12 — Pillar page pipeline (Elevate, UpBeet, CoQ10, Personlig vård).
+**Completed.** Sprint 13 — `index.html` (front page) migrated from Gen 1 to Gen 3.
 
 ---
 
 ## Sprint objective
 
-Upgrade the four remaining planned pillar pages from the backlog.
+Migrate `index.html` from Generation 1 (Legacy) to Generation 3 (Complete):
+inline `:root` → `pillar.css`, add `components.js` with `defer`, add
+verification meta tags, add `og:image`, add 3+ `@media` breakpoints.
 
 ---
 
 ## Tasks
 
-- [x] Sprint 9: `neolife-elevate.html` — add og:description, fix JSON-LD author, remove cost/distributor CTA
-- [x] Sprint 10: `neolife-upbeet.html` — add verification meta tags, remove cost CTA
-- [x] Sprint 11: `neolife-coq10.html` — add verification meta tags, remove cost references
-- [x] Sprint 12: `personlig-vard.html` — add author URL to JSON-LD (already well-formed)
+- [x] Add google-site-verification and p:domain_verify meta tags
+- [x] Add og:image meta tags
+- [x] Add `<link rel="stylesheet" href="/pillar.css">`
+- [x] Remove inline `:root` token block (tokens now from pillar.css)
+- [x] Add tablet `@media` breakpoint for 3+ total breakpoints
+- [x] Add `<script src="/components.js" defer>`
+- [x] Verify 13/13 audit pass (was 9/13 pre-migration)
+- [x] Commit and push
 - [x] Update PROJECT-STATUS.md
 
 ---
 
 ## Completion criteria
 
-All met. All four pages pass 13/13 audit. All cost/policy violations removed. Pillar table updated.
+All met. `index.html` passes 13/13 audit checklist. All Gen 3 requirements
+satisfied: `pillar.css`, no inline `:root`, scripts with `defer`, verification
+meta, `og:image`, Google Fonts, 3+ breakpoints, canonical, viewport.
 
 ---
 
@@ -43,7 +51,9 @@ None.
 
 ## Next action
 
-Pipeline complete. Remaining backlog: `/neolife-sport/` (page does not exist yet — requires new content creation, not migration).
+No active sprint. Recommended next sprint: `neolife-kosttillskott/index.html`
+(hub page) — last remaining hub page still at Gen 1 with inline `:root` and
+components.js without defer.
 
 ---
 

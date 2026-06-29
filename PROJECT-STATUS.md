@@ -165,6 +165,7 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 | Sprint 7 | `neolife-formula-iv` upgraded to pillar status: verification meta tags added, cost CTA violation removed | Jun 2026 |
 | Sprint 8 | `neolife-tre-en-en` upgraded to pillar status: OG/Twitter meta added, JSON-LD author fixed, breadcrumb fixed, cost violations removed | Jun 2026 |
 | Sprint 9–12 | `neolife-elevate`, `neolife-upbeet`, `neolife-coq10`, `personlig-vard` upgraded to pillar status | Jun 2026 |
+| Sprint 13 | `index.html` (front page) migrated from Gen 1 to Gen 3: `pillar.css`, no inline `:root`, `components.js` with defer, verification meta, `og:image`, 3+ breakpoints. Pre: 9/13 → Post: 13/13 | Jun 2026, `7a3d7cb` |
 
 ---
 
@@ -179,6 +180,22 @@ Pages that currently exist only as informational articles and are candidates for
 | Current file | Target URL |
 |---|---|
 | *(does not exist)* | `/neolife-sport/` |
+
+### 2. Gen 1 → Gen 3 page migrations
+
+Pages still at Gen 1 (Legacy) that need structural migration:
+
+| Page | Current issues |
+|---|---|
+| `neolife-kosttillskott/index.html` | inline `:root`, components.js without defer |
+| `neolife-historia.html` | inline `:root`, components.js without defer |
+| `neolife-vetenskap.html` | inline `:root`, components.js without defer |
+| `neolife-hallbarhet.html` | no pillar.css, inline `:root`, components.js without defer |
+| `neolife-affarsmojlighet.html` | inline `:root`, components.js without defer |
+| `om-oss.html` | inline `:root`, missing components.js |
+| `golden-home-care.html` | inline `:root`, components.js without defer |
+| `neolife-fibre-tablets/` | no pillar.css, inline `:root`, scripts without defer |
+| `neolife-sustained-vitamin-c/` | no pillar.css, inline `:root`, scripts without defer |
 
 ### 3. Trailing-slash canonical inconsistencies
 
