@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alla artiklar — kunskapsbibliotek | LevNytt</title>
+  <meta name="description" content="Bläddra bland alla evidensbaserade artiklar på LevNytt — om kosttillskott, vitaminer, mineraler, omega-3, tarmhälsa, kostfiber, direktförsäljning och mer. Filtrera efter kategori eller sök direkt.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://levnytt.se/artiklar">
+  <meta property="og:title" content="Alla artiklar — kunskapsbibliotek | LevNytt">
+  <meta property="og:description" content="42 evidensbaserade guider och konsumentartiklar om kosttillskott, vitaminer, mineraler, tarmhälsa och direktförsäljning. Sök och filtrera.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://levnytt.se/artiklar">
+  <meta property="og:site_name" content="LevNytt">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Alla artiklar | LevNytt">
+  <meta name="twitter:description" content="42 evidensbaserade guider om kosttillskott, vitaminer, mineraler och direktförsäljning.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Alla artiklar — kunskapsbibliotek",
+    "description": "Fullständigt artikelindex för LevNytt — evidensbaserade guider om kosttillskott, vitaminer, mineraler, omega-3, tarmhälsa, kostfiber, direktförsäljning och konsumentfrågor.",
+    "url": "https://levnytt.se/artiklar",
+    "publisher": {
+      "@type": "Organization",
+      "name": "LevNytt",
+      "url": "https://levnytt.se"
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Hem","item":"https://levnytt.se"},
+        {"@type":"ListItem","position":2,"name":"Alla artiklar","item":"https://levnytt.se/artiklar"}
+      ]
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark: #1B4332;
+      --green-mid: #2D6A4F;
+      --gold: #C9A84C;
+      --gold-light: #F5E6A3;
+      --cream: #FBF8F0;
+      --cream-mid: #F0EBDD;
+      --text: #1A1A1A;
+      --text-muted: #555;
+      --border: #E0D8C8;
+      --radius: 10px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--green-dark);
+      color: #fff;
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+    .page-hero-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .page-hero-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+    .page-hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-stat-l {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── CONTROLS ── */
+    .controls-bar {
+      position: sticky;
+      top: 64px;
+      z-index: 50;
+      background: rgba(251,248,240,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+    }
+    .controls-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+      max-width: 400px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      pointer-events: none;
+    }
+    #search-input {
+      width: 100%;
+      padding: 9px 12px 9px 36px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #search-input:focus { border-color: var(--green-mid); }
+    #search-input::placeholder { color: #aaa; }
+
+    .filter-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+    .chip {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+    .chip:hover { border-color: var(--green-mid); color: var(--green-dark); }
+    .chip.active {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+      color: #fff;
+    }
+
+    #results-count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      margin-left: auto;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* ── CATEGORY SECTION ── */
+    .category-section {
+      margin-bottom: 48px;
+    }
+    .category-section[data-hidden="true"] { display: none; }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--cream-mid);
+    }
+    .category-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .category-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .category-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--cream-mid);
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: auto;
+    }
+
+    /* ── ARTICLE GRID ── */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── ARTICLE CARD ── */
+    .art-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .art-card:hover {
+      border-color: var(--green-mid);
+      box-shadow: 0 4px 16px rgba(29,67,50,0.1);
+      transform: translateY(-2px);
+    }
+    .art-card[data-hidden="true"] { display: none; }
+
+    .art-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 2px;
+    }
+    .art-card-badge.portal {
+      color: var(--gold);
+    }
+    .art-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1.35;
+    }
+    .art-card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .art-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 4px;
+    }
+    .art-card-meta-sep { color: #ddd; }
+    .art-card-arrow {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      font-size: 0.85rem;
+      color: var(--gold);
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .art-card:hover .art-card-arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+
+    /* ── NO RESULTS ── */
+    #no-results {
+      display: none;
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--text-muted);
+    }
+    #no-results h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+    }
+    #no-results.visible { display: block; }
+
+    /* ── BACK TO TOP ── */
+    .back-top {
+      text-align: center;
+      padding: 24px 0 0;
+    }
+    .back-top a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--green-mid);
+      text-decoration: none;
+      padding: 8px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .back-top a:hover {
+      background: var(--cream-mid);
+      border-color: var(--green-mid);
+    }
+
+    @media (max-width: 640px) {
+      .page-hero { padding: 40px 16px 32px; }
+      .controls-bar { top: 0; padding: 12px 16px; }
+      .main { padding: 24px 16px 60px; }
+      .articles-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<script src="/nav.js" defer></script>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <span class="page-hero-label">Kunskapsbibliotek</span>
+  <h1>Alla artiklar</h1>
+  <p class="page-hero-desc">Evidensbaserade guider om kosttillskott, vitaminer, mineraler, tarmhälsa och direktförsäljning. Fakta före hype.</p>
+  <div class="page-hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-n" id="stat-total">42</span>
+      <span class="hero-stat-l">Artiklar</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-n" id="stat-cats">9</span>
+      <span class="hero-stat-l">Kategorier</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-n">5</span>
+      <span class="hero-stat-l">Portalguider</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROLS -->
+<div class="controls-bar">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg class="search-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+      <input type="search" id="search-input" placeholder="Sök artiklar…" aria-label="Sök artiklar" autocomplete="off">
+    </div>
+    <div class="filter-chips" id="filter-chips">
+      <button class="chip active" data-cat="alla">Alla</button>
+      <button class="chip" data-cat="multivitamin">Multivitamin</button>
+      <button class="chip" data-cat="mineraler">Mineraler</button>
+      <button class="chip" data-cat="vitamin-d">Vitamin D</button>
+      <button class="chip" data-cat="omega3">Omega-3</button>
+      <button class="chip" data-cat="tarmhalsa">Tarmhälsa</button>
+      <button class="chip" data-cat="kostfiber">Kostfiber</button>
+      <button class="chip" data-cat="halsa">Hälsa & Näring</button>
+      <button class="chip" data-cat="mlm">Direktförsäljning</button>
+      <button class="chip" data-cat="konsument">Konsumentguider</button>
+    </div>
+    <span id="results-count">42 artiklar</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="main" id="main-content">
+
+  <!-- ═══ CATEGORY: MULTIVITAMIN ═══ -->
+  <section class="category-section" id="cat-multivitamin" data-category="multivitamin">
+    <div class="category-header">
+      <div class="category-icon">💊</div>
+      <h2 class="category-title">Multivitamin</h2>
+      <span class="category-count" id="count-multivitamin">5 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/multivitamin-komplett-guide" class="art-card" data-cat="multivitamin" data-search="multivitamin komplett guide vitaminer mineraler behöver du cosmos jama portal">
+        <span class="art-card-badge portal">⭐ Portalguide</span>
+        <span class="art-card-title">Multivitamin — komplett guide: allt du behöver</span>
+        <span class="art-card-desc">Vad är ett multivitamin och behöver du ett? Här är vad Livsmedelsverket, COSMOS-studien och JAMA-metanalysen faktiskt visar om tillskott.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/multivitamin-for-kvinnor" class="art-card" data-cat="multivitamin" data-search="multivitamin kvinnor järn kalcium folat magnesium d-vitamin klimakteriet">
+        <span class="art-card-badge">Multivitamin</span>
+        <span class="art-card-title">Multivitamin för kvinnor — vad behöver kvinnor extra av?</span>
+        <span class="art-card-desc">Kvinnors näringsbehov skiljer sig från mäns på flera punkter. Här går vi igenom järn, kalcium, folat, magnesium och D-vitamin — och vad en bra multivitamin bör innehålla.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/multivitamin-for-man" class="art-card" data-cat="multivitamin" data-search="multivitamin män zink selen testosteron mäns hälsa">
+        <span class="art-card-badge">Multivitamin</span>
+        <span class="art-card-title">Multivitamin för män — vilka vitaminer behöver män?</span>
+        <span class="art-card-desc">Män har specifika näringsbehov: magnesium, zink, D-vitamin och B-vitaminer. Lär dig vilka vitaminer du som man verkligen behöver och hur du undviker vanliga brister.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>7 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/multivitamin-for-barn" class="art-card" data-cat="multivitamin" data-search="multivitamin barn föräldrar d-vitamin järn omega-3 barn kosttillskott">
+        <span class="art-card-badge">Multivitamin</span>
+        <span class="art-card-title">Multivitamin för barn — behöver barn kosttillskott?</span>
+        <span class="art-card-desc">Behöver barn multivitamin? Vi går igenom näringsbehov, D-vitamin, järn, omega-3 och när kosttillskott kan vara motiverat för barn.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>7 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/multivitamin-kvinnor-over-40" class="art-card" data-cat="multivitamin" data-search="multivitamin kvinnor över 40 evidens kliniska studier klimakteriet">
+        <span class="art-card-badge">Multivitamin</span>
+        <span class="art-card-title">Multivitamin för kvinnor över 40 – vad säger forskningen?</span>
+        <span class="art-card-desc">Multivitamin för kvinnor över 40: vilka näringsämnen förändras med åldern, vad visar kliniska studier och vad bör du titta efter? Evidensbaserad genomgång.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY: VITAMIN D ═══ -->
+  <section class="category-section" id="cat-vitamin-d" data-category="vitamin-d">
+    <div class="category-header">
+      <div class="category-icon">☀️</div>
+      <h2 class="category-title">Vitamin D</h2>
+      <span class="category-count" id="count-vitamin-d">6 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/vitamin-d-komplett-guide" class="art-card" data-cat="vitamin-d" data-search="vitamin d komplett guide dosering brist sol forskning tillskott portal">
+        <span class="art-card-badge portal">⭐ Portalguide</span>
+        <span class="art-card-title">Vitamin D — komplett guide: allt du behöver veta</span>
+        <span class="art-card-desc">Vad är vitamin D och varför behöver kroppen det? Komplett guide om D-vitamin — dosering, källor, brist, forskning och hur du väljer rätt tillskott.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/d-vitamin-dosering-per-dag" class="art-card" data-cat="vitamin-d" data-search="d-vitamin dosering per dag livsmedelsverket mcg ie rekommendation">
+        <span class="art-card-badge">Vitamin D</span>
+        <span class="art-card-title">D-vitamin dosering per dag — vad rekommenderar Livsmedelsverket?</span>
+        <span class="art-card-desc">Hur mycket D-vitamin per dag behöver du? Här går vi igenom rekommenderat dagligt intag, övre tolerabel nivå och vad svenska myndigheter säger.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>7 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/d-vitaminbrist-sverige" class="art-card" data-cat="vitamin-d" data-search="d-vitaminbrist sverige vinter brist vanligt riskgrupper">
+        <span class="art-card-badge">Vitamin D</span>
+        <span class="art-card-title">D-vitaminbrist i Sverige — hur vanligt är det?</span>
+        <span class="art-card-desc">D-vitaminbrist är vanligare i Sverige än många tror. Här går vi igenom hur utbredd bristen är, vilka som drabbas och vad du kan göra åt det.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/d-vitamin-och-solen" class="art-card" data-cat="vitamin-d" data-search="d-vitamin sol solljus uv-index solskydd produktion sverige">
+        <span class="art-card-badge">Vitamin D</span>
+        <span class="art-card-title">D-vitamin och solen — hur mycket sol behövs i Sverige?</span>
+        <span class="art-card-desc">Hur mycket sol behövs i Sverige för D-vitaminproduktion? Lär dig om solvinkel, UV-index, årstider och hur du undviker brist oavsett breddgrad.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/d-vitamin-immunforsvaret" class="art-card" data-cat="vitamin-d" data-search="d-vitamin immunförsvar forskning förkylning influensa infektion">
+        <span class="art-card-badge">Vitamin D</span>
+        <span class="art-card-title">D-vitamin för immunförsvaret — vad säger forskningen?</span>
+        <span class="art-card-desc">D-vitamin är avgörande för immunförsvaret. Här går vi igenom vad forskningen säger om D-vitaminets roll, dosering för immunitet och kopplingen till infektioner.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/varfor-tar-d-vitamin-slut-pa-ditt-magnesium" class="art-card" data-cat="vitamin-d" data-search="d-vitamin magnesium kombination aktivering enzym kalmag">
+        <span class="art-card-badge">Vitamin D × Mineraler</span>
+        <span class="art-card-title">Varför tar D-vitamin slut på magnesium?</span>
+        <span class="art-card-desc">Varför tar D-vitamin slut på magnesium? Hög dos D-vitamin aktiveras via enzymsteg som kräver magnesium — så funkar sambandet och vad du kan göra.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>10 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY: MINERALER ═══ -->
+  <section class="category-section" id="cat-mineraler" data-category="mineraler">
+    <div class="category-header">
+      <div class="category-icon">🪨</div>
+      <h2 class="category-title">Mineraler</h2>
+      <span class="category-count" id="count-mineraler">8 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/magnesium-komplett-guide" class="art-card" data-cat="mineraler" data-search="magnesium komplett guide former dosering fördelar stressmagnesium portal">
+        <span class="art-card-badge portal">⭐ Portalguide</span>
+        <span class="art-card-title">Magnesium — komplett evidensbaserad guide</span>
+        <span class="art-card-desc">Vad är magnesium och varför behöver kroppen det? Hela guiden om former, dosering, forskning och hur du väljer rätt magnesiumtillskott.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/magnesiumformer-vilken-valja" class="art-card" data-cat="mineraler" data-search="magnesiumformer glycinat citrat malat treonat oxid vilken form bäst absorption">
+        <span class="art-card-badge">Mineraler</span>
+        <span class="art-card-title">Magnesiumformer — vilken ska man välja?</span>
+        <span class="art-card-desc">Glycinat, citrat, malat, treonat eller oxid — så skiljer de sig åt i upptag, effekt och pris enligt forskningen. Komplett jämförelseguide.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>10 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/magnesium-for-somn" class="art-card" data-cat="mineraler" data-search="magnesium sömn sömnkvalitet gaba melatonin stresshormoner">
+        <span class="art-card-badge">Mineraler</span>
+        <span class="art-card-title">Magnesium för sömn — hjälper magnesium dig att sova bättre?</span>
+        <span class="art-card-desc">Forskningen visar att magnesium kan påverka sömnkvalitet via GABA-receptorer, melatoninproduktion och stresshormoner. Vad studierna faktiskt säger.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>11 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/magnesiumglycinat-och-somn" class="art-card" data-cat="mineraler" data-search="magnesiumglycinat sömn kliniska studier mekanism tier 1 evidens">
+        <span class="art-card-badge">Mineraler</span>
+        <span class="art-card-title">Magnesiumglycinat och sömn — vad säger forskningen?</span>
+        <span class="art-card-desc">Evidensbaserad genomgång av magnesiumglycinat och sömn: vad visar kliniska studier, hur fungerar mekanismen och vad bör du tänka på?</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/magnesiumbrist-symptom-tester" class="art-card" data-cat="mineraler" data-search="magnesiumbrist symptom tester muskelkramper trötthet ångest sömnproblem rbc blodprov">
+        <span class="art-card-badge">Mineraler</span>
+        <span class="art-card-title">Magnesiumbrist — symptom och tester</span>
+        <span class="art-card-desc">Magnesiumbrist ger symptom som muskelkramper, trötthet, ångest och sömnproblem. Så vet du om du har brist — från blodprov till RBC-test.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>11 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/magnesium-och-stress" class="art-card" data-cat="mineraler" data-search="magnesium stress hpa-axeln kortisol gaba ångest lugnande">
+        <span class="art-card-badge">Mineraler</span>
+        <span class="art-card-title">Magnesium och stress — kan magnesium minska stress?</span>
+        <span class="art-card-desc">Forskningen visar att magnesium kan påverka stressresponsen via HPA-axeln, kortisolreglering och GABA-systemet. Evidensgenomgång med studier.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/magnesium-d-vitamin-kombination" class="art-card" data-cat="mineraler" data-search="magnesium d-vitamin kombination aktivering enzym forskning kalmag plus">
+        <span class="art-card-badge">Mineraler × Vitamin D</span>
+        <span class="art-card-title">Magnesium och D-vitamin — varför de fungerar bäst tillsammans</span>
+        <span class="art-card-desc">Forskning visar att magnesium är nödvändigt för D-vitaminaktivering och att kombinationen ger bättre resultat än vardera ämnet ensamt.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/vad-ar-vitamin-b12" class="art-card" data-cat="mineraler" data-search="vitamin b12 kobalamin nervsystem röda blodkroppar absorption brist b12-former">
+        <span class="art-card-badge">Vitaminer & Mineraler</span>
+        <span class="art-card-title">Vad är vitamin B12 — och varför räcker inte kosten?</span>
+        <span class="art-card-desc">Kobalamin behövs för nervsystem och röda blodkroppar — men kroppen kan ibland inte ta upp det. Lär dig om absorption, brist och B12-former.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY: OMEGA-3 ═══ -->
+  <section class="category-section" id="cat-omega3" data-category="omega3">
+    <div class="category-header">
+      <div class="category-icon">🐟</div>
+      <h2 class="category-title">Omega-3</h2>
+      <span class="category-count" id="count-omega3">4 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/ala-vs-epa-vs-dha" class="art-card" data-cat="omega3" data-search="ala epa dha omega-3 växtomega fisk konvertering linfrö isotopstudie">
+        <span class="art-card-badge">Omega-3</span>
+        <span class="art-card-title">ALA vs EPA vs DHA — varför kan inte växtomega-3 ersätta fisk?</span>
+        <span class="art-card-desc">ALA från linfrön konverteras till EPA med 0–8% och DHA med under 4%. Vi undersöker varför omega-3-källan spelar roll och vad isotopstudierna visar.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>10 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/varfor-fiskolja-inte-ar-likvardigt" class="art-card" data-cat="omega3" data-search="fiskolja triglycerid etylester omega-3 kvalitet absorption ifos">
+        <span class="art-card-badge">Omega-3</span>
+        <span class="art-card-title">Varför fiskolja inte är likvärdigt — triglycerid vs etylester</span>
+        <span class="art-card-desc">Naturlig triglyceridform absorberas 70% bättre än etylesterform. De 8 omega-3-fettsyrorna förklarade. Varför fiskoljetillskott skiljer sig kraftigt i kvalitet.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/karotenoid-tillskott-vs-mat" class="art-card" data-cat="omega3" data-search="karotenoider betakaroten syntetisk helfodskarotenoider caret cancer rökare">
+        <span class="art-card-badge">Fetter & Karotenoider</span>
+        <span class="art-card-title">Karotenoider från mat eller tillskott — spelar källan roll?</span>
+        <span class="art-card-desc">Syntetiskt betakaroten och helfodskarotenoider beter sig olika. CARET visade ökad cancerrisk hos rökare vid megadoser. Vi undersöker forskningen.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/zeaxantin-immunforsvar-2025" class="art-card" data-cat="omega3" data-search="zeaxantin ögon macula immunförsvar evidens 2025 lutein">
+        <span class="art-card-badge">Karotenoider & Ögon</span>
+        <span class="art-card-title">Vad är zeaxantin? Forskning om ögon och immunförsvar</span>
+        <span class="art-card-desc">Zeaxantin skyddar ögats macula och ny forskning antyder immuneffekter. Vi undersöker evidensnivån — vad vet vi, och vad återstår att bevisa?</span>
+        <div class="art-card-meta"><span>2025</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY: TARMHÄLSA ═══ -->
+  <section class="category-section" id="cat-tarmhalsa" data-category="tarmhalsa">
+    <div class="category-header">
+      <div class="category-icon">🦠</div>
+      <h2 class="category-title">Tarmhälsa & Probiotika</h2>
+      <span class="category-count" id="count-tarmhalsa">5 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/probiotika-komplett-guide" class="art-card" data-cat="tarmhalsa" data-search="probiotika komplett guide tarmflora stammar ibs antibiotika prebiotika portal">
+        <span class="art-card-badge portal">⭐ Portalguide</span>
+        <span class="art-card-title">Probiotika — komplett guide: tarmflora och stammar</span>
+        <span class="art-card-desc">Vad är probiotika? Här är vad forskningen visar om effekten på IBS, antibiotikarelaterad diarré och skillnaden mot prebiotika.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/probiotika-for-magen-ibs" class="art-card" data-cat="tarmhalsa" data-search="probiotika magen ibs uppblåsthet förstoppning stammar evidens">
+        <span class="art-card-badge">Tarmhälsa</span>
+        <span class="art-card-title">Probiotika för magen — IBS, uppblåsthet, förstoppning</span>
+        <span class="art-card-desc">Hjälper probiotika mot IBS, uppblåsthet och förstoppning? Vi går igenom vad forskningen visar om specifika stammar, evidensnivåer och praktiska råd.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>10 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/probiotika-prebiotika-skillnad" class="art-card" data-cat="tarmhalsa" data-search="probiotika prebiotika skillnad synbiotika tarmhälsa samband">
+        <span class="art-card-badge">Tarmhälsa</span>
+        <span class="art-card-title">Probiotika och prebiotika — skillnad och samband</span>
+        <span class="art-card-desc">Probiotika och prebiotika — vad är skillnaden och hur samverkar de? Vi reder ut definitionerna, förklarar synbiotika och ger praktiska råd.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/probiotika-dosering-timing" class="art-card" data-cat="tarmhalsa" data-search="probiotika dosering cfu timing mat fastande mage morgon kväll">
+        <span class="art-card-badge">Tarmhälsa</span>
+        <span class="art-card-title">Probiotika dosering och timing — hur mycket CFU behövs?</span>
+        <span class="art-card-desc">Hur mycket CFU probiotika behöver du egentligen? Forskning om dosering, timing, mat-timing och hur länge du bör ta probiotika.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/vad-ar-probiotika" class="art-card" data-cat="tarmhalsa" data-search="vad är probiotika efsa livsmedelsverket cochrane forskning grundläggande">
+        <span class="art-card-badge">Tarmhälsa</span>
+        <span class="art-card-title">Vad är probiotika — och vad säger forskningen egentligen?</span>
+        <span class="art-card-desc">Ordet probiotika får inte ens stå på en förpackning i Sverige. Vi går igenom vad EFSA, Livsmedelsverket och Cochrane faktiskt säger om probiotika.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>7 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY: KOSTFIBER ═══ -->
+  <section class="category-section" id="cat-kostfiber" data-category="kostfiber">
+    <div class="category-header">
+      <div class="category-icon">🌾</div>
+      <h2 class="category-title">Kostfiber</h2>
+      <span class="category-count" id="count-kostfiber">6 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/kostfiber-komplett-guide" class="art-card" data-cat="kostfiber" data-search="kostfiber komplett guide löslig olöslig fiberrika livsmedel rekommenderat intag portal">
+        <span class="art-card-badge portal">⭐ Portalguide</span>
+        <span class="art-card-title">Kostfiber — komplett guide: allt du behöver veta</span>
+        <span class="art-card-desc">Vad är kostfiber och varför behöver du det? Hela guiden om löslig och olöslig fiber, rekommenderat intag, fiberrika livsmedel och forskningen bakom.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/fibrer-for-magen-forstoppning" class="art-card" data-cat="kostfiber" data-search="fibrer magen förstoppning löslig olöslig psyllium kostfiber">
+        <span class="art-card-badge">Kostfiber</span>
+        <span class="art-card-title">Fibrer för magen — hjälper fiber mot förstoppning?</span>
+        <span class="art-card-desc">Fibrer för magen: löslig och olöslig fiber mot förstoppning. Forskning, dosering, matkällor och kosttillskott för en regelbunden mage.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/fibrer-for-viktminskning" class="art-card" data-cat="kostfiber" data-search="fibrer viktminskning mättnad blodsocker kaloriintag tarmflora">
+        <span class="art-card-badge">Kostfiber</span>
+        <span class="art-card-title">Fibrer för viktminskning — hjälper fiber dig att gå ner i vikt?</span>
+        <span class="art-card-desc">Kan fibrer hjälpa dig att gå ner i vikt? Lär dig hur kostfiber påverkar mättnad, blodsocker, kaloriintag och tarmflora.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/fiberrika-livsmedel" class="art-card" data-cat="kostfiber" data-search="fiberrika livsmedel mat fiberkällor 20 bästa jämförelsetabell öka fiberintaget">
+        <span class="art-card-badge">Kostfiber</span>
+        <span class="art-card-title">Fiberrika livsmedel — 20 bästa källorna och hur du äter mer</span>
+        <span class="art-card-desc">Vilka livsmedel har mest fibrer? Rankad lista med 20 fiberrika livsmedel, jämförelsetabell, portionsstorlekar och tips för att öka fiberintaget.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/fibrer-tarmflora-prebiotisk" class="art-card" data-cat="kostfiber" data-search="fibrer tarmflora prebiotisk effekt scfa tarmbakterier tarmhälsa">
+        <span class="art-card-badge">Kostfiber × Tarmhälsa</span>
+        <span class="art-card-title">Fibrer och tarmflora — den prebiotiska effekten</span>
+        <span class="art-card-desc">Fibrer som prebiotika — hur påverkar kostfiber tarmfloran? Lär dig om prebiotiska fibrer, SCFA och hur du stödjer din tarmhälsa med rätt fibrer.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/vad-ar-kostfiber" class="art-card" data-cat="kostfiber" data-search="vad är kostfiber källa mat tillskott fibertillskott forskning grundläggande">
+        <span class="art-card-badge">Kostfiber</span>
+        <span class="art-card-title">Vad är kostfiber — och varför spelar källan roll?</span>
+        <span class="art-card-desc">Svenskar äter i snitt hälften av rekommenderat fiberintag. Men källan till fibret — mat eller tillskott — påverkar mer än bara mängden.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>7 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY: HÄLSA & NÄRING ═══ -->
+  <section class="category-section" id="cat-halsa" data-category="halsa">
+    <div class="category-header">
+      <div class="category-icon">🌿</div>
+      <h2 class="category-title">Hälsa & Näring</h2>
+      <span class="category-count" id="count-halsa">7 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/billig-dyr-multivitamin" class="art-card" data-cat="halsa" data-search="billig dyr multivitamin prisjämförelse råvara biotillgänglighet konsumentguide">
+        <span class="art-card-badge">Konsumentguide</span>
+        <span class="art-card-title">Billig vs dyr multivitamin — vad får du för pengarna?</span>
+        <span class="art-card-desc">Jämför billiga och dyra multivitamin — råvarukvalitet, biotillgänglighet, additiv och vad du faktiskt får för pengarna.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>11 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/fytosteroler-cellmembran" class="art-card" data-cat="halsa" data-search="fytosteroler växtsteroler cellmembran kolesterol ldl evidens">
+        <span class="art-card-badge">Näringsforskning</span>
+        <span class="art-card-title">Vad är fytosteroler? Cellmembran, kolesterol och evidens</span>
+        <span class="art-card-desc">Fytosteroler är växtbaserade steroler som liknar kolesterol strukturellt. Vad gör de i cellmembranet och hur påverkar de LDL-kolesterol?</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/vaxtbaserade-steroler-dagligen" class="art-card" data-cat="halsa" data-search="växtsteroler 2g dagligen efsa ldl kolesterol kosten räcker inte">
+        <span class="art-card-badge">Näringsforskning</span>
+        <span class="art-card-title">2 g växtsteroler dagligen — varför räcker inte kosten?</span>
+        <span class="art-card-desc">EFSA godkände att 2g växtsteroler dagligen sänker LDL-kolesterol 7–10%. Det är omöjligt via kosten ensam. Vi undersöker varför och vad forskningen säger.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/viktuppgang-klimakteriet" class="art-card" data-cat="halsa" data-search="viktuppgång klimakteriet östrogenbrist kortisol fettdistribution kost glp-1">
+        <span class="art-card-badge">Hälsa & Livsstil</span>
+        <span class="art-card-title">Viktkontroll i klimakteriet — hormonella mekanismer och kostansatser</span>
+        <span class="art-card-desc">Viktuppgång i klimakteriet drivs av östrogenbrist, kortisol och förändrad fettdistribution. Evidensbaserade kostansatser utan GLP-1.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>11 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/ekologisk-stadning-greenwashing" class="art-card" data-cat="halsa" data-search="greenwashing städprodukter ekologisk miljövänlig eu-lagstiftning tensidkemi">
+        <span class="art-card-badge">Konsumentguide</span>
+        <span class="art-card-title">Greenwashing i städprodukter — hur känner du igen det?</span>
+        <span class="art-card-desc">Ord som ekologisk och miljövänlig på städprodukter är odefinierade. Vi undersöker vad EU-lagstiftning och tensidkemi faktiskt innebär för konsumenten.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/finns-det-billigare-alternativ" class="art-card" data-cat="halsa" data-search="billigare alternativ kostnad per användning koncentrat refill kalkylator">
+        <span class="art-card-badge">Konsumentkalkyl</span>
+        <span class="art-card-title">Finns det billigare alternativ? Räkna på verklig kostnad</span>
+        <span class="art-card-desc">Ett lågt inköpspris är inte alltid samma sak som låg kostnad per användning. Räkna ut ditt verkliga pris och se när ett medlemskap lönar sig.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>Interaktiv kalkyl</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/zeaxantin-immunforsvar-2025" class="art-card" data-cat="halsa" data-search="zeaxantin lutein ögon immunförsvar karotenoid macula">
+        <span class="art-card-badge">Hälsoforskning</span>
+        <span class="art-card-title">Vad är zeaxantin? Forskning om ögon och immunförsvar</span>
+        <span class="art-card-desc">Zeaxantin skyddar ögats macula och ny forskning antyder immuneffekter. Vi undersöker evidensnivån — vad vet vi, och vad återstår att bevisa?</span>
+        <div class="art-card-meta"><span>2025</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY: DIREKTFÖRSÄLJNING & MLM ═══ -->
+  <section class="category-section" id="cat-mlm" data-category="mlm">
+    <div class="category-header">
+      <div class="category-icon">🤝</div>
+      <h2 class="category-title">Direktförsäljning & MLM</h2>
+      <span class="category-count" id="count-mlm">3 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/direktforsaljning-fakta" class="art-card" data-cat="mlm" data-search="direktförsäljning pyramidspel juridisk skillnad ftc amway 1979 wfdsa neolife">
+        <span class="art-card-badge">MLM & Direktförsäljning</span>
+        <span class="art-card-title">Direktförsäljning vs pyramidspel — den juridiska skillnaden</span>
+        <span class="art-card-desc">MLM och direktförsäljning är legala affärsmodeller. Vi undersöker FTC-standard, Amway-avgörandet 1979 och hur du känner igen skillnaden mot pyramidspel.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>12 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/hur-fungerar-natverksmarknadsforing-egentligen" class="art-card" data-cat="mlm" data-search="nätverksmarknadsföring hur fungerar ftc statistik inkomst kompensation">
+        <span class="art-card-badge">MLM & Direktförsäljning</span>
+        <span class="art-card-title">Hur fungerar nätverksmarknadsföring? Fakta och statistik</span>
+        <span class="art-card-desc">MLM-bolagen lovar inkomst och frihet. FTC:s analys av 70 bolag: 79% tjänar ingenting. Här är mekanismen och siffrorna bakom nätverksmarknadsföring.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>11 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/billig-dyr-multivitamin" class="art-card" data-cat="mlm" data-search="mlm kosttillskott pris kvalitet jämförelse butik apotek">
+        <span class="art-card-badge">Konsumentguide</span>
+        <span class="art-card-title">Billig vs dyr multivitamin — prisjämförelse och råvarukvalitet</span>
+        <span class="art-card-desc">Jämför billiga och dyra multivitamin — råvarukvalitet, biotillgänglighet, additiv och vad du faktiskt får för pengarna. Relevant för MLM-kosttillskott.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>11 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY: KONSUMENTGUIDER ═══ -->
+  <section class="category-section" id="cat-konsument" data-category="konsument">
+    <div class="category-header">
+      <div class="category-icon">🔍</div>
+      <h2 class="category-title">Konsumentguider & Forskning</h2>
+      <span class="category-count" id="count-konsument">5 artiklar</span>
+    </div>
+    <div class="articles-grid">
+
+      <a href="/varfor-fiskolja-inte-ar-likvardigt" class="art-card" data-cat="konsument" data-search="fiskolja likvärdigt konsumentguide kvalitet omega-3 tillskott">
+        <span class="art-card-badge">Konsumentguide</span>
+        <span class="art-card-title">Varför fiskolja inte är likvärdigt — vad du inte ser på etiketten</span>
+        <span class="art-card-desc">Naturlig triglyceridform absorberas 70% bättre än etylesterform. Allt du behöver veta för att köpa rätt omega-3-tillskott.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/billig-dyr-multivitamin" class="art-card" data-cat="konsument" data-search="billig dyr multivitamin konsument råvara biotillgänglighet additiv">
+        <span class="art-card-badge">Konsumentguide</span>
+        <span class="art-card-title">Billig vs dyr multivitamin — vad får du för pengarna?</span>
+        <span class="art-card-desc">Jämför billiga och dyra multivitamin — råvarukvalitet, biotillgänglighet, additiv och vad du faktiskt får för pengarna. Informationsrik konsumentguide.</span>
+        <div class="art-card-meta"><span>29 juni 2026</span><span class="art-card-meta-sep">·</span><span>11 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/finns-det-billigare-alternativ" class="art-card" data-cat="konsument" data-search="billigare alternativ pris per dos kalkylator verklig kostnad">
+        <span class="art-card-badge">Konsumentkalkyl</span>
+        <span class="art-card-title">Finns det billigare alternativ? Räkna på verklig kostnad</span>
+        <span class="art-card-desc">Ett lågt inköpspris är inte alltid samma sak som låg kostnad per användning. Räkna ut ditt verkliga pris och se när ett medlemskap lönar sig.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>Interaktiv</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/ekologisk-stadning-greenwashing" class="art-card" data-cat="konsument" data-search="greenwashing städprodukter konsumentskydd eu-lagstiftning etiketter">
+        <span class="art-card-badge">Konsumentguide</span>
+        <span class="art-card-title">Greenwashing i städprodukter — hur känner du igen det?</span>
+        <span class="art-card-desc">Ord som ekologisk och miljövänlig på städprodukter är odefinierade. Vi undersöker vad EU-lagstiftning och tensidkemi faktiskt innebär.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>8 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+      <a href="/karotenoid-tillskott-vs-mat" class="art-card" data-cat="konsument" data-search="karotenoider tillskott mat konsumentguide evidens cancer caret">
+        <span class="art-card-badge">Konsumentguide</span>
+        <span class="art-card-title">Karotenoider från mat eller tillskott — spelar källan roll?</span>
+        <span class="art-card-desc">Syntetiskt betakaroten och helfodskarotenoider beter sig olika. CARET visade ökad cancerrisk hos rökare. Vi undersöker forskningen.</span>
+        <div class="art-card-meta"><span>2026</span><span class="art-card-meta-sep">·</span><span>9 min</span></div>
+        <span class="art-card-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- NO RESULTS MESSAGE -->
+  <div id="no-results">
+    <h3>Inga artiklar hittades</h3>
+    <p>Prova ett annat sökord eller välj en annan kategori.</p>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <div class="back-top">
+    <a href="#top">↑ Tillbaka till toppen</a>
+  </div>
+
+</main>
+
+<script src="/footer.js" defer></script>
+
+<script>
+// ── ARTICLE INDEX CONTROLLER ──────────────────────────────────────
+(function() {
+  var searchInput = document.getElementById('search-input');
+  var chips = document.querySelectorAll('.chip');
+  var cards = document.querySelectorAll('.art-card');
+  var sections = document.querySelectorAll('.category-section');
+  var noResults = document.getElementById('no-results');
+  var resultsCount = document.getElementById('results-count');
+
+  var activeCategory = 'alla';
+  var searchTerm = '';
+
+  function normalize(str) {
+    return str.toLowerCase()
+      .replace(/[åä]/g, 'a')
+      .replace(/ö/g, 'o')
+      .replace(/é/g, 'e');
+  }
+
+  function applyFilters() {
+    var visibleCount = 0;
+    var visibleByCat = {};
+
+    cards.forEach(function(card) {
+      var catMatch = (activeCategory === 'alla') || (card.dataset.cat === activeCategory);
+      var searchData = normalize((card.dataset.search || '') + ' ' + normalize(card.textContent));
+      var searchMatch = !searchTerm || searchData.indexOf(normalize(searchTerm)) !== -1;
+      var show = catMatch && searchMatch;
+      card.dataset.hidden = show ? 'false' : 'true';
+      if (show) {
+        visibleCount++;
+        visibleByCat[card.dataset.cat] = (visibleByCat[card.dataset.cat] || 0) + 1;
+      }
+    });
+
+    // Show/hide sections
+    sections.forEach(function(section) {
+      var cat = section.dataset.category;
+      var hasVisible = false;
+      section.querySelectorAll('.art-card').forEach(function(c) {
+        if (c.dataset.hidden !== 'true') hasVisible = true;
+      });
+      section.dataset.hidden = hasVisible ? 'false' : 'true';
+    });
+
+    // Update count label
+    var label = visibleCount === 1 ? '1 artikel' : visibleCount + ' artiklar';
+    resultsCount.textContent = label;
+
+    // No results
+    noResults.classList.toggle('visible', visibleCount === 0);
+  }
+
+  // Search
+  searchInput.addEventListener('input', function() {
+    searchTerm = this.value.trim();
+    applyFilters();
+  });
+
+  // Category chips
+  chips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      chips.forEach(function(c) { c.classList.remove('active'); });
+      this.classList.add('active');
+      activeCategory = this.dataset.cat;
+      applyFilters();
+    });
+  });
+
+  // Initial state
+  applyFilters();
+})();
+</script>
+
+</body>
+</html>

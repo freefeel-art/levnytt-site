@@ -52,6 +52,7 @@
     <div class="lnav-links" id="lnavLinks">
       <a href="/"${isActive('/')}>Hem</a>
       <a href="/om-oss"${isActive('/om-oss')}>Om oss</a>
+      <a href="/artiklar"${isActive('/artiklar')}>Artiklar</a>
 
       <a href="/neolife-historia/"${isActive('/neolife-historia/')}>Historia</a>
       <a href="/neolife-vetenskap/"${isActive('/neolife-vetenskap/')}>Vetenskap</a>

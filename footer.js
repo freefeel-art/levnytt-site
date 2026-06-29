@@ -44,6 +44,7 @@
         <a href="https://levnytt.se/neolife-carotenoid-complex">Carotenoid Complex</a>
         <a href="https://levnytt.se/neolife-omega-3-plus">Omega-3 Plus</a>
         <a href="https://levnytt.se/om-oss">Om Oss</a>
+        <a href="https://levnytt.se/artiklar">Alla artiklar</a>
         <a href="https://levnytt.se/den-fundersamma-mannen">Den Fundersamma Mannen</a>
         <a href="https://levnytt.se/var-metod">Vår Metod</a>
         <a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a>
