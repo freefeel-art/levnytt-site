@@ -20,7 +20,7 @@
 | 10 | D-vitaminbrist i Sverige | Vitamin D | 85 | **Published** | `d-vitaminbrist-sverige.html` |
 | 11 | Fibrer för magen — mot förstoppning | Fiber | 84 | **Published** | `fibrer-for-magen-forstoppning.html` |
 | 12 | Probiotika och prebiotika — skillnad och samband | Probiotics | 78 | **Published** | `probiotika-prebiotika-skillnad.html` |
-| 13 | Multivitamin för män | Multivitamin | 78 | **Generated** | `content/articles/multivitamin-for-man.html` |
+| 13 | Multivitamin för män | Multivitamin | 78 | **Published** | `multivitamin-for-man.html` |
 | 14 | Fibrer för viktminskning | Fiber | 77 | **Generated** | `content/articles/fibrer-for-viktminskning.html` |
 | 15 | Magnesium för sömn | Magnesium | 76 | **Generated** | `content/articles/magnesium-for-somn.html` |
 | 16 | Magnesiumbrist — symptom, tester | Magnesium | 74 | **Generated** | `content/articles/magnesiumbrist-symptom-tester.html` |
