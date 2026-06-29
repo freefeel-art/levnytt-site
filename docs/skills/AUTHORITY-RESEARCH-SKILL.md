@@ -56,11 +56,54 @@ The skill prioritizes **evidence quality over popularity**.
 
 Sources are evaluated in tiers. Work from the top down. Use lower tiers only when higher-tier evidence is unavailable or to understand perception gaps.
 
-### Tier 1 — Primary Authorities
+**Rule:** Whenever Tier 0 exists, it must be consulted before Tier 1–4. Tier 0 is not automatically "correct," but it is always the primary historical source.
 
-**Highest priority.**
+### Tier 0 — Original Sources
 
-These sources create, enforce, or document factual reality.
+**Highest priority. First-hand evidence.**
+
+Tier 0 represents original, unmediated source material. It is the closest possible evidence to the person, organization, event, or idea being studied.
+
+| Source type | Examples |
+|---|---|
+| Original books and writings | Founder autobiographies, shareholder letters, original published works |
+| Annual shareholder letters | Berkshire Hathaway letters, company annual reports to shareholders |
+| Founder writings | Early company documents, personal correspondence, manifestos |
+| Original interviews | Recorded interviews, transcripts, first-person accounts |
+| Original speeches | Recorded seminars, keynote addresses, congressional testimony |
+| Company founding documents | Articles of incorporation, partnership agreements, early business plans |
+| Court transcripts | Full trial records, hearing transcripts, deposition records |
+| Congressional hearings | Official hearing records and testimony |
+| Patents | Original patent filings and claims |
+| Original research datasets | Raw data from studies, where available |
+| Official company archives | Internal newsletters, historical annual reports, archived websites |
+| Original videos and transcripts | First-party recordings with verified provenance |
+
+**How to use:**
+
+- Start every research project here when original material exists.
+- Verify provenance: is this genuinely from the claimed source?
+- Distinguish original claims from later reinterpretations.
+- Treat Tier 0 as the best evidence of what someone said, wrote, or did — not as proof that their claims were true.
+- Document the exact edition, date, archive URL, or recording location.
+
+**Examples for existing Authority Profiles:**
+
+- **Warren Buffett** → Berkshire Hathaway Shareholder Letters
+- **Charlie Munger** → Daily Journal annual meeting transcripts / speeches
+- **Richard Branson** → Books, original Virgin interviews
+- **Jim Rohn** → Original seminars and books
+- **Eric Worre** → *Go Pro*, Network Marketing Pro presentations
+- **Jerry Brassfield** → Original NeoLife material, speeches, interviews
+- **Carl Rehnborg** → Original Nutrilite material, where available
+
+---
+
+### Tier 1 — Government / Regulatory / Peer-reviewed
+
+**Highest-confidence interpretive and factual authorities.**
+
+These sources create, enforce, or document factual reality through independent or rigorous processes.
 
 | Source type | Examples |
 |---|---|
@@ -70,52 +113,51 @@ These sources create, enforce, or document factual reality.
 | Peer-reviewed research | PubMed, Google Scholar, institutional repositories |
 | Official legislation | EU regulation, Swedish law, Marknadsföringslagen (2008:486) |
 | Official company documentation | Annual reports, SEC filings, official policies, income disclosure statements |
-| Historical source documents | Founding documents, court transcripts, original publications |
 
 **How to use:**
 
-- Start every research project here.
+- Search Tier 1 immediately after Tier 0.
 - Download or archive the source where possible.
 - Note date, version, and jurisdiction.
 - Distinguish between a raw document and a press summary.
 
 ---
 
-### Tier 2 — Historical Industry Sources
+### Tier 2 — Industry / Company
 
-Research the development of the industry or field itself.
+**Industry-generated sources and structured historical material.**
+
+These sources document the industry's own view, history, and self-regulation. They are valuable for context but carry commercial interest.
 
 | Source type | Examples |
 |---|---|
-| Industry history | Direct selling evolution, MLM milestones, trade association archives |
+| Industry associations | WFDSA, Direct Selling Sweden, national DSAs |
+| Company histories | Official corporate histories, anniversary publications |
 | Landmark cases | Amway 1979, Herbalife 2016, major EU rulings |
-| Historical business models | Early catalog sales, door-to-door, party plan, digital direct sales |
-| Consumer protection evolution | How regulation developed in response to abuse |
+| Industry milestones | Trade association archives, historical business models |
+| Consumer protection evolution | Industry codes of ethics, self-regulatory guidelines |
 
 **How to use:**
 
-- Build timelines.
-- Identify cause-and-effect relationships.
-- Show readers how current practices emerged.
-- Avoid presentism: evaluate events in their historical context.
+- Use for industry scale, history, and self-regulation claims.
+- Cross-check industry claims against Tier 0 and Tier 1 sources.
+- Note conflicts of interest explicitly.
 
 ---
 
-### Tier 3 — Influential Industry Figures
+### Tier 3 — Expert Commentary
 
-Study individuals who have significantly influenced the field.
+**Analysis, interpretation, and influential figures.**
 
-The purpose is **understanding historical development**.
+These sources help understand how ideas developed and how experts interpret evidence. They are not proof.
 
-Examples:
-
-- Jim Rohn
-- Eric Worre
-- Richard Bliss Brooke
-- Jerry Brassfield
-- Carl Rehnborg
-- Jay Van Andel
-- Rich DeVos
+| Source type | Examples |
+|---|---|
+| Influential industry figures | Jim Rohn, Eric Worre, Richard Bliss Brooke, Jerry Brassfield, Carl Rehnborg, Jay Van Andel, Rich DeVos |
+| Business philosophers | Warren Buffett, Charlie Munger, Richard Branson, Peter Drucker |
+| Leadership thinkers | John C. Maxwell, Stephen Covey |
+| Independent analysts | Journalists, academics, consultants with disclosed expertise |
+| Biographers | Critical and sympathetic biographies |
 
 **How to use:**
 
@@ -127,9 +169,9 @@ Examples:
 
 ---
 
-### Tier 4 — Community Evidence
+### Tier 4 — Community Observations
 
-Use last. Use carefully.
+**Use last. Use carefully.**
 
 | Source type | Examples |
 |---|---|
@@ -148,7 +190,7 @@ Use last. Use carefully.
 **Rules:**
 
 - Never use community consensus as factual evidence.
-- Always verify claims against Tier 1–3 sources.
+- Always verify claims against Tier 0–3 sources.
 - Treat anecdotes as signals, not proof.
 - Note bias: communities self-select for strong opinions.
 
@@ -212,44 +254,51 @@ Examples:
 - "What does the evidence actually say about Omega-3 and heart health?"
 - "What is the documented history of NeoLife's scientific advisory board?"
 
-### Step 2 — Search Tier 1 sources
+### Step 2 — Search Tier 0 sources
+
+- Identify people, organizations, and events relevant to the topic.
+- Locate original source material: books, letters, speeches, court transcripts, patents, original videos, founding documents, official archives.
+- Verify provenance before using.
+- Document exact editions, dates, archive URLs, or recording locations.
+
+### Step 3 — Search Tier 1 sources
 
 - Identify relevant government agencies, regulators, courts, and peer-reviewed databases.
 - Collect primary documents.
 - Record URLs, archive links, publication dates, and document versions.
 
-### Step 3 — Search Tier 2 sources
+### Step 4 — Search Tier 2 sources
 
-- Build a historical timeline.
-- Identify landmark events, cases, and industry milestones.
-- Note how practice evolved in response to regulation.
+- Gather industry association reports, company histories, trade archives, and self-regulatory codes.
+- Cross-check against Tier 0 and Tier 1 sources.
+- Note commercial interests.
 
-### Step 4 — Search Tier 3 sources and Authority Profiles
+### Step 5 — Search Tier 3 sources and Authority Profiles
 
-- Identify influential figures and organizations.
+- Identify influential figures and expert commentators.
 - Check whether relevant Authority Profiles already exist in `/docs/research/authority-profiles/`.
 - If a profile exists, import its Reliability Assessment, Major Contributions, and Conflicts of Interest.
 - If no profile exists, document the authority's claims and evidence, and consider creating a placeholder profile.
 - Note conflicts of interest.
 
-### Step 5 — Search Tier 4 sources (if useful)
+### Step 6 — Search Tier 4 sources (if useful)
 
 - Mine communities for myths, objections, and recurring questions.
-- Cross-check every claim against Tier 1–3 sources.
+- Cross-check every claim against Tier 0–3 sources.
 
-### Step 6 — Evaluate evidence
+### Step 7 — Evaluate evidence
 
 For every important claim, build an Evidence Matrix entry.
 
-### Step 7 — Assess confidence
+### Step 8 — Assess confidence
 
 Assign a confidence level to every conclusion.
 
-### Step 8 — Identify article opportunities
+### Step 9 — Identify article opportunities
 
 Based on the research, suggest which facts should become articles.
 
-### Step 9 — Map internal links
+### Step 10 — Map internal links
 
 Identify existing LevNytt pages that should link to the new authority content.
 
@@ -314,6 +363,7 @@ For each myth:
 | MLM is legal in Sweden when income derives primarily from product sales | Marknadsföringslagen, FTC v. Amway, Konsumentverket guidance | Tier 1 | High | Applies to legitimate MLM; pyramid schemes remain illegal |
 | 79% of LifeWave active distributors earned nothing in 2024 | Company income disclosure statement, FTC 2024 report | Tier 1 | High | Single-company figure; not universal |
 | "Everyone can succeed in MLM" | Motivational claim by industry trainers | Tier 3 | Low / Misleading | Contradicted by income disclosure data |
+| Warren Buffett emphasized long-term business quality over short-term speculation | Berkshire Hathaway shareholder letters | Tier 0 | High | Original source; does not imply endorsement of MLM |
 
 ### 7. Contradictory Evidence
 
@@ -396,19 +446,24 @@ Every important claim in the report must be represented in the Evidence Matrix.
 |---|---|
 | Claim | A single, falsifiable statement |
 | Evidence | The specific document, study, or source supporting it |
-| Source type | Tier 1, Tier 2, Tier 3, or Tier 4 |
+| Source type | Tier 0, Tier 1, Tier 2, Tier 3, or Tier 4 |
 | Confidence | High / Moderate / Low |
 | Notes | Limitations, caveats, or contradictions |
 
 Claims without evidence are not allowed in the Key Facts section.
 
+**Tier 0 note:** When a claim is based on an original source (Tier 0), the matrix must identify the specific original document or recording. Original sources are the best evidence of what was said or done, but they do not automatically prove the truth of the claim itself.
+
+
 ---
 
 ## Research Confidence Definitions
 
+Confidence reflects the strength of evidence behind a conclusion. Tier 0 and Tier 1 sources carry the most weight. Tier 2 is useful but carries commercial or institutional interest. Tier 3 is interpretive. Tier 4 is perception only.
+
 ### High
 
-- Multiple independent Tier 1 sources support the conclusion.
+- Supported by multiple independent Tier 0 or Tier 1 sources, or one strong Tier 1 source with little contradiction.
 - Evidence is current and relevant to the target jurisdiction.
 - Little or no credible contradictory evidence exists.
 
@@ -417,7 +472,7 @@ Claims without evidence are not allowed in the Key Facts section.
 ### Moderate
 
 - Supported by Tier 1 or strong Tier 2 sources.
-- Some limitations apply: older data, narrow sample, or jurisdictional differences.
+- Some limitations apply: older data, narrow sample, jurisdictional differences, or industry source.
 - Minor contradictions exist but do not overturn the conclusion.
 
 **Example:** *"Most MLM distributors earn little or no profit."* Supported by FTC analysis of 70 companies, but percentages vary by company and year.
@@ -425,7 +480,7 @@ Claims without evidence are not allowed in the Key Facts section.
 ### Low
 
 - Limited evidence available.
-- Heavy reliance on Tier 3–4 sources.
+- Heavy reliance on Tier 3–4 sources, or significant gaps in Tier 0–1 coverage.
 - Significant contradictions or gaps remain.
 
 **Example:** *"Supplement MLMs consistently produce higher-quality products than retail brands."* Often asserted by companies, but peer-reviewed comparative data is scarce and company-funded.
@@ -496,11 +551,11 @@ Related backlog: docs/editorial-backlog/<topic-slug>-gap.md
 2. Do **not** write HTML.
 3. Do **not** create schema markup.
 4. Do **not** treat popularity, search volume, or community consensus as evidence.
-5. Do **not** rely on press releases or company blogs as Tier 1 sources.
+5. Do **not** rely on press releases or company blogs as Tier 1 sources when Tier 0 or stronger Tier 1 evidence is available.
 6. Every Key Fact must appear in the Evidence Matrix.
 7. Every conclusion must have a confidence rating with explanation.
 8. Contradictory evidence must be surfaced, not hidden.
-9. Community sources are allowed only for myth identification and must be cross-checked.
+9. Community sources are allowed only for myth identification and must be cross-checked against Tier 0–3 sources.
 10. The final report must be usable as the factual input for an Informational Article or Authority Article.
 
 ---
@@ -524,10 +579,12 @@ Related backlog: docs/editorial-backlog/<topic-slug>-gap.md
 Before closing an Authority Research report, verify:
 
 - [ ] Research question is stated in reader terms.
-- [ ] Tier 1 sources were searched first.
+- [ ] Tier 0 sources were searched first when original material exists.
+- [ ] Tier 1 sources were searched.
 - [ ] Relevant Authority Profiles were checked in `/docs/research/authority-profiles/`.
 - [ ] Historical timeline includes dates, events, and sources.
 - [ ] Every Key Fact is backed by the Evidence Matrix.
+- [ ] Evidence Matrix identifies Tier 0 material where applicable.
 - [ ] Common Myths section includes source-based corrections.
 - [ ] Contradictory Evidence is surfaced.
 - [ ] Consensus Assessment is included.
