@@ -2,7 +2,7 @@
 
 > **Status:** Active
 > **Previous Phase:** Phase 1 (Site Build — complete)
-> **Next Phase:** Phase 3 (Calculators & Interactivity)
+> **Next Phase:** Phase 3 (Automation & Intelligence)
 > **First Completed Document:** `AFFARSMOJLIGHET-2.0-MASTERPLAN.md`
 
 ---
@@ -77,7 +77,7 @@ Projects are ordered by implementation sequence. Later projects depend on earlie
 | **Dependencies** | Dynamic Product Database (needs live prices) |
 | **Estimated Complexity** | Medium (static table + JS-enhanced calculator) |
 | **Purpose** | Let visitors select products they use and see exact annual savings at distributor pricing. This is the "soft close" of the Affärsmöjlighet page — the moment the visitor internalizes the value. |
-| **Key Deliverable** | Working savings calculator on the Affärsmöjlighet page (static version first, interactive in Phase 3) |
+| **Key Deliverable** | Working savings calculator on the Affärsmöjlighet page (static version first, full interactivity in Phase 3) |
 
 ---
 
@@ -159,42 +159,174 @@ Projects are ordered by implementation sequence. Later projects depend on earlie
 
 ---
 
+### 11. AI Content Pipeline
+
+| Field | Value |
+|-------|-------|
+| **Status** | Planned |
+| **Priority** | Medium |
+| **Dependencies** | Affärsmöjlighet 2.0 content (establishes tone and structure), Product Entity System (needs product data for generation) |
+| **Estimated Complexity** | Medium (workflow definition + prompt templates + automation scripts) |
+| **Purpose** | Build a repeatable, AI-assisted content production workflow so LevNytt can scale authority content without sacrificing quality or transparency. Removes manual bottlenecks while keeping editorial control. |
+| **Key Deliverable** | Documented pipeline with prompt templates, fact-check workflow, editorial checklist, and automation scripts for internal linking, schema generation, and publishing. |
+
+**Pipeline stages:**
+
+| Stage | Description | AI Role |
+|-------|-------------|---------|
+| Research | Gather source material, competitor analysis, SERP data | Assist (gathering, summarising) |
+| Fact verification | Cross-check claims against NeoLife sources, scientific studies, and regulatory data | Assist (flagging inconsistencies) |
+| Draft generation | Produce first draft following LevNytt tone and IA patterns | Generate |
+| Editorial review | Human editor reviews, rewrites, approves | Human (final say) |
+| Internal linking automation | Scan new content against existing pages, suggest natural link placements | Assist |
+| Schema generation | Generate Article, FAQPage, HowTo, Product JSON-LD structured data | Automate |
+| Publishing workflow | Push to staging, review, schedule, deploy | Automate |
+
+**How this supports future authority content:**
+
+- Enables rapid production of informational articles without content debt
+- Keeps tone consistent across every page (no drift)
+- Automates the tedious parts (schema, internal links) so editors focus on substance
+- Creates a template system that new writers (or future team members) can follow
+- Ensures every piece of content meets Phase 2's transparency standards before it ships
+
+---
+
+### 12. Analytics & Authority Dashboard
+
+| Field | Value |
+|-------|-------|
+| **Status** | Planned |
+| **Priority** | Medium |
+| **Dependencies** | Affärsmöjlighet 2.0 live (needs baseline data), Authority Content Expansion (needs content to measure) |
+| **Estimated Complexity** | Low-Medium (GA4 + GSC setup + simple dashboard) |
+| **Purpose** | Measure whether Phase 2 actually improves authority and search visibility. Replace guesswork with data. |
+| **Key Deliverable** | Internal dashboard (markdown or lightweight HTML) showing key SEO and engagement metrics. |
+
+**Metrics tracked:**
+
+| Metric | Source | Purpose |
+|--------|--------|---------|
+| Search Impressions | Google Search Console | Are pages being discovered? |
+| Search CTR | Google Search Console | Are titles/meta descriptions working? |
+| Top Queries | Google Search Console | What is LevNytt ranking for? |
+| Top Pages | Google Search Console | Which pages drive traffic? |
+| Average Position | Google Search Console | Is authority improving over time? |
+| Page Views | Google Analytics | Are visitors engaging? |
+| Time on Page | Google Analytics | Is content holding attention? |
+| Bounce Rate | Google Analytics | Are visitors finding what they need? |
+| Scroll Depth | Google Analytics (enhanced) | Are visitors reading full pages? |
+| Internal Link Clicks | Google Analytics | Are content journeys working? |
+| Outlink Clicks (registrations) | Google Analytics | Are visitors taking action? |
+
+**Dashboard outputs:**
+- Monthly content performance report (auto-generated from GSC + GA data)
+- Authority score trend (composite of position, CTR, and engagement)
+- Top opportunity queries (pages ranking 11-20 that could reach top 10)
+- Content gap alerts (high-volume queries LevNytt doesn't target)
+
+---
+
+### 13. Video Authority Pipeline
+
+| Field | Value |
+|-------|-------|
+| **Status** | Planned |
+| **Priority** | Medium |
+| **Dependencies** | Affärsmöjlighet 2.0 content (primary source material), Authority Content Expansion (articles to adapt from) |
+| **Estimated Complexity** | Medium (script adaptation + recording + publishing workflow) |
+| **Purpose** | Expand written authority content into video assets that reach audiences on YouTube, Pinterest, and short-form platforms. Every article becomes a potential video. |
+| **Key Deliverable** | Documented article-to-video workflow + first batch of companion videos for key pages. |
+
+**Platforms:**
+
+| Platform | Content Type | Format | Purpose |
+|----------|-------------|--------|---------|
+| YouTube | Full companion videos | 4-10 min | Embed on article pages, long-form SEO |
+| Pinterest | Infographic pins, idea pins | Static + short video | Drive referral traffic, visual discovery |
+| Short-form (Shorts/Reels) | Key takeaways, quick tips | 30-60 sec | Brand awareness, younger audiences |
+
+**Article-to-video workflow:**
+
+```
+Article published
+  │
+  ▼
+Script adaptation (condense article into spoken script)
+  │
+  ▼
+Fact-check script against article source
+  │
+  ▼
+Record (talking head + screen share + B-roll)
+  │
+  ▼
+Edit + captions + thumbnail
+  │
+  ▼
+Publish to YouTube → embed on article page
+  │
+  ▼
+Repurpose clips for Shorts / Reels / Pinterest
+```
+
+**Future expansion (Phase 3+):**
+- AI-assisted narration (synthetic voiceovers for rapid video production)
+- Automated caption generation and translation
+- Dynamic video thumbnails with A/B testing
+- YouTube channel SEO optimisation
+
+---
+
 ## Dependencies
 
 ```
 Affärsmöjlighet 2.0
   │
-  ▼
-Product Entity System ─────────────────────────────┐
-  │                                                  │
-  ▼                                                  │
-Dynamic Product Database                             │
-  │                                                  │
-  ├────────────┬────────────┬────────────┐           │
-  ▼            ▼            ▼            │           │
-Besparings-   Pris per     Produkt-      │           │
-kalkylator    användning   jämförelser   │           │
-  │            │            │            │           │
-  └────────────┴────────────┘            │           │
-               ▼                         │           │
-      Interactive Decision Tools ←───────┘           │
-               │                                      │
-               ▼                                      │
-      Video Integration                               │
-               │                                      │
-               ▼                                      │
-      Internal Recommendation Engine ←────────────────┘
-               │                                      │
-               ▼                                      ▼
-      Authority Content Expansion (ongoing)
+  ├─────────────────────────────────────────────────────┐
+  ▼                                                     │
+Product Entity System                                   │
+  │                                                     │
+  ▼                                                     │
+Dynamic Product Database                                │
+  │                                                     │
+  ├────────────┬────────────┬────────────┐              │
+  ▼            ▼            ▼            │              │
+Besparings-   Pris per     Produkt-      │              │
+kalkylator    användning   jämförelser   │              │
+  │            │            │            │              │
+  └────────────┴────────────┘            │              │
+               ▼                         │              │
+      Interactive Decision Tools ←───────┘              │
+               │                                        │
+               ▼                                        │
+      Video Integration                                 │
+               │                                        │
+               ▼                                        │
+      Internal Recommendation Engine ←──────────────────┘
+               │                                        │
+               ├────────────────────┐                   │
+               ▼                    ▼                   │
+      Authority Content    AI Content Pipeline          │
+      Expansion (ongoing)  (feeds expansion)            │
+               │                    │                   │
+               └────────┬───────────┘                   │
+                        ▼                               │
+               Video Authority Pipeline                 │
+               (article → video)                        │
+                                                        │
+      Analytics & Authority Dashboard ←─────────────────┘
+      (measures everything, runs in parallel)
 ```
 
 ### Dependency Rules
 
 - **Must block:** Dynamic Product Database cannot be built before Product Entity System exists. Calculators cannot work without the database.
-- **Can run in parallel:** Video Integration and Product Entity System are independent. Authority Content Expansion can begin as soon as content patterns are established.
+- **Can run in parallel:** Video Integration and Product Entity System are independent. Authority Content Expansion can begin as soon as content patterns are established. Analytics & Authority Dashboard runs alongside all other projects.
 - **Soft dependency (content, not code):** Interactive Decision Tools needs calculator content to exist, but the JavaScript layer can be developed in parallel with the data layer using mock data.
 - **Cumulative dependency:** Internal Recommendation Engine becomes more valuable as more content exists. Build it early (architecture) but it reaches full value late (content volume).
+- **Feeder dependency:** AI Content Pipeline feeds Authority Content Expansion — it produces the articles that expand the library. Video Authority Pipeline consumes articles and turns them into video assets.
+- **Measurement dependency:** Analytics & Authority Dashboard has full value only after other projects ship, but data collection (GA/GSC) should begin on day one to establish baselines.
 
 ---
 
@@ -211,6 +343,9 @@ kalkylator    användning   jämförelser   │           │
 | M7 | **Multimedia layer added** | Video embedded. Page supports reading, watching, and calculating. | Project 8 |
 | M8 | **Site-wide content recommendations** | Related content appears on pillar pages and articles. Visitors naturally discover connected content. | Project 9 |
 | M9 | **Content library expanded** | 5+ new informational articles published that link to and from the Affärsmöjlighet page. | Project 10 |
+| M10 | **AI content pipeline operational** | Research, draft generation, fact-check, editorial review, internal linking, schema generation, and publishing workflow documented and tested with at least 2 articles. | Project 11 |
+| M11 | **Analytics dashboard live** | GSC + GA data flowing. Monthly report template created. Baseline metrics recorded for authority score, impressions, CTR, and top queries. | Project 12 |
+| M12 | **First video companion published** | Article-to-video workflow documented. At least one companion video published and embedded on its corresponding article page. | Project 13 |
 
 ### Milestone Schedule (Target)
 
@@ -220,8 +355,9 @@ kalkylator    användning   jämförelser   │           │
 | Month 2 | M2, M3 (Product data infrastructure) |
 | Month 3 | M4, M5 (Calculators & comparisons) |
 | Month 4 | M6, M7 (Interactive tools & video) |
-| Month 5 | M8 (Recommendation engine) |
-| Ongoing | M9 (Content expansion) |
+| Month 5 | M8, M10 (Recommendation engine + AI pipeline) |
+| Month 6 | M9, M11, M12 (Content expansion + analytics + video authority) |
+| Ongoing | M9 continued, M11 reporting cadence |
 
 ---
 
@@ -255,6 +391,26 @@ Phase 2 is complete when all of the following are true:
 - [ ] Video is embedded and functional
 - [ ] Internal recommendation engine displays relevant content on pillar pages and articles
 
+### AI & Automation
+
+- [ ] AI content pipeline documented with all 7 stages defined and tested
+- [ ] At least 2 articles produced through the AI pipeline end-to-end
+- [ ] Schema generation automated in the publishing workflow
+- [ ] Internal linking suggestions integrated into the editorial workflow
+
+### Analytics & Measurement
+
+- [ ] Google Search Console + Google Analytics tracking active on all Phase 2 pages
+- [ ] Monthly content performance report template exists
+- [ ] Baseline authority score recorded (composite of position, CTR, engagement)
+- [ ] Top opportunity queries identified (pages ranking 11-20)
+
+### Video Authority
+
+- [ ] Article-to-video workflow documented
+- [ ] At least 1 companion video published and embedded on its article page
+- [ ] Video hosted on YouTube and integrated into the page
+
 ### Platform Health
 
 - [ ] All Phase 2 pages pass Lighthouse mobile score > 70 (Performance) and > 90 (Accessibility, SEO)
@@ -265,7 +421,7 @@ Phase 2 is complete when all of the following are true:
 
 ### Definition of "Phase 2 Complete"
 
-When the success criteria checklist above is fully green, Phase 2 ends and Phase 3 (Calculators & Advanced Interactivity) begins. The Affärsmöjlighet page at this point is a complete, transparent decision-support page with static calculators and embedded multimedia — ready for the dynamic JavaScript layer that Phase 3 will add.
+When the success criteria checklist above is fully green, Phase 2 ends and Phase 3 (Automation & Intelligence) begins. The Affärsmöjlighet page at this point is a complete, transparent decision-support page with static calculators and embedded multimedia. The AI content pipeline, analytics dashboard, and video authority workflow are operational. Phase 3 will layer on interactive tools, automation, AI-assisted workflows, advanced recommendation systems, personalization, and future intelligent features.
 
 ---
 
@@ -275,7 +431,10 @@ When the success criteria checklist above is fully green, Phase 2 ends and Phase
 |----------|-------------|
 | `AFFARSMOJLIGHET-2.0-MASTERPLAN.md` | First completed Phase 2 deliverable. Defines the what. This roadmap defines the when and how. |
 | Future Affärsmöjlighet HTML page | The concrete output of Project 1. Must match the IA in the master plan. |
-| Future product data files | The concrete output of Project 2-3. Follows schema defined during implementation. |
+| Future product data files | The concrete output of Projects 2-3. Follows schema defined during implementation. |
+| Future pipeline documentation | The concrete output of Project 11. Defines the AI content workflow. |
+| Future analytics dashboard | The concrete output of Project 12. Tracks Phase 2 success metrics. |
+| Future video workflow documentation | The concrete output of Project 13. Defines the article-to-video pipeline. |
 
 ---
 
