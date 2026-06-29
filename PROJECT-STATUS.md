@@ -166,6 +166,17 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 | Sprint 8 | `neolife-tre-en-en` upgraded to pillar status: OG/Twitter meta added, JSON-LD author fixed, breadcrumb fixed, cost violations removed | Jun 2026 |
 | Sprint 9–12 | `neolife-elevate`, `neolife-upbeet`, `neolife-coq10`, `personlig-vard` upgraded to pillar status | Jun 2026 |
 | Sprint 13 | `index.html` (front page) migrated from Gen 1 to Gen 3: `pillar.css`, no inline `:root`, `components.js` with defer, verification meta, `og:image`, 3+ breakpoints. Pre: 9/13 → Post: 13/13 | Jun 2026, `7a3d7cb` |
+| Sprint 14 | `neolife-kosttillskott/index.html` migrated to Gen 3: defer added to components.js | Jun 2026, `3cafa90` |
+| Sprint 15 | `neolife-pro-vitality.html` migrated to Gen 3: verification meta + components.js | Jun 2026, `e97fdad` |
+| Sprint 16 | `neolife-carotenoid-complex.html` migrated to Gen 3: verification meta + components.js | Jun 2026, `098139e` |
+| Sprint 17 | `neolife-omega-3-plus.html` migrated to Gen 3: verification meta + components.js | Jun 2026, `46192b6` |
+| Sprint 18 | `neolife-historia.html` migrated to Gen 3: removed inline `:root`, defer to components.js | Jun 2026, `6bcb3b3` |
+| Sprint 19 | `neolife-vetenskap.html` migrated to Gen 3: removed inline `:root`, defer to components.js | Jun 2026, `fa8ce83` |
+| Sprint 20 | `neolife-hallbarhet.html` migrated to Gen 3: added pillar.css, og:image, removed inline `:root`/duplicate CSS | Jun 2026, `f970916` |
+| Sprint 21 | `neolife-affarsmojlighet.html` migrated to Gen 3: removed inline `:root`, defer, page-specific og:image | Jun 2026, `cbd21c1` |
+| Sprint 22 | `om-oss.html` migrated to Gen 3: added components.js, verification meta, page-specific og:image | Jun 2026, `24d5eac` |
+| Sprint 23 | `golden-home-care.html` migrated to Gen 3: removed inline `:root`, defer, page-specific og:image | Jun 2026, `656a050` |
+| Sprint 24 | `den-fundersamma-mannen.html` migrated to Gen 3: defer, page-specific og:image | Jun 2026, `935cf30` |
 | Sprint 14 | `neolife-kosttillskott/index.html` (hub page) migrated to Gen 3: added `defer` to `components.js`. Pre: 13/13 → Post: 13/13 | Jun 2026, `3cafa90` |
 | Sprint 15 | `neolife-pro-vitality.html` migrated to Gen 3: added verification meta tags and `components.js` with defer. Pre: 13/13 → Post: 13/13 | Jun 2026, `e97fdad` |
 | Sprint 16 | `neolife-carotenoid-complex.html` migrated to Gen 3: added verification meta tags and `components.js` with defer. Pre: 13/13 → Post: 13/13 | Jun 2026, `098139e` |
@@ -191,13 +202,6 @@ Pages still at Gen 1 (Legacy) that need structural migration:
 
 | Page | Current issues | Priority |
 |---|---|---|
-| `neolife-historia.html` | inline `:root`, components.js without defer, missing verification meta | High |
-| `neolife-vetenskap.html` | inline `:root`, components.js without defer, missing verification meta | High |
-| `neolife-hallbarhet.html` | no pillar.css, inline `:root`, components.js without defer, missing og:image | High |
-| `neolife-affarsmojlighet.html` | inline `:root`, components.js without defer, missing verification meta | High |
-| `om-oss.html` | inline `:root`, missing components.js, missing verification meta | High |
-| `golden-home-care.html` | inline `:root`, components.js without defer | High |
-| `den-fundersamma-mannen.html` | components.js without defer, missing verification meta | Medium |
 | `neolife-fibre-tablets/` | no pillar.css, inline `:root`, scripts without defer, missing og:image | High |
 | `neolife-sustained-vitamin-c/` | no pillar.css, inline `:root`, scripts without defer, missing og:image | High |
 | `integritetspolicy.html` | no pillar.css, inline `:root`, components.js without defer, missing og:image | Low |
