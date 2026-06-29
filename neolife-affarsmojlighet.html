@@ -52,9 +52,20 @@
 .savings-highlight .amount{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold-light);display:block;line-height:1.1;}
 .savings-highlight .context{font-size:14px;color:rgba(255,255,255,0.8);margin-top:4px;}
 
+.video-card{display:block;margin:28px 0;border-radius:var(--radius);overflow:hidden;background:var(--white);border:1px solid var(--border);text-decoration:none;transition:box-shadow 0.2s;}
+.video-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+.video-card-thumb{position:relative;overflow:hidden;background:var(--ink);aspect-ratio:1211/613;}
+.video-card-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s;}
+.video-card:hover .video-card-thumb img{opacity:0.85;}
+.video-card-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.video-card-play svg{width:64px;height:64px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4));transition:transform 0.2s;}
+.video-card:hover .video-card-play svg{transform:scale(1.08);}
+.video-card-caption{font-size:13px;color:var(--ink-muted);padding:12px 18px 14px;margin:0;font-family:'Inter',sans-serif;}
+
 @media(max-width:600px){
   .comparison-card{padding:18px 16px;}
   .placeholder-box{padding:24px 18px;}
+  .video-card-play svg{width:48px;height:48px;}
 }
 @media(max-width:480px){
   .comparison-card{padding:14px 12px;}
@@ -248,11 +259,19 @@
       </div>
 
       <h2>Video — hur det fungerar</h2>
-      <div class="placeholder-box">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="#999"/></svg>
-        <p class="placeholder-label">Video kommer i en framtida uppdatering</p>
-        <p>En kort genomgång av vad återförsäljarskapet innebär — planerad inom kort.</p>
-      </div>
+      <a href="https://www.zoom.us/clips/share/l61TXn2wQBe_ceOweLlSLQ" target="_blank" rel="noopener noreferrer" class="video-card">
+        <div class="video-card-thumb">
+          <img src="/neolife.png" alt="Officiell informationsvideo från NeoLife" loading="lazy">
+          <div class="video-card-play">
+            <svg viewBox="0 0 80 80" fill="none">
+              <circle cx="40" cy="40" r="40" fill="rgba(27,67,50,0.85)"/>
+              <circle cx="40" cy="40" r="36" stroke="#C9A84C" stroke-width="2" fill="none"/>
+              <polygon points="34,26 34,54 56,40" fill="#C9A84C"/>
+            </svg>
+          </div>
+        </div>
+        <p class="video-card-caption">Officiell informationsvideo från NeoLife.</p>
+      </a>
 
       <h2>Sparkalkylator — hur mycket skulle du spara?</h2>
       <div class="placeholder-box">
