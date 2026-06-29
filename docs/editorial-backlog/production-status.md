@@ -1,6 +1,6 @@
 # Production Status — All Batches
 
-**Date:** 2026-06-29
+**Date:** 2026-06-29 (updated 2026-06-29 — Publication Pipeline V1 started)
 **Source backlog:** `docs/editorial-backlog/global-batch-2026-06-29-gap.md`
 **Commits:** `5500d41` (Batch 1), pending (Batch 2)
 
@@ -13,7 +13,7 @@
 | 3 | Probiotika — komplett evidensbaserad guide | Probiotics | 91 | **Generated** | `probiotika-komplett-guide.html` |
 | 4 | Vitamin D — komplett guide | Vitamin D | 90 | **Generated** | `vitamin-d-komplett-guide.html` |
 | 5 | Kostfiber — komplett guide | Fiber | 89 | **Generated** | `kostfiber-komplett-guide.html` |
-| 6 | Magnesiumformer — vilken ska man välja? | Magnesium | 88 | **Generated** | `content/articles/magnesiumformer-vilken-valja.html` |
+| 6 | Magnesiumformer — vilken ska man välja? | Magnesium | 88 | **Published** | `magnesiumformer-vilken-valja.html` |
 | 7 | D-vitamin dosering per dag | Vitamin D | 87 | **Generated** | `content/articles/d-vitamin-dosering-per-dag.html` |
 | 8 | Probiotika för magen — IBS, uppblåsthet, förstoppning | Probiotics | 86 | **Generated** | `content/articles/probiotika-for-magen-ibs.html` |
 | 9 | Multivitamin för kvinnor | Multivitamin | 85 | **Generated** | `content/articles/multivitamin-for-kvinnor.html` |
