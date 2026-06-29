@@ -9,51 +9,40 @@ See `PROJECT-ENTRY.md` for workflow. See `PROJECT-STATUS.md` for the open backlo
 
 ## Sprint status
 
-**Completed.** Sprint 13 — `index.html` (front page) migrated from Gen 1 to Gen 3.
+**No active sprint.** Sprints 13–17 completed in session 2026-06-29.
 
 ---
 
-## Sprint objective
+## Completed sprints this session
 
-Migrate `index.html` from Generation 1 (Legacy) to Generation 3 (Complete):
-inline `:root` → `pillar.css`, add `components.js` with `defer`, add
-verification meta tags, add `og:image`, add 3+ `@media` breakpoints.
-
----
-
-## Tasks
-
-- [x] Add google-site-verification and p:domain_verify meta tags
-- [x] Add og:image meta tags
-- [x] Add `<link rel="stylesheet" href="/pillar.css">`
-- [x] Remove inline `:root` token block (tokens now from pillar.css)
-- [x] Add tablet `@media` breakpoint for 3+ total breakpoints
-- [x] Add `<script src="/components.js" defer>`
-- [x] Verify 13/13 audit pass (was 9/13 pre-migration)
-- [x] Commit and push
-- [x] Update PROJECT-STATUS.md
+| Sprint | Page | Fix | Commit |
+|--------|------|-----|--------|
+| 13 | `index.html` | Full Gen 1→3 migration (pillar.css, components.js, verification, og:image, breakpoints) | `7a3d7cb` |
+| 14 | `neolife-kosttillskott/index.html` | Added defer to components.js | `3cafa90` |
+| 15 | `neolife-pro-vitality.html` | Added verification meta + components.js | `e97fdad` |
+| 16 | `neolife-carotenoid-complex.html` | Added verification meta + components.js | `098139e` |
+| 17 | `neolife-omega-3-plus.html` | Added verification meta + components.js | `46192b6` |
 
 ---
 
-## Completion criteria
+## Remaining Gen 1 pages (highest priority)
 
-All met. `index.html` passes 13/13 audit checklist. All Gen 3 requirements
-satisfied: `pillar.css`, no inline `:root`, scripts with `defer`, verification
-meta, `og:image`, Google Fonts, 3+ breakpoints, canonical, viewport.
-
----
-
-## Blockers
-
-None.
+| Page | Issues |
+|------|--------|
+| `neolife-historia.html` | inline `:root`, components.js without defer |
+| `neolife-vetenskap.html` | inline `:root`, components.js without defer |
+| `neolife-hallbarhet.html` | no pillar.css, inline `:root`, components.js without defer, no og:image |
+| `neolife-affarsmojlighet.html` | inline `:root`, components.js without defer |
+| `om-oss.html` | inline `:root`, missing components.js |
+| `golden-home-care.html` | inline `:root`, components.js without defer |
+| `neolife-fibre-tablets/` | no pillar.css, inline `:root`, no defer |
+| `neolife-sustained-vitamin-c/` | no pillar.css, inline `:root`, no defer |
 
 ---
 
 ## Next action
 
-No active sprint. Recommended next sprint: `neolife-kosttillskott/index.html`
-(hub page) — last remaining hub page still at Gen 1 with inline `:root` and
-components.js without defer.
+Recommended: start a new session, load `pillar-page-template` skill, and continue with `neolife-historia.html` — highest-priority remaining Gen 1 page.
 
 ---
 
