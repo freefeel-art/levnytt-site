@@ -9,28 +9,32 @@ See `PROJECT-ENTRY.md` for workflow. See `PROJECT-STATUS.md` for the open backlo
 
 ## Sprint status
 
-**Completed.** Sprint 7 — Formula IV pillar page upgrade.
+**Completed.** Sprint 8 — Tre-en-en pillar page upgrade.
 
 ---
 
 ## Sprint objective
 
-Upgrade `neolife-formula-iv.html` from informational article to full pillar page status.
+Upgrade `neolife-tre-en-en.html` from informational article to full pillar page status.
 
 ---
 
 ## Tasks
 
 - [x] Load `pillar-page-template` skill
-- [x] Read full file and run pre-flight audit
-- [x] Identify issues (cost CTA violation; missing verification meta tags)
-- [x] Get owner decision on CTA fix (confirmed: remove)
-- [x] Add Google/Pinterest verification meta tags
-- [x] Remove cost CTA; replace with neutral product CTA
-- [x] JSON-LD schema — confirmed unchanged (existing `@type: Article` matches all other named pillar pages)
-- [x] Run final audit — 13/13
+- [x] Define sprint in CURRENT-SPRINT.md
+- [x] Read full file
+- [x] Run pre-flight audit (13/13 already — no structural failures)
+- [x] Fix OG/Twitter meta tags (were missing entirely)
+- [x] Fix JSON-LD author: Organization → Person (Jarmo Halonen)
+- [x] Fix BreadcrumbList: dead `/neolife-hub/` → `/neolife-kosttillskott`
+- [x] Fix visible breadcrumb: same correction
+- [x] Remove cost/savings % from CTA block (`SKILL.md §0` violation)
+- [x] Remove cost/savings % from FAQ answer (`SKILL.md §0` violation)
+- [x] Replace distributor recruitment CTA with neutral shop CTA
+- [x] Final audit: 13/13 confirmed
 - [x] Visual review before commit
-- [x] Commit (`c9cf841`)
+- [x] Commit (`c05c51d`)
 - [x] Update PROJECT-STATUS.md
 
 ---
@@ -38,10 +42,11 @@ Upgrade `neolife-formula-iv.html` from informational article to full pillar page
 ## Completion criteria
 
 All met:
-- Verification meta tags added ✓
-- Content-policy violation (cost CTA) removed ✓
 - 13/13 audit score ✓
-- No copy, URL, slug, title, or meta description changed ✓
+- Content-policy violations (savings %) removed ✓
+- OG/Twitter meta present ✓
+- JSON-LD author correct ✓
+- Breadcrumbs correct ✓
 
 ---
 
@@ -53,7 +58,7 @@ None.
 
 ## Next action
 
-Sprint 7 complete. Project owner: open the next sprint from `PROJECT-STATUS.md → Open backlog`.
+Sprint 8 complete. Next sprint: `neolife-elevate.html` (next in backlog).
 
 ---
 

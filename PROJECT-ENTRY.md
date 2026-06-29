@@ -68,6 +68,20 @@ This is a mandatory project rule for every future sprint.
 
 ---
 
+## Autonomous Execution (Mandatory)
+
+After loading the required project documents and skills:
+
+- If no sprint is active, automatically continue with the next planned sprint according to the project documentation.
+- If multiple implementation candidates exist, select the highest-priority recommended item without asking the user.
+- Resolve all routine implementation decisions using the repository, project documentation, and loaded skills.
+- Do not interrupt the user for decisions that can be resolved from documented project rules.
+- Ask the user only when a business, content, branding, SEO strategy, legal, or other user-owned decision is required, or when documentation is contradictory or ambiguous.
+
+This rule is mandatory for all future sprints.
+
+---
+
 ## Source of Truth hierarchy
 
 | Priority | Source | Authoritative for |
@@ -90,7 +104,7 @@ The repository is never modified to match outdated documentation. Documentation 
 2. Determine which skills are required for the current sprint and load them with the skill tool (see **Skill Loading** above).
 3. Check `CURRENT-SPRINT.md` — is a sprint active?
    - **Yes:** implement the active sprint. Do not introduce unrelated work.
-   - **No:** ask the project owner what to start next.
+   - **No:** select the highest-priority item from `PROJECT-STATUS.md → Open backlog` and open it as the next sprint. See **Autonomous Execution** above.
 4. If the repository state appears to conflict with `PROJECT-STATUS.md`, verify before acting. Report the conflict. Do not invent a resolution.
 
 ### Doing work

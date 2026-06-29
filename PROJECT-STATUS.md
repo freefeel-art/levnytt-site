@@ -131,6 +131,7 @@ Highest-priority SEO pages. All pass the 13/13 audit checklist as of 2026-06-28.
 | Forsknings-FAQ | `/forsknings-faq` |
 | LevNytt Principer | `/levnytt-principer` |
 | Formula IV | `/neolife-formula-iv` |
+| Tre-en-en | `/neolife-tre-en-en` |
 
 ### Tier 2: Informational articles
 
@@ -158,6 +159,7 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 | Wave 3B / Sprint 6 | All informational articles migrated to production standard: `pillar.css`, no inline `:root`, 3 breakpoints, `og:image`, `components.js` with `defer` | Jun 2026 |
 | Sprint 6.1 | Google Fonts links added to 9 pages; canonical URLs corrected on 3 `content/articles/` pages | Jun 2026 |
 | Sprint 7 | `neolife-formula-iv` upgraded to pillar status: verification meta tags added, cost CTA violation removed | Jun 2026 |
+| Sprint 8 | `neolife-tre-en-en` upgraded to pillar status: OG/Twitter meta added, JSON-LD author fixed, breadcrumb fixed, cost violations removed | Jun 2026 |
 
 ---
 
@@ -171,7 +173,6 @@ Pages that currently exist only as informational articles and are candidates for
 
 | Current file | Target URL |
 |---|---|
-| `neolife-tre-en-en.html` | `/neolife-tre-en-en/` |
 | `neolife-elevate.html` | `/neolife-elevate/` |
 | `neolife-upbeet.html` | `/neolife-upbeet/` |
 | `neolife-coq10.html` | `/neolife-coq10/` |
