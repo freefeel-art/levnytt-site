@@ -174,6 +174,24 @@ A / B / C
 
 ---
 
+### Publication Score
+
+XX / 100
+
+Score based on:
+
+- Search Opportunity
+- Strategic Fit
+- Existing LevNytt Coverage
+- EEAT Potential
+- Internal Linking Value
+- Cluster Importance
+- Long-term Evergreen Value
+
+<2–4 sentences explaining why the cluster received that score>
+
+---
+
 ### Strategic Fit
 
 - Supports Product Pages
@@ -221,3 +239,18 @@ Output files from this skill should be saved as:
 Example: `/docs/editorial-backlog/omega-3-gap.md`
 
 These files are consumed by the Informational Article Skill as the **Content Brief** input.
+
+---
+
+## Summary Table
+
+Every backlog must end with a ranked summary table that includes:
+
+| # | Cluster | Priority | Publication Score | Recommendation |
+|---|---|---|---|---|
+| 1 | Cluster name | A | 95/100 | Write now |
+| 2 | Cluster name | B | 72/100 | Write now |
+
+Sort the table by Publication Score descending. The top 3–5 entries are the immediate editorial backlog.
+
+The Publication Score makes it immediately obvious which articles to publish next without requiring manual prioritization.
