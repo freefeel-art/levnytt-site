@@ -22,7 +22,7 @@
 | 12 | Probiotika och prebiotika — skillnad och samband | Probiotics | 78 | **Published** | `probiotika-prebiotika-skillnad.html` |
 | 13 | Multivitamin för män | Multivitamin | 78 | **Published** | `multivitamin-for-man.html` |
 | 14 | Fibrer för viktminskning | Fiber | 77 | **Published** | `fibrer-for-viktminskning.html` |
-| 15 | Magnesium för sömn | Magnesium | 76 | **Generated** | `content/articles/magnesium-for-somn.html` |
+| 15 | Magnesium för sömn | Magnesium | 76 | **Published** | `magnesium-for-somn.html` |
 | 16 | Magnesiumbrist — symptom, tester | Magnesium | 74 | **Published** | `magnesiumbrist-symptom-tester.html` |
 | 17 | Probiotika dosering och timing | Probiotics | 74 | **Published** | `probiotika-dosering-timing.html` |
 | 18 | D-vitamin och solen | Vitamin D | 73 | **Published** | `d-vitamin-och-solen.html` |
