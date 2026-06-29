@@ -14,7 +14,7 @@
 | 4 | Vitamin D — komplett guide | Vitamin D | 90 | **Generated** | `vitamin-d-komplett-guide.html` |
 | 5 | Kostfiber — komplett guide | Fiber | 89 | **Generated** | `kostfiber-komplett-guide.html` |
 | 6 | Magnesiumformer — vilken ska man välja? | Magnesium | 88 | **Published** | `magnesiumformer-vilken-valja.html` |
-| 7 | D-vitamin dosering per dag | Vitamin D | 87 | **Generated** | `content/articles/d-vitamin-dosering-per-dag.html` |
+| 7 | D-vitamin dosering per dag | Vitamin D | 87 | **Published** | `d-vitamin-dosering-per-dag.html` |
 | 8 | Probiotika för magen — IBS, uppblåsthet, förstoppning | Probiotics | 86 | **Generated** | `content/articles/probiotika-for-magen-ibs.html` |
 | 9 | Multivitamin för kvinnor | Multivitamin | 85 | **Generated** | `content/articles/multivitamin-for-kvinnor.html` |
 | 10 | D-vitaminbrist i Sverige | Vitamin D | 85 | **Generated** | `content/articles/d-vitaminbrist-sverige.html` |
