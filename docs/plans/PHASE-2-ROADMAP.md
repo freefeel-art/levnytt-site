@@ -33,12 +33,12 @@ Projects are ordered by implementation sequence. Later projects depend on earlie
 
 | Field | Value |
 |-------|-------|
-| **Status** | Planning Complete |
+| **Status** | ✅ Done |
 | **Priority** | Critical |
 | **Dependencies** | None (standalone page rewrite) |
 | **Estimated Complexity** | High (full page content, 10 sections) |
 | **Purpose** | Replace existing MLM-style business page with a transparent decision-support page centered on savings, not recruitment. |
-| **Key Deliverable** | New `/affarsmojlighet/` HTML page following the architecture in `AFFARSMOJLIGHET-2.0-MASTERPLAN.md` |
+| **Key Deliverable** | `neolife-affarsmojlighet.html` — 10 IA sections, 13/13 audit, real prices from price database, 8 FAQ questions, JSON-LD Article + FAQPage schema |
 
 ---
 

@@ -269,6 +269,7 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 | Wave 3B / Sprint 6 | All informational articles migrated to production standard: `pillar.css`, no inline `:root`, 3 breakpoints, `og:image`, `components.js` with `defer` | Jun 2026 |
 | Sprint 6.1 | Google Fonts links added to 9 pages; canonical URLs corrected on 3 `content/articles/` pages | Jun 2026 |
 | Sprint 7 | `neolife-formula-iv` upgraded to pillar status: verification meta tags added, cost CTA violation removed | Jun 2026 |
+| Sprint 7 (Phase 2) | **Affärsmöjlighet 2.0** — first Phase 2 authority page built. Old MLM-style business page replaced with transparent decision-support page. 10 IA sections, real product prices, 8 FAQ questions, JSON-LD schema, 13/13 audit. | Jun 2026 |
 | Sprint 8 | `neolife-tre-en-en` upgraded to pillar status: OG/Twitter meta added, JSON-LD author fixed, breadcrumb fixed, cost violations removed | Jun 2026 |
 | Sprint 9–12 | `neolife-elevate`, `neolife-upbeet`, `neolife-coq10`, `personlig-vard` upgraded to pillar status | Jun 2026 |
 | Sprint 13 | `index.html` (front page) migrated from Gen 1 to Gen 3: `pillar.css`, no inline `:root`, `components.js` with defer, verification meta, `og:image`, 3+ breakpoints. Pre: 9/13 → Post: 13/13 | Jun 2026, `7a3d7cb` |

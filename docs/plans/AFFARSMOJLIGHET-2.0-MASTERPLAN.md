@@ -378,10 +378,10 @@ Dessa sektioner är reserverade för framtida implementering och bör inte bygga
 | Aktivitet | Status |
 |-----------|--------|
 | Masterplan-dokument skapat | ✅ |
-| Nuvarande affärsmöjlighetssida granskad | ❌ |
-| Innehållsanalys och gap-analys | ❌ |
-| Teknisk kravspecifikation (CSS, layout) | ❌ |
-| Sitemap-uppdatering planerad | ❌ |
+| Nuvarande affärsmöjlighetssida granskad | ✅ |
+| Innehållsanalys och gap-analys | ✅ |
+| Teknisk kravspecifikation (CSS, layout) | ✅ |
+| Sitemap-uppdatering planerad | ✅ |
 
 ---
 
@@ -389,13 +389,13 @@ Dessa sektioner är reserverade för framtida implementering och bör inte bygga
 
 | Aktivitet | Status |
 |-----------|--------|
-| Skriva H1, ingress och alla sektioner | ❌ |
-| Produktbesparingsexempel (faktiska priser) | ❌ |
-| Pris-per-användning-jämförelser | ❌ |
-| FAQ-innehåll (minst 8 frågor) | ❌ |
-| Kund vs Återförsäljare vs Verksamhet-jämförelse | ❌ |
-| Interna länkar identifierade och kartlagda | ❌ |
-| Copy review och faktakontroll | ❌ |
+| Skriva H1, ingress och alla sektioner | ✅ |
+| Produktbesparingsexempel (faktiska priser) | ✅ |
+| Pris-per-användning-jämförelser | ✅ |
+| FAQ-innehåll (minst 8 frågor) | ✅ |
+| Kund vs Återförsäljare vs Verksamhet-jämförelse | ✅ |
+| Interna länkar identifierade och kartlagda | ✅ |
+| Copy review och faktakontroll | ✅ |
 | Video-manus och inspelningsplan | ❌ |
 
 ---
