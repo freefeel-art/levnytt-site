@@ -23,7 +23,7 @@
 | 13 | Multivitamin för män | Multivitamin | 78 | **Published** | `multivitamin-for-man.html` |
 | 14 | Fibrer för viktminskning | Fiber | 77 | **Published** | `fibrer-for-viktminskning.html` |
 | 15 | Magnesium för sömn | Magnesium | 76 | **Generated** | `content/articles/magnesium-for-somn.html` |
-| 16 | Magnesiumbrist — symptom, tester | Magnesium | 74 | **Generated** | `content/articles/magnesiumbrist-symptom-tester.html` |
+| 16 | Magnesiumbrist — symptom, tester | Magnesium | 74 | **Published** | `magnesiumbrist-symptom-tester.html` |
 | 17 | Probiotika dosering och timing | Probiotics | 74 | **Generated** | `content/articles/probiotika-dosering-timing.html` |
 | 18 | D-vitamin och solen | Vitamin D | 73 | **Generated** | `content/articles/d-vitamin-och-solen.html` |
 | 19 | Multivitamin för barn | Multivitamin | 72 | **Generated** | `content/articles/multivitamin-for-barn.html` |
