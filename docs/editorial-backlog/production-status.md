@@ -28,7 +28,7 @@
 | 18 | D-vitamin och solen | Vitamin D | 73 | **Published** | `d-vitamin-och-solen.html` |
 | 19 | Multivitamin för barn | Multivitamin | 72 | **Published** | `multivitamin-for-barn.html` |
 | 20 | Fiberrika livsmedel | Fiber | 72 | **Published** | `fiberrika-livsmedel.html` |
-| 21 | D-vitamin för immunförsvaret | Vitamin D | 71 | **Generated** | `content/articles/d-vitamin-immunforsvaret.html` |
+| 21 | D-vitamin för immunförsvaret | Vitamin D | 71 | **Published** | `d-vitamin-immunforsvaret.html` |
 | 22 | Magnesium och stress | Magnesium | 70 | **Generated** | `content/articles/magnesium-och-stress.html` |
 | 23 | Fibrer och tarmflora (prebiotisk effekt) | Fiber | 70 | **Generated** | `content/articles/fibrer-tarmflora-prebiotisk.html` |
 | 24 | Billig vs dyr multivitamin | Multivitamin | 69 | **Generated** | `content/articles/billig-dyr-multivitamin.html` |
