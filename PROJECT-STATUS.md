@@ -177,6 +177,10 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 | Sprint 22 | `om-oss.html` migrated to Gen 3: added components.js, verification meta, page-specific og:image | Jun 2026, `24d5eac` |
 | Sprint 23 | `golden-home-care.html` migrated to Gen 3: removed inline `:root`, defer, page-specific og:image | Jun 2026, `656a050` |
 | Sprint 24 | `den-fundersamma-mannen.html` migrated to Gen 3: defer, page-specific og:image | Jun 2026, `935cf30` |
+| Sprint 25 | `neolife-fibre-tablets/` migrated to Gen 3 (8/13→13/13): pillar.css, og:image, removed inline :root/footer CSS | Jun 2026, `ab9e13f` |
+| Sprint 26 | `neolife-sustained-vitamin-c/` migrated to Gen 3 (8/13→13/13): same pattern as Sprint 25 | Jun 2026, `b9d14c4` |
+| Sprint 27 | `integritetspolicy.html` migrated to Gen 3 (10/13→13/13): last Gen 1 page | Jun 2026, `b5196cc` |
+| Sprint 28 | 30 Gen 2 pages: batch-added verification meta tags (google-site-verification + p:domain_verify) | Jun 2026 |
 | Sprint 14 | `neolife-kosttillskott/index.html` (hub page) migrated to Gen 3: added `defer` to `components.js`. Pre: 13/13 → Post: 13/13 | Jun 2026, `3cafa90` |
 | Sprint 15 | `neolife-pro-vitality.html` migrated to Gen 3: added verification meta tags and `components.js` with defer. Pre: 13/13 → Post: 13/13 | Jun 2026, `e97fdad` |
 | Sprint 16 | `neolife-carotenoid-complex.html` migrated to Gen 3: added verification meta tags and `components.js` with defer. Pre: 13/13 → Post: 13/13 | Jun 2026, `098139e` |
@@ -198,14 +202,11 @@ Pages that currently exist only as informational articles and are candidates for
 
 ### 2. Gen 1 → Gen 3 page migrations
 
-Pages still at Gen 1 (Legacy) that need structural migration:
+All Gen 1 pages have been migrated to Gen 3 (13/13 audit compliance). No more Gen 1 pages remain.
 
 | Page | Current issues | Priority |
 |---|---|---|
-| `neolife-fibre-tablets/` | no pillar.css, inline `:root`, scripts without defer, missing og:image | High |
-| `neolife-sustained-vitamin-c/` | no pillar.css, inline `:root`, scripts without defer, missing og:image | High |
-| `integritetspolicy.html` | no pillar.css, inline `:root`, components.js without defer, missing og:image | Low |
-| 53 Gen 2 pages | missing verification meta tags only | Low |
+All 10 Gen 1 pages migrated to Gen 3. All 30 Gen 2 pages updated with verification meta tags. **All pages now at Gen 3 compliance (13/13). No remaining migration backlog.**
 
 ### 3. Trailing-slash canonical inconsistencies
 
