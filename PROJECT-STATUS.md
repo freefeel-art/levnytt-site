@@ -1,9 +1,41 @@
-# PROJECT-STATUS.md
-# LevNytt.se — Current Project Status
+# PROJECT-STATUS.md — LevNytt.se Executive Dashboard
 
-Last updated: 2026-06-29
+*Last updated: 2026-06-29 | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions.*
 
-See `PROJECT-ENTRY.md` for the reading order and workflow. See `DECISIONS.md` for engineering conventions.
+---
+
+## Project Health
+
+| Status | Value |
+|---|---|
+| **Production** | ✅ Stable — live at https://levnytt.se/ |
+| **Migration** | ✅ Complete — all pages at Gen 3 |
+| **Public pages** | 55 |
+| **Audit compliance** | 55 / 55 pages pass the 13/13 production audit |
+| **Deployment** | Cloudflare Pages — automatic on `git push` |
+| **Current phase** | Maintenance + Feature Development |
+
+---
+
+## Project Objectives
+
+- Build Sweden's most trustworthy NeoLife knowledge platform
+- Help visitors make informed decisions using facts, research, and transparency
+- Prioritize educational content over sales content
+- Build topical authority through high-quality pillar pages and informational articles
+
+---
+
+## Engineering Principles
+
+- **Repository is the single source of truth** — all changes flow through git
+- **Documentation describes the repository** — keep docs in sync with code
+- **Skills are the implementation authority** — use the pillar-page-template skill for migrations, informational-article skill for new content
+- **Verify before implementing** — audit every page before and after migration
+- **One completed page = one commit** — clean, atomic git history
+- **Audit before and after every migration** — run `audit_pillar_page.py` on both sides
+- **Prefer autonomous execution** — the AI should act on instructions without asking for permission on routine tasks
+- **Ask only when business or strategy decisions are required** — branding, legal, content strategy, SEO strategy
 
 ---
 
@@ -11,7 +43,6 @@ See `PROJECT-ENTRY.md` for the reading order and workflow. See `DECISIONS.md` fo
 
 **LevNytt.se** is a Swedish-language knowledge platform for NeoLife supplements and home care products. Its purpose is to drive organic search traffic and convert readers into NeoLife customers or distributors.
 
-- **Live site:** https://levnytt.se/
 - **Language:** Swedish (sv-SE)
 - **Sponsor ID:** 41-830928
 - **Customer shop:** `https://se.neolifeshop.com/i/shop.html?sponsor=41-830928`
@@ -74,6 +105,20 @@ Pages in `content/articles/` are served via 200-rewrites in `_redirects`:
 ```
 
 Root-level `.html` files are served directly by Cloudflare Pages Pretty URLs (no rewrite needed).
+
+---
+
+## Current Platform Status
+
+| Component | Status |
+|---|---|
+| **Design system** | ✅ Complete — `pillar.css` on all 55 pages |
+| **Navigation system** | ✅ Complete — `nav.js` with defer on all pages |
+| **Shared components** | ✅ Complete — `footer.js` + `components.js` with defer on all pages |
+| **Audit system** | ✅ Operational — `audit_pillar_page.py` for all pages |
+| **Documentation system** | ✅ Operational — `PROJECT-STATUS.md`, `CURRENT-SPRINT.md`, `docs/reports/` |
+| **Sprint workflow** | ✅ Operational — sprint-based migration cadence |
+| **Autonomous execution** | ✅ Operational — AI executes routine migrations without manual approval |
 
 ---
 
@@ -185,18 +230,42 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 
 ---
 
-## Project Phase: Maintenance + Feature Development
+## Success Metrics
 
-The Gen 3 migration is **complete**. All 55 public pages pass 13/13 audit. Future work focuses on content expansion, feature development, and incremental polish.
+| Metric | Value |
+|---|---|
+| **Public pages** | 55 |
+| **Pillar pages** | 20 |
+| **Informational articles** | 29 |
+| **13/13 audit compliance** | 55 / 55 (100%) |
+| **Gen 3 migration** | Complete — all pages migrated |
+| **Documentation status** | Current |
+| **Production status** | ✅ Stable — live at https://levnytt.se/ |
 
-### Future work candidates
+---
 
-| Area | Description | Priority |
-|---|---|---|
-| Content expansion | New articles, product pages, or informational guides | Medium |
-| Product entity system | Structured product data via `content/products/` schema | Low |
-| Trailing-slash canonical cleanup | Align canonical URLs with sitemap entries | Low |
-| Performance optimization | Image optimization, lazy loading audit, Core Web Vitals | Low |
-| Accessibility improvements | Contrast checks, ARIA labels, keyboard navigation | Low |
+## Next Development Priorities
 
-See `CURRENT-SPRINT.md` for active sprint status.
+### Priority 1 — New high-value content
+- New pillar pages (e.g. `/neolife-sport/`)
+- New informational articles in uncovered niches
+- Expand the existing article clusters
+
+### Priority 2 — Product Entity System
+- Build out structured product data via `content/products/` schema
+- Link product pages to their entity definitions
+
+### Priority 3 — Interactive tools
+- Comparison pages (e.g. Omega-3 sources comparison)
+- Calculators (e.g. daily nutrient intake)
+- Interactive decision guides
+
+### Priority 4 — Performance & accessibility
+- Image optimization and lazy loading audit
+- Core Web Vitals tuning
+- Accessibility improvements (contrast checks, ARIA labels, keyboard navigation)
+- Trailing-slash canonical cleanup
+
+---
+
+See `CURRENT-SPRINT.md` for active sprint status. See `docs/reports/SITE-PAGE-INVENTORY.md` for the full page inventory.
