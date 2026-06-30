@@ -1,166 +1,120 @@
-# Production Status — All Batches
+# Production Status — Auto-Generated
 
-**Date:** 2026-06-29 (updated 2026-06-29 — Publication Pipeline V1 started)
-**Source backlog:** `docs/editorial-backlog/global-batch-2026-06-29-gap.md`
-**Commits:** `5500d41` (Batch 1), pending (Batch 2)
+**Generated:** 2026-06-30 11:58:52
+**Commit:** 63fc2dc
+**Source:** Editorial Sync Engine V1.0
+
+> AUTO-GENERATED — DO NOT EDIT. Run `python3 scripts/sync-editorial-state.py` to regenerate.
 
 ## Full Backlog
 
-| # | Cluster | Topic | Score | Status | File |
-|---|---------|-------|-------|--------|------|
-| 1 | Multivitamin — komplett guide | Multivitamin | 93 | **Generated** | `multivitamin-komplett-guide.html` |
-| 2 | Magnesium — komplett evidensbaserad guide | Magnesium | 92 | **Generated** | `magnesium-komplett-guide.html` |
-| 3 | Probiotika — komplett evidensbaserad guide | Probiotics | 91 | **Generated** | `probiotika-komplett-guide.html` |
-| 4 | Vitamin D — komplett guide | Vitamin D | 90 | **Generated** | `vitamin-d-komplett-guide.html` |
-| 5 | Kostfiber — komplett guide | Fiber | 89 | **Generated** | `kostfiber-komplett-guide.html` |
-| 6 | Magnesiumformer — vilken ska man välja? | Magnesium | 88 | **Published** | `magnesiumformer-vilken-valja.html` |
-| 7 | D-vitamin dosering per dag | Vitamin D | 87 | **Published** | `d-vitamin-dosering-per-dag.html` |
-| 8 | Probiotika för magen — IBS, uppblåsthet, förstoppning | Probiotics | 86 | **Published** | `probiotika-for-magen-ibs.html` |
-| 9 | Multivitamin för kvinnor | Multivitamin | 85 | **Published** | `multivitamin-for-kvinnor.html` |
-| 10 | D-vitaminbrist i Sverige | Vitamin D | 85 | **Published** | `d-vitaminbrist-sverige.html` |
-| 11 | Fibrer för magen — mot förstoppning | Fiber | 84 | **Published** | `fibrer-for-magen-forstoppning.html` |
-| 12 | Probiotika och prebiotika — skillnad och samband | Probiotics | 78 | **Published** | `probiotika-prebiotika-skillnad.html` |
-| 13 | Multivitamin för män | Multivitamin | 78 | **Published** | `multivitamin-for-man.html` |
-| 14 | Fibrer för viktminskning | Fiber | 77 | **Published** | `fibrer-for-viktminskning.html` |
-| 15 | Magnesium för sömn | Magnesium | 76 | **Published** | `magnesium-for-somn.html` |
-| 16 | Magnesiumbrist — symptom, tester | Magnesium | 74 | **Published** | `magnesiumbrist-symptom-tester.html` |
-| 17 | Probiotika dosering och timing | Probiotics | 74 | **Published** | `probiotika-dosering-timing.html` |
-| 18 | D-vitamin och solen | Vitamin D | 73 | **Published** | `d-vitamin-och-solen.html` |
-| 19 | Multivitamin för barn | Multivitamin | 72 | **Published** | `multivitamin-for-barn.html` |
-| 20 | Fiberrika livsmedel | Fiber | 72 | **Published** | `fiberrika-livsmedel.html` |
-| 21 | D-vitamin för immunförsvaret | Vitamin D | 71 | **Published** | `d-vitamin-immunforsvaret.html` |
-| 22 | Magnesium och stress | Magnesium | 70 | **Published** | `magnesium-och-stress.html` |
-| 23 | Fibrer och tarmflora (prebiotisk effekt) | Fiber | 70 | **Published** | `fibrer-tarmflora-prebiotisk.html` |
-| 24 | Billig vs dyr multivitamin | Multivitamin | 69 | **Published** | `billig-dyr-multivitamin.html` |
-| 25 | Magnesium och D-vitamin — kombination | Magnesium | 68 | **Published** | `magnesium-d-vitamin-kombination.html` |
+| # | Cluster | Gap Report | Priority | Score | Status | File | Authority |
+|---|---------|------------|----------|-------|--------|------|-----------|
+| 1 | Kostfiber — komplett guide: varför det är viktigt och hur du får i dig nog | fiber | A | 89 | Published | vad-ar-kostfiber.html | BLOCKED |
+| 2 | Fibrer för magen — mot förstoppning och matsmältningsproblem | fiber | A | 84 | Published | fibrer-for-viktminskning.html | BLOCKED |
+| 3 | Fibrer för viktminskning — hjälper det? | fiber | B | 77 | Published | fibrer-for-viktminskning.html | BLOCKED |
+| 4 | Fiberrika livsmedel — bästa källorna och hur du äter mer | fiber | B | 72 | Published | vad-ar-kostfiber.html | BLOCKED |
+| 5 | Fibrer och tarmflora — prebiotisk effekt | fiber | B | 70 | Published | fibrer-for-viktminskning.html | BLOCKED |
+| 6 | Fibertillskott vs fiber från mat — vad är bäst? | fiber | C | 60 | Published | vad-ar-kostfiber.html | BLOCKED |
+| 7 | Multivitamin — komplett guide | global-batch-2026-06-29 | A | 93 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 8 | Magnesium — komplett evidensbaserad guide | global-batch-2026-06-29 | A | 92 | Published | magnesium-for-somn.html | BLOCKED |
+| 9 | Probiotika — komplett evidensbaserad guide | global-batch-2026-06-29 | A | 91 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 10 | Vitamin D — komplett guide | global-batch-2026-06-29 | A | 90 | Published | neolife-vitamin-d.html | BLOCKED |
+| 11 | Kostfiber — komplett guide | global-batch-2026-06-29 | A | 89 | Published | vad-ar-kostfiber.html | BLOCKED |
+| 12 | Magnesiumformer — vilken ska man välja? | global-batch-2026-06-29 | A | 88 | Published | magnesium-for-somn.html | BLOCKED |
+| 13 | D-vitamin dosering per dag | global-batch-2026-06-29 | A | 87 | Published | neolife-vitamin-d.html | BLOCKED |
+| 14 | Probiotika för magen — IBS, uppblåsthet, förstoppning | global-batch-2026-06-29 | A | 86 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 15 | Multivitamin för kvinnor | global-batch-2026-06-29 | A | 85 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 16 | D-vitaminbrist i Sverige | global-batch-2026-06-29 | A | 85 | Published | d-vitaminbrist-sverige.html | BLOCKED |
+| 17 | Fibrer för magen — mot förstoppning | global-batch-2026-06-29 | A | 84 | Published | fibrer-for-viktminskning.html | BLOCKED |
+| 18 | Probiotika och prebiotika — skillnad och samband | global-batch-2026-06-29 | B | 78 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 19 | Multivitamin för män | global-batch-2026-06-29 | B | 78 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 20 | Fibrer för viktminskning | global-batch-2026-06-29 | B | 77 | Published | fibrer-for-viktminskning.html | BLOCKED |
+| 21 | Magnesium för sömn | global-batch-2026-06-29 | B | 76 | Published | magnesium-for-somn.html | BLOCKED |
+| 22 | Magnesiumbrist — symptom, tester | global-batch-2026-06-29 | B | 74 | Published | magnesium-for-somn.html | BLOCKED |
+| 23 | Probiotika dosering och timing | global-batch-2026-06-29 | B | 74 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 24 | D-vitamin och solen | global-batch-2026-06-29 | B | 73 | Published | d-vitamin-och-solen.html | BLOCKED |
+| 25 | Multivitamin för barn | global-batch-2026-06-29 | B | 72 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 26 | Fiberrika livsmedel | global-batch-2026-06-29 | B | 72 | Published | vad-ar-kostfiber.html | BLOCKED |
+| 27 | D-vitamin för immunförsvaret | global-batch-2026-06-29 | B | 71 | **New Article** |  | BLOCKED |
+| 28 | Magnesium och stress | global-batch-2026-06-29 | B | 70 | Published | magnesium-for-somn.html | BLOCKED |
+| 29 | Fibrer och tarmflora (prebiotisk effekt) | global-batch-2026-06-29 | B | 70 | Published | fibrer-for-viktminskning.html | BLOCKED |
+| 30 | Billig vs dyr multivitamin | global-batch-2026-06-29 | B | 69 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 31 | Magnesium och D-vitamin — kombination | global-batch-2026-06-29 | B | 68 | Published | magnesium-for-somn.html | BLOCKED |
+| 32 | Kreatin | kosttillskott | A | — | **New Article** |  | CLEARED |
+| 33 | Adaptogener — Ashwagandha, Rosenrot, Ginseng | kosttillskott | A | — | **New Article** |  | CLEARED |
+| 34 | Longevity / Anti-aging kosttillskott | kosttillskott | A | — | Generated | ar-dyra-kosttillskott-verkligen-battre.html | CLEARED |
+| 35 | Kvinnohälsa — Kosttillskott för PMS, mensvärk och hormonbalans | kosttillskott | A | — | Generated | ar-dyra-kosttillskott-verkligen-battre.html | CLEARED |
+| 36 | Melatonin och sömn | kosttillskott | A | — | **New Article** |  | CLEARED |
+| 37 | Kollagen | kosttillskott | B | — | **New Article** |  | CLEARED |
+| 38 | Är kosttillskott farligt? Risker och biverkningar | kosttillskott | A | — | Generated | ar-dyra-kosttillskott-verkligen-battre.html | CLEARED |
+| 39 | Behöver jag kosttillskott? (När räcker maten?) | kosttillskott | A | — | **New Article** |  | CLEARED |
+| 40 | När ska man ta kosttillskott? Timingguide | kosttillskott | B | — | **New Article** |  | CLEARED |
+| 41 | Proteinpulver och proteintillskott | kosttillskott | B | — | **New Article** |  | CLEARED |
+| 42 | Kosttillskott för hud, hår och naglar | kosttillskott | B | — | Generated | ar-dyra-kosttillskott-verkligen-battre.html | CLEARED |
+| 43 | D-vitamin — dosering och behov i Sverige | kosttillskott | B | — | Published | probiotika-dosering-timing.html | CLEARED |
+| 44 | Järnbrist — symptom och tillskott | kosttillskott | B | — | Published | karotenoid-tillskott-vs-mat.html | CLEARED |
+| 45 | Probiotika och tarmhälsa | kosttillskott | B | — | Published | probiotika-komplett-guide.html | CLEARED |
+| 46 | Magnesium — former, dosering och effekt | kosttillskott | C | — | Published | magnesium-for-somn.html | CLEARED |
+| 47 | Vitamin B12 — brist och tillskott för veganer och äldre | kosttillskott | C | — | Published | neolife-vitamin-d.html | CLEARED |
+| 48 | Zink — immunförsvar, hud och testosteron | kosttillskott | C | — | **New Article** |  | CLEARED |
+| 49 | CoQ10 — hjärta, energi och åldrande | kosttillskott | C | — | Published | neolife-coq10.html | CLEARED |
+| 50 | Antiinflammatorisk kost och tillskott | kosttillskott | C | — | Published | karotenoid-tillskott-vs-mat.html | CLEARED |
+| 51 | Kosttillskott för äldre (65+) | kosttillskott | C | — | Generated | ar-dyra-kosttillskott-verkligen-battre.html | CLEARED |
+| 52 | Magnesium — komplett evidensbaserad guide | magnesium | A | 92 | Published | magnesium-for-somn.html | BLOCKED |
+| 53 | Magnesiumformer — vilken ska man välja? | magnesium | A | 88 | Published | magnesium-for-somn.html | BLOCKED |
+| 54 | Magnesium för sömn — fungerar det? | magnesium | B | 76 | Published | magnesium-for-somn.html | BLOCKED |
+| 55 | Magnesiumbrist — symptom, tester och orsaker | magnesium | B | 74 | Published | magnesium-for-somn.html | BLOCKED |
+| 56 | Magnesium och stress — kan det lugna nerverna? | magnesium | B | 70 | Published | magnesium-for-somn.html | BLOCKED |
+| 57 | Magnesium för idrott och återhämtning | magnesium | C | 58 | Published | magnesium-for-somn.html | BLOCKED |
+| 58 | Magnesium och D-vitamin — varför de fungerar tillsammans | magnesium | B | 68 | Published | magnesium-for-somn.html | BLOCKED |
+| 59 | Magnesium dosering för kvinnor — graviditet, PMS, klimakterium | magnesium | C | 55 | Published | magnesium-for-somn.html | BLOCKED |
+| 60 | MLM Inkomstredovisningar — vad säger siffrorna egentligen? | mlm | A | 85 | **New Article** |  | CLEARED |
+| 61 | MLM-produkter och kosttillskott — varför kostar de mer? | mlm | A | 90 | Generated | ar-dyra-kosttillskott-verkligen-battre.html | CLEARED |
+| 62 | MLM-rekrytering — social press, taktiker och hur man säger nej | mlm | B | 75 | **New Article** |  | CLEARED |
+| 63 | Direktförsäljning som sidoinkomst — vad är egentligen realistiskt? | mlm | B | 70 | Published | direktforsaljning-fakta.html | CLEARED |
+| 64 | Konsumenträtt vid MLM-köp — returrätt, ångerrätt och anmälan | mlm | B | 72 | **New Article** |  | CLEARED |
+| 65 | Kända MLM-företag och skandaler i Sverige och världen | mlm | C | 68 | Published | d-vitaminbrist-sverige.html | CLEARED |
+| 66 | Multivitamin — komplett guide: alla vitaminer och mineraler du behöver | multivitamin | A | 93 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 67 | Multivitamin för kvinnor — vad skiljer från män? | multivitamin | A | 85 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 68 | Multivitamin för män — behöver män ett annat? | multivitamin | B | 78 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 69 | Multivitamin för barn — behöver barn det? | multivitamin | B | 72 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 70 | Multivitamin och biverkningar — är det farligt? | multivitamin | C | 62 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 71 | Billig vs dyr multivitamin — är dyrare bättre? | multivitamin | B | 69 | Published | multivitamin-komplett-guide.html | BLOCKED |
+| 72 | Omega-3 — komplett evidensbaserad guide | omega-3 | A | — | **New Article** |  | CLEARED |
+| 73 | Omega-3 dosering — hur mycket per dag? | omega-3 | A | — | Published | probiotika-dosering-timing.html | CLEARED |
+| 74 | Fiskolja vs algolja vs krillolja — vilket är bäst? | omega-3 | A | — | Published | varfor-fiskolja-inte-ar-likvardigt.html | CLEARED |
+| 75 | Omega-3 från mat — räcker kosten? | omega-3 | A | — | **New Article** |  | CLEARED |
+| 76 | När och hur ska man ta omega-3? | omega-3 | B | — | **New Article** |  | CLEARED |
+| 77 | Omega-3 brist — symptom och testning | omega-3 | B | — | Published | magnesiumbrist-symptom-tester.html | CLEARED |
+| 78 | Omega-3 för specifika grupper — barn, gravida, äldre | omega-3 | B | — | Published | multivitamin-for-barn.html | CLEARED |
+| 79 | Omega-3 och hjärthälsa — vad säger forskningen? | omega-3 | B | — | **New Article** |  | CLEARED |
+| 80 | Omega-3 och inflammation — hjälper det mot ledvärk? | omega-3 | C | — | **New Article** |  | CLEARED |
+| 81 | Omega-3 kvalitet och renhet — hur väljer man rätt? | omega-3 | C | — | **New Article** |  | CLEARED |
+| 82 | Probiotika — komplett evidensbaserad guide | probiotics | A | 91 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 83 | Probiotika för magen — vilka problem kan det hjälpa? | probiotics | A | 86 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 84 | Probiotika och prebiotika — skillnad och varför du behöver båda | probiotics | B | 78 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 85 | Probiotika dosering och timing — när och hur mycket? | probiotics | B | 74 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 86 | Probiotika biverkningar och risker — vad ska man veta? | probiotics | C | 58 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 87 | Probiotika från mat — vilka livsmedel innehåller naturlig probiotika? | probiotics | C | 56 | Published | probiotika-komplett-guide.html | BLOCKED |
+| 88 | Vitamin D — komplett guide: allt du behöver veta | vitamin-d | A | 90 | Published | neolife-vitamin-d.html | BLOCKED |
+| 89 | D-vitamin dosering — hur mycket per dag? | vitamin-d | A | 87 | Published | neolife-vitamin-d.html | BLOCKED |
+| 90 | D-vitamin brist i Sverige — är du i riskzonen? | vitamin-d | A | 85 | Published | d-vitaminbrist-sverige.html | BLOCKED |
+| 91 | D-vitamin och solen — hur mycket sol räcker? | vitamin-d | B | 73 | Published | d-vitamin-och-solen.html | BLOCKED |
+| 92 | D-vitamin för immunförsvaret — forskningsläget | vitamin-d | B | 71 | **New Article** |  | BLOCKED |
+| 93 | D-vitamin och magnesium — varför de måste kombineras | vitamin-d | B | 65 | Published | magnesium-for-somn.html | BLOCKED |
+| 94 | D-vitamin för barn — dosering, säkerhet och behov | vitamin-d | C | 60 | Published | probiotika-dosering-timing.html | BLOCKED |
 
 ---
 
-## QA Status — All Generated Articles
+## Production Status Summary
 
-### Batch 1 (Session 1 — portal guides)
+**Total clusters tracked:** 94
+**Published:** 69
+**Generated (source ready):** 6
+**New Article (unwritten):** 19
+**Update Existing:** 0
+**Skipped:** 0
 
-| File | Status | Issues |
-|------|--------|--------|
-| `multivitamin-komplett-guide.html` | ⚠️ WARN | No GSV/Pinterest meta |
-| `magnesium-komplett-guide.html` | ⚠️ WARN | No GSV/Pinterest meta |
-| `probiotika-komplett-guide.html` | ⚠️ WARN | No GSV/Pinterest meta |
-
-### Batch 1 (Session 2 — informational articles)
-
-| File | Status | Issues |
-|------|--------|--------|
-| `vitamin-d-komplett-guide.html` | ✅ PASS | — |
-| `kostfiber-komplett-guide.html` | ✅ PASS | — |
-| `d-vitamin-dosering-per-dag.html` | ✅ PASS | — |
-| `probiotika-for-magen-ibs.html` | ✅ PASS | — |
-| `d-vitaminbrist-sverige.html` | ✅ PASS | — |
-
-### Batch 2 (remaining backlog)
-
-| # | File | Status | Issues |
-|---|------|--------|--------|
-| 6 | `magnesiumformer-vilken-valja.html` | ✅ PASS | — |
-| 9 | `multivitamin-for-kvinnor.html` | ✅ PASS | — |
-| 11 | `fibrer-for-magen-forstoppning.html` | ✅ PASS | — |
-| 12 | `probiotika-prebiotika-skillnad.html` | ✅ PASS | — |
-| 13 | `multivitamin-for-man.html` | ✅ PASS | — |
-| 14 | `fibrer-for-viktminskning.html` | ✅ PASS | — |
-| 15 | `magnesium-for-somn.html` | ✅ PASS | — |
-| 16 | `magnesiumbrist-symptom-tester.html` | ✅ PASS | — |
-| 17 | `probiotika-dosering-timing.html` | ✅ PASS | — |
-| 18 | `d-vitamin-och-solen.html` | ✅ PASS | — |
-| 19 | `multivitamin-for-barn.html` | ✅ PASS | — |
-| 20 | `fiberrika-livsmedel.html` | ✅ PASS | — |
-| 21 | `d-vitamin-immunforsvaret.html` | ✅ PASS | — |
-| 22 | `magnesium-och-stress.html` | ✅ PASS | — |
-| 23 | `fibrer-tarmflora-prebiotisk.html` | ✅ PASS | — |
-| 24 | `billig-dyr-multivitamin.html` | ✅ PASS | — |
-| 25 | `magnesium-d-vitamin-kombination.html` | ✅ PASS | — |
-
----
-
-## Summary
-
-| Total items | Generated | Pending | Skipped | Coverage Rate |
-|-------------|-----------|---------|---------|---------------|
-| 25 | **25** | **0** | **0** | **100 %** |
-
-### By topic
-
-| Topic | Total | Generated | Pending | Skipped |
-|-------|-------|-----------|---------|---------|
-| Multivitamin | 5 | 4 | 0 | 0 |
-| Magnesium | 6 | 6 | 0 | 0 |
-| Probiotics | 4 | 4 | 0 | 0 |
-| Vitamin D | 5 | 5 | 0 | 0 |
-| Fiber | 5 | 5 | 0 | 0 |
-
-### By priority
-
-| Priority | Generated | Pending | Skipped |
-|----------|-----------|---------|---------|
-| A (Score 84–93) | 11 | 0 | 1 |
-| B (Score 68–78) | 13 | 0 | 0 |
-
-### QA summary
-
-| Level | Count | Notes |
-|-------|-------|-------|
-| ✅ PASS | 21 | All Batch 2 + Session 2 Batch 1 |
-| ⚠️ WARN | 3 | Session 1 portal guides (missing GSV/Pinterest meta — added in later standard) |
-| ❌ FAIL | 0 | — |
-
-### Generated articles detail
-
-| # | File | Canonical URL | Batch |
-|---|------|---------------|-------|
-| 1 | `multivitamin-komplett-guide.html` | `/multivitamin-komplett-guide` | Session 1 |
-| 2 | `magnesium-komplett-guide.html` | `/magnesium-komplett-guide` | Session 1 |
-| 3 | `probiotika-komplett-guide.html` | `/probiotika-komplett-guide` | Session 1 |
-| 4 | `vitamin-d-komplett-guide.html` | `/vitamin-d-komplett-guide` | Session 2 |
-| 5 | `kostfiber-komplett-guide.html` | `/kostfiber-komplett-guide` | Session 2 |
-| 6 | `content/articles/magnesiumformer-vilken-valja.html` | `/magnesiumformer-vilken-valja` | Batch 2 |
-| 7 | `content/articles/d-vitamin-dosering-per-dag.html` | `/d-vitamin-dosering-per-dag` | Session 2 |
-| 8 | `content/articles/probiotika-for-magen-ibs.html` | `/probiotika-for-magen-ibs` | Session 2 |
-| 9 | `content/articles/multivitamin-for-kvinnor.html` | `/multivitamin-for-kvinnor` | Batch 2 |
-| 10 | `content/articles/d-vitaminbrist-sverige.html` | `/d-vitaminbrist-sverige` | Session 2 |
-| 11 | `content/articles/fibrer-for-magen-forstoppning.html` | `/fibrer-for-magen-forstoppning` | Batch 2 |
-| 12 | `content/articles/probiotika-prebiotika-skillnad.html` | `/probiotika-prebiotika-skillnad` | Batch 2 |
-| 13 | `content/articles/multivitamin-for-man.html` | `/multivitamin-for-man` | Batch 2 |
-| 14 | `content/articles/fibrer-for-viktminskning.html` | `/fibrer-for-viktminskning` | Batch 2 |
-| 15 | `content/articles/magnesium-for-somn.html` | `/magnesium-for-somn` | Batch 2 |
-| 16 | `content/articles/magnesiumbrist-symptom-tester.html` | `/magnesiumbrist-symptom-tester` | Batch 2 |
-| 17 | `content/articles/probiotika-dosering-timing.html` | `/probiotika-dosering-timing` | Batch 2 |
-| 18 | `content/articles/d-vitamin-och-solen.html` | `/d-vitamin-och-solen` | Batch 2 |
-| 19 | `content/articles/multivitamin-for-barn.html` | `/multivitamin-for-barn` | Batch 2 |
-| 20 | `content/articles/fiberrika-livsmedel.html` | `/fiberrika-livsmedel` | Batch 2 |
-| 21 | `content/articles/d-vitamin-immunforsvaret.html` | `/d-vitamin-immunforsvaret` | Batch 2 |
-| 22 | `content/articles/magnesium-och-stress.html` | `/magnesium-och-stress` | Batch 2 |
-| 23 | `content/articles/fibrer-tarmflora-prebiotisk.html` | `/fibrer-tarmflora-prebiotisk` | Batch 2 |
-| 24 | `content/articles/billig-dyr-multivitamin.html` | `/billig-dyr-multivitamin` | Batch 2 |
-| 25 | `content/articles/magnesium-d-vitamin-kombination.html` | `/magnesium-d-vitamin-kombination` | Batch 2 |
-
----
-
-## Notes
-
-- **25/25** backlog items generated (100 % coverage).
-- **All Priority A items** (11 of 11) are complete.
-- **All Priority B items** (13 of 13) are complete.
-- **Item #20 (Fiberrika livsmedel)** was originally skipped and absorbed into the portal guide. After review, it was restored as a standalone article — the focused listicle format targets specific long-tail queries ("fiberrika livsmedel", "topp 10 fiberkällor") that the portal guide cannot fully optimize for, and adds a comprehensive comparison table that strengthens the fiber content cluster.
-- **3 Session 1 portal guides** lack GSV/Pinterest meta (not part of the template at that time).
-- **Backlog is complete.** Next batch topics recommended: Zinc, CoQ10, Collagen, Immunity, Longevity.
-
----
-
-## Publication Pipeline V1 — Additional Published Articles
-
-Articles published via Publication Agent V1.0 (2026-06-29) that were in `content/articles/` source but not originally listed as distinct batch items in the main table above:
-
-| File | Canonical URL | Notes |
-|---|---|---|
-| `varfor-tar-d-vitamin-slut-pa-ditt-magnesium.html` | `/varfor-tar-d-vitamin-slut-pa-ditt-magnesium` | Published 2026-06-29. Covers magnesium-gap Cluster 7 / vitamin-d-gap Cluster 6 (Update Existing topic). |
-| `magnesium-for-somn.html` | `/magnesium-for-somn` | Published 2026-06-29. Satellite to existing `/magnesiumglycinat-och-somn.html`. |
-| `magnesium-d-vitamin-kombination.html` | `/magnesium-d-vitamin-kombination` | Published 2026-06-29. Covers global-batch #25. |
-| `magnesiumformer-vilken-valja.html` | `/magnesiumformer-vilken-valja` | Published 2026-06-29. Covers global-batch #6 (also listed above as row 6 — Updated to Published). |
+**Authority CLEARED:** 23
+**Authority BLOCKED:** 2
