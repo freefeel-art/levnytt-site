@@ -81,6 +81,139 @@ def get_git_commit():
         return "unknown"
 
 
+def calculate_business_impact(cluster, published_slugs, entities):
+    """
+    Calculate Business Impact score (0-100) based on long-term strategic value.
+    
+    Factors:
+    - Pillar/cornerstone content (25 points)
+    - Search demand potential (20 points) 
+    - Internal linking value (20 points)
+    - Commercial relevance (15 points)
+    - Evergreen value (10 points)
+    - Product Entity coverage (10 points)
+    
+    Returns: (score, rating_stars)
+    """
+    score = 0
+    topic = cluster["topic"].lower()
+    gap_file = cluster.get("gap_file", "")
+    priority = cluster.get("priority", "C")
+    
+    # 1. Pillar/Cornerstone Content (25 points)
+    pillar_keywords = [
+        "komplett guide", "evidensbaserad guide", "portal", "komplett",
+        "allt du behöver veta", "kompletta guiden"
+    ]
+    if any(kw in topic for kw in pillar_keywords):
+        score += 25
+    elif topic.endswith("guide") or "guide" in topic:
+        score += 20
+    elif priority == "A":
+        score += 15  # A-priority suggests cornerstone value
+    elif priority == "B":
+        score += 10
+    else:  # Priority C
+        score += 5
+    
+    # 2. Search Demand Potential (20 points)
+    # Based on gap report type and cluster priority
+    high_demand_topics = [
+        "multivitamin", "magnesium", "probiotika", "vitamin d", "kostfiber",
+        "omega-3", "kosttillskott"
+    ]
+    if any(keyword in topic for keyword in high_demand_topics):
+        if priority == "A":
+            score += 20
+        elif priority == "B":
+            score += 15
+        else:
+            score += 10
+    else:
+        if priority == "A":
+            score += 15
+        elif priority == "B":
+            score += 10
+        else:
+            score += 5
+    
+    # 3. Internal Linking Value (20 points)
+    # Portal articles and foundational content have high linking value
+    if "portal" in gap_file or "global-batch" in gap_file:
+        score += 20
+    elif any(word in topic for word in ["komplett", "guide", "vad är", "behöver jag"]):
+        score += 15
+    elif priority == "A":
+        score += 12
+    else:
+        score += 8
+    
+    # 4. Commercial Relevance (15 points)
+    # How well does this support product sales or business model
+    commercial_topics = [
+        "kosttillskott", "neolife", "direktförsäljning", "mlm", 
+        "behöver jag", "farligt", "säkerhet", "kvalitet", "bäst"
+    ]
+    if any(word in topic for word in commercial_topics):
+        score += 15
+    elif "mlm" in gap_file or "kosttillskott" in gap_file:
+        score += 12
+    else:
+        score += 8
+    
+    # 5. Evergreen Value (10 points)
+    # Scientific, educational, and regulatory content ages well
+    evergreen_indicators = [
+        "forskning", "vetenskap", "evidens", "vad är", "hur fungerar",
+        "säkerhet", "risker", "kvalitet", "dosering"
+    ]
+    if any(indicator in topic for indicator in evergreen_indicators):
+        score += 10
+    elif priority in ["A", "B"]:
+        score += 8
+    else:
+        score += 6
+    
+    # 6. Product Entity Coverage (10 points)
+    # Articles that can support multiple product entities
+    relevant_entities = 0
+    entity_keywords = [
+        "multivitamin", "magnesium", "probiotika", "vitamin", "omega",
+        "fiber", "kosttillskott", "supplement"
+    ]
+    
+    # Count how many product categories this article could support
+    for keyword in entity_keywords:
+        if keyword in topic:
+            relevant_entities += 1
+    
+    if relevant_entities >= 3:
+        score += 10
+    elif relevant_entities >= 2:
+        score += 8
+    elif relevant_entities >= 1:
+        score += 6
+    else:
+        score += 3
+    
+    # Ensure score is within bounds
+    score = min(100, max(0, score))
+    
+    # Convert to star rating
+    if score >= 90:
+        rating = "★★★★★"
+    elif score >= 75:
+        rating = "★★★★☆"
+    elif score >= 60:
+        rating = "★★★☆☆"
+    elif score >= 40:
+        rating = "★★☆☆☆"
+    else:
+        rating = "★☆☆☆☆"
+    
+    return score, rating
+
+
 def categorize_page(slug):
     if slug.startswith("neolife-"):
         return "product"
@@ -329,7 +462,8 @@ def slug_matches_topic_keywords(slug, topic):
     STOP_WORDS = {"komplett", "guide", "och", "för", "mot", "hur", "vad", "är",
                    "en", "ett", "det", "som", "att", "till", "med", "den",
                    "hjälper", "varför", "behöver", "från", "bästa", "mycket",
-                   "skillnad", "samband", "egentligen", "funktion", "riktigt"}
+                   "skillnad", "samband", "egentligen", "funktion", "riktigt",
+                   "sverige", "världen"}
 
     # 1. Exact slug-in-topic check
     if slug.replace("-", " ") in tl or slug in tl:
@@ -499,6 +633,11 @@ def main():
         auth = find_authority_for_cluster(cluster, authority_files)
         authority_status = "CLEARED" if auth else "BLOCKED"
         authority_file = auth["filename"] if auth else "—"
+        
+        # Calculate Business Impact
+        business_impact, business_rating = calculate_business_impact(
+            cluster, published_slugs, entities
+        )
 
         file_field = ""
         if status == "Published" and pub_slug:
@@ -523,6 +662,8 @@ def main():
             "cluster_num": cluster["cluster_num"],
             "priority": cluster["priority"],
             "score": cluster["score"],
+            "business_impact": business_impact,
+            "business_rating": business_rating,
             "status": status,
             "file": file_field,
             "authority": authority_status,
@@ -546,6 +687,8 @@ def main():
             "topic": row["cluster"],
             "priority": row["priority"],
             "score": row["score"],
+            "business_impact": row["business_impact"],
+            "business_rating": row["business_rating"],
             "gap_report": row["gap_report"],
             "authority": row["authority"],
             "authority_file": row["authority_file"],
@@ -562,14 +705,16 @@ def main():
 
     def sort_key(e):
         pri = {"A": 0, "B": 1, "C": 2}.get(e["priority"], 3)
-        sc = -(e["score"] or 0)
-        return (pri, sc)
+        bi = -(e["business_impact"] or 0)  # Business Impact descending
+        sc = -(e["score"] or 0)  # Original score descending
+        return (pri, bi, sc)
 
     ready_to_write.sort(key=sort_key)
     blocked.sort(key=sort_key)
-    ready_to_publish.sort(key=lambda e: -(e["score"] or 0))
+    ready_to_publish.sort(key=lambda e: -(e["business_impact"] or 0))
     update_existing.sort(key=lambda e: (
         {"A": 0, "B": 1, "C": 2}.get(e["priority"], 3),
+        -(e["business_impact"] or 0),
         -(e["score"] or 0)
     ))
 
@@ -742,14 +887,15 @@ def main():
         "",
         "## Full Backlog",
         "",
-        "| # | Cluster | Gap Report | Priority | Score | Status | File | Authority |",
-        "|---|---------|------------|----------|-------|--------|------|-----------|",
+        "| # | Cluster | Gap Report | Priority | Score | Business Impact | Status | File | Authority |",
+        "|---|---------|------------|----------|-------|----------------|--------|------|-----------|",
     ]
 
     for row in production_rows:
         if row["status"] == "Skipped":
             continue
         score_str = str(row["score"]) if row["score"] else "—"
+        business_impact_str = f"{row['business_impact']} {row['business_rating']}"
         status_emoji = {
             "Published": "Published",
             "Generated": "Generated",
@@ -759,7 +905,7 @@ def main():
 
         lines.append(
             f"| {row['num']} | {row['cluster']} | {row['gap_report']} | "
-            f"{row['priority']} | {score_str} | {status_emoji} | "
+            f"{row['priority']} | {score_str} | {business_impact_str} | {status_emoji} | "
             f"{row['file']} | {row['authority']} |"
         )
 
@@ -926,12 +1072,13 @@ def main():
         "",
     ]
     if ready_to_write:
-        lines.append("| Rank | Topic | Priority | Score | Gap Report | Authority File |")
-        lines.append("|------|-------|----------|-------|------------|----------------|")
+        lines.append("| Rank | Topic | Priority | Score | Business Impact | Gap Report | Authority File |")
+        lines.append("|------|-------|----------|-------|----------------|------------|----------------|")
         for i, item in enumerate(ready_to_write, 1):
             sc = str(item["score"]) if item["score"] else "—"
+            bi = f"{item['business_impact']} {item['business_rating']}"
             lines.append(
-                f"| {i} | {item['topic']} | {item['priority']} | {sc} | "
+                f"| {i} | {item['topic']} | {item['priority']} | {sc} | {bi} | "
                 f"{item['gap_report']} | {item['authority_file']} |"
             )
     else:
@@ -940,12 +1087,13 @@ def main():
     lines.append("## Blocked (Needs Authority Research)")
     lines.append("")
     if blocked:
-        lines.append("| Rank | Topic | Priority | Score | Gap Report |")
-        lines.append("|------|-------|----------|-------|------------|")
+        lines.append("| Rank | Topic | Priority | Score | Business Impact | Gap Report |")
+        lines.append("|------|-------|----------|-------|----------------|------------|")
         for i, item in enumerate(blocked, 1):
             sc = str(item["score"]) if item["score"] else "—"
+            bi = f"{item['business_impact']} {item['business_rating']}"
             lines.append(
-                f"| {i} | {item['topic']} | {item['priority']} | {sc} | {item['gap_report']} |"
+                f"| {i} | {item['topic']} | {item['priority']} | {sc} | {bi} | {item['gap_report']} |"
             )
     else:
         lines.append("*No items.*")
@@ -953,12 +1101,13 @@ def main():
     lines.append("## Ready to Publish (Source File Exists)")
     lines.append("")
     if ready_to_publish:
-        lines.append("| Rank | Topic | Score | Gap Report |")
-        lines.append("|------|-------|-------|------------|")
+        lines.append("| Rank | Topic | Score | Business Impact | Gap Report |")
+        lines.append("|------|-------|-------|----------------|------------|")
         for i, item in enumerate(ready_to_publish, 1):
             sc = str(item["score"]) if item["score"] else "—"
+            bi = f"{item['business_impact']} {item['business_rating']}"
             lines.append(
-                f"| {i} | {item['topic']} | {sc} | {item['gap_report']} |"
+                f"| {i} | {item['topic']} | {sc} | {bi} | {item['gap_report']} |"
             )
     else:
         lines.append("*No items.*")
@@ -966,11 +1115,12 @@ def main():
     lines.append("## Update Existing")
     lines.append("")
     if update_existing:
-        lines.append("| Rank | Topic | Priority | Gap Report |")
-        lines.append("|------|-------|----------|------------|")
+        lines.append("| Rank | Topic | Priority | Business Impact | Gap Report |")
+        lines.append("|------|-------|----------|----------------|------------|")
         for i, item in enumerate(update_existing, 1):
+            bi = f"{item['business_impact']} {item['business_rating']}"
             lines.append(
-                f"| {i} | {item['topic']} | {item['priority']} | {item['gap_report']} |"
+                f"| {i} | {item['topic']} | {item['priority']} | {bi} | {item['gap_report']} |"
             )
     else:
         lines.append("*No items.*")

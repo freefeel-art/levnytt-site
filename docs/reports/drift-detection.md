@@ -1,7 +1,7 @@
 # Drift Detection — Auto-Generated
 
-**Generated:** 2026-06-30 11:58:52
-**Commit:** 63fc2dc
+**Generated:** 2026-06-30 12:17:53
+**Commit:** 5bc9222
 
 > AUTO-GENERATED — DO NOT EDIT. Run `python3 scripts/sync-editorial-state.py` to regenerate.
 

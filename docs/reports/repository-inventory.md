@@ -1,7 +1,7 @@
 # Repository Inventory — Auto-Generated
 
-**Generated:** 2026-06-30 11:58:52
-**Commit:** 63fc2dc
+**Generated:** 2026-06-30 12:17:53
+**Commit:** 5bc9222
 
 > AUTO-GENERATED — DO NOT EDIT. Run `python3 scripts/sync-editorial-state.py` to regenerate.
 
@@ -18,14 +18,14 @@
 
 ### By Source Gap Report
 - **fiber:** 6
-- **global-batch-2026-06-29:** 24
+- **global-batch-2026-06-29:** 23
 - **kosttillskott:** 7
 - **magnesium:** 8
-- **mlm:** 2
+- **mlm:** 1
 - **multivitamin:** 6
 - **omega-3:** 4
 - **probiotics:** 6
-- **vitamin-d:** 6
+- **vitamin-d:** 5
 - **Undocumented (no gap report):** 7
 
   - `ala-vs-epa-vs-dha.html`
@@ -86,14 +86,14 @@
 | Report | Total | Published | Generated | New | Update | Skipped |
 |--------|-------|-----------|-----------|-----|--------|---------|
 | fiber-gap | 6 | 6 | 0 | 0 | 0 | 0 |
-| global-batch-2026-06-29-gap | 25 | 24 | 0 | 1 | 0 | 0 |
+| global-batch-2026-06-29-gap | 25 | 23 | 0 | 2 | 0 | 0 |
 | kosttillskott-gap | 20 | 7 | 5 | 8 | 0 | 0 |
 | magnesium-gap | 8 | 8 | 0 | 0 | 0 | 0 |
-| mlm-gap | 6 | 2 | 1 | 3 | 0 | 0 |
+| mlm-gap | 6 | 1 | 1 | 4 | 0 | 0 |
 | multivitamin-gap | 6 | 6 | 0 | 0 | 0 | 0 |
 | omega-3-gap | 10 | 4 | 0 | 6 | 0 | 0 |
 | probiotics-gap | 6 | 6 | 0 | 0 | 0 | 0 |
-| vitamin-d-gap | 7 | 6 | 0 | 1 | 0 | 0 |
+| vitamin-d-gap | 7 | 5 | 0 | 2 | 0 | 0 |
 
 ---
 
