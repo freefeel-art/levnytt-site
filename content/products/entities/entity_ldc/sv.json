@@ -1,0 +1,89 @@
+{
+  "canonical_id": "entity_ldc",
+  "neoLife_code": 21,
+  "locale": "sv",
+  "slug": "neolife-ldc",
+  "product_name": "LDC",
+  "aliases": [
+    "Light Duty Cleaner",
+    "Diskmedel",
+    "Handtvål",
+    "Lättrengöring"
+  ],
+  "category": "home_care",
+  "subcategory": "dish_soap",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "diskmedel",
+    "handtvål",
+    "lättrengöring",
+    "koncentrat",
+    "biologiskt nedbrytbar",
+    "fosfatfri",
+    "Golden Home Care"
+  ],
+  "short_description": "Koncentrerat disk-, handtvål- och lättrengöringsmedel — 1 liter ger upp till 6 liter färdigt medel.",
+  "summary": "NeoLife LDC (Light Duty Cleaner) är ett koncentrerat rengöringsmedel som fungerar som diskmedel, handtvål och allrengöring. Fosfatfritt och biologiskt nedbrytbart sedan 1960-talet. En liter koncentrat ger upp till 6 liter färdigt medel.",
+  "usage": {
+    "dosage": "1:5 utspädning för disk och handtvål",
+    "method": "späds i vatten",
+    "timing": "vid behov"
+  },
+  "packaging": {
+    "size": 1,
+    "unit": "l",
+    "label": "1 l"
+  },
+  "variants": [
+    {
+      "code": 21,
+      "packaging": {
+        "size": 1,
+        "unit": "l",
+        "label": "1 l"
+      },
+      "price_database_ref": {
+        "code": 21,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "3. GOLDEN RENGÖRING"
+      }
+    },
+    {
+      "code": 25,
+      "packaging": {
+        "size": 5,
+        "unit": "l",
+        "label": "5 l"
+      },
+      "price_database_ref": {
+        "code": 25,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "3. GOLDEN RENGÖRING"
+      }
+    }
+  ],
+  "price_database_ref": {
+    "code": 21,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "3. GOLDEN RENGÖRING"
+  },
+  "shop_path": "/i/shop/home-care/ldc.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_super_10",
+    "entity_soft",
+    "entity_g1"
+  ],
+  "related_article_slugs": [
+    "neolife-golden-home-care"
+  ],
+  "faq_references": [
+    "Vad är LDC och hur används det?",
+    "Hur mycket kan man spara med LDC?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

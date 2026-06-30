@@ -1,0 +1,67 @@
+{
+  "canonical_id": "entity_carotenoid_complex",
+  "neoLife_code": 566,
+  "locale": "sv",
+  "slug": "neolife-carotenoid-complex",
+  "product_name": "Carotenoid Complex",
+  "aliases": ["Karotenoid Complex", "Karotenoider", "Betakaroten"],
+  "legacy_codes": [],
+  "category": "supplements",
+  "subcategory": "phytonutrient",
+  "product_family": "pro_vitality_system",
+  "keywords": ["karotenoider", "lykopen", "lutein", "zeaxantin", "betakaroten", "alfakaroten", "betakryptoxantin", "antioxidant", "immunförsvar", "ögat", "makuladegeneration", "AMD", "helfodskälla"],
+  "short_description": "Spektrum av karotenoider från åtta helfodsbaserade källor — lykopen, lutein, zeaxantin, betakaroten och mer.",
+  "summary": "NeoLife Carotenoid Complex är ett kosttillskott som levererar ett brett spektrum av karotenoider från åtta helfodsbaserade källor — till skillnad från isolerat syntetiskt betakaroten som är vanligt i standardmultivitaminer. Formuleringen inkluderar lykopen (1 200 mcg), lutein och zeaxantin (410 mcg), betakaroten, alfakaroten och betakryptoxantin. En USDA-studie publicerad i American Journal of Clinical Nutrition visade 37% ökning av immunkapacitet (NK-celler) på 20 dagar med denna formulering.",
+  "ingredients": [
+    {"name": "Lykopen", "amount": "1200", "unit": "mcg"},
+    {"name": "Lutein + Zeaxantin", "amount": "410", "unit": "mcg"},
+    {"name": "Betakaroten", "unit": "provitamin A-källa"},
+    {"name": "Alfakaroten", "unit": "provitamin A-källa"},
+    {"name": "Betakryptoxantin", "unit": "provitamin A-källa"},
+    {"name": "Karotenoidkällor", "amount": "8", "unit": "helfodsbaserade"}
+  ],
+  "usage": {
+    "dosage": "1 kapsel dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "90 dagar (90 kapslar)"
+  },
+  "certifications": [],
+  "packaging": {"size": 90, "unit": "kapslar", "label": "90 kapslar"},
+  "price_database_ref": {
+    "code": 566,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/carotenoid-complex.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_formula_iv",
+    "entity_tre_en_en",
+    "entity_omega_3_plus",
+    "entity_pro_vitality",
+    "entity_betaguard",
+    "entity_flavonoid_complex",
+    "entity_cruciferous_plus"
+  ],
+  "related_article_slugs": [
+    "karotenoid-tillskott-vs-mat",
+    "zeaxantin-immunforsvar-2025"
+  ],
+  "faq_references": [
+    "Vad är karotenoider?",
+    "Får man tillräckligt med karotenoider genom kosten?",
+    "Vad är skillnaden mellan naturliga och syntetiska karotenoider?",
+    "Hur påverkar karotenoider immunförsvaret?",
+    "Vad är lutein och zeaxantin, och varför är de viktiga för ögonen?"
+  ],
+  "research_references": [
+    {"tier": "T2", "label": "Chew BP et al. — Karotenoidspektra och NK-cellsaktivitet, Am J Clin Nutr 1997", "url": "https://pubmed.ncbi.nlm.nih.gov/9024281/"},
+    {"tier": "T3", "label": "CARET-studien — syntetiskt betakaroten och risk hos rökare", "url": "https://pubmed.ncbi.nlm.nih.gov/8943999/"}
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

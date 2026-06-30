@@ -1,0 +1,52 @@
+{
+  "canonical_id": "entity_ultra_hydrating_serum",
+  "neoLife_code": 367,
+  "locale": "sv",
+  "slug": "neolife-ultra-hydrating-serum",
+  "product_name": "Ultra Hydrating Serum",
+  "aliases": [
+    "Ultra serum",
+    "Intensivt serum",
+    "Nutriance ultra serum"
+  ],
+  "category": "skin_care",
+  "subcategory": "facial_care",
+  "product_family": "nutriance_organic_hudvard",
+  "keywords": [
+    "serum",
+    "ansiktet",
+    "ultra återfuktande",
+    "torr hud",
+    "Nutriance"
+  ],
+  "short_description": "Intensivt återfuktande ansiktsserum för mycket torr hud — 30 ml.",
+  "summary": "NeoLife Ultra Hydrating Serum är ett intensivt återfuktande serum från Nutriance Organic-serien för mycket torr hud.",
+  "usage": {
+    "dosage": "Applicera några droppar i ansiktet",
+    "method": "klappa in försiktigt före dagkräm",
+    "timing": "morgon och kväll"
+  },
+  "packaging": {
+    "size": 30,
+    "unit": "ml",
+    "label": "30 ml"
+  },
+  "price_database_ref": {
+    "code": 367,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "5. NUTRIANCE ORGANIC HUDVÅRD"
+  },
+  "shop_path": "/i/shop/skin-care/ultra-hydrating-serum.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_hydrating_serum"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan Hydrating Serum och Ultra Hydrating Serum?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

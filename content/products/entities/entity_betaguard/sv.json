@@ -1,0 +1,80 @@
+{
+  "canonical_id": "entity_betaguard",
+  "neoLife_code": 789,
+  "locale": "sv",
+  "slug": "neolife-betaguard",
+  "product_name": "Beta Guard",
+  "aliases": [
+    "Betaguard",
+    "Betakaroten",
+    "Antioxidantkomplex"
+  ],
+  "category": "supplements",
+  "subcategory": "phytonutrient",
+  "keywords": [
+    "betakaroten",
+    "C-vitamin",
+    "E-vitamin",
+    "selen",
+    "antioxidant",
+    "oxidativ stress",
+    "d-alfa-tokoferol"
+  ],
+  "short_description": "Brett antioxidantkomplex med betakaroten, C-vitamin, naturlig E-vitamin och selen — 90 tabletter.",
+  "summary": "NeoLife Beta Guard är ett brett antioxidantkomplex som kombinerar betakaroten, C-vitamin, naturlig E-vitamin (d-alfa-tokoferol) och selen. Vitamin C regenererar vitamin E. Selen är särskilt relevant i Europa på grund av selenfattig jordmån.",
+  "ingredients": [
+    {
+      "name": "Betakaroten"
+    },
+    {
+      "name": "C-vitamin"
+    },
+    {
+      "name": "E-vitamin (d-alfa-tokoferol)"
+    },
+    {
+      "name": "Selen"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 tabletter dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "45-90 dagar (90 tabletter)"
+  },
+  "packaging": {
+    "size": 90,
+    "unit": "tabletter",
+    "label": "90 tabletter"
+  },
+  "price_database_ref": {
+    "code": 789,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/beta-guard.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_all_c",
+    "entity_vitamin_e"
+  ],
+  "related_article_slugs": [
+    "neolife-betaguard"
+  ],
+  "faq_references": [
+    "Vad är antioxidantnätverket?",
+    "Vad är skillnaden mellan Beta Guard och Carotenoid Complex?"
+  ],
+  "research_references": [
+    {
+      "tier": "T2",
+      "label": "Am J Clin Nutr 2002: Naturlig vs syntetisk E-vitamin retention",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12198000/"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

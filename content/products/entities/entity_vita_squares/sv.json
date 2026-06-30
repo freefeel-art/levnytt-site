@@ -1,0 +1,71 @@
+{
+  "canonical_id": "entity_vita_squares",
+  "neoLife_code": 740,
+  "locale": "sv",
+  "slug": "neolife-vita-squares",
+  "product_name": "Vita Squares",
+  "aliases": [
+    "Barnmultivitamin",
+    "Children's multivitamin",
+    "Kids multi"
+  ],
+  "category": "supplements",
+  "subcategory": "multivitamin",
+  "keywords": [
+    "barnmultivitamin",
+    "barn",
+    "tuggtablett",
+    "D-vitamin barn",
+    "järn",
+    "jod"
+  ],
+  "short_description": "Multivitamin för barn i tuggbar form — 180 tuggtabletter, anpassade doser för barn från 2 år.",
+  "summary": "NeoLife Vita Squares är ett multivitaminpreparat för barn i tuggbar tablettform. Dosen är anpassad för barns behov. Vanliga näringsgap hos svenska barn inkluderar D-vitamin, järn och jod. Livsmedelsverket rekommenderar D-vitamintillskott till alla barn under 2 år.",
+  "ingredients": [
+    {
+      "name": "Vitamin- och mineralspektrum",
+      "unit": "barndoserade nivåer"
+    }
+  ],
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen (åldersanpassat)",
+    "method": "tuggas",
+    "timing": "valfri tid",
+    "duration": "180 tuggtabletter",
+    "safety": "Ej till barn under 2 år utan läkarkontakt. Fettlösliga vitaminer kan ackumuleras vid överdos."
+  },
+  "packaging": {
+    "size": 180,
+    "unit": "tuggtabletter",
+    "label": "180 tuggtabletter"
+  },
+  "price_database_ref": {
+    "code": 740,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/vita-squares.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_vegan_d"
+  ],
+  "related_article_slugs": [
+    "neolife-vita-squares",
+    "neolife-vitamin-d"
+  ],
+  "faq_references": [
+    "Vilka näringsgap är vanligast hos svenska barn?",
+    "När ska barn få vitamintillskott?"
+  ],
+  "research_references": [
+    {
+      "tier": "T2",
+      "label": "Pediatrics 2001: Järnbristanemi och kognitiv utveckling hos barn under 2 år"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

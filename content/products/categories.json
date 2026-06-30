@@ -1,0 +1,66 @@
+{
+  "description": "Product category taxonomy for LevNytt Product Entity System",
+  "last_updated": "2026-06-30",
+  "categories": [
+    {
+      "id": "supplements",
+      "label_sv": "Kosttillskott",
+      "price_db_section": "1. KOSTTILLSKOTT",
+      "subcategories": [
+        {"id": "omega-3", "label_sv": "Omega-3 och fiskolja"},
+        {"id": "multivitamin", "label_sv": "Multivitamin och brett spektrum"},
+        {"id": "mineral", "label_sv": "Enskilda mineraler"},
+        {"id": "phytonutrient", "label_sv": "Växtbaserade näringsämnen"},
+        {"id": "probiotic", "label_sv": "Probiotika och matsmältning"},
+        {"id": "targeted", "label_sv": "Riktade näringsämnen"},
+        {"id": "protein_meal", "label_sv": "Måltidsersättning och protein"},
+        {"id": "green_drink", "label_sv": "Gröna drycker och koncentrat"}
+      ]
+    },
+    {
+      "id": "weight_management",
+      "label_sv": "Viktkontroll",
+      "price_db_section": "2. VIKTKONTROLL",
+      "subcategories": [
+        {"id": "meal_replacement", "label_sv": "Måltidsersättning (shakes, bars, te)"}
+      ]
+    },
+    {
+      "id": "home_care",
+      "label_sv": "Golden Rengöring",
+      "price_db_section": "3. GOLDEN RENGÖRING",
+      "subcategories": [
+        {"id": "all_cleaner", "label_sv": "Allrengöring och grovrengöring"},
+        {"id": "dish_soap", "label_sv": "Diskmedel och lättrengöring"},
+        {"id": "laundry", "label_sv": "Tvättmedel"},
+        {"id": "fabric_softener", "label_sv": "Sköljmedel"}
+      ]
+    },
+    {
+      "id": "personal_care",
+      "label_sv": "Hår & Kroppsvård",
+      "price_db_section": "4. NUTRIANCE HÅR & KROPSVÅRD",
+      "subcategories": [
+        {"id": "shampoo", "label_sv": "Schampo"},
+        {"id": "conditioner", "label_sv": "Balsam"},
+        {"id": "body_care", "label_sv": "Kroppsvård"}
+      ]
+    },
+    {
+      "id": "skin_care",
+      "label_sv": "Hudvård",
+      "price_db_section": "5. NUTRIANCE ORGANIC HUDVÅRD",
+      "subcategories": [
+        {"id": "facial_care", "label_sv": "Ansiktsvård"}
+      ]
+    },
+    {
+      "id": "accessories",
+      "label_sv": "Tillbehör",
+      "price_db_section": "TILLBEHÖR",
+      "subcategories": [
+        {"id": "accessory", "label_sv": "Tillbehör och dispensers"}
+      ]
+    }
+  ]
+}

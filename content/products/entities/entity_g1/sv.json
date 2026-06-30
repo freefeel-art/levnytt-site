@@ -1,0 +1,56 @@
+{
+  "canonical_id": "entity_g1",
+  "neoLife_code": 144,
+  "locale": "sv",
+  "slug": "neolife-g1",
+  "product_name": "G1",
+  "aliases": [
+    "G1 tvättmedel",
+    "Tvättmedel",
+    "Golden Home Care tvättmedel"
+  ],
+  "category": "home_care",
+  "subcategory": "laundry",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "tvättmedel",
+    "koncentrerat",
+    "pulver",
+    "Golden Home Care"
+  ],
+  "short_description": "Koncentrerat tvättmedel i pulverform — 5 kg, effektiv och miljövänlig tvätt.",
+  "summary": "NeoLife G1 är ett koncentrerat tvättmedel i pulverform från Golden Home Care-sortimentet.",
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "tillsätts i tvättmedelsfacket",
+    "timing": "vid varje tvätt"
+  },
+  "packaging": {
+    "size": 5,
+    "unit": "kg",
+    "label": "5 kg"
+  },
+  "price_database_ref": {
+    "code": 144,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "3. GOLDEN RENGÖRING"
+  },
+  "shop_path": "/i/shop/home-care/g1.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_soft",
+    "entity_super_10",
+    "entity_ldc"
+  ],
+  "related_article_slugs": [
+    "neolife-golden-home-care"
+  ],
+  "faq_references": [
+    "Vad ingår i Golden Home Care-sortimentet?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

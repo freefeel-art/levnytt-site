@@ -1,0 +1,41 @@
+{
+  "canonical_id": "entity_dunkpump_ldc_5l",
+  "neoLife_code": 1586,
+  "locale": "sv",
+  "slug": "neolife-dunkpump-ldc-5l",
+  "product_name": "Dunkpump LDC 5L",
+  "aliases": [
+    "Dunkpump 5 l LDC"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "dunkpump",
+    "5 liter",
+    "LDC",
+    "Golden Home Care"
+  ],
+  "short_description": "Dunkpump för 5 liters LDC-dunk — för enkel dosering av diskmedel.",
+  "summary": "NeoLife dunkpump för 5 liters LDC-dunk.",
+  "packaging": {
+    "size": 1,
+    "unit": "st",
+    "label": "1 dunkpump (5 l)"
+  },
+  "price_database_ref": {
+    "code": 1586,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/dunkpump-ldc-5l.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_ldc"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

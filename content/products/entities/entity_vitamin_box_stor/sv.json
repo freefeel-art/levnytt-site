@@ -1,0 +1,42 @@
+{
+  "canonical_id": "entity_vitamin_box_stor",
+  "neoLife_code": 5001,
+  "locale": "sv",
+  "slug": "neolife-vitamin-box-stor",
+  "product_name": "Vitamin box, stor",
+  "aliases": [
+    "Stor vitaminbox",
+    "Vitaminbox stor"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "keywords": [
+    "vitaminbox",
+    "tablettask",
+    "tillbehör",
+    "förvaring",
+    "stor"
+  ],
+  "short_description": "Stor vitaminbox för daglig dosering — rymmer fler tabletter.",
+  "summary": "NeoLife större vitaminbox för praktisk förvaring och dosering av dagliga kosttillskott.",
+  "packaging": {
+    "size": 1,
+    "unit": "st",
+    "label": "1 stor vitaminbox"
+  },
+  "price_database_ref": {
+    "code": 5001,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/vitamin-box-stor.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_vitamin_box"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

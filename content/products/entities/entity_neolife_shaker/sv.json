@@ -1,0 +1,40 @@
+{
+  "canonical_id": "entity_neolife_shaker",
+  "neoLife_code": 608,
+  "locale": "sv",
+  "slug": "neolife-shaker",
+  "product_name": "NeoLife Shaker",
+  "aliases": [
+    "Shaker",
+    "NeoLife shaker"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "keywords": [
+    "shaker",
+    "NeoLife",
+    "tillbehör"
+  ],
+  "short_description": "NeoLife Shaker för tillredning av NeoLifeShake — 1 st.",
+  "summary": "NeoLife Shaker för bekväm tillredning av NeoLifeShake.",
+  "packaging": {
+    "size": 1,
+    "unit": "st",
+    "label": "1 shaker"
+  },
+  "price_database_ref": {
+    "code": 608,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/shaker.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_neolife_shake"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

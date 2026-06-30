@@ -44,10 +44,14 @@
     @media(max-width:900px){.nav-links{display:none;}.nav-hamburger{display:block;}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:16px 24px;}}
     @media(max-width:600px){.error-links{grid-template-columns:1fr;}.error-num{font-size:6rem;}}
   </style>
+<link rel="stylesheet" href="/pillar.css">
 </head>
 <body>
 
-  <section class="error-section">
+  <div id="site-nav"></div>
+<script src="/nav.js" defer></script>
+
+<section class="error-section">
     <div class="error-inner">
       <div class="error-num">404</div>
       <h1 class="error-title">Sidan hittades inte</h1>
@@ -76,7 +80,6 @@
     </div>
   </section>
 
-  <script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
   <script src="/components.js"></script>
 </body>

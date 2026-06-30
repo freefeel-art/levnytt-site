@@ -1,0 +1,77 @@
+{
+  "canonical_id": "entity_cruciferous_plus",
+  "neoLife_code": 892,
+  "locale": "sv",
+  "slug": "neolife-cruciferous-plus",
+  "product_name": "Cruciferous Plus",
+  "aliases": [
+    "Glukosinolater",
+    "Sulforafan",
+    "I3C",
+    "DIM",
+    "Korsblommiga grönsaker",
+    "Broccoli",
+    "Kål"
+  ],
+  "category": "supplements",
+  "subcategory": "phytonutrient",
+  "keywords": [
+    "glukosinolater",
+    "sulforafan",
+    "korsblommiga",
+    "Nrf2",
+    "avgiftning",
+    "myrosinas",
+    "broccoli",
+    "fytonutrient"
+  ],
+  "short_description": "Extrakt från korsblommiga grönsaker med glukosinolater för cellulär avgiftning — 60 tabletter.",
+  "summary": "NeoLife Cruciferous Plus levererar glukosinolater (glucoraphanin, glucobrassicin) och deras bioaktiva nedbrytningsprodukter (sulforafan, I3C, DIM) från broccoli, kål och andra korsblommiga växter. Sulforafan aktiverar Nrf2-signalvägen — en masterregulator för cellulära antioxidantsystem.",
+  "ingredients": [
+    {
+      "name": "Extrakt från broccoli (Brassica oleracea)"
+    },
+    {
+      "name": "Glukosinolater (glucoraphanin, glucobrassicin)"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 tabletter dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "30-60 dagar (60 tabletter)"
+  },
+  "packaging": {
+    "size": 60,
+    "unit": "tabletter",
+    "label": "60 tabletter"
+  },
+  "price_database_ref": {
+    "code": 892,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/cruciferous-plus.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_flavonoid_complex"
+  ],
+  "related_article_slugs": [
+    "neolife-cruciferous-plus"
+  ],
+  "faq_references": [
+    "Vad är glukosinolater?",
+    "Varför är korsblommiga grönsaker viktiga för avgiftning?"
+  ],
+  "research_references": [
+    {
+      "tier": "T3",
+      "label": "J Nutr Biochem 2015: Sulforafan och Nrf2-signalvägen"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

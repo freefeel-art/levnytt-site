@@ -1,0 +1,133 @@
+{
+  "canonical_id": "entity_neolife_shake",
+  "neoLife_code": 915,
+  "locale": "sv",
+  "slug": "neolife-shake",
+  "product_name": "NeoLifeShake",
+  "aliases": [
+    "Shake",
+    "Måltidsersättning",
+    "GR2 shake",
+    "Protein shake"
+  ],
+  "category": "weight_management",
+  "subcategory": "meal_replacement",
+  "keywords": [
+    "måltidsersättning",
+    "protein",
+    "GR2",
+    "glykemisk respons",
+    "krom",
+    "viktnedgång",
+    "shake"
+  ],
+  "short_description": "Måltidsersättning med GR2 glykemisk responskontroll — 18 g protein, 5 g fiber, 150 kcal per portion.",
+  "summary": "NeoLifeShake är en måltidsersättning baserad på GR2-teknologi som planerar ut blodsockersvaret. Innehåller 18 g protein (soja, kasein, vassle), 5 g fiber och 22 aminosyror per portion. Finns i vanilj, choklad och bär. Rekommenderas med Pro Vitality+ för fullständig cellnäring.",
+  "ingredients": [
+    {
+      "name": "Protein",
+      "amount": "18",
+      "unit": "g (soja, kasein, vassle)"
+    },
+    {
+      "name": "Fiber",
+      "amount": "5",
+      "unit": "g"
+    },
+    {
+      "name": "Aminosyror",
+      "amount": "22",
+      "unit": "st (9 essentiella)"
+    },
+    {
+      "name": "Krom",
+      "unit": "för normal blodsockernivå"
+    },
+    {
+      "name": "GR2 Glycemic Response Control",
+      "unit": "patenterad teknologi"
+    }
+  ],
+  "usage": {
+    "dosage": "1 portion som måltidsersättning",
+    "method": "blandas med vatten eller lättmjölk",
+    "timing": "frukost eller lunch",
+    "duration": "15 portioner per förpackning"
+  },
+  "packaging": {
+    "size": 15,
+    "unit": "sachet",
+    "label": "15 sachéer"
+  },
+  "variants": [
+    {
+      "code": 915,
+      "packaging": {
+        "size": 15,
+        "unit": "portionspåsar",
+        "label": "15 portioner (Vanilj)"
+      },
+      "price_database_ref": {
+        "code": 915,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "2. VIKTKONTROLL"
+      }
+    },
+    {
+      "code": 916,
+      "packaging": {
+        "size": 15,
+        "unit": "portionspåsar",
+        "label": "15 portioner (Choklad)"
+      },
+      "price_database_ref": {
+        "code": 916,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "2. VIKTKONTROLL"
+      }
+    },
+    {
+      "code": 917,
+      "packaging": {
+        "size": 15,
+        "unit": "portionspåsar",
+        "label": "15 portioner (Bär)"
+      },
+      "price_database_ref": {
+        "code": 917,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "2. VIKTKONTROLL"
+      }
+    }
+  ],
+  "price_database_ref": {
+    "code": 915,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "2. VIKTKONTROLL"
+  },
+  "shop_path": "/i/shop/weight-management/neolifeshake.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_neolife_bar",
+    "entity_neolife_tea"
+  ],
+  "related_article_slugs": [
+    "neolife-viktkontroll"
+  ],
+  "faq_references": [
+    "Vad är GR2-teknologi?",
+    "Hur många måltider ersätter NeoLifeShake?",
+    "Kan NeoLifeShake kombineras med Pro Vitality+?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "EFSA: Krom och normal blodsockernivå"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

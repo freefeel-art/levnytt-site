@@ -1,0 +1,77 @@
+{
+  "canonical_id": "entity_magnesium_complex",
+  "neoLife_code": 805,
+  "locale": "sv",
+  "slug": "neolife-magnesium-complex",
+  "product_name": "Magnesium Complex",
+  "aliases": [
+    "Magnesium",
+    "Magnesiumglycinat",
+    "Organiskt magnesium"
+  ],
+  "category": "supplements",
+  "subcategory": "mineral",
+  "keywords": [
+    "magnesium",
+    "organiskt magnesium",
+    "aminosyrachelat",
+    "energimetabolism",
+    "nervsystemet",
+    "muskelfunktion",
+    "biotillgänglighet"
+  ],
+  "short_description": "Organiskt magnesium i aminosyrachelat-form för bättre absorption — 60 tabletter.",
+  "summary": "NeoLife Magnesium Complex är ett magnesiumtillskott i organisk form för förbättrad absorption. Magnesiumoxid absorberas <5% medan organiska former som magnesiumglycinat absorberas 40–50%. Magnesium är koenzym i 300+ enzymreaktioner med 8–9 EFSA-godkända hälsopåståenden.",
+  "ingredients": [
+    {
+      "name": "Magnesium (organisk form)",
+      "unit": "aminosyrachelat"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 tabletter dagligen",
+    "method": "i samband med måltid",
+    "timing": "kväll (främjar avslappning)",
+    "duration": "30-60 dagar (60 tabletter)"
+  },
+  "packaging": {
+    "size": 60,
+    "unit": "tabletter",
+    "label": "60 tabletter"
+  },
+  "price_database_ref": {
+    "code": 805,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/magnesium-complex.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_kalmag_plus_d",
+    "entity_all_c"
+  ],
+  "related_article_slugs": [
+    "neolife-magnesium-complex",
+    "neolife-kalmag-plus-d"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan olika magnesiumformer?",
+    "Hur mycket magnesium behöver man?",
+    "Varför är organiskt magnesium bättre?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "Nutrition Research Reviews 2014: Aminosyrachelat-mineralers biotillgänglighet"
+    },
+    {
+      "tier": "T1",
+      "label": "EFSA: Godkända hälsopåståenden för magnesium"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

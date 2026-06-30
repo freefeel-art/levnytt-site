@@ -1,0 +1,84 @@
+{
+  "canonical_id": "entity_kalmag_plus_d",
+  "neoLife_code": 724,
+  "locale": "sv",
+  "slug": "neolife-kalmag-plus-d",
+  "product_name": "Kal-Mag Plus D",
+  "aliases": [
+    "Kalcium Magnesium D-vitamin",
+    "Calcium Magnesium Vitamin D"
+  ],
+  "category": "supplements",
+  "subcategory": "mineral",
+  "keywords": [
+    "kalcium",
+    "magnesium",
+    "D-vitamin",
+    "D3",
+    "benhälsa",
+    "osteoporos",
+    "postmenopaus",
+    "muskelfunktion",
+    "PTH"
+  ],
+  "short_description": "Kalcium, magnesium och D-vitamin D3 i ett preparat — 180 tabletter, 60 dagars räckvidd.",
+  "summary": "NeoLife Kal-Mag Plus D kombinerar kalcium, magnesium och vitamin D3 i ett preparat. De tre ämnena bildar ett interdependent system: D-vitamin aktiverar kalciumabsorption, magnesium aktiverar D-vitamin och reglerar kalciumbalansen. Utan D-vitamin absorberas endast 10–15% av kalcium vs 30–40% med adekvat D-vitamin.",
+  "ingredients": [
+    {
+      "name": "Kalcium"
+    },
+    {
+      "name": "Magnesium"
+    },
+    {
+      "name": "D-vitamin D3 (kolekalciferol)"
+    }
+  ],
+  "usage": {
+    "dosage": "3 tabletter dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid, helst fördelat över dagen",
+    "duration": "60 dagar (180 tabletter)"
+  },
+  "packaging": {
+    "size": 180,
+    "unit": "tabletter",
+    "label": "180 tabletter"
+  },
+  "price_database_ref": {
+    "code": 724,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/kal-mag-plus-d.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_magnesium_complex",
+    "entity_vegan_d"
+  ],
+  "related_article_slugs": [
+    "neolife-kalmag-plus-d",
+    "neolife-vitamin-d",
+    "neolife-magnesium-complex"
+  ],
+  "faq_references": [
+    "Varför kombineras kalcium, magnesium och D-vitamin?",
+    "Vem bör ta Kal-Mag Plus D?",
+    "Kan höga doser kalcium vara skadligt?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "EFSA: Godkända hälsopåståenden för kalcium, magnesium och D-vitamin"
+    },
+    {
+      "tier": "T3",
+      "label": "J Am Osteopath Assoc 2018: Magnesium aktiverar D-vitamin och reglerar PTH"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

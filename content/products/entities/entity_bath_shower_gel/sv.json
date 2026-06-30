@@ -1,0 +1,50 @@
+{
+  "canonical_id": "entity_bath_shower_gel",
+  "neoLife_code": 314,
+  "locale": "sv",
+  "slug": "neolife-bath-shower-gel",
+  "product_name": "Refreshing Bath & Shower Gel",
+  "aliases": [
+    "Duschgel",
+    "Badgel",
+    "Nutriance duschgel"
+  ],
+  "category": "personal_care",
+  "subcategory": "body_care",
+  "product_family": "nutriance_hair_body",
+  "keywords": [
+    "duschgel",
+    "badgel",
+    "kroppsvård",
+    "Nutriance",
+    "uppfriskande"
+  ],
+  "short_description": "Uppfriskande dusch- och badgel — 250 ml för hela kroppen.",
+  "summary": "NeoLife Refreshing Bath & Shower Gel är en uppfriskande dusch- och badgel från Nutriance-serien.",
+  "usage": {
+    "dosage": "Applicera på våt hud",
+    "method": "massera in, skölj noga",
+    "timing": "vid dusch eller bad"
+  },
+  "packaging": {
+    "size": 250,
+    "unit": "ml",
+    "label": "250 ml"
+  },
+  "price_database_ref": {
+    "code": 314,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "4. NUTRIANCE HÅR & KROPSVÅRD"
+  },
+  "shop_path": "/i/shop/personal-care/shower-gel.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_hand_body_lotion",
+    "entity_aloe_vera_gel"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

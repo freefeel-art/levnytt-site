@@ -1,0 +1,41 @@
+{
+  "canonical_id": "entity_vitamin_box",
+  "neoLife_code": 1650,
+  "locale": "sv",
+  "slug": "neolife-vitamin-box",
+  "product_name": "Vitamin box",
+  "aliases": [
+    "Vitaminbox",
+    "Dagsbox"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "keywords": [
+    "vitaminbox",
+    "tablettask",
+    "tillbehör",
+    "förvaring"
+  ],
+  "short_description": "Vitaminbox för daglig dosering — praktisk förpackning för dina kosttillskott.",
+  "summary": "NeoLife vitaminbox för praktisk förvaring och dosering av dagliga kosttillskott.",
+  "packaging": {
+    "size": 1,
+    "unit": "st",
+    "label": "1 vitaminbox"
+  },
+  "price_database_ref": {
+    "code": 1650,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/vitamin-box.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_vitamin_box_stor"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

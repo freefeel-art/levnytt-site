@@ -1,25 +1,15 @@
 # CURRENT-SPRINT.md
 # LevNytt.se — Project Phase
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 ---
 
 ## Phase: Maintenance + Feature Development
 
-The Gen 3 migration project is **complete**.
-
-- **All public pages** migrated to Gen 3
-- **All public pages** pass the 13/13 audit checklist
-- **0** remaining migration backlog items
-
-All pages now share:
-- `pillar.css` (shared design system)
-- `nav.js` / `footer.js` / `components.js` with `defer`
-- Verification meta tags (Google + Pinterest)
-- Page-specific `og:image`
-- At least 3 responsive breakpoints
-- Google Fonts (Playfair Display + Inter)
+The Gen 3 migration is **complete**.
+The Brand System integration (Sprint 8) and Brand Rollout (Sprint 9) are **complete**.
+Sprint 10 (Documentation & Baseline Update) is **active**.
 
 ---
 
@@ -28,66 +18,115 @@ All pages now share:
 | | |
 |---|---|
 | **Status** | ✅ Completed |
-| **Sprint** | 7 — Affärsmöjlighet 2.0 |
-| **Completed** | 2026-06-29 |
+| **Sprint** | 9 — Brand Rollout |
+| **Completed** | 2026-06-30 |
 
-### Tasks
+### Tasks (Sprint 9)
 
-- [x] Read all core project documents (PROJECT-ENTRY, STATUS, SPRINT, DECISIONS, MASTERPLAN, ROADMAP)
-- [x] Explore existing page architecture, components, and design patterns
-- [x] Build Affärsmöjlighet 2.0 page following masterplan IA
-- [x] Build succeeds — 13/13 audit passed
-- [x] Committed and pushed
+- [x] Replace legacy branding on all existing pages
+- [x] Update shared components for brand consistency
+- [x] Split `/pillar.css` responsibilities
+- [x] Resolve duplicated nav/footer/CSS loading
+- [x] Verify the site-wide consistency
 
-### What was implemented
+### What was implemented (Sprint 9)
 
-Complete replacement of `neolife-affarsmojlighet.html` with the new Affärsmöjlighet 2.0 page. The old MLM-style business page with income claims, compensation plan tables, and Director earnings illustrations was replaced with a transparent decision-support page centered on savings.
+- Brand OG image (`assets/brand/og-brand.png`) deployed to all 70 root pages + 37 content/articles source files
+- `#site-nav` placeholder added to final 44 root pages + 3 subdirectory pages
+- Final validation confirmed all 80 root pages have: `nav.js` + `footer.js` + `components.js` + `pillar.css` + `#site-nav`
+- LV Brand Mark present in both `nav.js` and `footer.js`
+- Hero watermark injector present in `components.js`
+- Author avatar injector present in `components.js`
 
-All 10 IA sections from the masterplan are built:
+### Pages excluded from brand OG replacement
 
-1. **Hero** — H1 "Hur mycket kan du faktiskt spara som NeoLife återförsäljare?" with ingress and stat row (21% savings, 57 products, 0 kr registration, 0 sales requirements)
-2. **"De flesta börjar inte för att sälja"** — narrative section explaining most register for the discount
-3. **Video placeholder** — dashed placeholder box for future video
-4. **Calculator placeholder** — dashed placeholder box for future savings calculator
-5. **Product savings examples** — table with 7 real products, prices from LEVNYTT-PRICE-DATABASE.md
-6. **Pris per användning** — cost-per-use table across 6 products
-7. **Kund / Återförsäljare / Verksamhet** — three-column comparison using `component-grid` + custom cards
-8. **FAQ** — 8 questions using `details/summary` accordion with FAQPage schema
-9. **Registration** — step-by-step registration info + CTA block
-10. **Closing** — core message repeated, no hard sell
+Pages with page-specific or product-specific OG images were preserved:
 
-Additional:
-- JSON-LD schema: Article + FAQPage + BreadcrumbList
-- Internal linking section (`tier-section`) with 6 outgoing links
-- 13/13 audit compliance
-- Uses existing design system — no new components added to pillar.css
-
-### What was left for later sprints
-
-- **Besparingskalkylator** (interactive) — placeholder only. Logic deferred to Phase 2, Project 4.
-- **Video integration** — placeholder only. Deferred to Phase 2, Project 8.
-- **Product Entity System** — not built. Deferred to Phase 2, Project 2.
-- **Dynamic Product Database** — not built. Deferred to Phase 2, Project 3.
-- **OG image** — meta tags point to `images/og/neolife-affarsmojlighet.webp` (needs to be created separately)
-
-### Architectural observations
-
-- The `component-grid`/`component-card` pattern in pillar.css works well for three-column comparisons with minor page-specific overrides. The comparison cards introduced minimal page-specific CSS (`.comparison-card`) that could be promoted to pillar.css if this pattern repeats on other pages.
-- The placeholder box pattern (`.placeholder-box`) is intentionally page-specific since it's a temporary pattern. Once calculators and video land, these dashed boxes are replaced entirely.
-- No changes to project architecture, shared components, or pillar.css were required.
+- `den-fundersamma-mannen.html` — editorial OG
+- `fytosteroler-cellmembran.html` — editorial OG
+- `integritetspolicy.html` — editorial OG
+- `neolife-affarsmojlighet.html` — editorial OG
+- `neolife-hallbarhet.html` — editorial OG
+- `neolife-omega-3-plus.html` — product image OG
+- `neolife-pro-vitality.html` — product image OG
+- `neolife-tre-en-en-cellnaring.html` — product image OG
+- `personlig-vard.html` — product image OG
+- `404.html` — no OG (utility page)
 
 ---
 
-## Future work
+## Active Sprint — 12
 
-Candidates for next sprint include:
+| | |
+|---|---|
+| **Status** | ✅ Completed |
+| **Sprint** | 10 — Documentation & Baseline Update |
+| **Completed** | 2026-06-30 |
+| **Next** | Sprint 11 — Documentation Alignment |
+
+### Sprint 10 completed
+
+- PROJECT-STATUS.md, CURRENT-SPRINT.md, DECISIONS.md, PROJECT-ENTRY.md all updated
+- SPRINT-9-BRAND-ROLLOUT.md created
+- Final validation complete: 58/75 .md files clean, 6 files reported for review
+
+### Sprint 11 completed
+
+- PUBLICATION-ARTICLE-STANDARD.md: OG image path updated, Sprint 7/8/9 drift resolved
+- PHASE-2-ROADMAP.md: completely rewritten for current vanilla HTML architecture
+- Validation: no Astro references, no obsolete OG paths, no DECISIONS.md contradictions
+
+---
+
+## Active Sprint — 12
+
+| | |
+|---|---|
+| **Status** | 🟢 Active |
+| **Sprint** | 12 — Product Entity System Foundation |
+| **Started** | 2026-06-30 |
+
+### Objective
+
+Establish the architecture and specification for a Product Entity System — the canonical source for product identity, classification, and metadata across all LevNytt systems.
+
+No production pages modified. Specification only.
+
+### Tasks
+
+- [x] Audit all places product information currently exists
+- [x] Design Product Entity schema with field-level justification
+- [x] Define repository structure (content/products/entities/)
+- [x] Create category taxonomy (content/products/categories.json)
+- [x] Document integration plan (PA, PB, Price DB, calculators, video)
+- [x] Document migration strategy (incremental, 6 waves)
+- [x] Validate: no Price DB duplication, no DECISIONS.md contradiction
+
+### Completion criteria
+
+- Product Entity architecture documented
+- Canonical schema defined
+- Repository structure proposed
+- Integration plan completed
+- Migration strategy documented
+- No production pages modified
+- No articles modified
+
+### Next action
+
+Start Wave 1 entity creation (Omega-3 Plus, Carotenoid Complex, Pro Vitality, Formula IV, Tre-en-en). Resolve multi-variant product modeling question first.
+
+---
+
+## Future work (backlog, unordered)
 
 | Area | Description |
 |---|---|
-| **Product Entity System** | Structured product data via `src/data/products.yaml` |
-| **Content expansion** | New articles, internal linking from Affärsmöjlighet |
+| **Product Entity System** | Structured product data via `content/products/` |
+| **Content expansion** | New articles, internal linking |
 | **Performance** | Image optimization, lazy loading, Core Web Vitals |
 | **Accessibility** | Contrast checks, ARIA labels, keyboard navigation |
+| **Interactive tools** | Comparison pages, calculators, decision guides |
 
 ---
 

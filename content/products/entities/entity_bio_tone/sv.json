@@ -1,0 +1,42 @@
+{
+  "canonical_id": "entity_bio_tone",
+  "neoLife_code": 935,
+  "locale": "sv",
+  "slug": "neolife-bio-tone",
+  "product_name": "Bio-Tone",
+  "aliases": [
+    "Bio Tone",
+    "Matsmältningsenzymer"
+  ],
+  "status": "inactive",
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "enzymer",
+    "matsmältning"
+  ],
+  "short_description": "Matsmältningsenzympreparat — 120 tabletter. Inte aktivt marknadsförd.",
+  "summary": "NeoLife Bio-Tone är ett matsmältningsenzympreparat. Produkten finns i prislistan men är inte aktivt marknadsförd av LevNytt.",
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "i samband med måltid",
+    "timing": "före eller under måltid"
+  },
+  "packaging": {
+    "size": 120,
+    "unit": "tabletter",
+    "label": "120 tabletter"
+  },
+  "price_database_ref": {
+    "code": 935,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/bio-tone.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

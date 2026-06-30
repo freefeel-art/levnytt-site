@@ -28,6 +28,24 @@ If documentation and repository disagree:
 
 ---
 
+## Documentation Hierarchy
+
+Always read documentation in this order before starting work:
+
+1. `PROJECT-ENTRY.md` — entry point, workflow, skills
+2. `PROJECT-STATUS.md` — current state, architecture, milestones, priorities
+3. `CURRENT-SPRINT.md` — active sprint, tasks, next action
+4. `DECISIONS.md` — permanent engineering decisions
+5. Repository files — actual code and pages
+6. Historical documents — context only, not authoritative
+
+Reference documents (read only when relevant to the task):
+- `docs/BRAND-DESIGN-SYSTEM.md` — brand identity, LV Mark spec, colors, usage rules
+- `docs/PUBLICATION-ARTICLE-STANDARD.md` — Publication Agent rules and conventions
+- `docs/ARTICLE-TEMPLATE-FAMILIES.md` — article template taxonomy
+
+---
+
 ## Skill Loading (Mandatory)
 
 Before starting any implementation work, explicitly load every Claude/OpenCode skill that is relevant to the current sprint.
@@ -40,13 +58,13 @@ Skills are the implementation authority for their respective tasks and must be l
 
 Typical skills include:
 
-- `pillar-page-template`
-- `informational-article`
-- `astro-builder`
-- `direct-sales-reddit-research`
-- `olsp-authority-article`
-- `search-gap-research`
-- `supplement-reddit-research`
+- `pillar-page-template` — pillar page migration and audit
+- `informational-article` — publish-ready HTML articles
+- `astro-builder` — Astro-based websites (not used for levnytt.se)
+- `direct-sales-reddit-research` — Reddit mining for direct sales market intelligence
+- `olsp-authority-article` — OLSP authority articles (not used for levnytt.se)
+- `search-gap-research` — keyword validation and content briefs
+- `supplement-reddit-research` — Reddit mining for supplement/health niche content ideas
 
 ### Mandatory workflow
 
@@ -91,34 +109,61 @@ Routine implementation decisions should be made autonomously.
 
 For every sprint:
 
-1. Read the complete target page.
-2. Run the required audit.
-3. Apply fixes.
-4. Perform a visual review.
-5. Re-run the audit.
-6. Commit the page.
-7. Push.
-8. Update PROJECT-STATUS.md and CURRENT-SPRINT.md.
-9. Report completed work.
+1. Read the four required documents (in order).
+2. Load relevant skills.
+3. Verify before implementing.
+4. Apply changes.
+5. Verify after changes.
+6. Update documentation.
+7. Commit and push.
+8. Report completed work.
 
-One page = one commit.
+One concern per commit.
 
 ---
 
-## Session Management
+## Current Architecture Summary
 
-Prefer short implementation sessions.
+LevNytt.se is a vanilla HTML5/CSS3/ES5 static site hosted on Cloudflare Pages.
 
-When a sprint is completed, recommend starting a new session instead of continuing indefinitely.
+**No build step, no framework, no npm.**
 
-Resume work by reading:
+### Major systems
 
-- PROJECT-ENTRY.md
-- PROJECT-STATUS.md
-- CURRENT-SPRINT.md
-- DECISIONS.md
+| System | Location | Purpose |
+|---|---|---|
+| Pages | Root `*.html` files + `neolife-*/index.html` subdirectories | All public content |
+| Design System | `/pillar.css` | Shared CSS with brand CSS variables |
+| Brand System | `assets/brand/` | LV Mark, favicon, apple-touch-icon, hero-watermark, OG image |
+| Navigation | `/nav.js` | Self-injecting IIFE; all pages via `defer` |
+| Footer | `/footer.js` | Self-injecting IIFE; all pages via `defer` |
+| Components | `/components.js` | Brand injectors, sponsor-ID rewriting, scroll-to-top |
+| Source articles | `content/articles/` | Informational articles (deployed via Publication Agent) |
+| Routing | `_redirects` | Cloudflare rewrite rules for `content/articles/` |
+| SEO | `sitemap.xml` | Hand-maintained URL index |
 
-Then load the required skills before implementation begins.
+### Where brand assets live
+
+```
+assets/brand/
+├── favicon.svg           ← Browser tab icon (injected by components.js)
+├── apple-touch-icon.png   ← iOS home screen icon (injected by components.js)
+├── hero-watermark.svg     ← Hero section watermark (injected by components.js)
+├── og-brand.png           ← Default Open Graph image (1200x630)
+├── og-brand.svg           ← OG image source
+├── logo.svg               ← LV Mark light background variant
+├── logo-dark.svg          ← LV Mark dark background variant
+├── logo-light.svg         ← LV Mark optional variant
+└── author-avatar.svg      ← Author avatar source (LV Mark inline SVG in components.js)
+```
+
+### Where articles are generated
+
+Articles are created by the `informational-article` skill, which produces a `content/articles/<slug>.html` file. The Publication Agent deploys these to root level via `_redirects` 200-rewrites.
+
+### Where pillar pages are generated
+
+Pillar pages are created or migrated by the `pillar-page-template` skill. They are hand-authored `.html` files at root level that follow the Gen 3 production standard (13/13 audit checklist).
 
 ---
 
@@ -141,24 +186,24 @@ The repository is never modified to match outdated documentation. Documentation 
 ### Starting a session
 
 1. Read the four required documents above (in order).
-2. Determine which skills are required for the current sprint and load them with the skill tool (see **Skill Loading** above).
+2. Determine which skills are required for the current sprint and load them with the skill tool.
 3. Check `CURRENT-SPRINT.md` — is a sprint active?
    - **Yes:** implement the active sprint. Do not introduce unrelated work.
-   - **No:** select the highest-priority item from `PROJECT-STATUS.md → Open backlog` and open it as the next sprint. See **Autonomous Sprint Selection** above.
+   - **No:** select the highest-priority item from `PROJECT-STATUS.md → Next Development Priorities` and open it as the next sprint.
 4. If the repository state appears to conflict with `PROJECT-STATUS.md`, verify before acting. Report the conflict. Do not invent a resolution.
 
 ### Doing work
 
 - Work on **one task at a time**, as defined in `CURRENT-SPRINT.md`.
 - Do not redesign, refactor, or change architectural decisions without first updating `DECISIONS.md` and getting explicit confirmation.
-- Do not modify `sitemap.xml`, `nav.js`, `footer.js`, or `pillar.css` without understanding their role (see `PROJECT-STATUS.md → Architecture`).
+- Do not modify `sitemap.xml`, `nav.js`, `footer.js`, `pillar.css`, or `components.js` without understanding their role.
 - After any HTML change, verify the page still loads `nav.js`, `footer.js`, and `pillar.css` with `defer`.
 
 ### Finishing a session
 
 - Update `CURRENT-SPRINT.md` to reflect task progress.
-- If a sprint is completed, update `PROJECT-STATUS.md` (milestones, priorities) and clear `CURRENT-SPRINT.md`.
-- Commit with a concise message matching the existing commit style (see `git log --oneline`).
+- If a sprint is completed, update `PROJECT-STATUS.md` (milestones, priorities) and either close or advance `CURRENT-SPRINT.md`.
+- Commit with a concise message matching the existing commit style.
 
 ### Committing
 
@@ -191,7 +236,15 @@ These documents exist in the repository but are **not operational**. Read them o
 |---|---|---|
 | `LEVNYTT-MUISTIO.md` | Original ops memo (Finnish). Sponsor IDs, image naming, git workflow. | Partially outdated — superseded by `PROJECT-STATUS.md` |
 | `AUDIT-REPORT.md` | Site audit from 2026-06-23. Issues documented were resolved in subsequent commits. | Historical record |
-| `SITEMAP-VERIFICATION.md` | Sitemap completeness check from 2026-06-28. All 73 pages confirmed. | Completed task record |
+| `SITEMAP-VERIFICATION.md` | Sitemap completeness check from 2026-06-28. All pages confirmed. | Completed task record |
 | `OPENCODE-REPOSITORY-ANALYSIS.md` | AI-generated architecture summary from 2026-06-28. | Superseded by `PROJECT-STATUS.md` |
 | `DOCUMENTATION-MIGRATION-REPORT.md` | Record of the documentation consolidation on 2026-06-28. | Archive |
+| `DOCUMENTATION-UPDATE-REPORT.md` | Record of a documentation update pass. Likely outdated. | Archive |
+| `SPRINT-6-REPORT.md` | Sprint 6 (Wave 3B) report. | Historical record |
+| `docs/reports/SPRINT-6-MIGRATION-INVENTORY.md` | Inventory of pages migrated in Sprint 6. | Archive |
+| `docs/reports/SPRINT-6.1-CLEANUP-REPORT.md` | Sprint 6.1 cleanup record. | Archive |
+| `docs/reports/SITE-PAGE-INVENTORY.md` | Site page inventory. Likely outdated. | Archive |
+| `docs/reports/MORNING-BRIEF-VALIDATION-REPORT.md` | Validation report. | Archive |
 | `docs/databank/LEVNYTT-PRICE-DATABASE.md` | NeoLife SE product prices (April 2026). Use when building cost calculators. | Active reference |
+| `docs/specifications/HOMEPAGE.md` | Homepage specification. | Active reference |
+| `docs/specifications/MORNING-BRIEF-ARCHITECTURE.md` | Morning Brief architecture spec. | Archive |

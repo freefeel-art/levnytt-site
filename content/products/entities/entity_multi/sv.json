@@ -1,0 +1,46 @@
+{
+  "canonical_id": "entity_multi",
+  "neoLife_code": 590,
+  "locale": "sv",
+  "slug": "neolife-multi",
+  "product_name": "Multi",
+  "aliases": [
+    "Multi multivitamin",
+    "Bas-multivitamin"
+  ],
+  "status": "inactive",
+  "category": "supplements",
+  "subcategory": "multivitamin",
+  "keywords": [
+    "multivitamin",
+    "mineraler",
+    "bastillskott"
+  ],
+  "short_description": "Enklare multivitamin- och mineralpreparat — 60 tabletter. Ersatt av Formula IV.",
+  "summary": "NeoLife Multi är ett enklare multivitamin- och mineralpreparat. Produkten är inte aktivt marknadsförd av LevNytt — Formula IV och Formula IV Plus rekommenderas som bredare och mer biotillgängliga alternativ.",
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid"
+  },
+  "packaging": {
+    "size": 60,
+    "unit": "tabletter",
+    "label": "60 tabletter"
+  },
+  "price_database_ref": {
+    "code": 590,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/multi.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_all_c"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

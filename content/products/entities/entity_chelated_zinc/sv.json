@@ -1,0 +1,72 @@
+{
+  "canonical_id": "entity_chelated_zinc",
+  "neoLife_code": 830,
+  "locale": "sv",
+  "slug": "neolife-chelated-zinc",
+  "product_name": "Chelated Zinc",
+  "aliases": [
+    "Zink",
+    "Zinkkelat",
+    "Aminosyrachelaterad zink"
+  ],
+  "category": "supplements",
+  "subcategory": "mineral",
+  "keywords": [
+    "zink",
+    "kelat",
+    "aminosyrachelat",
+    "immunförsvar",
+    "biotillgänglighet"
+  ],
+  "short_description": "Zink i aminosyrachelat-form för bättre absorption — 90 tabletter.",
+  "summary": "NeoLife Chelated Zinc är ett zinktillskott i chelat-form för bättre absorption. Kelaterad zink absorberas via aminosyratransportörer. Zink är koenzym i 300+ enzymer. EFSA har godkänt hälsopåståenden för zink och normalt immunförsvar.",
+  "ingredients": [
+    {
+      "name": "Zink (aminosyrachelat)"
+    }
+  ],
+  "usage": {
+    "dosage": "1 tablett dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "90 dagar (90 tabletter)",
+    "safety": "Högdos zink (>25 mg/dag) kan störa kopparabsorptionen."
+  },
+  "packaging": {
+    "size": 90,
+    "unit": "tabletter",
+    "label": "90 tabletter"
+  },
+  "price_database_ref": {
+    "code": 830,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/chelated-zinc.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_all_c"
+  ],
+  "related_article_slugs": [
+    "neolife-chelated-zinc"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan olika zinkformer?",
+    "Kan man få i sig tillräckligt med zink via kosten?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "Cochrane 2013: Zink och förkylningsduration"
+    },
+    {
+      "tier": "T1",
+      "label": "Nutrition Research Reviews 2014: Kelaterade mineralers biotillgänglighet"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

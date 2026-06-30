@@ -1,0 +1,123 @@
+{
+  "canonical_id": "entity_super_10",
+  "neoLife_code": 16,
+  "locale": "sv",
+  "slug": "neolife-super-10",
+  "product_name": "Super 10",
+  "aliases": [
+    "Super 10 grovrengöringsmedel",
+    "Allrengöring",
+    "Koncentrerat rengöringsmedel"
+  ],
+  "category": "home_care",
+  "subcategory": "all_cleaner",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "rengöring",
+    "koncentrat",
+    "allrengöring",
+    "grovrengöring",
+    "biologiskt nedbrytbar",
+    "tensider",
+    "Golden Home Care"
+  ],
+  "short_description": "Koncentrerat allrengöringsmedel med biologiskt nedbrytbara tensider — finns i 1L, 5L, 10L och 25L.",
+  "summary": "NeoLife Super 10 är ett koncentrerat allrengöringsmedel med biologiskt nedbrytbara tensider. Används på golv, kakel, kök och allmän ytrengöring. Ingår i Golden Home Care-sortimentet. Ger upp till 100 doser per liter.",
+  "usage": {
+    "dosage": "10 ml per 1 l vatten",
+    "method": "späds i vatten före användning",
+    "timing": "vid behov",
+    "duration": "100 doser per liter koncentrat"
+  },
+  "packaging": {
+    "size": 1,
+    "unit": "l",
+    "label": "1 l"
+  },
+  "variants": [
+    {
+      "code": 16,
+      "packaging": {
+        "size": 1,
+        "unit": "l",
+        "label": "1 l"
+      },
+      "price_database_ref": {
+        "code": 16,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "3. GOLDEN RENGÖRING"
+      }
+    },
+    {
+      "code": 17,
+      "packaging": {
+        "size": 5,
+        "unit": "l",
+        "label": "5 l"
+      },
+      "price_database_ref": {
+        "code": 17,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "3. GOLDEN RENGÖRING"
+      }
+    },
+    {
+      "code": 18,
+      "packaging": {
+        "size": 10,
+        "unit": "l",
+        "label": "10 l"
+      },
+      "price_database_ref": {
+        "code": 18,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "3. GOLDEN RENGÖRING"
+      }
+    },
+    {
+      "code": 19,
+      "packaging": {
+        "size": 25,
+        "unit": "l",
+        "label": "25 l"
+      },
+      "price_database_ref": {
+        "code": 19,
+        "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+        "section": "3. GOLDEN RENGÖRING"
+      }
+    }
+  ],
+  "price_database_ref": {
+    "code": 16,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "3. GOLDEN RENGÖRING"
+  },
+  "shop_path": "/i/shop/home-care/super-10.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_ldc",
+    "entity_soft",
+    "entity_g1"
+  ],
+  "related_article_slugs": [
+    "neolife-super-10",
+    "neolife-golden-home-care"
+  ],
+  "faq_references": [
+    "Vad är ett koncentrerat rengöringsmedel?",
+    "Hur beräknar man kostnad per användning?",
+    "Vad innehåller NeoLife Super 10?"
+  ],
+  "research_references": [
+    {
+      "tier": "T4",
+      "label": "EU:s tensidförordning (EC 648/2004) — krav på biologisk nedbrytbarhet"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

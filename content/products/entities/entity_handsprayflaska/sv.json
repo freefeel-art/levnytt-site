@@ -1,0 +1,42 @@
+{
+  "canonical_id": "entity_handsprayflaska",
+  "neoLife_code": 303,
+  "locale": "sv",
+  "slug": "neolife-handsprayflaska",
+  "product_name": "Handsprayflaska",
+  "aliases": [
+    "Sprayflaska",
+    "500 ml spray"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "sprayflaska",
+    "Golden Home Care",
+    "tillbehör"
+  ],
+  "short_description": "Handsprayflaska 500 ml för utspädda rengöringsmedel — återanvändbar.",
+  "summary": "NeoLife handsprayflaska på 500 ml för utspädda rengöringsmedel. Praktisk för daglig användning med Super 10 och andra Golden Home Care-produkter.",
+  "packaging": {
+    "size": 500,
+    "unit": "ml",
+    "label": "500 ml"
+  },
+  "price_database_ref": {
+    "code": 303,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/handsprayflaska.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_blandflaska",
+    "entity_super_10"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

@@ -1,0 +1,52 @@
+{
+  "canonical_id": "entity_cleansing_milk",
+  "neoLife_code": 361,
+  "locale": "sv",
+  "slug": "neolife-cleansing-milk",
+  "product_name": "Cleansing Milk",
+  "aliases": [
+    "Rengöringsmjölk",
+    "Ansiktsrengöring",
+    "Nutriance cleansing milk"
+  ],
+  "category": "skin_care",
+  "subcategory": "facial_care",
+  "product_family": "nutriance_organic_hudvard",
+  "keywords": [
+    "rengöringsmjölk",
+    "ansiktet",
+    "rengöring",
+    "Nutriance"
+  ],
+  "short_description": "Mild rengöringsmjölk för ansiktet — 150 ml, avlägsnar smink och orenheter.",
+  "summary": "NeoLife Cleansing Milk är en mild rengöringsmjölk från Nutriance Organic-serien.",
+  "usage": {
+    "dosage": "Applicera i torrt eller fuktigt ansikte",
+    "method": "massera försiktigt, avlägsna med bomullsrondell",
+    "timing": "morgon och kväll"
+  },
+  "packaging": {
+    "size": 150,
+    "unit": "ml",
+    "label": "150 ml"
+  },
+  "price_database_ref": {
+    "code": 361,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "5. NUTRIANCE ORGANIC HUDVÅRD"
+  },
+  "shop_path": "/i/shop/skin-care/cleansing-milk.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_cleansing_gel",
+    "entity_balancing_tonic"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan Cleansing Milk och Cleansing Gel?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

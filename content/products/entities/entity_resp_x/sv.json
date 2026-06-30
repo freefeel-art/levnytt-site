@@ -1,0 +1,85 @@
+{
+  "canonical_id": "entity_resp_x",
+  "neoLife_code": 820,
+  "locale": "sv",
+  "slug": "neolife-resp-x",
+  "product_name": "Resp-X",
+  "aliases": [
+    "Luftvägshälsa",
+    "Älderbär",
+    "Marshmallowrot",
+    "Respiratory health"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "älderbär",
+    "sambucus nigra",
+    "marshmallowrot",
+    "luftvägar",
+    "immunförsvar",
+    "C-vitamin",
+    "zink"
+  ],
+  "short_description": "Kombination av örter och näringsämnen för luftvägshälsa med älderbär och marshmallowrot — 90 tabletter.",
+  "summary": "NeoLife Resp-X är ett kombinationspreparat för luftvägshälsa. Innehåller älderbär (Sambucus nigra) — forskning visar reducerad förkylningsduration, marshmallowrot (Althaea officinalis) för mild halsslemhinneirritation, samt vitamin C och zink för normalt immunförsvar.",
+  "ingredients": [
+    {
+      "name": "Älderbär (Sambucus nigra)"
+    },
+    {
+      "name": "Marshmallowrot (Althaea officinalis)"
+    },
+    {
+      "name": "C-vitamin"
+    },
+    {
+      "name": "Zink"
+    }
+  ],
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "sväljes hel",
+    "timing": "valfri tid",
+    "duration": "90 tabletter per förpackning",
+    "safety": "Marshmallowrot kan fördröja absorption av andra läkemedel — ta minst 1 timme från andra mediciner."
+  },
+  "packaging": {
+    "size": 90,
+    "unit": "tabletter",
+    "label": "90 tabletter"
+  },
+  "price_database_ref": {
+    "code": 820,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/resp-x.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_all_c",
+    "entity_chelated_zinc"
+  ],
+  "related_article_slugs": [
+    "neolife-resp-x"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan immunstöd och behandling?",
+    "Vilken forskning finns om älderbär?"
+  ],
+  "research_references": [
+    {
+      "tier": "T2",
+      "label": "Nutrients 2016: Älderbär och förkylningsduration — RCT på 312 flygpassagerare"
+    },
+    {
+      "tier": "T1",
+      "label": "Complementary Medicine Research 2016: Meta-analys av älderbär och influensaliknande symptom"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

@@ -1,0 +1,81 @@
+{
+  "canonical_id": "entity_vegan_d",
+  "neoLife_code": 865,
+  "locale": "sv",
+  "slug": "neolife-vegan-d",
+  "product_name": "Vegan D",
+  "aliases": [
+    "D-vitamin",
+    "Vitamin D",
+    "Kolekalciferol",
+    "D3",
+    "Veganskt D-vitamin"
+  ],
+  "category": "supplements",
+  "subcategory": "mineral",
+  "keywords": [
+    "D-vitamin",
+    "vitamin D",
+    "D3",
+    "kolekalciferol",
+    "veganskt",
+    "benhälsa",
+    "immunförsvar",
+    "nordiskt klimat",
+    "UVB"
+  ],
+  "short_description": "Veganskt D-vitamin D3 (kolekalciferol) — 120 tabletter för benhälsa, immunförsvar och muskelfunktion.",
+  "summary": "NeoLife Vegan D innehåller D-vitamin D3 (kolekalciferol) från vegansk källa. Sverige ligger på 56–69° N — från oktober till mars är UVB-strålningen för svag för D-vitaminproduktion. MONICA-studien visade att 20–41% av unga svenska män har otillräckliga nivåer vintertid.",
+  "ingredients": [
+    {
+      "name": "D-vitamin D3 (kolekalciferol)",
+      "unit": "vegansk källa"
+    }
+  ],
+  "usage": {
+    "dosage": "1 tablett dagligen (10-20 mcg enligt Livsmedelsverket)",
+    "method": "sväljes hel",
+    "timing": "i samband med måltid (fett förbättrar absorption)",
+    "duration": "120 dagar (120 tabletter)",
+    "safety": "Överskrid ej 100 mcg/dag. Blodprov rekommenderas vid misstänkt brist."
+  },
+  "packaging": {
+    "size": 120,
+    "unit": "tabletter",
+    "label": "120 tabletter"
+  },
+  "price_database_ref": {
+    "code": 865,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/vegan-d.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_kalmag_plus_d",
+    "entity_vita_squares"
+  ],
+  "related_article_slugs": [
+    "neolife-vitamin-d"
+  ],
+  "faq_references": [
+    "Behöver svenskar D-vitamintillskott?",
+    "Vad är skillnaden mellan D2 och D3?",
+    "Vilka riskgrupper har störst behov av D-vitamin?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "EFSA: Godkända hälsopåståenden för D-vitamin"
+    },
+    {
+      "tier": "T2",
+      "label": "MONICA-studien norra Sverige: 20-41% av unga män har otillräckligt D-vitamin vintertid"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

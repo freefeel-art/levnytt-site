@@ -1,0 +1,50 @@
+{
+  "canonical_id": "entity_conditioner",
+  "neoLife_code": 312,
+  "locale": "sv",
+  "slug": "neolife-conditioner",
+  "product_name": "Enriching Conditioner",
+  "aliases": [
+    "Balsam",
+    "Nutriance balsam",
+    "Hårbalsam"
+  ],
+  "category": "personal_care",
+  "subcategory": "conditioner",
+  "product_family": "nutriance_hair_body",
+  "keywords": [
+    "balsam",
+    "hår",
+    "återfuktande",
+    "Nutriance",
+    "hårvård"
+  ],
+  "short_description": "Återfuktande balsam för mjukt och hanterbart hår — 250 ml.",
+  "summary": "NeoLife Enriching Conditioner är ett återfuktande balsam från Nutriance-serien.",
+  "usage": {
+    "dosage": "Applicera i rent, vått hår",
+    "method": "massera in, låt verka 1-2 min, skölj",
+    "timing": "efter schamponering"
+  },
+  "packaging": {
+    "size": 250,
+    "unit": "ml",
+    "label": "250 ml"
+  },
+  "price_database_ref": {
+    "code": 312,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "4. NUTRIANCE HÅR & KROPSVÅRD"
+  },
+  "shop_path": "/i/shop/personal-care/conditioner.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_rich_shampoo",
+    "entity_mild_shampoo"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

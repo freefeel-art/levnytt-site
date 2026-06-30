@@ -1,0 +1,42 @@
+{
+  "canonical_id": "entity_dunkpump_super_10_5l",
+  "neoLife_code": 1584,
+  "locale": "sv",
+  "slug": "neolife-dunkpump-5l",
+  "product_name": "Dunkpump Super 10 5L",
+  "aliases": [
+    "Dunkpump 5 l Super 10"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "dunkpump",
+    "5 liter",
+    "Super 10",
+    "Golden Home Care"
+  ],
+  "short_description": "Dunkpump för 5 liters Super 10-dunk — för enkel dosering.",
+  "summary": "NeoLife dunkpump för 5 liters Super 10-dunk. Underlättar dosering av koncentrerat rengöringsmedel.",
+  "packaging": {
+    "size": 1,
+    "unit": "st",
+    "label": "1 dunkpump (5 l)"
+  },
+  "price_database_ref": {
+    "code": 1584,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/dunkpump-s10-5l.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_dunkpump_super_10_10l",
+    "entity_super_10"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

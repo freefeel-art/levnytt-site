@@ -1,0 +1,54 @@
+{
+  "canonical_id": "entity_mild_shampoo",
+  "neoLife_code": 311,
+  "locale": "sv",
+  "slug": "neolife-mild-shampoo",
+  "product_name": "Mild Revitalizing Shampoo",
+  "aliases": [
+    "Mild shampoo",
+    "Skonsamt schampo",
+    "Nutriance shampoo mild"
+  ],
+  "category": "personal_care",
+  "subcategory": "shampoo",
+  "product_family": "nutriance_hair_body",
+  "keywords": [
+    "schampo",
+    "hår",
+    "milt",
+    "skonsamt",
+    "Nutriance",
+    "känslig"
+  ],
+  "short_description": "Skonsamt revitaliserande schampo för känsligt hår och daglig användning — 250 ml.",
+  "summary": "NeoLife Mild Revitalizing Shampoo är ett skonsamt schampo från Nutriance-serien för känsligt hår och daglig användning.",
+  "usage": {
+    "dosage": "Applicera i vått hår",
+    "method": "massera in, skölj noga",
+    "timing": "vid varje hårtvätt"
+  },
+  "packaging": {
+    "size": 250,
+    "unit": "ml",
+    "label": "250 ml"
+  },
+  "price_database_ref": {
+    "code": 311,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "4. NUTRIANCE HÅR & KROPSVÅRD"
+  },
+  "shop_path": "/i/shop/personal-care/mild-shampoo.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_rich_shampoo",
+    "entity_conditioner"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan Rich och Mild Revitalizing Shampoo?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

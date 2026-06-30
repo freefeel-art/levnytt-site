@@ -1,0 +1,52 @@
+{
+  "canonical_id": "entity_rejuvenating_rich_cream",
+  "neoLife_code": 369,
+  "locale": "sv",
+  "slug": "neolife-rejuvenating-rich-cream",
+  "product_name": "Rejuvenating Rich Cream",
+  "aliases": [
+    "Nattkräm",
+    "Rich cream",
+    "Nutriance rich cream",
+    "Återuppbyggande kräm"
+  ],
+  "category": "skin_care",
+  "subcategory": "facial_care",
+  "product_family": "nutriance_organic_hudvard",
+  "keywords": [
+    "nattkräm",
+    "ansiktskräm",
+    "rik",
+    "återuppbyggande",
+    "Nutriance",
+    "anti-aging"
+  ],
+  "short_description": "Återuppbyggande rik ansiktskräm — 50 ml för vårdande och skyddande hudvård.",
+  "summary": "NeoLife Rejuvenating Rich Cream är en återuppbyggande ansiktskräm från Nutriance Organic-serien, särskilt lämplig som nattkräm.",
+  "usage": {
+    "dosage": "Applicera i ansikte och hals",
+    "method": "massera försiktigt in i huden",
+    "timing": "kväll"
+  },
+  "packaging": {
+    "size": 50,
+    "unit": "ml",
+    "label": "50 ml"
+  },
+  "price_database_ref": {
+    "code": 369,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "5. NUTRIANCE ORGANIC HUDVÅRD"
+  },
+  "shop_path": "/i/shop/skin-care/rejuvenating-rich-cream.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_insta_lift_eye_gel",
+    "entity_moisturizing_cream"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

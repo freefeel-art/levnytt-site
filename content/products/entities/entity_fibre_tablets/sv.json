@@ -1,0 +1,62 @@
+{
+  "canonical_id": "entity_fibre_tablets",
+  "neoLife_code": 850,
+  "locale": "sv",
+  "slug": "neolife-fibre-tablets",
+  "product_name": "Fibre Tablets",
+  "aliases": [
+    "Fibertabletter",
+    "Kostfibrer",
+    "Fibertillskott"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "fiber",
+    "kostfibrer",
+    "lösliga fibrer",
+    "olösliga fibrer",
+    "matsmältning",
+    "mättnad",
+    "tarmhälsa"
+  ],
+  "short_description": "Blandning av lösliga och olösliga fibrer från frukt, grönsaker och spannmål — 120 tabletter, 2 g fiber per portion.",
+  "summary": "NeoLife Fibre Tablets innehåller en blandning av lösliga och olösliga fibrer från frukt-, grönsaks- och spannmålskällor. 4 tabletter ger 2 g kostfiber. Lösliga fibrer kan bidra till sänkt kolesterol och stabilare blodsocker. Olösliga fibrer stödjer tarmfunktion.",
+  "ingredients": [
+    {
+      "name": "Blandning av frukt-, grönsaks- och spannmålsfibrer",
+      "amount": "2",
+      "unit": "g per portion (4 tabletter)"
+    }
+  ],
+  "usage": {
+    "dosage": "4 tabletter per portion, 1-2 portioner dagligen",
+    "method": "sväljes med ett fullt glas vatten",
+    "timing": "före måltid för mättnadseffekt",
+    "duration": "60-120 dagar (120 tabletter)"
+  },
+  "packaging": {
+    "size": 120,
+    "unit": "tabletter",
+    "label": "120 tabletter"
+  },
+  "price_database_ref": {
+    "code": 850,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/fibre-tablets.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_article_slugs": [
+    "neolife-fibre-tablets"
+  ],
+  "faq_references": [
+    "Hur mycket fiber behöver man per dag?",
+    "Vad är skillnaden mellan lösliga och olösliga fibrer?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

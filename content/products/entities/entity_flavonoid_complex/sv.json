@@ -1,0 +1,84 @@
+{
+  "canonical_id": "entity_flavonoid_complex",
+  "neoLife_code": 790,
+  "locale": "sv",
+  "slug": "neolife-flavonoid-complex",
+  "product_name": "Flavonoid Complex",
+  "aliases": [
+    "Flavonoider",
+    "Bioflavonoider",
+    "Polyfenoler",
+    "Quercetin",
+    "Rutin",
+    "Hesperidin"
+  ],
+  "category": "supplements",
+  "subcategory": "phytonutrient",
+  "keywords": [
+    "flavonoider",
+    "bioflavonoider",
+    "polyfenoler",
+    "quercetin",
+    "rutin",
+    "hesperidin",
+    "antioxidant",
+    "kärlhälsa"
+  ],
+  "short_description": "Brett flavonoid-spektrum med quercetin, rutin och hesperidin — 60 tabletter, växtbaserade fytonäringsämnen.",
+  "summary": "NeoLife Flavonoid Complex levererar ett brett spektrum av flavonoider (quercetin, rutin, hesperidin). Över 6 000 flavonoider har identifierats. Genomsnittligt kostintag: 200–500 mg/dag. Forskning visar potential för blodtryckssänkning och förbättrade kärlfunktionsmarkörer.",
+  "ingredients": [
+    {
+      "name": "Quercetin"
+    },
+    {
+      "name": "Rutin (quercetin-3-rutinosid)"
+    },
+    {
+      "name": "Hesperidin"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 tabletter dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "30-60 dagar (60 tabletter)"
+  },
+  "packaging": {
+    "size": 60,
+    "unit": "tabletter",
+    "label": "60 tabletter"
+  },
+  "price_database_ref": {
+    "code": 790,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/flavonoid-complex.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_cruciferous_plus",
+    "entity_botanical_balance"
+  ],
+  "related_article_slugs": [
+    "neolife-flavonoid-complex"
+  ],
+  "faq_references": [
+    "Vad är flavonoider?",
+    "Vad är skillnaden mellan flavonoider från kost och tillskott?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "Nutrition Reviews 2016: Quercetin och blodtryck — meta-analys"
+    },
+    {
+      "tier": "T2",
+      "label": "Nutrients 2019: Hesperidin och kärlfunktion"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

@@ -30,7 +30,15 @@
 <footer class="lfoot" role="contentinfo">
   <div class="lfoot-inner">
     <div class="lfoot-top">
-      <a href="https://levnytt.se" class="lfoot-logo">Lev<span>Nytt</span></a>
+      <a href="https://levnytt.se" class="lfoot-logo" aria-label="LevNytt — Hem">
+        <svg viewBox="0 0 28 28" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;">
+          <rect x="5" y="4" width="4" height="18" rx="1" fill="#E8C870"/>
+          <rect x="5" y="18" width="11" height="3" rx="1" fill="#E8C870"/>
+          <rect x="16" y="4" width="3" height="18" rx="1" fill="#E8C870" transform="rotate(14 17.5 4)"/>
+          <rect x="24" y="4" width="3" height="18" rx="1" fill="#E8C870" transform="rotate(-14 25.5 4)"/>
+        </svg>
+        Lev<span>Nytt</span>
+      </a>
       <nav class="lfoot-nav" aria-label="Sidfot navigation">
         <a href="https://levnytt.se/neolife-historia">Historia</a>
         <a href="https://levnytt.se/neolife-vetenskap">Vetenskap</a>

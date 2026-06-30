@@ -35,7 +35,25 @@ Extract the **READY TO PUBLISH** list in order. If no brief exists or no READY T
 
 ---
 
-### STEP 2 — Confirm Source File Exists
+### STEP 2 — Validate Product Entity References (Phase 1)
+
+For each article to be published, run the Product Entity validator:
+
+```bash
+python3 content/products/scripts/validate_product_references.py content/articles/<filename>.html
+```
+
+If validation fails (exit code 1):
+- Log the warnings
+- **Do not halt** — Phase 1 is advisory. Report issues but proceed with publication.
+- If validation passes (exit code 0): proceed.
+
+**Phase 1 behavior:** Warnings are logged but do not block publication.
+**Phase 2 (future):** Validation failures block publication.
+
+---
+
+### STEP 3 — Confirm Source File Exists
 
 For each article to be published, verify:
 
@@ -49,7 +67,7 @@ If the root file already exists: skip the article, log as ALREADY PUBLISHED (no 
 
 ---
 
-### STEP 3 — Publish (Copy to Root)
+### STEP 4 — Publish (Copy to Root)
 
 ```bash
 cp content/articles/<filename>.html <filename>.html
@@ -63,19 +81,32 @@ cp content/articles/<filename>.html <filename>.html
 
 ---
 
-### STEP 4 — Verify Publication
+### STEP 5 — Verify Publication
 
 After copying, confirm:
 
 1. Root file exists: `ls <filename>.html`
 2. File size matches source: `diff content/articles/<filename>.html <filename>.html` → must be identical
 3. File is valid HTML: check that `<html` tag is present
+4. **Brand assets exist**: verify `assets/brand/` contains all required assets — if any asset is missing, log as BRAND ASSET MISSING and halt
+
+Required brand assets:
+```
+assets/brand/logo.svg
+assets/brand/logo-light.svg
+assets/brand/logo-dark.svg
+assets/brand/favicon.svg
+assets/brand/apple-touch-icon.png
+assets/brand/author-avatar.svg
+assets/brand/hero-watermark.svg
+assets/brand/og-brand.png
+```
 
 If verification fails: remove the root copy, log as PUBLISH FAILED, do not proceed with commit.
 
 ---
 
-### STEP 5 — Update Production Status
+### STEP 6 — Update Production Status
 
 Update `docs/editorial-backlog/production-status.md`:
 
@@ -87,7 +118,7 @@ If the article is not yet in production-status.md (e.g. it is from a newer gap r
 
 ---
 
-### STEP 6 — Commit
+### STEP 7 — Commit
 
 Stage only:
 - The new root HTML file
@@ -109,7 +140,7 @@ Status: production-status.md updated
 
 ---
 
-### STEP 7 — Push
+### STEP 8 — Push
 
 ```bash
 git push origin main
@@ -119,7 +150,7 @@ Confirm push succeeded. Report the commit hash.
 
 ---
 
-### STEP 8 — Publication Report
+### STEP 9 — Publication Report
 
 After each article (or batch), print:
 
@@ -128,6 +159,8 @@ After each article (or batch), print:
    Source: content/articles/<filename>.html
    Commit: <hash>
    Score: <score>/100
+   Brand: v1 — LevNytt LV Mark (assets/brand/)
+   Entities: validated — Product Entity System v1
 ```
 
 Or for failures:
@@ -144,7 +177,7 @@ Or for failures:
 When publishing multiple articles in one run:
 
 1. Process articles in Publication Score order (highest first)
-2. Complete STEP 1–7 for each article before moving to the next
+2. Complete STEP 1–8 for each article before moving to the next
 3. After all articles are processed, print a final batch summary table
 4. Push after EVERY article (not batched — one commit and push per article)
 

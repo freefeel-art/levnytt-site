@@ -45,7 +45,7 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "CollectionPage",
+        "@type": "Article",
         "name": "NeoLife Personlig Vård — Nutriance Organic",
         "headline": "Nutriance Organic — marin botanisk hudvård från NeoLife",
         "description": "COSMOS-certifierad marin botanisk hudvård från NeoLife. Vad innehåller den, vad visar de kliniska testerna, och hur fungerar de tre stegen?",
@@ -79,72 +79,10 @@
 </head>
 <body>
 
-<!-- BREADCRUMBS -->
-<div class="breadcrumbs" role="navigation" aria-label="Brödsmulor">
-  <div class="container">
-    <a href="https://levnytt.se">LevNytt</a>
-    <span>›</span>
-    Personlig vård
-  </div>
-</div>
+<div id="site-nav"></div>
+<script src="/nav.js" defer></script>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="container">
-    <p class="hero-eyebrow">Personlig vård · Marin botanisk hudvård · COSMOS-certifierad</p>
-    <h1>Nutriance Organic — hudvård baserad på marina växter</h1>
-    <p class="hero-intro">Nutriance Organic är NeoLifes COSMOS-certifierade hudvårdsserie, vetenskapligt formulerad tillsammans med marinbiologer och dermatologer och kliniskt testad vid europeiska forskningscenter. Här går vi igenom vad som faktiskt finns i produkterna, vad de kliniska testerna visar — och vad de inte visar.</p>
-    <div class="hero-meta">
-      <span>Av <strong>Jarmo Halonen</strong></span>
-      <span>Uppdaterad <strong>22 juni 2026</strong></span>
-      <span>Oberoende NeoLife-referens</span>
-    </div>
-  </div>
-</header>
-
-<!-- STATS ROW -->
-<section class="stats-row">
-  <div class="container">
-    <div class="stats-grid">
-      <div>
-        <span class="stat-number">15</span>
-        <span class="stat-label">Marina extrakt i serien</span>
-        <span class="stat-source">NeoLife produktbroschyr, 2019</span>
-      </div>
-      <div>
-        <span class="stat-number">12</span>
-        <span class="stat-label">Botaniska extrakt utöver de marina</span>
-        <span class="stat-source">NeoLife produktbroschyr, 2019</span>
-      </div>
-      <div>
-        <span class="stat-number">100%</span>
-        <span class="stat-label">COSMOS-certifierad, vegansk, ej djurtestad</span>
-        <span class="stat-source">COSMOS-standard</span>
-      </div>
-      <div>
-        <span class="stat-number">1958</span>
-        <span class="stat-label">NeoLifes grundår — femtio år forskningstradition innan Nutriance lanserades</span>
-        <span class="stat-source">NeoLife International</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AUTHORITY NAV -->
-<div class="authority-nav" role="navigation">
-  <div class="container">
-    <span class="authority-nav-label">Om LevNytt</span>
-    <a href="https://levnytt.se/om-oss">Om oss</a>
-    <a href="https://levnytt.se/den-fundersamma-mannen">Den Fundersamma Mannen</a>
-    <a href="https://levnytt.se/var-metod">Vår Metod</a>
-    <a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a>
-    <a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a>
-  </div>
-</div>
-
-<!-- ARTICLE -->
-<main class="article-wrap">
-  <div class="container">
+<div class="ia-wrap"><article>
 
     <!-- PUNCHLINE -->
     <div class="ia-punchline">
@@ -153,7 +91,7 @@
 
     <!-- KEY TAKEAWAYS -->
     <div class="ia-takeaways">
-      <h2>Det viktigaste att veta</h2>
+      <h3>Key Takeaways</h3>
       <ul>
         <li>Nutriance Organic är COSMOS-certifierad — en oberoende tredjepartsstandard för ekologisk hudvård, inte ett egendeklarerat påstående.</li>
         <li>Seriens marina råvaror kommer huvudsakligen från Molène-arkipelagen i Bretagne, Frankrike, ett skyddat UNESCO-biosfärområde.</li>
@@ -164,15 +102,12 @@
       </ul>
     </div>
 
-    <!-- ARTICLE BODY -->
-    <div class="article-body">
-
       <h2>Vad är Nutriance Organic?</h2>
       <p>Nutriance Organic är en hudvårdsserie utvecklad av NeoLife i samarbete med ledande hudvårdsexperter och marinbiologer, och kliniskt testad vid framstående franska forsknings- och dermatologicenter. Serien är vetenskapligt formulerad kring marina botaniska extrakt — växtbaserade aktiva ämnen som hämtas från havsmiljön snarare än från land.</p>
       <p>Råvarorna kommer främst från Molène-arkipelagen i Bretagne, Frankrike — ett skyddat biosfärområde känt för sin renhet och artrikedom av sjögräs och alger. Metoden att använda havsvatten och marina ingredienser för hud och hälsa kallas <em>thalassoterapi</em> (från grekiskans <em>thalassa</em>, hav, och <em>therapeia</em>, läkande) och har använts i sekler, men Nutriance Organic kombinerar detta med modern formulering och klinisk testning.</p>
 
-      <div class="callout callout-standard">
-        <p class="callout-title">Vad COSMOS-certifiering faktiskt innebär</p>
+      <div class="ia-callout">
+        <h4>Vad COSMOS-certifiering faktiskt innebär</h4>
         <p>COSMOS (Cosmetic Organic Standard) är en europeisk certifieringsstandard som granskas av oberoende tredjepartsorgan. Den ställer krav på andelen ekologiska/naturligt härledda ingredienser och förbjuder en rad syntetiska tillsatser, inklusive parabener. Skillnaden mot ett varumärke som själv skriver "ekologisk" på förpackningen utan certifiering är att COSMOS faktiskt kontrolleras utifrån.</p>
       </div>
 
@@ -307,8 +242,8 @@
         <cite>NeoLife International, officiell produktbroschyr 2019. Brasklapp i originalkällan: "Results may vary."</cite>
       </div>
 
-      <div class="callout callout-amber">
-        <p class="callout-title">Vad dessa siffror inte är</p>
+      <div class="ia-callout">
+        <h4>Vad dessa siffror inte är</h4>
         <p>Det här är tillverkarfinansierad klinisk testning utförd av NeoLife vid europeiska laboratorier — inte oberoende peer-reviewed forskning publicerad i en vetenskaplig tidskrift. Det betyder inte att resultaten är falska, men det är en annan evidensnivå än till exempel den USDA-samarbetade studien bakom <a href="https://levnytt.se/neolife-carotenoid-complex">NeoLife Carotenoid Complex</a>. NeoLife skriver själva "results may vary" i originalkällan, och det citerar vi medvetet här också.</p>
       </div>
 
@@ -316,88 +251,68 @@
       <p>Utöver ansiktsvårdsstegen ingår en komplett rutin för hår och kropp med samma marina botaniska bas: Mild Revitalizing Shampoo (daglig användning), Rich Revitalizing Shampoo (torrt/skadat hår), Enriching Conditioner, Refreshing Bath &amp; Shower Gel och Moisturizing Hand &amp; Body Lotion.</p>
 
       <!-- CTA -->
-      <div class="cta-block">
+      <div class="ia-cta">
         <h3>Vill du se hela sortimentet?</h3>
         <p>Produkterna går att handla som kund eller via en NeoLife-distributör. LevNytt tar inte ställning till om det är rätt val för dig — bara till vad som faktiskt finns i flaskan och vad testerna visar.</p>
-        <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="cta-btn" target="_blank" rel="nofollow noopener sponsored">Se Nutriance Organic i NeoLife-butiken →</a>
+        <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="ia-cta-btn" target="_blank" rel="nofollow noopener sponsored">Se Nutriance Organic i NeoLife-butiken →</a>
       </div>
 
       <!-- FAQ -->
-      <div class="faq-section">
+      <div class="ia-faq">
         <h2>Vanliga frågor om Nutriance Organic</h2>
 
         <details>
           <summary>Vad betyder COSMOS-certifiering?</summary>
-          <div class="faq-answer">
             <p>COSMOS (Cosmetic Organic Standard) är en europeisk certifieringsstandard för ekologisk och naturlig hudvård. Den ställer krav på andelen ekologiska och naturligt härledda ingredienser, förbjuder vissa syntetiska tillsatser och kontrollerar produktionsprocessen från råvara till färdig produkt. Att en hudvårdsserie är COSMOS-certifierad innebär att en oberoende tredje part har granskat och godkänt formuleringen — det är inte ett egendeklarerat påstående från tillverkaren.</p>
-          </div>
         </details>
 
         <details>
           <summary>Är Nutriance Organic veganskt och fritt från djurtester?</summary>
-          <div class="faq-answer">
             <p>Ja. NeoLife uppger att Nutriance Organic är 100% vegansk och att inga djurtester någonsin genomförts på produktserien. Den är även parabenfri, fri från GMO och sulfatfri.</p>
-          </div>
         </details>
 
         <details>
           <summary>Vad är skillnaden mellan Hydrating Serum och Ultra Hydrating Serum?</summary>
-          <div class="faq-answer">
             <p>Hydrating Serum är formulerat för kombinerad till fet hud — en lättare textur med samma marina antioxidanter men mindre rik bas. Ultra Hydrating Serum är formulerat för torr hud och innehåller en rikare koncentration av fukthållande ingredienser. Samma princip gäller för de flesta produkter i serien: två varianter, en lättare för kombinerad/fet hud och en rikare för torr hud.</p>
-          </div>
         </details>
 
         <details>
           <summary>Hur tillförlitliga är de kliniska resultaten som anges för produkterna?</summary>
-          <div class="faq-answer">
             <p>Resultaten kommer från tester som NeoLife låtit utföra vid europeiska — främst franska — dermatologiska forskningslaboratorier, under expertkontroll. Det är viktigt att vara tydlig om vad det innebär: det är tillverkarfinansierad klinisk testning, inte oberoende peer-reviewed forskning publicerad i en vetenskaplig tidskrift. Resultat kan variera mellan individer, och NeoLife anger själva att "results may vary" i sitt eget material. LevNytt presenterar dessa siffror med källa och denna brasklapp synlig — inte som en oberoende bekräftad sanning.</p>
-          </div>
         </details>
 
         <details>
           <summary>Behöver jag använda alla tre stegen, eller räcker en produkt?</summary>
-          <div class="faq-answer">
             <p>Systemet är designat som en helhet — rengöring förbereder huden, tonic balanserar pH och förbereder för steg 3, och serum/kräm tillför den huvudsakliga fuktigheten och de aktiva ingredienserna. NeoLifes eget material beskriver det som ett 3-stegssystem snarare än fristående produkter. Det går att använda enskilda produkter, men de kliniska resultaten som anges är testade på den specifika produkten i fråga, inte nödvändigtvis på enskilda produkter använda isolerat utanför sitt steg.</p>
-          </div>
         </details>
       </div>
 
+      <p class="ia-disclosure"><strong>Metodnotering:</strong> Den här artikeln täcker konsumentprodukter och hudvårdspåståenden (YMYL-kategori). Kliniska testresultat som anges kommer från NeoLifes officiella produktmaterial och tillverkarfinansierad testning vid europeiska laboratorier. Evidensnivån är tydligt angiven vid varje påstående. Inga anonyma forumkällor används.</p>
+
       <!-- TIER BOXES -->
-      <div class="tier-section">
+      <div class="ia-tierbox">
         <p class="tier-label">Relaterade resurser på LevNytt</p>
-        <div class="tier-grid">
-          <a href="https://levnytt.se/neolife-vetenskap" class="tier-box">
+          <a href="https://levnytt.se/neolife-vetenskap" class="tier-box" target="_blank" rel="noopener noreferrer">
             <span class="tier-box-label">Om NeoLife</span>
             <span class="tier-box-title">NeoLife och forskning</span>
           </a>
-          <a href="https://levnytt.se/var-metod" class="tier-box">
-            <span class="tier-box-label">Om LevNytt</span>
-            <span class="tier-box-title">Vår Metod</span>
-          </a>
-          <a href="https://levnytt.se/neolife-carotenoid-complex" class="tier-box">
-            <span class="tier-box-label">Produkt</span>
-            <span class="tier-box-title">NeoLife Carotenoid Complex</span>
-          </a>
-          <a href="https://levnytt.se/lutein-zeaxantin-huden" class="tier-box">
+          <a href="https://levnytt.se/lutein-zeaxantin-huden" class="tier-box" target="_blank" rel="noopener noreferrer">
             <span class="tier-box-label">Artikel</span>
             <span class="tier-box-title">Lutein och zeaxantin för huden</span>
           </a>
-          <a href="https://levnytt.se/c-vitamin-tillskott-vs-serum-huden" class="tier-box">
+          <a href="https://levnytt.se/c-vitamin-tillskott-vs-serum-huden" class="tier-box" target="_blank" rel="noopener noreferrer">
             <span class="tier-box-label">Artikel</span>
             <span class="tier-box-title">C-vitamin tillskott vs serum för huden</span>
           </a>
-          <a href="https://levnytt.se/hudtecken-naringsbrist" class="tier-box">
+          <a href="https://levnytt.se/hudtecken-naringsbrist" class="tier-box" target="_blank" rel="noopener noreferrer">
             <span class="tier-box-label">Artikel</span>
             <span class="tier-box-title">Hudtecken på näringsbrist</span>
           </a>
-        </div>
       </div>
 
       <!-- AUTHOR BOX -->
-      <div class="author-box">
-        <div class="author-avatar">
-          <img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="56" height="56">
-        </div>
+      <div class="ia-author-box">
+        <div class="ia-author-avatar">JH</div>
         <div class="author-info">
           <span class="author-label">Skribent</span>
           <strong>Jarmo Halonen</strong>
@@ -408,14 +323,10 @@
         </div>
       </div>
 
-      <p class="last-updated">Sidan senast uppdaterad: 22 juni 2026.</p>
+      <p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
 
-    </div><!-- /article-body -->
-  </div><!-- /container -->
-</main>
+</article></div>
 
-<!-- FOOTER -->
-<script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
 <script src="/components.js" defer></script>
 </body>

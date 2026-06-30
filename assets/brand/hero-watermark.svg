@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- LevNytt Hero Watermark — Large transparent LV Mark -->
+  <!-- L at 8% opacity -->
+  <rect x="80" y="72" width="56" height="248" rx="8" fill="#1B4332" opacity="0.08"/>
+  <rect x="80" y="280" width="144" height="40" rx="8" fill="#1B4332" opacity="0.08"/>
+  <!-- V at 8% opacity -->
+  <rect x="224" y="72" width="40" height="256" rx="8" fill="#E8C870" opacity="0.08" transform="rotate(14 244 72)"/>
+  <rect x="336" y="72" width="40" height="256" rx="8" fill="#E8C870" opacity="0.08" transform="rotate(-14 356 72)"/>
+</svg>

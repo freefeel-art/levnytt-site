@@ -1,10 +1,71 @@
 // LevNytt.se — Global components
-// Translate + scroll-to-top + sponsor-ID automaatio
+// Brand system + scroll-to-top + sponsor-ID automaatio
 
 (function() {
 
   var SPONSOR = '41-830928';
   var SHOP_BASE = 'https://se.neolifeshop.com';
+
+  // ============================================================
+  // BRAND SYSTEM — favicon, apple-touch-icon, OG image
+  // ============================================================
+  function injectBrandMeta() {
+    if (document.querySelector('link[rel="icon"][href*="favicon"]')) return;
+
+    var frag = document.createDocumentFragment();
+
+    var favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    favicon.type = 'image/svg+xml';
+    favicon.href = '/assets/brand/favicon.svg';
+    frag.appendChild(favicon);
+
+    var apple = document.createElement('link');
+    apple.rel = 'apple-touch-icon';
+    apple.href = '/assets/brand/apple-touch-icon.png';
+    frag.appendChild(apple);
+
+    document.head.insertBefore(frag, document.head.firstChild);
+  }
+
+  // ============================================================
+  // BRAND WATERMARK — inject hero-watermark.svg into .hero
+  // ============================================================
+  function injectHeroWatermark() {
+    var hero = document.querySelector('.hero');
+    if (!hero || hero.querySelector('.lv-watermark')) return;
+
+    var wm = document.createElement('img');
+    wm.className = 'lv-watermark';
+    wm.src = '/assets/brand/hero-watermark.svg';
+    wm.alt = '';
+    wm.setAttribute('aria-hidden', 'true');
+    wm.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:80%;pointer-events:none;z-index:1;';
+    hero.style.position = 'relative';
+    hero.style.overflow = 'hidden';
+    hero.insertBefore(wm, hero.firstChild);
+  }
+
+  // ============================================================
+  // BRAND AUTHOR AVATAR — replace initials with LV Mark SVG
+  // ============================================================
+  function injectBrandAvatar() {
+    document.querySelectorAll('.ia-author-avatar').forEach(function(el) {
+      if (el.querySelector('svg')) return;
+      el.textContent = '';
+      el.style.cssText = 'background:#1B4332;display:flex;align-items:center;justify-content:center;';
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 28 28');
+      svg.setAttribute('width', '20');
+      svg.setAttribute('height', '20');
+      svg.setAttribute('fill', 'none');
+      svg.innerHTML = '<rect x="5" y="4" width="4" height="18" rx="1" fill="#E8C870"/>' +
+        '<rect x="5" y="18" width="11" height="3" rx="1" fill="#E8C870"/>' +
+        '<rect x="16" y="4" width="3" height="18" rx="1" fill="#E8C870" transform="rotate(14 17.5 4)"/>' +
+        '<rect x="24" y="4" width="3" height="18" rx="1" fill="#E8C870" transform="rotate(-14 25.5 4)"/>';
+      el.appendChild(svg);
+    });
+  }
 
   // ============================================================
   // TUOTESIVUKARTTA — sivu → suora tuote-URL sponsori-ID:llä
@@ -62,10 +123,20 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fixLinks);
-  } else {
+  // ============================================================
+  // INIT — run on DOMContentLoaded
+  // ============================================================
+  function init() {
     fixLinks();
+    injectBrandMeta();
+    injectHeroWatermark();
+    injectBrandAvatar();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 
   // CSS

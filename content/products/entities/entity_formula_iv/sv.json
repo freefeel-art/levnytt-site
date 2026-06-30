@@ -1,0 +1,68 @@
+{
+  "canonical_id": "entity_formula_iv",
+  "neoLife_code": 576,
+  "locale": "sv",
+  "slug": "neolife-formula-iv",
+  "product_name": "Formula IV",
+  "aliases": ["Multivitamin", "Vitaminer och mineraler"],
+  "legacy_codes": [],
+  "category": "supplements",
+  "subcategory": "multivitamin",
+  "product_family": "pro_vitality_system",
+  "keywords": ["multivitamin", "mineraler", "chelaterade mineraler", "helfodskälla", "d-alfa-tokoferol", "folat", "MTHFR", "biotillgänglighet", "näringsgap", "D-vitamin", "magnesium", "järn", "selen", "jod"],
+  "short_description": "Komplett multivitamin och mineralpreparat med helfodsbaserade källor och chelat-mineraler för bättre absorption.",
+  "summary": "Formula IV är NeoLifes flaggskeppsmultivitamin som kombinerar ett fullständigt spektrum av vitaminer och mineraler med chelat-mineraler och naturliga vitaminformer. Till skillnad från många standardmultivitaminer använder Formula IV naturlig d-alfa-tokoferol (E-vitamin) som kroppen behåller dubbelt så länge som syntetisk dl-alfa-tokoferol, och organiska mineralformer med signifikant bättre biotillgänglighet. Formula IV Plus (kod 691) är en utökad version med extra antioxidanter.",
+  "ingredients": [
+    {"name": "Vitaminer (fullt spektrum)", "unit": "essentiella vitaminer"},
+    {"name": "Mineraler (chelat-form)", "unit": "aminosyrachelat"},
+    {"name": "d-alfa-tokoferol (naturlig E-vitamin)"},
+    {"name": "Folat (aktiv form)"}
+  ],
+  "usage": {
+    "dosage": "2 kapslar dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "50 dagar (100 kapslar)"
+  },
+  "certifications": [],
+  "packaging": {"size": 100, "unit": "kapslar", "label": "100 kapslar"},
+  "price_database_ref": {
+    "code": 576,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/formula-iv.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_omega_3_plus",
+    "entity_tre_en_en",
+    "entity_carotenoid_complex",
+    "entity_pro_vitality",
+    "entity_formula_iv_plus",
+    "entity_magnesium_complex",
+    "entity_chelated_zinc",
+    "entity_vegan_d"
+  ],
+  "related_article_slugs": [
+    "naringsbrist",
+    "neolife-vitamin-d",
+    "neolife-magnesium-complex"
+  ],
+  "faq_references": [
+    "Vad är ett multivitamin?",
+    "Vad är skillnaden mellan syntetiska vitaminer och vitaminer från hela livsmedel?",
+    "Vad är chelat-mineraler och varför används de?",
+    "Vad är skillnaden mellan Formula IV och Formula IV Plus?",
+    "Vilka näringsgap är vanligast i Sverige?"
+  ],
+  "research_references": [
+    {"tier": "T1", "label": "Meta-analys: mineralbiotillgänglighet — organiska vs oorganiska former", "url": "https://pubmed.ncbi.nlm.nih.gov/24463710/"},
+    {"tier": "T2", "label": "Naturlig vs syntetisk E-vitamin — retention i kroppen, Am J Clin Nutr 2002", "url": "https://pubmed.ncbi.nlm.nih.gov/12198000/"},
+    {"tier": "T3", "label": "MTHFR-genvarianter och folatmetabolism", "url": "https://pubmed.ncbi.nlm.nih.gov/22049265/"}
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

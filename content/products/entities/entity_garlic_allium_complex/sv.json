@@ -1,0 +1,81 @@
+{
+  "canonical_id": "entity_garlic_allium_complex",
+  "neoLife_code": 555,
+  "locale": "sv",
+  "slug": "neolife-garlic-allium-complex",
+  "product_name": "Garlic Allium Complex",
+  "aliases": [
+    "Vitlök",
+    "Allicin",
+    "Allium",
+    "Vitlökskomplex"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "vitlök",
+    "allicin",
+    "alliin",
+    "lök",
+    "purjolök",
+    "organosvavelföreningar",
+    "blodtryck"
+  ],
+  "short_description": "Vitlök kombinerat med lök och purjolök för ett bredare allium-spektrum — 60 tabletter.",
+  "summary": "NeoLife Garlic Allium Complex kombinerar vitlök (Allium sativum) med lök (Allium cepa) och purjolök (Allium porrum) för ett bredare spektrum av organosvavelföreningar. Allicin bildas när alliin möter enzymet alliinas vid krossning. Forskning visar bland annat blodtryckssänkande effekt.",
+  "ingredients": [
+    {
+      "name": "Vitlök (Allium sativum)"
+    },
+    {
+      "name": "Lök (Allium cepa)"
+    },
+    {
+      "name": "Purjolök (Allium porrum)"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 tabletter dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "30-60 dagar (60 tabletter)"
+  },
+  "packaging": {
+    "size": 60,
+    "unit": "tabletter",
+    "label": "60 tabletter"
+  },
+  "price_database_ref": {
+    "code": 555,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/garlic-allium-complex.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_flavonoid_complex"
+  ],
+  "related_article_slugs": [
+    "neolife-garlic-allium-complex"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan alliin och allicin?",
+    "Kan vitlökstillskott sänka blodtrycket?",
+    "Vilka läkemedel interagerar med vitlök?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "Cochrane 2012: Vitlök och blodtryck — meta-analys av 11 RCTs"
+    },
+    {
+      "tier": "T2",
+      "label": "Archives of Internal Medicine 2007: Vitlök och LDL — ingen signifikant effekt"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

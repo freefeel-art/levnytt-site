@@ -1,0 +1,42 @@
+{
+  "canonical_id": "entity_tre",
+  "neoLife_code": 735,
+  "locale": "sv",
+  "slug": "neolife-tre",
+  "product_name": "Tre",
+  "aliases": [
+    "Tre-dryck",
+    "Tre växtbaserad dryck"
+  ],
+  "category": "supplements",
+  "subcategory": "green_drink",
+  "keywords": [
+    "tre",
+    "växtbaserad dryck",
+    "grön dryck"
+  ],
+  "short_description": "Växtbaserad dryck på 750 ml — från NeoLifes växtsortiment.",
+  "summary": "NeoLife Tre är en växtbaserad dryck på 750 ml från NeoLifes sortiment. En flytande produkt för den som vill ha ett växtbaserat komplement.",
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "drickes",
+    "timing": "valfri tid"
+  },
+  "packaging": {
+    "size": 750,
+    "unit": "ml",
+    "label": "750 ml"
+  },
+  "price_database_ref": {
+    "code": 735,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/tre.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

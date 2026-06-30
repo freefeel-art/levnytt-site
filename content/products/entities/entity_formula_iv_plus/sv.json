@@ -1,0 +1,68 @@
+{
+  "canonical_id": "entity_formula_iv_plus",
+  "neoLife_code": 691,
+  "locale": "sv",
+  "slug": "neolife-formula-iv-plus",
+  "product_name": "Formula IV Plus",
+  "aliases": [
+    "Formula IV+",
+    "Formula IV Plus multivitamin"
+  ],
+  "category": "supplements",
+  "subcategory": "multivitamin",
+  "keywords": [
+    "multivitamin",
+    "mineraler",
+    "antioxidanter",
+    "formula iv plus",
+    "extra tillskott"
+  ],
+  "short_description": "Utökad version av Formula IV med extra antioxidanter — 60 tabletter/kapslar för bredare dagligt skydd.",
+  "summary": "Formula IV Plus är en utökad version av NeoLifes flaggskeppsmultivitamin Formula IV, med extra antioxidanter utöver det fullständiga vitamin- och mineralspektrumet. Innehåller samma bas av chelat-mineraler och naturliga vitaminformer som Formula IV.",
+  "ingredients": [
+    {
+      "name": "Vitaminer (fullt spektrum)",
+      "unit": "essentiella vitaminer"
+    },
+    {
+      "name": "Mineraler (chelat-form)",
+      "unit": "aminosyrachelat"
+    },
+    {
+      "name": "Extra antioxidanter",
+      "unit": "utöver Formula IV-standard"
+    }
+  ],
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "60 tabletter per förpackning"
+  },
+  "packaging": {
+    "size": 60,
+    "unit": "tabletter/kapslar",
+    "label": "60 tabletter/kapslar"
+  },
+  "price_database_ref": {
+    "code": 691,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/formula-iv-plus.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_formula_iv"
+  ],
+  "related_article_slugs": [
+    "neolife-formula-iv"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan Formula IV och Formula IV Plus?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

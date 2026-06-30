@@ -1,0 +1,79 @@
+{
+  "canonical_id": "entity_sustained_vitamin_c",
+  "neoLife_code": 551,
+  "locale": "sv",
+  "slug": "neolife-sustained-vitamin-c",
+  "product_name": "Sustained Release Vitamin C",
+  "aliases": [
+    "C-vitamin med fordröjd frisättning",
+    "SR Vitamin C"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "C-vitamin",
+    "fordröjd frisättning",
+    "citrusbioflavonoider",
+    "acerola",
+    "nypon",
+    "plasmanivåer"
+  ],
+  "short_description": "C-vitamin med fordröjd frisättning i 6–8 timmar med citrusbioflavonoider, acerola och nypon — 120 tabletter.",
+  "summary": "NeoLife Sustained Release Vitamin C levererar vitamin C kontinuerligt under 6–8 timmar via en time-release-matris. Till skillnad från vanliga C-vitamintabletter som snabbt utsöndras ger den fordröjda frisättningen jämnare plasmanivåer under hela dagen. Innehåller citrusbioflavonoider, acerolakörsbär och nypon som kompletterande växtkällor.",
+  "ingredients": [
+    {
+      "name": "C-vitamin (askorbinsyra)",
+      "amount": "300",
+      "unit": "mg per tablett (uppskattat)"
+    },
+    {
+      "name": "Citrusbioflavonoider"
+    },
+    {
+      "name": "Acerolakörsbär (Malpighia glabra)"
+    },
+    {
+      "name": "Nypon (Rosa canina)"
+    }
+  ],
+  "usage": {
+    "dosage": "1 tablett dagligen",
+    "method": "sväljes hel",
+    "timing": "morgon",
+    "duration": "120 dagar (120 tabletter)"
+  },
+  "packaging": {
+    "size": 120,
+    "unit": "tabletter",
+    "label": "120 tabletter"
+  },
+  "price_database_ref": {
+    "code": 551,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/sustained-release-vitamin-c.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_all_c",
+    "entity_betaguard"
+  ],
+  "related_article_slugs": [
+    "neolife-sustained-vitamin-c"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan All C och Sustained Release Vitamin C?",
+    "Varför välja fordröjd frisättning av C-vitamin?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "EFSA: Godkända hälsopåståenden för vitamin C"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

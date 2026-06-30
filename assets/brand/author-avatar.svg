@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- LevNytt Author Avatar — LV Mark inside Deep Green circle -->
+  <circle cx="50" cy="50" r="50" fill="#1B4332"/>
+  <g transform="translate(0,0)">
+    <!-- L in Light Gold -->
+    <rect x="26" y="24" width="12" height="52" rx="3" fill="#E8C870"/>
+    <rect x="26" y="66" width="30" height="8" rx="3" fill="#E8C870"/>
+    <!-- V in Light Gold -->
+    <rect x="54" y="24" width="8" height="54" rx="3" fill="#E8C870" transform="rotate(14 58 24)"/>
+    <rect x="76" y="24" width="8" height="54" rx="3" fill="#E8C870" transform="rotate(-14 80 24)"/>
+  </g>
+</svg>

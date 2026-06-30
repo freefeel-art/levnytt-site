@@ -1,0 +1,82 @@
+{
+  "canonical_id": "entity_all_c",
+  "neoLife_code": 552,
+  "locale": "sv",
+  "slug": "neolife-all-c",
+  "product_name": "All C",
+  "aliases": [
+    "C-vitamin",
+    "Askorbinsyra",
+    "Vitamin C"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "C-vitamin",
+    "bioflavonoider",
+    "quercetin",
+    "rutin",
+    "hesperidin",
+    "immunförsvar",
+    "antioxidant",
+    "kollagen"
+  ],
+  "short_description": "Tuggbar C-vitamin med bioflavonoider — 120 tabletter, för immunförsvar, kollagenbildning och antioxidantskydd.",
+  "summary": "NeoLife All C är en tuggbar C-vitamin med tillsatta bioflavonoider (quercetin, rutin, hesperidin) för förbättrat upptag. Vitamin C är vattenlösligt och måste tillföras dagligen. EFSA har godkänt hälsopåståenden för vitamin C gällande immunförsvar, kollagenbildning, antioxidantskydd, järnabsorption och energimetabolism.",
+  "ingredients": [
+    {
+      "name": "C-vitamin (askorbinsyra)"
+    },
+    {
+      "name": "Bioflavonoider",
+      "unit": "quercetin, rutin, hesperidin"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 tuggtabletter dagligen",
+    "method": "tuggas eller sväljes",
+    "timing": "valfri tid",
+    "duration": "60-120 dagar (120 tabletter)",
+    "safety": "Överskrid ej 2000 mg/dag totalt. Kan ge magbesvär i höga doser."
+  },
+  "packaging": {
+    "size": 120,
+    "unit": "tuggtabletter",
+    "label": "120 tuggtabletter"
+  },
+  "price_database_ref": {
+    "code": 552,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/all-c.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_sustained_vitamin_c",
+    "entity_betaguard"
+  ],
+  "related_article_slugs": [
+    "neolife-vitamin-c",
+    "neolife-sustained-vitamin-c"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan All C och Sustained Release Vitamin C?",
+    "Vad är bioflavonoider och varför kombineras de med C-vitamin?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "Cochrane 2023: Vitamin C och förkylning — meta-analys av 11 000+ deltagare",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23440782/"
+    },
+    {
+      "tier": "T1",
+      "label": "EFSA: Godkända hälsopåståenden för vitamin C"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

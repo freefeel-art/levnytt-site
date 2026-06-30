@@ -1,0 +1,88 @@
+{
+  "canonical_id": "entity_acidophilus_plus",
+  "neoLife_code": 560,
+  "locale": "sv",
+  "slug": "neolife-acidophilus-plus",
+  "product_name": "Acidophilus Plus",
+  "aliases": [
+    "Probiotika",
+    "Mjölksyrabakterier",
+    "Probiotics"
+  ],
+  "category": "supplements",
+  "subcategory": "probiotic",
+  "keywords": [
+    "probiotika",
+    "mjölksyrabakterier",
+    "Lactobacillus acidophilus",
+    "Bifidobacterium",
+    "CFU",
+    "mikrobiom",
+    "tarmhälsa",
+    "magsyraresistens"
+  ],
+  "short_description": "Fem mjölksyrabakteriestammar med magsyra-skydd — 5 miljarder CFU per kapsel, 60 kapslar.",
+  "summary": "NeoLife Acidophilus Plus innehåller fem mjölksyrabakteriestammar i lika mängd med 5 miljarder CFU per kapsel. Ett särskilt skyddssystem säkerställer att bakterierna når tarmen levande. Stammarna inkluderar Lactobacillus acidophilus, L. bulgaricus, L. paracasei, Bifidobacterium animalis och Streptococcus thermophilus.",
+  "ingredients": [
+    {
+      "name": "Lactobacillus acidophilus"
+    },
+    {
+      "name": "Lactobacillus delbrueckii subsp. bulgaricus"
+    },
+    {
+      "name": "Lactobacillus paracasei"
+    },
+    {
+      "name": "Bifidobacterium animalis"
+    },
+    {
+      "name": "Streptococcus thermophilus"
+    },
+    {
+      "name": "Totalt CFU",
+      "amount": "5",
+      "unit": "miljarder per kapsel"
+    }
+  ],
+  "usage": {
+    "dosage": "1 kapsel dagligen",
+    "method": "sväljes hel",
+    "timing": "valfri tid",
+    "duration": "60 dagar (60 kapslar)"
+  },
+  "packaging": {
+    "size": 60,
+    "unit": "kapslar",
+    "label": "60 kapslar"
+  },
+  "price_database_ref": {
+    "code": 560,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/acidophilus-plus.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_flavonoid_complex"
+  ],
+  "related_article_slugs": [
+    "neolife-acidophilus-plus"
+  ],
+  "faq_references": [
+    "Vad är probiotika?",
+    "Varför behövs magsyra-skydd för probiotika?",
+    "Vad är skillnaden mellan Lactobacillus och Bifidobacterium?"
+  ],
+  "research_references": [
+    {
+      "tier": "T3",
+      "label": "Probiotika och mag-tarmhälsa — allmän forskningsöversikt"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

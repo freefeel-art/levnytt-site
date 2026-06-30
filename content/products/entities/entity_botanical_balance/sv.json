@@ -1,0 +1,82 @@
+{
+  "canonical_id": "entity_botanical_balance",
+  "neoLife_code": 800,
+  "locale": "sv",
+  "slug": "neolife-botanical-balance",
+  "product_name": "Botanical Balance",
+  "aliases": [
+    "Adaptogener",
+    "Växtextrakt",
+    "Ashwagandha",
+    "Ginseng",
+    "Botanicals"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "adaptogener",
+    "ashwagandha",
+    "ginseng",
+    "botaniska extrakt",
+    "stress",
+    "HPA-axeln",
+    "kortisol"
+  ],
+  "short_description": "Brett spektrum av botaniska extrakt och adaptogener för stressbalans — 120 tabletter.",
+  "summary": "NeoLife Botanical Balance är NeoLifes bredaste botaniska tillskott med 120 tabletter. Innehåller ett spektrum av växtextrakt med fokus på adaptogener för stressrespons och hormonell modulering. Adaptogener verkar via HPA-axel-modulering och neuroendokrina effekter.",
+  "ingredients": [
+    {
+      "name": "Ashwagandha"
+    },
+    {
+      "name": "Panax Ginseng"
+    },
+    {
+      "name": "Övriga botaniska extrakt",
+      "unit": "spektrum av adaptogener"
+    }
+  ],
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "120 tabletter per förpackning"
+  },
+  "packaging": {
+    "size": 120,
+    "unit": "tabletter",
+    "label": "120 tabletter"
+  },
+  "price_database_ref": {
+    "code": 800,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/botanical-balance.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_flavonoid_complex"
+  ],
+  "related_article_slugs": [
+    "neolife-botanical-balance"
+  ],
+  "faq_references": [
+    "Vad är adaptogener?",
+    "Vad är skillnaden mellan Botanical Balance och enstaka växtextrakt?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "Medicine 2019: Ashwagandha och stress/kortisol — meta-analys av 5 RCTs"
+    },
+    {
+      "tier": "T1",
+      "label": "Cochrane 2010: Panax ginseng och kognitiva effekter"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

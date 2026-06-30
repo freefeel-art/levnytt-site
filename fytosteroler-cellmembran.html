@@ -25,169 +25,60 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/pillar.css">
 <style>
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.75;font-size:17px;}
 h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.3;}
 a{color:var(--green-dark);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
 a:hover{color:var(--gold-dark);}
 .container{max-width:var(--max-width);margin:0 auto;padding:0 24px;}
-
-/* NAV */
-
-/* BREADCRUMBS */
-.breadcrumbs{background:var(--white);border-bottom:1px solid var(--border);padding:12px 0;font-size:13px;color:var(--ink-muted);}
-.breadcrumbs a{color:var(--ink-muted);text-decoration:none;}
-.breadcrumbs a:hover{color:var(--green);}
-.breadcrumbs span{margin:0 6px;}
-
-/* HERO */
-.hero{background:linear-gradient(145deg,#0d2218 0%,var(--green-dark) 60%,#20503a 100%);color:var(--white);padding:64px 0 56px;position:relative;overflow:hidden;}
-
-.hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;font-family:'Inter',sans-serif;}
-.hero h1{font-size:clamp(26px,5vw,44px);font-weight:700;color:var(--white);margin-bottom:20px;max-width:680px;}
-.hero-intro{font-size:18px;color:rgba(255,255,255,0.85);max-width:620px;margin-bottom:28px;line-height:1.65;}
-.hero-meta{font-size:13px;color:rgba(255,255,255,0.6);display:flex;gap:20px;flex-wrap:wrap;align-items:center;}
-.hero-meta strong{color:rgba(255,255,255,0.85);}
-
-/* STATS ROW */
-.stats-row{background:var(--white);border-bottom:3px solid var(--gold);padding:32px 0;}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:24px;text-align:center;}
-.stat-number{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--green-dark);display:block;}
-.stat-label{display:block;font-size:13px;color:var(--ink-muted);margin-top:4px;line-height:1.4;}
-.stat-source{display:block;font-size:11px;color:#bbb;margin-top:3px;}
-
-/* AUTHORITY NAV */
-.authority-nav{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;}
-.authority-nav .container{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;}
-.authority-nav-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);font-family:'Inter',sans-serif;flex-shrink:0;}
-.authority-nav a{font-size:13px;color:var(--green-dark);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;}
-.authority-nav a:hover{border-bottom-color:var(--green);}
-
-/* ARTICLE */
-.article-wrap{padding:56px 0 64px;}
-.ia-punchline{background:var(--green-dark);color:var(--white);border-radius:var(--radius);padding:28px 32px;margin-bottom:40px;border-left:5px solid var(--gold);}
-.ia-punchline p{font-size:18px;line-height:1.65;margin:0;}
-.ia-punchline strong{color:var(--gold-light);}
-.ia-takeaways{background:var(--cream-dark);border-radius:var(--radius);padding:28px 32px;margin-bottom:48px;border:1px solid var(--border);}
-.ia-takeaways h2{font-size:13px;color:var(--green-dark);margin-bottom:16px;font-family:'Inter',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;}
-.ia-takeaways ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.ia-takeaways li{padding-left:28px;position:relative;font-size:15.5px;line-height:1.55;}
-.ia-takeaways li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;}
-.article-body h2{font-size:clamp(21px,3.5vw,27px);color:var(--green-dark);margin:52px 0 20px;padding-top:8px;border-top:2px solid var(--border);}
-.article-body h2:first-of-type{margin-top:0;border-top:none;}
-.article-body h3{font-size:19px;color:var(--ink);margin:32px 0 12px;}
-.article-body p{margin-bottom:18px;}
-.article-body p:last-child{margin-bottom:0;}
-
-/* CALLOUTS */
-.callout{border-radius:var(--radius);padding:22px 26px;margin:28px 0;}
-.callout-standard{background:var(--green-light);border-left:4px solid var(--green);}
-.callout-gold{background:var(--gold-light);border-left:4px solid var(--gold);}
-.callout-warning{background:var(--red-light);border-left:4px solid var(--red-accent);}
-.callout-amber{background:var(--amber-light);border-left:4px solid var(--amber);}
-.callout-title{font-family:'Inter',sans-serif;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
-.callout-standard .callout-title{color:var(--green-dark);}
-.callout-gold .callout-title{color:var(--gold-dark);}
-.callout-warning .callout-title{color:var(--red-accent);}
-.callout-amber .callout-title{color:var(--amber);}
-.callout p{margin:0;font-size:15.5px;line-height:1.65;}
-
-/* EVIDENCE TAGS */
-.evidence-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-family:'Inter',sans-serif;margin-left:6px;vertical-align:middle;}
-.evidence-clinical{background:var(--green-light);color:var(--green-dark);}
-.evidence-observational{background:#E8EAF6;color:#3949AB;}
-.evidence-mixed{background:#F3E5F5;color:#6A1B9A;}
-
-/* RESEARCH BOX */
+.ia-wrap{max-width:760px;margin:0 auto;padding:0 20px;font-family:Inter,system-ui,sans-serif;color:#1a1a1a;line-height:1.65}
+.ia-wrap h1{font-family:"Playfair Display",Georgia,serif;font-size:2.1em;line-height:1.2;color:#1B4332;margin:0.6em 0 0.4em}
+.ia-wrap h2{font-family:"Playfair Display",Georgia,serif;font-size:1.5em;color:#1B4332;margin:1.6em 0 0.6em}
+.ia-wrap h3{font-family:"Playfair Display",Georgia,serif;font-size:1.15em;color:#1B4332;margin:1.2em 0 0.5em}
+.ia-punchline{font-size:1.3em;font-weight:600;border-left:4px solid #C9A84C;padding:18px 22px;background:#F9F6EF;margin:24px 0;border-radius:0 6px 6px 0;color:#1B4332}
+.ia-takeaways{background:#1B4332;color:#F9F6EF;border-radius:10px;padding:22px 26px;margin:26px 0}
+.ia-wrap .ia-takeaways h3{margin:0 0 14px;color:#C9A84C;font-size:1.05em;letter-spacing:0.04em;text-transform:uppercase;font-weight:700}
+.ia-takeaways ul{margin:0;padding-left:20px;color:#F9F6EF}
+.ia-takeaways li{margin:9px 0;line-height:1.55;color:#F9F6EF}
+.ia-takeaways a{color:#ffd47a;text-decoration-color:#ffd47a}
+.ia-callout{background:#F9F6EF;border:1px solid #e3dcc9;border-radius:8px;padding:16px 20px;margin:22px 0}
+.ia-callout h4{margin:0 0 8px;color:#1B4332;font-size:1em}
+.ia-faq details{border-bottom:1px solid #e3dcc9;padding:14px 0}
+.ia-faq summary{font-weight:600;cursor:pointer;color:#1B4332}
+.ia-faq p{margin:10px 0 0}
+.ia-tierbox{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}
+.ia-tier{flex:1 1 150px;background:#1B4332;color:#F9F6EF;border-radius:8px;padding:14px 16px;text-decoration:none;font-size:0.9em}
+.ia-tier b{color:#C9A84C;display:block;font-size:0.8em;letter-spacing:0.05em;margin-bottom:4px}
+.ia-cta{background:#1B4332;color:#F9F6EF;border-radius:10px;padding:24px 26px;margin:30px 0;text-align:center}
+.ia-wrap .ia-cta h3{color:#C9A84C;margin-top:0}
+.ia-cta a{color:#F9F6EF;background:#C9A84C;padding:10px 20px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:10px;font-weight:600}
+.ia-author-box{display:flex;gap:16px;align-items:flex-start;background:#F9F6EF;border-radius:10px;padding:20px;margin:34px 0}
+.ia-author-avatar{width:48px;height:48px;border-radius:50%;background:#1B4332;color:#C9A84C;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
+.ia-disclosure{font-size:0.82em;color:#666;border-top:1px solid #e3dcc9;padding-top:16px;margin-top:30px}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:24px 0}
+thead{background:#1B4332;color:var(--white);}
+thead th{padding:14px 18px;text-align:left;font-weight:600;font-size:13px;letter-spacing:0.04em;}
+tbody tr:nth-child(even){background:var(--cream);}
+tbody tr:nth-child(odd){background:var(--white);}
+tbody td{padding:12px 18px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
+tbody tr:last-child td{border-bottom:none;}
 .research-box{background:linear-gradient(135deg,#f0f7f3,#e8f4ed);border:1px solid #a8d5b8;border-radius:var(--radius);padding:26px 30px;margin:32px 0;}
 .research-box-label{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-dark);margin-bottom:10px;display:block;}
 .research-box h4{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--green-dark);margin-bottom:8px;}
 .research-box p{font-size:14.5px;color:var(--ink);margin:0;line-height:1.6;}
 .research-box p+p{margin-top:10px;}
 .research-box cite{font-size:12px;color:var(--ink-muted);display:block;margin-top:10px;font-style:normal;}
-
-/* TABLES */
-.table-wrap{overflow-x:auto;margin:28px 0;border-radius:var(--radius);border:1px solid var(--border);}
-table{width:100%;border-collapse:collapse;font-size:15px;}
-thead{background:var(--green-dark);color:var(--white);}
-thead th{padding:14px 18px;text-align:left;font-weight:600;font-size:13px;letter-spacing:0.04em;}
-tbody tr:nth-child(even){background:var(--cream);}
-tbody tr:nth-child(odd){background:var(--white);}
-tbody td{padding:12px 18px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
-tbody tr:last-child td{border-bottom:none;}
-
-/* TIER BOXES */
-.tier-section{margin:56px 0 40px;padding:36px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.tier-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:20px;font-family:'Inter',sans-serif;}
-.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;}
-.tier-box{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;background:var(--white);text-decoration:none;transition:border-color 0.2s,box-shadow 0.2s;display:block;}
-.tier-box:hover{border-color:var(--gold);box-shadow:0 3px 16px rgba(232,179,64,0.22);transform:translateY(-1px);}
-.tier-box-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:4px;display:block;font-family:'Inter',sans-serif;}
-.tier-box-title{font-size:14px;font-weight:600;color:var(--green-dark);font-family:'Inter',sans-serif;}
-
-/* CTA */
-.cta-block{background:linear-gradient(135deg,var(--green-dark),#0d2218);border-radius:var(--radius);padding:36px 40px;margin:48px 0;color:var(--white);text-align:center;}
-.cta-block h3{font-size:22px;color:var(--white);margin-bottom:12px;}
-.cta-block p{color:rgba(255,255,255,0.8);margin-bottom:24px;font-size:16px;}
-.cta-btn{display:inline-block;background:var(--gold);color:var(--white);padding:14px 32px;border-radius:6px;font-weight:600;text-decoration:none;font-size:15px;font-family:'Inter',sans-serif;transition:background 0.2s;}
-.cta-btn:hover{background:var(--gold-dark);color:var(--white);}
-
-/* FAQ */
-.faq-section{margin:48px 0;}
-details{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;background:var(--white);overflow:hidden;}
-summary{padding:18px 22px;font-weight:600;cursor:pointer;font-size:16px;display:flex;justify-content:space-between;align-items:center;list-style:none;color:var(--green-dark);font-family:'Inter',sans-serif;}
-summary::after{content:'+';font-size:20px;color:var(--gold);font-weight:300;flex-shrink:0;margin-left:12px;}
-details[open] summary::after{content:'−';}
-.faq-answer{padding:16px 22px 20px;font-size:15.5px;line-height:1.65;border-top:1px solid var(--cream-dark);}
-.faq-answer p{margin-bottom:12px;}
-.faq-answer p:last-child{margin-bottom:0;}
-
-/* AUTHOR BOX */
-.author-box{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin:48px 0 32px;display:flex;gap:20px;align-items:flex-start;}
-.author-avatar{width:56px;height:56px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:2px solid var(--border);overflow:hidden;}
-.author-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
-.author-info{flex:1;}
-.author-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:4px;display:block;font-family:'Inter',sans-serif;}
-.author-info strong{display:block;font-size:15px;color:var(--ink);margin-bottom:4px;}
-.author-info span{font-size:13.5px;color:var(--ink-muted);line-height:1.5;}
-.method-note{font-size:13px;color:var(--ink-muted);border-top:1px solid var(--border);padding-top:16px;margin-top:16px;line-height:1.55;}
-.last-updated{font-size:13px;color:var(--ink-muted);margin-bottom:40px;}
-
-/* JOURNEY BLOCK */
-.journey-block{background:var(--cream-dark);border-radius:var(--radius);padding:28px 32px;margin:48px 0 0;border:1px solid var(--border);}
-.journey-label{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:16px;}
-.journey-steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
-.journey-step{font-size:13.5px;color:var(--green-dark);font-weight:500;font-family:'Inter',sans-serif;}
-.journey-arrow{color:var(--gold);font-size:16px;}
-
-/* FOOTER */
-.site-footer{background:var(--green-dark);color:rgba(255,255,255,0.65);padding:56px 0 32px;margin-top:64px;}
-.footer-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
-.footer-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--white);margin-bottom:12px;}
-.footer-brand span{color:var(--gold-light);}
-.footer-tagline{font-size:0.82rem;line-height:1.6;max-width:260px;margin-bottom:12px;}
-.footer-philosophy{font-size:0.82rem;line-height:1.7;color:rgba(255,255,255,0.45);font-style:italic;}
-.footer-col h5{font-family:'Inter',sans-serif;color:var(--white);font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;}
-.footer-col a{display:block;color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.875rem;padding:4px 0;transition:color 0.2s;}
-.footer-col a:hover{color:var(--gold-light);}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;font-size:0.78rem;color:rgba(255,255,255,0.35);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
-
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px;}}
+.evidence-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-family:'Inter',sans-serif;margin-left:6px;vertical-align:middle;}
+.evidence-clinical{background:var(--green-light);color:var(--green-dark);}
+.evidence-observational{background:#E8EAF6;color:#3949AB;}
+.evidence-mixed{background:#F3E5F5;color:#6A1B9A;}
 @media(max-width:600px){
-  .hero{padding:44px 0 40px;}
-  .stats-grid{grid-template-columns:1fr 1fr;}
-  .tier-grid{grid-template-columns:1fr 1fr;}
-  .cta-block{padding:28px 22px;}
-  .author-box{flex-direction:column;}
+  .ia-tierbox{flex-direction:column;}
   .ia-punchline,.ia-takeaways{padding:20px 20px;}
-  .footer-grid{grid-template-columns:1fr;gap:24px;}
-  .footer-bottom{flex-direction:column;gap:6px;}
-  .journey-steps{flex-direction:column;align-items:flex-start;}
+  .ia-cta{padding:28px 22px;}
+  .ia-author-box{flex-direction:column;}
 }
-@media(max-width:900px){}@media(max-width:768px){}@media(max-width:600px){}</style>
-
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -232,235 +123,132 @@ details[open] summary::after{content:'−';}
 </head>
 <body>
 
-<!-- NAVBAR -->
-
-<!-- BREADCRUMBS -->
-<div class="breadcrumbs" role="navigation" aria-label="Brödsmulor">
-  <div class="container">
-    <a href="https://levnytt.se">LevNytt</a>
-    <span>›</span>
-    <a href="https://levnytt.se/neolife-vetenskap">Fytonutrienter</a>
-    <span>›</span>
-    Fytosteroler och cellmembranet
-  </div>
-</div>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="container">
-    <p class="hero-eyebrow">Fytonutrienter · Cellbiologi · Kolesterol</p>
-    <h1>Vad är fytosteroler — och vad har de med cellmembranet att göra?</h1>
-    <p class="hero-intro">Fytosteroler finns i alla växter och liknar kolesterol strukturellt. De spelar en central roll i växtcellers membran och påverkar hur kroppen absorberar kolesterol. Vad vet forskningen — och vad vet den inte?</p>
-    <div class="hero-meta">
-      <span>Av <strong>Jarmo Halonen</strong></span>
-      <span>Publicerad <strong>14 juni 2026</strong></span>
-      <span>Evidenstyp: <strong>Klinisk RCT + mekanistisk</strong></span>
-    </div>
-  </div>
-</header>
-
-<!-- STATS ROW -->
-<section class="stats-row">
-  <div class="container">
-    <div class="stats-grid">
-      <div>
-        <span class="stat-number">250+</span>
-        <span class="stat-label">olika fytosteroler identifierade i naturen</span>
-        <span class="stat-source">PubMed review, 2018</span>
-      </div>
-      <div>
-        <span class="stat-number">7–10%</span>
-        <span class="stat-label">LDL-sänkning vid 1,5–2,4 g/dag — godkänt hälsopåstående EFSA</span>
-        <span class="stat-source">EFSA Journal, 2012</span>
-      </div>
-      <div>
-        <span class="stat-number">150–400 mg</span>
-        <span class="stat-label">genomsnittligt dagligt fytosterolintag via vanlig kost i västvärlden</span>
-        <span class="stat-source">Linus Pauling Institute</span>
-      </div>
-      <div>
-        <span class="stat-number">2–3 v</span>
-        <span class="stat-label">tid tills mätbar LDL-sänkning vid tillräcklig dos fytosteroler</span>
-        <span class="stat-source">EU-kommissionen, 2012</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AUTHORITY NAV -->
-<div class="authority-nav" role="navigation">
-  <div class="container">
-    <span class="authority-nav-label">Om LevNytt</span>
-    <a href="https://levnytt.se/om-oss">Om oss</a>
-    <a href="https://levnytt.se/den-fundersamma-mannen">Den Fundersamma Mannen</a>
-    <a href="https://levnytt.se/var-metod">Vår Metod</a>
-    <a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a>
-    <a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a>
-  </div>
-</div>
-
-<!-- ARTICLE -->
-<main class="article-wrap">
-  <div class="container">
-
-    <div class="ia-punchline">
-      <p>Vad är fytosteroler? — Fytosteroler är växternas version av kolesterol. De bygger upp och stabiliserar cellmembranets struktur i alla växtceller, precis som kolesterol gör i djurceller. <strong>I den mänskliga kroppen konkurrerar de med kolesterol om absorptionen — med mätbar effekt på LDL-nivåer, bekräftad av EFSA.</strong> Vad de däremot inte bevisat gör är att minska risken för hjärtinfarkt — en distinktion som är viktig att förstå.</p>
-    </div>
-
-    <div class="ia-takeaways">
-      <h2>Det viktigaste att veta</h2>
-      <ul>
-        <li>Fytosteroler är strukturella komponenter i växtcellers membran — de fyller samma roll som kolesterol fyller i djurcellers membran.</li>
-        <li>Mer än 250 olika fytosteroler existerar. De vanligaste i mänsklig kost är beta-sitosterol, campesterol och stigmasterol.</li>
-        <li>EFSA har godkänt hälsopåståendet att 1,5–2,4 g växtsterolestrar dagligen sänker LDL-kolesterol med 7–10% på 2–3 veckor.</li>
-        <li>Det genomsnittliga kostintaget via vanlig mat är 150–400 mg/dag — långt under den dos som ger mätbar LDL-effekt.</li>
-        <li>Det finns ännu inga avslutade långtidsstudier som visar att fytosteroler minskar risken för kardiovaskulär sjukdom eller dödlighet — den kliniska slutpunktsevidensen saknas.</li>
-        <li>Högt intag kan minska absorptionen av fettlösliga vitaminer och karotenoider, varför parallellt intag av frukt och grönsaker rekommenderas.</li>
-      </ul>
-    </div>
-
-    <div class="article-body">
-
-      <h2>Vad är fytosteroler och var kommer de ifrån?</h2>
-      <p>Fytosteroler — eller växtbaserade steroler — är en grupp naturliga föreningar som förekommer i alla växter. De tillhör samma kemiska familj som kolesterol (sterolerna) men produceras uteslutande av växter, alger och svampar. I växtceller fyller de exakt samma strukturella roll som kolesterol fyller i djurceller: de är inbyggda i cellmembranets fosfolipiddubbellager och reglerar dess fysikaliska egenskaper.</p>
-      <p>Enligt en <a href="https://pubmed.ncbi.nlm.nih.gov/29627611/" rel="noopener" target="_blank">översiktsartikel publicerad i PubMed (2018)</a> har mer än 250 olika fytosteroler identifierats. De tre vanligaste i mänsklig kost är beta-sitosterol (β-sitosterol), campesterol och stigmasterol. Vegetabiliska oljor, nötter, frön och fullkorn är de viktigaste kostmässiga källorna.</p>
-
-      <div class="callout callout-standard">
-        <p class="callout-title">Fytosteroler vs kolesterol — strukturen är nyckeln</p>
-        <p>Fytosteroler och kolesterol är nästan identiska molekyler. Skillnaden sitter i en sidokedja vid C-24 i sterolskelettet. Denna lilla skillnad gör att kroppen hanterar dem helt olika: kolesterol absorberas effektivt, fytosteroler absorberas mycket dåligt — vilket är precis varför de kan påverka kolesterolets absorption.</p>
-      </div>
-
-      <h2>Vad gör fytosteroler i cellmembranet?</h2>
-      <p>Cellmembranet är inte en passiv barriär — det är en dynamisk struktur som reglerar vad som passerar in och ut ur cellen, hur signaler förmedlas och hur enzymer fungerar. Dess fysikaliska egenskaper (fluiditet, ordning, permeabilitet) är centrala för cellens funktion.</p>
-      <p>I växtceller fyller fytosteroler samma membranstrukturerande funktion som kolesterol fyller i djurceller. De interagerar med fosfolipiderna i dubbellagret och påverkar membraneegenskaperna. En <a href="https://pubmed.ncbi.nlm.nih.gov/21864283/" rel="noopener" target="_blank">översiktsartikel i PubMed (2011)</a> sammanfattar att fytosteroler är integrerade komponenter i växtcellers membran med stabiliserande effekt på fosfolipiddubbellagret — precis som kolesterol i djurceller — och att deras strukturella likhet med kolesterol möjliggör den LDL-sänkande mekanismen i tarmen. En <a href="https://pubmed.ncbi.nlm.nih.gov/18676403/" rel="noopener" target="_blank">studie i PubMed (2008)</a> visade att borttagning av fytosteroler från växtcellers membran ökade lipidkedjornas oordning och störde bildandet av lipidraftar — specialiserade membranmikrodomäner som är viktiga för signalöverföring.</p>
-
-      <div class="research-box">
-        <span class="research-box-label">Mekanistisk forskning <span class="evidence-tag evidence-observational">In vitro · Cellstudier</span></span>
-        <h4>Fytosteroler och lipidraftar i cellmembranet</h4>
-        <p>Lipidraftar är ordnade mikrodomäner i cellmembranet som fungerar som plattformar för signalproteiner och enzymer. Forskning visar att fytosteroler är nödvändiga för bildandet av dessa domäner i växtceller. I djurceller kan fytosteroler — vid höga koncentrationer — interagera med membranet och påverka dess biofysikaliska egenskaper, vilket kan ha implikationer för inflammationssignalering.</p>
-        <p>En studie publicerad i Food &amp; Function (2025) visade att fytosteroler kan dämpa inflammationssvar genom att störa lipidpackningsordningen i cellmembranet och därmed hämma NADPH-oxidasaktivitet och ROS-produktion.</p>
-        <cite>Phytosterol-mediated disturbance of the lipid packing order. Food Funct. 2025;16:6150-6159.</cite>
-      </div>
-
-      <h2>Hur påverkar fytosteroler LDL-kolesterol?</h2>
-      <p>Mekanismen för fytosterolernas LDL-sänkande effekt är välbeskriven: fytosteroler konkurrerar med kolesterol om inkorporering i miceller i tunntarmen. Eftersom deras struktur liknar kolesterols, kan de tränga undan kolesterol i de fetttransportpartiklar som absorberas genom tarmväggen. Resultatet är att kolesterolet i stället förblir i tarmen och utsöndras.</p>
-
-      <div class="research-box">
-        <span class="research-box-label">Klinisk evidens <span class="evidence-tag evidence-clinical">RCT · EFSA-godkänt</span></span>
-        <h4>EFSA hälsopåstående — LDL-kolesterol</h4>
-        <p>Efter vetenskaplig granskning har Europeiska livsmedelsmyndigheten (EFSA) godkänt hälsopåståendet att ett dagligt intag på 1,5–2,4 g växtsterolestrar kan sänka LDL-kolesterol med 7–10% på 2–3 veckor. EU-kommissionen har auktoriserat detta påstående för produkter som innehåller tillräckliga mängder.</p>
-        <p>Konsumtion av 2 g per dag av växtsterolestrar är i flera randomiserade kontrollerade studier associerat med en LDL-sänkning på cirka 10%.</p>
-        <cite>EU-kommissionen, förordning (EU) nr 686/2014. EFSA Journal 2012;10(5):2692.</cite>
-      </div>
-
-      <div class="callout callout-amber">
-        <p class="callout-title">Viktigt: LDL-sänkning ≠ minskad hjärtsjukdomsrisk</p>
-        <p>Det finns ännu inga avslutade randomiserade kliniska prövningar som visar att fytosteroler minskar risken för hjärtinfarkt, stroke eller kardiovaskulär dödlighet. Mekanismen är biologiskt plausibel — lägre LDL är kopplat till lägre kardiovaskulär risk — men de hårda kliniska slutpunkterna är inte dokumenterade för fytosteroler som isolerat interventionsmedel.</p>
-      </div>
-
-      <h2>Hur mycket fytosteroler finns i vanlig kost?</h2>
-      <p>Det genomsnittliga dagliga fytosterolintaget via vanlig kost i västvärlden uppgår till 150–400 mg per dag, enligt <a href="https://lpi.oregonstate.edu/mic/dietary-factors/phytochemicals/phytosterols" rel="noopener" target="_blank">Linus Pauling Institute vid Oregon State University</a>. Det är väsentligt lägre än de 1,5–2 g som associeras med mätbar LDL-sänkning.</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Livsmedel</th><th>Fytosterolinnehåll (per 100 g)</th><th>Notering</th></tr></thead>
-          <tbody>
-            <tr><td>Majsolja</td><td>~700–900 mg</td><td>En av de rikaste källorna</td></tr>
-            <tr><td>Solrosolja</td><td>~300–400 mg</td><td>Vanlig matlagningsolja</td></tr>
-            <tr><td>Mandel</td><td>~150–200 mg</td><td>God källa bland nötter</td></tr>
-            <tr><td>Vete (fullkorn)</td><td>~70–100 mg</td><td>Bidrar i vår vardag</td></tr>
-            <tr><td>Berikade margariner</td><td>Upp till 2000 mg/portion</td><td>Konstruerat för LDL-effekt</td></tr>
-            <tr><td>Typisk västerländsk kost</td><td>150–400 mg/dag totalt</td><td>Under terapeutisk dos</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h2>Hur skiljer sig fytosteroler från fytostanoler?</h2>
-      <p>Fytostanoler är mättade versioner av fytosteroler — de saknar en dubbelbindning i sterolringen. Fytostanoler absorberas ännu sämre i tarmen, vilket teoretiskt ger renare LDL-sänkande effekt utan att konkurrera om sin egen absorption. I praktiken visar kliniska studier liknande LDL-sänkande effekter för båda formerna vid jämförbara doser.</p>
-      <p>Fytostanoler marknadsförs bland annat i berikade margariner. Produkter som innehåller dessa ämnen sätts ofta in i kostrådgivning för personer med förhöjt LDL som ett dietärt komplement — inte som ersättning för läkemedel vid klinisk hyperkolesterolemi.</p>
-
-      <h2>Är det säkert att ta fytosteroltillskott?</h2>
-      <p>Fytosteroler betraktas som säkra vid normala kostmängder och vid supplementering i de doser som studerats i kliniska prövningar (upp till 3 g/dag). En potentiell begränsning är att högt intag kan minska absorptionen av fettlösliga vitaminer — framför allt betakaroten och andra karotenoider. Forskning rekommenderar att parallellt öka intaget av frukt och grönsaker för att motverka detta.</p>
-
-      <div class="callout callout-warning">
-        <p class="callout-title">Sitosterolemi — en sällsynt genetisk undantagssituation</p>
-        <p>En sällsynt autosomalt recessiv störning (sitosterolemi) leder till kraftigt ökad absorption av fytosteroler i tarmen. Drabbade individer ackumulerar fytosteroler i blodet och vävnader, vilket kan ge aterosklerotiska förändringar. Tillståndet behandlas med strikt begränsning av fytosterolintag och specifik läkemedelsbehandling. För personer utan denna genetiska störning är normala till måttliga mängder fytosteroler säkra.</p>
-      </div>
-
-      <p>NeoLifes Tre-en-en är ett tillskott formulerat kring växtbaserade steroler och fetter med syfte att stödja cellmembranets funktion. Du kan läsa mer om hur NeoLife förhåller sig till fytonutrienter och cellnäring på <a href="https://levnytt.se/neolife-vetenskap">NeoLife Vetenskap</a>.</p>
-
-      <div class="cta-block">
-        <h3>Vill du förstå fytosterolernas plats i en daglig näringsprofil?</h3>
-        <p>LevNytt undersöker hur NeoLifes Tre-en-en är formulerat kring växtbaserade steroler och vad forskningen säger om daglig supplementering.</p>
-        <a href="https://levnytt.se/vaxtbaserade-steroler-dagligen" class="cta-btn">Växtbaserade steroler dagligen →</a>
-      </div>
-
-      <!-- TIER BOXES -->
-      <div class="tier-section">
-        <p class="tier-label">Utforska vidare på LevNytt</p>
-        <div class="tier-grid">
-          <a href="https://levnytt.se/neolife-historia" class="tier-box">
-            <span class="tier-box-label">Tier 1</span>
-            <span class="tier-box-title">NeoLife Historia</span>
-          </a>
-          <a href="https://levnytt.se/neolife-vetenskap" class="tier-box">
-            <span class="tier-box-label">Tier 2</span>
-            <span class="tier-box-title">NeoLife Vetenskap</span>
-          </a>
-          <a href="https://levnytt.se/forsknings-faq" class="tier-box">
-            <span class="tier-box-label">Tier 3</span>
-            <span class="tier-box-title">Forsknings-FAQ</span>
-          </a>
-          <a href="https://levnytt.se/levnytt-principer" class="tier-box">
-            <span class="tier-box-label">Tier 4</span>
-            <span class="tier-box-title">LevNytt Principer</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- FAQ -->
-      <div class="faq-section">
-        <h2>Vanliga frågor om fytosteroler</h2>
-        <details><summary>Vad är fytosteroler?</summary><div class="faq-answer"><p>Fytosteroler (växtbaserade steroler) är naturliga beståndsdelar i växtcellers membran. De fungerar i växter ungefär som kolesterol fungerar i djurceller — de stabiliserar cellmembranet och reglerar dess fluiditet. Mer än 250 olika fytosteroler har identifierats, varav beta-sitosterol, campesterol och stigmasterol är de vanligaste i mänsklig kost.</p></div></details>
-        <details><summary>Hur påverkar fytosteroler LDL-kolesterol?</summary><div class="faq-answer"><p>Fytosteroler konkurrerar med kolesterol om absorptionen i tunntarmen. Eftersom deras molekylstruktur liknar kolesterols, tränger de undan kolesterol i de miceller som transporteras genom tarmväggen. Resultatet är att mindre kolesterol absorberas. EFSA har godkänt hälsopåståendet att ett dagligt intag på 1,5–2,4 g växtsterolestrar kan sänka LDL-kolesterol med 7–10% på 2–3 veckor.</p></div></details>
-        <details><summary>Vad gör fytosteroler i cellmembranet?</summary><div class="faq-answer"><p>I växtceller fyller fytosteroler samma strukturella roll som kolesterol fyller i djurceller. De interagerar med fosfolipiderna i membranets dubbellager och påverkar membranegenskaper som fluiditet, permeabilitet och ordning. Forskning visar att fytosteroler är nödvändiga för bildandet av lipidraftar — specialiserade domäner i cellmembranet som spelar en roll i signalöverföring och enzymaktivitet.</p></div></details>
-        <details><summary>I vilka livsmedel finns fytosteroler?</summary><div class="faq-answer"><p>Fytosteroler finns naturligt i vegetabiliska oljor, nötter, frön, spannmål och grönsaker. Majsolja och solrosolja innehåller relativt höga halter. Det genomsnittliga dagliga kostintaget i västvärlden uppskattas till 150–400 mg per dag — långt under de 1,5–2 g som associeras med mätbar LDL-sänkning. Berikade margariner kan innehålla 2 g per portion.</p></div></details>
-        <details><summary>Är fytosteroler säkra?</summary><div class="faq-answer"><p>Fytosteroler betraktas som säkra vid normala kostmängder och vid supplementering i de doser som studerats (upp till 3 g/dag). En potentiell begränsning är att högt intag kan minska absorptionen av fettlösliga vitaminer och karotenoider, varför parallellt intag av frukt och grönsaker rekommenderas. En sällsynt genetisk störning (sitosterolemi) leder till kraftigt ökad fytosterolabsorption och kräver dietär begränsning.</p></div></details>
-        <details><summary>Minskar fytosteroler risken för hjärtsjukdom?</summary><div class="faq-answer"><p>Det är en viktig distinktion: fytosteroler sänker LDL-kolesterol med dokumenterad effekt (7–10%), men det finns ännu inga avslutade långtidsstudier som visar att de minskar risken för hjärtinfarkt eller kardiovaskulär dödlighet. EFSA har godkänt hälsopåståendet om LDL-sänkning, men inte ett påstående om minskad kardiovaskulär risk. Mekanismen är plausibel men slutpunktsevidensen saknas.</p></div></details>
-        <details><summary>Hur skiljer sig fytosteroler från fytostanoler?</summary><div class="faq-answer"><p>Fytostanoler är mättade versioner av fytosteroler — de saknar en dubbelbindning i sterolringen. Fytostanoler absorberas ännu sämre i tarmen. I praktiken visar kliniska studier liknande LDL-sänkande effekter för båda formerna vid jämförbara doser. Fytostanoler används bland annat i margariner som Becel pro.activ.</p></div></details>
-      </div>
-
-      <!-- AUTHOR BOX -->
-      <div class="author-box">
-        <div class="author-avatar"><img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="56" height="56"></div>
-        <div class="author-info">
-          <span class="author-label">Skribent</span>
-          <strong>Jarmo Halonen</strong>
-          <span>Långvarig NeoLife-användare och entreprenör med intresse för hälsa, konsumentfrågor och vardagsekonomi. Driver LevNytt som en oberoende konsumentutbildningsresurs.</span>
-          <div class="method-note"><strong>Kommersiell upplysning:</strong> LevNytt drivs av en NeoLife-distributör. Hälsopåståenden är sourcade från primärkällor (EFSA, PubMed). Evidensnivå anges explicit. <a href="https://levnytt.se/var-metod">Läs om vår metod →</a></div>
-        </div>
-      </div>
-
-      <p class="last-updated">Senast uppdaterad: 14 juni 2026. Källor: EFSA Journal 2012, PubMed reviews, Linus Pauling Institute.</p>
-
-      <!-- JOURNEY BLOCK -->
-      <div class="journey-block">
-        <p class="journey-label">Din läsarresa i klustret Fytonutrienter &amp; Växter</p>
-        <div class="journey-steps">
-          <span class="journey-step"><strong>Fytosteroler och cellmembranet</strong> ← du är här</span>
-          <span class="journey-arrow">→</span>
-          <span class="journey-step"><a href="https://levnytt.se/vaxtbaserade-steroler-dagligen">Växtbaserade steroler dagligen</a></span>
-          <span class="journey-arrow">→</span>
-          <span class="journey-step"><a href="https://levnytt.se/neolife-vetenskap">NeoLife och forskning</a></span>
-        </div>
-      </div>
-
-    </div><!-- /article-body -->
-  </div><!-- /container -->
-</main>
-
-<!-- FOOTER -->
+<div id="site-nav"></div>
 <script src="/nav.js" defer></script>
+
+<div class="ia-wrap"><article>
+
+<div class="ia-punchline">
+  <p>Vad är fytosteroler? — Fytosteroler är växternas version av kolesterol. De bygger upp och stabiliserar cellmembranets struktur i alla växtceller, precis som kolesterol gör i djurceller. <strong>I den mänskliga kroppen konkurrerar de med kolesterol om absorptionen — med mätbar effekt på LDL-nivåer, bekräftad av EFSA.</strong> Vad de däremot inte bevisat gör är att minska risken för hjärtinfarkt — en distinktion som är viktig att förstå.</p>
+</div>
+
+<div class="ia-takeaways">
+  <h3>Key Takeaways</h3>
+  <ul>
+    <li>Fytosteroler är strukturella komponenter i växtcellers membran — de fyller samma roll som kolesterol fyller i djurcellers membran.</li>
+    <li>Mer än 250 olika fytosteroler existerar. De vanligaste i mänsklig kost är beta-sitosterol, campesterol och stigmasterol.</li>
+    <li>EFSA har godkänt hälsopåståendet att 1,5–2,4 g växtsterolestrar dagligen sänker LDL-kolesterol med 7–10% på 2–3 veckor.</li>
+    <li>Det genomsnittliga kostintaget via vanlig mat är 150–400 mg/dag — långt under den dos som ger mätbar LDL-effekt.</li>
+    <li>Det finns ännu inga avslutade långtidsstudier som visar att fytosteroler minskar risken för kardiovaskulär sjukdom eller dödlighet — den kliniska slutpunktsevidensen saknas.</li>
+    <li>Högt intag kan minska absorptionen av fettlösliga vitaminer och karotenoider, varför parallellt intag av frukt och grönsaker rekommenderas.</li>
+  </ul>
+</div>
+
+<h2>Vad är fytosteroler och var kommer de ifrån?</h2>
+<p>Fytosteroler — eller växtbaserade steroler — är en grupp naturliga föreningar som förekommer i alla växter. De tillhör samma kemiska familj som kolesterol (sterolerna) men produceras uteslutande av växter, alger och svampar. I växtceller fyller de exakt samma strukturella roll som kolesterol fyller i djurceller: de är inbyggda i cellmembranets fosfolipiddubbellager och reglerar dess fysikaliska egenskaper.</p>
+<p>Enligt en <a href="https://pubmed.ncbi.nlm.nih.gov/29627611/" rel="noopener" target="_blank">översiktsartikel publicerad i PubMed (2018)</a> har mer än 250 olika fytosteroler identifierats. De tre vanligaste i mänsklig kost är beta-sitosterol (β-sitosterol), campesterol och stigmasterol. Vegetabiliska oljor, nötter, frön och fullkorn är de viktigaste kostmässiga källorna.</p>
+
+<div class="ia-callout">
+  <h4>Fytosteroler vs kolesterol — strukturen är nyckeln</h4>
+  <p>Fytosteroler och kolesterol är nästan identiska molekyler. Skillnaden sitter i en sidokedja vid C-24 i sterolskelettet. Denna lilla skillnad gör att kroppen hanterar dem helt olika: kolesterol absorberas effektivt, fytosteroler absorberas mycket dåligt — vilket är precis varför de kan påverka kolesterolets absorption.</p>
+</div>
+
+<h2>Vad gör fytosteroler i cellmembranet?</h2>
+<p>Cellmembranet är inte en passiv barriär — det är en dynamisk struktur som reglerar vad som passerar in och ut ur cellen, hur signaler förmedlas och hur enzymer fungerar. Dess fysikaliska egenskaper (fluiditet, ordning, permeabilitet) är centrala för cellens funktion.</p>
+<p>I växtceller fyller fytosteroler samma membranstrukturerande funktion som kolesterol fyller i djurceller. De interagerar med fosfolipiderna i dubbellagret och påverkar membraneegenskaperna. En <a href="https://pubmed.ncbi.nlm.nih.gov/21864283/" rel="noopener" target="_blank">översiktsartikel i PubMed (2011)</a> sammanfattar att fytosteroler är integrerade komponenter i växtcellers membran med stabiliserande effekt på fosfolipiddubbellagret — precis som kolesterol i djurceller — och att deras strukturella likhet med kolesterol möjliggör den LDL-sänkande mekanismen i tarmen. En <a href="https://pubmed.ncbi.nlm.nih.gov/18676403/" rel="noopener" target="_blank">studie i PubMed (2008)</a> visade att borttagning av fytosteroler från växtcellers membran ökade lipidkedjornas oordning och störde bildandet av lipidraftar — specialiserade membranmikrodomäner som är viktiga för signalöverföring.</p>
+
+<div class="research-box">
+  <span class="research-box-label">Mekanistisk forskning <span class="evidence-tag evidence-observational">In vitro · Cellstudier</span></span>
+  <h4>Fytosteroler och lipidraftar i cellmembranet</h4>
+  <p>Lipidraftar är ordnade mikrodomäner i cellmembranet som fungerar som plattformar för signalproteiner och enzymer. Forskning visar att fytosteroler är nödvändiga för bildandet av dessa domäner i växtceller. I djurceller kan fytosteroler — vid höga koncentrationer — interagera med membranet och påverka dess biofysikaliska egenskaper, vilket kan ha implikationer för inflammationssignalering.</p>
+  <p>En studie publicerad i Food &amp; Function (2025) visade att fytosteroler kan dämpa inflammationssvar genom att störa lipidpackningsordningen i cellmembranet och därmed hämma NADPH-oxidasaktivitet och ROS-produktion.</p>
+  <cite>Phytosterol-mediated disturbance of the lipid packing order. Food Funct. 2025;16:6150-6159.</cite>
+</div>
+
+<h2>Hur påverkar fytosteroler LDL-kolesterol?</h2>
+<p>Mekanismen för fytosterolernas LDL-sänkande effekt är välbeskriven: fytosteroler konkurrerar med kolesterol om inkorporering i miceller i tunntarmen. Eftersom deras struktur liknar kolesterols, kan de tränga undan kolesterol i de fetttransportpartiklar som absorberas genom tarmväggen. Resultatet är att kolesterolet i stället förblir i tarmen och utsöndras.</p>
+
+<div class="research-box">
+  <span class="research-box-label">Klinisk evidens <span class="evidence-tag evidence-clinical">RCT · EFSA-godkänt</span></span>
+  <h4>EFSA hälsopåstående — LDL-kolesterol</h4>
+  <p>Efter vetenskaplig granskning har Europeiska livsmedelsmyndigheten (EFSA) godkänt hälsopåståendet att ett dagligt intag på 1,5–2,4 g växtsterolestrar kan sänka LDL-kolesterol med 7–10% på 2–3 veckor. EU-kommissionen har auktoriserat detta påstående för produkter som innehåller tillräckliga mängder.</p>
+  <p>Konsumtion av 2 g per dag av växtsterolestrar är i flera randomiserade kontrollerade studier associerat med en LDL-sänkning på cirka 10%.</p>
+  <cite>EU-kommissionen, förordning (EU) nr 686/2014. EFSA Journal 2012;10(5):2692.</cite>
+</div>
+
+<div class="ia-callout">
+  <h4>Viktigt: LDL-sänkning ≠ minskad hjärtsjukdomsrisk</h4>
+  <p>Det finns ännu inga avslutade randomiserade kliniska prövningar som visar att fytosteroler minskar risken för hjärtinfarkt, stroke eller kardiovaskulär dödlighet. Mekanismen är biologiskt plausibel — lägre LDL är kopplat till lägre kardiovaskulär risk — men de hårda kliniska slutpunkterna är inte dokumenterade för fytosteroler som isolerat interventionsmedel.</p>
+</div>
+
+<h2>Hur mycket fytosteroler finns i vanlig kost?</h2>
+<p>Det genomsnittliga dagliga fytosterolintaget via vanlig kost i västvärlden uppgår till 150–400 mg per dag, enligt <a href="https://lpi.oregonstate.edu/mic/dietary-factors/phytochemicals/phytosterols" rel="noopener" target="_blank">Linus Pauling Institute vid Oregon State University</a>. Det är väsentligt lägre än de 1,5–2 g som associeras med mätbar LDL-sänkning.</p>
+
+<table>
+  <thead><tr><th>Livsmedel</th><th>Fytosterolinnehåll (per 100 g)</th><th>Notering</th></tr></thead>
+  <tbody>
+    <tr><td>Majsolja</td><td>~700–900 mg</td><td>En av de rikaste källorna</td></tr>
+    <tr><td>Solrosolja</td><td>~300–400 mg</td><td>Vanlig matlagningsolja</td></tr>
+    <tr><td>Mandel</td><td>~150–200 mg</td><td>God källa bland nötter</td></tr>
+    <tr><td>Vete (fullkorn)</td><td>~70–100 mg</td><td>Bidrar i vår vardag</td></tr>
+    <tr><td>Berikade margariner</td><td>Upp till 2000 mg/portion</td><td>Konstruerat för LDL-effekt</td></tr>
+    <tr><td>Typisk västerländsk kost</td><td>150–400 mg/dag totalt</td><td>Under terapeutisk dos</td></tr>
+  </tbody>
+</table>
+
+<h2>Hur skiljer sig fytosteroler från fytostanoler?</h2>
+<p>Fytostanoler är mättade versioner av fytosteroler — de saknar en dubbelbindning i sterolringen. Fytostanoler absorberas ännu sämre i tarmen, vilket teoretiskt ger renare LDL-sänkande effekt utan att konkurrera om sin egen absorption. I praktiken visar kliniska studier liknande LDL-sänkande effekter för båda formerna vid jämförbara doser.</p>
+<p>Fytostanoler marknadsförs bland annat i berikade margariner. Produkter som innehåller dessa ämnen sätts ofta in i kostrådgivning för personer med förhöjt LDL som ett dietärt komplement — inte som ersättning för läkemedel vid klinisk hyperkolesterolemi.</p>
+
+<h2>Är det säkert att ta fytosteroltillskott?</h2>
+<p>Fytosteroler betraktas som säkra vid normala kostmängder och vid supplementering i de doser som studerats i kliniska prövningar (upp till 3 g/dag). En potentiell begränsning är att högt intag kan minska absorptionen av fettlösliga vitaminer — framför allt betakaroten och andra karotenoider. Forskning rekommenderar att parallellt öka intaget av frukt och grönsaker för att motverka detta.</p>
+
+<div class="ia-callout">
+  <h4>Sitosterolemi — en sällsynt genetisk undantagssituation</h4>
+  <p>En sällsynt autosomalt recessiv störning (sitosterolemi) leder till kraftigt ökad absorption av fytosteroler i tarmen. Drabbade individer ackumulerar fytosteroler i blodet och vävnader, vilket kan ge aterosklerotiska förändringar. Tillståndet behandlas med strikt begränsning av fytosterolintag och specifik läkemedelsbehandling. För personer utan denna genetiska störning är normala till måttliga mängder fytosteroler säkra.</p>
+</div>
+
+<p>NeoLifes Tre-en-en är ett tillskott formulerat kring växtbaserade steroler och fetter med syfte att stödja cellmembranets funktion. Du kan läsa mer om hur NeoLife förhåller sig till fytonutrienter och cellnäring på <a href="https://levnytt.se/neolife-vetenskap">NeoLife Vetenskap</a>.</p>
+
+<div class="ia-cta">
+  <h3>Vill du förstå fytosterolernas plats i en daglig näringsprofil?</h3>
+  <p>LevNytt undersöker hur NeoLifes Tre-en-en är formulerat kring växtbaserade steroler och vad forskningen säger om daglig supplementering.</p>
+  <a href="https://levnytt.se/vaxtbaserade-steroler-dagligen" target="_blank" rel="noopener noreferrer">Växtbaserade steroler dagligen →</a>
+</div>
+
+<div class="ia-tierbox">
+  <a class="ia-tier" target="_blank" rel="noopener noreferrer" href="https://levnytt.se/neolife-historia"><b>Tier 1</b>NeoLife Historia</a>
+  <a class="ia-tier" target="_blank" rel="noopener noreferrer" href="https://levnytt.se/neolife-vetenskap"><b>Tier 2</b>NeoLife Vetenskap</a>
+  <a class="ia-tier" target="_blank" rel="noopener noreferrer" href="https://levnytt.se/forsknings-faq"><b>Tier 3</b>Forsknings-FAQ</a>
+  <a class="ia-tier" target="_blank" rel="noopener noreferrer" href="https://levnytt.se/levnytt-principer"><b>Tier 4</b>LevNytt Principer</a>
+</div>
+
+<div class="ia-faq">
+  <h2>Vanliga frågor om fytosteroler</h2>
+  <details><summary>Vad är fytosteroler?</summary><p>Fytosteroler (växtbaserade steroler) är naturliga beståndsdelar i växtcellers membran. De fungerar i växter ungefär som kolesterol fungerar i djurceller — de stabiliserar cellmembranet och reglerar dess fluiditet. Mer än 250 olika fytosteroler har identifierats, varav beta-sitosterol, campesterol och stigmasterol är de vanligaste i mänsklig kost.</p></details>
+  <details><summary>Hur påverkar fytosteroler LDL-kolesterol?</summary><p>Fytosteroler konkurrerar med kolesterol om absorptionen i tunntarmen. Eftersom deras molekylstruktur liknar kolesterols, tränger de undan kolesterol i de miceller som transporteras genom tarmväggen. Resultatet är att mindre kolesterol absorberas. EFSA har godkänt hälsopåståendet att ett dagligt intag på 1,5–2,4 g växtsterolestrar kan sänka LDL-kolesterol med 7–10% på 2–3 veckor.</p></details>
+  <details><summary>Vad gör fytosteroler i cellmembranet?</summary><p>I växtceller fyller fytosteroler samma strukturella roll som kolesterol fyller i djurceller. De interagerar med fosfolipiderna i membranets dubbellager och påverkar membranegenskaper som fluiditet, permeabilitet och ordning. Forskning visar att fytosteroler är nödvändiga för bildandet av lipidraftar — specialiserade domäner i cellmembranet som spelar en roll i signalöverföring och enzymaktivitet.</p></details>
+  <details><summary>I vilka livsmedel finns fytosteroler?</summary><p>Fytosteroler finns naturligt i vegetabiliska oljor, nötter, frön, spannmål och grönsaker. Majsolja och solrosolja innehåller relativt höga halter. Det genomsnittliga dagliga kostintaget i västvärlden uppskattas till 150–400 mg per dag — långt under de 1,5–2 g som associeras med mätbar LDL-sänkning. Berikade margariner kan innehålla 2 g per portion.</p></details>
+  <details><summary>Är fytosteroler säkra?</summary><p>Fytosteroler betraktas som säkra vid normala kostmängder och vid supplementering i de doser som studerats (upp till 3 g/dag). En potentiell begränsning är att högt intag kan minska absorptionen av fettlösliga vitaminer och karotenoider, varför parallellt intag av frukt och grönsaker rekommenderas. En sällsynt genetisk störning (sitosterolemi) leder till kraftigt ökad fytosterolabsorption och kräver dietär begränsning.</p></details>
+  <details><summary>Minskar fytosteroler risken för hjärtsjukdom?</summary><p>Det är en viktig distinktion: fytosteroler sänker LDL-kolesterol med dokumenterad effekt (7–10%), men det finns ännu inga avslutade långtidsstudier som visar att de minskar risken för hjärtinfarkt eller kardiovaskulär dödlighet. EFSA har godkänt hälsopåståendet om LDL-sänkning, men inte ett påstående om minskad kardiovaskulär risk. Mekanismen är plausibel men slutpunktsevidensen saknas.</p></details>
+  <details><summary>Hur skiljer sig fytosteroler från fytostanoler?</summary><p>Fytostanoler är mättade versioner av fytosteroler — de saknar en dubbelbindning i sterolringen. Fytostanoler absorberas ännu sämre i tarmen. I praktiken visar kliniska studier liknande LDL-sänkande effekter för båda formerna vid jämförbara doser. Fytostanoler används bland annat i margariner som Becel pro.activ.</p></details>
+</div>
+
+<p class="ia-disclosure"><strong>Metodnotering:</strong> Hälsopåståenden sourcade från primärkällor (EFSA, PubMed). Evidensnivå anges explicit. <a href="https://levnytt.se/var-metod">Läs om vår metod →</a></p>
+
+<div class="ia-author-box">
+  <div class="ia-author-avatar">JH</div>
+  <div>
+    <span class="author-label">Skribent</span>
+    <strong>Jarmo Halonen</strong>
+    <span>Långvarig NeoLife-användare och entreprenör med intresse för hälsa, konsumentfrågor och vardagsekonomi. Driver LevNytt som en oberoende konsumentutbildningsresurs.</span>
+  </div>
+</div>
+
+<p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
+
+</article></div>
+
 <script src="/footer.js" defer></script>
 <script src="/components.js" defer></script>
 </body>

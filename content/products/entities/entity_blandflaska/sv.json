@@ -1,0 +1,41 @@
+{
+  "canonical_id": "entity_blandflaska",
+  "neoLife_code": 308,
+  "locale": "sv",
+  "slug": "neolife-blandflaska",
+  "product_name": "Blandflaska",
+  "aliases": [
+    "Blandflaska 500 ml"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "blandflaska",
+    "Golden Home Care",
+    "tillbehör"
+  ],
+  "short_description": "Blandflaska 500 ml för beredning av utspädda rengöringsmedel.",
+  "summary": "NeoLife blandflaska på 500 ml för beredning av utspädda rengöringsmedel.",
+  "packaging": {
+    "size": 500,
+    "unit": "ml",
+    "label": "500 ml"
+  },
+  "price_database_ref": {
+    "code": 308,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/blandflaska.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_handsprayflaska",
+    "entity_super_10"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

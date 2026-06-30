@@ -1,6 +1,6 @@
 # PROJECT-STATUS.md — LevNytt.se Executive Dashboard
 
-*Last updated: 2026-06-29 | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions.*
+*Last updated: 2026-06-30 | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions.*
 
 ---
 
@@ -12,24 +12,24 @@
 | **Mission** | Sweden's evidence-based NeoLife knowledge platform |
 | **Status** | 🟢 Production Stable |
 | **Phase** | Maintenance + Feature Development |
-| **Public Pages** | 55 |
-| **Audit Compliance** | 55 / 55 pages pass the 13/13 production audit |
 | **Migration** | ✅ Complete |
+| **Brand System** | ✅ Integrated and rolled out |
 | **Deployment** | Cloudflare Pages (automatic deployment) |
-| **Next Focus** | Content Expansion & Feature Development |
+| **Next Focus** | Content Expansion |
 
 ---
 
-## Project Health
+## Current State (post-Sprint 9)
 
 | Status | Value |
 |---|---|
 | **Production** | ✅ Stable — live at https://levnytt.se/ |
-| **Migration** | ✅ Complete — all pages at Gen 3 |
-| **Public pages** | 55 |
-| **Audit compliance** | 55 / 55 pages pass the 13/13 production audit |
+| **Platform** | ✅ All root pages use shared components + brand system |
+| **Design system** | ✅ `pillar.css` with CSS variables on all pages |
+| **Brand System** | ✅ Integrated: `assets/brand/`, brand injectors, brand OG image |
+| **Shared components** | ✅ `nav.js` + `footer.js` + `components.js` on all root pages |
 | **Deployment** | Cloudflare Pages — automatic on `git push` |
-| **Current phase** | Maintenance + Feature Development |
+| **Current phase** | Documentation baseline + Content Expansion |
 
 ---
 
@@ -56,9 +56,8 @@ Every article, pillar page and decision tool should increase trust through facts
 
 - **Repository is the source of truth** — all changes flow through git
 - **Documentation reflects the repository** — keep docs in sync with the codebase
-- **Skills are the implementation authority** — use the pillar-page-template skill for migrations, informational-article skill for new content
+- **Skills are the implementation authority** — load required skills before implementation
 - **Verify before implementing** — audit every page before making changes
-- **One completed page = one commit** — clean, atomic git history
 - **Audit before and after every migration** — run `audit_pillar_page.py` on both sides
 - **Prefer autonomous execution** — the AI should act on instructions without asking for permission on routine tasks
 - **Ask only when business, branding, legal, SEO strategy or content strategy decisions are required** — the AI escalates these; everything else is routine
@@ -67,10 +66,10 @@ Every article, pillar page and decision tool should increase trust through facts
 
 ## Definition of Done
 
-A page is considered complete only when:
+A page or sprint is considered complete only when:
 
-- it passes the 13/13 production audit
-- it follows the Gen 3 design system
+- it passes the applicable production audit
+- it follows the current design system
 - all required project skills have been applied
 - documentation has been updated
 - changes have been committed and pushed
@@ -96,26 +95,29 @@ A page is considered complete only when:
 | Layer | Technology |
 |---|---|
 | Pages | Vanilla HTML5 — hand-authored `.html` files |
-| Styling | `pillar.css` (shared design system) + page-specific `<style>` blocks on select pages |
+| Styling | `pillar.css` (shared design system with CSS variables) + page-specific `<style>` blocks on select pages |
+| Brand System | `assets/brand/` — LV Mark SVG, favicon, apple-touch-icon, hero-watermark, brand OG image |
 | Shared components | `nav.js`, `footer.js`, `components.js` — self-injecting IIFEs, loaded with `defer` |
+| Component injection | `components.js` injects brand meta, hero watermark, author avatar, scroll-to-top, sponsor-ID rewriting |
 | Routing | Cloudflare Pages "Pretty URLs" + `_redirects` file |
 | SEO | Hand-maintained `sitemap.xml`, JSON-LD schemas per page |
 | Hosting | Cloudflare Pages — auto-deploys on `git push` |
 | Repository | GitHub: `freefeel-art/levnytt-site` |
-| Images | JPEG/PNG/WebP in `/images/`. Hero images generated via KIE.ai GPT Image 2 API. |
+| Images | JPEG/PNG/WebP in `/images/`. Product images in `img/og/` and `neolife-*-subdir/`. |
 | Fonts | Google Fonts CDN: Playfair Display (headings) + Inter (body) |
 
 There is **no build step, no npm, no framework**. Files are deployed as-is.
 
 ### Design tokens (pillar.css)
 
-| Token | Value |
-|---|---|
-| `--green-dark` | `#1B4332` |
-| `--green` | `#2D6A4F` |
-| `--gold` | `#C9A84C` |
-| `--cream` | `#F9F6EF` |
-| Max content width | `820px` |
+| Token | Value | Usage |
+|---|---|---|
+| `--lv-green` | `#1B4332` | Primary brand — deep green |
+| `--lv-gold` | `#E8C870` | Secondary brand — light gold |
+| `--lv-green-dark` | `#0D2C1E` | Dark green accent |
+| `--lv-green-light` | `#2D6A4F` | Light green accent |
+| `--lv-cream` | `#F9F6EF` | Background cream |
+| Max content width | `820px` | Article body width |
 
 ### Required page includes
 
@@ -133,17 +135,33 @@ Every production page must include:
 <script src="/components.js" defer></script>
 ```
 
-`components.js` rewrites all `neolifeshop.com` links to include the sponsor ID automatically.
+`components.js` provides:
+- Brand meta injection (favicon, apple-touch-icon via `injectBrandMeta()`)
+- Hero watermark injection (`.lv-watermark` SVG in `.hero` sections)
+- Author avatar replacement (LV Mark SVG in `.ia-author-avatar` elements)
+- Scroll-to-top button
+- Sponsor-ID auto-rewriting for all `neolifeshop.com` links
 
-### Routing pattern for content/articles/
+### Brand assets
 
-Pages in `content/articles/` are served via 200-rewrites in `_redirects`:
+All brand assets live in `assets/brand/` and originate from the master LV Mark SVG:
+
+| Asset | Path | Purpose |
+|---|---|---|
+| LV Mark (inline SVG) | Injected via `nav.js` / `footer.js` / `components.js` | Primary brand symbol |
+| Favicon | `assets/brand/favicon.svg` | Browser tab icon |
+| Apple Touch Icon | `assets/brand/apple-touch-icon.png` | iOS home screen icon |
+| Hero Watermark | `assets/brand/hero-watermark.svg` | Background watermark on hero sections |
+| Brand OG Image | `assets/brand/og-brand.png` | Default Open Graph social share image |
+
+### Routing pattern
+
+- Root-level `.html` files are served directly by Cloudflare Pages Pretty URLs (no rewrite needed).
+- Pages in `content/articles/` are served via 200-rewrites in `_redirects`:
 
 ```
-/forsknings-faq  /content/articles/forsknings-faq  200
+/slug  /content/articles/slug  200
 ```
-
-Root-level `.html` files are served directly by Cloudflare Pages Pretty URLs (no rewrite needed).
 
 ---
 
@@ -151,13 +169,16 @@ Root-level `.html` files are served directly by Cloudflare Pages Pretty URLs (no
 
 | Component | Status |
 |---|---|
-| **Design system** | ✅ Complete — `pillar.css` on all 55 pages |
-| **Navigation system** | ✅ Complete — `nav.js` with defer on all pages |
-| **Shared components** | ✅ Complete — `footer.js` + `components.js` with defer on all pages |
-| **Audit system** | ✅ Operational — `audit_pillar_page.py` for all pages |
-| **Documentation system** | ✅ Operational — `PROJECT-STATUS.md`, `CURRENT-SPRINT.md`, `docs/reports/` |
-| **Sprint workflow** | ✅ Operational — sprint-based migration cadence |
-| **Autonomous execution** | ✅ Operational — AI executes routine migrations without manual approval |
+| **Design system** | ✅ Complete — `pillar.css` on all pages |
+| **Brand System** | ✅ Complete — `assets/brand/` with LV Mark, favicon, apple-touch-icon, hero-watermark, brand OG |
+| **Navigation system** | ✅ Complete — `nav.js` on all root pages |
+| **Footer system** | ✅ Complete — `footer.js` on all root pages |
+| **Shared components** | ✅ Complete — `components.js` with brand injectors, sponsor-ID rewriting, scroll-to-top |
+| **Open Graph** | ✅ Complete — brand OG image on all root pages; product-specific OG on product subdirectories |
+| **Audit system** | ✅ Operational — `audit_pillar_page.py` for pillar pages |
+| **Documentation system** | ✅ Operational — `PROJECT-STATUS.md`, `CURRENT-SPRINT.md`, `docs/sprints/`, `docs/reports/` |
+| **Sprint workflow** | ✅ Operational — sprint-based cadence |
+| **Autonomous execution** | ✅ Operational — AI executes routine work without manual approval |
 | **Deployment pipeline** | ✅ Operational — Cloudflare Pages auto-deploys on `git push` |
 
 ---
@@ -185,7 +206,7 @@ Ask the user only when business, branding, legal, SEO strategy or content strate
 
 ## Repository state
 
-The repository is the authoritative source for current page counts. Run `find . -name "*.html" -not -path "./.git/*"` to enumerate all HTML files.
+The repository is the authoritative source for current page counts.
 
 ### File structure
 
@@ -195,14 +216,16 @@ levnytt-site/
 ├── *.html                               ← root-level pages
 ├── content/
 │   ├── articles/                        ← informational articles (served via _redirects)
-│   └── products/entity_formula_iv/sv.json  ← Nascent product entity system (one entry defined)
+│   └── products/entities/                  ← Product Entity System (5 Wave 1 entities, Sprint 13)
 ├── neolife-kosttillskott/index.html     ← Hub page
 ├── neolife-fibre-tablets/index.html     ← Product subdir page
 ├── neolife-sustained-vitamin-c/index.html ← Product subdir page
 ├── images/                              ← product and editorial images
+├── assets/
+│   └── brand/                           ← Brand System assets (LV Mark, favicon, OG, watermark)
 ├── nav.js                               ← Site-wide navigation
 ├── footer.js                            ← Site-wide footer
-├── components.js                        ← Sponsor-ID link rewriting + scroll-to-top
+├── components.js                        ← Brand injectors + sponsor-ID rewriting + scroll-to-top
 ├── pillar.css                           ← Shared design system
 ├── levnytt-se-master-template.html      ← Dev template (not a public page)
 ├── _redirects                           ← Cloudflare routing rules
@@ -211,46 +234,13 @@ levnytt-site/
 └── 404.html                             ← noindex, custom error page
 ```
 
----
+### Content generation pipeline
 
-## Page taxonomy
-
-### Tier 1: Pillar pages
-
-Highest-priority SEO pages. All pass the 13/13 audit checklist as of 2026-06-29.
-
-| Page | URL |
-|---|---|
-| Homepage | `/` |
-| Kosttillskott hub | `/neolife-kosttillskott` |
-| Historia | `/neolife-historia` |
-| Vetenskap | `/neolife-vetenskap` |
-| Hållbarhet | `/neolife-hallbarhet/` |
-| Pro Vitality | `/neolife-pro-vitality` |
-| Carotenoid Complex | `/neolife-carotenoid-complex` |
-| Omega-3 Plus | `/neolife-omega-3-plus` |
-| Golden Home Care | `/golden-home-care/` |
-| Affärsmöjlighet | `/neolife-affarsmojlighet` |
-| Om oss | `/om-oss` |
-| Den fundersamma mannen | `/den-fundersamma-mannen` |
-| Vår metod | `/var-metod` |
-| Forsknings-FAQ | `/forsknings-faq` |
-| LevNytt Principer | `/levnytt-principer` |
-| Formula IV | `/neolife-formula-iv` |
-| Tre-en-en | `/neolife-tre-en-en` |
-| Elevate | `/neolife-elevate/` |
-| UpBeet | `/neolife-upbeet` |
-| CoQ10 | `/neolife-coq10` |
-| Personlig vård (Nutriance Organic) | `/personlig-vard/` |
-
-### Tier 2: Informational articles
-
-Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science articles, skincare cluster, nutrition cluster, direct sales cluster. All in `sitemap.xml`.
-
-### Special pages (not indexed)
-
-- `404.html` — noindex, utility error page
-- `levnytt-se-master-template.html` — dev template, not publicly linked
+1. **Search Gap Research** discovers keyword opportunities (via `search-gap-research` skill)
+2. **Informational Article** generates publish-ready HTML (via `informational-article` skill)
+3. **Publication Agent** deploys articles from `content/articles/` to root-level pages (via PA rules)
+4. **Page Builder** creates or migrates pillar/product pages (via `pillar-page-template` skill)
+5. **Brand System** provides shared branding to both Page Builder and Publication Agent outputs
 
 ---
 
@@ -264,45 +254,14 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 | Nav migration | All pages migrated from hardcoded nav to `nav.js` + `footer.js` | Jun 2026 |
 | Sitemap expansion | Sitemap expanded; all production pages covered | Jun 2026 |
 | Author photo | Emoji avatar replaced with real photo across all linked pages | Jun 2026 |
-| Wave 3A | A batch of vitamin product pages migrated to production standard | Jun 2026, `f45c9e5` |
-| New articles | `vad-ar-vitamin-b12`, `hur-fungerar-natverksmarknadsforing-egentligen`, `vad-ar-probiotika`, `vad-ar-kostfiber` | Jun 2026 |
-| Wave 3B / Sprint 6 | All informational articles migrated to production standard: `pillar.css`, no inline `:root`, 3 breakpoints, `og:image`, `components.js` with `defer` | Jun 2026 |
-| Sprint 6.1 | Google Fonts links added to 9 pages; canonical URLs corrected on 3 `content/articles/` pages | Jun 2026 |
-| Sprint 7 | `neolife-formula-iv` upgraded to pillar status: verification meta tags added, cost CTA violation removed | Jun 2026 |
-| Sprint 7 (Phase 2) | **Affärsmöjlighet 2.0** — first Phase 2 authority page built. Old MLM-style business page replaced with transparent decision-support page. 10 IA sections, real product prices, 8 FAQ questions, JSON-LD schema, 13/13 audit. | Jun 2026 |
-| Sprint 8 | `neolife-tre-en-en` upgraded to pillar status: OG/Twitter meta added, JSON-LD author fixed, breadcrumb fixed, cost violations removed | Jun 2026 |
-| Sprint 9–12 | `neolife-elevate`, `neolife-upbeet`, `neolife-coq10`, `personlig-vard` upgraded to pillar status | Jun 2026 |
-| Sprint 13 | `index.html` (front page) migrated from Gen 1 to Gen 3: `pillar.css`, no inline `:root`, `components.js` with defer, verification meta, `og:image`, 3+ breakpoints. Pre: 9/13 → Post: 13/13 | Jun 2026, `7a3d7cb` |
-| Sprint 14 | `neolife-kosttillskott/index.html` migrated to Gen 3: defer added to components.js | Jun 2026, `3cafa90` |
-| Sprint 15 | `neolife-pro-vitality.html` migrated to Gen 3: verification meta + components.js | Jun 2026, `e97fdad` |
-| Sprint 16 | `neolife-carotenoid-complex.html` migrated to Gen 3: verification meta + components.js | Jun 2026, `098139e` |
-| Sprint 17 | `neolife-omega-3-plus.html` migrated to Gen 3: verification meta + components.js | Jun 2026, `46192b6` |
-| Sprint 18 | `neolife-historia.html` migrated to Gen 3: removed inline `:root`, defer to components.js | Jun 2026, `6bcb3b3` |
-| Sprint 19 | `neolife-vetenskap.html` migrated to Gen 3: removed inline `:root`, defer to components.js | Jun 2026, `fa8ce83` |
-| Sprint 20 | `neolife-hallbarhet.html` migrated to Gen 3: added pillar.css, og:image, removed inline `:root`/duplicate CSS | Jun 2026, `f970916` |
-| Sprint 21 | `neolife-affarsmojlighet.html` migrated to Gen 3: removed inline `:root`, defer, page-specific og:image | Jun 2026, `cbd21c1` |
-| Sprint 22 | `om-oss.html` migrated to Gen 3: added components.js, verification meta, page-specific og:image | Jun 2026, `24d5eac` |
-| Sprint 23 | `golden-home-care.html` migrated to Gen 3: removed inline `:root`, defer, page-specific og:image | Jun 2026, `656a050` |
-| Sprint 24 | `den-fundersamma-mannen.html` migrated to Gen 3: defer, page-specific og:image | Jun 2026, `935cf30` |
-| Sprint 25 | `neolife-fibre-tablets/` migrated to Gen 3 (8/13→13/13): pillar.css, og:image, removed inline :root/footer CSS | Jun 2026, `ab9e13f` |
-| Sprint 26 | `neolife-sustained-vitamin-c/` migrated to Gen 3 (8/13→13/13): same pattern as Sprint 25 | Jun 2026, `b9d14c4` |
-| Sprint 27 | `integritetspolicy.html` migrated to Gen 3 (10/13→13/13): last Gen 1 page | Jun 2026, `b5196cc` |
-| Sprint 28 | 30 Gen 2 pages: batch-added verification meta tags (google-site-verification + p:domain_verify) | Jun 2026 |
-| **Gen 3 Migration Complete** | All 55 public pages at Gen 3 (13/13 audit). No remaining migration backlog. Project moves to Maintenance + Feature Development. | Jun 2026 |
-
----
-
-## Success Metrics
-
-| Metric | Value |
-|---|---|
-| **Public pages** | 55 |
-| **Pillar pages** | 20 |
-| **Informational articles** | 29 |
-| **13/13 audit compliance** | 55 / 55 (100%) |
-| **Gen 3 migration** | Complete — all pages migrated |
-| **Documentation status** | Current |
-| **Production status** | ✅ Stable — live at https://levnytt.se/ |
+| Wave 3A | A batch of vitamin product pages migrated to production standard | Jun 2026 |
+| New articles | Batch of informational articles in new niches | Jun 2026 |
+| Wave 3B / Sprint 6 | All informational articles migrated to production standard | Jun 2026 |
+| Sprint 6.1 | Google Fonts links added; canonical URLs corrected | Jun 2026 |
+| Sprint 7 | `neolife-formula-iv` pillar upgrade + Affärsmöjlighet 2.0 | Jun 2026 |
+| Sprint 8 — Brand System | `neolife-tre-en-en` pillar, `assets/brand/` directory, brand injectors, pillar.css consolidation | Jun 2026 |
+| Sprint 9 — Brand Rollout | Brand OG image deployed to all root pages + source articles; `#site-nav` on all root pages; subdirectory consistency | Jun 2026 |
+| Sprint 10 — Documentation | Full documentation baseline: PROJECT-STATUS, CURRENT-SPRINT, DECISIONS, PROJECT-ENTRY, SPRINT-9 report | Jun 2026 |
 
 ---
 
@@ -332,21 +291,26 @@ Format: "Vad är X / Varför X / X vs Y / Hur X". Product explainers, science ar
 
 ## Current Milestone
 
-Phase 2 — Content Expansion & Topical Authority
+Sprint 10 — Documentation & Baseline Update
 
-Primary objectives:
+Primary objective:
 
-- Expand the pillar page network.
-- Publish high-quality informational articles.
-- Build the Product Entity System.
-- Improve internal linking and topical authority.
-- Develop interactive tools and comparison pages.
-- Continue improving performance, accessibility and user experience.
+- Bring all project documentation in sync with the current repository state
+- Document Sprint 8 and Sprint 9 architectural decisions in DECISIONS.md
+- Create Sprint 9 summary report
+- Validate documentation for outdated, duplicate, or obsolete files
 
-The Gen 3 migration project is complete.
+The Brand System integration (Sprint 8) and Brand Rollout (Sprint 9) are complete.
 
-Future development focuses on expanding the platform rather than rebuilding existing pages.
+All root pages now share:
+- `pillar.css` (shared design system with brand CSS variables)
+- `nav.js` / `footer.js` / `components.js` with `defer`
+- Brand meta injection (favicon, apple-touch-icon)
+- Brand OG image (`assets/brand/og-brand.png`)
+- `#site-nav` placeholder
+- Verification meta tags (Google + Pinterest)
+- Google Fonts (Playfair Display + Inter)
 
 ---
 
-See `CURRENT-SPRINT.md` for active sprint status. See `docs/reports/SITE-PAGE-INVENTORY.md` for the full page inventory.
+See `CURRENT-SPRINT.md` for active sprint status.

@@ -1,0 +1,52 @@
+{
+  "canonical_id": "entity_moisturizing_cream",
+  "neoLife_code": 364,
+  "locale": "sv",
+  "slug": "neolife-moisturizing-cream",
+  "product_name": "Moisturizing Cream",
+  "aliases": [
+    "Dagkräm",
+    "Återfuktande ansiktskräm",
+    "Nutriance day cream"
+  ],
+  "category": "skin_care",
+  "subcategory": "facial_care",
+  "product_family": "nutriance_organic_hudvard",
+  "keywords": [
+    "dagkräm",
+    "ansiktskräm",
+    "återfuktande",
+    "Nutriance"
+  ],
+  "short_description": "Återfuktande ansiktskräm — 75 ml för daglig ansiktsvård.",
+  "summary": "NeoLife Moisturizing Cream är en återfuktande ansiktskräm från Nutriance Organic-serien.",
+  "usage": {
+    "dosage": "Applicera i ansikte och hals",
+    "method": "massera försiktigt in i huden",
+    "timing": "morgon och/eller kväll"
+  },
+  "packaging": {
+    "size": 75,
+    "unit": "ml",
+    "label": "75 ml"
+  },
+  "price_database_ref": {
+    "code": 364,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "5. NUTRIANCE ORGANIC HUDVÅRD"
+  },
+  "shop_path": "/i/shop/skin-care/moisturizing-cream.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_ultra_moisturizing_cream",
+    "entity_balancing_tonic"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan Moisturizing Cream och Ultra Moisturizing Cream?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

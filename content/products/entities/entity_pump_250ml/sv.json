@@ -1,0 +1,41 @@
+{
+  "canonical_id": "entity_pump_250ml",
+  "neoLife_code": 1583,
+  "locale": "sv",
+  "slug": "neolife-pump-250ml",
+  "product_name": "Pump 250 ml",
+  "aliases": [
+    "Pump till 250 ml flaska"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "product_family": "nutriance_hair_body",
+  "keywords": [
+    "pump",
+    "250 ml",
+    "Nutriance",
+    "tillbehör"
+  ],
+  "short_description": "Pump till 250 ml flaska — för Nutriance hår- och kroppsvård.",
+  "summary": "NeoLife pump till 250 ml flaska. Passar Nutriance hår- och kroppsvårdsprodukter.",
+  "packaging": {
+    "size": 1,
+    "unit": "st",
+    "label": "1 pump (250 ml flaska)"
+  },
+  "price_database_ref": {
+    "code": 1583,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/pump-250ml.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_pump_1l"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

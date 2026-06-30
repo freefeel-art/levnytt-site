@@ -1,0 +1,77 @@
+{
+  "canonical_id": "entity_vitamin_e",
+  "neoLife_code": 562,
+  "locale": "sv",
+  "slug": "neolife-vitamin-e",
+  "product_name": "Wheat Germ Oil with Vitamin E",
+  "aliases": [
+    "E-vitamin",
+    "d-alfa-tokoferol",
+    "Vetegroddsolja",
+    "Tokoferol"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "E-vitamin",
+    "d-alfa-tokoferol",
+    "vetegroddsolja",
+    "antioxidant",
+    "cellmembran",
+    "fettlöslig",
+    "naturlig E-vitamin"
+  ],
+  "short_description": "Naturlig E-vitamin (d-alfa-tokoferol) från vetegroddsolja — 100 kapslar, fettlöslig antioxidant.",
+  "summary": "NeoLife Wheat Germ Oil with Vitamin E levererar naturlig d-alfa-tokoferol (RRR-alpha-tocopherol) i sin ursprungliga vetegroddsoljemiljö. Naturlig d-alfa-tokoferol behålls dubbelt så länge i kroppen som syntetisk dl-alfa-tokoferol, då den syntetiska formen innehåller åtta stereoisomerer varav endast en är biologiskt aktiv.",
+  "ingredients": [
+    {
+      "name": "d-alfa-tokoferol (naturlig E-vitamin)",
+      "unit": "från vetegroddsolja"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 kapslar dagligen",
+    "method": "i samband med måltid (innehåller fett för absorption)",
+    "timing": "valfri tid",
+    "duration": "50-100 dagar (100 kapslar)"
+  },
+  "packaging": {
+    "size": 100,
+    "unit": "kapslar",
+    "label": "100 kapslar"
+  },
+  "price_database_ref": {
+    "code": 562,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/wheat-germ-oil-vitamin-e.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_betaguard",
+    "entity_all_c"
+  ],
+  "related_article_slugs": [
+    "neolife-vitamin-e"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan naturlig och syntetisk E-vitamin?",
+    "Varför behövs E-vitamin vid högt omega-3-intag?"
+  ],
+  "research_references": [
+    {
+      "tier": "T2",
+      "label": "Am J Clin Nutr 2002: Naturlig vs syntetisk E-vitamin — retention",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12198000/"
+    },
+    {
+      "tier": "T3",
+      "label": "Am J Clin Nutr 2007: E-vitaminbehov vid högt omega-3-intag"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

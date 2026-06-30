@@ -1,0 +1,44 @@
+{
+  "canonical_id": "entity_pump_1l",
+  "neoLife_code": 1573,
+  "locale": "sv",
+  "slug": "neolife-pump-1l",
+  "product_name": "Pump 1L",
+  "aliases": [
+    "Pump till 1 l flaska",
+    "Plastkork pump"
+  ],
+  "category": "accessories",
+  "subcategory": "accessory",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "pump",
+    "1 liter",
+    "Golden Home Care",
+    "tillbehör"
+  ],
+  "short_description": "Pump till 1 liters flaska med plastkork — för enkel dosering.",
+  "summary": "NeoLife pump till 1 liters flaska (plastkork). Passar Super 10 och LDC 1L-flaskor.",
+  "packaging": {
+    "size": 1,
+    "unit": "st",
+    "label": "1 pump (1 l flaska)"
+  },
+  "price_database_ref": {
+    "code": 1573,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "TILLBEHÖR"
+  },
+  "shop_path": "/i/shop/accessories/pump-1l.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_pump_250ml",
+    "entity_super_10",
+    "entity_ldc"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

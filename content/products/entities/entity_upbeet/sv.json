@@ -1,0 +1,81 @@
+{
+  "canonical_id": "entity_upbeet",
+  "neoLife_code": 840,
+  "locale": "sv",
+  "slug": "neolife-upbeet",
+  "product_name": "UpBeet",
+  "aliases": [
+    "Rödbeta",
+    "Kväveoxid",
+    "Beetroot",
+    "NO-boost",
+    "Rödbetskoncentrat"
+  ],
+  "category": "supplements",
+  "subcategory": "green_drink",
+  "keywords": [
+    "rödbeta",
+    "nitrater",
+    "kväveoxid",
+    "NO",
+    "betain",
+    "blodtryck",
+    "uthållighet",
+    "kärlvidgning"
+  ],
+  "short_description": "Rödbetskoncentrat i portionssticka med dietära nitrater och betain — 30 portioner för kärlhälsa och uthållighet.",
+  "summary": "NeoLife UpBeet är ett rödbetskoncentrat i stickpack-format som levererar dietära nitrater och betain. Nitrater omvandlas via munbakterier till kväveoxid (NO) — en potent kärlvidgare. Forskning visar blodtryckssänkning på ~4,4 mmHg och förbättrad uthållighet.",
+  "ingredients": [
+    {
+      "name": "Rödbetakoncentrat",
+      "unit": "källa för dietära nitrater"
+    },
+    {
+      "name": "Betain",
+      "unit": "för homocysteinomsättning"
+    }
+  ],
+  "usage": {
+    "dosage": "1 sticka dagligen",
+    "method": "blandas i vatten",
+    "timing": "30-60 min före träning för uthållighetseffekt",
+    "duration": "30 dagar (30 portioner)"
+  },
+  "packaging": {
+    "size": 30,
+    "unit": "portioner",
+    "label": "30 portionsstickor"
+  },
+  "price_database_ref": {
+    "code": 840,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/upbeet.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_elevate"
+  ],
+  "related_article_slugs": [
+    "neolife-upbeet"
+  ],
+  "faq_references": [
+    "Vad är kväveoxid och varför är det viktigt?",
+    "Varför ska man inte använda antibakteriell munskölj med UpBeet?"
+  ],
+  "research_references": [
+    {
+      "tier": "T1",
+      "label": "Hypertension 2013: Rödbetsjuice och blodtryck — meta-analys av 16 RCTs"
+    },
+    {
+      "tier": "T2",
+      "label": "J Appl Physiol 2009: Rödbetsjuice och uthållighet — Exeter-studien"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

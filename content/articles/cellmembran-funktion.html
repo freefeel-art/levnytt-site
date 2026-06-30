@@ -11,7 +11,15 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://levnytt.se/cellmembran-funktion">
 <meta property="og:site_name" content="LevNytt">
-<meta property="og:image" content="https://levnytt.se/images/og/default.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="LevNytt — En oberoende NeoLife-distributör">
+<meta property="og:image" content="https://levnytt.se/assets/brand/og-brand.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="LevNytt — En oberoende NeoLife-distributör">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cellmembran funktion – vad gör cellmembranet och varför spelar det roll?">
+<meta name="twitter:description" content="Vad gör cellmembranet egentligen? Lär dig om fosfolipider, transport, signalering och varför membranets sammansättning spelar roll för cellens funktion.">
+<meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
+<meta name="google-site-verification" content="mJDEe4KUthHlmM7ap-D8PBY6tFnEwKcPHhBwiF-wGL8" />
+<meta name="google-site-verification" content="p9JxTUW0kYPm3TZoF5vMKOnA6rsq-WQ6Wxg3KqZqcN8" />
+<meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337"/>
+<meta property="og:locale" content="sv_SE">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,118 +28,6 @@
 <link rel="stylesheet" href="/pillar.css">
 <style>
 
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--cream);
-  color: var(--ink);
-  line-height: 1.75;
-  font-size: 17px;
-}
-
-h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.3; }
-
-a { color: var(--green-dark); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--gold-dark); }
-
-.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
-
-/* BREADCRUMBS */
-.breadcrumbs {
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-  padding: 12px 0;
-  font-size: 13px;
-  color: var(--ink-muted);
-}
-.breadcrumbs a { color: var(--ink-muted); text-decoration: none; }
-.breadcrumbs a:hover { color: var(--green); }
-.breadcrumbs span { margin: 0 6px; }
-
-/* HERO */
-.hero {
-  background: linear-gradient(145deg, #0f2d1f 0%, var(--green-dark) 60%, #1e4d35 100%);
-  color: var(--white);
-  padding: 64px 0 56px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 360px; height: 360px;
-  border-radius: 50%;
-  background: rgba(184,150,12,0.10);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -40px; left: -40px;
-  width: 240px; height: 240px;
-  border-radius: 50%;
-  background: rgba(45,106,79,0.20);
-  pointer-events: none;
-}
-.hero-eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  margin-bottom: 16px;
-}
-.hero h1 {
-  font-size: clamp(28px, 5vw, 46px);
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 20px;
-  max-width: 680px;
-}
-.hero-intro {
-  font-size: 18px;
-  color: rgba(255,255,255,0.85);
-  max-width: 620px;
-  margin-bottom: 28px;
-  line-height: 1.65;
-}
-.hero-meta {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.hero-meta strong { color: rgba(255,255,255,0.85); }
-
-/* STATS ROW */
-.stats-row {
-  background: var(--white);
-  border-bottom: 3px solid var(--gold);
-  padding: 32px 0;
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 24px;
-  text-align: center;
-}
-.stat-number {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--green-dark);
-  display: block;
-}
-.stat-label { display: block; font-size: 13px; color: var(--ink-muted); margin-top: 4px; line-height: 1.4; }
-.stat-source { display: block; font-size: 11px; color: #bbb; margin-top: 3px; }
-
-/* ARTICLE */
-.article-wrap { padding: 56px 0 64px; }
 
 /* PUNCHLINE */
 .ia-punchline {
@@ -167,34 +63,17 @@ a:hover { color: var(--gold-dark); }
 .ia-takeaways li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
 
 /* HEADINGS */
-.article-body h2 {
+h2 {
   font-size: clamp(22px, 3.5vw, 28px);
   color: var(--green-dark);
   margin: 52px 0 20px;
   padding-top: 8px;
   border-top: 2px solid var(--cream-dark);
 }
-.article-body h2:first-of-type { margin-top: 0; border-top: none; }
-.article-body h3 { font-size: 19px; color: var(--ink); margin: 32px 0 12px; }
-.article-body p { margin-bottom: 18px; }
-.article-body p:last-child { margin-bottom: 0; }
-
-/* CALLOUTS */
-.callout { border-radius: var(--radius); padding: 22px 26px; margin: 28px 0; }
-.callout-standard { background: var(--green-light); border-left: 4px solid var(--green); }
-.callout-gold { background: var(--gold-light); border-left: 4px solid var(--gold); }
-.callout-warning { background: var(--red-light); border-left: 4px solid var(--red-accent); }
-.callout-blue { background: var(--blue-light); border-left: 4px solid var(--blue-accent); }
-.callout-title {
-  font-weight: 600; font-size: 13px; text-transform: uppercase;
-  letter-spacing: 0.07em; margin-bottom: 8px;
-  font-family: 'Inter', sans-serif;
-}
-.callout-standard .callout-title { color: var(--green-dark); }
-.callout-gold .callout-title { color: var(--gold-dark); }
-.callout-warning .callout-title { color: var(--red-accent); }
-.callout-blue .callout-title { color: var(--blue-accent); }
-.callout p { margin: 0; font-size: 15.5px; line-height: 1.65; }
+h2:first-of-type { margin-top: 0; border-top: none; }
+h3 { font-size: 19px; color: var(--ink); margin: 32px 0 12px; }
+p { margin-bottom: 18px; }
+p:last-child { margin-bottom: 0; }
 
 /* MEMBRANE DIAGRAM — inline SVG visual */
 .diagram-wrap {
@@ -278,45 +157,6 @@ tbody tr:last-child td { border-bottom: none; }
 .step-body h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15.5px; margin-bottom: 4px; color: var(--green-dark); }
 .step-body p { font-size: 15px; color: var(--ink-muted); margin: 0; line-height: 1.55; }
 
-/* TIER BOXES */
-.tier-section {
-  margin: 56px 0 40px;
-  padding: 36px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.tier-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 20px; }
-.tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-.tier-box {
-  border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 16px 18px; background: var(--white);
-  text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; display: block;
-}
-.tier-box:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(184,150,12,0.15); }
-.tier-box-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 4px; display: block; }
-.tier-box-title { font-size: 14px; font-weight: 600; color: var(--green-dark); font-family: 'Inter', sans-serif; }
-.tier-box-inactive { opacity: 0.45; pointer-events: none; cursor: default; }
-
-/* CTA */
-.cta-block {
-  background: linear-gradient(135deg, var(--green-dark), #0f2d1f);
-  border-radius: var(--radius);
-  padding: 36px 40px;
-  margin: 48px 0;
-  color: var(--white);
-  text-align: center;
-}
-.cta-block h3 { font-size: 22px; color: var(--white); margin-bottom: 12px; }
-.cta-block p { color: rgba(255,255,255,0.8); margin-bottom: 24px; font-size: 16px; }
-.cta-btn {
-  display: inline-block; background: var(--gold); color: var(--white);
-  padding: 14px 32px; border-radius: 6px; font-weight: 600;
-  text-decoration: none; font-size: 15px; transition: background 0.2s;
-}
-.cta-btn:hover { background: var(--gold-dark); color: var(--white); }
-
-/* FAQ */
-.faq-section { margin: 48px 0; }
 details {
   border: 1px solid var(--border); border-radius: var(--radius);
   margin-bottom: 10px; background: var(--white); overflow: hidden;
@@ -332,37 +172,11 @@ details[open] summary::after { content: '−'; }
 .faq-answer p { margin-bottom: 12px; }
 .faq-answer p:last-child { margin-bottom: 0; }
 
-/* AUTHOR BOX */
-.author-box {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 24px 28px; margin: 48px 0 32px;
-  display: flex; gap: 20px; align-items: flex-start;
-}
-.author-avatar {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--cream-dark); display: flex; align-items: center;
-  justify-content: center; font-size: 22px; flex-shrink: 0;
-  border: 2px solid var(--border);
-overflow:hidden;}
-.author-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
-.author-info { flex: 1; }
-.author-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 4px; display: block; }
-.author-info strong { display: block; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
-.author-info span { font-size: 13.5px; color: var(--ink-muted); line-height: 1.5; }
-
-.method-note { font-size: 13px; color: var(--ink-muted); border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px; line-height: 1.55; }
-.last-updated { font-size: 13px; color: var(--ink-muted); margin-bottom: 40px; }
+.ia-punchline, .ia-takeaways { padding: 20px 20px; }
 
 @media (max-width: 600px) {
-  .hero { padding: 44px 0 40px; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
   .card-grid { grid-template-columns: 1fr; }
-  .tier-grid { grid-template-columns: 1fr 1fr; }
-  .cta-block { padding: 28px 20px; }
-  .author-box { flex-direction: column; }
-  .ia-punchline, .ia-takeaways { padding: 20px 20px; }
-}
-@media(max-width:900px){}@media(max-width:768px){}@media(max-width:600px){}</style>
+}</style>
 
 <script type="application/ld+json">
 {
@@ -438,78 +252,18 @@ overflow:hidden;}
           }
         }
       ]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "LevNytt", "item": "https://levnytt.se" },
-        { "@type": "ListItem", "position": 2, "name": "NeoLife Vetenskap", "item": "https://levnytt.se/neolife-vetenskap" },
-        { "@type": "ListItem", "position": 3, "name": "Cellmembran funktion", "item": "https://levnytt.se/cellmembran-funktion" }
-      ]
     }
   ]
 }
 </script>
 </head>
 <body>
+<div id="site-nav"></div>
 
-<!-- BREADCRUMBS -->
-<div role="navigation" class="breadcrumbs" aria-label="Brödsmulor">
-  <div class="container">
-    <a href="https://levnytt.se">LevNytt</a>
-    <span>›</span>
-    <a href="https://levnytt.se/neolife-vetenskap">NeoLife Vetenskap</a>
-    <span>›</span>
-    Cellmembran funktion
-  </div>
-</div>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="container">
-    <p class="hero-eyebrow">Cellbiologi · Grundläggande vetenskap</p>
-    <h1>Cellmembran funktion</h1>
-    <p class="hero-intro">Varje cell i kroppen omges av ett membran som gör mycket mer än att hålla ihop det inre. Det filtrerar, kommunicerar, transporterar och signalerar – och dess sammansättning beror delvis på vad du äter.</p>
-    <div class="hero-meta">
-      <span>Av <strong>Jarmo Halonen</strong></span>
-      <span>Publicerad <strong>8 juni 2026</strong></span>
-      <span>Last updated: 8 juni 2026</span>
-      <span>Lästid: <strong>~10 min</strong></span>
-    </div>
-  </div>
-</header>
-
-<!-- STATS ROW -->
-<section class="stats-row">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <span class="stat-number">37 biljoner</span>
-        <span class="stat-label">celler i en vuxen människokropp – varje cell omges av ett membran</span>
-        <span class="stat-source">Bianconi et al., Annals of Human Biology</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">5</span>
-        <span class="stat-label">kända huvudfunktioner har cellmembranet: barriär, transport, signalering, organisation, cellkontakt</span>
-        <span class="stat-source">Cellbiologisk konsensus</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">30–50%</span>
-        <span class="stat-label">av lipiderna i djurcellers membran utgörs av kolesterol och steroler</span>
-        <span class="stat-source">PMC8539253, 2021</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">~7 nm</span>
-        <span class="stat-label">är cellmembranets tjocklek – ungefär en tiondel av ett virus</span>
-        <span class="stat-source">Standardmätning, cellfysiologi</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ARTICLE -->
-<main class="article-wrap">
-  <div class="container">
+<div class="ia-wrap"><article>
+<p style="font-size:0.85em;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">Cellbiologi · Grundläggande vetenskap</p>
+<h1>Cellmembran funktion</h1>
+<p>Av <a href="https://levnytt.se/om-oss/">Jarmo Halonen</a> · Uppdaterad: juni 2026 · ~10 min läsning</p>
 
     <!-- PUNCHLINE -->
     <div class="ia-punchline">
@@ -530,9 +284,7 @@ overflow:hidden;}
       </ul>
     </div>
 
-    <p class="method-note"><strong>Metodnotering:</strong> Den här artikeln bygger på publicerade vetenskapliga studier, läroböcker i cellbiologi och peer-reviewed tidskrifter. Den är skriven som konsumentinformation och riktar sig till den nyfikne läsaren – inte till medicinska yrkesverksamma. Inga marknadsföringskällor eller produktsidor har använts som faktaunderlag.</p>
-
-    <div class="article-body">
+    <p class="ia-method-note"><strong>Metodnotering:</strong> Den här artikeln bygger på publicerade vetenskapliga studier, läroböcker i cellbiologi och peer-reviewed tidskrifter. Den är skriven som konsumentinformation och riktar sig till den nyfikne läsaren – inte till medicinska yrkesverksamma. Inga marknadsföringskällor eller produktsidor har använts som faktaunderlag.</p>
 
       <h2>Vad är cellmembranet egentligen?</h2>
 
@@ -540,8 +292,8 @@ overflow:hidden;}
 
       <p>Den moderna förståelsen av cellmembranets struktur bygger på den så kallade <strong>fluid mosaic model</strong>, som introducerades på 1970-talet. Den beskriver membranet som ett tvådimensionellt flytande lager av lipider, i vilket proteiner fritt kan röra sig runt. Det är inte en fast vägg – det är snarare ett hav av molekyler i ständig rörelse.</p>
 
-      <div class="callout callout-standard">
-        <p class="callout-title">Enkelt uttryckt</p>
+      <div class="ia-callout">
+        <strong>Enkelt uttryckt</strong>
         <p>Tänk dig cellmembranet som en tvålagersbubbla av fettmolekyler – hydrofila huvuden pekar utåt mot vattnet (både innanför och utanför cellen), hydrofoba svansar möts i mitten och bildar en vattenskyende kärna. I detta lager flyter proteiner runt som öar – därav bilden av ett "mosaik".</p>
       </div>
 
@@ -676,8 +428,8 @@ overflow:hidden;}
         </div>
       </div>
 
-      <div class="callout callout-gold">
-        <p class="callout-title">Nyckelinsikt</p>
+      <div class="ia-callout">
+        <strong>Nyckelinsikt</strong>
         <p>Alla fem funktioner är beroende av att membranet har rätt sammansättning och rätt rörlighet. Ett membran som är för styvt eller för flytande fungerar sämre på alla punkter – inte bara en.</p>
       </div>
 
@@ -743,8 +495,8 @@ overflow:hidden;}
 
       <p>Det är viktigt att notera att de exakta mekanismerna och den kliniska relevansen fortfarande studeras. Sambanden är komplexa – membranets sammansättning är ett av många faktorer som påverkar cellens funktion, och forskningen är ännu inte redo att dra enkla orsakssamband.</p>
 
-      <div class="callout callout-blue">
-        <p class="callout-title">Forskningsstatus: omega-3 och membraner</p>
+      <div class="ia-callout">
+        <strong>Forskningsstatus: omega-3 och membraner</strong>
         <p>Evidensnivå: <strong>Tier 2 – kliniska studier och kontrollerade experiment</strong>. Det finns välkontrollerade studier som visar att EPA och DHA inkorporeras i cellmembraner efter kosttillskott. Hur stor klinisk effekt detta har för friska individer är fortfarande ett öppet forskningsfråga. Påstående som "omega-3 förbättrar cellmembranfunktionen" är en förenkling av ett komplext samband.</p>
       </div>
 
@@ -787,8 +539,8 @@ overflow:hidden;}
 
       <p>LevNytt har tidigare skrivit mer utförligt om fytosteroler i artiklarna <a href="https://levnytt.se/fytosteroler-cellmembran">Fytosteroler och cellmembranet</a> och <a href="https://levnytt.se/vaxtbaserade-steroler-dagligen">Växtbaserade steroler dagligen</a> – läs gärna dem för ett djupare perspektiv.</p>
 
-      <div class="callout callout-warning">
-        <p class="callout-title">Viktigt att skilja på</p>
+      <div class="ia-callout">
+        <strong>Viktigt att skilja på</strong>
         <p>Fytosterolers roll i <em>växtcellers</em> membran är välstuderad och tydlig. Deras roll i <em>människans</em> cellmembran är en annan fråga – de absorberas knappt och når sällan cellmembranet i praktiken. Blanda inte ihop de två.</p>
       </div>
 
@@ -800,16 +552,16 @@ overflow:hidden;}
 
       <p>Det är viktigt att notera att lipid raft-forskningen fortfarande är ett aktivt område med många öppna frågor. Hur stabila dessa domäner faktiskt är i levande celler, och hur stor roll de spelar för olika fysiologiska processer, debatteras fortfarande i forskarvärlden.</p>
 
-      <div class="callout callout-standard">
-        <p class="callout-title">Kopplingen till näring</p>
+      <div class="ia-callout">
+        <strong>Kopplingen till näring</strong>
         <p>Eftersom omega-3-fettsyror kan störa bildandet av lipid rafts – de passar inte lika bra i de tätt packade domänerna som mättade fettsyror – kan fettsyrasammansättningen indirekt påverka hur dessa signalplattformar fungerar. Det är ett exempel på hur kost, cellbiologi och fysiologi hänger samman på ett komplext sätt.</p>
       </div>
 
       <!-- INTERNAL LINK CTA -->
-      <div class="cta-block">
+      <div class="ia-cta">
         <h3>Nyfiken på den vetenskapliga grunden bakom NeoLifes produkter?</h3>
         <p>NeoLife har sedan 1950-talet byggt sin produktutveckling på cellbiologisk forskning. Läs mer om den vetenskapliga plattformen.</p>
-        <a  class="cta-btn" target="_blank" rel="noopener noreferrer" href="https://levnytt.se/neolife-vetenskap">NeoLife Vetenskap →</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://levnytt.se/neolife-vetenskap">NeoLife Vetenskap →</a>
       </div>
 
       <h2>Vad kan du faktiskt påverka – och vad kan du inte?</h2>
@@ -859,38 +611,20 @@ overflow:hidden;}
         </table>
       </div>
 
-      <p class="method-note">Observationella samband innebär inte bevisat orsakssamband. Kliniska studier ger starkare evidens men gäller ofta specifika populationer eller doser.</p>
+      <p class="ia-method-note">Observationella samband innebär inte bevisat orsakssamband. Kliniska studier ger starkare evidens men gäller ofta specifika populationer eller doser.</p>
 
-      <!-- TIER BOXES -->
-      <div class="tier-section">
-        <p class="tier-label">Utforska vidare på LevNytt</p>
-        <div class="tier-grid">
-          <a href="https://levnytt.se/neolife-historia" class="tier-box">
-            <span class="tier-box-label">Tier 1</span>
-            <span class="tier-box-title">NeoLife Historia</span>
-          </a>
-          <a href="https://levnytt.se/neolife-vetenskap" class="tier-box">
-            <span class="tier-box-label">Tier 2</span>
-            <span class="tier-box-title">NeoLife Vetenskap</span>
-          </a>
-          <div class="tier-box tier-box-inactive">
-            <span class="tier-box-label">Tier 3</span>
-            <span class="tier-box-title">Forsknings-FAQ</span>
-          </div>
-          <div class="tier-box tier-box-inactive">
-            <span class="tier-box-label">Tier 4</span>
-            <span class="tier-box-title">LevNytt Principer</span>
-          </div>
-        </div>
+      <div class="ia-tierbox">
+        <a href="https://levnytt.se/neolife-historia" class="ia-tier">NeoLife Historia</a>
+        <a href="https://levnytt.se/neolife-vetenskap" class="ia-tier">NeoLife Vetenskap</a>
       </div>
 
       <!-- FAQ -->
-      <div class="faq-section">
+      <div class="ia-faq">
         <h2>Vanliga frågor om cellmembranets funktion</h2>
 
         <details>
           <summary>Vad är cellmembranets funktion?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Cellmembranet har fem huvudfunktioner: det fungerar som en fysisk barriär mot omgivningen, det reglerar vad som transporteras in och ut ur cellen, det tar emot och vidarebefordrar signaler från omvärlden, det organiserar cellens inre organeller, och det möjliggör kontakt med grannliggande celler.</p>
             <p>Utan ett fungerande membran kan cellen inte upprätthålla sin inre miljö.</p>
           </div>
@@ -898,7 +632,7 @@ overflow:hidden;}
 
         <details>
           <summary>Vad består cellmembranet av?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Cellmembranet består av ett dubbellager av fosfolipider med inbäddade proteiner, kolesterol och kolhydrater. Fosfolipiderna bildar grundstrukturen tack vare att de är amfifila – vattenlösliga i ena änden (huvudet) och fettlösliga i den andra (svansen).</p>
             <p>Proteinerna sköter transport och signalmottagning. Kolesterol bidrar till membranets stabilitet och fluiditet.</p>
           </div>
@@ -906,7 +640,7 @@ overflow:hidden;}
 
         <details>
           <summary>Varför är cellmembranets fluiditet viktig?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Fluiditeten – hur rörliga fosfolipiderna är – är avgörande för att membranets proteiner ska kunna röra sig fritt och utföra sina uppgifter. Om membranet är för styvt eller för flytande fungerar transport, signalering och celldelning sämre.</p>
             <p>Fettsyrasammansättningen, kolesterolhalten och temperaturen påverkar alla membranets fluiditet.</p>
           </div>
@@ -914,7 +648,7 @@ overflow:hidden;}
 
         <details>
           <summary>Hur påverkar omega-3 cellmembranet?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Omega-3-fettsyrorna EPA och DHA byggs in i fosfolipidlagret i cellmembranen. Forskning visar att inkorporering av dessa fettsyror förändrar membranets sammansättning och fluiditet, vilket påverkar enzymaktivitet, jontransport och signalöverföring.</p>
             <p>Mekanismerna är inte helt klarlagda och sambanden är komplexa. Forskning pågår om vilken klinisk relevans detta har för friska individer.</p>
           </div>
@@ -922,7 +656,7 @@ overflow:hidden;}
 
         <details>
           <summary>Vad är fytosteroler och vad har de med cellmembranet att göra?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Fytosteroler är växternas motsvarighet till kolesterol och ingår naturligt i växtcellers membran. Hos människor konkurrerar de med kolesterol vid absorptionen i tarmen, vilket kan minska kolesterolupptaget.</p>
             <p>Steroler generellt – inklusive kolesterol i djurceller – påverkar membranets rörlighet och stabilitet, vilket i sin tur påverkar cellens funktion.</p>
           </div>
@@ -930,7 +664,7 @@ overflow:hidden;}
 
         <details>
           <summary>Kan kost påverka cellmembranets sammansättning?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Ja. Fettsyrainnehållet i cellmembranen speglar delvis vad du äter. En kost rik på omättade fettsyror – från till exempel fet fisk, olivolja och nötter – bidrar till en mer flexibel membranstruktur.</p>
             <p>Forskning pågår om exakt hur stor skillnad kosten gör och vilka effekter det har för olika vävnader och hälsoutfall.</p>
           </div>
@@ -938,7 +672,7 @@ overflow:hidden;}
 
         <details>
           <summary>Vad är lipid rafts?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Lipid rafts är mikrodomäner i cellmembranet rika på sfingolipider och kolesterol. De fungerar som organiserade plattformar för signalering och membrantransport.</p>
             <p>Forskning tyder på att sammansättningen av dessa domäner påverkar hur effektivt cellen kommunicerar med sin omgivning, men mekanismerna studeras fortfarande aktivt.</p>
           </div>
@@ -954,29 +688,24 @@ overflow:hidden;}
 
       <p>Det är den biologiska grunden bakom intresset för omega-3, fytosteroler och andra lipider i ett hälsosammanhang. Inte som "cellmembranförbättrare" med enkla löften – utan som faktiska byggstenar i de strukturer som håller varje cell i kroppen fungerande.</p>
 
-      <div class="callout callout-gold">
-        <p class="callout-title">Varför det spelar roll för dig som konsument</p>
+      <div class="ia-callout">
+        <strong>Varför det spelar roll för dig som konsument</strong>
         <p>Nästa gång du ser ett produktpåstående om att något "stödjer cellfunktionen" – fråga dig: vad menar de egentligen? Cellmembranen är faktiskt en specifik och välstuderad mekanism. Evidensen för att fettsyrasammansättningen påverkar membranens egenskaper är reell. Det är en annan sak än att produkten "förbättrar hälsan" i allmänhet.</p>
       </div>
 
       <p>Vill du fördjupa dig ytterligare kan du läsa om <a href="https://levnytt.se/fytosteroler-cellmembran">fytosteroler och cellmembranet</a>, om <a href="https://levnytt.se/ala-vs-epa-vs-dha">skillnaden mellan ALA, EPA och DHA</a>, och om <a href="https://levnytt.se/varfor-fiskolja-inte-ar-likvardigt">varför inte all fiskolja är likvärdig</a>. Alla tre artiklarna är naturliga nästa steg från den här sidan.</p>
 
-    </div><!-- /article-body -->
-
     <!-- AUTHOR BOX -->
-    <div class="author-box">
-      <div class="author-avatar"><img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="56" height="56"></div>
-      <div class="author-info">
-        <span class="author-label">Om författaren</span>
+    <div class="ia-author-box">
+      <div class="ia-author-avatar"><img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="56" height="56"></div>
+      <div>
         <strong>Jarmo Halonen</strong>
-        <span>Långvarig NeoLife-användare och entreprenör med intresse för hälsa, konsumentfrågor och vardagsekonomi. Skriver för LevNytt med fokus på att ge svenska konsumenter faktabaserad information att fatta egna välgrundade beslut.</span>
+        <p>Långvarig NeoLife-användare och entreprenör med intresse för hälsa, konsumentfrågor och vardagsekonomi. Skriver för LevNytt med fokus på att ge svenska konsumenter faktabaserad information att fatta egna välgrundade beslut.</p>
       </div>
     </div>
 
-    <p class="last-updated">Senast uppdaterad: 8 juni 2026</p>
-
-  </div><!-- /container -->
-</main>
+<p class="ia-disclosure">LevNytt.se är en oberoende informationskälla som drivs av en NeoLife-distributör. Innehållet granskas kontinuerligt för att säkerställa vetenskaplig noggrannhet och transparens. Läs mer om <a href="https://levnytt.se/var-metod">vår metod</a> och <a href="https://levnytt.se/om-oss">om oss</a>.</p>
+</article></div>
 
 <script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>

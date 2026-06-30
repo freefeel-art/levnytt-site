@@ -1,0 +1,78 @@
+{
+  "canonical_id": "entity_neolife_tea",
+  "neoLife_code": 920,
+  "locale": "sv",
+  "slug": "neolife-tea",
+  "product_name": "NeoLifeTea",
+  "aliases": [
+    "Te",
+    "NeoLife Tea",
+    "Grönt te",
+    "Vitt te",
+    "Svart te"
+  ],
+  "category": "weight_management",
+  "subcategory": "meal_replacement",
+  "keywords": [
+    "grönt te",
+    "vitt te",
+    "svart te",
+    "ginseng",
+    "rhodiola",
+    "te",
+    "antioxidant"
+  ],
+  "short_description": "Blandning av grönt, vitt och svart te med Panax ginseng och Rhodiola — 15 st (30 portioner), 5 kcal/portion.",
+  "summary": "NeoLifeTea är en teblandning av grönt, vitt och svart te med adaptogener (Panax ginseng, Codonopsis pilosula, Rhodiola rosea). Naturligt koffein från teet. Endast 5 kcal per portion. Inga artificiella tillsatser.",
+  "ingredients": [
+    {
+      "name": "Grönt te"
+    },
+    {
+      "name": "Vitt te"
+    },
+    {
+      "name": "Svart te"
+    },
+    {
+      "name": "Panax ginseng"
+    },
+    {
+      "name": "Rhodiola rosea"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 koppar dagligen",
+    "method": "bryggs med hett vatten",
+    "timing": "valfri tid",
+    "duration": "30 portioner per förpackning"
+  },
+  "packaging": {
+    "size": 15,
+    "unit": "st (30 portioner)",
+    "label": "15 st (30 portioner)"
+  },
+  "price_database_ref": {
+    "code": 920,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "2. VIKTKONTROLL"
+  },
+  "shop_path": "/i/shop/weight-management/neolife-tea.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_neolife_shake",
+    "entity_neolife_bar"
+  ],
+  "related_article_slugs": [
+    "neolife-viktkontroll"
+  ],
+  "faq_references": [
+    "Vad innehåller NeoLifeTea?",
+    "Innehåller NeoLifeTea koffein?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

@@ -1,0 +1,86 @@
+{
+  "canonical_id": "entity_elevate",
+  "neoLife_code": 860,
+  "locale": "sv",
+  "slug": "neolife-elevate",
+  "product_name": "Elevate",
+  "aliases": [
+    "Energidryck",
+    "Nootropic",
+    "Suntheanine",
+    "L-teanin",
+    "Koffein grönt te"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "suntheanine",
+    "L-teanin",
+    "koffein",
+    "grönt te",
+    "fokus",
+    "energi",
+    "B-vitaminer",
+    "kognition"
+  ],
+  "short_description": "Energidryck med Suntheanine (200 mg) och naturligt koffein från grönt te (120 mg) — 30 stickor för fokus och energi.",
+  "summary": "NeoLife Elevate är en energidryck i stickpack-format som verkar via tre mekanismer: nootropics (kognition), energimetabolism (B-vitaminer) och elektrolyter. Innehåller 200 mg Suntheanine och 120 mg naturligt koffein från grönt te — kombinationen har i kliniska studier visats förbättra kognitiv funktion med reducerade biverkningar.",
+  "ingredients": [
+    {
+      "name": "Suntheanine (patenterad L-teanin)",
+      "amount": "200",
+      "unit": "mg"
+    },
+    {
+      "name": "Naturligt koffein från grönt te",
+      "amount": "120",
+      "unit": "mg"
+    },
+    {
+      "name": "B-vitaminer"
+    },
+    {
+      "name": "Elektrolytmineraler"
+    }
+  ],
+  "usage": {
+    "dosage": "1 sticka dagligen",
+    "method": "blandas i vatten",
+    "timing": "dag tid (undvik kväll)",
+    "duration": "30 dagar (30 stickor)",
+    "safety": "Rekommenderas ej för barn, gravida eller ammande. Innehåller 120 mg koffein."
+  },
+  "packaging": {
+    "size": 30,
+    "unit": "portioner",
+    "label": "30 portionsstickor"
+  },
+  "price_database_ref": {
+    "code": 860,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/elevate.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_upbeet"
+  ],
+  "related_article_slugs": [
+    "neolife-elevate"
+  ],
+  "faq_references": [
+    "Vad är Suntheanine?",
+    "Hur fungerar kombinationen L-teanin och koffein?"
+  ],
+  "research_references": [
+    {
+      "tier": "T2",
+      "label": "Suntheanine + koffein: 10 kliniska studier — förbättrad kognition med reducerade biverkningar"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

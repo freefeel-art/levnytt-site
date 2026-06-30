@@ -1,0 +1,53 @@
+{
+  "canonical_id": "entity_balancing_tonic",
+  "neoLife_code": 360,
+  "locale": "sv",
+  "slug": "neolife-balancing-tonic",
+  "product_name": "Balancing Tonic",
+  "aliases": [
+    "Ansiktstonik",
+    "Nutriance tonic"
+  ],
+  "category": "skin_care",
+  "subcategory": "facial_care",
+  "product_family": "nutriance_organic_hudvard",
+  "keywords": [
+    "tonik",
+    "ansiktet",
+    "balanserande",
+    "Nutriance",
+    "hudvård"
+  ],
+  "short_description": "Balanserande ansiktstonik — 100 ml för återfuktning och hudbalans.",
+  "summary": "NeoLife Balancing Tonic är en balanserande ansiktstonik från Nutriance Organic-serien.",
+  "usage": {
+    "dosage": "Applicera efter rengöring",
+    "method": "applicera med bomullsrondell, undvik ögonområdet",
+    "timing": "morgon och kväll"
+  },
+  "packaging": {
+    "size": 100,
+    "unit": "ml",
+    "label": "100 ml"
+  },
+  "price_database_ref": {
+    "code": 360,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "5. NUTRIANCE ORGANIC HUDVÅRD"
+  },
+  "shop_path": "/i/shop/skin-care/balancing-tonic.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_cleansing_milk",
+    "entity_cleansing_gel",
+    "entity_moisturizing_cream"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan Cleansing Milk och Cleansing Gel?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

@@ -1,0 +1,83 @@
+{
+  "canonical_id": "entity_neolife_bar",
+  "neoLife_code": 950,
+  "locale": "sv",
+  "slug": "neolife-bar",
+  "product_name": "NeoLifeBar",
+  "aliases": [
+    "Bar",
+    "Proteinbar",
+    "Frukt & Nötter bar"
+  ],
+  "category": "weight_management",
+  "subcategory": "meal_replacement",
+  "keywords": [
+    "proteinbar",
+    "frukt",
+    "nötter",
+    "havre",
+    "linfrö",
+    "omega-3",
+    "ALA",
+    "glutenfri",
+    "mellanmål"
+  ],
+  "short_description": "Proteinbar med frukt, nötter och frön — 10 g protein, 5 g fiber, 173 kcal, 320 mg omega-3 ALA.",
+  "summary": "NeoLifeBar är en proteinbar med frukt, nötter och frön. Innehåller 10 g protein, 5 g fiber och 320 mg omega-3 (ALA från linfrö). Ingredienser: sojaprotein, havre, blåbär, tranbär, russin, nötter och frön. Glutenfri. Inga artificiella tillsatser.",
+  "ingredients": [
+    {
+      "name": "Protein",
+      "amount": "10",
+      "unit": "g"
+    },
+    {
+      "name": "Fiber",
+      "amount": "5",
+      "unit": "g"
+    },
+    {
+      "name": "Omega-3 (ALA från linfrö)",
+      "amount": "320",
+      "unit": "mg"
+    },
+    {
+      "name": "Kalorier",
+      "amount": "173",
+      "unit": "kcal"
+    }
+  ],
+  "usage": {
+    "dosage": "1 bar som mellanmål, upp till 2 per dag",
+    "method": "ät som den är",
+    "timing": "mellan mål",
+    "duration": "15 bars per förpackning"
+  },
+  "packaging": {
+    "size": 15,
+    "unit": "bars",
+    "label": "15 bars"
+  },
+  "price_database_ref": {
+    "code": 950,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "2. VIKTKONTROLL"
+  },
+  "shop_path": "/i/shop/weight-management/neolife-bar.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_neolife_shake",
+    "entity_neolife_tea"
+  ],
+  "related_article_slugs": [
+    "neolife-viktkontroll"
+  ],
+  "faq_references": [
+    "Är NeoLifeBar glutenfri?",
+    "När ska man äta NeoLifeBar?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

@@ -1,0 +1,53 @@
+{
+  "canonical_id": "entity_rich_shampoo",
+  "neoLife_code": 310,
+  "locale": "sv",
+  "slug": "neolife-rich-shampoo",
+  "product_name": "Rich Revitalizing Shampoo",
+  "aliases": [
+    "Rich shampoo",
+    "Revitalizing shampoo",
+    "Nutriance shampoo rich"
+  ],
+  "category": "personal_care",
+  "subcategory": "shampoo",
+  "product_family": "nutriance_hair_body",
+  "keywords": [
+    "schampo",
+    "hår",
+    "revitalizing",
+    "Nutriance",
+    "hårvård"
+  ],
+  "short_description": "Näringsrikt revitaliserande schampo för normalt till torrt hår — 250 ml.",
+  "summary": "NeoLife Rich Revitalizing Shampoo är ett näringsrikt schampo från Nutriance-serien för normalt till torrt hår.",
+  "usage": {
+    "dosage": "Applicera i vått hår",
+    "method": "massera in, skölj noga",
+    "timing": "vid varje hårtvätt"
+  },
+  "packaging": {
+    "size": 250,
+    "unit": "ml",
+    "label": "250 ml"
+  },
+  "price_database_ref": {
+    "code": 310,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "4. NUTRIANCE HÅR & KROPSVÅRD"
+  },
+  "shop_path": "/i/shop/personal-care/rich-shampoo.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_mild_shampoo",
+    "entity_conditioner"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan Rich och Mild Revitalizing Shampoo?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

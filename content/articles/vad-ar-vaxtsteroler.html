@@ -11,7 +11,10 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://levnytt.se/vad-ar-vaxtsteroler">
 <meta property="og:site_name" content="LevNytt">
-<meta property="og:image" content="https://levnytt.se/images/og/default.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="LevNytt — En oberoende NeoLife-distributör">
+<meta property="og:image" content="https://levnytt.se/assets/brand/og-brand.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="LevNytt — En oberoende NeoLife-distributör">
+<meta name="google-site-verification" content="mJDEe4KUthHlmM7ap-D8PBY6tFnEwKcPHhBwiF-wGL8" />
+<meta name="google-site-verification" content="p9JxTUW0kYPm3TZoF5vMKOnA6rsq-WQ6Wxg3KqZqcN8" />
+<meta property="og:locale" content="sv_SE">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,49 +23,6 @@
 <link rel="stylesheet" href="/pillar.css">
 <style>
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.75; font-size: 17px; }
-h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.3; }
-a { color: var(--green-dark); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--gold-dark); }
-.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
-
-/* BREADCRUMBS */
-.breadcrumbs { background: var(--white); border-bottom: 1px solid var(--border); padding: 12px 0; font-size: 13px; color: var(--ink-muted); }
-.breadcrumbs a { color: var(--ink-muted); text-decoration: none; }
-.breadcrumbs a:hover { color: var(--green); }
-.breadcrumbs span { margin: 0 6px; }
-
-/* HERO */
-.hero {
-  background: linear-gradient(145deg, #0e2b1c 0%, #1B4332 55%, #235c41 100%);
-  color: var(--white); padding: 64px 0 56px; position: relative; overflow: hidden;
-}
-.hero::before {
-  content: ''; position: absolute; top: -70px; right: -70px;
-  width: 340px; height: 340px; border-radius: 50%;
-  background: rgba(184,150,12,0.11); pointer-events: none;
-}
-.hero::after {
-  content: ''; position: absolute; bottom: -30px; left: -30px;
-  width: 200px; height: 200px; border-radius: 50%;
-  background: rgba(45,106,79,0.18); pointer-events: none;
-}
-.hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 16px; }
-.hero h1 { font-size: clamp(28px, 5vw, 46px); font-weight: 700; color: var(--white); margin-bottom: 20px; max-width: 680px; }
-.hero-intro { font-size: 18px; color: rgba(255,255,255,0.85); max-width: 620px; margin-bottom: 28px; line-height: 1.65; }
-.hero-meta { font-size: 13px; color: rgba(255,255,255,0.6); display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-.hero-meta strong { color: rgba(255,255,255,0.85); }
-
-/* STATS ROW */
-.stats-row { background: var(--white); border-bottom: 3px solid var(--gold); padding: 32px 0; }
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 24px; text-align: center; }
-.stat-number { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: var(--green-dark); display: block; }
-.stat-label { display: block; font-size: 13px; color: var(--ink-muted); margin-top: 4px; line-height: 1.4; }
-.stat-source { display: block; font-size: 11px; color: #bbb; margin-top: 3px; }
-
-/* ARTICLE */
-.article-wrap { padding: 56px 0 64px; }
 
 /* PUNCHLINE */
 .ia-punchline {
@@ -88,30 +48,14 @@ a:hover { color: var(--gold-dark); }
 .ia-takeaways li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
 
 /* HEADINGS */
-.article-body h2 {
+h2 {
   font-size: clamp(22px, 3.5vw, 28px); color: var(--green-dark);
   margin: 52px 0 20px; padding-top: 8px; border-top: 2px solid var(--cream-dark);
 }
-.article-body h2:first-of-type { margin-top: 0; border-top: none; }
-.article-body h3 { font-size: 20px; color: var(--ink); margin: 32px 0 12px; }
-.article-body p { margin-bottom: 18px; }
-.article-body p:last-child { margin-bottom: 0; }
-
-/* CALLOUTS */
-.callout { border-radius: var(--radius); padding: 22px 26px; margin: 28px 0; }
-.callout-standard { background: var(--green-light); border-left: 4px solid var(--green); }
-.callout-gold { background: var(--gold-light); border-left: 4px solid var(--gold); }
-.callout-warning { background: var(--red-light); border-left: 4px solid var(--red-accent); }
-.callout-teal { background: var(--teal-light); border-left: 4px solid var(--teal); }
-.callout-title {
-  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;
-  text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px;
-}
-.callout-standard .callout-title { color: var(--green-dark); }
-.callout-gold .callout-title { color: var(--gold-dark); }
-.callout-warning .callout-title { color: var(--red-accent); }
-.callout-teal .callout-title { color: var(--teal); }
-.callout p { margin: 0; font-size: 15.5px; line-height: 1.65; }
+h2:first-of-type { margin-top: 0; border-top: none; }
+h3 { font-size: 20px; color: var(--ink); margin: 32px 0 12px; }
+p { margin-bottom: 18px; }
+p:last-child { margin-bottom: 0; }
 
 /* MOLECULE COMPARISON — inline SVG */
 .diagram-wrap {
@@ -186,25 +130,7 @@ tbody tr:last-child td { border-bottom: none; }
 .mstep-body h4 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15.5px; margin-bottom: 4px; color: var(--green-dark); }
 .mstep-body p { font-size: 14.5px; color: var(--ink-muted); margin: 0; line-height: 1.55; }
 
-/* TIER BOXES */
-.tier-section { margin: 56px 0 40px; padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.tier-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 20px; font-family: 'Inter', sans-serif; }
-.tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-.tier-box { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; background: var(--white); text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; display: block; }
-.tier-box:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(184,150,12,0.15); }
-.tier-box-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 4px; display: block; font-family: 'Inter', sans-serif; }
-.tier-box-title { font-size: 14px; font-weight: 600; color: var(--green-dark); font-family: 'Inter', sans-serif; }
-.tier-box-inactive { opacity: 0.45; pointer-events: none; cursor: default; }
-
-/* CTA */
-.cta-block { background: linear-gradient(135deg, var(--green-dark), #0e2b1c); border-radius: var(--radius); padding: 36px 40px; margin: 48px 0; color: var(--white); text-align: center; }
-.cta-block h3 { font-size: 22px; color: var(--white); margin-bottom: 12px; }
-.cta-block p { color: rgba(255,255,255,0.8); margin-bottom: 24px; font-size: 16px; }
-.cta-btn { display: inline-block; background: var(--gold); color: var(--white); padding: 14px 32px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 15px; transition: background 0.2s; font-family: 'Inter', sans-serif; }
-.cta-btn:hover { background: var(--gold-dark); color: var(--white); }
-
 /* FAQ */
-.faq-section { margin: 48px 0; }
 details { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 10px; background: var(--white); overflow: hidden; }
 summary { padding: 18px 22px; font-weight: 600; cursor: pointer; font-size: 16px; display: flex; justify-content: space-between; align-items: center; list-style: none; color: var(--green-dark); font-family: 'Inter', sans-serif; }
 summary::after { content: '+'; font-size: 20px; color: var(--gold); font-weight: 300; flex-shrink: 0; margin-left: 12px; }
@@ -213,29 +139,12 @@ details[open] summary::after { content: '−'; }
 .faq-answer p { margin-bottom: 12px; }
 .faq-answer p:last-child { margin-bottom: 0; }
 
-/* AUTHOR BOX */
-.author-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 48px 0 32px; display: flex; gap: 20px; align-items: flex-start; }
-.author-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--cream-dark); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 2px solid var(--border); overflow:hidden;}
-.author-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
-.author-info { flex: 1; }
-.author-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 4px; display: block; font-family: 'Inter', sans-serif; }
-.author-info strong { display: block; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
-.author-info span { font-size: 13.5px; color: var(--ink-muted); line-height: 1.5; }
-
-.method-note { font-size: 13px; color: var(--ink-muted); border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px; line-height: 1.55; }
-.last-updated { font-size: 13px; color: var(--ink-muted); margin-bottom: 40px; }
 
 @media (max-width: 600px) {
-  .hero { padding: 44px 0 40px; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
   .source-grid { grid-template-columns: 1fr; }
   .compare-block { grid-template-columns: 1fr; }
-  .tier-grid { grid-template-columns: 1fr 1fr; }
-  .cta-block { padding: 28px 20px; }
-  .author-box { flex-direction: column; }
   .ia-punchline, .ia-takeaways { padding: 20px 20px; }
-}
-@media(max-width:900px){}@media(max-width:768px){}@media(max-width:600px){}</style>
+}</style>
 
 <script type="application/ld+json">
 {
@@ -311,78 +220,19 @@ details[open] summary::after { content: '−'; }
           }
         }
       ]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "LevNytt", "item": "https://levnytt.se" },
-        { "@type": "ListItem", "position": 2, "name": "Fytonutrienter", "item": "https://levnytt.se/fytosteroler-cellmembran" },
-        { "@type": "ListItem", "position": 3, "name": "Vad är växtsteroler?", "item": "https://levnytt.se/vad-ar-vaxtsteroler" }
-      ]
     }
   ]
 }
 </script>
 </head>
 <body>
-
-<!-- BREADCRUMBS -->
-<div role="navigation" class="breadcrumbs" aria-label="Brödsmulor">
-  <div class="container">
-    <a href="https://levnytt.se">LevNytt</a>
-    <span>›</span>
-    <a href="https://levnytt.se/fytosteroler-cellmembran">Fytosteroler &amp; cellmembran</a>
-    <span>›</span>
-    Vad är växtsteroler?
-  </div>
-</div>
-
-<!-- HERO -->
-<header class="hero">
-  <div class="container">
-    <p class="hero-eyebrow">Fytonutrienter · Grundläggande begrepp</p>
-    <h1>Vad är växtsteroler?</h1>
-    <p class="hero-intro">Växtsteroler är växternas motsvarighet till kolesterol. De sitter i växtcellernas membran, de finns i din mat och de diskuteras allt oftare i näringsforskning. Den här artikeln förklarar vad de faktiskt är, hur de fungerar och vad forskningen faktiskt säger.</p>
-    <div class="hero-meta">
-      <span>Av <strong>Jarmo Halonen</strong></span>
-      <span>Publicerad <strong>8 juni 2026</strong></span>
-      <span>Last updated: 8 juni 2026</span>
-      <span>Lästid: <strong>~10 min</strong></span>
-    </div>
-  </div>
-</header>
-
-<!-- STATS ROW -->
-<section class="stats-row">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <span class="stat-number">40+</span>
-        <span class="stat-label">olika växtsteroler har identifierats i livsmedel</span>
-        <span class="stat-source">Läkartidningen, 2005</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">&lt;5%</span>
-        <span class="stat-label">av intagna växtsteroler absorberas – mot ~50–60% för kolesterol</span>
-        <span class="stat-source">PMC8781140, 2022</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">150–400 mg</span>
-        <span class="stat-label">är det normala dagliga intaget via västerländsk kost</span>
-        <span class="stat-source">Nutritionsfakta.se, 2016</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">2012</span>
-        <span class="stat-label">godkände EFSA hälsopåstående för växtsteroler och LDL-kolesterol</span>
-        <span class="stat-source">EFSA Journal 2012</span>
-      </div>
-    </div>
-  </div>
-</section>
-
+<div id="site-nav"></div>
 <!-- ARTICLE -->
-<main class="article-wrap">
-  <div class="container">
+<div class="ia-wrap"><article>
+
+<p style="font-size:0.85em;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">Fytonutrienter · Grundläggande begrepp</p>
+<h1>Vad är växtsteroler?</h1>
+<p>Av <a href="https://levnytt.se/om-oss/">Jarmo Halonen</a> · Uppdaterad: juni 2026 · ~10 min läsning</p>
 
     <!-- PUNCHLINE -->
     <div class="ia-punchline">
@@ -404,9 +254,7 @@ details[open] summary::after { content: '−'; }
       </ul>
     </div>
 
-    <p class="method-note"><strong>Metodnotering:</strong> Denna artikel bygger på peer-reviewed forskning, EFSA-utlåtanden och svenska medicinska källor inklusive Läkartidningen och Nutritionsfakta. Inga hälsopåståenden görs utöver vad EFSA formellt godkänt. Inga marknadsföringskällor eller produktsidor har använts som faktaunderlag.</p>
-
-    <div class="article-body">
+    <p class="ia-method-note"><strong>Metodnotering:</strong> Denna artikel bygger på peer-reviewed forskning, EFSA-utlåtanden och svenska medicinska källor inklusive Läkartidningen och Nutritionsfakta. Inga hälsopåståenden görs utöver vad EFSA formellt godkänt. Inga marknadsföringskällor eller produktsidor har använts som faktaunderlag.</p>
 
       <h2>Vad är egentligen en växsterol — och varför finns de i växter?</h2>
 
@@ -416,8 +264,8 @@ details[open] summary::after { content: '−'; }
 
       <p>Hittills har <a href="https://lakartidningen.se/klinik-och-vetenskap-1/2005/01/vaxtsteroler-i-vanliga-livsmedel-sanker-serumkolestrol/" target="_blank" rel="noopener">över 40 olika växtsteroler identifierats</a> i livsmedel. De tre vanligaste — beta-sitosterol, campesterol och stigmasterol — dominerar kvantitativt i det vi äter och är också de som studerats mest i humanforskning.</p>
 
-      <div class="callout callout-standard">
-        <p class="callout-title">Namn att hålla isär</p>
+      <div class="ia-callout">
+        <strong>Namn att hålla isär</strong>
         <p><strong>Fytosteroler = Växtsteroler.</strong> Båda namnen används i litteratur, på förpackningar och i forskning. "Fyto" kommer från grekiskans <em>phyton</em> (växt). Samma ämnen, olika namn. <strong>Växtstanoler</strong> är en delmängd av sterolgruppen där kolringarna är mättade — de saknar den dubbelbindning som växtsteroler har. Båda ingår ofta i samlingsbegreppet "fytosteroler".</p>
       </div>
 
@@ -520,8 +368,8 @@ details[open] summary::after { content: '−'; }
 
       <p>Kroppens absorptionssystem för steroler känner igen skillnaden. Resultat: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8781140/" target="_blank" rel="noopener">bioavailabiliteten för växtsteroler är bara 0,5–2%</a> — den exakta mekanismen är inte fullt klarlagd, men kroppen är mycket bättre på att absorbera kolesterol och aktivt pumpar ut växtsteroler via ABCG5/G8-transportörer.</p>
 
-      <div class="callout callout-gold">
-        <p class="callout-title">Tre viktiga arter att känna till</p>
+      <div class="ia-callout">
+        <strong>Tre viktiga arter att känna till</strong>
         <p><strong>Beta-sitosterol</strong> — den vanligaste, extra etylgrupp vid C-24. Finns i nötter, oljor, fullkorn.<br>
         <strong>Campesterol</strong> — extra metylgrupp vid C-24. Finns i spannmål och vegetabiliska oljor.<br>
         <strong>Stigmasterol</strong> — extra etylgrupp + dubbelbindning i sidokedjan. Finns i soja, raps.<br>
@@ -567,8 +415,8 @@ details[open] summary::after { content: '−'; }
 
       <p>En genomsnittlig västerländsk kost ger ungefär 150–400 mg växtsteroler per dag, med de största bidragen från bröd, cerealier och matfett. <a href="https://nutritionsfakta.se/2016/06/10/vaxtsteroler-och-hjart-karlsjukdom-okat-intag-via-kosten-ger-minskad-risk/" target="_blank" rel="noopener">Bröd och cerealier samt matfett är de två största källorna i Europa med ett gemensamt bidrag på en till två tredjedelar av det totala intaget</a>.</p>
 
-      <div class="callout callout-warning">
-        <p class="callout-title">Den terapeutiska dosen är svår att nå via vanlig mat</p>
+      <div class="ia-callout">
+        <strong>Den terapeutiska dosen är svår att nå via vanlig mat</strong>
         <p>Att äta varierat och med fokus på växtbaserade livsmedel ger ett normalt intag på 150–400 mg/dag. Den dos som EFSA godkänt för kolesterolsänkning (1,5–3 g/dag) är 4–20 gånger högre. Det kräver berikade produkter eller tillskott. Det är en viktig skillnad att hålla isär.</p>
       </div>
 
@@ -655,7 +503,7 @@ details[open] summary::after { content: '−'; }
         </table>
       </div>
 
-      <p class="method-note">Tabellen baseras på EFSA Journal 2012 och PMC8781140 (2022). Individuell respons varierar. Effekten gäller LDL-kolesterol, inte total kardiovaskulär risk. Högt kolesterol är en riskfaktor, men inte den enda för hjärt-kärlsjukdom.</p>
+      <p class="ia-method-note">Tabellen baseras på EFSA Journal 2012 och PMC8781140 (2022). Individuell respons varierar. Effekten gäller LDL-kolesterol, inte total kardiovaskulär risk. Högt kolesterol är en riskfaktor, men inte den enda för hjärt-kärlsjukdom.</p>
 
       <h2>Vad gör växtsteroler i växtcellernas membran?</h2>
 
@@ -699,16 +547,16 @@ details[open] summary::after { content: '−'; }
 
       <p>Forskning från <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8539253/" target="_blank" rel="noopener">PMC (2021) visar att steroler kan utgöra 20% av alla lipider i växtmembran och 30–50% i djurmembran</a>. Det är inte en marginell beståndsdel — det är en av de dominerande molekylerna i cellmembranets kemi. Du kan läsa mer om cellmembranets funktion i sin helhet i vår artikel om <a href="https://levnytt.se/fytosteroler-cellmembran">fytosteroler och cellmembranet</a>.</p>
 
-      <div class="callout callout-teal">
-        <p class="callout-title">Varför steroler är universella i livet</p>
+      <div class="ia-callout">
+        <strong>Varför steroler är universella i livet</strong>
         <p>Att steroler finns i nästan alla levande organismer — djur, växter, svampar — och fyller liknande strukturella roller är en av de mer fascinerande observationerna i biokemi. Svampar använder ergosterol, djur kolesterol, växter fytosteroler. Samma funktion, lätt modifierad molekyl, parallell evolution. Det understryker hur fundamentalt viktig denna molekylklass är för cellfunktion.</p>
       </div>
 
       <!-- CTA to related content -->
-      <div class="cta-block">
+      <div class="ia-cta">
         <h3>Nyfiken på den vetenskapliga basen?</h3>
         <p>NeoLife arbetar med fytonutrienter som en del av sin produktutveckling. Läs mer om forskningsgrunden bakom deras approach.</p>
-        <a  class="cta-btn" target="_blank" rel="noopener noreferrer" href="https://levnytt.se/neolife-vetenskap">NeoLife Vetenskap →</a>
+        <a  target="_blank" rel="noopener noreferrer" href="https://levnytt.se/neolife-vetenskap">NeoLife Vetenskap →</a>
       </div>
 
       <h2>Vad bör du som konsument tänka på kring växtsteroler?</h2>
@@ -727,43 +575,28 @@ details[open] summary::after { content: '−'; }
 
       <h3>Vad man bör vara försiktig med</h3>
 
-      <div class="callout callout-warning">
-        <p class="callout-title">Tre viktiga begränsningar</p>
+      <div class="ia-callout">
+        <strong>Tre viktiga begränsningar</strong>
         <p><strong>1. Sitosterolemi</strong> — ett sällsynt genetiskt tillstånd där kroppen inte eliminerar växtsteroler normalt. Berörda individer bör undvika höga doser. Diagnos kräver läkarundersökning.<br><br>
         <strong>2. Gravida och ammande</strong> — berikade produkter med höga doser rekommenderas inte utan läkarkontakt.<br><br>
         <strong>3. Ersätter inte livsstilsförändringar</strong> — växtsteroler är ett komplement, inte en genväg. Rökstopp, motion och kostförändringar har bredare kardiovaskulär effekt.</p>
       </div>
 
       <!-- TIER BOXES -->
-      <div class="tier-section">
-        <p class="tier-label">Utforska vidare på LevNytt</p>
-        <div class="tier-grid">
-          <a href="https://levnytt.se/neolife-historia" class="tier-box">
-            <span class="tier-box-label">Tier 1</span>
-            <span class="tier-box-title">NeoLife Historia</span>
-          </a>
-          <a href="https://levnytt.se/neolife-vetenskap" class="tier-box">
-            <span class="tier-box-label">Tier 2</span>
-            <span class="tier-box-title">NeoLife Vetenskap</span>
-          </a>
-          <div class="tier-box tier-box-inactive">
-            <span class="tier-box-label">Tier 3</span>
-            <span class="tier-box-title">Forsknings-FAQ</span>
-          </div>
-          <div class="tier-box tier-box-inactive">
-            <span class="tier-box-label">Tier 4</span>
-            <span class="tier-box-title">LevNytt Principer</span>
-          </div>
+      <div class="ia-tierbox">
+        <div>
+          <a href="https://levnytt.se/neolife-historia" class="ia-tier">NeoLife Historia</a>
+          <a href="https://levnytt.se/neolife-vetenskap" class="ia-tier">NeoLife Vetenskap</a>
         </div>
       </div>
 
       <!-- FAQ -->
-      <div class="faq-section">
+      <div class="ia-faq">
         <h2>Vanliga frågor om växtsteroler</h2>
 
         <details>
           <summary>Vad är växtsteroler?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Växtsteroler, även kallade fytosteroler, är naturligt förekommande ämnen i växtriket med en kemisk struktur som liknar kolesterol. De är strukturella komponenter i växtcellernas membran och fyller samma funktion där som kolesterol gör i djurceller.</p>
             <p>De vanligaste är beta-sitosterol, campesterol och stigmasterol. De finns i alla vegetabiliska livsmedel — mest i oljor, nötter, fullkorn och baljväxter.</p>
           </div>
@@ -771,7 +604,7 @@ details[open] summary::after { content: '−'; }
 
         <details>
           <summary>Vad är skillnaden mellan växtsteroler och kolesterol?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Båda tillhör sterolgruppen och delar samma grundstruktur. Skillnaden ligger i sidokedjan på position C-24: växtsteroler har en extra metyl- eller etylgrupp där, kolesterol har inget.</p>
             <p>Den lilla kemiska skillnaden gör att kroppen behandlar dem helt olika: kolesterol absorberas till 50–60%, växtsteroler till under 5%.</p>
           </div>
@@ -779,7 +612,7 @@ details[open] summary::after { content: '−'; }
 
         <details>
           <summary>Vad innehåller mest växtsteroler?</summary>
-          <div class="faq-answer">
+          <div>
             <p>De högsta koncentrationerna finns i vegetabiliska oljor — framförallt majsolja och rapsolja. Nötter, frön, fullkornsprodukter, baljväxter och broccoli är också goda källor.</p>
             <p>I en typisk västerländsk kost bidrar bröd, cerealier och matfett mest till det totala dagliga intaget, tack vare att de äts i stora mängder.</p>
           </div>
@@ -787,7 +620,7 @@ details[open] summary::after { content: '−'; }
 
         <details>
           <summary>Hur fungerar växtsteroler i tarmen?</summary>
-          <div class="faq-answer">
+          <div>
             <p>I tunntarmen konkurrerar växtsteroler med kolesterol om plats i gallsyremicellar — de strukturer som transporterar fetter till tarmväggen. Växtsteroler tränger undan kolesterol från micellerna, vilket minskar kolesterolabsorptionen.</p>
             <p>EFSA godkände 2012 ett hälsopåstående om att 1,5–3 gram växtsteroler per dag bidrar till att sänka LDL-kolesterol.</p>
           </div>
@@ -795,14 +628,14 @@ details[open] summary::after { content: '−'; }
 
         <details>
           <summary>Är växtsteroler samma sak som fytosteroler?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Ja — växtsteroler och fytosteroler är exakt samma sak. "Fyto" kommer från grekiskans phyton (växt). Båda termerna används omväxlande i forskning, på förpackningar och i populärvetenskaplig litteratur.</p>
           </div>
         </details>
 
         <details>
           <summary>Vad är skillnaden mellan växtsteroler och växtstanoler?</summary>
-          <div class="faq-answer">
+          <div>
             <p>Växtstanoler är en delmängd av sterolgruppen där kolringarna är mättade — de saknar dubbelbindningen mellan kol 5 och 6 som växtsteroler har. I praktiken absorberas växtstanoler ännu sämre (under 0,5%) och anses av vissa vara mer stabila i produkter.</p>
             <p>Båda har visat sig minska kolesterolabsorptionen i tarmen och ingår i EFSA-godkända hälsopåståenden.</p>
           </div>
@@ -810,7 +643,7 @@ details[open] summary::after { content: '−'; }
 
         <details>
           <summary>Kan alla äta växtsteroler?</summary>
-          <div class="faq-answer">
+          <div>
             <p>De flesta friska vuxna kan äta växtsteroler via vanlig mat utan problem. Berikade produkter med höga doser rekommenderas framförallt för personer med förhöjda kolesterolvärden som komplement till livsstilsförändringar.</p>
             <p>Undantag: sitosterolemi (sällsynt genetiskt tillstånd), gravida och ammande bör rådfråga läkare. Växtsteroler ersätter inte medicinsk behandling vid allvarliga blodfettsrubbningar.</p>
           </div>
@@ -826,29 +659,25 @@ details[open] summary::after { content: '−'; }
 
       <p>Vad det <em>inte</em> innebär: att de är ett universalmedel, att de ersätter medicinsk behandling, eller att mera alltid är bättre. Den terapeutiska dosen är väldefinierad (1,5–3 g/dag), och ovanför 3 g tillkommer inga dokumenterade fördelar.</p>
 
-      <div class="callout callout-gold">
-        <p class="callout-title">Rätt nivå av förväntningar</p>
+      <div class="ia-callout">
+        <strong>Rätt nivå av förväntningar</strong>
         <p>Växtsteroler är ett välstudierat och EFSA-godkänt verktyg för LDL-sänkning inom ramen för en hälsosam livsstil. De är inte ett mirakel. De är ett komplement — till god kost, rörelse och i förekommande fall medicinsk behandling. Det är en ärlig sammanfattning av vad forskningen faktiskt säger.</p>
       </div>
 
       <p>Vill du fördjupa dig vidare kan du läsa om <a href="https://levnytt.se/fytosteroler-cellmembran">fytosteroler och cellmembranet</a> för ett djupare cellbiologiskt perspektiv, om <a href="https://levnytt.se/vaxtbaserade-steroler-dagligen">är det värt att ta växtsteroler dagligen</a> för ett mer praktiskt konsumentperspektiv, och om <a href="https://levnytt.se/neolife-vetenskap">NeoLifes vetenskapliga plattform</a> om du är nyfiken på hur den typen av forskning används i produktutveckling.</p>
 
-    </div><!-- /article-body -->
 
     <!-- AUTHOR BOX -->
-    <div class="author-box">
-      <div class="author-avatar"><img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="56" height="56"></div>
-      <div class="author-info">
-        <span class="author-label">Om författaren</span>
+    <div class="ia-author-box">
+      <div class="ia-author-avatar"><img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="56" height="56"></div>
+      <div>
         <strong>Jarmo Halonen</strong>
-        <span>Långvarig NeoLife-användare och entreprenör med intresse för hälsa, konsumentfrågor och vardagsekonomi. Skriver för LevNytt med fokus på att ge svenska konsumenter faktabaserad information att fatta egna välgrundade beslut.</span>
+        <p>Långvarig NeoLife-användare och entreprenör med intresse för hälsa, konsumentfrågor och vardagsekonomi. Skriver för LevNytt med fokus på att ge svenska konsumenter faktabaserad information att fatta egna välgrundade beslut.</p>
       </div>
     </div>
 
-    <p class="last-updated">Senast uppdaterad: 8 juni 2026</p>
-
-  </div><!-- /container -->
-</main>
+    <p class="ia-disclosure">LevNytt.se är en oberoende informationskälla som drivs av en NeoLife-distributör. Innehållet granskas kontinuerligt för att säkerställa vetenskaplig noggrannhet och transparens. Läs mer om <a href="https://levnytt.se/var-metod">vår metod</a> och <a href="https://levnytt.se/om-oss">om oss</a>.</p>
+</article></div>
 
 <script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>

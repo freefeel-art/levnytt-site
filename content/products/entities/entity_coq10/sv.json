@@ -1,0 +1,77 @@
+{
+  "canonical_id": "entity_coq10",
+  "neoLife_code": 930,
+  "locale": "sv",
+  "slug": "neolife-coq10",
+  "product_name": "CoQ10",
+  "aliases": [
+    "Koenzym Q10",
+    "Ubiquinon",
+    "Ubiquinol",
+    "Q10"
+  ],
+  "category": "supplements",
+  "subcategory": "targeted",
+  "keywords": [
+    "koenzym Q10",
+    "ubiquinon",
+    "mitokondrier",
+    "ATP",
+    "energiproduktion",
+    "statiner",
+    "åldrande",
+    "Q-SYMBIO"
+  ],
+  "short_description": "Koenzym Q10 för mitokondriell energiproduktion — 60 kapslar, fettlöslig formulering.",
+  "summary": "NeoLife CoQ10 är ett koenzym Q10-tillskott i fettlöslig formulering. Q10 är essentiellt för mitokondriell ATP-produktion. Kroppens egen produktion toppar vid ~20 år och sjunker 50–60% till 70–80 år. Q-SYMBIO-studien visade 43% minskad kardiovaskulär dödlighet hos hjärtsviktspatienter med 300 mg/dag.",
+  "ingredients": [
+    {
+      "name": "Koenzym Q10 (ubiquinon)"
+    }
+  ],
+  "usage": {
+    "dosage": "1-2 kapslar dagligen",
+    "method": "i samband med måltid som innehåller fett",
+    "timing": "valfri tid",
+    "duration": "30-60 dagar (60 kapslar)",
+    "safety": "Rådfråga läkare vid statinbehandling eller blodförtunnande medicin."
+  },
+  "packaging": {
+    "size": 60,
+    "unit": "kapslar",
+    "label": "60 kapslar"
+  },
+  "price_database_ref": {
+    "code": 930,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/coq10.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_omega_3_plus"
+  ],
+  "related_article_slugs": [
+    "neolife-coq10"
+  ],
+  "faq_references": [
+    "Vad är CoQ10 och varför sjunker nivåerna med åldern?",
+    "Påverkar statiner CoQ10-nivåerna?"
+  ],
+  "research_references": [
+    {
+      "tier": "T2",
+      "label": "Q-SYMBIO 2014: CoQ10 och kardiovaskulär mortalitet — JACC Heart Failure",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24576417/"
+    },
+    {
+      "tier": "T1",
+      "label": "Lipids Health Dis 2019: Statiner och CoQ10-nivåer — meta-analys"
+    }
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

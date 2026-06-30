@@ -1,0 +1,48 @@
+{
+  "canonical_id": "entity_aloe_vera_plus",
+  "neoLife_code": 731,
+  "locale": "sv",
+  "slug": "neolife-aloe-vera-plus",
+  "product_name": "Aloe Vera Plus",
+  "aliases": [
+    "Aloe vera-dryck",
+    "Aloe vera"
+  ],
+  "category": "supplements",
+  "subcategory": "green_drink",
+  "keywords": [
+    "aloe vera",
+    "aloe barbadensis",
+    "aloe-dryck",
+    "växtbaserad"
+  ],
+  "short_description": "Aloe Vera-dryck på 1 liter — återfuktande växtbaserat kosttillskott.",
+  "summary": "NeoLife Aloe Vera Plus är en aloe vera-dryck baserad på Aloe barbadensis Miller. En klassisk växtbaserad produkt för daglig återfuktning och välmående.",
+  "ingredients": [
+    {
+      "name": "Aloe Vera (Aloe barbadensis Miller)"
+    }
+  ],
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "drickes",
+    "timing": "valfri tid"
+  },
+  "packaging": {
+    "size": 1,
+    "unit": "l",
+    "label": "1 l"
+  },
+  "price_database_ref": {
+    "code": 731,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/aloe-vera-plus.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

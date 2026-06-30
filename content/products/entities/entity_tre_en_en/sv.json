@@ -1,0 +1,66 @@
+{
+  "canonical_id": "entity_tre_en_en",
+  "neoLife_code": 927,
+  "locale": "sv",
+  "slug": "neolife-tre-en-en",
+  "product_name": "Tre-en-en",
+  "aliases": ["Tre-en-en Kornkoncentrat", "Kornkoncentrat", "Spannmålslipider", "Fytosteroler"],
+  "legacy_codes": [510],
+  "category": "supplements",
+  "subcategory": "phytonutrient",
+  "product_family": "pro_vitality_system",
+  "keywords": ["fytosteroler", "beta-sitosterol", "gamma-oryzanol", "oktakosanol", "stigmasterol", "campesterol", "cellmembran", "lipid", "sterol", "fullkorn", "vetegroddar", "riskli", "soja", "fosfolipider", "glykolipider", "tokotrienoler", "Texas A&M"],
+  "short_description": "Lipider och steroler från vetegroddar, riskli och soja — världens första fytonäringstillskott sedan 1958.",
+  "summary": "NeoLife Tre-en-en (produktkod 927) är världens första fytonäringstillskott, lanserat 1958 — 32 år innan begreppet fytonäringsämne etablerades. Det levererar ett spektrum av lipider och steroler (beta-sitosterol, gamma-oryzanol, stigmasterol, campesterol, oktakosanol) från tre kallpressade fullkornkällor: vetegroddar, riskli och sojabönor. Kapslarna är naturligt klorofyllfärgade. Texas A&M University dokumenterade 1987 förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering. Tre-en-en ingår som cellulär grund i Pro Vitality+-systemet.",
+  "ingredients": [
+    {"name": "Beta-sitosterol"},
+    {"name": "Gamma-oryzanol"},
+    {"name": "Stigmasterol"},
+    {"name": "Campesterol"},
+    {"name": "Oktakosanol"},
+    {"name": "Fosfolipider"},
+    {"name": "Glykolipider"},
+    {"name": "Tokotrienoler"}
+  ],
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "120 kapslar per förpackning"
+  },
+  "certifications": [],
+  "packaging": {"size": 120, "unit": "kapslar", "label": "120 mjuka gelatinkapslar"},
+  "price_database_ref": {
+    "code": 927,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/tre-en-en.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/images/neolifetreenen.jpg",
+    "product_image": "https://levnytt.se/images/neolifetreenen.jpg"
+  },
+  "related_product_ids": [
+    "entity_formula_iv",
+    "entity_omega_3_plus",
+    "entity_carotenoid_complex",
+    "entity_pro_vitality"
+  ],
+  "related_article_slugs": [
+    "neolife-tre-en-en-cellnaring",
+    "neolife-historia"
+  ],
+  "faq_references": [
+    "Vad är NeoLife Tre-en-en?",
+    "Varför behöver cellmembran lipider och steroler?",
+    "Vad visar Texas A&M-forskningen om Tre-en-en?",
+    "Vilka specifika steroler och lipider ingår?",
+    "Vad är skillnaden mellan Tre-en-en och vanlig fullkornmat?"
+  ],
+  "research_references": [
+    {"tier": "T4", "label": "Texas A&M University 1987 — kornlipidkomplettering och näringsutnyttjande (djurstudie)"}
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

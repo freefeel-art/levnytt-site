@@ -1,0 +1,48 @@
+{
+  "canonical_id": "entity_insta_lift_eye_gel",
+  "neoLife_code": 368,
+  "locale": "sv",
+  "slug": "neolife-insta-lift-eye-gel",
+  "product_name": "Insta-Lift Eye Gel",
+  "aliases": [
+    "Ögongel",
+    "Eye gel",
+    "Nutriance eye gel"
+  ],
+  "category": "skin_care",
+  "subcategory": "facial_care",
+  "product_family": "nutriance_organic_hudvard",
+  "keywords": [
+    "ögongel",
+    "ögon",
+    "Nutriance",
+    "insta-lift"
+  ],
+  "short_description": "Uppstramande ögongel — 15 ml för en yngre och fräschare blick.",
+  "summary": "NeoLife Insta-Lift Eye Gel är en uppstramande ögongel från Nutriance Organic-serien.",
+  "usage": {
+    "dosage": "Applicera en liten mängd under ögonen",
+    "method": "klappa försiktigt in med ringfingret",
+    "timing": "morgon och kväll"
+  },
+  "packaging": {
+    "size": 15,
+    "unit": "ml",
+    "label": "15 ml"
+  },
+  "price_database_ref": {
+    "code": 368,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "5. NUTRIANCE ORGANIC HUDVÅRD"
+  },
+  "shop_path": "/i/shop/skin-care/insta-lift-eye-gel.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_rejuvenating_rich_cream"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

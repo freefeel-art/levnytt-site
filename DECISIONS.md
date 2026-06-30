@@ -158,6 +158,13 @@ Navigation and footer are injected by `nav.js` and `footer.js` via self-invoking
 
 All current and future pages use `pillar.css` for styling. Inline `<style>` blocks with `:root` token definitions are a legacy pattern being phased out.
 
+`pillar.css` defines brand-aware CSS variables:
+- `--lv-green` (`#1B4332`) — Deep Green, primary brand
+- `--lv-gold` (`#E8C870`) — Light Gold, secondary brand
+- `--lv-green-dark` (`#0D2C1E`) — Dark green accent
+- `--lv-green-light` (`#2D6A4F`) — Light green accent
+- `--lv-cream` (`#F9F6EF`) — Background cream
+
 **Implication:** New pages must link `pillar.css`. Do not add new inline `:root` blocks. Existing pages with inline `:root` blocks are migration candidates.
 
 ---
@@ -203,6 +210,54 @@ Known legacy exceptions (intentional trailing-slash canonicals on root-level fil
 **Implication:** New root-level pages: use clean-slug canonical. New subdir pages: use trailing-slash canonical.
 
 ---
+
+### B8. BRAND-DESIGN-SYSTEM.md is the Single Source of Truth for brand identity
+
+`docs/BRAND-DESIGN-SYSTEM.md` defines the LV Mark, brand colors, usage rules, and visual identity. It is the authoritative specification. All brand assets must be derived from its rules.
+
+`pillar.css` CSS variables (`--lv-green`, `--lv-gold`, etc.) are the technical implementation of the brand spec. They must never contradict `BRAND-DESIGN-SYSTEM.md`.
+
+**Implication:** Before adding or changing brand assets, read `docs/BRAND-DESIGN-SYSTEM.md` first. Do not create brand assets that are not specified or implied by the brand document.
+
+---
+
+### B9. Brand assets are stored in assets/brand/
+
+All brand image assets live in `assets/brand/`:
+
+| Asset | Purpose |
+|---|---|
+| favicon.svg | Browser tab icon |
+| apple-touch-icon.png | iOS home screen icon |
+| hero-watermark.svg | Background watermark on hero sections |
+| og-brand.png | Default Open Graph social share image |
+| logo.svg | LV Mark (light background variant) |
+| logo-dark.svg | LV Mark (dark background variant) |
+| logo-light.svg | LV Mark (optional variant) |
+
+All raster assets originate from the master SVG. The `og-brand.png` (1200x630) is the only rasted OG asset required.
+
+**Implication:** New brand image files must be placed in `assets/brand/`. Do not scatter brand assets across `images/` or `img/` directories.
+
+---
+
+### B10. Shared branding is injected through components.js
+
+Brand meta elements (favicon, apple-touch-icon, hero watermark, author avatar) are injected at runtime by `components.js` via self-invoking IIFEs.
+
+No page may hardcode brand meta tags or brand images unless the page requires a page-specific override (e.g. product-specific OG image).
+
+**Implication:** New pages include `components.js` with `defer`. The brand injectors (`injectBrandMeta`, `injectHeroWatermark`, `injectBrandAvatar`) run automatically on `DOMContentLoaded`. Do not hardcode favicon or apple-touch-icon links in individual pages.
+
+---
+
+### B11. Publication Agent and Page Builder consume the same shared brand assets
+
+Both the Publication Agent (which deploys articles from `content/articles/`) and the Page Builder (which migrates pillar pages) use the same shared components: `nav.js`, `footer.js`, `components.js`, `pillar.css`, and `assets/brand/`.
+
+There is no separate brand pipeline for articles vs. pillar pages. Both are vanilla HTML files at root level and use the same shared infrastructure.
+
+**Implication:** New content generation skills (informational-article, pillar-page-template, etc.) must reference the same shared components. Do not create a second brand system for any output type.
 
 ## C. Content and SEO decisions
 

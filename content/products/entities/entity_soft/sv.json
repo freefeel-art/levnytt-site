@@ -1,0 +1,56 @@
+{
+  "canonical_id": "entity_soft",
+  "neoLife_code": 42,
+  "locale": "sv",
+  "slug": "neolife-soft",
+  "product_name": "Soft",
+  "aliases": [
+    "Soft sköljmedel",
+    "Sköljmedel",
+    "Golden Home Care sköljmedel"
+  ],
+  "category": "home_care",
+  "subcategory": "fabric_softener",
+  "product_family": "golden_home_care",
+  "keywords": [
+    "sköljmedel",
+    "tygmjukgörare",
+    "Golden Home Care",
+    "tvätt"
+  ],
+  "short_description": "Koncentrerat sköljmedel — 1 liter för mjukare och fräschare tvätt.",
+  "summary": "NeoLife Soft är ett koncentrerat sköljmedel från Golden Home Care-sortimentet. Biologiskt nedbrytbar formel.",
+  "usage": {
+    "dosage": "Enligt anvisning på förpackningen",
+    "method": "tillsätts i sköljmedelsfacket",
+    "timing": "vid varje tvätt"
+  },
+  "packaging": {
+    "size": 1,
+    "unit": "l",
+    "label": "1 l"
+  },
+  "price_database_ref": {
+    "code": 42,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "3. GOLDEN RENGÖRING"
+  },
+  "shop_path": "/i/shop/home-care/soft.html",
+  "media": {
+    "og_image": "https://levnytt.se/assets/brand/og-brand.png",
+    "hero_image": "https://levnytt.se/assets/brand/og-brand.png"
+  },
+  "related_product_ids": [
+    "entity_g1",
+    "entity_super_10",
+    "entity_ldc"
+  ],
+  "related_article_slugs": [
+    "neolife-golden-home-care"
+  ],
+  "faq_references": [
+    "Vad ingår i Golden Home Care-sortimentet?"
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}

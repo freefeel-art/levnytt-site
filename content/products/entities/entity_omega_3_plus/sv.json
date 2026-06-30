@@ -1,0 +1,64 @@
+{
+  "canonical_id": "entity_omega_3_plus",
+  "neoLife_code": 929,
+  "locale": "sv",
+  "slug": "neolife-omega-3-plus",
+  "product_name": "Omega-3 Plus",
+  "aliases": ["Omega-3", "Laxoljekapslar", "Fiskolja"],
+  "legacy_codes": [],
+  "category": "supplements",
+  "subcategory": "omega-3",
+  "product_family": "pro_vitality_system",
+  "keywords": ["EPA", "DHA", "DPA", "triglyceridform", "etylester", "fiskolja", "laxolja", "omega-3", "hjärtat", "inflammation", "cellmembran", "absorption", "renhet", "kvicksilver", "PCB"],
+  "short_description": "Högkoncentrerat omega-3-tillskott i triglyceridform från lax — 460 mg EPA, 480 mg DHA, 50 mg DPA per portion.",
+  "summary": "Omega-3 Plus är NeoLifes koncentrerade omega-3-tillskott från vildfångad lax. Fettsyrorna föreligger i triglyceridform — samma form som förekommer naturligt i fisk — vilket enligt forskning ger 50–70% bättre absorption än etylesterformer. Varje portion innehåller 460 mg EPA, 480 mg DHA och 50 mg DPA. Produkten screenas för över 200 föroreningar per batch.",
+  "ingredients": [
+    {"name": "EPA", "amount": "460", "unit": "mg"},
+    {"name": "DHA", "amount": "480", "unit": "mg"},
+    {"name": "DPA", "amount": "50", "unit": "mg"},
+    {"name": "Total omega-3", "amount": "1069", "unit": "mg"}
+  ],
+  "usage": {
+    "dosage": "3 kapslar dagligen",
+    "method": "i samband med måltid",
+    "timing": "valfri tid",
+    "duration": "30 dagar (90 kapslar)",
+    "safety": "Bör ej tas av personer med blodförtunnande medicinering utan läkarkontakt"
+  },
+  "certifications": ["Friend of the Sea"],
+  "packaging": {"size": 90, "unit": "kapslar", "label": "90 kapslar"},
+  "price_database_ref": {
+    "code": 929,
+    "database": "docs/databank/LEVNYTT-PRICE-DATABASE.md",
+    "section": "1. KOSTTILLSKOTT"
+  },
+  "shop_path": "/i/shop/nutrition/omega-3-plus.html",
+  "media": {
+    "og_image": "https://levnytt.se/images/omega-3-plus.jpg",
+    "hero_image": "https://levnytt.se/images/omega-3-plus.jpg"
+  },
+  "related_product_ids": [
+    "entity_formula_iv",
+    "entity_tre_en_en",
+    "entity_carotenoid_complex",
+    "entity_pro_vitality",
+    "entity_coq10"
+  ],
+  "related_article_slugs": [
+    "ala-vs-epa-vs-dha",
+    "varfor-fiskolja-inte-ar-likvardigt"
+  ],
+  "faq_references": [
+    "Vad är skillnaden mellan triglyceridform och etylesterform av omega-3?",
+    "Hur mycket omega-3 behöver man per dag?",
+    "Varför är renhet viktigt i omega-3-tillskott?",
+    "Kan man få tillräckligt med EPA och DHA från mat?"
+  ],
+  "research_references": [
+    {"tier": "T1", "label": "Omega-3 absorption triglycerider vs etylestrar — meta-analys", "url": "https://pubmed.ncbi.nlm.nih.gov/20638827/"},
+    {"tier": "T1", "label": "EFSA vetenskapligt utlåtande om EPA/DHA och hjärtfunktion", "url": "https://efsa.onlinelibrary.wiley.com/doi/abs/10.2903/j.efsa.2010.1461"},
+    {"tier": "T2", "label": "Lawson & Hughes — första kontrollerade studien om TG vs EE absorption", "url": "https://pubmed.ncbi.nlm.nih.gov/3410652/"}
+  ],
+  "last_verified": "2026-06-30",
+  "entity_version": 1
+}
