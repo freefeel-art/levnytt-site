@@ -246,5 +246,7 @@ These documents exist in the repository but are **not operational**. Read them o
 | `docs/reports/SITE-PAGE-INVENTORY.md` | Site page inventory. Likely outdated. | Archive |
 | `docs/reports/MORNING-BRIEF-VALIDATION-REPORT.md` | Validation report. | Archive |
 | `docs/databank/LEVNYTT-PRICE-DATABASE.md` | NeoLife SE product prices (April 2026). Use when building cost calculators. | Active reference |
+| `docs/editorial-state/README.md` | **Editorial State Interface** — official specification for Editorial Sync Engine generated files. All editorial agents must follow this interface. | **Active specification** |
+| `docs/specifications/AGENT-REGISTRY.md` | **Agent Registry** — canonical inventory of all production agents, responsibilities, routing rules, and workflows. | **Active specification** |
 | `docs/specifications/HOMEPAGE.md` | Homepage specification. | Active reference |
-| `docs/specifications/MORNING-BRIEF-ARCHITECTURE.md` | Morning Brief architecture spec. | Archive |
+| `docs/specifications/MORNING-BRIEF-ARCHITECTURE.md` | Morning Brief architecture spec. | Active reference |

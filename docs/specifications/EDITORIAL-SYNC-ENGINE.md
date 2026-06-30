@@ -468,4 +468,23 @@ After implementation and verification, update the MLM Brief agent to consume gen
 
 ---
 
+## 8. Editorial State Interface
+
+The Editorial Sync Engine is the canonical producer of synchronized editorial state. All generated files follow the **Editorial State Interface** specification:
+
+**Interface Documentation:** `docs/editorial-state/README.md`
+
+This interface defines:
+- All generated file formats and purposes
+- Producer-consumer architecture
+- Repository inspection rules for editorial agents
+- Interface evolution and versioning
+
+**Consumer Agents:**
+- Morning Brief V2.1 (`.opencode/agents/morning-brief.md`)
+- MLM Brief V1.1 (`.opencode/agents/mlm-brief.md`)
+- Future editorial agents
+
+---
+
 *End of Editorial Sync Engine Specification V1.0*

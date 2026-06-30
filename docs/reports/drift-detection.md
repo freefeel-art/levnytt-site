@@ -1,17 +1,21 @@
 # Drift Detection — Auto-Generated
 
-**Generated:** 2026-06-30 12:17:53
-**Commit:** 5bc9222
+**Generated:** 2026-06-30 13:08:43
+**Commit:** fef52d8
 
 > AUTO-GENERATED — DO NOT EDIT. Run `python3 scripts/sync-editorial-state.py` to regenerate.
 
-**Drifts found:** 19
+**Drifts found:** 23
 
 | Type | Detail | Severity |
 |------|--------|----------|
 | Undocumented page | Root page `ala-vs-epa-vs-dha.html` has no matching gap report cluster. | **AMBER** |
 | Undocumented page | Root page `finns-det-billigare-alternativ.html` has no matching gap report cluster. | **AMBER** |
 | Undocumented page | Root page `fytosteroler-cellmembran.html` has no matching gap report cluster. | **AMBER** |
+| Undocumented page | Root page `mlm-konsumentratt-retur-angeratt.html` has no matching gap report cluster. | **AMBER** |
+| Undocumented page | Root page `nar-och-hur-ska-man-ta-omega-3.html` has no matching gap report cluster. | **AMBER** |
+| Undocumented page | Root page `omega-3-fran-mat-racker-kosten.html` has no matching gap report cluster. | **AMBER** |
+| Undocumented page | Root page `omega-3-och-hjarthalsa-forskning.html` has no matching gap report cluster. | **AMBER** |
 | Undocumented page | Root page `super-10.html` has no matching gap report cluster. | **AMBER** |
 | Undocumented page | Root page `vaxtbaserade-steroler-dagligen.html` has no matching gap report cluster. | **AMBER** |
 | Undocumented page | Root page `viktuppgang-klimakteriet.html` has no matching gap report cluster. | **AMBER** |

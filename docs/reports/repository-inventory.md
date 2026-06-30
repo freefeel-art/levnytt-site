@@ -1,36 +1,40 @@
 # Repository Inventory — Auto-Generated
 
-**Generated:** 2026-06-30 12:17:53
-**Commit:** 5bc9222
+**Generated:** 2026-06-30 13:08:43
+**Commit:** fef52d8
 
 > AUTO-GENERATED — DO NOT EDIT. Run `python3 scripts/sync-editorial-state.py` to regenerate.
 
 ## Published Pages
 
-**Total:** 81
+**Total:** 100
 
 ### By Category
 - **Product:** 29
 - **Pillar:** 7
-- **Informational:** 35
+- **Informational:** 54
 - **Portal:** 5
 - **Utility:** 5
 
 ### By Source Gap Report
 - **fiber:** 6
 - **global-batch-2026-06-29:** 23
-- **kosttillskott:** 7
+- **kosttillskott:** 19
 - **magnesium:** 8
-- **mlm:** 1
+- **mlm:** 5
 - **multivitamin:** 6
-- **omega-3:** 4
+- **omega-3:** 7
 - **probiotics:** 6
 - **vitamin-d:** 5
-- **Undocumented (no gap report):** 7
+- **Undocumented (no gap report):** 11
 
   - `ala-vs-epa-vs-dha.html`
   - `finns-det-billigare-alternativ.html`
   - `fytosteroler-cellmembran.html`
+  - `mlm-konsumentratt-retur-angeratt.html`
+  - `nar-och-hur-ska-man-ta-omega-3.html`
+  - `omega-3-fran-mat-racker-kosten.html`
+  - `omega-3-och-hjarthalsa-forskning.html`
   - `super-10.html`
   - `vaxtbaserade-steroler-dagligen.html`
   - `viktuppgang-klimakteriet.html`
@@ -87,11 +91,11 @@
 |--------|-------|-----------|-----------|-----|--------|---------|
 | fiber-gap | 6 | 6 | 0 | 0 | 0 | 0 |
 | global-batch-2026-06-29-gap | 25 | 23 | 0 | 2 | 0 | 0 |
-| kosttillskott-gap | 20 | 7 | 5 | 8 | 0 | 0 |
+| kosttillskott-gap | 20 | 19 | 0 | 1 | 0 | 0 |
 | magnesium-gap | 8 | 8 | 0 | 0 | 0 | 0 |
-| mlm-gap | 6 | 1 | 1 | 4 | 0 | 0 |
+| mlm-gap | 6 | 5 | 0 | 1 | 0 | 0 |
 | multivitamin-gap | 6 | 6 | 0 | 0 | 0 | 0 |
-| omega-3-gap | 10 | 4 | 0 | 6 | 0 | 0 |
+| omega-3-gap | 10 | 7 | 0 | 3 | 0 | 0 |
 | probiotics-gap | 6 | 6 | 0 | 0 | 0 | 0 |
 | vitamin-d-gap | 7 | 5 | 0 | 2 | 0 | 0 |
 
@@ -104,6 +108,10 @@
 - **[**AMBER**]** Root page `ala-vs-epa-vs-dha.html` has no matching gap report cluster.
 - **[**AMBER**]** Root page `finns-det-billigare-alternativ.html` has no matching gap report cluster.
 - **[**AMBER**]** Root page `fytosteroler-cellmembran.html` has no matching gap report cluster.
+- **[**AMBER**]** Root page `mlm-konsumentratt-retur-angeratt.html` has no matching gap report cluster.
+- **[**AMBER**]** Root page `nar-och-hur-ska-man-ta-omega-3.html` has no matching gap report cluster.
+- **[**AMBER**]** Root page `omega-3-fran-mat-racker-kosten.html` has no matching gap report cluster.
+- **[**AMBER**]** Root page `omega-3-och-hjarthalsa-forskning.html` has no matching gap report cluster.
 - **[**AMBER**]** Root page `super-10.html` has no matching gap report cluster.
 - **[**AMBER**]** Root page `vaxtbaserade-steroler-dagligen.html` has no matching gap report cluster.
 - **[**AMBER**]** Root page `viktuppgang-klimakteriet.html` has no matching gap report cluster.
