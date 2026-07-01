@@ -5,10 +5,11 @@ Last updated: 2026-07-01
 
 ---
 
-## Phase: Maintenance + Feature Development
+## Phase: Content Factory Transition
 
 The Gen 3 migration is **complete**.
-The Brand System integration (Sprint 8), Brand Rollout (Sprint 9), and Repository Cleanup (Sprint 9b) are **complete**.
+The Brand System (Sprint 8), Brand Rollout (Sprint 9), Repository Cleanup (Sprint 9b), and Post-Cleanup Baseline (Sprint 10) are **complete**.
+The Production Orchestrator V1 (Sprint 11) is built and being tested.
 
 ---
 
@@ -23,66 +24,70 @@ The Brand System integration (Sprint 8), Brand Rollout (Sprint 9), and Repositor
 | **Commit** | `c61eebc` |
 
 - Brand OG images deployed to 70+ root pages + 37 content/articles
-- `#site-nav` placeholders added to final 44 root pages
-- `nav.js` + `footer.js` + `components.js` + `pillar.css` verified on all 80 root pages
 - 28+ obsolete/superseded files removed
-- SKILL-v2 backups moved to `.archive/`; `levnytt-se-master-template.html` marked LEGACY
-- Production validation pass: `vad-ar-lutein` — 83/83 QA checks
-- REPOSITORY-CLEANUP-REPORT.md written as deletion record
+- SKILL-v2 backups moved to `.archive/`
+- REPOSITORY-CLEANUP-REPORT.md written
+
+### Sprint 10 — Post-Cleanup Baseline
+
+| | |
+|---|---|
+| **Status** | ✅ Completed |
+| **Completed** | 2026-07-01 |
+| **Commits** | `69c5359`, `a0ab42a` |
+
+- levnytt-writer.md: `<div class="ia-wrap">` structure, PAS V1.0 note
+- SKILL.md: `gpt-image-2` reference fixed
+- reddit_niche_radar.py: cron path fixed
+- levnytt-se-master-template.html: deleted, 6 docs updated
+- vad-ar-lutein: deployed to root, QA 12/12
 
 ---
 
-## Active Sprint — 10
+## Active Sprint — 11
 
 | | |
 |---|---|
 | **Status** | 🟢 Active |
-| **Sprint** | 10 — Post-Cleanup Baseline |
+| **Sprint** | 11 — Production Orchestrator V1 |
 | **Started** | 2026-07-01 |
 
 ### Objective
 
-Solidify the single production baseline after cleanup: update writer pipeline to PAS V1.0, resolve legacy references, and clear remaining broken references.
+Transform the agent suite into a Content Factory with a single-command production pipeline. Pipeline documentation, orchestrator agent, shell runner, and QA validator are built. Ready for end-to-end testing.
 
 ### Tasks
 
-- [x] Update `.opencode/agents/levnytt-writer.md` to reference PAS V1.0 template (not SKILL.md)
-- [x] Update `.opencode/agents/levnytt-writer.md` to use `<div class="ia-wrap"><article>` structure
-- [x] Update `.opencode/agents/levnytt-writer.md` to use green/gold brand palette (already correct)
-- [x] Update `.opencode/agents/levnytt-writer.md` to use dark evidence tier backgrounds (already correct)
-- [x] Remove or update 5+ docs referencing `levnytt-se-master-template.html`
-- [x] Decide fate of `levnytt-se-master-template.html` — removed (6 docs updated, file deleted)
-- [x] Fix broken cron path in `reddit_niche_radar.py` (`/home/yampa/Documents/Levnytt/`)
-- [x] Fix `informational-article/SKILL.md` reference to sibling `gpt-image-2` skill
-- [x] Run Publication Agent for `vad-ar-lutein` (deploy to root)
+- [x] Audit all 7 registered agents (responsibilities, inputs, outputs)
+- [x] Write `docs/PRODUCTION-PIPELINE.md`
+- [x] Write `docs/PRODUCTION-ORCHESTRATOR.md`
+- [x] Create `.opencode/agents/production-orchestrator.md`
+- [x] Create `scripts/run-production.sh`
+- [x] Create `scripts/qa-article.sh` (12-check PAS V1.0 validator)
+- [x] Fix QA edge cases (multi-line structure, gold variants)
+- [ ] End-to-end production test with a real keyword
+- [ ] Verify Publication Agent handles orchestrator publishes
 
 ### Completion criteria
 
-- [x] Pipeline produces PAS V1.0 compliant articles (levnytt-writer.md updated)
-- [x] No broken references to deleted files
-- [x] No docs reference `levnytt-se-master-template.html` (file deleted, 6 docs updated)
-- [x] levnytt-writer.md uses `<div class="ia-wrap"><article>` structure
-- [x] SKILL.md `gpt-image-2` reference fixed
-- [x] Cron paths in `reddit_niche_radar.py` fixed
-- [x] Production article `vad-ar-lutein.html` deployed at root
-- [x] CURRENT-SPRINT.md updated with Sprint 10 progress
+- Single command: `./scripts/run-production.sh "<keyword>"`
+- QA validator: correct GREEN/AMBER/RED gates
+- Orchestrator agent: chains all agents via opencode Task tool
+- End-to-end run produces published article at root
 
 ### Next action
 
-Serve `vad-ar-lutein.html` at http://127.0.0.1:8080/vad-ar-lutein for visual QA.
-## Sprint status
-Active.
+Full end-to-end test: invoke orchestrator with a real keyword.
+Run `"run production: vad-är-magnesium"` in opencode.
 
-## Sprint objective
-[One sentence describing the goal.]
+---
 
-## Tasks
-- [ ] Task 1
-- [ ] Task 2
+## Future work (backlog)
 
-## Completion criteria
-[Specific, verifiable conditions that define "done".]
-
-## Next action
-[Exactly what to do next.]
-```
+| Area | Description |
+|---|---|
+| Product Entity System | Structured product data via `content/products/` |
+| Content expansion | New articles, internal linking |
+| Research Commander modules | Implement authority, DataForSEO, reddit modules |
+| Automated Editorial Review | Auto-approve routine QC gates |
+| Performance | Image optimization, lazy loading, Core Web Vitals |
