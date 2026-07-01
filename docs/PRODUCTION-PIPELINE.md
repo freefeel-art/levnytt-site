@@ -168,9 +168,16 @@ Copy to root, verify, regenerate article index, commit, push.
 
 ---
 
-## Stage 7: Production Report
+## Stage 7: Production Report + Cost Telemetry
 
-Terminal summary of the entire run — all stages, statuses, commit hash, duration.
+Terminal summary of the entire run — all stages, statuses, commit hash, duration, and per-agent cost breakdown.
+
+**Cost telemetry** is captured automatically:
+- Per-agent token/cost/duration estimates → `production/logs/<run_id>.json`
+- Aggregated run summary → appended to `production/logs/history.json`
+- Cost report script: `./scripts/cost-report.sh`
+
+See `docs/COST-TELEMETRY.md` for the full telemetry specification.
 
 ---
 
@@ -195,6 +202,8 @@ research/packages/<slug>/                   ← Stage 2: Research Package
 └── audit.json
 content/articles/<slug>/<slug>.html         ← Stage 4: Article
 /<slug>.html                                 ← Stage 6: Published
+production/logs/<run_id>.json               ← Stage 7: Cost telemetry
+production/logs/history.json                ← Stage 7: Aggregated (appended)
 ```
 
 ---
@@ -215,3 +224,4 @@ content/articles/<slug>/<slug>.html         ← Stage 4: Article
 |---|---|---|
 | V1 | 2026-07-01 | Initial pipeline: keyword-based, 7 stages |
 | V2 | 2026-07-01 | Production Brief architecture: brief→package→editorial chain, Research Package spec |
+| V2.1 | 2026-07-01 | Cost telemetry: per-run JSON logs, history.json aggregation, cost-report.sh |

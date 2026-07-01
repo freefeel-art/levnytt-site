@@ -1,0 +1,73 @@
+{
+  "run_id": "20260701-133000-vad-ar-lutein",
+  "timestamp": "2026-07-01T13:30:00Z",
+  "article": "vad-ar-lutein",
+  "status": "success",
+  "token_source": "estimate",
+  "note": "First production validation run. Research via direct web search, writer manual invocation, QA 12/12, published.",
+  "agents": {
+    "research": {
+      "agent": "research-commander",
+      "model": "deepseek-v4-pro",
+      "provider": "openrouter",
+      "requests": 4,
+      "input_tokens": 48000,
+      "output_tokens": 9500,
+      "cost_estimate_usd": 0.023,
+      "duration_ms": 22000,
+      "cache_used": false
+    },
+    "editorial": {
+      "agent": "editorial-commander",
+      "model": "deepseek-v4-pro",
+      "provider": "openrouter",
+      "requests": 1,
+      "input_tokens": 22000,
+      "output_tokens": 2800,
+      "cost_estimate_usd": 0.009,
+      "duration_ms": 6000,
+      "cache_used": null
+    },
+    "writer": {
+      "agent": "levnytt-writer",
+      "model": "deepseek-v4-pro",
+      "provider": "openrouter",
+      "requests": 3,
+      "input_tokens": 72000,
+      "output_tokens": 14000,
+      "cost_estimate_usd": 0.035,
+      "duration_ms": 120000,
+      "cache_used": null
+    },
+    "publication": {
+      "agent": "publication-agent",
+      "model": "deepseek-v4-pro",
+      "provider": "openrouter",
+      "requests": 1,
+      "input_tokens": 12000,
+      "output_tokens": 1500,
+      "cost_estimate_usd": 0.005,
+      "duration_ms": 6000,
+      "cache_used": null
+    },
+    "qa": {
+      "agent": "qa-article.sh",
+      "model": "none",
+      "provider": "none",
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_estimate_usd": 0.0,
+      "duration_ms": 300,
+      "cache_used": null
+    }
+  },
+  "totals": {
+    "total_requests": 9,
+    "total_input_tokens": 154000,
+    "total_output_tokens": 27800,
+    "total_tokens": 181800,
+    "total_cost_estimate_usd": 0.072,
+    "total_duration_ms": 154300
+  }
+}

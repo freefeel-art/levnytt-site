@@ -154,9 +154,17 @@ Prompt: "Publish article: content/articles/<slug>/<slug>.html.
 
 **Gate:** Published at root, committed, pushed.
 
-### STAGE 7 — Production Report
+### STAGE 7 — Production Report + Cost Telemetry
 
-Print terminal summary.
+Print terminal summary. Then capture cost telemetry to `production/logs/`.
+
+See `docs/COST-TELEMETRY.md` for the full telemetry specification.
+
+After every run:
+1. Write `production/logs/<run_id>.json` — full per-agent breakdown
+2. Append to `production/logs/history.json` — aggregated summary
+
+Cost aggregation: `./scripts/cost-report.sh [--today|--month YYYY-MM|--per-article|--article <slug>]`
 
 ---
 
@@ -204,3 +212,4 @@ Same 12 checks as V1 (see `scripts/qa-article.sh`). V2 adds one optional check:
 |---|---|---|
 | V1 | 2026-07-01 | Initial orchestrator: keyword-based, 12 QA checks |
 | V2 | 2026-07-01 | Production Brief architecture: brief→package→editorial, stage 0 validation |
+| V2.1 | 2026-07-01 | Cost telemetry: per-agent token/cost tracking, production/logs/, cost-report.sh |
