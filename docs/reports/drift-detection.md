@@ -1,15 +1,16 @@
 # Drift Detection — Auto-Generated
 
-**Generated:** 2026-06-30 13:08:43
-**Commit:** fef52d8
+**Generated:** 2026-07-01 12:13:48
+**Commit:** e43a551
 
 > AUTO-GENERATED — DO NOT EDIT. Run `python3 scripts/sync-editorial-state.py` to regenerate.
 
-**Drifts found:** 23
+**Drifts found:** 25
 
 | Type | Detail | Severity |
 |------|--------|----------|
 | Undocumented page | Root page `ala-vs-epa-vs-dha.html` has no matching gap report cluster. | **AMBER** |
+| Undocumented page | Root page `antioxidanter-komplett-guide.html` has no matching gap report cluster. | **AMBER** |
 | Undocumented page | Root page `finns-det-billigare-alternativ.html` has no matching gap report cluster. | **AMBER** |
 | Undocumented page | Root page `fytosteroler-cellmembran.html` has no matching gap report cluster. | **AMBER** |
 | Undocumented page | Root page `mlm-konsumentratt-retur-angeratt.html` has no matching gap report cluster. | **AMBER** |
@@ -28,6 +29,7 @@
 | Orphan source article | `content/articles/lutein-zeaxantin-huden.html` has no matching gap report cluster. | **AMBER** |
 | Orphan source article | `content/articles/naringsbrist.html` has no matching gap report cluster. | **AMBER** |
 | Orphan source article | `content/articles/retinol-pa-sommaren.html` has no matching gap report cluster. | **AMBER** |
+| Orphan source article | `content/articles/tarmhalsa-komplett-guide.html` has no matching gap report cluster. | **AMBER** |
 | Orphan source article | `content/articles/vad-ar-niacinamid.html` has no matching gap report cluster. | **AMBER** |
 | Orphan source article | `content/articles/vad-ar-vaxtsteroler.html` has no matching gap report cluster. | **AMBER** |
 | Orphan source article | `content/articles/var-metod.html` has no matching gap report cluster. | **AMBER** |

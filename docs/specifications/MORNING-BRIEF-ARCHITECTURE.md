@@ -123,7 +123,7 @@ Neither agent may:
 * Generate HTML
 * Modify repository files
 * Publish content
-* Perform Page Builder tasks
+* Perform pillar page tasks
 * Invoke another agent automatically
 
 ---

@@ -1,0 +1,9 @@
+{
+  "module": "reddit",
+  "topic": "kosttillskott-aldre-65",
+  "language": "sv",
+  "executed_at": "2026-07-01T11:48:30Z",
+  "status": "skipped",
+  "reason": "YMYL constraint: Health topic for elderly (65+) is classified as Your Money or Your Life. Reddit is not a reliable source for YMYL health recommendations. Skipping to avoid surfacing unverified claims or anecdotal advice that could mislead vulnerable readers.",
+  "note": "Reddit module can be enabled for non-YMYL topics or when configured with strict source reliability filters. In this execution context, it is bypassed."
+}

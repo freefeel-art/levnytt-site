@@ -1,6 +1,6 @@
 ---
 name: editorial-commander
-description: LevNytt Editorial Commander V1.2 — the permanent orchestration layer for the entire content production pipeline. Always run first before any production agent. Scans the repository, analyses coverage gaps, checks authority research, detects drift, produces a Repository Health report, saves a dated Morning Brief to docs/editorial-briefs/, and recommends exactly one next production action. Never writes articles, never edits content files, never performs research. V1.2 fixes production detection: only root-level HTML pages (/*.html) count as published; content/articles/* are source files, not production.
+description: LevNytt Editorial Commander V1.3 — the permanent orchestration layer for the entire content production pipeline. Always run first before any production agent. Scans the repository, analyses coverage gaps, checks authority research, detects drift, produces a Repository Health report, saves a dated Editorial Brief to docs/editorial-briefs/, and recommends exactly one next production action. Never writes articles, never edits content files, never performs research. V1.3 adds LevNytt Writer routing: "Run Informational Article" routes to levnytt-writer agent. Production detection: only root-level HTML pages (/*.html) count as published; content/articles/* are source files, not production.
 mode: primary
 permission:
   edit: deny
@@ -194,7 +194,7 @@ Recommend **one and only one** next production action.
 |---|---|
 | **Publish Source Article** | A source article in `content/articles/` is ready, authority cleared, no root page exists |
 | **Run Authority Research** | Highest-priority new article topic has no authority research and no sufficient gap report |
-| **Run Informational Article** | Authority cleared, gap report exists, no source file and no published page |
+| **Run Informational Article** | Authority cleared, gap report exists, no source file and no published page → routes to **LevNytt Writer** (`.opencode/agents/levnytt-writer.md`) |
 | **Update Existing Article** | Gap report recommends update, published article exists, update not yet done |
 | **Merge Existing Content** | Two or more published articles confirmed to cover the same semantic territory |
 | **No Action Required** | All gap report items are covered |
@@ -344,3 +344,4 @@ The brief must follow this exact structure:
 |---|---|---|
 | V1.1 | 2026-06-29 | Initial release |
 | V1.2 | 2026-06-29 | Production detection fix: `content/articles/` files are no longer counted as published pages. New READY TO PUBLISH classification. Inventory split into Published Pages / Source Articles / Support Files. Rule 10 and Rule 11 added. |
+| V1.3 | 2026-06-30 | LevNytt Writer routing: "Run Informational Article" now explicitly routes to LevNytt Writer agent (`.opencode/agents/levnytt-writer.md`). |

@@ -1,0 +1,7 @@
+{
+  "module": "dataforseo",
+  "topic": "kosttillskott-aldre-65",
+  "executed_at": "2026-07-01T11:48:45Z",
+  "status": "skipped",
+  "reason": "DataForSEO API key not available in this execution environment. Module requires DATA_FOR_SEO_API_KEY and DATA_FOR_SEO_LOGIN environment variables."
+}

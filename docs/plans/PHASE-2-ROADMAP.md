@@ -15,7 +15,7 @@ LevNytt.se is a **vanilla HTML5/CSS3/ES5 static site** hosted on Cloudflare Page
 #### Publication Agent
 The Publication Agent (`.opencode/agents/publication-agent.md`) generates informational articles and deploys them from `content/articles/` to root-level production via `_redirects` 200-rewrites. Articles follow the Publication Article Standard (`docs/PUBLICATION-ARTICLE-STANDARD.md`) and are structurally uniform: `ia-wrap` content wrapper, `ia-*` CSS classes, JSON-LD `@graph` (Article + FAQPage), evidence tier labels, tiered internal linking, and CTA blocks.
 
-#### Page Builder
+#### Pillar Page Template
 Pillar pages and product pages are hand-authored root-level `.html` files that follow the Gen 3 production standard. Each page passes the 13/13 audit checklist (nav.js, footer.js, components.js, pillar.css, no inline `:root`, Google Fonts, 3+ breakpoints, clean canonical, OG image, viewport meta). The `pillar-page-template` skill provides the migration workflow.
 
 #### Brand Design System
@@ -122,7 +122,7 @@ levnytt-site/
 | Brand assets in assets/brand/ injected by components.js | ✅ Operational |
 | Brand OG image on all generic pages | ✅ Operational |
 | Publication Agent generates PA-standard articles | ✅ Operational |
-| Page Builder creates 13/13 compliant pillar pages | ✅ Operational |
+| Pillar Page Template creates 13/13 compliant pillar pages | ✅ Operational |
 | 404 page, robots.txt, sitemap.xml | ✅ Operational |
 | Cloudflare Pages auto-deployment | ✅ Operational |
 | Documentation hierarchy and sprint workflow | ✅ Operational |

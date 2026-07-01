@@ -99,9 +99,9 @@ The MLM Editorial Agent may fetch external sources **only when repository author
 - **Company IDS filings** — Official income disclosure statements
 
 ### Prohibited External Sources
-- **PubMed** — Health research (belongs to Health Editorial Agent)
-- **EFSA** — European Food Safety Authority health claims (belongs to Health Editorial Agent)
-- **Livsmedelsverket** — Swedish Food Agency nutrition guidance (belongs to Health Editorial Agent)
+- **PubMed** — Health research (belongs to LevNytt Writer — `.opencode/agents/levnytt-writer.md`)
+- **EFSA** — European Food Safety Authority health claims (belongs to LevNytt Writer)
+- **Livsmedelsverket** — Swedish Food Agency nutrition guidance (belongs to LevNytt Writer)
 - **Supplement retailer sites** — Product claims and marketing
 - **MLM company marketing pages** — Income promises and lifestyle claims
 

@@ -55,14 +55,16 @@ The brand represents LevNytt as an editorial authority, not an individual author
 
 # Primary Usage
 
-Use the LV Mark as:
+Use `lv-brand-mark.svg` as:
 
-- Header logo
-- Footer logo
-- Author avatar
-- Browser favicon
-- Apple Touch Icon
-- PWA application icon
+- Header logo (`header-logo.svg`)
+- Footer logo (`header-logo.svg`)
+- Author avatar (`author-avatar.svg`)
+- Browser favicon (`favicon.svg`, `favicon-*.png`)
+- Apple Touch Icon (`apple-touch-icon.png`)
+- PWA application icon (`android-chrome-*.png`)
+- Social media profile (`social-avatar.svg` / `.png`)
+- Open Graph preview (`og-template.svg` / `.png`)
 
 ---
 
@@ -70,33 +72,100 @@ Use the LV Mark as:
 
 The LV Mark may also appear as:
 
-- Hero watermark
 - Section divider
-- Background accent
-- Open Graph branding
 - PDF reports
 - Presentation material
-- Social media graphics
 - Video intro/outro
+
+Use `editorial-watermark.svg` for:
+
+- Hero backgrounds
+- Section backgrounds
+- PDF cover pages
+- Editorial illustrations
 
 ---
 
-# Future Asset Package
+# Watermark Policy
 
-The visual identity should eventually include:
+`editorial-watermark.svg` is a decorative background element, not a logo.
 
-- logo.svg
-- logo-dark.svg
-- logo-light.svg
-- favicon.svg
-- favicon.ico
-- apple-touch-icon.png
-- author-avatar.svg
-- hero-watermark.svg
-- og-brand.png
-- social-avatar.png
+**Always:** hero backgrounds, section backgrounds, PDF covers, OG watermark.
+**Never:** header, footer, author avatar, favicon, social avatar, brand signatures.
 
-All assets originate from the same master SVG.
+The watermark must never be presented as a logo or brand identifier. When used as a background, apply 10–15 % opacity.
+
+---
+
+# Safe Zones
+
+| Asset | Minimum Clear Space |
+|-------|-------------------|
+| `lv-brand-mark.svg` | 25 % of icon diameter in all directions |
+| `header-logo.svg` | 20 % of total height on all sides |
+| `social-avatar.svg` | 10 % of canvas (built into 82 % fill spec) |
+
+---
+
+# Asset Registry
+
+All brand assets live in `assets/brand/` and originate from the master SVG `lv-brand-mark.svg`.
+
+Approved visual reference: `docs/brand/brand-system-reference.png`
+
+## Master Asset
+
+| File | Type | Purpose |
+|------|------|---------|
+| `lv-brand-mark.svg` | SVG master | Primary brand identifier. All other assets derive from this file. |
+
+## Logo & Identity
+
+| File | Type | Purpose |
+|------|------|---------|
+| `header-logo.svg` | SVG | Site header, sticky nav, mobile nav. Brand Mark + "LevNytt" wordmark. |
+| `author-avatar.svg` | SVG | Editorial byline, article meta, author signature. |
+| `social-avatar.svg` | SVG | Social media profiles (Facebook, Instagram, YouTube, LinkedIn, X). |
+| `social-avatar-512.png` | PNG 512×512 | Social profile image. |
+| `social-avatar-1024.png` | PNG 1024×1024 | High-res social image. |
+
+## Open Graph
+
+| File | Type | Purpose |
+|------|------|---------|
+| `og-template.svg` | SVG | OG previews. Replace [CATEGORY] and [HEADLINE] per article. |
+| `og-template.png` | PNG 1200×630 | OG image export. |
+
+## Favicon & System Icons
+
+| File | Type | Purpose |
+|------|------|---------|
+| `favicon.svg` | SVG | Browser tab, bookmarks (modern browsers). |
+| `favicon-16.png` | PNG 16×16 | Favicon legacy. |
+| `favicon-32.png` | PNG 32×32 | Favicon legacy. |
+| `favicon-48.png` | PNG 48×48 | Favicon legacy. |
+| `apple-touch-icon.png` | PNG 180×180 | iOS home screen. |
+| `android-chrome-192.png` | PNG 192×192 | Android home screen. |
+| `android-chrome-512.png` | PNG 512×512 | Android splash screen. |
+| `mstile-150.png` | PNG 150×150 | Microsoft tile. |
+| `mask-icon.svg` | SVG | Safari pinned tab (monochrome). |
+
+## Editorial
+
+| File | Type | Purpose |
+|------|------|---------|
+| `editorial-watermark.svg` | SVG | Decorative background element. **Never used as logo.** See Watermark Policy. |
+
+## Legacy Assets (deprecated — kept for backwards compatibility)
+
+| File | Replaced By |
+|------|-------------|
+| `logo.svg` | `lv-brand-mark.svg` |
+| `logo-dark.svg` | `lv-brand-mark.svg` |
+| `logo-light.svg` | `lv-brand-mark.svg` |
+| `hero-watermark.svg` | `editorial-watermark.svg` |
+| `og-brand.svg` | `og-template.svg` |
+| `og-brand.png` | `og-template.png` |
 
 ---
 
@@ -130,9 +199,9 @@ Never:
 
 # Relationship to the Design System
 
-The LV Mark complements the Page Builder Design System.
+The LV Mark complements the shared component system (pillar.css, nav.js, footer.js, components.js).
 
-Page Builder defines:
+The shared component system defines:
 
 - Layout
 - Typography
@@ -154,7 +223,7 @@ Every visual touchpoint should immediately communicate LevNytt.
 Whether a visitor sees:
 
 - an informational article
-- a Page Builder page
+- a pillar page
 - a favicon
 - an Open Graph image
 - a PDF report

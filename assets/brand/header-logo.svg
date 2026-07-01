@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 100">
+  <!-- LevNytt Header Logo — Brand Mark + Wordmark horizontal lockup -->
+  <!-- Built from lv-brand-mark.svg -->
+
+  <!-- LV Brand Mark -->
+  <circle cx="50" cy="50" r="48" fill="#1B4332" stroke="#E8C870" stroke-width="3"/>
+  <text x="50" y="65" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-size="46" font-weight="400" fill="#E8C870" letter-spacing="-3.5">LV</text>
+
+  <!-- Wordmark — gap of 48 px (half the icon diameter) -->
+  <text x="148" y="66"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-size="46" font-weight="400">
+    <tspan fill="#1B4332">Lev</tspan>
+    <tspan fill="#E8C870">Nytt</tspan>
+  </text>
+</svg>

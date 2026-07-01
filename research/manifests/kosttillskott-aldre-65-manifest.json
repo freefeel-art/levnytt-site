@@ -1,0 +1,75 @@
+{
+  "manifest_id": "RC-20260701-001",
+  "topic": "kosttillskott-aldre-65",
+  "slug": "kosttillskott-aldre-65",
+  "language": "sv",
+  "created_at": "2026-07-01T11:50:00Z",
+  "commander_version": "V1 (BASELINE)",
+  "lifecycle_state": "published",
+  "previous_state": "approved",
+  "published_at": "2026-07-01T12:13:00Z",
+  "transition_at": "2026-07-01T12:13:00Z",
+  "modules": {
+    "authority": {
+      "status": "completed",
+      "findings_count": 15,
+      "confidence": "high",
+      "executed_at": "2026-07-01T11:45:00Z"
+    },
+    "content-gap": {
+      "status": "completed",
+      "findings_count": 8,
+      "confidence": "medium",
+      "executed_at": "2026-07-01T11:46:00Z"
+    },
+    "product-db": {
+      "status": "completed",
+      "findings_count": 8,
+      "confidence": "high",
+      "executed_at": "2026-07-01T11:47:00Z"
+    },
+    "news-radar": {
+      "status": "completed",
+      "findings_count": 6,
+      "confidence": "high",
+      "executed_at": "2026-07-01T11:48:00Z"
+    },
+    "reddit": {
+      "status": "skipped",
+      "reason": "YMYL constraint — health topic for elderly"
+    },
+    "dataforseo": {
+      "status": "skipped",
+      "reason": "API key not available"
+    },
+    "gsc": {
+      "status": "skipped",
+      "reason": "Credentials not available"
+    }
+  },
+  "total_findings": 37,
+  "brief_path": "research/briefs/kosttillskott-aldre-65-brief.md",
+  "cache_records": [
+    "research/cache/authority/cache-kosttillskott-aldre-65.json",
+    "research/cache/news-radar/cache-kosttillskott-aldre-65.json"
+  ],
+  "dependency_graph": {
+    "parent_topic": "kosttillskott",
+    "child_topics": ["protein-aldre", "b12-aldre", "sarkopeni-forebyggande"],
+    "related_articles": [
+      "d-vitamin-allt-du-behover-veta",
+      "nya-kostrad-65-plus-d-vitamin-magnesium",
+      "magnesium-d-vitamin-kombination",
+      "omega-3-nyckeln-till-hjarnhalsa",
+      "nar-ska-man-ta-kosttillskott-timingguide",
+      "behoever-jag-kosttillskott"
+    ]
+  },
+  "provenance": {
+    "created_by": "ResearchCommander V1 (BASELINE)",
+    "protocol": "BASELINE-V1",
+    "base_commit": "e43a551",
+    "review_required": true,
+    "human_override": true
+  }
+}

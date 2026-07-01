@@ -251,9 +251,9 @@ No page may hardcode brand meta tags or brand images unless the page requires a 
 
 ---
 
-### B11. Publication Agent and Page Builder consume the same shared brand assets
+### B11. LevNytt Writer and pillar-page-template consume the same shared brand assets
 
-Both the Publication Agent (which deploys articles from `content/articles/`) and the Page Builder (which migrates pillar pages) use the same shared components: `nav.js`, `footer.js`, `components.js`, `pillar.css`, and `assets/brand/`.
+Both the LevNytt Writer (which generates informational articles) and the `pillar-page-template` skill (which migrates pillar pages) use the same shared components: `nav.js`, `footer.js`, `components.js`, `pillar.css`, and `assets/brand/`.
 
 There is no separate brand pipeline for articles vs. pillar pages. Both are vanilla HTML files at root level and use the same shared infrastructure.
 

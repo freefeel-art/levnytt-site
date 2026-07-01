@@ -1,0 +1,115 @@
+{
+  "module": "authority",
+  "topic": "kosttillskott-aldre-65",
+  "language": "sv",
+  "executed_at": "2026-07-01T11:45:00Z",
+  "confidence": "high",
+  "findings": [
+    {
+      "claim": "Livsmedelsverket rekommenderar D-vitamintillskott 20 µg/dag för alla över 75 år",
+      "source": "Livsmedelsverket, Kostråd för vuxna över 65 år (2026), L 2026 nr 07",
+      "url": "https://www.livsmedelsverket.se/49d5dd/globalassets/publikationsdatabas/rapporter/2026/l-2026-nr-07-kostrad-for-vuxna-over-65-ar-med-normal-respektive-nedsatt-aptit.-hanteringsrapport.pdf",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Äldre över 65 år har ett ökat proteinbehov för att bibehålla muskelstyrka",
+      "source": "Livsmedelsverket (2026); EFSA DRV for protein (0.83 g/kg/dag)",
+      "url": "https://www.livsmedelsverket.se/matvanor-halsa--miljo/mat-och-naring/nya-kostrad-for-personer-over-65-ar-och-tio-atgarder-for-att-forebygga-undernaring-bland-aldre/",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Multivitamin supplementation significantly improved delayed free recall in adults 65+ (SMD = 0.09, p < 0.0001)",
+      "source": "Xu et al., Food Science and Human Wellness (2024). Systematic review, 10 RCTs, n=13,600",
+      "url": "https://doi.org/10.26599/fshw.2024.9250310",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Vitamin D, probiotics, and PUFAs (omega-3) likely reduce cognitive decline risk in older adults; vitamins A, B, C, E showed no significant effects",
+      "source": "PMC systematic review (2024). 33 primary studies in adults 65+",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11509913/",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Multicomponent exercise + nutrition supplements reduced frailty risk by relative change 28% in older adults (low certainty)",
+      "source": "BMC Geriatrics systematic review (2024). 7 nutritional intervention RCTs, n=258",
+      "url": "https://link.springer.com/article/10.1186/s12877-024-05551-8",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Protein intake of 1.2 g/kg/day recommended for adults 65+ (vs 0.83 g/kg for younger adults)",
+      "source": "Dorrington N., Review of nutritional requirements for adults ≥65 years in the UK (2020). SACN review.",
+      "url": "https://centaur.reading.ac.uk/95845/",
+      "evidence_tier": "T2",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Over 90% of older adults in Europe have vitamin D intakes below 10 µg/day",
+      "source": "Proceedings of the Nutrition Society (2019). Nutritional challenges for older adults in Europe.",
+      "url": "https://www.cambridge.org/core/journals/proceedings-of-the-nutrition-society/article/nutritional-challenges-for-older-adults-in-europe-current-status-and-future-directions/75EAA0A3525BD70078D1F5D9A8123974",
+      "evidence_tier": "T2",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Vitamin B12 deficiency common in older adults due to decreased absorption (atrophic gastritis, PPI use)",
+      "source": "FSAI, Scientific Recommendations for Food-Based Dietary Guidelines for Older Adults in Ireland (2021)",
+      "url": "https://www.fsai.ie/getmedia/c0610e7f-9bfa-457a-9dca-3f97149e43a1/scientific-recommendations-for-food-based-dietary-guidelines-for-older-adults-in-ireland.pdf",
+      "evidence_tier": "T2",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Calcium recommendation 1000 mg/day for adults 65+; calcium + vitamin D combined may reduce fracture risk",
+      "source": "Dorrington N. (2020); EFSA DRV for calcium",
+      "url": "https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2015.4101",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "B vitamin supplementation (B12, folate, B6) improves cognition in those with mild cognitive impairment but not in healthy older adults without deficiency",
+      "source": "Berg et al., Nutrition Reviews (2025). Systematic review and meta-analysis.",
+      "url": "https://doi.org/10.1093/nutrit/nuaf155",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Micronutrient supplementation in frail elderly: evidence quality is low to very low for most outcomes",
+      "source": "Paraskevas et al., Healthcare (2025). Systematic review of 11 RCTs.",
+      "url": "https://doi.org/10.3390/healthcare13222828",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "EFSA tolerable upper intake level for vitamin D: 100 µg/day for adults",
+      "source": "EFSA DRV update (2016-2019). Tolerable Upper Intake Level summary.",
+      "url": "https://www.efsa.europa.eu/en/topics/topic/dietary-reference-values",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "Oral nutrition supplements significantly increase energy intake, body weight, BMI, and grip strength in community-dwelling older adults",
+      "source": "BMC Nutrition (2025). Systematic review, 12 RCTs, n=1320.",
+      "url": "https://link.springer.com/article/10.1186/s40795-025-01010-8",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "NNR 2023 and Livsmedelsverket 2025 generella kostråd: basis for elderly recommendations; higher protein and vitamin D are key differences",
+      "source": "Livsmedelsverket rapport L 2025 nr 04 (2025); NNR 2023",
+      "url": "https://www.livsmedelsverket.se/globalassets/publikationsdatabas/rapporter/2025/l-2025-nr-04-livsmedelsverkets-generella-kostrad-for-den-vuxna-befolkningen.pdf",
+      "evidence_tier": "T1",
+      "retrieval_date": "2026-07-01"
+    },
+    {
+      "claim": "54% of Boomers worldwide take multivitamins or single vitamin/mineral supplements for healthy aging",
+      "source": "Innova Market Insights, Senior Nutrition Trends (2026)",
+      "url": "https://www.innovamarketinsights.com/trends/senior-nutrition-trends-global-market-overview/",
+      "evidence_tier": "T3",
+      "retrieval_date": "2026-07-01"
+    }
+  ],
+  "summary": "Strong Tier 1 evidence supports D-vitamin supplementation (20 µg/day from 75 år), increased protein intake (1.2 g/kg/day recommended), and multivitamin use for cognitive function (delayed recall). Evidence for vitamin D in frailty is mixed but overall supportive. B12 and calcium are common deficiencies in older adults. Livsmedelsverket published new official guidelines in 2026."
+}

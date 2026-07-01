@@ -1,7 +1,7 @@
 # Publication Queue — Auto-Generated
 
-**Generated:** 2026-06-30 13:08:43
-**Commit:** fef52d8
+**Generated:** 2026-07-01 12:13:48
+**Commit:** e43a551
 
 > AUTO-GENERATED — DO NOT EDIT. Run `python3 scripts/sync-editorial-state.py` to regenerate.
 

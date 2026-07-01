@@ -1,0 +1,49 @@
+{
+  "module": "content-gap",
+  "topic": "kosttillskott-aldre-65",
+  "language": "sv",
+  "executed_at": "2026-07-01T11:46:00Z",
+  "confidence": "medium",
+  "analysis": {
+    "existing_coverage": [
+      {"slug": "d-vitamin-allt-du-behover-veta", "relevance": "high", "coverage": "D-vitamin for general population; does not address 65+ specific dosing"},
+      {"slug": "nya-kostrad-65-plus-d-vitamin-magnesium", "relevance": "high", "coverage": "Covers 2026 Livsmedelsverket guidelines for 65+ but is narrowly focused on D-vitamin + magnesium"},
+      {"slug": "magnesium-d-vitamin-kombination", "relevance": "medium", "coverage": "Magnesium-D-vitamin interaction"},
+      {"slug": "nar-ska-man-ta-kosttillskott-timingguide", "relevance": "medium", "coverage": "General timing guide, not age-specific"},
+      {"slug": "behoever-jag-kosttillskott", "relevance": "medium", "coverage": "Whether supplements are needed generally"},
+      {"slug": "multivitamin-for-man", "relevance": "low", "coverage": "Men-specific multivitamin"},
+      {"slug": "multivitamin-for-kvinnor", "relevance": "low", "coverage": "Women-specific multivitamin"},
+      {"slug": "multivitamin-for-barn", "relevance": "none", "coverage": "Children-focused"},
+      {"slug": "kalcium", "relevance": "none", "coverage": "No dedicated calcium article exists"},
+      {"slug": "protein-aldre", "relevance": "none", "coverage": "No article about protein needs for elderly"},
+      {"slug": "b12-aldre", "relevance": "none", "coverage": "No article about B12 for elderly"}
+    ],
+    "gaps": [
+      "No comprehensive guide about supplements specifically for 65+",
+      "No article covering the full spectrum of age-related nutrient needs (protein, D, B12, calcium, magnesium, omega-3)",
+      "No article about drug-nutrient interactions common in elderly (PPI-B12, statin-CoQ10, diuretic-magnesium)",
+      "No article about sarcopenia prevention through nutrition",
+      "No guide about when food alone is insufficient for older adults",
+      "No article covering swallowing difficulties and supplement forms for elderly"
+    ],
+    "lsi_keywords": [
+      "kosttillskott äldre", "näringsbehov 65+", "proteinbehov äldre", "D-vitamin äldre",
+      "B12 brist äldre", "kalcium benskörhet", "sarkopeni förebygga", "aldrande nutrition",
+      "läkemedel interaktion kosttillskott", "äldres aptit", "undernäring äldre",
+      "muskelbevarande kost", "benhälsa kosttillskott", "kognitiv funktion nutrition"
+    ],
+    "question_bank": [
+      "Vilka kosttillskott behöver man efter 65?",
+      "Räcker maten för äldre eller behövs tillskott?",
+      "Vad är bästa D-vitamindosen för äldre?",
+      "Behöver äldre extra protein?",
+      "Varför är B12-brist vanligt bland äldre?",
+      "Kan kosttillskott förebygga benskörhet?",
+      "Vilka interaktioner finns mellan läkemedel och kosttillskott?",
+      "Vad är sarkopeni och hur förebygger man det?",
+      "Behöver äldre omega-3-tillskott?",
+      "När ska man välja flytande kosttillskott istället för tabletter?"
+    ],
+    "recommended_structure": "Portalguide (komplett guide) covering: protein, D-vitamin, B12, calcium, magnesium, omega-3, multivitamin, drug interactions, food-first approach, practical supplement routine for 65+"
+  }
+}

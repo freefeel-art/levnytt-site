@@ -239,9 +239,9 @@ levnytt-site/
 1. **Search Gap Research** discovers keyword opportunities (via `search-gap-research` skill)
 2. **Informational Article** generates publish-ready HTML (via `informational-article` skill)
 3. **Publication Agent** deploys articles from `content/articles/` to root-level pages (via PA rules)
-4. **Page Builder** creates or migrates pillar/product pages (via `pillar-page-template` skill)
-5. **Brand System** provides shared branding to both Page Builder and Publication Agent outputs
+4. **Pillar Page Template** creates or migrates pillar/product pages (via `pillar-page-template` skill)
 
+5. **Brand System** provides shared branding to both pillar pages and Publication Agent article outputs
 ---
 
 ## Completed milestones

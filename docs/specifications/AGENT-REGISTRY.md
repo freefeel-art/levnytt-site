@@ -17,8 +17,9 @@ This document is the official registry of all agents implemented in the LevNytt 
 | 3 | MLM Brief | `mlm-brief.md` | V1.2 | **Production** | Industry intelligence — editorial backlog, authority research, MLM/regulatory pipeline |
 | 4 | MLM Editorial Agent | `mlm-editorial-agent.md` | V1.0 | **Production** | Specialist content producer — MLM, network marketing, consumer protection, FTC regulation |
 | 5 | Publication Agent | `publication-agent.md` | V1.0 | **Production** | Deployment — copies source articles from content/articles/ to production root |
+| 6 | LevNytt Writer | `levnytt-writer.md` | V1.0 | **Production** | Informational article writer — health, supplements, nutrition, wellness. Based on original LLM-Optimized Informational Article Generator. Produces PUBLICATION-ARTICLE-STANDARD-compliant HTML |
 
-**Total Production Agents:** 5
+**Total Production Agents:** 6
 
 ---
 
@@ -98,7 +99,22 @@ This document is the official registry of all agents implemented in the LevNytt 
 - **Never Does:** Content creation, content editing, content modification
 - **Outputs:** Published root HTML files, updated production-status.md
 
----
+### 6. LevNytt Writer V1.0
+- **Type:** Specialist Content Producer (Informational Articles)
+- **Scope:** Health, supplements, nutrition, wellness, healthy aging
+- **Primary Function:** LLM-optimized informational article production
+- **Triggers:** Editorial Commander's "Run Informational Article" recommendation
+- **Key Responsibilities:**
+  - Web research, sitemap mining, LSI entity clustering
+  - GPT Image 2 hero + infographic generation
+  - PUBLICATION-ARTICLE-STANDARD-compliant HTML output
+  - Authority Content Mode (evidence hierarchy, no treatment claims, tier-labeled citations)
+  - Brand Design System compliance (colors, typography, LV Mark)
+  - Product Entity System integration for product references
+  - Internal linking following LevNytt Contextual Link Intelligence
+  - Verification against combined SEO + LLM-optimization checklist
+- **Never Does:** MLM content (routes to MLM Editorial Agent), promotional content, income claims
+- **Outputs:** Complete HTML articles in `content/articles/[slug]/`
 
 ## Agent Workflow Architecture
 
@@ -131,7 +147,13 @@ This document is the official registry of all agents implemented in the LevNytt 
           │                │  MLM Editorial      │ ← Specialist producer
           │                │  Agent              │
           │                └─────────┬───────────┘
-          │                          │ Produces
+          │                          │
+          │                          ▼
+          │                ┌─────────────────────┐
+          │                │  LevNytt Writer     │ ← Informational article
+          │                │  (Health/Supplements)│   producer
+          │                └─────────┬───────────┘
+          │                          │
           ▼                          ▼
 ┌─────────────────────────────────────────────────┐
 │              Publication Agent                   │ ← Deployment
@@ -158,23 +180,26 @@ The Editorial Commander and MLM Brief use these rules to route topics to appropr
 | Company Comparisons | "Amway vs NeoLife", "MLM company history" | **MLM Editorial Agent** |
 | Recruitment Tactics | "Social pressure in MLM", "How to say no" | **MLM Editorial Agent** |
 
-### Health Editorial Agent Routes (Future Implementation)
+### LevNytt Writer Routes (Health / Supplement / Nutrition)
 | Topic Category | Example Keywords | Route To |
 |---|---|---|
-| Health / Supplements | "Vitamin D deficiency", "Omega-3 benefits" | **Health Editorial Agent** |
-| Nutrition Science | "Probiotics for gut health", "Magnesium forms" | **Health Editorial Agent** |
-| Medical Research | "Clinical trials", "Systematic reviews" | **Health Editorial Agent** |
+| Health / Supplements | "Vitamin D deficiency", "Omega-3 benefits" | **LevNytt Writer** |
+| Nutrition Science | "Probiotics for gut health", "Magnesium forms" | **LevNytt Writer** |
+| Medical Research | "Clinical trials", "Systematic reviews" | **LevNytt Writer** |
+| Wellness / Healthy Aging | "Anti-aging nutrients", "Longevity supplements" | **LevNytt Writer** |
+| Informational / Explainer | "How does X work", "What is X" | **LevNytt Writer** |
 
 ---
 
 ## Agent Permissions
 
 | Agent | Edit Files | WebFetch | WebSearch | Repository Access |
-|---|---|---|---|---|
+|---|---|---|---|---|---|
 | Editorial Commander | ❌ Deny | ❌ Deny | ❌ Deny | ✅ Read-only |
 | Morning Brief | ❌ Deny | ✅ Allow | ❌ Deny | ✅ Read-only |
 | MLM Brief | ❌ Deny | ❌ Deny | ❌ Deny | ✅ Read-only |
 | MLM Editorial Agent | ❌ Deny | ✅ Allow | ❌ Deny | ✅ Read-only |
+| LevNytt Writer | ❌ Deny | ✅ Allow | ✅ Allow | ✅ Read-only |
 | Publication Agent | ✅ Allow | ❌ Deny | ❌ Deny | ✅ Read-write |
 
 **Security Note:** Only the Publication Agent has file modification permissions. All content production agents generate output that must be manually saved or deployed via the Publication Agent.
@@ -227,7 +252,7 @@ Repository traversal is only permitted when synchronized state cannot answer the
 ## Future Agent Roadmap
 
 ### Phase 2: Additional Specialist Agents
-1. **Health Editorial Agent** — Health, supplements, nutrition, medical research content
+1. ~~**Health Editorial Agent**~~ — **SUPERSEDED by LevNytt Writer** (Sprint 10). All health/supplement/nutrition informational articles are now handled by LevNytt Writer.
 2. **Product Editorial Agent** — NeoLife product pages, comparisons, savings analysis
 3. **Pillar Page Agent** — Authority page updates and standardization
 
@@ -268,6 +293,7 @@ Repository traversal is only permitted when synchronized state cannot answer the
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-06-30 | Initial agent registry. 5 production agents catalogued: Editorial Commander V1.2, Morning Brief V2.0, MLM Brief V1.2, MLM Editorial Agent V1.0, Publication Agent V1.0. Architecture workflows documented. Category routing rules defined. Integration with Editorial Sync Engine specified. |
+| 1.1 | 2026-06-30 | Sprint 10 — LevNytt Writer V1.0 registered (agent #6). Workflow diagram updated. Health/Supplement/Nutrition routing moved from "Future Health Editorial Agent" to LevNytt Writer. Agent permissions table updated. Future roadmap updated. |
 
 ---
 

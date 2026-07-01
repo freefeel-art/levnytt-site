@@ -106,6 +106,30 @@ If verification fails: remove the root copy, log as PUBLISH FAILED, do not proce
 
 ---
 
+### STEP 5B — Regenerate Article Index, Search & Category Pages
+
+After the article is verified at root, regenerate the article index so every published article appears on the search and category pages:
+
+```bash
+python3 scripts/generate-article-index.py
+```
+
+This command:
+- Scans all published root HTML files
+- Extracts metadata (title, description, date) from JSON-LD
+- Classifies each article into its correct category
+- Rebuilds the article cards for all 6 category sections
+- Updates article count, category count, and portalguide count in the hero stats
+- Updates JSON-LD CollectionPage schema with correct article count
+
+**Rules:**
+- Run this AFTER verifying the article is successfully published
+- If the script fails (exit code non-zero), log as INDEX GENERATION FAILED and halt — do not commit
+- The script modifies only `artiklar.html` — no other files are touched
+- The new article is now automatically included in the index, search, and category pages
+
+---
+
 ### STEP 6 — Update Production Status
 
 Update `docs/editorial-backlog/production-status.md`:
@@ -123,6 +147,7 @@ If the article is not yet in production-status.md (e.g. it is from a newer gap r
 Stage only:
 - The new root HTML file
 - The updated `docs/editorial-backlog/production-status.md`
+- `artiklar.html` (auto-updated by the article index generator)
 
 Never stage:
 - `content/articles/` source files
@@ -161,6 +186,7 @@ After each article (or batch), print:
    Score: <score>/100
    Brand: v1 — LevNytt LV Mark (assets/brand/)
    Entities: validated — Product Entity System v1
+   Index: artiklar.html auto-updated — <total> articles across <cats> categories
 ```
 
 Or for failures:

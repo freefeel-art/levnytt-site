@@ -184,7 +184,7 @@ Always regenerate using the Editorial Sync Engine.
 - **Scope:** MLM, network marketing, direct selling, compensation plans, income disclosures, consumer protection, FTC regulation, pyramid scheme education, company comparisons
 - **Authority Sources:** 8 MLM authority research files in `docs/authority-research/`
 - **Authority Source Mapping:** `docs/editorial-state/mlm-authority-source-mapping.md`
-- **Never Handles:** Health, supplements, nutrition, medical research (belongs to Health Editorial Agent)
+- **Never Handles:** Health, supplements, nutrition, medical research (belongs to LevNytt Writer — `.opencode/agents/levnytt-writer.md`)
 
 ### MLM Brief V1.1 (Compliant)
 ```markdown

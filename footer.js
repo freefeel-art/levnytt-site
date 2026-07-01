@@ -7,15 +7,15 @@
 .lfoot{background:#1B4332;color:rgba(255,255,255,0.75);padding:28px 0 0;font-size:14px;line-height:1.7;font-family:'Inter',-apple-system,sans-serif;}
 .lfoot-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
 .lfoot-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 40px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.12);}
-.lfoot-logo{font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:-0.01em;text-decoration:none;white-space:nowrap;}
-.lfoot-logo span{color:#B8960C;}
+.lfoot-logo{text-decoration:none;display:inline-flex;align-items:center;}
+.lfoot-logo img{display:block;height:24px;width:auto;}
 .lfoot-nav{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;}
 .lfoot-nav a{color:rgba(255,255,255,0.72);text-decoration:none;font-size:12.5px;transition:color 0.18s;}
-.lfoot-nav a:hover{color:#F5E6A3;}
+.lfoot-nav a:hover{color:#E8C870;}
 .lfoot-closing{padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.12);}
 .lfoot-lines{display:flex;gap:6px 28px;flex-wrap:wrap;margin-bottom:8px;}
 .lfoot-line{font-family:'Playfair Display',Georgia,serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.50);font-style:italic;white-space:nowrap;}
-.lfoot-line::before{content:'— ';color:#B8960C;font-style:normal;}
+.lfoot-line::before{content:'— ';color:#E8C870;font-style:normal;}
 .lfoot-note{font-size:11px;font-style:italic;color:rgba(255,255,255,0.45);line-height:1.5;margin:0;max-width:560px;}
 .lfoot-legal{padding:12px 0 20px;display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;}
 .lfoot-copy{font-size:10.5px;color:rgba(255,255,255,0.35);line-height:1.5;max-width:480px;margin:0;}
@@ -31,13 +31,7 @@
   <div class="lfoot-inner">
     <div class="lfoot-top">
       <a href="https://levnytt.se" class="lfoot-logo" aria-label="LevNytt — Hem">
-        <svg viewBox="0 0 28 28" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;">
-          <rect x="5" y="4" width="4" height="18" rx="1" fill="#E8C870"/>
-          <rect x="5" y="18" width="11" height="3" rx="1" fill="#E8C870"/>
-          <rect x="16" y="4" width="3" height="18" rx="1" fill="#E8C870" transform="rotate(14 17.5 4)"/>
-          <rect x="24" y="4" width="3" height="18" rx="1" fill="#E8C870" transform="rotate(-14 25.5 4)"/>
-        </svg>
-        Lev<span>Nytt</span>
+        <img src="/assets/brand/logo-light.svg" alt="LevNytt">
       </a>
       <nav class="lfoot-nav" aria-label="Sidfot navigation">
         <a href="https://levnytt.se/neolife-historia">Historia</a>
@@ -53,7 +47,7 @@
         <a href="https://levnytt.se/neolife-omega-3-plus">Omega-3 Plus</a>
         <a href="https://levnytt.se/om-oss">Om Oss</a>
         <a href="https://levnytt.se/artiklar">Alla artiklar</a>
-        <a href="https://levnytt.se/den-fundersamma-mannen">Den Fundersamma Mannen</a>
+        <a href="https://levnytt.se/den-fundersamma-mannen">Jarmo Halonen</a>
         <a href="https://levnytt.se/var-metod">Vår Metod</a>
         <a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a>
         <a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a>

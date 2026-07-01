@@ -1,0 +1,40 @@
+{
+  "keyword": "järnbrist symptom tillskott",
+  "target_site": "levnytt.se",
+  "article_type": "how-to",
+  "author_name": "Den Fundersamma Mannen",
+  "author_profile_url": "https://levnytt.se/den-fundersamma-mannen",
+  "author_credentials": "Grundare av LevNytt, oberoende NeoLife-distributör med fokus på kosttillskott, näringslära och hälsa",
+  "slug": "jarnbrist-symptom-tillskott",
+  "output_file": "content/articles/jarnbrist-symptom-tillskott/jarnbrist-symptom-tillskott.html",
+  "canonical_url": "https://levnytt.se/jarnbrist-symptom-tillskott",
+  "title": "Järnbrist — symptom och tillskott | LevNytt",
+  "h1": "Järnbrist — symptom, orsaker och tillskott",
+  "description": "Järnbrist drabbar 30% av kvinnor i fertil ålder globalt. Lär dig känna igen symptom, förstå ferritinvärden, och jämför järntillskott — från heme-järn till icke-heme.",
+  "date_published": "2026-07-01",
+  "date_modified": "2026-07-01",
+  "reading_time": "12 min läsning",
+  "ymyl": true,
+  "evidence_tiers_used": {
+    "tier_1": 12,
+    "tier_2": 9,
+    "tier_3": 7,
+    "tier_4": 1
+  },
+  "faq_count": 8,
+  "tables": 3,
+  "stat_cards": 4,
+  "sources": [
+    "WHO Anaemia Fact Sheet, 2025",
+    "EFSA Dietary Reference Values for Iron, 2015",
+    "Nordiska Näringsrekommendationer (NNR), 2023",
+    "PubMed peer-reviewed studies"
+  ],
+  "lsi_entities": [
+    "ferritin", "hemoglobin", "transferrin", "anemi", "menstruation",
+    "vegan", "vegetarisk", "heme-järn", "icke-heme-järn", "C-vitamin absorption",
+    "magbesvär", "överdosering", "hepcidin", "järnsulfat", "järnbisglycinat",
+    "blodpudding", "hemokromatos", "graviditet", "järndepåer", "elementärt järn",
+    "pica", "restless legs syndrome", "klimakteriet", "CRP", "järnmättnad"
+  ]
+}

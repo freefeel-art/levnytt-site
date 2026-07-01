@@ -1,0 +1,7 @@
+{
+  "module": "gsc",
+  "topic": "kosttillskott-aldre-65",
+  "executed_at": "2026-07-01T11:49:00Z",
+  "status": "skipped",
+  "reason": "Google Search Console client secrets not available in this execution environment. Module requires GSC service account credentials."
+}

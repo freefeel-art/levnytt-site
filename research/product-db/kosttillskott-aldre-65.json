@@ -1,0 +1,75 @@
+{
+  "module": "product-db",
+  "topic": "kosttillskott-aldre-65",
+  "language": "sv",
+  "executed_at": "2026-07-01T11:47:00Z",
+  "confidence": "high",
+  "neoLife_relevance": "high",
+  "relevant_products": [
+    {
+      "product": "Pro Vitality (NeoLife multivitamin)",
+      "relevance": "high",
+      "rationale": "Complete multivitamin/mineral with chelated minerals, CoQ10, alpha-lipoic acid. Covers the foundational micronutrient gaps identified in 65+ population (zinc, selenium, magnesium, B-vitamins).",
+      "forms": "tablett",
+      "dosing": "3 tabletter/dag",
+      "key_nutrients": ["vitamin D (10 µg/3 tabletter)", "vitamin B12 (6 µg)", "magnesium (100 mg)", "zink (15 mg)", "CoQ10 (10 mg)", "ALA (25 mg)"]
+    },
+    {
+      "product": "Golden Home Care (NeoLife proteinshake)",
+      "relevance": "high",
+      "rationale": "High-quality whey protein isolate for sarcopenia prevention. 15 g protein per portion. Can be consumed as meal replacement or supplement between meals for elderly with reduced appetite.",
+      "forms": "pulver (vanilj/choklad/smultron)",
+      "dosing": "1-2 portioner/dag",
+      "key_nutrients": ["protein (15 g/portion)", "kalcium (380 mg)", "vitamin D (5 µg)", "B-vitaminer", "fiber (3.5 g)"]
+    },
+    {
+      "product": "Omega-3 Plus (NeoLife fiskolja)",
+      "relevance": "high",
+      "rationale": "Omega-3 for anti-inflammatory support, cardiovascular health, and cognitive function in aging. High concentration EPA/DHA. Third-party tested for purity.",
+      "forms": "mjuka kapslar",
+      "dosing": "2-4 kapslar/dag",
+      "key_nutrients": ["EPA (360 mg/2 kapslar)", "DHA (240 mg/2 kapslar)"]
+    },
+    {
+      "product": "Carotenoid Complex (NeoLife)",
+      "relevance": "medium",
+      "rationale": "Antioxidant protection for aging cells. Mixed carotenoids from natural sources (tomato, spirulina, broccoli). Supports eye health (macular degeneration prevention) and immune function.",
+      "forms": "kapslar",
+      "dosing": "3-6 kapslar/dag",
+      "key_nutrients": ["beta-karoten (3.75 mg/3 kapslar)", "lykopen (2.25 mg)", "lutein (1.5 mg)", "zeaxantin (0.75 mg)"]
+    },
+    {
+      "product": "Cal-Mag-Zinc (NeoLife)",
+      "relevance": "medium",
+      "rationale": "Basic bone health and mineral support for elderly. Lower dose than standalone products but useful as maintenance. Chewable form aids adherence for those with swallowing difficulties.",
+      "forms": "tuggtablett (citronsmak)",
+      "dosing": "3-6 tabletter/dag",
+      "key_nutrients": ["kalcium (500 mg/3 tabletter)", "magnesium (250 mg)", "zink (10 mg)"]
+    },
+    {
+      "product": "Garlic Complex (NeoLife)",
+      "relevance": "low",
+      "rationale": "Circulation support, blood pressure management. Relevant for elderly cardiovascular health but not a core 65+ recommendation.",
+      "forms": "kapsel",
+      "dosing": "3 kapslar/dag",
+      "key_nutrients": ["vitlök 630 mg", "allicin 6300 µg"]
+    },
+    {
+      "product": "Glucosamine (NeoLife)",
+      "relevance": "medium",
+      "rationale": "Joint health support for aging population. 1500 mg glucosamine sulphate. Suitable for elderly with osteoarthritis concerns.",
+      "forms": "tablett",
+      "dosing": "3 tabletter/dag",
+      "key_nutrients": ["glukosaminsulfat 1500 mg"]
+    },
+    {
+      "product": "Super Select Multi Vitamin, Mjölkfritt (NeoLife)",
+      "relevance": "medium",
+      "rationale": "Alternative multivitamin for second household member, dairy-free. Useful for elderly with lactose intolerance.",
+      "forms": "tablett",
+      "dosing": "1 tablett/dag",
+      "key_nutrients": ["vitamin D (5 µg)", "B12 (1.8 µg)", "brett vitamin/mineralprofil"]
+    }
+  ],
+  "summary": "NeoLife has strong product coverage across all major 65+ nutritional needs: multivitamin (Pro Vitality), protein (Golden Home Care), omega-3 (Omega-3 Plus), antioxidants (Carotenoid Complex), minerals (Cal-Mag-Zinc), and joint support (Glucosamine). Golden Home Care is uniquely valuable as a dual-purpose product (protein supplementation + nutrient delivery) for elderly with reduced appetite."
+}

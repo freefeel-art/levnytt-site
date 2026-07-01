@@ -182,14 +182,14 @@ Editorial Commander identifies topic
          ↓
    Is it FTC Regulation/Pyramid Schemes? ──YES──→ MLM Editorial Agent
          ↓
-   Is it Health/Supplements/Nutrition? ──YES──→ Health Editorial Agent
+    Is it Health/Supplements/Nutrition? ──YES──→ LevNytt Writer (`.opencode/agents/levnytt-writer.md`)
          ↓
    Is it Product-specific (NeoLife)? ──YES──→ Product Editorial Agent
 ```
 
 ### Decision Criteria
 
-| Criteria | MLM Editorial Agent | Health Editorial Agent |
+| Criteria | MLM Editorial Agent | LevNytt Writer |
 |----------|-------------------|----------------------|
 | Topic involves MLM business model | ✅ Yes | ❌ No |
 | Topic involves consumer rights (MLM) | ✅ Yes | ❌ No |

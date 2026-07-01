@@ -1,19 +1,19 @@
 # Repository Inventory — Auto-Generated
 
-**Generated:** 2026-06-30 13:08:43
-**Commit:** fef52d8
+**Generated:** 2026-07-01 12:13:48
+**Commit:** e43a551
 
 > AUTO-GENERATED — DO NOT EDIT. Run `python3 scripts/sync-editorial-state.py` to regenerate.
 
 ## Published Pages
 
-**Total:** 100
+**Total:** 104
 
 ### By Category
 - **Product:** 29
 - **Pillar:** 7
-- **Informational:** 54
-- **Portal:** 5
+- **Informational:** 57
+- **Portal:** 6
 - **Utility:** 5
 
 ### By Source Gap Report
@@ -26,9 +26,10 @@
 - **omega-3:** 7
 - **probiotics:** 6
 - **vitamin-d:** 5
-- **Undocumented (no gap report):** 11
+- **Undocumented (no gap report):** 12
 
   - `ala-vs-epa-vs-dha.html`
+  - `antioxidanter-komplett-guide.html`
   - `finns-det-billigare-alternativ.html`
   - `fytosteroler-cellmembran.html`
   - `mlm-konsumentratt-retur-angeratt.html`
@@ -42,10 +43,10 @@
 
 ## Source Articles
 
-**Total:** 38
-**Published duplicates (root exists):** 21
-**Unique source-only (rewrite):** 17
-**Orphan (no gap report):** 12
+**Total:** 41
+**Published duplicates (root exists):** 22
+**Unique source-only (rewrite):** 19
+**Orphan (no gap report):** 14
 
 ## Product Entities
 
@@ -106,6 +107,7 @@
 **Overall:** AMBER
 
 - **[**AMBER**]** Root page `ala-vs-epa-vs-dha.html` has no matching gap report cluster.
+- **[**AMBER**]** Root page `antioxidanter-komplett-guide.html` has no matching gap report cluster.
 - **[**AMBER**]** Root page `finns-det-billigare-alternativ.html` has no matching gap report cluster.
 - **[**AMBER**]** Root page `fytosteroler-cellmembran.html` has no matching gap report cluster.
 - **[**AMBER**]** Root page `mlm-konsumentratt-retur-angeratt.html` has no matching gap report cluster.
@@ -124,6 +126,7 @@
 - **[**AMBER**]** `content/articles/lutein-zeaxantin-huden.html` has no matching gap report cluster.
 - **[**AMBER**]** `content/articles/naringsbrist.html` has no matching gap report cluster.
 - **[**AMBER**]** `content/articles/retinol-pa-sommaren.html` has no matching gap report cluster.
+- **[**AMBER**]** `content/articles/tarmhalsa-komplett-guide.html` has no matching gap report cluster.
 - **[**AMBER**]** `content/articles/vad-ar-niacinamid.html` has no matching gap report cluster.
 - **[**AMBER**]** `content/articles/vad-ar-vaxtsteroler.html` has no matching gap report cluster.
 - **[**AMBER**]** `content/articles/var-metod.html` has no matching gap report cluster.

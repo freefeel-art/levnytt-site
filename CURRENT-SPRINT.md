@@ -67,7 +67,7 @@ Pages with page-specific or product-specific OG images were preserved:
 ### Sprint 10 completed
 
 - PROJECT-STATUS.md, CURRENT-SPRINT.md, DECISIONS.md, PROJECT-ENTRY.md all updated
-- SPRINT-9-BRAND-ROLLOUT.md created
+- SPRINT-9-BRAND-ROLLOUT.md created (archived in repo cleanup)
 - Final validation complete: 58/75 .md files clean, 6 files reported for review
 
 ### Sprint 11 completed

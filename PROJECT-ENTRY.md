@@ -236,15 +236,15 @@ These documents exist in the repository but are **not operational**. Read them o
 |---|---|---|
 | `LEVNYTT-MUISTIO.md` | Original ops memo (Finnish). Sponsor IDs, image naming, git workflow. | Partially outdated — superseded by `PROJECT-STATUS.md` |
 | `AUDIT-REPORT.md` | Site audit from 2026-06-23. Issues documented were resolved in subsequent commits. | Historical record |
-| `SITEMAP-VERIFICATION.md` | Sitemap completeness check from 2026-06-28. All pages confirmed. | Completed task record |
-| `OPENCODE-REPOSITORY-ANALYSIS.md` | AI-generated architecture summary from 2026-06-28. | Superseded by `PROJECT-STATUS.md` |
-| `DOCUMENTATION-MIGRATION-REPORT.md` | Record of the documentation consolidation on 2026-06-28. | Archive |
-| `DOCUMENTATION-UPDATE-REPORT.md` | Record of a documentation update pass. Likely outdated. | Archive |
-| `SPRINT-6-REPORT.md` | Sprint 6 (Wave 3B) report. | Historical record |
-| `docs/reports/SPRINT-6-MIGRATION-INVENTORY.md` | Inventory of pages migrated in Sprint 6. | Archive |
-| `docs/reports/SPRINT-6.1-CLEANUP-REPORT.md` | Sprint 6.1 cleanup record. | Archive |
-| `docs/reports/SITE-PAGE-INVENTORY.md` | Site page inventory. Likely outdated. | Archive |
-| `docs/reports/MORNING-BRIEF-VALIDATION-REPORT.md` | Validation report. | Archive |
+| `SITEMAP-VERIFICATION.md` | ~~Sitemap completeness check~~ | Deleted in repo cleanup |
+| `OPENCODE-REPOSITORY-ANALYSIS.md` | ~~AI-generated architecture summary~~ | Deleted in repo cleanup |
+| `DOCUMENTATION-MIGRATION-REPORT.md` | ~~Documentation consolidation record~~ | Deleted in repo cleanup |
+| `DOCUMENTATION-UPDATE-REPORT.md` | ~~Documentation update pass~~ | Deleted in repo cleanup |
+| `SPRINT-6-REPORT.md` | ~~Sprint 6 (Wave 3B) report~~ | Deleted in repo cleanup |
+| `docs/reports/SPRINT-6-MIGRATION-INVENTORY.md` | ~~Sprint 6 migration inventory~~ | Deleted in repo cleanup |
+| `docs/reports/SPRINT-6.1-CLEANUP-REPORT.md` | ~~Sprint 6.1 cleanup record~~ | Deleted in repo cleanup |
+| `docs/reports/SITE-PAGE-INVENTORY.md` | ~~Site page inventory~~ | Deleted in repo cleanup |
+| `docs/reports/MORNING-BRIEF-VALIDATION-REPORT.md` | ~~Validation report~~ | Deleted in repo cleanup |
 | `docs/databank/LEVNYTT-PRICE-DATABASE.md` | NeoLife SE product prices (April 2026). Use when building cost calculators. | Active reference |
 | `docs/editorial-state/README.md` | **Editorial State Interface** — official specification for Editorial Sync Engine generated files. All editorial agents must follow this interface. | **Active specification** |
 | `docs/specifications/AGENT-REGISTRY.md` | **Agent Registry** — canonical inventory of all production agents, responsibilities, routing rules, and workflows. | **Active specification** |

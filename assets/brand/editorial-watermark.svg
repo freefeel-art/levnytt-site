@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- LevNytt Editorial Watermark — Master Editorial Asset -->
+  <!-- Decorative background element only. NOT a logo. -->
+  <!-- Single color #1B4332. Opacity set in CSS (0.08–0.12). No baked opacity. -->
+
+  <!-- Globe outline — editorial knowledge reference -->
+  <circle cx="200" cy="200" r="155" fill="none" stroke="#1B4332" stroke-width="2"/>
+
+  <!-- Editorial rule — top -->
+  <line x1="138" y1="178" x2="262" y2="178" stroke="#1B4332" stroke-width="1.2"/>
+
+  <!-- LV monogram — centered serif, editorial styling -->
+  <text x="200" y="216" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="30" font-weight="700" fill="#1B4332" letter-spacing="4">LV</text>
+
+  <!-- Editorial rule — bottom -->
+  <line x1="138" y1="236" x2="262" y2="236" stroke="#1B4332" stroke-width="1.2"/>
+
+  <!-- Decorative dot — editorial punctuation -->
+  <circle cx="200" cy="256" r="2" fill="#1B4332"/>
+</svg>

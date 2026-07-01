@@ -1,4 +1,4 @@
-name: Generate Homepage
+name: Generate Homepage & Article Index
 
 on:
   push:
@@ -20,14 +20,25 @@ jobs:
       - name: Run homepage generator
         run: python3 scripts/generate-homepage.py
 
-      - name: Commit updated homepage if changed
+      - name: Run article index generator
+        run: python3 scripts/generate-article-index.py
+
+      - name: Commit updated pages if changed
         run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          CHANGED=false
           if ! git diff --quiet index.html; then
-            git config user.name 'github-actions[bot]'
-            git config user.email 'github-actions[bot]@users.noreply.github.com'
             git add index.html
-            git commit -m "chore: auto-update homepage [skip ci]"
+            CHANGED=true
+          fi
+          if ! git diff --quiet artiklar.html; then
+            git add artiklar.html
+            CHANGED=true
+          fi
+          if [ "$CHANGED" = true ]; then
+            git commit -m "chore: auto-update homepage & article index [skip ci]"
             git push
           else
-            echo "No changes to homepage — skipping commit"
+            echo "No changes — skipping commit"
           fi

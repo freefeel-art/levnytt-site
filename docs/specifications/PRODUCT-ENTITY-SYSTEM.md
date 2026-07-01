@@ -546,12 +546,12 @@ The PA validates article product references against entities before deployment u
 2. **Phase 2 (pending):** PA auto-populates shop paths and short descriptions from entities
 3. **Phase 3 (pending):** PA generates tier box links from entity `related_product_ids`
 
-### 7.2 Page Builder Integration
+### 7.2 Pillar Page Integration
 
 **Current state:** Pillar pages are hand-authored. Product data is embedded in prose.
 
 **Future integration:**
-- Page templates include an "entity reference" section that auto-populates product code, price reference, shop link, and related products
+- Pillar page templates include an "entity reference" section that auto-populates product code, price reference, shop link, and related products
 - Entity data provides the "ingredients" and "research references" sections of pillar page JSON-LD and content
 
 ### 7.3 Calculator Integration

@@ -1,0 +1,58 @@
+{
+  "module": "news-radar",
+  "topic": "kosttillskott-aldre-65",
+  "language": "sv",
+  "executed_at": "2026-07-01T11:48:00Z",
+  "confidence": "high",
+  "news_items": [
+    {
+      "headline": "Livsmedelsverket publicerade nya kostråd för vuxna över 65 år (2026)",
+      "source": "Livsmedelsverket",
+      "date": "2026-02",
+      "url": "https://www.livsmedelsverket.se/matvanor-halsa--miljo/mat-och-naring/nya-kostrad-for-personer-over-65-ar-och-tio-atgarder-for-att-forebygga-undernaring-bland-aldre/",
+      "key_point": "För första gången specifika kostråd för 65+ med rekommendationer om aptit, protein och D-vitamin.",
+      "impact": "high"
+    },
+    {
+      "headline": "Senior nutrition trends: 54% of Boomers worldwide take multivitamins",
+      "source": "Innova Market Insights",
+      "date": "2026-06",
+      "url": "https://www.innovamarketinsights.com/trends/senior-nutrition-trends-global-market-overview/",
+      "key_point": "Strong consumer demand for recognizable vitamins and minerals. Trust from familiarity.",
+      "impact": "medium"
+    },
+    {
+      "headline": "Healthspan shift: from living longer to living better in older age",
+      "source": "Nutrition Insight",
+      "date": "2026-01",
+      "url": "https://www.nutritioninsight.com/news/healthy-active-aging-healthspan-technology-supplements.html",
+      "key_point": "Market shift from lifespan to healthspan. Seniors want science-backed ingredients for mobility, cognition, vitality.",
+      "impact": "high"
+    },
+    {
+      "headline": "Promising healthy aging ingredients target muscle, cognition, inflammation",
+      "source": "Nutrition Insight",
+      "date": "2026-06",
+      "url": "https://www.nutritioninsight.com/news/healthy-aging-pathways-ingredients.html",
+      "key_point": "Magnesium, K2, omega-3s, dairy proteins, choline have strongest human evidence for healthy aging pathways.",
+      "impact": "medium"
+    },
+    {
+      "headline": "Longevity market: 50% of supplements since 2022 carry healthspan messaging",
+      "source": "NutraIngredients",
+      "date": "2026-06",
+      "url": "https://www.nutraingredients.com/Article/2026/06/19/the-business-of-longevity-how-to-win-the-credibility-game/",
+      "key_point": "Huge growth in cellular health ingredients. NAD+, NMN, collagen surging despite regulatory challenges in EU.",
+      "impact": "low"
+    },
+    {
+      "headline": "World Health Summit 2025: Resolution on Healthy Aging emphasizes prevention through nutrition",
+      "source": "WHO",
+      "date": "2025-10",
+      "url": "https://www.who.int/initiatives/decade-of-healthy-ageing",
+      "key_point": "Healthy Ageing Decade 2021-2030. Nutrition as cornerstone of prevention in aging populations.",
+      "impact": "medium"
+    }
+  ],
+  "summary": "Major developments: (1) Livsmedelsverket's first-ever 65+ specific guidelines (2026) — this is the key news hook, (2) healthspan narrative dominates 2026, (3) strong consumer interest in familiar vitamins/minerals, (4) protein for muscle maintenance is top trend in senior nutrition globally."
+}

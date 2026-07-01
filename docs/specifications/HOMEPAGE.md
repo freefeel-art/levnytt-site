@@ -43,7 +43,7 @@ The homepage update is triggered by the **post-generation pipeline step** that r
 
 **Pipeline sequence:**
 
-1. Generate article HTML files (Informational Article Skill / Page Builder)
+1. Generate article HTML files (LevNytt Writer / pillar-page-template skill)
 2. Run homepage generator script (rewrites `index.html`)
 3. Update `_redirects` if new routes were added
 4. Commit and deploy

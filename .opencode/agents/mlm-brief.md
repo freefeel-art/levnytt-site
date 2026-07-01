@@ -324,7 +324,7 @@ The MLM Editorial Agent (`.opencode/agents/mlm-editorial-agent.md`) is the speci
 - Company Comparisons → MLM Editorial Agent
 - Recruitment Tactics → MLM Editorial Agent
 - Ethics / Self-Regulation → MLM Editorial Agent
-- Health / Supplements → Health Editorial Agent (never MLM Editorial Agent)
+- Health / Supplements → LevNytt Writer (never MLM Editorial Agent)
 
 ---
 
