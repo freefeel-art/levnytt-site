@@ -1,0 +1,63 @@
+# LevNytt Production Brief — 2026-07-01
+# Verified against published article: vad-ar-lutein.html (QA 12/12)
+
+title: Vad är lutein? — karotenoiden för ögon, hud och hjärna
+
+entity:
+  - lutein
+
+primary_keyword:
+  vad är lutein
+
+content_type:
+  informational_article
+
+intent:
+  definition
+
+topic:
+  antioxidants
+
+cluster:
+  carotenoids
+
+audience:
+  consumers
+
+language:
+  sv
+
+authority_mode:
+  health
+
+goal: >
+  Explain what lutein is, where it is found in food, what current
+  research says about eye health, skin protection and cognitive
+  function, and when supplementation may be relevant. Help the
+  reader understand lutein's role in the carotenoid family and how
+  to get enough through diet or supplementation.
+
+publication:
+  levnytt.se
+
+related_entities:
+  - zeaxanthin
+  - macula
+  - carotenoids
+  - beta-carotene
+  - meso-zeaxanthin
+  - marigold
+
+required_outputs:
+  - definition
+  - evidence
+  - food_sources
+  - mechanism
+  - safety
+  - dosage
+  - faq
+  - internal_links
+  - cta
+  - stat_cards
+  - practical_guide
+  - myth_busting

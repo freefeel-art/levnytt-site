@@ -1,330 +1,217 @@
-# LevNytt Production Pipeline V1
+# LevNytt Production Pipeline V2
 
 **Date:** 2026-07-01
 **Status:** ACTIVE — single source of truth for the end-to-end content production flow
+**Supersedes:** PRODUCTION-PIPELINE.md V1
 
 ---
 
-## Overview
+## Architecture Overview
 
-The LevNytt Production Pipeline transforms a keyword into a published, QA-verified informational article. It chains six stages through five registered agents, with a strict gate between each stage.
+The pipeline transforms a **Production Brief** into a published, QA-verified article. The keyword is one field in the brief — never the pipeline's primary input.
 
 ```
-KEYWORD ──→ RESEARCH ──→ BRIEF ──→ WRITE ──→ QA ──→ PUBLISH ──→ REPORT
-  │           │            │          │        │         │           │
-  │     Research       Editorial     Writer   QA       Publication   Production
-  │     Commander      Commander             Gate     Agent         Orchestrator
-  │                                                                    │
-  └──── Production Orchestrator (orchestrates all stages) ────────────┘
+Production Brief        content/briefs/<slug>.brief.yaml
+    ↓
+Research Commander      Reads brief → builds research mission
+    ↓
+Research Package        research/packages/<slug>/ (12 structured files)
+    ↓
+Editorial Commander     Reads package → produces editorial brief
+    ↓
+Editorial Brief         Writer-ready instructions
+    ↓
+Writer                  LevNytt Writer V1.0
+    ↓
+QA Gate                 12-check PAS V1.0 validator
+    ↓
+Publication Agent       Deploy to root, commit, push
+    ↓
+Production Report       Terminal summary
 ```
 
 ---
 
-## Stage 1: Keyword → Run Config
+## Stage 1: Production Brief
 
-**Responsible:** Production Orchestrator
+**Input:** Editorial decision (topic selection, content gap analysis)
 
-**Input:** Raw keyword string (e.g. `"vad är lutein"`)
+**Output:** `content/briefs/<slug>.brief.yaml`
 
-**Actions:**
-1. Validate keyword is not empty
-2. Convert to slug: lowercase, strip special chars, replace spaces/hyphens
-3. Detect intent: `definition` / `how-to` / `listicle` / `comparison` / `explainer`
-4. Detect YMYL: true if health/medical/nutrition/supplement/financial/legal
-5. Create output directory: `content/articles/<slug>/`
-6. Write `run-config.json`
+A human (or Editorial Commander) creates a Production Brief. This is the single source of truth for the entire production run. See `docs/PRODUCTION-BRIEF-SPEC.md` for the full field specification.
 
-**Output:** `content/articles/<slug>/run-config.json`
+**Key principle:** The brief describes an **editorial assignment**, not an SEO keyword.
 
-**Schema (run-config.json):**
-```json
-{
-  "keyword": "<original keyword>",
-  "slug": "<url-slug>",
-  "target_site": "levnytt.se",
-  "language": "sv",
-  "intent": "explainer|definition|how-to|listicle|comparison",
-  "ymyl": true|false,
-  "generated": "YYYY-MM-DD"
-}
+**Example fields:**
+```yaml
+title: Vad är lutein? — karotenoiden för ögon, hud och hjärna
+entity: [lutein]
+primary_keyword: vad är lutein
+content_type: informational_article
+intent: definition
+topic: antioxidants
+cluster: carotenoids
+audience: consumers
+authority_mode: health
+goal: Explain what lutein is...
+required_outputs: [definition, evidence, food_sources, ...]
 ```
 
-**Error handling:**
-- Empty keyword → abort with ERROR: missing keyword
-- Duplicate slug (existing `content/articles/<slug>/`) → warn, ask to overwrite or pick new slug
-- Invalid slug characters → abort with ERROR: invalid slug
+**Gate:** All 14 required fields present and valid. Brief file exists at correct path.
+**Error:** Missing or invalid brief → pipeline cannot start.
 
 ---
 
-## Stage 2: Research
+## Stage 2: Research Commander
 
-**Responsible:** Research Commander (`.opencode/agents/research-commander.md`)
+**Input:** `content/briefs/<slug>.brief.yaml`
 
-**Input:** `run-config.json` + keyword context from Editorial Commander routing
+**Output:** `research/packages/<slug>/` (12 structured files)
 
-**Actions:**
-1. Build research plan (infer required modules from topic)
-2. Check two-level cache (topic package + per-module)
-3. Execute missing modules: authority, dataforseo, reddit, content-gap, gsc, news-radar, product-db
-4. Generate Research Package (`research/briefs/<slug>-approved.md`)
-5. Generate Research Manifest (`research/manifests/<slug>.json`)
-6. Editorial Review gate (human approval)
-7. Produce Approved Research Brief
+The Research Commander reads the Production Brief and builds a **research mission** from it. It uses the entity list for PubMed/authority queries, the cluster for content-gap analysis, the related_entities for entity co-occurrence, and the goal for scoping.
 
-**Output files:**
-| File | Required | Description |
-|------|----------|-------------|
-| `research/briefs/<slug>-approved.md` | Yes | Approved Research Brief (Writer input) |
-| `research/manifests/<slug>.json` | Yes | Manifest with `final_brief = approved` |
-| `research/authority/<slug>.json` | Optional | Authority research module output |
-| `research/reddit/<slug>.json` | Optional | Reddit research (YMYL topics skip this) |
+**Module selection is driven by the brief:**
+- `authority_mode: health` → all modules including authority research
+- `entity` → entity disambiguation + synonym expansion
+- `cluster` → content-gap analysis against existing cluster content
+- `related_entities` → co-occurrence for LSI clustering
+- `goal` → scopes research depth (broad explainer vs narrow evidence dive)
 
-**Gate:** `research/manifests/<slug>.json` must have `final_brief = approved`
+**Package contents:**
+| File | Required | Content |
+|------|----------|---------|
+| `manifest.json` | Yes | Provenance, module status, lifecycle |
+| `research-summary.md` | Yes | Human-readable synthesis |
+| `sources.json` | Yes | All sources with evidence tiers (T1-T4) |
+| `studies.json` | Health mode | Extracted study data |
+| `entities.json` | Yes | Named entities + relationships |
+| `internal-links.json` | Yes | Link targets with placement context |
+| `faq.json` | Yes | 6-10 FAQ candidates |
+| `competitor-analysis.md` | Yes | Top 3-5 SERP competitors |
+| `evidence.md` | Health mode | Claim-to-evidence mapping |
+| `product-notes.json` | Optional | Relevant NeoLife products |
+| `keywords.json` | Optional | LSI + co-occurring terms |
+| `audit.json` | Yes | Execution log |
 
-**Error handling:**
-- All modules fail → abort: RESEARCH FAILED
-- Partial failure → deliver partial package, Editorial Review decides
-- Manifest missing or `final_brief = pending` → block writer, wait for approval
-- Cache hit on all modules → return existing approved brief, skip to Stage 3
-
----
-
-## Stage 3: Editorial Briefing
-
-**Responsible:** Editorial Commander (`.opencode/agents/editorial-commander.md`)
-
-**Input:** Approved Research Brief from Stage 2
-
-**Actions:**
-1. Verify authority clearance
-2. Assign article type (defines H2 structure)
-3. Select internal link targets from published sitemap pages
-4. Set CTA destination (cluster hub + product page)
-5. Write editorial briefing into the Approved Brief
-
-**Output:** `research/briefs/<slug>-approved.md` (updated with editorial layer)
-
-**Gate:** Authority check CLEARED. If BLOCKED, pipeline halts — must run authority research first.
-
-**Error handling:**
-- Authority not cleared → abort: AUTHORITY BLOCKED
-- No approved brief found → abort: BRIEF MISSING
-- Brief `final_brief != approved` → abort: BRIEF NOT APPROVED
+**Gate:** `manifest.json lifecycle = completed`. For health/science: ≥3 Tier 1-2 sources in `sources.json`.
+**Error:** Package incomplete → Editorial Commander decides whether to proceed with partial data.
 
 ---
 
-## Stage 4: Write Article
+## Stage 3: Editorial Commander
 
-**Responsible:** LevNytt Writer (`.opencode/agents/levnytt-writer.md`)
+**Input:** `research/packages/<slug>/` (full Research Package)
+
+**Output:** Editorial Brief (integrated into the package as editorial decisions)
+
+The Editorial Commander reads the Research Package and **does no research of its own**. It makes editorial decisions based on the research data.
+
+**Decisions made:**
+1. **Angle confirmation:** Does the recommended angle match the original goal?
+2. **Claim selection:** Which verified facts go into the article?
+3. **Evidence tier assignment:** Confirm or adjust tier labels
+4. **Source prioritization:** Which sources are primary vs supporting?
+5. **Internal link priority:** Finalize link targets and placement
+6. **CTA strategy:** Which product link? Where?
+7. **Structure confirmation:** H2 outline based on `required_outputs`
+
+**Gate:** Package is complete and all required decisions are made.
+**Error:** If the package is insufficient (e.g., no Tier 1 sources for a health claim), the Editorial Commander requests a research refresh or waives the requirement.
+
+---
+
+## Stage 4: Writer
 
 **Input:**
-- `run-config.json` from Stage 1
-- Approved Research Brief from Stage 3
-- `PUBLICATION-ARTICLE-STANDARD.md` V1.0 (canonical template)
-- `BRAND-DESIGN-SYSTEM.md` (green/gold palette)
-
-**Actions:**
-1. Read run-config.json for keyword, slug, intent
-2. Read approved brief for verified facts, sources, writer instructions
-3. Follow PAS V1.0 Section 6.0 page shell verbatim
-4. Write complete HTML article with all 28 mandatory components
-5. Save to `content/articles/<slug>/<slug>.html`
+- Production Brief (`content/briefs/<slug>.brief.yaml`)
+- Research Package (`research/packages/<slug>/`) + editorial decisions
+- `PUBLICATION-ARTICLE-STANDARD.md` V1.0
 
 **Output:** `content/articles/<slug>/<slug>.html`
 
-**Mandatory components (PAS V1.0):**
-- `<div class="ia-wrap"><article>` structure (NOT `<main>`)
-- Full PAS inline CSS (green/gold, dark evidence tiers)
-- `<p class="ia-punchline">` — Q-A pattern, keyword in first 8 words
-- `.ia-takeaways` — 4-7 bulleted claims with evidence labels
-- `.ia-stat-grid` — 3-6 sourced stat cards
-- `.ia-comp-table` — comparison table (if applicable)
-- Question-format H2s (min 4 of 6-10)
-- `.ia-cta` blocks (mid-article + bottom)
-- `.ia-faq` — 6-10 question/answer pairs
-- `.ia-author-box`
-- `.ia-method-note`
-- `@graph` JSON-LD (Article + FAQPage)
-- `<title>` ≤60 chars, `<meta description>` ≤155 chars
-- `#site-nav` div
-- `nav.js` + `footer.js` + `components.js` scripts
-- External links: `target="_blank" rel="noopener noreferrer"`
+The Writer produces a PAS V1.0-compliant HTML article. It does not research. It does not decide structure. It follows the editorial brief, the required_outputs from the Production Brief, and the evidence map from the Research Package.
 
-**Error handling:**
-- Brief missing or not approved → abort: NO APPROVED BRIEF
-- PAS V1.0 file missing → abort: TEMPLATE MISSING
-- Write failure → save partial, mark as DRAFT, abort
+**Writer's constraints:**
+- Must use PAS V1.0 Section 6.0 page shell verbatim
+- Must use green/gold brand palette (`#1B4332` / `#E8C870` / `#F9F6EF`)
+- Must use dark evidence tier labels
+- Must use `<div class="ia-wrap"><article>` structure
+- Must include all `required_outputs` specified in the brief
+
+**Gate:** Valid HTML file written to `content/articles/<slug>/`.
+**Error:** Writer fails → save partial output, report failure.
 
 ---
 
 ## Stage 5: QA Gate
 
-**Responsible:** Production Orchestrator (scripts/qa-article.sh or inline validation)
-
 **Input:** `content/articles/<slug>/<slug>.html`
 
-**Checks (V1 — 12 critical checks):**
+**Output:** QA report (GREEN / AMBER / RED)
 
-| # | Check | Type | Pass Condition |
-|---|-------|------|---------------|
-| 1 | File exists | existence | `content/articles/<slug>/<slug>.html` is a regular file |
-| 2 | Non-empty | existence | file size > 5000 bytes |
-| 3 | Valid HTML | structure | contains `<html`, `</html>`, `<head>`, `<body>` |
-| 4 | Correct wrapper | structure | `<div class="ia-wrap"><article>` present (NOT `<main>`) |
-| 5 | PAS CSS present | style | contains `.ia-punchline`, `.ia-takeaways`, `.ia-cta`, `.ia-faq` |
-| 6 | Green/gold palette | brand | `#1B4332` and `#E8C870` present, `#F25F4C` and `#0F1B3A` absent |
-| 7 | Dark evidence tiers | style | `.ia-ev-t1`, `.ia-ev-t2` present with dark backgrounds |
-| 8 | #site-nav div | structure | `<div id="site-nav"></div>` present |
-| 9 | Shared scripts | structure | `nav.js`, `footer.js`, `components.js` all loaded |
-| 10 | @graph schema | seo | JSON-LD script with `Article` and `FAQPage` types |
-| 11 | Title length | seo | `<title>` ≤ 60 characters |
-| 12 | Description length | seo | `<meta name="description">` ≤ 155 characters |
+12 automated checks via `scripts/qa-article.sh`. See `docs/PRODUCTION-ORCHESTRATOR.md` for full check list.
 
 **Gate behavior:**
-- 12/12 pass → GREEN, proceed to Stage 6
-- 10-11/12 pass → AMBER, report warnings, operator can override
-- 1-9/12 pass → RED, HALT — article must be fixed
-- Any RED → pipeline stops, error reported
-
-**Output:** QA report printed to terminal
-
-**Error handling:**
-- RED gate → write `content/articles/<slug>/qa-failures.txt` with failure details
-- AMBER gate → write warnings to QA report, prompt operator override
+- 12/12 → GREEN — proceed
+- 10-11/12 → AMBER — operator override required
+- <10/12 → RED — pipeline blocked
 
 ---
 
-## Stage 6: Publication
+## Stage 6: Publication Agent
 
-**Responsible:** Publication Agent (`.opencode/agents/publication-agent.md`)
+**Input:** `content/articles/<slug>/<slug>.html` (QA passed)
 
-**Input:**
-- `content/articles/<slug>/<slug>.html` (QA passed)
-- `docs/editorial-backlog/production-status.md`
-- Brand assets under `assets/brand/`
+**Output:** Published root page, git commit
 
-**Actions:**
-1. Confirm source file exists
-2. Confirm root file does NOT already exist
-3. Copy to root: `cp content/articles/<slug>/<slug>.html <slug>.html`
-4. Verify copy (byte-identical diff check)
-5. Validate brand assets exist
-6. Regenerate article index: `python3 scripts/generate-article-index.py`
-7. Update production status
-8. Git commit + push
-
-**Output:**
-- `/<slug>.html` — published root page
-- Updated `docs/editorial-backlog/production-status.md`
-- Updated `artiklar.html`
-- Git commit on `main` branch
-
-**Error handling:**
-- Source file missing → abort: SOURCE MISSING
-- Root file already exists → skip, log ALREADY PUBLISHED
-- Diff check fails → remove root copy, abort: COPY VERIFICATION FAILED
-- Brand assets missing → abort: BRAND ASSET MISSING
-- Index generation fails → abort: INDEX FAILED
+Copy to root, verify, regenerate article index, commit, push.
 
 ---
 
 ## Stage 7: Production Report
 
-**Responsible:** Production Orchestrator
+Terminal summary of the entire run — all stages, statuses, commit hash, duration.
 
-**Input:** Results from all stages
+---
 
-**Output (terminal):**
+## Complete File Map
+
+After a successful production run:
+
 ```
-╔══════════════════════════════════════════════════════╗
-║         PRODUCTION COMPLETE                          ║
-║         <keyword> — <date>                           ║
-╚══════════════════════════════════════════════════════╝
-
-STAGE           STATUS    DETAIL
-─────           ──────    ──────
-Run Config      ✅       content/articles/<slug>/run-config.json
-Research        ✅       Approved brief: research/briefs/<slug>-approved.md
-Write           ✅       content/articles/<slug>/<slug>.html
-QA              ✅       12/12 checks passed
-Publish         ✅       https://levnytt.se/<slug> (commit <hash>)
-
-Duration: Xm Ys
+content/briefs/<slug>.brief.yaml            ← Stage 1: Production Brief
+research/packages/<slug>/                   ← Stage 2: Research Package
+├── manifest.json
+├── research-summary.md
+├── sources.json
+├── studies.json
+├── entities.json
+├── internal-links.json
+├── faq.json
+├── competitor-analysis.md
+├── evidence.md
+├── keywords.json
+├── product-notes.json
+└── audit.json
+content/articles/<slug>/<slug>.html         ← Stage 4: Article
+/<slug>.html                                 ← Stage 6: Published
 ```
 
 ---
 
-## Full File Map
+## Key Architectural Decisions
 
-After a complete production run:
-
-```
-content/articles/<slug>/
-├── run-config.json              ← Stage 1
-└── <slug>.html                  ← Stage 4
-
-research/
-├── briefs/<slug>-approved.md    ← Stage 2
-├── manifests/<slug>.json        ← Stage 2
-├── authority/<slug>.json        ← Stage 2 (optional)
-└── ...
-
-/<slug>.html                     ← Stage 6 (published root)
-
-docs/
-└── editorial-backlog/
-    └── production-status.md     ← Stage 6 (updated)
-```
-
----
-
-## Abort Conditions
-
-The pipeline halts at these gates. No stage beyond the gate executes.
-
-| Gate | Condition | What is blocked |
-|------|-----------|----------------|
-| **Keyword** | Empty or duplicate slug | Entire pipeline |
-| **Research** | All modules failed | Writer, QA, Publish |
-| **Brief** | `final_brief != approved` | Writer, QA, Publish |
-| **Brief** | Authority not cleared | Writer, QA, Publish |
-| **QA RED** | <10/12 checks pass | Publication |
-| **Publish** | Source missing or copy fails | Commit, push |
-
----
-
-## Invocation
-
-### Via Production Orchestrator (recommended)
-
-```
-opencode → "run production 'vad är lutein'"
-```
-
-The Production Orchestrator agent (`production-orchestrator`) chains all stages, enforcing gates.
-
-### Via shell script
-
-```bash
-./scripts/run-production.sh "vad är lutein"
-```
-
-Creates run-config.json, prints pipeline instructions, optionally invokes opencode.
-
-### Manual (stage by stage)
-
-Each stage can also be invoked independently via opencode agents:
-```
-opencode → "research commander: vad är lutein"
-opencode → "write article for vad-ar-lutein"
-opencode → "qa vad-ar-lutein"
-opencode → "publish vad-ar-lutein"
-```
+1. **Keyword is a field, not the input.** The Production Brief is the input. Keyword is one of 14 fields.
+2. **Research Commander takes a brief, not a keyword.** The brief's entity, cluster, and goal drive the research mission.
+3. **Editorial Commander does no research.** It reads the Research Package and makes decisions.
+4. **Writer does no research.** It follows the editorial brief.
+5. **Every stage has a defined input and output contract.** No stage invents its own input.
 
 ---
 
 ## Version History
 
 | Version | Date | Change |
-|---------|------|--------|
-| V1 | 2026-07-01 | Initial pipeline specification. 7 stages, 5 agents, 12 QA checks. |
+|---|---|---|
+| V1 | 2026-07-01 | Initial pipeline: keyword-based, 7 stages |
+| V2 | 2026-07-01 | Production Brief architecture: brief→package→editorial chain, Research Package spec |
