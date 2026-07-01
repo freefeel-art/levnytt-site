@@ -1,140 +1,71 @@
 # CURRENT-SPRINT.md
 # LevNytt.se — Project Phase
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 ---
 
 ## Phase: Maintenance + Feature Development
 
 The Gen 3 migration is **complete**.
-The Brand System integration (Sprint 8) and Brand Rollout (Sprint 9) are **complete**.
-Sprint 10 (Documentation & Baseline Update) is **active**.
+The Brand System integration (Sprint 8), Brand Rollout (Sprint 9), and Repository Cleanup (Sprint 9b) are **complete**.
 
 ---
 
-## Sprint Status
+## Sprint History
+
+### Sprint 9 — Brand Rollout + Repository Cleanup
 
 | | |
 |---|---|
 | **Status** | ✅ Completed |
-| **Sprint** | 9 — Brand Rollout |
-| **Completed** | 2026-06-30 |
+| **Completed** | 2026-07-01 |
+| **Commit** | `c61eebc` |
 
-### Tasks (Sprint 9)
-
-- [x] Replace legacy branding on all existing pages
-- [x] Update shared components for brand consistency
-- [x] Split `/pillar.css` responsibilities
-- [x] Resolve duplicated nav/footer/CSS loading
-- [x] Verify the site-wide consistency
-
-### What was implemented (Sprint 9)
-
-- Brand OG image (`assets/brand/og-brand.png`) deployed to all 70 root pages + 37 content/articles source files
-- `#site-nav` placeholder added to final 44 root pages + 3 subdirectory pages
-- Final validation confirmed all 80 root pages have: `nav.js` + `footer.js` + `components.js` + `pillar.css` + `#site-nav`
-- LV Brand Mark present in both `nav.js` and `footer.js`
-- Hero watermark injector present in `components.js`
-- Author avatar injector present in `components.js`
-
-### Pages excluded from brand OG replacement
-
-Pages with page-specific or product-specific OG images were preserved:
-
-- `den-fundersamma-mannen.html` — editorial OG
-- `fytosteroler-cellmembran.html` — editorial OG
-- `integritetspolicy.html` — editorial OG
-- `neolife-affarsmojlighet.html` — editorial OG
-- `neolife-hallbarhet.html` — editorial OG
-- `neolife-omega-3-plus.html` — product image OG
-- `neolife-pro-vitality.html` — product image OG
-- `neolife-tre-en-en-cellnaring.html` — product image OG
-- `personlig-vard.html` — product image OG
-- `404.html` — no OG (utility page)
+- Brand OG images deployed to 70+ root pages + 37 content/articles
+- `#site-nav` placeholders added to final 44 root pages
+- `nav.js` + `footer.js` + `components.js` + `pillar.css` verified on all 80 root pages
+- 28+ obsolete/superseded files removed
+- SKILL-v2 backups moved to `.archive/`; `levnytt-se-master-template.html` marked LEGACY
+- Production validation pass: `vad-ar-lutein` — 83/83 QA checks
+- REPOSITORY-CLEANUP-REPORT.md written as deletion record
 
 ---
 
-## Active Sprint — 12
-
-| | |
-|---|---|
-| **Status** | ✅ Completed |
-| **Sprint** | 10 — Documentation & Baseline Update |
-| **Completed** | 2026-06-30 |
-| **Next** | Sprint 11 — Documentation Alignment |
-
-### Sprint 10 completed
-
-- PROJECT-STATUS.md, CURRENT-SPRINT.md, DECISIONS.md, PROJECT-ENTRY.md all updated
-- SPRINT-9-BRAND-ROLLOUT.md created (archived in repo cleanup)
-- Final validation complete: 58/75 .md files clean, 6 files reported for review
-
-### Sprint 11 completed
-
-- PUBLICATION-ARTICLE-STANDARD.md: OG image path updated, Sprint 7/8/9 drift resolved
-- PHASE-2-ROADMAP.md: completely rewritten for current vanilla HTML architecture
-- Validation: no Astro references, no obsolete OG paths, no DECISIONS.md contradictions
-
----
-
-## Active Sprint — 12
+## Active Sprint — 10
 
 | | |
 |---|---|
 | **Status** | 🟢 Active |
-| **Sprint** | 12 — Product Entity System Foundation |
-| **Started** | 2026-06-30 |
+| **Sprint** | 10 — Post-Cleanup Baseline |
+| **Started** | 2026-07-01 |
 
 ### Objective
 
-Establish the architecture and specification for a Product Entity System — the canonical source for product identity, classification, and metadata across all LevNytt systems.
-
-No production pages modified. Specification only.
+Solidify the single production baseline after cleanup: update writer pipeline to PAS V1.0, resolve legacy references, and clear remaining broken references.
 
 ### Tasks
 
-- [x] Audit all places product information currently exists
-- [x] Design Product Entity schema with field-level justification
-- [x] Define repository structure (content/products/entities/)
-- [x] Create category taxonomy (content/products/categories.json)
-- [x] Document integration plan (PA, PB, Price DB, calculators, video)
-- [x] Document migration strategy (incremental, 6 waves)
-- [x] Validate: no Price DB duplication, no DECISIONS.md contradiction
+- [ ] Update `.opencode/agents/levnytt-writer.md` to reference PAS V1.0 template (not SKILL.md)
+- [ ] Update `.opencode/agents/levnytt-writer.md` to use `<div class="ia-wrap"><article>` structure
+- [ ] Update `.opencode/agents/levnytt-writer.md` to use green/gold brand palette
+- [ ] Update `.opencode/agents/levnytt-writer.md` to use dark evidence tier backgrounds
+- [ ] Remove or update 5+ docs referencing `levnytt-se-master-template.html`
+- [ ] Decide fate of `levnytt-se-master-template.html`
+- [ ] Fix broken cron path in `reddit_niche_radar.py` (`/home/yampa/Documents/Levnytt/`)
+- [ ] Fix `informational-article/SKILL.md` reference to sibling `gpt-image-2` skill
+- [ ] Run Publication Agent for `vad-ar-lutein` (deploy to root)
 
 ### Completion criteria
 
-- Product Entity architecture documented
-- Canonical schema defined
-- Repository structure proposed
-- Integration plan completed
-- Migration strategy documented
-- No production pages modified
-- No articles modified
+- Pipeline produces PAS V1.0 compliant articles without manual fix-up
+- No broken references to deleted files
+- No docs reference `levnytt-se-master-template.html` or deleted files
+- Production article `vad-ar-lutein.html` deployed at root
 
 ### Next action
 
-Start Wave 1 entity creation (Omega-3 Plus, Carotenoid Complex, Pro Vitality, Formula IV, Tre-en-en). Resolve multi-variant product modeling question first.
-
----
-
-## Future work (backlog, unordered)
-
-| Area | Description |
-|---|---|
-| **Product Entity System** | Structured product data via `content/products/` |
-| **Content expansion** | New articles, internal linking |
-| **Performance** | Image optimization, lazy loading, Core Web Vitals |
-| **Accessibility** | Contrast checks, ARIA labels, keyboard navigation |
-| **Interactive tools** | Comparison pages, calculators, decision guides |
-
----
-
-## Sprint template
-
-When opening a new sprint, use:
-
-```
+Read and update `levnytt-writer.md` to embed PAS V1.0 template structure.
 ## Sprint status
 Active.
 
