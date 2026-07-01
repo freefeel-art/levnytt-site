@@ -9,7 +9,7 @@ Last updated: 2026-07-01
 
 The Gen 3 migration is **complete**.
 The Brand System (Sprint 8), Brand Rollout (Sprint 9), Repository Cleanup (Sprint 9b), and Post-Cleanup Baseline (Sprint 10) are **complete**.
-The Production Orchestrator V1 (Sprint 11) is built and being tested.
+The Production Orchestrator + Production Brief Architecture + Cost Telemetry (Sprint 11) is **complete**.
 
 ---
 
@@ -23,11 +23,6 @@ The Production Orchestrator V1 (Sprint 11) is built and being tested.
 | **Completed** | 2026-07-01 |
 | **Commit** | `c61eebc` |
 
-- Brand OG images deployed to 70+ root pages + 37 content/articles
-- 28+ obsolete/superseded files removed
-- SKILL-v2 backups moved to `.archive/`
-- REPOSITORY-CLEANUP-REPORT.md written
-
 ### Sprint 10 — Post-Cleanup Baseline
 
 | | |
@@ -36,49 +31,71 @@ The Production Orchestrator V1 (Sprint 11) is built and being tested.
 | **Completed** | 2026-07-01 |
 | **Commits** | `69c5359`, `a0ab42a` |
 
-- levnytt-writer.md: `<div class="ia-wrap">` structure, PAS V1.0 note
-- SKILL.md: `gpt-image-2` reference fixed
-- reddit_niche_radar.py: cron path fixed
-- levnytt-se-master-template.html: deleted, 6 docs updated
-- vad-ar-lutein: deployed to root, QA 12/12
+### Sprint 11 — Production Orchestrator + Brief Architecture + Telemetry
+
+| | |
+|---|---|
+| **Status** | ✅ Completed |
+| **Completed** | 2026-07-01 |
+| **Commits** | `4fd38ac`, `2bd61c6`, `ba7079f` |
+
+**Delivered:**
+- `docs/PRODUCTION-PIPELINE.md` — V2: Brief→Package→Editorial chain (7 stages)
+- `docs/PRODUCTION-ORCHESTRATOR.md` — V2: brief-first invocation, QA gating, abort/resume
+- `docs/PRODUCTION-BRIEF-SPEC.md` — 14-field canonical spec (YAML)
+- `docs/RESEARCH-PACKAGE-SPEC.md` — 12-file structured research output
+- `docs/COST-TELEMETRY.md` — model pricing, log format, aggregation queries
+- `scripts/run-production.sh` — V2: generates `.brief.yaml` from keyword, detects intent/topic/audience
+- `scripts/qa-article.sh` — 12-check PAS V1.0 validator (GREEN/AMBER/RED)
+- `scripts/cost-report.sh` — CLI cost aggregator (--today, --month, --per-article)
+- `content/briefs/vad-ar-lutein.brief.yaml` — example brief (verified against 12/12 QA article)
+- `production/logs/` — telemetry directory + sample log
+- `.opencode/agents/production-orchestrator.md` — V2: brief-first agent chainer with telemetry
+
+**Key architectural decision:** Keyword is now one field in the Production Brief, not the pipeline input. Brief → Research Commander → Research Package → Editorial Commander → Editorial Brief → Writer.
 
 ---
 
-## Active Sprint — 11
+## Active Sprint — 12
 
 | | |
 |---|---|
 | **Status** | 🟢 Active |
-| **Sprint** | 11 — Production Orchestrator V1 |
-| **Started** | 2026-07-01 |
+| **Sprint** | 12 — Local LLM Pilot (Ollama) |
+| **Started** | Pending reboot |
 
 ### Objective
 
-Transform the agent suite into a Content Factory with a single-command production pipeline. Pipeline documentation, orchestrator agent, shell runner, and QA validator are built. Ready for end-to-end testing.
+Evaluate whether Editorial Commander, Writer, and QA can run locally via Ollama instead of OpenRouter. Benchmark output quality, execution time, RAM, GPU usage, and estimated cost savings.
 
-### Tasks
+### Phase 1 — Setup
 
-- [x] Audit all 7 registered agents (responsibilities, inputs, outputs)
-- [x] Write `docs/PRODUCTION-PIPELINE.md`
-- [x] Write `docs/PRODUCTION-ORCHESTRATOR.md`
-- [x] Create `.opencode/agents/production-orchestrator.md`
-- [x] Create `scripts/run-production.sh`
-- [x] Create `scripts/qa-article.sh` (12-check PAS V1.0 validator)
-- [x] Fix QA edge cases (multi-line structure, gold variants)
-- [ ] End-to-end production test with a real keyword
-- [ ] Verify Publication Agent handles orchestrator publishes
+- [ ] Reboot system (NVIDIA driver installation requires it)
+- [ ] Verify NVIDIA: `nvidia-smi`, CUDA runtime
+- [ ] Install Ollama
+- [ ] Download qwen3:8b (or smaller model if needed)
+
+### Phase 2 — Benchmark
+
+- [ ] Run same Editorial Brief on OpenRouter (baseline)
+- [ ] Run same Editorial Brief on Ollama (local)
+- [ ] Compare: output quality, execution time, RAM, GPU, cost
+- [ ] Document findings
+
+### Phase 3 — Decision
+
+- [ ] Decide which agents can be moved to local execution
+- [ ] Update agent configuration if needed
 
 ### Completion criteria
 
-- Single command: `./scripts/run-production.sh "<keyword>"`
-- QA validator: correct GREEN/AMBER/RED gates
-- Orchestrator agent: chains all agents via opencode Task tool
-- End-to-end run produces published article at root
+- Ollama installed and running with at least one model
+- Benchmark data collected for OpenRouter vs Ollama
+- Clear recommendation: which agents to move local, which to keep on OpenRouter
 
 ### Next action
 
-Full end-to-end test: invoke orchestrator with a real keyword.
-Run `"run production: vad-är-magnesium"` in opencode.
+Reboot → `nvidia-smi` → install Ollama → pull model → run benchmark
 
 ---
 
@@ -89,5 +106,6 @@ Run `"run production: vad-är-magnesium"` in opencode.
 | Product Entity System | Structured product data via `content/products/` |
 | Content expansion | New articles, internal linking |
 | Research Commander modules | Implement authority, DataForSEO, reddit modules |
+| Agent migration to Production Brief | Update agents to consume `.brief.yaml` instead of keywords |
 | Automated Editorial Review | Auto-approve routine QC gates |
 | Performance | Image optimization, lazy loading, Core Web Vitals |
