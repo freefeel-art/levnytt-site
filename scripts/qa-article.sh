@@ -96,11 +96,14 @@ HAS_BODY=$(grep_count '<body>' "$ARTICLE")
 [ "$HAS_HTML_OPEN" -ge 1 ] && [ "$HAS_HTML_CLOSE" -ge 1 ] && [ "$HAS_HEAD" -ge 1 ] && [ "$HAS_BODY" -ge 1 ]
 check "3" "Valid HTML shell (html/head/body)" $?
 
-# ─── Q4 — PAS wrapper: <div class="ia-wrap"><article> ────────────────────
-DIV_WRAP=$(grep_count '<div class="ia-wrap"><article>' "$ARTICLE")
+# ─── Q4 — PAS wrapper: <div class="ia-wrap"> + <article> (NOT <main>) ────
+DIV_OPEN=$(grep_count '<div class="ia-wrap">' "$ARTICLE")
+ARTICLE_OPEN=$(grep_count '<article>' "$ARTICLE")
+ARTICLE_CLOSE=$(grep_count '</article>' "$ARTICLE")
+DIV_CLOSE=$(grep_count '</div>' "$ARTICLE")
 MAIN_WRAP=$(grep_count '<main class="ia-wrap">' "$ARTICLE")
-[ "$DIV_WRAP" -ge 1 ] && [ "$MAIN_WRAP" -eq 0 ]
-check "4" "PAS wrapper (<div>, not <main>)" $?
+[ "$DIV_OPEN" -ge 1 ] && [ "$ARTICLE_OPEN" -ge 1 ] && [ "$ARTICLE_CLOSE" -ge 1 ] && [ "$DIV_CLOSE" -ge 1 ] && [ "$MAIN_WRAP" -eq 0 ]
+check "4" "PAS wrapper (.ia-wrap div + article, no <main>)" $?
 
 # ─── Q5 — PAS CSS classes ───────────────────────────────────────────────
 HAS_PUNCH=$(grep_count '\.ia-punchline' "$ARTICLE")
@@ -110,13 +113,18 @@ HAS_FAQ=$(grep_count '\.ia-faq' "$ARTICLE")
 [ "$HAS_PUNCH" -ge 1 ] && [ "$HAS_TAKE" -ge 1 ] && [ "$HAS_CTA" -ge 1 ] && [ "$HAS_FAQ" -ge 1 ]
 check "5" "PAS CSS (.ia-punchline/.ia-takeaways/.ia-cta/.ia-faq)" $?
 
-# ─── Q6 — Green/gold palette (NO legacy navy/coral) ─────────────────────
+# ─── Q6 — Brand palette: green + gold (NO legacy navy/coral) ──────────
 HAS_GREEN=$(grep_count '#1B4332' "$ARTICLE")
-HAS_GOLD=$(grep_count '#E8C870' "$ARTICLE")
+HAS_GOLD_E8=$(grep_count '#E8C870' "$ARTICLE")
+HAS_GOLD_C9=$(grep_count '#C9A84C' "$ARTICLE")
+HAS_GOLD_D4=$(grep_count '#d4b85e' "$ARTICLE")
+HAS_CREAM=$(grep_count '#F9F6EF' "$ARTICLE")
 HAS_NAVY=$(grep_count '#0F1B3A' "$ARTICLE")
 HAS_CORAL=$(grep_count '#F25F4C' "$ARTICLE")
-[ "$HAS_GREEN" -ge 1 ] && [ "$HAS_GOLD" -ge 1 ] && [ "$HAS_NAVY" -eq 0 ] && [ "$HAS_CORAL" -eq 0 ]
-check "6" "Green/gold palette (no navy/coral)" $?
+HAS_OLD_CREAM=$(grep_count '#FAF4E6' "$ARTICLE")
+HAS_GOLD=$((HAS_GOLD_E8 + HAS_GOLD_C9 + HAS_GOLD_D4))
+[ "$HAS_GREEN" -ge 1 ] && [ "$HAS_GOLD" -ge 1 ] && [ "$HAS_CREAM" -ge 1 ] && [ "$HAS_NAVY" -eq 0 ] && [ "$HAS_CORAL" -eq 0 ] && [ "$HAS_OLD_CREAM" -eq 0 ]
+check "6" "Brand palette (green/gold/cream, no navy/coral/old-cream)" $?
 
 # ─── Q7 — Dark evidence tiers ───────────────────────────────────────────
 HAS_EVT1=$(grep_count '\.ia-ev-t1' "$ARTICLE")
