@@ -133,7 +133,7 @@
 - No inline :root tokens (uses pillar.css variables)
 - Fonts: Playfair Display 400/600/700 + Inter 300/400/500/600
 
-#### Key differences from `levnytt-se-master-template.html`
+#### Key differences from legacy `levnytt-se-master-template.html` (now removed)
 - **No freshness banner**
 - **No gradient hero** (flat header)
 - **No back-link**

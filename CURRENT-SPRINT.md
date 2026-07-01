@@ -46,26 +46,30 @@ Solidify the single production baseline after cleanup: update writer pipeline to
 
 ### Tasks
 
-- [ ] Update `.opencode/agents/levnytt-writer.md` to reference PAS V1.0 template (not SKILL.md)
-- [ ] Update `.opencode/agents/levnytt-writer.md` to use `<div class="ia-wrap"><article>` structure
-- [ ] Update `.opencode/agents/levnytt-writer.md` to use green/gold brand palette
-- [ ] Update `.opencode/agents/levnytt-writer.md` to use dark evidence tier backgrounds
-- [ ] Remove or update 5+ docs referencing `levnytt-se-master-template.html`
-- [ ] Decide fate of `levnytt-se-master-template.html`
-- [ ] Fix broken cron path in `reddit_niche_radar.py` (`/home/yampa/Documents/Levnytt/`)
-- [ ] Fix `informational-article/SKILL.md` reference to sibling `gpt-image-2` skill
-- [ ] Run Publication Agent for `vad-ar-lutein` (deploy to root)
+- [x] Update `.opencode/agents/levnytt-writer.md` to reference PAS V1.0 template (not SKILL.md)
+- [x] Update `.opencode/agents/levnytt-writer.md` to use `<div class="ia-wrap"><article>` structure
+- [x] Update `.opencode/agents/levnytt-writer.md` to use green/gold brand palette (already correct)
+- [x] Update `.opencode/agents/levnytt-writer.md` to use dark evidence tier backgrounds (already correct)
+- [x] Remove or update 5+ docs referencing `levnytt-se-master-template.html`
+- [x] Decide fate of `levnytt-se-master-template.html` — removed (6 docs updated, file deleted)
+- [x] Fix broken cron path in `reddit_niche_radar.py` (`/home/yampa/Documents/Levnytt/`)
+- [x] Fix `informational-article/SKILL.md` reference to sibling `gpt-image-2` skill
+- [x] Run Publication Agent for `vad-ar-lutein` (deploy to root)
 
 ### Completion criteria
 
-- Pipeline produces PAS V1.0 compliant articles without manual fix-up
-- No broken references to deleted files
-- No docs reference `levnytt-se-master-template.html` or deleted files
-- Production article `vad-ar-lutein.html` deployed at root
+- [x] Pipeline produces PAS V1.0 compliant articles (levnytt-writer.md updated)
+- [x] No broken references to deleted files
+- [x] No docs reference `levnytt-se-master-template.html` (file deleted, 6 docs updated)
+- [x] levnytt-writer.md uses `<div class="ia-wrap"><article>` structure
+- [x] SKILL.md `gpt-image-2` reference fixed
+- [x] Cron paths in `reddit_niche_radar.py` fixed
+- [x] Production article `vad-ar-lutein.html` deployed at root
+- [x] CURRENT-SPRINT.md updated with Sprint 10 progress
 
 ### Next action
 
-Read and update `levnytt-writer.md` to embed PAS V1.0 template structure.
+Serve `vad-ar-lutein.html` at http://127.0.0.1:8080/vad-ar-lutein for visual QA.
 ## Sprint status
 Active.
 

@@ -119,10 +119,9 @@ These counts change with every new page or file. Hard-coded counts in documentat
 # All HTML files (excluding .git)
 find . -name "*.html" -not -path "./.git/*" | wc -l
 
-# Production pages only (excluding 404 and template)
+# Production pages only (excluding 404)
 find . -name "*.html" -not -path "./.git/*" \
-  -not -name "404.html" \
-  -not -name "levnytt-se-master-template.html" | wc -l
+  -not -name "404.html" | wc -l
 
 # Sitemap entry count
 grep -c '<loc>' sitemap.xml

@@ -34,7 +34,6 @@ CANONICAL = {
 
 EXCLUDED_ROOT_PAGES = {
     "index.html", "404.html", "integritetspolicy.html",
-    "levnytt-se-master-template.html",
 }
 
 BRAND_ASSETS_REQUIRED = [
@@ -226,7 +225,7 @@ def categorize_page(slug):
                  "golden-home-care", "personlig-vard", "neolife-hallbarhet",
                  "ekologisk-stadning-greenwashing"}:
         return "pillar"
-    if slug in ("artiklar", "404", "index", "integritetspolicy", "levnytt-se-master-template"):
+    if slug in ("artiklar", "404", "index", "integritetspolicy"):
         return "utility"
     return "informational"
 

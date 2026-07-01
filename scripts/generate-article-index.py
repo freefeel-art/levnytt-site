@@ -23,7 +23,7 @@ SITE_DOMAIN = "https://levnytt.se"
 
 EXCLUDED_FILES = {
     "index.html", "artiklar.html", "404.html", "integritetspolicy.html",
-    "levnytt-se-master-template.html", "om-oss.html", "pillar.css",
+    "om-oss.html", "pillar.css",
 }
 
 CATEGORY_MAP = [

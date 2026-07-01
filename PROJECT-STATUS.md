@@ -227,7 +227,7 @@ levnytt-site/
 ├── footer.js                            ← Site-wide footer
 ├── components.js                        ← Brand injectors + sponsor-ID rewriting + scroll-to-top
 ├── pillar.css                           ← Shared design system
-├── levnytt-se-master-template.html      ← Dev template (not a public page)
+├── levnytt-se-master-template.html      ← REMOVED (was dev template, not a public page)
 ├── _redirects                           ← Cloudflare routing rules
 ├── robots.txt
 ├── sitemap.xml                          ← hand-maintained URL index

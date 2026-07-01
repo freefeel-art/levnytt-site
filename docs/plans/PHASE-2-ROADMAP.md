@@ -77,7 +77,7 @@ levnytt-site/
 ├── _redirects                    ← Cloudflare routing
 ├── sitemap.xml                   ← Hand-maintained URL index
 ├── 404.html                      ← Custom error page
-├── levnytt-se-master-template.html  ← Dev template (not public)
+├── levnytt-se-master-template.html  ← REMOVED (was dev template, not public)
 └── docs/                         ← All documentation
 ```
 
