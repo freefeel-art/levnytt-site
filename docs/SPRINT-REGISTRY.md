@@ -5,7 +5,7 @@
 This registry is the single source of truth for all project sprints. No other document defines sprint metadata independently. Future sprint plans, agents, and orchestrators read from this registry.
 
 **Last updated:** 2026-07-02
-**Status:** Completed — Sprint 14
+**Status:** Completed — Sprint 15
 
 ---
 
@@ -210,12 +210,12 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | **Active** |
+| **Status** | Completed |
 | **Objective** | Create centralized structured product data so every page references the same prices, descriptions, and categories. No build step. |
 | **Dependencies** | Sprint 14 |
 | **Deliverables** | content/products/prices.json (all 57 products), content/products/product-data.js (runtime module with price/entity lookups, sponsor link fixing, replacing components.js productMap), golden-home-care.html migrated as reference implementation |
-| **Completion Date** | *(in progress)* |
-| **Related Documents** | docs/plans/PHASE-2-ROADMAP.md, content/products/product-data.js, content/products/prices.json |
+| **Completion Date** | 2026-07-02 |
+| **Related Documents** | docs/plans/PHASE-2-ROADMAP.md, content/products/product-data.js, content/products/prices.json, docs/sprints/SPRINT-15-REPORT.md |
 
 ---
 

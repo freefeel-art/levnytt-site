@@ -30,20 +30,21 @@ See `docs/SPRINT-REGISTRY.md` for all sprint data.
 
 ---
 
-## Active Sprint: 15 — Product Entity System V1
+## Sprint 15 — Product Entity System V1
 
 | | |
 |---|---|
-| **Status** | 🟢 Active |
-| **Opened** | 2026-07-02 |
-| **Objective** | Create centralized structured product data so every page references the same prices, descriptions, and categories. No build step. |
+| **Status** | ✅ Completed |
+| **Completed** | 2026-07-02 |
 
-**Deliverables:**
+**Delivered:**
 - `content/products/prices.json` — all 57 products with prices from the Price Database
-- `content/products/product-data.js` — runtime JS module with entity lookups, price lookup, sponsor link fixing, replacing `components.js` `productMap`
-- `golden-home-care.html` — migrated as reference implementation: LDC prices injected from `product-data.js` instead of hardcoded HTML
-- `components.js` — `fixLinks()` now delegates to `LevNyttProductData` when available, falls back to legacy `productMap`
-- All documentation updated
+- `content/products/product-data.js` — runtime JS module with entity/price lookups, sponsor link fixing
+- `golden-home-care.html` — migrated as reference implementation: LDC prices injected from `product-data.js`
+- `components.js` — `fixLinks()` delegates to `LevNyttProductData` when available, falls back to `productMap`
+- `docs/sprints/SPRINT-15-REPORT.md` — sprint closing report
+
+See `docs/SPRINT-REGISTRY.md` for all sprint data. Awaiting owner direction for Sprint 16.
 
 ---
 
