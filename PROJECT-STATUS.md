@@ -1,6 +1,6 @@
 # PROJECT-STATUS.md — LevNytt.se Executive Dashboard
 
-*Last updated: 2026-07-02 (Sprint 14 active) | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions. Sprint metadata is canonical at `docs/SPRINT-REGISTRY.md`.*
+*Last updated: 2026-07-02 (Sprint 15 active) | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions. Sprint metadata is canonical at `docs/SPRINT-REGISTRY.md`.*
 
 ---
 
@@ -15,7 +15,7 @@
 | **Migration** | ✅ Complete |
 | **Brand System** | ✅ Integrated and rolled out |
 | **Deployment** | Cloudflare Pages (automatic deployment) |
-| **Next Focus** | Sprint 14 — Sprint Registry System V1 (Active) |
+| **Next Focus** | Sprint 15 — Product Entity System V1 (Active) |
 
 ---
 
@@ -29,7 +29,7 @@
 | **Brand System** | ✅ Integrated: `assets/brand/`, brand injectors, brand OG image |
 | **Shared components** | ✅ `nav.js` + `footer.js` + `components.js` on all root pages |
 | **Deployment** | Cloudflare Pages — automatic on `git push` |
-| **Current phase** | Sprint 14 — Sprint Registry System V1 (Active) |
+| **Current phase** | Sprint 15 — Product Entity System V1 (Active) |
 
 ---
 
@@ -266,16 +266,18 @@ levnytt-site/
 | Sprint 12 — Research Commander V2 | Research Commander V2 (brief-first, backward compat), GSC Content Audit (11 URLs) | Jul 2026 |
 | Sprint 13 — GSC Non-Indexed URL Remediation | 4 root copies published, sitemap updated, titles fixed (3 pages), 5 isolated pages received 5+ internal links each, canonical resolution between tre-en-en pages | Jul 2026 |
 | Sprint 14 — Sprint Registry System V1 | docs/SPRINT-REGISTRY.md created, CURRENT-SPRINT.md/PROJECT-STATUS.md/PHASE-2-ROADMAP.md updated to reference registry | Jul 2026 |
+| Sprint 15 — Product Entity System V1 | content/products/prices.json, product-data.js runtime module, golden-home-care.html reference migration | Jul 2026 |
 
 ---
 
 ## Next Development Priorities
 
-### Priority 1 — 🟢 Sprint 14 — Sprint Registry System V1 (Active)
-- ✅ `docs/SPRINT-REGISTRY.md` created with Sprints 1–20
-- ✅ `CURRENT-SPRINT.md` updated to reference registry
-- ✅ `PROJECT-STATUS.md` updated to reference registry
-- ✅ `docs/plans/PHASE-2-ROADMAP.md` updated to reference registry
+### Priority 1 — 🟢 Sprint 15 — Product Entity System V1 (Active)
+- ✅ `content/products/prices.json` — all 57 NeoLife products with prices
+- ✅ `content/products/product-data.js` — runtime JS module: price/entity lookups, sponsor link fixing
+- ✅ `golden-home-care.html` — migrated as reference implementation (LDC prices from data module)
+- ✅ `components.js` — `fixLinks()` delegates to `LevNyttProductData` when available
+- ✅ Documentation updated
 - ⬜ Commit and push
 
 ### Priority 2 — New high-value content
@@ -302,18 +304,16 @@ levnytt-site/
 
 ## Current Milestone
 
-Sprint 14 — Sprint Registry System V1
+Sprint 15 — Product Entity System V1
 
 Primary objective:
 
-- Create `docs/SPRINT-REGISTRY.md` as the single source of truth for all project sprints
-- Populate Sprints 1–20 with status, objective, deliverables, dependencies, and completion dates
-- Update `CURRENT-SPRINT.md` to reference the Sprint Registry instead of duplicating sprint metadata
-- Update `PROJECT-STATUS.md` to reference the Sprint Registry
-- Update `docs/plans/PHASE-2-ROADMAP.md` to reference the Sprint Registry
-- Commit and push all changes
+- Create `content/products/prices.json` — all 57 NeoLife products with prices (customer/distributor/savings), converted from Price Database
+- Create `content/products/product-data.js` — runtime JS module with embedded price data, entity slug index, sponsor link fixing, public API (`LevNyttProductData.getPrice()`, `.getProduct()`, `.getShopUrl()`, `.formatPrice()`)
+- Migrate `golden-home-care.html` as reference implementation — LDC prices injected dynamically from data module (replaces outdated hardcoded "ca 80–90 kr")
+- Update `components.js` — `fixLinks()` delegates to `LevNyttProductData` when available; falls back to legacy `productMap` for backward compatibility
 
-Sprint metadata is canonical at `docs/SPRINT-REGISTRY.md`. See `docs/SPRINT-REGISTRY.md` for sprint history.
+Product data is canonical at `content/products/prices.json` and `content/products/product-data.js`. See `docs/SPRINT-REGISTRY.md` for sprint history.
 
 ---
 

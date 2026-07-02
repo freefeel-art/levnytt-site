@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "version": "1.0",
+    "currency": "SEK",
+    "sources": [
+      "NeoLife Kundprislista SE 04.2026",
+      "NeoLife Återförsäljarprislista SE 04.2026"
+    ],
+    "last_updated": "2026-06-30",
+    "description": "All NeoLife product prices — canonical source. Generated from LEVNYTT-PRICE-DATABASE.md."
+  },
+  "categories": [
+    {
+      "id": "supplements",
+      "label_sv": "Kosttillskott",
+      "vat_pct": 6,
+      "products": [
+        {"code": 551, "name": "Sustained Release Vitamin-C", "packaging": "120 tab", "customer_price": 358, "distributor_price": 282, "savings_sek": 76, "savings_pct": 21.2},
+        {"code": 552, "name": "All C", "packaging": "120 tab", "customer_price": 259, "distributor_price": 205, "savings_sek": 54, "savings_pct": 20.8},
+        {"code": 555, "name": "Garlic Allium Complex", "packaging": "60 tab", "customer_price": 235, "distributor_price": 184, "savings_sek": 51, "savings_pct": 21.7},
+        {"code": 560, "name": "Acidophilus Plus", "packaging": "60 kaps", "customer_price": 520, "distributor_price": 409, "savings_sek": 111, "savings_pct": 21.3},
+        {"code": 562, "name": "Wheat Germ Oil with Vitamin E", "packaging": "100 kaps", "customer_price": 387, "distributor_price": 305, "savings_sek": 82, "savings_pct": 21.2},
+        {"code": 566, "name": "Carotenoid Complex", "packaging": "90 kaps", "customer_price": 736, "distributor_price": 579, "savings_sek": 157, "savings_pct": 21.3},
+        {"code": 576, "name": "Formula IV", "packaging": "100 kaps", "customer_price": 539, "distributor_price": 424, "savings_sek": 115, "savings_pct": 21.3},
+        {"code": 590, "name": "Multi", "packaging": "60 tab", "customer_price": 249, "distributor_price": 196, "savings_sek": 53, "savings_pct": 21.3},
+        {"code": 691, "name": "Formula IV Plus", "packaging": "60 tab/kaps", "customer_price": 486, "distributor_price": 383, "savings_sek": 103, "savings_pct": 21.2},
+        {"code": 724, "name": "Kal-Mag Plus D", "packaging": "180 tab", "customer_price": 240, "distributor_price": 190, "savings_sek": 50, "savings_pct": 20.8},
+        {"code": 731, "name": "Aloe Vera Plus", "packaging": "1 l", "customer_price": 224, "distributor_price": 176, "savings_sek": 48, "savings_pct": 21.4},
+        {"code": 735, "name": "Tre", "packaging": "750 ml", "customer_price": 492, "distributor_price": 387, "savings_sek": 105, "savings_pct": 21.3},
+        {"code": 740, "name": "Vita-Squares", "packaging": "180 tuggtab", "customer_price": 355, "distributor_price": 280, "savings_sek": 75, "savings_pct": 21.1},
+        {"code": 789, "name": "Betaguard", "packaging": "90 tab", "customer_price": 354, "distributor_price": 279, "savings_sek": 75, "savings_pct": 21.2},
+        {"code": 790, "name": "Flavonoid Complex", "packaging": "60 tab", "customer_price": 284, "distributor_price": 224, "savings_sek": 60, "savings_pct": 21.1},
+        {"code": 800, "name": "Botanical Balance", "packaging": "120 tab", "customer_price": 704, "distributor_price": 554, "savings_sek": 150, "savings_pct": 21.3},
+        {"code": 805, "name": "Magnesium Complex", "packaging": "60 tab", "customer_price": 231, "distributor_price": 182, "savings_sek": 49, "savings_pct": 21.2},
+        {"code": 820, "name": "Resp-X", "packaging": "90 tab", "customer_price": 268, "distributor_price": 211, "savings_sek": 57, "savings_pct": 21.3},
+        {"code": 830, "name": "Chelated Zinc", "packaging": "90 tab", "customer_price": 213, "distributor_price": 167, "savings_sek": 46, "savings_pct": 21.6},
+        {"code": 840, "name": "UpBeet", "packaging": "30 port", "customer_price": 818, "distributor_price": 643, "savings_sek": 175, "savings_pct": 21.4},
+        {"code": 850, "name": "Fibre Tablets", "packaging": "120 tab", "customer_price": 244, "distributor_price": 192, "savings_sek": 52, "savings_pct": 21.3},
+        {"code": 860, "name": "Elevate", "packaging": "30 port", "customer_price": 661, "distributor_price": 520, "savings_sek": 141, "savings_pct": 21.3},
+        {"code": 865, "name": "Vegan D", "packaging": "120 tab", "customer_price": 210, "distributor_price": 165, "savings_sek": 45, "savings_pct": 21.4},
+        {"code": 892, "name": "Cruciferous Plus", "packaging": "60 tab", "customer_price": 301, "distributor_price": 236, "savings_sek": 65, "savings_pct": 21.6},
+        {"code": 927, "name": "Tre-en-en", "packaging": "120 kaps", "customer_price": 562, "distributor_price": 442, "savings_sek": 120, "savings_pct": 21.4},
+        {"code": 929, "name": "Omega-3 Plus", "packaging": "90 kaps", "customer_price": 422, "distributor_price": 332, "savings_sek": 90, "savings_pct": 21.3},
+        {"code": 930, "name": "CoQ10", "packaging": "60 kaps", "customer_price": 586, "distributor_price": 461, "savings_sek": 125, "savings_pct": 21.3},
+        {"code": 935, "name": "Bio-Tone", "packaging": "120 tab", "customer_price": 527, "distributor_price": 416, "savings_sek": 111, "savings_pct": 21.1},
+        {"code": 942, "name": "Pro Vitality+", "packaging": "30 sachet", "customer_price": 647, "distributor_price": 509, "savings_sek": 138, "savings_pct": 21.3}
+      ]
+    },
+    {
+      "id": "weight_management",
+      "label_sv": "Viktkontroll",
+      "vat_pct": 6,
+      "products": [
+        {"code": 915, "name": "NeoLifeShake Creamy Vanilla", "packaging": "15 sachet", "customer_price": 776, "distributor_price": 612, "savings_sek": 164, "savings_pct": 21.1},
+        {"code": 916, "name": "NeoLifeShake Rich Chocolate", "packaging": "15 sachet", "customer_price": 776, "distributor_price": 612, "savings_sek": 164, "savings_pct": 21.1},
+        {"code": 917, "name": "NeoLifeShake Berries n' Cream", "packaging": "15 sachet", "customer_price": 776, "distributor_price": 612, "savings_sek": 164, "savings_pct": 21.1},
+        {"code": 920, "name": "NeoLifeTea", "packaging": "15 st (30 portioner)", "customer_price": 415, "distributor_price": 328, "savings_sek": 87, "savings_pct": 21.0},
+        {"code": 950, "name": "NeoLifeBar Frukt & Nötter", "packaging": "15 st", "customer_price": 465, "distributor_price": 404, "savings_sek": 61, "savings_pct": 13.1}
+      ]
+    },
+    {
+      "id": "home_care",
+      "label_sv": "Golden Rengöring",
+      "vat_pct": 25,
+      "products": [
+        {"code": 16, "name": "Super 10 grovrengöringsmedel", "packaging": "1 l", "customer_price": 254, "distributor_price": 200, "savings_sek": 54, "savings_pct": 21.3},
+        {"code": 17, "name": "Super 10 grovrengöringsmedel", "packaging": "5 l", "customer_price": 1034, "distributor_price": 816, "savings_sek": 218, "savings_pct": 21.1},
+        {"code": 18, "name": "Super 10 grovrengöringsmedel", "packaging": "10 l", "customer_price": 1993, "distributor_price": 1495, "savings_sek": 498, "savings_pct": 25.0},
+        {"code": 19, "name": "Super 10 grovrengöringsmedel", "packaging": "25 l", "customer_price": 4519, "distributor_price": 3389, "savings_sek": 1130, "savings_pct": 25.0},
+        {"code": 21, "name": "LDC disk- & lättrengöringsmedel/handtvål", "packaging": "1 l", "customer_price": 268, "distributor_price": 211, "savings_sek": 57, "savings_pct": 21.3},
+        {"code": 25, "name": "LDC disk- & lättrengöringsmedel/handtvål", "packaging": "5 l", "customer_price": 1091, "distributor_price": 861, "savings_sek": 230, "savings_pct": 21.1},
+        {"code": 42, "name": "Soft sköljmedel", "packaging": "1 l", "customer_price": 255, "distributor_price": 201, "savings_sek": 54, "savings_pct": 21.2},
+        {"code": 144, "name": "G1 tvättmedel", "packaging": "5 kg", "customer_price": 729, "distributor_price": 575, "savings_sek": 154, "savings_pct": 21.1}
+      ]
+    },
+    {
+      "id": "personal_care",
+      "label_sv": "Hår & Kroppsvård",
+      "vat_pct": 25,
+      "products": [
+        {"code": 310, "name": "Rich Revitalizing Shampoo", "packaging": "250 ml", "customer_price": 166, "distributor_price": 131, "savings_sek": 35, "savings_pct": 21.1},
+        {"code": 311, "name": "Mild Revitalizing Shampoo", "packaging": "250 ml", "customer_price": 166, "distributor_price": 131, "savings_sek": 35, "savings_pct": 21.1},
+        {"code": 312, "name": "Enriching Conditioner", "packaging": "250 ml", "customer_price": 158, "distributor_price": 125, "savings_sek": 33, "savings_pct": 20.9},
+        {"code": 314, "name": "Refreshing Bath & Shower Gel", "packaging": "250 ml", "customer_price": 208, "distributor_price": 164, "savings_sek": 44, "savings_pct": 21.2},
+        {"code": 315, "name": "Moisturizing Hand & Body Lotion", "packaging": "250 ml", "customer_price": 167, "distributor_price": 131, "savings_sek": 36, "savings_pct": 21.6},
+        {"code": 316, "name": "Aloe Vera Gel", "packaging": "100 ml", "customer_price": 207, "distributor_price": 164, "savings_sek": 43, "savings_pct": 20.8}
+      ]
+    },
+    {
+      "id": "skin_care",
+      "label_sv": "Hudvård",
+      "vat_pct": 25,
+      "products": [
+        {"code": 360, "name": "Balancing Tonic", "packaging": "100 ml", "customer_price": 321, "distributor_price": 252, "savings_sek": 69, "savings_pct": 21.5},
+        {"code": 361, "name": "Cleansing Milk", "packaging": "150 ml", "customer_price": 397, "distributor_price": 312, "savings_sek": 85, "savings_pct": 21.4},
+        {"code": 362, "name": "Cleansing Gel", "packaging": "150 ml", "customer_price": 397, "distributor_price": 312, "savings_sek": 85, "savings_pct": 21.4},
+        {"code": 364, "name": "Moisturizing Cream", "packaging": "75 ml", "customer_price": 490, "distributor_price": 386, "savings_sek": 104, "savings_pct": 21.2},
+        {"code": 365, "name": "Ultra Moisturizing Cream", "packaging": "75 ml", "customer_price": 490, "distributor_price": 386, "savings_sek": 104, "savings_pct": 21.2},
+        {"code": 366, "name": "Hydrating Serum", "packaging": "30 ml", "customer_price": 650, "distributor_price": 511, "savings_sek": 139, "savings_pct": 21.4},
+        {"code": 367, "name": "Ultra Hydrating Serum", "packaging": "30 ml", "customer_price": 650, "distributor_price": 511, "savings_sek": 139, "savings_pct": 21.4},
+        {"code": 368, "name": "Insta-Lift Eye Gel", "packaging": "15 ml", "customer_price": 304, "distributor_price": 239, "savings_sek": 65, "savings_pct": 21.4},
+        {"code": 369, "name": "Rejuvenating Rich Cream", "packaging": "50 ml", "customer_price": 588, "distributor_price": 462, "savings_sek": 126, "savings_pct": 21.4}
+      ]
+    },
+    {
+      "id": "accessories",
+      "label_sv": "Tillbehör",
+      "vat_pct": 25,
+      "products": [
+        {"code": 303, "name": "Handsprayflaska", "packaging": "500 ml", "customer_price": 29},
+        {"code": 308, "name": "Blandflaska", "packaging": "500 ml", "customer_price": 24},
+        {"code": 608, "name": "NeoLife Shaker", "packaging": "1 st", "customer_price": 41},
+        {"code": 1573, "name": "Pump till 1 l flaska (plastkork)", "packaging": "1 st", "customer_price": 42},
+        {"code": 1583, "name": "Pump till 250 ml flaska", "packaging": "1 st", "customer_price": 15},
+        {"code": 1584, "name": "Dunkpump 5 l Super 10", "packaging": "1 st", "customer_price": 133},
+        {"code": 1585, "name": "Dunkpump 10 l Super 10", "packaging": "1 st", "customer_price": 60},
+        {"code": 1586, "name": "Dunkpump 5 l LDC", "packaging": "1 st", "customer_price": 86},
+        {"code": 1650, "name": "Vitamin box", "packaging": "1 st", "customer_price": 32},
+        {"code": 5001, "name": "Vitamin box, stor", "packaging": "1 st", "customer_price": 38}
+      ]
+    }
+  ]
+}

@@ -115,6 +115,7 @@ levnytt-site/
 | **GSC Content Audit** | 11 "Crawled – not indexed" URLs audited with classifications and priority recommendations | Sprint 12 |
 | **GSC Non-Indexed URL Remediation** | 4 root copies published, sitemap updated, titles fixed, internal links added, canonical resolution | Sprint 13 |
 | **Sprint Registry System V1** | `docs/SPRINT-REGISTRY.md` created, all sprint metadata centralized | Sprint 14 |
+| **Product Entity System V1** | `content/products/prices.json`, `content/products/product-data.js` runtime module, golden-home-care page migrated as reference implementation | Sprint 15 |
 
 ---
 
@@ -131,7 +132,7 @@ levnytt-site/
 | 404 page, robots.txt, sitemap.xml | ✅ Operational |
 | Cloudflare Pages auto-deployment | ✅ Operational |
 | Documentation hierarchy and sprint workflow | ✅ Operational |
-| Product Entity System | ⬜ Not started |
+| Product Entity System | 🟡 In progress (Sprint 15) |
 | Interactive tools (calculators, comparisons) | ⬜ Not started |
 | Authority Research expansion | ⬜ Not started |
 
@@ -141,6 +142,10 @@ levnytt-site/
 
 ### Product Entity System
 Create a centralized product data source so every page references the same prices, descriptions, and categories. Currently, product prices are hardcoded per page. A structured system (e.g., `content/products/*.json` or a JS data module) would eliminate copy-paste errors and enable automated price-per-use calculations.
+
+**Status (Sprint 15):** `content/products/prices.json` ✅, `content/products/product-data.js` runtime module ✅, golden-home-care.html migrated as reference implementation ✅. Files are consumable at runtime via `window.LevNyttProductData` API.
+
+**Remaining:** Migrate additional pages from hardcoded prices to the runtime module. The `components.js` `productMap` is now a fallback — when `product-data.js` is loaded on a page, link fixing uses the entity index instead.
 
 **Deliverable:** Data file with all marketed NeoLife products, prices (customer/distributor), categories, and metadata. No build step — the file must be consumable directly by JavaScript at runtime or embedded during page authoring.
 

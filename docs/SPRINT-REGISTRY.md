@@ -206,16 +206,16 @@ This registry is the single source of truth for all project sprints. No other do
 
 ---
 
-### Sprint 15 — Product Entity System V1 (Planned)
+### Sprint 15 — Product Entity System V1
 
 | Field | Value |
 |-------|-------|
-| **Status** | Planned |
+| **Status** | **Active** |
 | **Objective** | Create centralized structured product data so every page references the same prices, descriptions, and categories. No build step. |
 | **Dependencies** | Sprint 14 |
-| **Deliverables** | content/products/ data file with all marketed NeoLife products, prices (customer/distributor), categories, metadata. Consumable by JavaScript at runtime or embedded during page authoring. |
-| **Completion Date** | — |
-| **Related Documents** | docs/plans/PHASE-2-ROADMAP.md |
+| **Deliverables** | content/products/prices.json (all 57 products), content/products/product-data.js (runtime module with price/entity lookups, sponsor link fixing, replacing components.js productMap), golden-home-care.html migrated as reference implementation |
+| **Completion Date** | *(in progress)* |
+| **Related Documents** | docs/plans/PHASE-2-ROADMAP.md, content/products/product-data.js, content/products/prices.json |
 
 ---
 

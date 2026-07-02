@@ -68,7 +68,9 @@
   }
 
   // ============================================================
-  // TUOTESIVUKARTTA — sivu → suora tuote-URL sponsori-ID:llä
+  // SPONSOR LINK FIXING — uses product-data.js when available,
+  // falls back to hardcoded productMap for backward compat.
+  // productMap will be removed once all pages load product-data.js.
   // ============================================================
   var productMap = {
     '/super-10/':                      SHOP_BASE + '/i/shop/home-care/super-10.html?sponsor=' + SPONSOR,
@@ -98,24 +100,23 @@
     '/neolife-shake-bar-tea/':         SHOP_BASE + '/i/shop/nutrition/neolife-shake.html?sponsor=' + SPONSOR,
   };
 
-  // ============================================================
-  // SPONSOR-ID AUTOMAATIO
-  // ============================================================
   function fixLinks() {
     var currentPath = window.location.pathname;
-    var directProductUrl = productMap[currentPath];
 
+    // Prefer product-data.js when loaded (no build step, gradual migration)
+    if (window.LevNyttProductData) {
+      window.LevNyttProductData.fixLinks();
+      return;
+    }
+
+    var directProductUrl = productMap[currentPath];
     var links = document.querySelectorAll('a[href*="neolifeshop.com"]');
     links.forEach(function(link) {
       var href = link.href;
-
-      // Jos ollaan tuotesivulla → ohjaa suoraan tuotteeseen
       if (directProductUrl && !href.includes('registration') && !href.includes('enrollment')) {
         link.href = directProductUrl;
         return;
       }
-
-      // Lisää sponsor= jos puuttuu
       if (!href.includes('sponsor=') && !href.includes('sponsorId=')) {
         var separator = href.includes('?') ? '&' : '?';
         link.href = href + separator + 'sponsor=' + SPONSOR;

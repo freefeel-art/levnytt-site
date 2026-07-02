@@ -26,7 +26,24 @@ The Sprint Registry (`docs/SPRINT-REGISTRY.md`) is now the **canonical source** 
 - `docs/plans/PHASE-2-ROADMAP.md` updated to reference registry
 - `docs/sprints/SPRINT-14-REPORT.md` — sprint closing report
 
-See `docs/SPRINT-REGISTRY.md` for all sprint data. Awaiting owner direction for Sprint 15.
+See `docs/SPRINT-REGISTRY.md` for all sprint data.
+
+---
+
+## Active Sprint: 15 — Product Entity System V1
+
+| | |
+|---|---|
+| **Status** | 🟢 Active |
+| **Opened** | 2026-07-02 |
+| **Objective** | Create centralized structured product data so every page references the same prices, descriptions, and categories. No build step. |
+
+**Deliverables:**
+- `content/products/prices.json` — all 57 products with prices from the Price Database
+- `content/products/product-data.js` — runtime JS module with entity lookups, price lookup, sponsor link fixing, replacing `components.js` `productMap`
+- `golden-home-care.html` — migrated as reference implementation: LDC prices injected from `product-data.js` instead of hardcoded HTML
+- `components.js` — `fixLinks()` now delegates to `LevNyttProductData` when available, falls back to legacy `productMap`
+- All documentation updated
 
 ---
 
