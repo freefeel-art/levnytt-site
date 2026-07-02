@@ -5,7 +5,7 @@
 This registry is the single source of truth for all project sprints. No other document defines sprint metadata independently. Future sprint plans, agents, and orchestrators read from this registry.
 
 **Last updated:** 2026-07-02
-**Status:** All sprints 1–21 completed — maintenance mode
+**Status:** Sprints 1–21 completed — Sprint 22 planned
 
 ---
 
@@ -294,6 +294,19 @@ This registry is the single source of truth for all project sprints. No other do
 | **Deliverables** | `scripts/md-to-article.py` (V2 → PAS V1.0 HTML converter, Python stdlib only, validates all required fields), `docs/PUBLICATION-SOURCE-V2.md` (frozen V2 frontmatter spec), `docs/MARKDOWN-FIRST-IMPLEMENTATION-PLAN.md`, `docs/CONTRADICTION-RESOLUTION.md` (C1–C8 classification), `content/articles/kalcium-brist-symtom/` (test article, QA GREEN 12/12), `_redirects` + `sitemap.xml` updated (B4/B5) |
 | **Completion Date** | 2026-07-02 |
 | **Related Documents** | docs/PUBLICATION-SOURCE-V2.md, docs/MARKDOWN-FIRST-IMPLEMENTATION-PLAN.md, docs/CONTRADICTION-RESOLUTION.md |
+
+---
+
+### Sprint 22 — Production Hardening: Protect Markdown Source Files
+
+| Field | Value |
+|-------|-------|
+| **Status** | Planned |
+| **Objective** | Fix the architectural issue where Markdown source files (`.md`) are colocated with published HTML output in `content/articles/`, making them publicly accessible on Cloudflare Pages. Establish `source/articles/` as the canonical input directory for the Markdown-first pipeline and update `md-to-article.py` accordingly. |
+| **Dependencies** | Sprint 21 (Markdown-First Publication Pipeline) |
+| **Deliverables** | `source/articles/` directory convention established, `kalcium-brist-symtom.md` moved from `content/articles/` to `source/articles/`, `scripts/md-to-article.py` updated (input path), `docs/PUBLICATION-SOURCE-V2.md` updated, `docs/MARKDOWN-FIRST-IMPLEMENTATION-PLAN.md` updated, QA confirming `.md` URL returns 404 and article slug returns 200 |
+| **Completion Date** | — |
+| **Related Documents** | docs/sprints/SPRINT-22-PLAN.md |
 
 ---
 
