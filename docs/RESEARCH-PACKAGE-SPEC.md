@@ -361,8 +361,11 @@ Relevant NeoLife products for CTA placement.
 
 The Research Commander receives a Production Brief and produces a Research Package.
 
-### Input
+### Input (primary)
 `content/briefs/<slug>.brief.yaml`
+
+### Input (backward compatibility)
+If a plain keyword string is provided instead of a brief path (e.g., `vad är lutein`), the Research Commander auto-generates a minimal Production Brief using keyword detection rules, then proceeds with the standard flow. The auto-generated brief is written to `content/briefs/<slug>.brief.yaml` for future reuse.
 
 ### Output
 `research/packages/<slug>/` with all required files
@@ -381,5 +384,6 @@ If not enough sources exist or modules fail critically, the package lifecycle is
 ## Version History
 
 | Version | Date | Change |
-|---|---|---|
+|---|---|---|---|
 | V1 | 2026-07-01 | Initial specification. 12 package files, JSON/YAML/MD formats. |
+| V1.1 | 2026-07-01 | Research Commander V2: backward compatibility note for keyword→brief auto-generation. |

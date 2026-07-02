@@ -18,8 +18,9 @@ This document is the official registry of all agents implemented in the LevNytt 
 | 4 | MLM Editorial Agent | `mlm-editorial-agent.md` | V1.0 | **Production** | Specialist content producer — MLM, network marketing, consumer protection, FTC regulation |
 | 5 | Publication Agent | `publication-agent.md` | V1.0 | **Production** | Deployment — copies source articles from content/articles/ to production root |
 | 6 | LevNytt Writer | `levnytt-writer.md` | V1.0 | **Production** | Informational article writer — health, supplements, nutrition, wellness. Based on original LLM-Optimized Informational Article Generator. Produces PUBLICATION-ARTICLE-STANDARD-compliant HTML |
+| 7 | Research Commander | `research-commander.md` | V2.0 | **Production** | Research orchestration — receives Production Brief (or keyword for backward compat), builds research mission, runs modules, produces Research Package + Approved Research Brief through Editorial Review gate |
 
-**Total Production Agents:** 6
+**Total Production Agents:** 7
 
 ---
 
@@ -116,6 +117,25 @@ This document is the official registry of all agents implemented in the LevNytt 
 - **Never Does:** MLM content (routes to MLM Editorial Agent), promotional content, income claims
 - **Outputs:** Complete HTML articles in `content/articles/[slug]/`
 
+### 7. Research Commander V2.0
+- **Type:** Research Orchestration Agent
+- **Scope:** All structured research — sources, studies, entities, competitor analysis, evidence mapping
+- **Primary Function:** Receive a Production Brief (or keyword for backward compatibility), build a research mission from its fields, execute research modules, assemble Research Package, and produce an Approved Research Brief through Editorial Review
+- **Triggers:** Production Orchestrator Stage 2, or direct `run research` / `research topic` / `research brief` commands
+- **Key Responsibilities:**
+  - Phase 0 — Resolve input: if Production Brief path, read it; if keyword, auto-generate a minimal brief
+  - Build research plan from brief fields: `entity` → authority, `cluster` → content-gap, `authority_mode` → module selection + YMYL skips, `goal` → research depth, `language` → research language
+  - Two-level cache check (package-level + module-level) before execution
+  - Duplicate detection against existing research manifests using brief entities + keyword
+  - Execute missing modules sequentially with graceful degradation on failure
+  - Cross-module conflict detection (no automatic resolution)
+  - Assemble Research Package (12 structured files) with Manifest
+  - Stage for Editorial Review gate (mandatory)
+  - Upon approval, generate Approved Research Brief consumable by Writer
+  - Maintain dependency graph and research index
+- **Never Does:** Write articles, edit content, perform research itself, publish content
+- **Outputs:** Research Package at `research/packages/<slug>/` (12 files) + Approved Research Brief at `research/briefs/<slug>-approved.md`
+
 ## Agent Workflow Architecture
 
 ```
@@ -194,13 +214,14 @@ The Editorial Commander and MLM Brief use these rules to route topics to appropr
 ## Agent Permissions
 
 | Agent | Edit Files | WebFetch | WebSearch | Repository Access |
-|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|
 | Editorial Commander | ❌ Deny | ❌ Deny | ❌ Deny | ✅ Read-only |
 | Morning Brief | ❌ Deny | ✅ Allow | ❌ Deny | ✅ Read-only |
 | MLM Brief | ❌ Deny | ❌ Deny | ❌ Deny | ✅ Read-only |
 | MLM Editorial Agent | ❌ Deny | ✅ Allow | ❌ Deny | ✅ Read-only |
 | LevNytt Writer | ❌ Deny | ✅ Allow | ✅ Allow | ✅ Read-only |
 | Publication Agent | ✅ Allow | ❌ Deny | ❌ Deny | ✅ Read-write |
+| Research Commander | ❌ Deny | ✅ Allow | ✅ Allow | ✅ Read-only |
 
 **Security Note:** Only the Publication Agent has file modification permissions. All content production agents generate output that must be manually saved or deployed via the Publication Agent.
 
@@ -294,6 +315,7 @@ Repository traversal is only permitted when synchronized state cannot answer the
 |---------|------|--------|
 | 1.0 | 2026-06-30 | Initial agent registry. 5 production agents catalogued: Editorial Commander V1.2, Morning Brief V2.0, MLM Brief V1.2, MLM Editorial Agent V1.0, Publication Agent V1.0. Architecture workflows documented. Category routing rules defined. Integration with Editorial Sync Engine specified. |
 | 1.1 | 2026-06-30 | Sprint 10 — LevNytt Writer V1.0 registered (agent #6). Workflow diagram updated. Health/Supplement/Nutrition routing moved from "Future Health Editorial Agent" to LevNytt Writer. Agent permissions table updated. Future roadmap updated. |
+| 1.2 | 2026-07-01 | Research Commander V2.0 registered (agent #7). Brief-first architecture: receives Production Brief instead of keyword. Backward compatibility with keyword input. Permissions and responsibilities documented. |
 
 ---
 

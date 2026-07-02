@@ -68,7 +68,7 @@ required_outputs: [definition, evidence, food_sources, ...]
 
 **Output:** `research/packages/<slug>/` (12 structured files)
 
-The Research Commander reads the Production Brief and builds a **research mission** from it. It uses the entity list for PubMed/authority queries, the cluster for content-gap analysis, the related_entities for entity co-occurrence, and the goal for scoping.
+The Research Commander reads the Production Brief and builds a **research mission** from it. It uses the entity list for PubMed/authority queries, the cluster for content-gap analysis, the related_entities for entity co-occurrence, and the goal for scoping. **Backward compatibility:** if invoked with a raw keyword instead of a brief path, the Research Commander auto-generates a minimal Production Brief using the same detection rules as `scripts/run-production.sh`.
 
 **Module selection is driven by the brief:**
 - `authority_mode: health` → all modules including authority research
@@ -221,7 +221,8 @@ production/logs/history.json                ← Stage 7: Aggregated (appended)
 ## Version History
 
 | Version | Date | Change |
-|---|---|---|
+|---|---|---|---|
 | V1 | 2026-07-01 | Initial pipeline: keyword-based, 7 stages |
 | V2 | 2026-07-01 | Production Brief architecture: brief→package→editorial chain, Research Package spec |
 | V2.1 | 2026-07-01 | Cost telemetry: per-run JSON logs, history.json aggregation, cost-report.sh |
+| V2.2 | 2026-07-01 | Research Commander V2: brief-first input with keyword backward compat. Agent registry updated. |

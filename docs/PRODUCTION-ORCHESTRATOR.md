@@ -67,7 +67,7 @@ The Production Orchestrator reads `content/briefs/vad-ar-lutein.brief.yaml`, val
 
 ### STAGE 2 — Research Commander
 
-**Input:** `content/briefs/<slug>.brief.yaml`
+**Input:** `content/briefs/<slug>.brief.yaml` (or keyword string for backward compatibility)
 
 Invoke Research Commander:
 ```
@@ -77,7 +77,10 @@ Prompt: "Build Research Package for Production Brief at
          Output to research/packages/<slug>/.
          Generate manifest, summary, sources, studies, entities,
          internal-links, faq, competitor-analysis, evidence,
-         keywords, product-notes, and audit log."
+         keywords, product-notes, and audit log.
+
+         If the brief does not exist and a keyword is provided,
+         auto-generate a minimal Production Brief first."
 ```
 
 **Check:**
@@ -172,7 +175,7 @@ Cost aggregation: `./scripts/cost-report.sh [--today|--month YYYY-MM|--per-artic
 
 | From | To | Passed Via |
 |---|---|---|
-| Orchestrator | Research Commander | `content/briefs/<slug>.brief.yaml` path |
+| Orchestrator | Research Commander | `content/briefs/<slug>.brief.yaml` path (or keyword string for backward compat) |
 | Research Commander | Editorial Commander | `research/packages/<slug>/` directory |
 | Editorial Commander | Writer | Package + editorial decisions (same dir) |
 | Orchestrator | Writer | Brief + package paths |
@@ -190,6 +193,7 @@ The orchestrator detects completed stages by checking files:
 |---|---|
 | 1. Brief | `content/briefs/<slug>.brief.yaml` exists |
 | 2. Research | `research/packages/<slug>/manifest.json` with lifecycle `completed` |
+| 3. Editorial | Editorial decisions recorded session context |
 | 4. Write | `content/articles/<slug>/<slug>.html` exists |
 | 5. QA | Last QA run passed (flag in context) |
 | 6. Publish | `/<slug>.html` at root |
@@ -209,7 +213,8 @@ Same 12 checks as V1 (see `scripts/qa-article.sh`). V2 adds one optional check:
 ## Version History
 
 | Version | Date | Change |
-|---|---|---|
+|---|---|---|---|
 | V1 | 2026-07-01 | Initial orchestrator: keyword-based, 12 QA checks |
 | V2 | 2026-07-01 | Production Brief architecture: brief→package→editorial, stage 0 validation |
 | V2.1 | 2026-07-01 | Cost telemetry: per-agent token/cost tracking, production/logs/, cost-report.sh |
+| V2.2 | 2026-07-01 | Research Commander V2: brief-first contract with keyword backward compat. Orchestrator prompt updated. |

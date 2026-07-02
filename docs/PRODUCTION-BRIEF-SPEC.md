@@ -78,6 +78,7 @@ The primary topic entity. Can be a single string or an array. These are the subj
 - Additional entities are the article's secondary focus
 - Entity names should be lowercase, singular form preferred
 - Used by Research Commander for authority research, PubMed queries, and entity disambiguation
+- If no Production Brief exists, the Research Commander can auto-generate one from a keyword (backward compatibility) — entity is extracted from the keyword
 
 ---
 
@@ -375,5 +376,6 @@ required_outputs:
 ## Version History
 
 | Version | Date | Change |
-|---|---|---|
+|---|---|---|---|
 | V1 | 2026-07-01 | Initial specification. 14 fields, YAML format, validation rules, example. |
+| V1.1 | 2026-07-01 | Research Commander V2: backward compatibility notes for keyword→brief auto-generation in entity and role sections. |
