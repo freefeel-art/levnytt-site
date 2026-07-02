@@ -15,7 +15,7 @@
 | **Migration** | ✅ Complete |
 | **Brand System** | ✅ Integrated and rolled out |
 | **Deployment** | Cloudflare Pages (automatic deployment) |
-| **Next Focus** | Content Expansion |
+| **Next Focus** | GSC Non-Indexed URL Remediation |
 
 ---
 
@@ -29,7 +29,7 @@
 | **Brand System** | ✅ Integrated: `assets/brand/`, brand injectors, brand OG image |
 | **Shared components** | ✅ `nav.js` + `footer.js` + `components.js` on all root pages |
 | **Deployment** | Cloudflare Pages — automatic on `git push` |
-| **Current phase** | Documentation baseline + Content Expansion |
+| **Current phase** | GSC Non-Indexed URL Remediation |
 
 ---
 
@@ -269,21 +269,27 @@ levnytt-site/
 
 ## Next Development Priorities
 
-### Priority 1 — New high-value content
+### Priority 1 — GSC Non-Indexed URL Remediation
+- Publish root `.html` files for 4 orphaned `content/articles/` pages
+- Add orphaned pages to `sitemap.xml`
+- Fix title lengths, title-URL mismatches, and duplicate topic signals
+- Increase internal links to crawl-isolated pages
+
+### Priority 2 — New high-value content
 - New pillar pages (e.g. `/neolife-sport/`)
 - New informational articles in uncovered niches
 - Expand the existing article clusters
 
-### Priority 2 — Product Entity System
+### Priority 3 — Product Entity System
 - Build out structured product data via `content/products/` schema
 - Link product pages to their entity definitions
 
-### Priority 3 — Interactive tools
+### Priority 4 — Interactive tools
 - Comparison pages (e.g. Omega-3 sources comparison)
 - Calculators (e.g. daily nutrient intake)
 - Interactive decision guides
 
-### Priority 4 — Performance & accessibility
+### Priority 5 — Performance & accessibility
 - Image optimization and lazy loading audit
 - Core Web Vitals tuning
 - Accessibility improvements (contrast checks, ARIA labels, keyboard navigation)

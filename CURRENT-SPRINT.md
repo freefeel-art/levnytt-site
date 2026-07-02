@@ -74,6 +74,18 @@ The Research Commander V2 + GSC Content Audit (Sprint 12) is **complete**.
 
 **Key architectural decision:** Research Commander now accepts a `.brief.yaml` path as primary input OR a plain keyword string (backward compatible). Brief fields drive module selection, depth, and YMYL handling.
 
+### Sprint 13 — GSC Non-Indexed URL Remediation
+
+| | |
+|---|---|
+| **Status** | 🟢 Active |
+| **Sprint** | 13 — GSC Non-Indexed URL Remediation |
+| **Started** | 2026-07-02 |
+
+**Objective:** Maximize the indexability of the highest-priority non-indexed URLs by resolving all repository-side issues identified in the GSC audit. The objective is to improve Google's ability to index the pages. Actual indexing remains Google's decision.
+
+See `docs/SPRINT-13-PLAN.md` for full deliverables, risks, and definition of done.
+
 ---
 
 ## Future work (backlog)
@@ -85,4 +97,3 @@ The Research Commander V2 + GSC Content Audit (Sprint 12) is **complete**.
 | Research Commander modules | Implement authority, DataForSEO, reddit modules |
 | Automated Editorial Review | Auto-approve routine QC gates |
 | Performance | Image optimization, lazy loading, Core Web Vitals |
-| GSC non-indexed URL remediation | Publish root files, sitemap fixes, deduplication (see `docs/SPRINT-13-PLAN.md`) |

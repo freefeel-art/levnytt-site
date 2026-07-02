@@ -289,7 +289,24 @@ Alt text: always in Swedish, always descriptive.
 
 ---
 
-### C3. Pillar page audit checklist (13 checks)
+### C3. Root-file remediation for non-indexed content/articles/ pages
+
+When a page in `content/articles/` is consistently not indexed by Google despite having a `_redirects` 200-rewrite and sitemap entry, the remediation is to **create a root `.html` file copy** of the article at the canonical URL path.
+
+**Rationale:** Google crawls the physical file path (`content/articles/varfor-ar-jag-trott-hela-tiden.html`) when no root file exists. The `_redirects` rewrite only applies when Google hits the canonical URL — which it may not discover if the physical path is the only crawled entry point. A root `.html` file eliminates the routing dependency entirely.
+
+**Rules:**
+- Copy the `content/articles/<slug>.html` source file to `/<slug>.html`
+- No content changes — the copy is a deployment mechanism, not an editorial pass
+- The source file in `content/articles/` remains the authoritative editorial version
+- The root file must pass `scripts/qa-article.sh` with GREEN status
+- Add the URL to `sitemap.xml` in the same commit (the URL is already covered by `_redirects` but the sitemap must reference the canonical path explicitly)
+
+**This is an indexing remediation strategy, not the default deployment path.** New articles continue to use `_redirects` rewrites. Root files are created only as a targeted fix for pages that fail to index through the standard routing.
+
+---
+
+### C4. Pillar page audit checklist (13 checks)
 
 Every named pillar page must pass all 13 checks from the audit script at `~/.claude/skills/pillar-page-template/scripts/audit_pillar_page.py`:
 
