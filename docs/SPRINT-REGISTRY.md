@@ -5,7 +5,7 @@
 This registry is the single source of truth for all project sprints. No other document defines sprint metadata independently. Future sprint plans, agents, and orchestrators read from this registry.
 
 **Last updated:** 2026-07-02
-**Status:** Active sprint — Sprint 14
+**Status:** Completed — Sprint 14
 
 ---
 
@@ -197,12 +197,12 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | **Active** |
+| **Status** | Completed |
 | **Objective** | Create centralized Sprint Registry as single source of truth for all project sprints. Build infrastructure so that future commands like "Run Sprint X", "Close Sprint X", "Open Sprint X" can be understood by any project agent by reading the registry. |
 | **Dependencies** | Sprint 13 |
 | **Deliverables** | docs/SPRINT-REGISTRY.md with sprints 1-20, CURRENT-SPRINT.md updated to reference registry, PROJECT-STATUS.md updated to reference registry, PHASE-2-ROADMAP.md updated to reference registry |
-| **Completion Date** | *(in progress)* |
-| **Related Documents** | CURRENT-SPRINT.md, PROJECT-STATUS.md, PHASE-2-ROADMAP.md, docs/sprints/SPRINT-13-REPORT.md |
+| **Completion Date** | 2026-07-02 |
+| **Related Documents** | CURRENT-SPRINT.md, PROJECT-STATUS.md, PHASE-2-ROADMAP.md, docs/sprints/SPRINT-14-REPORT.md |
 
 ---
 
