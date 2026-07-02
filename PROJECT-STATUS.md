@@ -1,6 +1,6 @@
 # PROJECT-STATUS.md — LevNytt.se Executive Dashboard
 
-*Last updated: 2026-07-02 (Sprint 13 completed) | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions.*
+*Last updated: 2026-07-02 (Sprint 14 active) | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions. Sprint metadata is canonical at `docs/SPRINT-REGISTRY.md`.*
 
 ---
 
@@ -15,7 +15,7 @@
 | **Migration** | ✅ Complete |
 | **Brand System** | ✅ Integrated and rolled out |
 | **Deployment** | Cloudflare Pages (automatic deployment) |
-| **Next Focus** | Awaiting owner direction — Sprint 14 planning |
+| **Next Focus** | Sprint 14 — Sprint Registry System V1 (Active) |
 
 ---
 
@@ -29,7 +29,7 @@
 | **Brand System** | ✅ Integrated: `assets/brand/`, brand injectors, brand OG image |
 | **Shared components** | ✅ `nav.js` + `footer.js` + `components.js` on all root pages |
 | **Deployment** | Cloudflare Pages — automatic on `git push` |
-| **Current phase** | Sprint 13 completed — awaiting next sprint |
+| **Current phase** | Sprint 14 — Sprint Registry System V1 (Active) |
 
 ---
 
@@ -265,20 +265,18 @@ levnytt-site/
 | Sprint 11 — Production Orchestrator | Brief→Package→Editorial chain, QA gating, cost telemetry, agent registry | Jul 2026 |
 | Sprint 12 — Research Commander V2 | Research Commander V2 (brief-first, backward compat), GSC Content Audit (11 URLs) | Jul 2026 |
 | Sprint 13 — GSC Non-Indexed URL Remediation | 4 root copies published, sitemap updated, titles fixed (3 pages), 5 isolated pages received 5+ internal links each, canonical resolution between tre-en-en pages | Jul 2026 |
+| Sprint 14 — Sprint Registry System V1 | docs/SPRINT-REGISTRY.md created, CURRENT-SPRINT.md/PROJECT-STATUS.md/PHASE-2-ROADMAP.md updated to reference registry | Jul 2026 |
 
 ---
 
 ## Next Development Priorities
 
-### Priority 1 — ✅ GSC Non-Indexed URL Remediation (Sprint 13 — Complete)
-- ✅ 4 root `.html` files published for orphaned pages
-- ✅ 4 orphaned pages added to `sitemap.xml`
-- ✅ Titles shortened on neolife-tre-en-en (85→56) and golden-home-care (88→59)
-- ✅ neolife-pro-vitality title fixed to match URL slug
-- ✅ naringsbrist differentiated from naringsbrist-symptom
-- ✅ 5 isolated pages received 5+ new contextual internal links each
-- ✅ Canonical resolution between tre-en-en and cellnaring pages
-- ✅ Deployed and verified live
+### Priority 1 — 🟢 Sprint 14 — Sprint Registry System V1 (Active)
+- ✅ `docs/SPRINT-REGISTRY.md` created with Sprints 1–20
+- ✅ `CURRENT-SPRINT.md` updated to reference registry
+- ✅ `PROJECT-STATUS.md` updated to reference registry
+- ✅ `docs/plans/PHASE-2-ROADMAP.md` updated to reference registry
+- ⬜ Commit and push
 
 ### Priority 2 — New high-value content
 - New pillar pages (e.g. `/neolife-sport/`)
@@ -304,22 +302,19 @@ levnytt-site/
 
 ## Current Milestone
 
-Sprint 13 — GSC Non-Indexed URL Remediation
+Sprint 14 — Sprint Registry System V1
 
 Primary objective:
 
-- Publish root .html files for 4 orphaned content/articles/ pages (P1.1)
-- Add orphaned pages to sitemap.xml (P1.2)
-- Differentiate naringsbrist vs naringsbrist-symptom (P1.3)
-- Add 5+ new internal links each to 5 isolated pages (P2.1)
-- Shorten titles on neolife-tre-en-en and golden-home-care (P2.2)
-- Fix title-URL mismatch on neolife-pro-vitality (P2.3)
-- Canonical resolution between tre-en-en and cellnaring pages (P2.4)
+- Create `docs/SPRINT-REGISTRY.md` as the single source of truth for all project sprints
+- Populate Sprints 1–20 with status, objective, deliverables, dependencies, and completion dates
+- Update `CURRENT-SPRINT.md` to reference the Sprint Registry instead of duplicating sprint metadata
+- Update `PROJECT-STATUS.md` to reference the Sprint Registry
+- Update `docs/plans/PHASE-2-ROADMAP.md` to reference the Sprint Registry
+- Commit and push all changes
 
-Sprint 13 is **complete** (commit `b381756`). See `docs/sprints/SPRINT-13-REPORT.md` for full details.
-
-Awaiting owner direction for Sprint 14 planning.
+Sprint metadata is canonical at `docs/SPRINT-REGISTRY.md`. See `docs/SPRINT-REGISTRY.md` for sprint history.
 
 ---
 
-See `CURRENT-SPRINT.md` for sprint history.
+See `docs/SPRINT-REGISTRY.md` for sprint history.

@@ -5,93 +5,33 @@ Last updated: 2026-07-02
 
 ---
 
-## Phase: Content Factory Transition
+## Phase: Infrastructure & Registry
 
-The Gen 3 migration is **complete**.
-The Brand System (Sprint 8), Brand Rollout (Sprint 9), Repository Cleanup (Sprint 9b), and Post-Cleanup Baseline (Sprint 10) are **complete**.
-The Production Orchestrator + Production Brief Architecture + Cost Telemetry (Sprint 11) is **complete**.
-The Research Commander V2 + GSC Content Audit (Sprint 12) is **complete**.
+The Sprint Registry (`docs/SPRINT-REGISTRY.md`) is now the **canonical source** for all sprint metadata. This file tracks the active sprint only; do not duplicate sprint details here.
+
+---
+
+## Active Sprint: 14 — Sprint Registry System V1
+
+| | |
+|---|---|
+| **Status** | 🟢 Active |
+| **Opened** | 2026-07-02 |
+| **Objective** | Create centralized Sprint Registry as single source of truth for all project sprints. Build infrastructure so agents can execute "Run Sprint X", "Close Sprint X", "Open Sprint X" by reading the registry. |
+
+**Deliverables:**
+- `docs/SPRINT-REGISTRY.md` with Sprints 1–20 populated
+- `CURRENT-SPRINT.md` updated to reference registry
+- `PROJECT-STATUS.md` updated to reference registry
+- `docs/plans/PHASE-2-ROADMAP.md` updated to reference registry
 
 ---
 
 ## Sprint History
 
-### Sprint 9 — Brand Rollout + Repository Cleanup
+See `docs/SPRINT-REGISTRY.md` for the canonical list of all sprints (1–20), their status, objectives, deliverables, completion dates, and dependencies.
 
-| | |
-|---|---|
-| **Status** | ✅ Completed |
-| **Completed** | 2026-07-01 |
-| **Commit** | `c61eebc` |
-
-### Sprint 10 — Post-Cleanup Baseline
-
-| | |
-|---|---|
-| **Status** | ✅ Completed |
-| **Completed** | 2026-07-01 |
-| **Commits** | `69c5359`, `a0ab42a` |
-
-### Sprint 11 — Production Orchestrator + Brief Architecture + Telemetry
-
-| | |
-|---|---|
-| **Status** | ✅ Completed |
-| **Completed** | 2026-07-01 |
-| **Commits** | `4fd38ac`, `2bd61c6`, `ba7079f` |
-
-**Delivered:**
-- `docs/PRODUCTION-PIPELINE.md` — V2: Brief→Package→Editorial chain (7 stages)
-- `docs/PRODUCTION-ORCHESTRATOR.md` — V2: brief-first invocation, QA gating, abort/resume
-- `docs/PRODUCTION-BRIEF-SPEC.md` — 14-field canonical spec (YAML)
-- `docs/RESEARCH-PACKAGE-SPEC.md` — 12-file structured research output
-- `docs/COST-TELEMETRY.md` — model pricing, log format, aggregation queries
-- `scripts/run-production.sh` — V2: generates `.brief.yaml` from keyword, detects intent/topic/audience
-- `scripts/qa-article.sh` — 12-check PAS V1.0 validator (GREEN/AMBER/RED)
-- `scripts/cost-report.sh` — CLI cost aggregator (--today, --month, --per-article)
-- `content/briefs/vad-ar-lutein.brief.yaml` — example brief (verified against 12/12 QA article)
-- `production/logs/` — telemetry directory + sample log
-- `.opencode/agents/production-orchestrator.md` — V2: brief-first agent chainer with telemetry
-
-**Key architectural decision:** Keyword is now one field in the Production Brief, not the pipeline input. Brief → Research Commander → Research Package → Editorial Commander → Editorial Brief → Writer.
-
-### Sprint 12 — Research Commander V2 + GSC Content Audit
-
-| | |
-|---|---|
-| **Status** | ✅ Completed |
-| **Completed** | 2026-07-02 |
-| **Commit** | `436f7ed` |
-
-**Delivered:**
-- `.opencode/agents/research-commander.md` (V2) — brief-first input with keyword backward compatibility, Phase 0 input resolution, brief-field-driven research planning
-- `docs/PRODUCTION-PIPELINE.md` (V2.2) — backward compatibility note, version history
-- `docs/PRODUCTION-ORCHESTRATOR.md` (V2.2) — brief-first Stage 2 contract, resume detection table
-- `docs/PRODUCTION-BRIEF-SPEC.md` (V1.1) — entity field backward compat note
-- `docs/RESEARCH-PACKAGE-SPEC.md` (V1.1) — backward compatibility input mode
-- `docs/specifications/AGENT-REGISTRY.md` (V1.2) — Research Commander registered as agent #7
-- `docs/gsc/GSC-CONTENT-AUDIT.md` — comprehensive audit of 11 GSC "Crawled – not indexed" URLs with per-URL analysis, classifications (KEEP 2, IMPROVE 5, MERGE 2, REMOVE 2), and priority recommendations
-
-**Key architectural decision:** Research Commander now accepts a `.brief.yaml` path as primary input OR a plain keyword string (backward compatible). Brief fields drive module selection, depth, and YMYL handling.
-
-### Sprint 13 — GSC Non-Indexed URL Remediation
-
-| | |
-|---|---|
-| **Status** | ✅ Completed |
-| **Completed** | 2026-07-02 |
-
-**Delivered:**
-- 4 root `.html` copies for orphaned pages with production includes (nav.js, footer.js, components.js, verification meta, #site-nav)
-- 4 new sitemap.xml entries for orphaned pages
-- `naringsbrist` differentiated from `naringsbrist-symptom` (title, H1, meta description)
-- 5 isolated pages received 5+ new contextual internal links each (total ~35+ new links across 14 files)
-- `neolife-tre-en-en` and `golden-home-care` titles shortened to ≤60 chars
-- `neolife-pro-vitality` title fixed to reference "Pro Vitality+" matching URL slug
-- Canonical resolution between `/neolife-tre-en-en` and `/neolife-tre-en-en-cellnaring` (cross-linking added)
-- `docs/sprints/SPRINT-13-REPORT.md` — sprint closing report
-
-See `docs/SPRINT-13-REPORT.md` for detailed verification and file list.
+Sprint reports are archived at `docs/sprints/SPRINT-<N>-REPORT.md`.
 
 ---
 

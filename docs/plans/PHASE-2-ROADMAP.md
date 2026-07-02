@@ -113,6 +113,8 @@ levnytt-site/
 | **Production Orchestrator + Brief Architecture + Telemetry** | V2 pipeline with Production Brief → Research Package → Editorial chain; QA gating; cost telemetry | Sprint 11 |
 | **Research Commander V2** | Brief-first research orchestration with keyword backward compatibility | Sprint 12 |
 | **GSC Content Audit** | 11 "Crawled – not indexed" URLs audited with classifications and priority recommendations | Sprint 12 |
+| **GSC Non-Indexed URL Remediation** | 4 root copies published, sitemap updated, titles fixed, internal links added, canonical resolution | Sprint 13 |
+| **Sprint Registry System V1** | `docs/SPRINT-REGISTRY.md` created, all sprint metadata centralized | Sprint 14 |
 
 ---
 
@@ -199,6 +201,8 @@ All brand assets originate from a single master LV Mark SVG, stored in `assets/b
 
 ### Sprint-Based Development
 One active sprint at a time. `CURRENT-SPRINT.md` defines the active sprint. Work outside the active sprint is backlog. Each sprint has a clear objective, task list, and completion criteria. Sprints are numbered and documented in `docs/sprints/` upon completion.
+
+**Sprint metadata is canonical at `docs/SPRINT-REGISTRY.md`.** No future document should redefine sprint metadata independently — always reference the registry.
 
 ### No Build Step
 The site is and remains vanilla HTML5/CSS3/ES5. No build framework, no npm at the repo root, no transpilation. Deployment is a direct `git push` with zero build step. New tools that require a build pipeline must have a written justification and explicit approval.
