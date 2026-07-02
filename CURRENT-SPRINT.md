@@ -1,7 +1,7 @@
 # CURRENT-SPRINT.md
 # LevNytt.se — Project Phase
 
-Last updated: 2026-07-01
+Last updated: 2026-07-02
 
 ---
 
@@ -10,6 +10,7 @@ Last updated: 2026-07-01
 The Gen 3 migration is **complete**.
 The Brand System (Sprint 8), Brand Rollout (Sprint 9), Repository Cleanup (Sprint 9b), and Post-Cleanup Baseline (Sprint 10) are **complete**.
 The Production Orchestrator + Production Brief Architecture + Cost Telemetry (Sprint 11) is **complete**.
+The Research Commander V2 + GSC Content Audit (Sprint 12) is **complete**.
 
 ---
 
@@ -54,48 +55,24 @@ The Production Orchestrator + Production Brief Architecture + Cost Telemetry (Sp
 
 **Key architectural decision:** Keyword is now one field in the Production Brief, not the pipeline input. Brief → Research Commander → Research Package → Editorial Commander → Editorial Brief → Writer.
 
----
-
-## Active Sprint — 12
+### Sprint 12 — Research Commander V2 + GSC Content Audit
 
 | | |
 |---|---|
-| **Status** | 🟢 Active |
-| **Sprint** | 12 — Local LLM Pilot (Ollama) |
-| **Started** | Pending reboot |
+| **Status** | ✅ Completed |
+| **Completed** | 2026-07-02 |
+| **Commit** | `436f7ed` |
 
-### Objective
+**Delivered:**
+- `.opencode/agents/research-commander.md` (V2) — brief-first input with keyword backward compatibility, Phase 0 input resolution, brief-field-driven research planning
+- `docs/PRODUCTION-PIPELINE.md` (V2.2) — backward compatibility note, version history
+- `docs/PRODUCTION-ORCHESTRATOR.md` (V2.2) — brief-first Stage 2 contract, resume detection table
+- `docs/PRODUCTION-BRIEF-SPEC.md` (V1.1) — entity field backward compat note
+- `docs/RESEARCH-PACKAGE-SPEC.md` (V1.1) — backward compatibility input mode
+- `docs/specifications/AGENT-REGISTRY.md` (V1.2) — Research Commander registered as agent #7
+- `docs/gsc/GSC-CONTENT-AUDIT.md` — comprehensive audit of 11 GSC "Crawled – not indexed" URLs with per-URL analysis, classifications (KEEP 2, IMPROVE 5, MERGE 2, REMOVE 2), and priority recommendations
 
-Evaluate whether Editorial Commander, Writer, and QA can run locally via Ollama instead of OpenRouter. Benchmark output quality, execution time, RAM, GPU usage, and estimated cost savings.
-
-### Phase 1 — Setup
-
-- [ ] Reboot system (NVIDIA driver installation requires it)
-- [ ] Verify NVIDIA: `nvidia-smi`, CUDA runtime
-- [ ] Install Ollama
-- [ ] Download qwen3:8b (or smaller model if needed)
-
-### Phase 2 — Benchmark
-
-- [ ] Run same Editorial Brief on OpenRouter (baseline)
-- [ ] Run same Editorial Brief on Ollama (local)
-- [ ] Compare: output quality, execution time, RAM, GPU, cost
-- [ ] Document findings
-
-### Phase 3 — Decision
-
-- [ ] Decide which agents can be moved to local execution
-- [ ] Update agent configuration if needed
-
-### Completion criteria
-
-- Ollama installed and running with at least one model
-- Benchmark data collected for OpenRouter vs Ollama
-- Clear recommendation: which agents to move local, which to keep on OpenRouter
-
-### Next action
-
-Reboot → `nvidia-smi` → install Ollama → pull model → run benchmark
+**Key architectural decision:** Research Commander now accepts a `.brief.yaml` path as primary input OR a plain keyword string (backward compatible). Brief fields drive module selection, depth, and YMYL handling.
 
 ---
 
@@ -106,6 +83,6 @@ Reboot → `nvidia-smi` → install Ollama → pull model → run benchmark
 | Product Entity System | Structured product data via `content/products/` |
 | Content expansion | New articles, internal linking |
 | Research Commander modules | Implement authority, DataForSEO, reddit modules |
-| Agent migration to Production Brief | Update agents to consume `.brief.yaml` instead of keywords |
 | Automated Editorial Review | Auto-approve routine QC gates |
 | Performance | Image optimization, lazy loading, Core Web Vitals |
+| GSC non-indexed URL remediation | Publish root files, sitemap fixes, deduplication (see `docs/SPRINT-13-PLAN.md`) |

@@ -1,6 +1,6 @@
 # PROJECT-STATUS.md — LevNytt.se Executive Dashboard
 
-*Last updated: 2026-06-30 | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions.*
+*Last updated: 2026-07-02 | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions.*
 
 ---
 
@@ -262,6 +262,8 @@ levnytt-site/
 | Sprint 8 — Brand System | `neolife-tre-en-en` pillar, `assets/brand/` directory, brand injectors, pillar.css consolidation | Jun 2026 |
 | Sprint 9 — Brand Rollout | Brand OG image deployed to all root pages + source articles; `#site-nav` on all root pages; subdirectory consistency | Jun 2026 |
 | Sprint 10 — Documentation | Full documentation baseline: PROJECT-STATUS, CURRENT-SPRINT, DECISIONS, PROJECT-ENTRY, SPRINT-9 report | Jun 2026 |
+| Sprint 11 — Production Orchestrator | Brief→Package→Editorial chain, QA gating, cost telemetry, agent registry | Jul 2026 |
+| Sprint 12 — Research Commander V2 | Research Commander V2 (brief-first, backward compat), GSC Content Audit (11 URLs) | Jul 2026 |
 
 ---
 
@@ -291,25 +293,16 @@ levnytt-site/
 
 ## Current Milestone
 
-Sprint 10 — Documentation & Baseline Update
+Sprint 12 — Research Commander V2 + GSC Content Audit
 
 Primary objective:
 
-- Bring all project documentation in sync with the current repository state
-- Document Sprint 8 and Sprint 9 architectural decisions in DECISIONS.md
-- Create Sprint 9 summary report
-- Validate documentation for outdated, duplicate, or obsolete files
+- Refactor Research Commander to accept Production Brief as primary input (keyword backward compatible)
+- Audit 11 GSC "Crawled – currently not indexed" URLs and produce content quality report
+- Update pipeline/orchestrator/brief/package specs for V2
+- Register Research Commander in Agent Registry
 
-The Brand System integration (Sprint 8) and Brand Rollout (Sprint 9) are complete.
-
-All root pages now share:
-- `pillar.css` (shared design system with brand CSS variables)
-- `nav.js` / `footer.js` / `components.js` with `defer`
-- Brand meta injection (favicon, apple-touch-icon)
-- Brand OG image (`assets/brand/og-brand.png`)
-- `#site-nav` placeholder
-- Verification meta tags (Google + Pinterest)
-- Google Fonts (Playfair Display + Inter)
+Sprint 12 is **complete**. See `docs/SPRINT-13-PLAN.md` for the proposed next sprint.
 
 ---
 

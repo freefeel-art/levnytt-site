@@ -250,7 +250,17 @@ No page may hardcode brand meta tags or brand images unless the page requires a 
 
 ---
 
-### B11. LevNytt Writer and pillar-page-template consume the same shared brand assets
+### B11. .opencode/ is excluded from version control
+
+The `.opencode/` directory (AI agent configurations, skill definitions, subagent prompts) is listed in `.gitignore` and intentionally excluded from git.
+
+**Rationale:** Agent configurations are environment-specific (model choices, prompts, permissions) and change independently of the production codebase. Committing them would create noise in the commit history and couple agent experiments to production deploys.
+
+**Implication:** Agent definitions that need to be shared or versioned must be documented in `docs/specifications/` (e.g., `AGENT-REGISTRY.md` for responsibilities, `PRODUCTION-ORCHESTRATOR.md` for contracts). The `.opencode/agents/` files are the local implementation; the `docs/` specs are the canonical reference. The `.gitignore` entry must not be removed without explicit owner approval.
+
+---
+
+### B12. LevNytt Writer and pillar-page-template consume the same shared brand assets
 
 Both the LevNytt Writer (which generates informational articles) and the `pillar-page-template` skill (which migrates pillar pages) use the same shared components: `nav.js`, `footer.js`, `components.js`, `pillar.css`, and `assets/brand/`.
 

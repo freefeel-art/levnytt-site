@@ -2,7 +2,7 @@
 
 > **Status:** Active
 > **Previous phase:** Phase 1 (Platform Build — complete)
-> **Last updated:** 2026-06-30
+> **Last updated:** 2026-07-02
 
 ---
 
@@ -110,6 +110,9 @@ levnytt-site/
 | **Brand Rollout** | Brand OG image deployed to all root pages + source articles; `#site-nav` on all pages; site-wide component coverage verified | Sprint 9 |
 | **Documentation Baseline** | All 4 core operational docs updated; Sprint 9 report created | Sprint 10 |
 | **Documentation Alignment** | PA standard updated with brand OG; PHASE-2-ROADMAP rewritten for current architecture | Sprint 11 |
+| **Production Orchestrator + Brief Architecture + Telemetry** | V2 pipeline with Production Brief → Research Package → Editorial chain; QA gating; cost telemetry | Sprint 11 |
+| **Research Commander V2** | Brief-first research orchestration with keyword backward compatibility | Sprint 12 |
+| **GSC Content Audit** | 11 "Crawled – not indexed" URLs audited with classifications and priority recommendations | Sprint 12 |
 
 ---
 
