@@ -1,6 +1,6 @@
 # PROJECT-STATUS.md — LevNytt.se Executive Dashboard
 
-*Last updated: 2026-07-02 | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions.*
+*Last updated: 2026-07-02 (Sprint 13 completed) | See `PROJECT-ENTRY.md` for reading order. See `DECISIONS.md` for engineering conventions.*
 
 ---
 
@@ -15,7 +15,7 @@
 | **Migration** | ✅ Complete |
 | **Brand System** | ✅ Integrated and rolled out |
 | **Deployment** | Cloudflare Pages (automatic deployment) |
-| **Next Focus** | GSC Non-Indexed URL Remediation |
+| **Next Focus** | Awaiting owner direction — Sprint 14 planning |
 
 ---
 
@@ -29,7 +29,7 @@
 | **Brand System** | ✅ Integrated: `assets/brand/`, brand injectors, brand OG image |
 | **Shared components** | ✅ `nav.js` + `footer.js` + `components.js` on all root pages |
 | **Deployment** | Cloudflare Pages — automatic on `git push` |
-| **Current phase** | GSC Non-Indexed URL Remediation |
+| **Current phase** | Sprint 13 completed — awaiting next sprint |
 
 ---
 
@@ -264,16 +264,21 @@ levnytt-site/
 | Sprint 10 — Documentation | Full documentation baseline: PROJECT-STATUS, CURRENT-SPRINT, DECISIONS, PROJECT-ENTRY, SPRINT-9 report | Jun 2026 |
 | Sprint 11 — Production Orchestrator | Brief→Package→Editorial chain, QA gating, cost telemetry, agent registry | Jul 2026 |
 | Sprint 12 — Research Commander V2 | Research Commander V2 (brief-first, backward compat), GSC Content Audit (11 URLs) | Jul 2026 |
+| Sprint 13 — GSC Non-Indexed URL Remediation | 4 root copies published, sitemap updated, titles fixed (3 pages), 5 isolated pages received 5+ internal links each, canonical resolution between tre-en-en pages | Jul 2026 |
 
 ---
 
 ## Next Development Priorities
 
-### Priority 1 — GSC Non-Indexed URL Remediation
-- Publish root `.html` files for 4 orphaned `content/articles/` pages
-- Add orphaned pages to `sitemap.xml`
-- Fix title lengths, title-URL mismatches, and duplicate topic signals
-- Increase internal links to crawl-isolated pages
+### Priority 1 — ✅ GSC Non-Indexed URL Remediation (Sprint 13 — Complete)
+- ✅ 4 root `.html` files published for orphaned pages
+- ✅ 4 orphaned pages added to `sitemap.xml`
+- ✅ Titles shortened on neolife-tre-en-en (85→56) and golden-home-care (88→59)
+- ✅ neolife-pro-vitality title fixed to match URL slug
+- ✅ naringsbrist differentiated from naringsbrist-symptom
+- ✅ 5 isolated pages received 5+ new contextual internal links each
+- ✅ Canonical resolution between tre-en-en and cellnaring pages
+- ✅ Deployed and verified live
 
 ### Priority 2 — New high-value content
 - New pillar pages (e.g. `/neolife-sport/`)
@@ -299,17 +304,22 @@ levnytt-site/
 
 ## Current Milestone
 
-Sprint 12 — Research Commander V2 + GSC Content Audit
+Sprint 13 — GSC Non-Indexed URL Remediation
 
 Primary objective:
 
-- Refactor Research Commander to accept Production Brief as primary input (keyword backward compatible)
-- Audit 11 GSC "Crawled – currently not indexed" URLs and produce content quality report
-- Update pipeline/orchestrator/brief/package specs for V2
-- Register Research Commander in Agent Registry
+- Publish root .html files for 4 orphaned content/articles/ pages (P1.1)
+- Add orphaned pages to sitemap.xml (P1.2)
+- Differentiate naringsbrist vs naringsbrist-symptom (P1.3)
+- Add 5+ new internal links each to 5 isolated pages (P2.1)
+- Shorten titles on neolife-tre-en-en and golden-home-care (P2.2)
+- Fix title-URL mismatch on neolife-pro-vitality (P2.3)
+- Canonical resolution between tre-en-en and cellnaring pages (P2.4)
 
-Sprint 12 is **complete**. See `docs/SPRINT-13-PLAN.md` for the proposed next sprint.
+Sprint 13 is **complete** (commit `b381756`). See `docs/sprints/SPRINT-13-REPORT.md` for full details.
+
+Awaiting owner direction for Sprint 14 planning.
 
 ---
 
-See `CURRENT-SPRINT.md` for active sprint status.
+See `CURRENT-SPRINT.md` for sprint history.
