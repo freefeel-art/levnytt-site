@@ -30,21 +30,22 @@ See `docs/SPRINT-REGISTRY.md` for all sprint data.
 
 ---
 
-## Sprint 15 — Product Entity System V1
+## Sprint 16 — Content Expansion Batch 1
 
 | | |
 |---|---|
-| **Status** | ✅ Completed |
-| **Completed** | 2026-07-02 |
+| **Status** | 🟢 Active |
 
-**Delivered:**
-- `content/products/prices.json` — all 57 products with prices from the Price Database
-- `content/products/product-data.js` — runtime JS module with entity/price lookups, sponsor link fixing
-- `golden-home-care.html` — migrated as reference implementation: LDC prices injected from `product-data.js`
-- `components.js` — `fixLinks()` delegates to `LevNyttProductData` when available, falls back to `productMap`
-- `docs/sprints/SPRINT-15-REPORT.md` — sprint closing report
+**Objective:** Publish new pillar pages and informational articles in uncovered niches. Target clusters: Vitamin D depth, Magnesium depth, Probiotics depth, Fiber depth. New pillar pages: neolife-sport.
 
-See `docs/SPRINT-REGISTRY.md` for all sprint data. Awaiting owner direction for Sprint 16.
+**Delivered so far:**
+- `content/articles/d-vitaminbrist-sverige/d-vitaminbrist-sverige.html` — full informational article with schema, FAQ, evidence tiers, stat cards
+- `neolife-sport.html` — Gen 3 production-standard pillar page with nav.js/footer.js/components.js/pillar.css, price comparison tables, product grid, stack recommendations, FAQ accordion, schema.org @graph
+
+**Pending:**
+- Probiotics, Fiber, Magnesium depth articles (batch backlog)
+
+See `docs/SPRINT-REGISTRY.md` for full sprint data.
 
 ---
 

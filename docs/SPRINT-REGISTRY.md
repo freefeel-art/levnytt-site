@@ -5,7 +5,7 @@
 This registry is the single source of truth for all project sprints. No other document defines sprint metadata independently. Future sprint plans, agents, and orchestrators read from this registry.
 
 **Last updated:** 2026-07-02
-**Status:** Completed — Sprint 15
+**Status:** Active — Sprint 16
 
 ---
 
@@ -219,11 +219,11 @@ This registry is the single source of truth for all project sprints. No other do
 
 ---
 
-### Sprint 16 — Content Expansion Batch 1 (Planned)
+### Sprint 16 — Content Expansion Batch 1
 
 | Field | Value |
 |-------|-------|
-| **Status** | Planned |
+| **Status** | Active |
 | **Objective** | Publish new pillar pages and informational articles in uncovered niches. Target clusters: Vitamin D depth, Magnesium depth, Probiotics depth, Fiber depth. New pillar page candidates: neolife-sport. |
 | **Dependencies** | Sprint 14 |
 | **Deliverables** | New article HTML files in content/articles/, new root-level pillar pages, cluster expansion |
