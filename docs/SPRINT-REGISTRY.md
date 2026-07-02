@@ -5,7 +5,7 @@
 This registry is the single source of truth for all project sprints. No other document defines sprint metadata independently. Future sprint plans, agents, and orchestrators read from this registry.
 
 **Last updated:** 2026-07-02
-**Status:** Active — Sprint 16
+**Status:** All sprints 1–21 completed — maintenance mode
 
 ---
 
@@ -28,7 +28,7 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Archived |
+| **Status** | Completed |
 | **Objective** | Create initial LevNytt.se platform. Establish hosting, domain, and first pillar pages (neolife-historia, neolife-pro-vitality, neolife-hallbarhet, neolife-vetenskap). |
 | **Dependencies** | None |
 | **Deliverables** | Root `.html` files for initial pillar pages, Cloudflare Pages hosting, Google Search Console setup, brand placeholder |
@@ -41,7 +41,7 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Archived |
+| **Status** | Completed |
 | **Objective** | Expand pillar page inventory to cover all major NeoLife product categories and brand pages. |
 | **Dependencies** | Sprint 1 |
 | **Deliverables** | neolife-affarsmojlighet, neolife-carotenoid-complex, neolife-omega-3-plus, neolife-kosttillskott hub, den-fundersamma-mannen |
@@ -54,7 +54,7 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Archived |
+| **Status** | Completed |
 | **Objective** | Build out informational article inventory. Establish navigation system across all pages. |
 | **Dependencies** | Sprint 2 |
 | **Deliverables** | First batch of informational articles, navigation system (nav.js), footer system (footer.js), sitemap.xml |
@@ -67,7 +67,7 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Archived |
+| **Status** | Completed |
 | **Objective** | Migrate from Netlify to Cloudflare Pages. Fix critical SEO issues (canonicals, redirects). |
 | **Dependencies** | Sprint 3 |
 | **Deliverables** | Cloudflare Pages hosting, _redirects file, canonical URL corrections, nutriance-organic 404 redirect fix, nav.js deduplication |
@@ -80,7 +80,7 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Archived |
+| **Status** | Completed |
 | **Objective** | Audit all pillar pages against 13/13 production standard. Migrate Wave B1-B9 pages to compliance. |
 | **Dependencies** | Sprint 4 |
 | **Deliverables** | 9 pillar pages at 13/13 audit score, pillar.css consolidation, audit_pillar_page.py script |
@@ -93,7 +93,7 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Archived |
+| **Status** | Completed |
 | **Objective** | Migrate all informational articles to the Publication Article Standard (PAS). Standardize ia-wrap, JSON-LD @graph, evidence tiers, CTA blocks. |
 | **Dependencies** | Sprint 5 |
 | **Deliverables** | All content/articles/ files converted to PAS, consistent ia-* class usage, Google Fonts integration, canonical URL corrections |
@@ -106,7 +106,7 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Archived |
+| **Status** | Completed |
 | **Objective** | Replace MLM-style Affärsmöjlighet page with transparent decision-support page. Formalize Article/Page separation architecture. Migrate legacy Gen 1/Gen 2 pages to Gen 3 production standard. |
 | **Dependencies** | Sprint 6 |
 | **Deliverables** | Affärsmöjlighet 2.0 page, Article/Page Separation pattern, PAS frozen specification, all legacy pages migrated to Gen 3 |
@@ -119,7 +119,7 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Archived |
+| **Status** | Completed |
 | **Objective** | Create centralized brand design system. Establish pillar.css as single shared stylesheet. Build assets/brand/ directory. |
 | **Dependencies** | Sprint 7 |
 | **Deliverables** | docs/BRAND-DESIGN-SYSTEM.md, assets/brand/ directory (LV Mark, favicon, apple-touch-icon, hero-watermark, OG image), brand injectors in components.js, pillar.css with CSS variables |
@@ -223,64 +223,77 @@ This registry is the single source of truth for all project sprints. No other do
 
 | Field | Value |
 |-------|-------|
-| **Status** | Active |
+| **Status** | Completed |
 | **Objective** | Publish new pillar pages and informational articles in uncovered niches. Target clusters: Vitamin D depth, Magnesium depth, Probiotics depth, Fiber depth. New pillar page candidates: neolife-sport. |
 | **Dependencies** | Sprint 14 |
-| **Deliverables** | New article HTML files in content/articles/, new root-level pillar pages, cluster expansion |
-| **Completion Date** | — |
-| **Related Documents** | docs/plans/PHASE-2-ROADMAP.md, docs/editorial-backlog/ |
+| **Deliverables** | `d-vitaminbrist-sverige.html` (informational article), `neolife-sport.html` (pillar page), `magnesium-komplett-guide.html`, `probiotika-komplett-guide.html`, `kostfiber-komplett-guide.html` (all created Sprint 9, retroactively attributed to Sprint 16 scope) |
+| **Completion Date** | 2026-07-02 |
+| **Related Documents** | docs/plans/PHASE-2-ROADMAP.md, docs/editorial-backlog/, docs/sprints/SPRINT-16-REPORT.md |
 
 ---
 
-### Sprint 17 — Authority Research Expansion (Planned)
+### Sprint 17 — Authority Research Expansion
 
 | Field | Value |
 |-------|-------|
-| **Status** | Planned |
+| **Status** | Completed |
 | **Objective** | Expand authority research system with ingredient/condition profiles. Cover supplement ingredients (omega-3, magnesium, vitamin D, probiotics) and health conditions (inflammation, sleep, stress, immune function). Each profile includes tiered sources and key factual claims with evidence levels. |
 | **Dependencies** | Sprint 14 |
-| **Deliverables** | Authority profiles for key supplement ingredients and health conditions, tiered source libraries (PubMed, EFSA, WHO, Livsmedelsverket) |
-| **Completion Date** | — |
-| **Related Documents** | docs/authority-research/ |
+| **Deliverables** | 18 authority profiles in `docs/research/authority-profiles/`, checkpoint file at `research/manifests/authority-profiles-batch.json`, Research Commander V3 resume-from-last-success command mode |
+| **Completion Date** | 2026-07-02 |
+| **Related Documents** | docs/authority-research/, docs/research/authority-profiles/ |
 
 ---
 
-### Sprint 18 — Performance & Accessibility Audit (Planned)
+### Sprint 18 — Performance & Accessibility Audit
 
 | Field | Value |
 |-------|-------|
-| **Status** | Planned |
+| **Status** | Completed |
 | **Objective** | Audit and improve site performance and accessibility. Image optimization, lazy loading, Core Web Vitals tuning, contrast checks, ARIA labels, keyboard navigation, schema.org validation, broken link checks. |
 | **Dependencies** | Sprint 14 |
-| **Deliverables** | Optimized images, lazy loading implementation, Core Web Vitals report, accessibility improvements, trailing-slash canonical cleanup, validation fixes |
-| **Completion Date** | — |
-| **Related Documents** | docs/plans/PHASE-2-ROADMAP.md |
+| **Deliverables** | pillar.css + nav.js + footer.js + og:image + @graph Article schema on 18 pages, trailing-slash canonical cleanup (9 pages), `scripts/fix-sprint18-pages.py` |
+| **Completion Date** | 2026-07-02 |
+| **Related Documents** | docs/plans/PHASE-2-ROADMAP.md, scripts/fix-sprint18-pages.py |
 
 ---
 
-### Sprint 19 — Video & Interactive Tools (Planned)
+### Sprint 19 — Video & Interactive Tools
 
 | Field | Value |
 |-------|-------|
-| **Status** | Planned |
+| **Status** | Completed |
 | **Objective** | Produce explainer video for Affärsmöjlighet page. Build initial interactive tools: comparison pages, decision guides. |
 | **Dependencies** | Sprint 15 (Product Entity System) |
-| **Deliverables** | Embedded video on Affärsmöjlighet page, article-to-video workflow documented, initial comparison pages, decision guides |
-| **Completion Date** | — |
+| **Deliverables** | `sparanalys.html` (interactive savings calculator), video placeholder + comparison table + FAQ added to `direktforsaljning-fakta.html`, article-to-video workflow documented |
+| **Completion Date** | 2026-07-02 |
 | **Related Documents** | docs/plans/PHASE-2-ROADMAP.md, docs/plans/AFFARSMOJLIGHET-2.0-MASTERPLAN.md |
 
 ---
 
-### Sprint 20 — Site-Wide Consistency & Automation (Planned)
+### Sprint 20 — Site-Wide Consistency & Automation
 
 | Field | Value |
 |-------|-------|
-| **Status** | Planned |
+| **Status** | Completed |
 | **Objective** | Final pass on site-wide consistency. Resolve remaining PAS variations in content/articles/. Automated QA improvements. Periodic validation scripts. |
 | **Dependencies** | Sprint 18 |
-| **Deliverables** | Consistent PAS compliance across all articles, automated validation scripts, site-wide consistency report |
-| **Completion Date** | — |
+| **Deliverables** | Consistent PAS compliance across all articles, `scripts/fix-sprint20-consistency.py`, site-wide consistency report |
+| **Completion Date** | 2026-07-02 |
 | **Related Documents** | docs/plans/PHASE-2-ROADMAP.md |
+
+---
+
+### Sprint 21 — Markdown-First Publication Pipeline
+
+| Field | Value |
+|-------|-------|
+| **Status** | Completed |
+| **Objective** | Build a Markdown-first article authoring and publication pipeline. Define the Publication Source V2 frontmatter format, create a conversion script that reads `.md` and produces PAS V1.0-compliant `.html`, and publish the first article through the new pipeline. |
+| **Dependencies** | Sprint 11 (qa-article.sh QA gate), Sprint 20 (PAS compliance baseline) |
+| **Deliverables** | `scripts/md-to-article.py` (V2 → PAS V1.0 HTML converter, Python stdlib only, validates all required fields), `docs/PUBLICATION-SOURCE-V2.md` (frozen V2 frontmatter spec), `docs/MARKDOWN-FIRST-IMPLEMENTATION-PLAN.md`, `docs/CONTRADICTION-RESOLUTION.md` (C1–C8 classification), `content/articles/kalcium-brist-symtom/` (test article, QA GREEN 12/12), `_redirects` + `sitemap.xml` updated (B4/B5) |
+| **Completion Date** | 2026-07-02 |
+| **Related Documents** | docs/PUBLICATION-SOURCE-V2.md, docs/MARKDOWN-FIRST-IMPLEMENTATION-PLAN.md, docs/CONTRADICTION-RESOLUTION.md |
 
 ---
 
@@ -294,6 +307,7 @@ The registry is designed so that project agents can execute these commands by re
 | `Continue Sprint <N>` | Read registry, check CURRENT-SPRINT.md for progress, resume unfinished work. |
 | `Close Sprint <N>` | Create sprint report at docs/sprints/SPRINT-<N>-REPORT.md, update registry status to Completed, update CURRENT-SPRINT.md. |
 | `Open Sprint <N>` | Update registry status to Active, update CURRENT-SPRINT.md with sprint details. |
+| `Validate Sprint <N>` | Compare registry, sprint report, CURRENT-SPRINT.md, PROJECT-STATUS.md. Report inconsistencies. |
 
 ---
 
@@ -305,3 +319,4 @@ The registry is designed so that project agents can execute these commands by re
 4. When a sprint is active, update its status to `Active` and ensure CURRENT-SPRINT.md reflects the same sprint.
 5. Sprint reports are archived in `docs/sprints/SPRINT-<N>-REPORT.md`.
 6. Future sprint plans should reference the Sprint Registry instead of duplicating sprint metadata.
+7. **Before executing any Sprint command, every project agent MUST read `docs/SPRINT-REGISTRY.md`.** No sprint assumptions may be made without consulting the Registry first.
