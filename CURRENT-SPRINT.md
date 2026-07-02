@@ -78,13 +78,20 @@ The Research Commander V2 + GSC Content Audit (Sprint 12) is **complete**.
 
 | | |
 |---|---|
-| **Status** | 🟢 Active |
-| **Sprint** | 13 — GSC Non-Indexed URL Remediation |
-| **Started** | 2026-07-02 |
+| **Status** | ✅ Completed |
+| **Completed** | 2026-07-02 |
 
-**Objective:** Maximize the indexability of the highest-priority non-indexed URLs by resolving all repository-side issues identified in the GSC audit. The objective is to improve Google's ability to index the pages. Actual indexing remains Google's decision.
+**Delivered:**
+- 4 root `.html` copies for orphaned pages with production includes (nav.js, footer.js, components.js, verification meta, #site-nav)
+- 4 new sitemap.xml entries for orphaned pages
+- `naringsbrist` differentiated from `naringsbrist-symptom` (title, H1, meta description)
+- 5 isolated pages received 5+ new contextual internal links each (total ~35+ new links across 14 files)
+- `neolife-tre-en-en` and `golden-home-care` titles shortened to ≤60 chars
+- `neolife-pro-vitality` title fixed to reference "Pro Vitality+" matching URL slug
+- Canonical resolution between `/neolife-tre-en-en` and `/neolife-tre-en-en-cellnaring` (cross-linking added)
+- `docs/sprints/SPRINT-13-REPORT.md` — sprint closing report
 
-See `docs/SPRINT-13-PLAN.md` for full deliverables, risks, and definition of done.
+See `docs/SPRINT-13-REPORT.md` for detailed verification and file list.
 
 ---
 
