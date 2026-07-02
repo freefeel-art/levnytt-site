@@ -11,19 +11,22 @@ The Sprint Registry (`docs/SPRINT-REGISTRY.md`) is now the **canonical source** 
 
 ---
 
-## Active Sprint: 14 — Sprint Registry System V1
+## Sprint 14 — Sprint Registry System V1
 
 | | |
 |---|---|
-| **Status** | 🟢 Active |
-| **Opened** | 2026-07-02 |
-| **Objective** | Create centralized Sprint Registry as single source of truth for all project sprints. Build infrastructure so agents can execute "Run Sprint X", "Close Sprint X", "Open Sprint X" by reading the registry. |
+| **Status** | ✅ Completed |
+| **Completed** | 2026-07-02 |
+| **Commit** | `db67afd` |
 
-**Deliverables:**
+**Delivered:**
 - `docs/SPRINT-REGISTRY.md` with Sprints 1–20 populated
-- `CURRENT-SPRINT.md` updated to reference registry
+- `CURRENT-SPRINT.md` updated to reference registry (no duplicated metadata)
 - `PROJECT-STATUS.md` updated to reference registry
 - `docs/plans/PHASE-2-ROADMAP.md` updated to reference registry
+- `docs/sprints/SPRINT-14-REPORT.md` — sprint closing report
+
+See `docs/SPRINT-REGISTRY.md` for all sprint data. Awaiting owner direction for Sprint 15.
 
 ---
 
