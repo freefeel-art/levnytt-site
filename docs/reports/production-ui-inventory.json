@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T19:59:01+00:00",
+  "generated_at": "2026-07-28T20:02:57+00:00",
   "production_page_count": 107,
   "family_counts": {
     "authority-editorial-trust": 2,
@@ -1725,5 +1725,6 @@
       "issues": []
     }
   ],
-  "failures": []
+  "failures": [],
+  "shared_style_literal_color_violations": []
 }

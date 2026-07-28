@@ -20,6 +20,7 @@ class ProductionUiAuditTests(unittest.TestCase):
     def test_production_inventory_has_no_contract_failures(self):
         report = audit.audit(ROOT)
         self.assertEqual([], report["failures"])
+        self.assertEqual([], report["shared_style_literal_color_violations"])
         self.assertTrue(all(page["h1_count"] == 1 for page in report["pages"]))
         self.assertTrue(all(not page["missing_local_images"] for page in report["pages"]))
 

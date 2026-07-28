@@ -17,6 +17,8 @@ BODY_RE = re.compile(r'<body\b[^>]*>', re.I)
 H1_RE = re.compile(r'<h1\b', re.I)
 IMAGE_RE = re.compile(r'<img\b[^>]*\bsrc=["\'](?P<src>[^"\']+)', re.I)
 KNOWN_TEMPLATES = {"informational-article-v1", "authority-editorial-trust-v1"}
+CANONICAL_COLOR_LITERALS = {"#1b4332", "#e8c870", "#c9a84c", "#f9f6ef", "#ddd8ce"}
+SHARED_STYLE_FILES = ("assets/css/levnytt-components.css", "assets/css/authority-trust.css")
 
 
 def production_pages(root: Path):
@@ -88,14 +90,19 @@ def audit(root: Path) -> dict:
         if unclassified: issues.append("unclassified_card")
         if issues: failures.append({"file":file.name,"issues":issues,"unclassified_cards":unclassified,"missing_images":missing_images})
         records.append({"url":url,"file":file.name,"current_template_family":family,"target_template_family":family,"visual_consistency":"STANDARDIZED" if not issues else "MIGRATION_REQUIRED","navigation_footer_compliance":not any(i.startswith("missing_") for i in issues),"link_compliance":"see link-audit.json","card_compliance":not unclassified,"cta_classification":metadata.get("levnytt-cta","legacy-not-declared"),"disclosure_compliance":"required" if metadata.get("levnytt-cta") in {"product-referral","affiliate-referral"} else "not-required","migration_status":"MIGRATED" if metadata.get("levnytt-template") else "SHARED-SHELL-MIGRATED","h1_count":len(H1_RE.findall(html)),"missing_local_images":missing_images,"issues":issues})
-    return {"generated_at":datetime.now(timezone.utc).isoformat(timespec="seconds"),"production_page_count":len(records),"family_counts":dict(sorted(families.items())),"pages":records,"failures":failures}
+    literal_violations = []
+    for relative in SHARED_STYLE_FILES:
+        text = (root / relative).read_text(encoding="utf-8").lower()
+        if any(token in text for token in CANONICAL_COLOR_LITERALS):
+            literal_violations.append(relative)
+    return {"generated_at":datetime.now(timezone.utc).isoformat(timespec="seconds"),"production_page_count":len(records),"family_counts":dict(sorted(families.items())),"pages":records,"failures":failures,"shared_style_literal_color_violations":literal_violations}
 
 
 def main() -> int:
     parser=argparse.ArgumentParser(); parser.add_argument("--root",type=Path,default=ROOT); parser.add_argument("--output",type=Path,default=ROOT/"docs"/"reports"/"production-ui-inventory.json")
     args=parser.parse_args(); report=audit(args.root); args.output.parent.mkdir(parents=True,exist_ok=True); args.output.write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
-    print(json.dumps({"pages":report["production_page_count"],"families":report["family_counts"],"failures":len(report["failures"])},ensure_ascii=False))
-    return 1 if report["failures"] else 0
+    print(json.dumps({"pages":report["production_page_count"],"families":report["family_counts"],"failures":len(report["failures"]),"shared_style_literal_color_violations":len(report["shared_style_literal_color_violations"])},ensure_ascii=False))
+    return 1 if report["failures"] or report["shared_style_literal_color_violations"] else 0
 
 
 if __name__=="__main__":
