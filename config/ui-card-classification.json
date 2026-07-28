@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "variants": {
+    "editorial": ["article-card", "idx-card", "cluster-card", "decision-card", "ia-related-card", "related-card"],
+    "authority": ["principle-card", "ps-card", "journey-card", "tier-box", "ia-tier-box", "ia-tierbox", "ia-tier-card", "authority-link-card", "research-box", "standard-card"],
+    "product": ["product-card", "component-card", "carot-card", "ingredient-card"],
+    "evidence": ["ia-stat-card", "ia-svg-card", "ia-highlight-box", "stat-box", "calc-card", "calc-card-wide", "result-box", "edu-card", "option-card"],
+    "warning": ["ia-warning-box", "warn-box"]
+  },
+  "supporting_classes": ["article-card-meta", "article-card-title", "author-box", "card", "card-grid", "card-grid-2", "card-icon", "cards-grid", "cause-card", "cause-card-type", "cluster-card-body", "cluster-card-header", "cluster-card-label", "cluster-card-more", "cluster-card-title", "comparison-card", "comparison-card-label", "decision-card-cta", "decision-card-desc", "decision-card-q", "ia-author-box", "ia-related-card-desc", "ia-related-card-title", "ia-related-card-type", "idx-card-arrow", "idx-card-badge", "idx-card-desc", "idx-card-meta", "idx-card-meta-sep", "idx-card-title", "om-author-box", "om-tier-box", "ps-card-num", "ps-card-title", "research-box-label", "tier-box-label", "tier-box-title", "video-card", "video-card-caption", "video-card-play", "video-card-thumb"]
+}
