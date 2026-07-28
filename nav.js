@@ -79,7 +79,7 @@
       </div>
 
       <a href="/neolife-affarsmojlighet/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-affarsmojlighet/')}>Affärsmöjlighet</a>
-      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="lnav-cta" target="_blank" rel="sponsored noopener noreferrer">Handla NeoLife &rarr;</a>
+      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="lnav-cta" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife &rarr;</a>
       <a href="/finns-det-billigare-alternativ/" class="lnav-cta lnav-savings" target="_blank" rel="noopener noreferrer">Spara Pengar?</a>
     </div>
   </div>
