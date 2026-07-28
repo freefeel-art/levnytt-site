@@ -1,4 +1,4 @@
-// Cloudflare Worker — LevNytt language helper and first-party CTA event receiver.
+// Cloudflare Pages Advanced Mode worker — language helper and first-party CTA event receiver.
 // CTA events are deliberately limited to configured, non-personal event fields.
 
 const CTA_PATHS = Object.freeze({
@@ -52,34 +52,26 @@ async function recordCtaClick(request, env, url) {
 }
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/events/cta-click") return recordCtaClick(request, env, url);
     const country = request.cf?.country;
-    const acceptLang = request.headers.get("Accept-Language") || "";
 
-    const response = await fetch(request);
+    const response = await env.ASSETS.fetch(request);
 
-    // Only modify HTML pages — skip assets, images, API calls
+    // Only modify HTML pages — skip assets, images, API calls.
     const contentType = response.headers.get("Content-Type") || "";
     if (!contentType.includes("text/html")) {
       return response;
     }
 
-    // Determine if visitor should see language suggestion
-    let langSuggestion = null;
-    if (country === "NO" && !url.pathname.startsWith("/no/")) {
-      langSuggestion = "no";
-    }
-
+    // Determine if visitor should see language suggestion.
+    const langSuggestion = country === "NO" && !url.pathname.startsWith("/no/") ? "no" : null;
     if (!langSuggestion) {
       return response;
     }
 
-    // Inject a language banner into the HTML
-    const HTMLRewriter = new HTMLRewriter();
-    let html = await response.text();
-
+    const html = await response.text();
     const banner = `
 <div style="background:#1B4332;color:#F9F6EF;padding:10px 20px;text-align:center;font-family:Inter,sans-serif;font-size:14px;z-index:9999;position:relative">
   🇳🇴 Hei! Vi har norsk innhold tilgjengelig.
@@ -87,8 +79,7 @@ export default {
   <button onclick="this.parentElement.remove()" style="background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;margin-left:12px;font-size:16px" title="Lukk">✕</button>
 </div>`;
 
-    html = html.replace("<body", "<body" + banner);
-    return new Response(html, {
+    return new Response(html.replace("<body", "<body" + banner), {
       status: response.status,
       headers: response.headers,
     });
