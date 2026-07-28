@@ -29,7 +29,7 @@ The required common components are: site shell, navigation, footer, brand mark, 
 
 The shell migrator places exactly one `#site-nav` mount immediately inside `body`, loads `nav.js` and `footer.js`, and loads the foundations and component styles for every sitemap-listed production page. The production UI audit verifies these contracts across the entire sitemap, including card classification and declared template requirements.
 
-The link audit treats `levnytt.se`, relative and root-relative destinations as internal: they are canonicalized to same-tab root-relative links. External new-tab destinations must carry `noopener noreferrer`, while sponsored tokens remain preserved.
+The link audit treats `levnytt.se`, relative and root-relative destinations as internal. Ordinary body links are canonicalized to same-tab root-relative links. The Owner-approved global navigation exception is explicit: every actual link emitted by `nav.js` or `footer.js`, including internal links and clickable logos, opens a new tab and carries `noopener noreferrer`; sponsored links preserve their relationship token. Menu buttons and other non-link controls are not affected.
 
 ## Informational Article v1
 

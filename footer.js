@@ -30,27 +30,27 @@
 <footer class="lfoot" role="contentinfo">
   <div class="lfoot-inner">
     <div class="lfoot-top">
-      <a href="https://levnytt.se" class="lfoot-logo" aria-label="LevNytt — Hem">
+      <a href="https://levnytt.se" class="lfoot-logo" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem">
         <img src="/assets/brand/header-logo.svg" alt="LevNytt">
       </a>
       <nav class="lfoot-nav" aria-label="Sidfot navigation">
-        <a href="https://levnytt.se/neolife-historia">Historia</a>
-        <a href="https://levnytt.se/neolife-vetenskap">Vetenskap</a>
-        <a href="https://levnytt.se/neolife-hallbarhet/">Hållbarhet</a>
-        <a href="https://levnytt.se/direktforsaljning-fakta">Direktförsäljning</a>
-        <a href="https://levnytt.se/neolife-affarsmojlighet">Affärsmöjlighet</a>
-        <a href="https://levnytt.se/neolife-kosttillskott">Kosttillskott</a>
-        <a href="https://levnytt.se/personlig-vard">Personlig Vård</a>
-        <a href="https://levnytt.se/golden-home-care/">Golden Home Care</a>
-        <a href="https://levnytt.se/neolife-pro-vitality">Pro Vitality+</a>
-        <a href="https://levnytt.se/neolife-carotenoid-complex">Carotenoid Complex</a>
-        <a href="https://levnytt.se/neolife-omega-3-plus">Omega-3 Plus</a>
-        <a href="https://levnytt.se/om-oss">Om Oss</a>
-        <a href="https://levnytt.se/artiklar">Alla artiklar</a>
-        <a href="https://levnytt.se/den-fundersamma-mannen">Jarmo Halonen</a>
-        <a href="https://levnytt.se/var-metod">Vår Metod</a>
-        <a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a>
-        <a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a>
+        <a href="https://levnytt.se/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+        <a href="https://levnytt.se/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+        <a href="https://levnytt.se/neolife-hallbarhet/" target="_blank" rel="noopener noreferrer">Hållbarhet</a>
+        <a href="https://levnytt.se/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a>
+        <a href="https://levnytt.se/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+        <a href="https://levnytt.se/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a>
+        <a href="https://levnytt.se/personlig-vard" target="_blank" rel="noopener noreferrer">Personlig Vård</a>
+        <a href="https://levnytt.se/golden-home-care/" target="_blank" rel="noopener noreferrer">Golden Home Care</a>
+        <a href="https://levnytt.se/neolife-pro-vitality" target="_blank" rel="noopener noreferrer">Pro Vitality+</a>
+        <a href="https://levnytt.se/neolife-carotenoid-complex" target="_blank" rel="noopener noreferrer">Carotenoid Complex</a>
+        <a href="https://levnytt.se/neolife-omega-3-plus" target="_blank" rel="noopener noreferrer">Omega-3 Plus</a>
+        <a href="https://levnytt.se/om-oss" target="_blank" rel="noopener noreferrer">Om Oss</a>
+        <a href="https://levnytt.se/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a>
+        <a href="https://levnytt.se/den-fundersamma-mannen" target="_blank" rel="noopener noreferrer">Jarmo Halonen</a>
+        <a href="https://levnytt.se/var-metod" target="_blank" rel="noopener noreferrer">Vår Metod</a>
+        <a href="https://levnytt.se/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a>
+        <a href="https://levnytt.se/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a>
       </nav>
     </div>
     <div class="lfoot-closing">
@@ -71,7 +71,7 @@
         NeoLife&reg; är ett registrerat varumärke tillhörande NeoLife International, LLC. LevNytt är inte en officiell NeoLife-webbplats.
       </p>
       <nav class="lfoot-legal-links" aria-label="Juridiska sidor">
-        <a href="https://levnytt.se/integritetspolicy">Integritetspolicy</a>
+        <a href="https://levnytt.se/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a>
       </nav>
     </div>
   </div>

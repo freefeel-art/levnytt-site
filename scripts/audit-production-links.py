@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Audit and safely normalize links on LevNytt pages published in sitemap.xml.
 
-The optional --fix mode changes only the attributes of individual anchor tags
-whose classification is deterministic: internal links become canonical
+The optional --fix mode changes only the attributes of individual body anchor
+tags whose classification is deterministic: internal links become canonical
 root-relative same-tab links; external new-tab links gain noopener noreferrer.
+The global nav/footer exception is audited separately: every link emitted by
+nav.js or footer.js must open a new tab with safe rel attributes.
 Unknown local targets are reported, never rewritten to a guessed destination.
 """
 from __future__ import annotations
@@ -22,6 +24,25 @@ SITE_HOST = "levnytt.se"
 ANCHOR_RE = re.compile(r"<a\b(?P<attrs>[^>]*)>", re.I)
 ATTR_RE = re.compile(r"(?P<name>[\w:-]+)(?:\s*=\s*(?P<quote>[\"'])(?P<value>.*?)(?P=quote))?", re.S)
 SAFE_REL = {"noopener", "noreferrer"}
+
+
+def audit_shared_component(source: str, component: str) -> dict:
+    """Validate the Owner exception for links emitted by nav.js/footer.js."""
+    links = []
+    issues = []
+    for match in ANCHOR_RE.finditer(source):
+        attrs = read_attrs(match.group("attrs"))
+        href = attrs.get("href") or ""
+        if not href or href.startswith("#"):
+            continue
+        links.append(href)
+        target = (attrs.get("target") or "").lower()
+        rel_tokens = set((attrs.get("rel") or "").lower().split())
+        if target != "_blank":
+            issues.append({"href": href, "issue": "shared_navigation_link_missing_new_tab"})
+        if not SAFE_REL.issubset(rel_tokens):
+            issues.append({"href": href, "issue": "shared_navigation_link_missing_safe_rel"})
+    return {"component": component, "link_count": len(links), "issues": issues}
 
 
 def redirects(root: Path) -> dict[str, str]:
@@ -174,6 +195,7 @@ def run(root: Path, fix: bool) -> dict:
             if "missing_local_target" in item["issues"] or "invalid_href" in item["issues"] or "development_url" in item["issues"]:
                 exceptions.append({"page": path.name, **item})
         pages.append({"url": url, "file": path.name, "findings": findings})
+    shared_components = [audit_shared_component((root / name).read_text(encoding="utf-8"), name) for name in ("nav.js", "footer.js")]
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "scope": "sitemap-listed production pages only",
@@ -182,6 +204,7 @@ def run(root: Path, fix: bool) -> dict:
         "issue_counts": dict(sorted(totals.items())),
         "unresolved_exceptions": exceptions,
         "pages": pages,
+        "shared_components": shared_components,
     }
 
 
@@ -197,6 +220,9 @@ def write_reports(report: dict, output: Path) -> None:
             lines.append(f"- `{item['page']}` — `{item['href']}` — {', '.join(item['issues'])}")
     else:
         lines.append("- None.")
+    lines += ["", "## Shared component link policy", ""]
+    for component in report["shared_components"]:
+        lines.append(f"- `{component['component']}`: {component['link_count']} links; {len(component['issues'])} policy issues.")
     (output / "link-audit.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -208,8 +234,9 @@ def main() -> int:
     args = parser.parse_args()
     report = run(args.root, args.fix)
     write_reports(report, args.output)
-    print(json.dumps({"pages": report["production_page_count"], "issues": report["issue_counts"], "exceptions": len(report["unresolved_exceptions"])}, ensure_ascii=False))
-    return 1 if report["unresolved_exceptions"] else 0
+    component_issues = sum(len(item["issues"]) for item in report["shared_components"])
+    print(json.dumps({"pages": report["production_page_count"], "issues": report["issue_counts"], "exceptions": len(report["unresolved_exceptions"]), "shared_component_issues": component_issues}, ensure_ascii=False))
+    return 1 if report["unresolved_exceptions"] or component_issues else 0
 
 
 if __name__ == "__main__":

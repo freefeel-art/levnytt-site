@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T19:59:01+00:00",
+  "generated_at": "2026-07-28T20:11:57+00:00",
   "scope": "sitemap-listed production pages only",
   "fixed": false,
   "production_page_count": 107,
@@ -540,6 +540,18 @@
       "url": "https://levnytt.se/vad-ar-pyramidspel",
       "file": "vad-ar-pyramidspel.html",
       "findings": []
+    }
+  ],
+  "shared_components": [
+    {
+      "component": "nav.js",
+      "link_count": 14,
+      "issues": []
+    },
+    {
+      "component": "footer.js",
+      "link_count": 19,
+      "issues": []
     }
   ]
 }

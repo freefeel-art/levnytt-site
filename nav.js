@@ -45,19 +45,19 @@
 </style>
 <nav id="levnytt-nav">
   <div class="lnav-inner">
-    <a href="/" class="lnav-brand" aria-label="LevNytt — Hem">
+    <a href="/" class="lnav-brand" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem">
       <img src="/assets/brand/header-logo.svg" alt="LevNytt">
     </a>
     <button class="lnav-hamburger" id="lnavHamburger" aria-label="Meny">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
     <div class="lnav-links" id="lnavLinks">
-      <a href="/"${isActive('/')}>Hem</a>
-      <a href="/om-oss"${isActive('/om-oss')}>Om oss</a>
-      <a href="/artiklar"${isActive('/artiklar')}>Artiklar</a>
+      <a href="/" target="_blank" rel="noopener noreferrer"${isActive('/')}>Hem</a>
+      <a href="/om-oss" target="_blank" rel="noopener noreferrer"${isActive('/om-oss')}>Om oss</a>
+      <a href="/artiklar" target="_blank" rel="noopener noreferrer"${isActive('/artiklar')}>Artiklar</a>
 
-      <a href="/neolife-historia/"${isActive('/neolife-historia/')}>Historia</a>
-      <a href="/neolife-vetenskap/"${isActive('/neolife-vetenskap/')}>Vetenskap</a>
+      <a href="/neolife-historia/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-historia/')}>Historia</a>
+      <a href="/neolife-vetenskap/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-vetenskap/')}>Vetenskap</a>
 
       <div class="lnav-dropdown" id="lnavDropdown">
         <button class="lnav-dropdown-btn${isActive('/neolife-kosttillskott/') || isActive('/personlig-vard/') || isActive('/golden-home-care/') || isActive('/nutriance-organic/') ? ' nav-active' : ''}" id="lnavDropBtn">
@@ -66,21 +66,21 @@
         </button>
         <div class="lnav-dropdown-menu" id="lnavDropMenu">
           <p class="lnav-dropdown-label">Kosttillskott</p>
-          <a href="/neolife-pro-vitality/"${isActive('/neolife-pro-vitality/')}>Pro Vitality+</a>
-          <a href="/multivitamin-kvinnor-over-40/"${isActive('/multivitamin-kvinnor-over-40/')}>Multivitamin för kvinnor över 40</a>
-          <a href="/neolife-kosttillskott/"${isActive('/neolife-kosttillskott/')}>Alla kosttillskott</a>
+          <a href="/neolife-pro-vitality/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-pro-vitality/')}>Pro Vitality+</a>
+          <a href="/multivitamin-kvinnor-over-40/" target="_blank" rel="noopener noreferrer"${isActive('/multivitamin-kvinnor-over-40/')}>Multivitamin för kvinnor över 40</a>
+          <a href="/neolife-kosttillskott/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-kosttillskott/')}>Alla kosttillskott</a>
           <div class="lnav-dropdown-divider"></div>
           <p class="lnav-dropdown-label">Personlig vård</p>
-          <a href="/personlig-vard/"${isActive('/personlig-vard/')}>Personlig vård — översikt</a>
+          <a href="/personlig-vard/" target="_blank" rel="noopener noreferrer"${isActive('/personlig-vard/')}>Personlig vård — översikt</a>
           <div class="lnav-dropdown-divider"></div>
           <p class="lnav-dropdown-label">Hem & Städning</p>
-          <a href="/golden-home-care/"${isActive('/golden-home-care/')}>Golden Home Care</a>
+          <a href="/golden-home-care/" target="_blank" rel="noopener noreferrer"${isActive('/golden-home-care/')}>Golden Home Care</a>
         </div>
       </div>
 
-      <a href="/neolife-affarsmojlighet/"${isActive('/neolife-affarsmojlighet/')}>Affärsmöjlighet</a>
-      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="lnav-cta" target="_blank" rel="nofollow noopener sponsored">Handla NeoLife &rarr;</a>
-      <a href="/finns-det-billigare-alternativ/" class="lnav-cta lnav-savings">Spara Pengar?</a>
+      <a href="/neolife-affarsmojlighet/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-affarsmojlighet/')}>Affärsmöjlighet</a>
+      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="lnav-cta" target="_blank" rel="sponsored noopener noreferrer">Handla NeoLife &rarr;</a>
+      <a href="/finns-det-billigare-alternativ/" class="lnav-cta lnav-savings" target="_blank" rel="noopener noreferrer">Spara Pengar?</a>
     </div>
   </div>
 </nav>`;
