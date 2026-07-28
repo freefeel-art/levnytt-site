@@ -89,6 +89,13 @@
 <a href="https://levnytt.se/neolife-historia" class="ia-cta-btn" target="_blank" rel="noopener noreferrer">NeoLife Historia →</a>
 </div>
 
+<div class="ia-cta">
+<h3>Information om OLSP</h3>
+<p>För officiell information om OLSP, besök den externa OLSP-sidan.</p>
+<a href="https://olsp.profitandprivilege.com" class="ia-cta-btn" data-hermes-cta="levnytt-direktforsaljning-olsp-primary" target="_blank" rel="nofollow sponsored noopener noreferrer">Läs mer om OLSP →</a>
+<p class="ia-disclosure">Extern informations- och referral-länk. LevNytt kan få ersättning om du väljer att använda länken.</p>
+</div>
+
 <div class="ia-tierbox">
 <a class="ia-tier" rel="noopener noreferrer" target="_blank" href="https://levnytt.se/neolife-historia">NeoLife Historia</a>
 <a class="ia-tier" rel="noopener noreferrer" target="_blank" href="https://levnytt.se/levnytt-principer">LevNytt Principer</a>
@@ -117,6 +124,23 @@
 <p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
 
 </article></div>
+<script>
+document.addEventListener("click", function (event) {
+  const link = event.target.closest("a[data-hermes-cta]");
+  if (!link) return;
+  const payload = {
+    cta_id: link.dataset.hermesCta,
+    page_path: "/direktforsaljning-fakta",
+    destination: link.href.replace(/\/$/, "")
+  };
+  const body = JSON.stringify(payload);
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon("/events/cta-click", new Blob([body], { type: "application/json" }));
+    return;
+  }
+  fetch("/events/cta-click", { method: "POST", credentials: "same-origin", keepalive: true, headers: { "Content-Type": "application/json" }, body: body });
+});
+</script>
 <script src="/footer.js" defer></script>
 <script src="/components.js" defer></script>
 </body></html>
