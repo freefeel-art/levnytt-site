@@ -152,8 +152,12 @@
     @media(max-width:600px){.historia-hero{min-height:260px;}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0.01ms!important;}}
   </style>
+<link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
+<link rel="stylesheet" href="/assets/css/levnytt-components.css">
 </head>
 <body>
+<div id="site-nav"></div>
+<script src="/nav.js" defer></script>
 
   <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
 
@@ -230,7 +234,7 @@
 
       <h2 id="arthur-furst">Dr. Arthur Furst — grundaren av SAB</h2>
 
-      <img src="ArthurFurst.png"
+      <img src="/images/arthurfurst.png"
            alt="Dr. Arthur Furst — grundare av NeoLife Scientific Advisory Board, Stanford Ph.D., toxikologins fader"
            class="portrait"
            loading="lazy">
@@ -360,10 +364,10 @@
 
       <p style="font-size:0.85em;color:#888;border-top:1px solid var(--border);padding-top:14px;margin-top:32px;">
         <strong>Källor och referenser:</strong><br>
-        <a href="https://pubmed.ncbi.nlm.nih.gov/8147336/" target="_blank" rel="noopener">Carughi &amp; Hooper (1994) — American Journal of Clinical Nutrition, PMID: 8147336</a><br>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/8147336/" target="_blank" rel="noopener noreferrer">Carughi &amp; Hooper (1994) — American Journal of Clinical Nutrition, PMID: 8147336</a><br>
         <a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a><br>
         <a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning</a><br>
-        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
+        <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener noreferrer sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
       </p>
 
     </div>
@@ -394,8 +398,6 @@
       a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});
     });
   </script>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
   <script src="/components.js" defer></script>
 </body>

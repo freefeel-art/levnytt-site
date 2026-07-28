@@ -1,0 +1,55 @@
+/* LevNytt UI Framework v1 — shared component contracts. */
+.ln-card,
+.article-card,.idx-card,.cluster-card,.decision-card,.ia-related-card,.related-card,
+.principle-card,.ps-card,.journey-card,.tier-box,.ia-tier-box,.research-box,.standard-card,
+.product-card,.component-card,.carot-card,.ingredient-card,
+.ia-stat-card,.ia-svg-card,.stat-box,.calc-card,.calc-card-wide,.result-box,.edu-card,.option-card,
+.ia-warning-box,.warn-box {
+  border: 1px solid var(--ln-color-border);
+  border-radius: var(--ln-radius-md);
+  box-sizing: border-box;
+}
+.ln-card--editorial,.article-card,.idx-card,.cluster-card,.decision-card,.ia-related-card,.related-card {
+  background: var(--ln-color-surface-raised);
+  color: var(--ln-color-text);
+  padding: var(--ln-space-5);
+}
+.ln-card--authority,.principle-card,.ps-card,.journey-card,.tier-box,.ia-tier-box,.research-box,.standard-card {
+  background: var(--ln-color-surface);
+  border-top: 3px solid var(--ln-color-brand-gold-deep);
+  color: var(--ln-color-text);
+  padding: var(--ln-space-5);
+}
+.ln-card--product,.product-card,.component-card,.carot-card,.ingredient-card {
+  background: var(--ln-color-surface-raised);
+  border-top: 3px solid var(--ln-color-brand-green);
+  padding: var(--ln-space-5);
+}
+.ln-card--evidence,.ia-stat-card,.ia-svg-card,.stat-box,.calc-card,.calc-card-wide,.result-box,.edu-card,.option-card {
+  background: var(--ln-color-surface-muted);
+  color: var(--ln-color-text);
+  padding: var(--ln-space-4);
+}
+.ln-card--warning,.ia-warning-box,.warn-box {
+  background: var(--ln-color-caution-surface);
+  border-left: 4px solid var(--ln-color-caution-border);
+  color: var(--ln-color-text);
+  padding: var(--ln-space-4);
+}
+.ln-card :is(h2,h3,h4),.article-card-title,.idx-card-title,.cluster-card-title,.principle-card h3,.ps-card-title {
+  color: var(--ln-color-brand-green);
+  font-family: var(--ln-font-display);
+}
+a.article-card,a.idx-card,a.cluster-card,a.decision-card,a.ia-related-card,a.related-card,a.tier-box {
+  display: block;
+  text-decoration: none;
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+a.article-card:hover,a.idx-card:hover,a.cluster-card:hover,a.decision-card:hover,a.ia-related-card:hover,a.related-card:hover,a.tier-box:hover {
+  border-color: var(--ln-color-brand-gold-deep);
+  box-shadow: 0 0.4rem 1.2rem rgba(27,67,50,.12);
+  transform: translateY(-1px);
+}
+@media (max-width: 600px) {
+  .ln-card,.article-card,.idx-card,.cluster-card,.decision-card,.ia-related-card,.related-card,.principle-card,.ps-card,.journey-card,.tier-box,.ia-tier-box,.research-box,.standard-card,.product-card,.component-card,.carot-card,.ingredient-card,.ia-stat-card,.ia-svg-card,.stat-box,.calc-card,.calc-card-wide,.result-box,.edu-card,.option-card,.ia-warning-box,.warn-box { padding: var(--ln-space-4); }
+}

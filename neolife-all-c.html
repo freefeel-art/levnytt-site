@@ -39,9 +39,13 @@
 ]},
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LevNytt","item":"https://levnytt.se"},{"@type":"ListItem","position":2,"name":"Vitaminer & Mineraler","item":"https://levnytt.se/neolife-kosttillskott"},{"@type":"ListItem","position":3,"name":"C-vitamin","item":"https://levnytt.se/neolife-all-c"}]}]}
 </script>
+<link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
+<link rel="stylesheet" href="/assets/css/levnytt-components.css">
 </head><body>
+<div id="site-nav"></div>
+<script src="/nav.js" defer></script>
 
-<div class="breadcrumbs" role="navigation" aria-label="Brödsmulor"><div class="container"><a href="https://levnytt.se">LevNytt</a><span>›</span><a href="https://levnytt.se/neolife-kosttillskott">Vitaminer &amp; Mineraler</a><span>›</span>C-vitamin</div></div>
+<div class="breadcrumbs" role="navigation" aria-label="Brödsmulor"><div class="container"><a href="/">LevNytt</a><span>›</span><a href="/neolife-kosttillskott">Vitaminer &amp; Mineraler</a><span>›</span>C-vitamin</div></div>
 <header class="hero"><div class="container">
   <p class="hero-eyebrow">Vitaminer · C-vitamin · Immunförsvar · Kollagen</p>
   <h1>Vad är C-vitamin — och hur mycket behöver man?</h1>
@@ -54,7 +58,7 @@
   <div><span class="stat-number">2 000 mg</span><span class="stat-label">EFSA:s tolerabla övre gräns per dag för vuxna</span><span class="stat-source">EFSA Journal</span></div>
   <div><span class="stat-number">190 mg</span><span class="stat-label">C-vitamin per 100g röd paprika — rikaste vanliga kostkällan</span><span class="stat-source">Livsmedelsverket</span></div>
 </div></div></section>
-<div class="authority-nav" role="navigation"><div class="container"><span class="authority-nav-label">Om LevNytt</span><a href="https://levnytt.se/om-oss">Om oss</a><a href="https://levnytt.se/den-fundersamma-mannen">Jarmo Halonen</a><a href="https://levnytt.se/var-metod">Vår Metod</a><a href="https://levnytt.se/forsknings-faq">Forsknings-FAQ</a><a href="https://levnytt.se/levnytt-principer">LevNytt Principer</a></div></div>
+<div class="authority-nav" role="navigation"><div class="container"><span class="authority-nav-label">Om LevNytt</span><a href="/om-oss">Om oss</a><a href="/den-fundersamma-mannen">Jarmo Halonen</a><a href="/var-metod">Vår Metod</a><a href="/forsknings-faq">Forsknings-FAQ</a><a href="/levnytt-principer">LevNytt Principer</a></div></div>
 <main class="article-wrap"><div class="container">
   <div class="ia-punchline"><p>Hur mycket C-vitamin behöver man? — EFSA:s referensintag är 95–110 mg/dag. <strong>Men C-vitamin är vattenlösligt och kroppen utsöndrar det den inte behöver — höga doser ger inte nödvändigtvis mer effekt.</strong> Den klassiska påståendet att megadoser förebygger förkylning håller inte — men daglig supplementering kortar varaktigheten något.</p></div>
   <div class="ia-takeaways">
@@ -71,9 +75,9 @@
   <div class="article-body">
     <h2>Vad är C-vitamin och vad gör det i kroppen?</h2>
     <p>Askorbinsyra (C-vitamin) är ett vattenlösligt vitamin som utmärker sig på flera sätt. Till skillnad från D-vitamin kan kroppen inte producera det och kan heller inte lagra stora mängder. Det upptas i tarmen via aktiva transportörer som mättas vid höga intag — vilket förklarar varför absorptionseffektiviteten minskar vid höga doser.</p>
-    <p>C-vitamins biologiska roller är breda. Som antioxidant donerar det elektroner för att neutralisera fria radikaler — och regenererar E-vitaminet till sin aktiva form. Det är en essentiell kofaktor för enzymer som syntetiserar kollagen, karnitin och vissa neurotransmittorer. <a href="https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2013.3418" rel="noopener" target="_blank">EFSA:s genomgång av C-vitamin (2013)</a> dokumenterar dess godkända hälsopåståenden inom dessa biologiska kategorier.</p>
+    <p>C-vitamins biologiska roller är breda. Som antioxidant donerar det elektroner för att neutralisera fria radikaler — och regenererar E-vitaminet till sin aktiva form. Det är en essentiell kofaktor för enzymer som syntetiserar kollagen, karnitin och vissa neurotransmittorer. <a href="https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2013.3418" rel="noopener noreferrer" target="_blank">EFSA:s genomgång av C-vitamin (2013)</a> dokumenterar dess godkända hälsopåståenden inom dessa biologiska kategorier.</p>
     <h2>Vad säger Cochrane om C-vitamin och förkylning?</h2>
-    <p>Frågan om C-vitamin och förkylning har genererat mer forskning än nästan något annat vitamintillskott. <a href="https://pubmed.ncbi.nlm.nih.gov/23440782/" rel="noopener" target="_blank">Cochrane-metaanalysen (senast uppdaterad 2023)</a> analyserade 29 prövningar med 11 306 deltagare och fann:</p>
+    <p>Frågan om C-vitamin och förkylning har genererat mer forskning än nästan något annat vitamintillskott. <a href="https://pubmed.ncbi.nlm.nih.gov/23440782/" rel="noopener noreferrer" target="_blank">Cochrane-metaanalysen (senast uppdaterad 2023)</a> analyserade 29 prövningar med 11 306 deltagare och fann:</p>
     <ul style="list-style:disc;padding-left:28px;margin:16px 0;line-height:1.8">
       <li>Daglig C-vitaminsupplementering minskade <em>inte</em> förkylningsincidensen hos normalbefolkningen.</li>
       <li>Förkylningens varaktighet kortades med 8% hos vuxna och 14% hos barn.</li>
@@ -82,40 +86,38 @@
     <div class="callout callout-amber"><p class="callout-title">Evidensnyansen</p><p>Cochranestudien testsade daglig supplementering som förebyggande åtgärd. Separata studier har testat C-vitamin vid symtomdebut — resultaten är mer blandade och metodologin varierar. Megadoser (>1 000 mg/dag) ger inte konsekvent bättre effekt än lägre doser på 200–500 mg.</p></div>
     <h2>Vad är bioflavonoider och hur relaterar de till C-vitamin?</h2>
     <p>I sin naturliga form i frukt och grönsaker förekommer C-vitamin tillsammans med bioflavonoider — en klass polyfenoliska fytonutrienter som inkluderar kvercertin, rutosid, hesperidin och naringenin. I citrus sitter bioflavonoiderna framför allt i det vita skalet under det yttre skalet.</p>
-    <p>Albert Szent-Györgyi — nobelpristagaren som isolerade C-vitaminet — föreslog ursprungligen att ett icke-identifierat ämne i citrus (kallat "vitamin P") var nödvändigt för C-vitamins fulla effekt. Moderna studier har inte bekräftat att bioflavonoider konsekvent förbättrar C-vitaminabsorptionen, men <a href="https://pubmed.ncbi.nlm.nih.gov/28641164/" rel="noopener" target="_blank">forskning publicerad i Nutrients (2017)</a> bekräftade att bioflavonoider som kvercertin har egna antioxidant- och antiinflammatoriska effekter via signalvägar oberoende av C-vitamin.</p>
+    <p>Albert Szent-Györgyi — nobelpristagaren som isolerade C-vitaminet — föreslog ursprungligen att ett icke-identifierat ämne i citrus (kallat "vitamin P") var nödvändigt för C-vitamins fulla effekt. Moderna studier har inte bekräftat att bioflavonoider konsekvent förbättrar C-vitaminabsorptionen, men <a href="https://pubmed.ncbi.nlm.nih.gov/28641164/" rel="noopener noreferrer" target="_blank">forskning publicerad i Nutrients (2017)</a> bekräftade att bioflavonoider som kvercertin har egna antioxidant- och antiinflammatoriska effekter via signalvägar oberoende av C-vitamin.</p>
     <h2>Vad är skillnaden mellan All C och Sustained Release Vitamin C?</h2>
     <p>NeoLife erbjuder båda formaten i sin produktportfölj. All C (kod 552) är en tuggtablett med C-vitamin och bioflavonoider — ett praktiskt alternativ för de som föredrar tuggtabletter. Sustained Release Vitamin C (kod 551) har en matris som frisätter C-vitaminet gradvis under 4–6 timmar.</p>
     <p>Sustained release är relevant eftersom C-vitamin absorberas bäst i lägre koncentrationer och utsöndras snabbt vid höga doser. Gradvis frisättning kan hålla plasmanivåerna jämnare — vilket är mer relevant vid doser över 200 mg per dag.</p>
     <div class="callout callout-standard"><p class="callout-title">Kostkällor räcker för de flesta</p><p>En portion röd paprika (100g) ger nästan dubbelt EFSA:s dagliga referensintag. En apelsin ger ungefär hälften. För de som äter en varierad kost med rikligt av frukt och grönsaker är C-vitamintillskott i normalfallet inte nödvändigt. Rökare, de med begränsad frukt/grönsakkonsumtion och de under hög oxidativ stress (intensiv träning, sjukdom) är de grupper där supplementering är mest motiverat.</p></div>
     <div class="ia-cta">
       <h3>Förstå antioxidanters roll i kroppen</h3>
-      <p>C-vitamin är en antioxidant — men det är inte den enda. LevNytt har en genomgång av karotenoiderna och hur de kompletterar C- och E-vitamin — samt <a href="https://levnytt.se/karotenoid-tillskott-vs-mat">karotenoider från tillskott vs mat</a>.</p>
-      <a href="https://levnytt.se/neolife-carotenoid-complex" class="ia-cta-btn">Carotenoid Complex →</a>
+      <p>C-vitamin är en antioxidant — men det är inte den enda. LevNytt har en genomgång av karotenoiderna och hur de kompletterar C- och E-vitamin — samt <a href="/karotenoid-tillskott-vs-mat">karotenoider från tillskott vs mat</a>.</p>
+      <a href="/neolife-carotenoid-complex" class="ia-cta-btn">Carotenoid Complex →</a>
     </div>
     <div class="faq-section">
       <h2>Vanliga frågor om C-vitamin</h2>
-      <details><summary>Vad är C-vitamin och vad gör det?</summary><div class="faq-answer"><p>C-vitamin är ett vattenlösligt vitamin med roller som antioxidant, kollagensynteskofaktor, immunstöd och järnabsorptionsförbättrare. Kroppen kan inte producera det och lagrar det inte effektivt — dagligt intag är nödvändigt. <a href="https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2013.3418" rel="noopener" target="_blank">EFSA godkände 2013</a> ett brett spektrum av hälsopåståenden.</p></div></details>
+      <details><summary>Vad är C-vitamin och vad gör det?</summary><div class="faq-answer"><p>C-vitamin är ett vattenlösligt vitamin med roller som antioxidant, kollagensynteskofaktor, immunstöd och järnabsorptionsförbättrare. Kroppen kan inte producera det och lagrar det inte effektivt — dagligt intag är nödvändigt. <a href="https://efsa.onlinelibrary.wiley.com/doi/10.2903/j.efsa.2013.3418" rel="noopener noreferrer" target="_blank">EFSA godkände 2013</a> ett brett spektrum av hälsopåståenden.</p></div></details>
       <details><summary>Hur mycket C-vitamin rekommenderar EFSA?</summary><div class="faq-answer"><p>95 mg/dag för vuxna kvinnor, 110 mg/dag för vuxna män. Rökare rekommenderas 35 mg extra. Tolerabel övre gräns: 2 000 mg/dag. Absorptionseffektiviteten minskar vid doser >200 mg — vid 1 250 mg absorberas bara ~33%.</p></div></details>
-      <details><summary>Vad är bioflavonoider och varför kombineras de med C-vitamin?</summary><div class="faq-answer"><p>Bioflavonoider (kvercertin, hesperidin, rutosid) förekommer naturligt med C-vitamin i frukt. De har egna antioxidant- och antiinflammatoriska effekter. <a href="https://pubmed.ncbi.nlm.nih.gov/28641164/" rel="noopener" target="_blank">Nutrients (2017)</a> bekräftade bioflavonoiders biologiska aktivitet oberoende av C-vitamin. Absorptionsförstärkning är mer omtvistad i modern forskning.</p></div></details>
+      <details><summary>Vad är bioflavonoider och varför kombineras de med C-vitamin?</summary><div class="faq-answer"><p>Bioflavonoider (kvercertin, hesperidin, rutosid) förekommer naturligt med C-vitamin i frukt. De har egna antioxidant- och antiinflammatoriska effekter. <a href="https://pubmed.ncbi.nlm.nih.gov/28641164/" rel="noopener noreferrer" target="_blank">Nutrients (2017)</a> bekräftade bioflavonoiders biologiska aktivitet oberoende av C-vitamin. Absorptionsförstärkning är mer omtvistad i modern forskning.</p></div></details>
       <details><summary>Vad är skillnaden mellan All C och Sustained Release Vitamin C?</summary><div class="faq-answer"><p>All C (552) är tuggtablett med bioflavonoider. Sustained Release Vitamin C (551) frisätter C-vitaminet gradvis under 4–6 timmar — relevant för att hålla jämna plasmanivåer vid doser >200 mg. Båda innehåller askorbinsyra som aktiv ingrediens.</p></div></details>
-      <details><summary>Hjälper C-vitamin mot förkylning?</summary><div class="faq-answer"><p><a href="https://pubmed.ncbi.nlm.nih.gov/23440782/" rel="noopener" target="_blank">Cochrane-metaanalysen (2023)</a> av 11 000+ deltagare: C-vitamin förebygger inte förkylning i normalbefolkningen, men kortar varaktigheten med 8% (vuxna) och 14% (barn). Vid intensiv fysisk ansträngning halverades förkylningsincidensen.</p></div></details>
+      <details><summary>Hjälper C-vitamin mot förkylning?</summary><div class="faq-answer"><p><a href="https://pubmed.ncbi.nlm.nih.gov/23440782/" rel="noopener noreferrer" target="_blank">Cochrane-metaanalysen (2023)</a> av 11 000+ deltagare: C-vitamin förebygger inte förkylning i normalbefolkningen, men kortar varaktigheten med 8% (vuxna) och 14% (barn). Vid intensiv fysisk ansträngning halverades förkylningsincidensen.</p></div></details>
       <details><summary>Vilka livsmedel är rika på C-vitamin?</summary><div class="faq-answer"><p>Röd paprika (190 mg/100g), svarta vinbär (170 mg/100g), guava, bryssekål (90 mg/100g), broccoli (65 mg/100g), apelsin (50 mg/100g). C-vitamin är värmekänsligt — råa och lätt tillagade grönsaker ger mest.</p></div></details>
       <details><summary>Är höga doser C-vitamin farliga?</summary><div class="faq-answer"><p>EFSA:s tolerabla övre gräns är 2 000 mg/dag. Vid >1 000 mg kan gastrointestinala biverkningar uppstå. Höga doser kan påverka järnabsorptionen hos de med järnöverbelastning. Megadoser (>1 000 mg) ger inte konsekvent mer hälsoeffekt än doser på 200–500 mg — det extra C-vitaminet utsöndras via urinen.</p></div></details>
     </div>
-    <div class="author-box"><div class="author-avatar"><img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="56" height="56"></div><div class="author-info"><span class="author-label">Skribent</span><strong>Jarmo Halonen</strong><span>Långvarig NeoLife-användare och entreprenör med intresse för hälsa, konsumentfrågor och vardagsekonomi.</span><div class="method-note"><strong>Metodnotering:</strong> Hälsopåståenden sourcade från primärkällor: EFSA, PubMed, Livsmedelsverket. Kommersiell upplysning: LevNytt drivs av en NeoLife-distributör. <a href="https://levnytt.se/var-metod">Läs om vår metod →</a></div></div></div>
+    <div class="author-box"><div class="author-avatar"><img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="56" height="56"></div><div class="author-info"><span class="author-label">Skribent</span><strong>Jarmo Halonen</strong><span>Långvarig NeoLife-användare och entreprenör med intresse för hälsa, konsumentfrågor och vardagsekonomi.</span><div class="method-note"><strong>Metodnotering:</strong> Hälsopåståenden sourcade från primärkällor: EFSA, PubMed, Livsmedelsverket. Kommersiell upplysning: LevNytt drivs av en NeoLife-distributör. <a href="/var-metod">Läs om vår metod →</a></div></div></div>
     <p class="last-updated">Senast uppdaterad: 15 juni 2026. Källor: EFSA Journal 2013, Cochrane 2023, Nutrients 2017, PubMed.</p>
     <div class="journey-block"><p class="journey-label">Klustret Vitaminer &amp; Mineraler</p>
       <div class="journey-steps">
-        <span class="journey-step"><a href="https://levnytt.se/neolife-vitamin-d">D-vitamin</a></span><span class="journey-arrow">→</span>
-        <span class="journey-step"><a href="https://levnytt.se/neolife-magnesium-complex">Magnesium</a></span><span class="journey-arrow">→</span>
+        <span class="journey-step"><a href="/neolife-vitamin-d">D-vitamin</a></span><span class="journey-arrow">→</span>
+        <span class="journey-step"><a href="/neolife-magnesium-complex">Magnesium</a></span><span class="journey-arrow">→</span>
         <span class="journey-step"><strong>C-vitamin / All C</strong> ← du är här</span><span class="journey-arrow">→</span>
-        <span class="journey-step"><a href="https://levnytt.se/neolife-formula-iv">Formula IV</a></span>
+        <span class="journey-step"><a href="/neolife-formula-iv">Formula IV</a></span>
       </div>
     </div>
   </div></div>
 </main>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
 <script src="/footer.js" defer></script>
 <script src="/components.js" defer></script>
 </body></html>
