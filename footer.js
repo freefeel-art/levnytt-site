@@ -4,18 +4,18 @@
 
   var html = `
 <style>
-.lfoot{background:#1B4332;color:rgba(255,255,255,0.75);padding:28px 0 0;font-size:14px;line-height:1.7;font-family:'Inter',-apple-system,sans-serif;}
-.lfoot-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
+.lfoot{background:var(--ln-color-brand-green,#1B4332);color:rgba(255,255,255,0.75);padding:28px 0 0;font-size:14px;line-height:1.7;font-family:var(--ln-font-body,'Inter',-apple-system,sans-serif);}
+.lfoot-inner{max-width:var(--ln-width-shell,1200px);margin:0 auto;padding:0 24px;}
 .lfoot-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 40px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.12);}
-.lfoot-logo{text-decoration:none;display:inline-flex;align-items:center;}
+.lfoot-logo{background:var(--ln-color-surface,#F9F6EF);border-radius:var(--ln-radius-sm,6px);padding:4px 8px;text-decoration:none;display:inline-flex;align-items:center;}
 .lfoot-logo img{display:block;height:24px;width:auto;}
 .lfoot-nav{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;}
 .lfoot-nav a{color:rgba(255,255,255,0.72);text-decoration:none;font-size:12.5px;transition:color 0.18s;}
-.lfoot-nav a:hover{color:#E8C870;}
+.lfoot-nav a:hover{color:var(--ln-color-brand-gold,#E8C870);}
 .lfoot-closing{padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.12);}
 .lfoot-lines{display:flex;gap:6px 28px;flex-wrap:wrap;margin-bottom:8px;}
 .lfoot-line{font-family:'Playfair Display',Georgia,serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.50);font-style:italic;white-space:nowrap;}
-.lfoot-line::before{content:'— ';color:#E8C870;font-style:normal;}
+.lfoot-line::before{content:'— ';color:var(--ln-color-brand-gold,#E8C870);font-style:normal;}
 .lfoot-note{font-size:11px;font-style:italic;color:rgba(255,255,255,0.45);line-height:1.5;margin:0;max-width:560px;}
 .lfoot-legal{padding:12px 0 20px;display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;}
 .lfoot-copy{font-size:10.5px;color:rgba(255,255,255,0.35);line-height:1.5;max-width:480px;margin:0;}
@@ -31,7 +31,7 @@
   <div class="lfoot-inner">
     <div class="lfoot-top">
       <a href="https://levnytt.se" class="lfoot-logo" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/logo-light.svg" alt="LevNytt">
+        <img src="/assets/brand/header-logo.svg" alt="LevNytt">
       </a>
       <nav class="lfoot-nav" aria-label="Sidfot navigation">
         <a href="https://levnytt.se/neolife-historia">Historia</a>

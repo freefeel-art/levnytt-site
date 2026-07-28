@@ -1,0 +1,33 @@
+/* LevNytt UI Framework v1 — canonical tokens and shared foundations. */
+:root {
+  --ln-color-brand-green: #1B4332;
+  --ln-color-brand-gold: #E8C870;
+  --ln-color-brand-gold-deep: #C9A84C;
+  --ln-color-surface: #F9F6EF;
+  --ln-color-surface-raised: #FFFFFF;
+  --ln-color-surface-muted: #EDE8DC;
+  --ln-color-text: #1A1A1A;
+  --ln-color-text-muted: #555550;
+  --ln-color-border: #DDD8CE;
+  --ln-font-display: "Playfair Display", Georgia, serif;
+  --ln-font-body: Inter, system-ui, sans-serif;
+  --ln-space-1: 0.25rem;
+  --ln-space-2: 0.5rem;
+  --ln-space-3: 0.75rem;
+  --ln-space-4: 1rem;
+  --ln-space-5: 1.5rem;
+  --ln-space-6: 2rem;
+  --ln-space-7: 3rem;
+  --ln-space-8: 4rem;
+  --ln-radius-sm: 0.375rem;
+  --ln-radius-md: 0.625rem;
+  --ln-radius-lg: 1rem;
+  --ln-width-content: 47.5rem;
+  --ln-width-shell: 75rem;
+  --ln-image-editorial: 3 / 2;
+  --ln-image-social: 2 / 3;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+img { height: auto; max-width: 100%; }
+:focus-visible { outline: 3px solid var(--ln-color-brand-gold); outline-offset: 3px; }
