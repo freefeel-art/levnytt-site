@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
+<!doctype html><html lang="sv">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
@@ -10,689 +8,26 @@
     <link rel="canonical" href="https://levnytt.se/finns-det-billigare-alternativ/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/pillar.css">
-<style>
-        
+    
+    
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            color: var(--ink);
-            background-color: var(--cream);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Layout Utilities */
-        .container {
-            max-width: var(--max-w);
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-alt {
-            background-color: var(--white);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gold-dark);
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .section-title {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            font-weight: 700;
-            color: var(--ink);
-            line-height: 1.2;
-            margin-bottom: 24px;
-        }
-
-        .section-desc {
-            font-size: 1.1rem;
-            color: var(--ink-muted);
-            max-width: 680px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* Hero */
-        .hero {
-            position: relative;
-            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
-            padding: 100px 24px;
-            text-align: center;
-            color: var(--white);
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at top right, rgba(232, 200, 112, 0.15), transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.7;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Video Section */
-        .video-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 40px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .video-placeholder {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: var(--cream-dark);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--ink-muted);
-            font-weight: 600;
-            border: 2px dashed var(--border);
-            margin-top: 32px;
-        }
-
-        /* Calculator 1 Styles */
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 32px;
-            margin-bottom: 48px;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        @media (min-width: 768px) {
-            .calculator-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 40px;
-            }
-        }
-
-        .calc-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 40px 32px;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow var(--transition), transform var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .calc-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-        }
-
-        .calc-header {
-            margin-bottom: 32px;
-            text-align: center;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--cream-dark);
-        }
-
-        .product-name {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--green-dark);
-        }
-
-        .input-group {
-            margin-bottom: 32px;
-        }
-
-        .input-label {
-            display: block;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 8px;
-        }
-
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .price-input {
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 1.1rem;
-            font-family: var(--font-sans);
-            color: var(--ink);
-            background-color: var(--cream);
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
-            transition: border-color var(--transition), box-shadow var(--transition);
-            outline: none;
-            -moz-appearance: textfield;
-        }
-
-        .price-input::-webkit-outer-spin-button,
-        .price-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        .price-input:focus {
-            border-color: var(--green);
-            box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
-            background-color: var(--white);
-        }
-
-        .currency-symbol {
-            position: absolute;
-            right: 20px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--ink-muted);
-            pointer-events: none;
-        }
-
-        .volume-info {
-            background-color: var(--cream);
-            border-radius: var(--radius);
-            padding: 24px;
-            margin-bottom: 32px;
-        }
-
-        .volume-row {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            font-size: 0.95rem;
-            color: var(--ink-muted);
-        }
-
-        .volume-row .operator {
-            width: 24px;
-            font-weight: 700;
-            color: var(--gold-dark);
-            text-align: center;
-            margin-right: 12px;
-        }
-
-        .volume-row.total {
-            border-top: 2px solid var(--border);
-            margin-top: 8px;
-            padding-top: 16px;
-            font-weight: 600;
-            color: var(--ink);
-        }
-
-        .volume-row.total .operator {
-            color: var(--green);
-        }
-
-        .volume-row.total .volume-value {
-            color: var(--green-dark);
-        }
-
-        .result-box {
-            margin-top: auto;
-            text-align: center;
-            padding-top: 24px;
-        }
-
-        .result-label {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--ink-muted);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .result-value-wrapper {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .result-value {
-            font-family: var(--font-serif);
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--green);
-            line-height: 1;
-            transition: color var(--transition);
-        }
-
-        .result-currency {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--ink-muted);
-        }
-
-        /* Educational Section */
-        .edu-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .edu-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .edu-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 40px 32px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .edu-card h3 {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--green-dark);
-            margin-bottom: 16px;
-        }
-
-        .edu-card p {
-            color: var(--ink-muted);
-            margin-bottom: 24px;
-            font-size: 1.05rem;
-        }
-
-        .edu-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .edu-list li {
-            font-size: 1rem;
-            color: var(--ink-muted);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .edu-list li::before {
-            content: "✦";
-            color: var(--gold);
-            font-weight: 700;
-            margin-top: 2px;
-        }
-
-        /* Calculator 2 Styles */
-        .calc-card-wide {
-            max-width: 800px;
-            margin: 0 auto 48px;
-        }
-
-        .input-group-center {
-            text-align: center;
-        }
-
-        .slider-wrapper {
-            position: relative;
-            padding: 20px 0;
-            margin-bottom: 16px;
-        }
-
-        .range-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            background: var(--cream-dark);
-            border-radius: 4px;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--green);
-            cursor: pointer;
-            border: 4px solid var(--white);
-            box-shadow: var(--shadow-md);
-            transition: transform 0.1s;
-        }
-
-        .range-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.1);
-        }
-
-        .range-slider::-moz-range-thumb {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--green);
-            cursor: pointer;
-            border: 4px solid var(--white);
-            box-shadow: var(--shadow-md);
-            transition: transform 0.1s;
-        }
-
-        .range-slider::-moz-range-thumb:hover {
-            transform: scale(1.1);
-        }
-
-        .slider-value-display {
-            font-family: var(--font-serif);
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 8px;
-        }
-
-        .slider-value-unit {
-            font-size: 1.1rem;
-            color: var(--ink-muted);
-            font-weight: 500;
-        }
-
-        .results-grid-2 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            background: var(--cream);
-            padding: 32px;
-            border-radius: var(--radius);
-        }
-
-        @media (min-width: 600px) {
-            .results-grid-2 {
-                grid-template-columns: 1fr 1fr;
-                gap: 32px;
-            }
-        }
-
-        .result-item-2 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .result-item-2.highlight {
-            border-top: 2px solid var(--border);
-            padding-top: 24px;
-        }
-
-        @media (min-width: 600px) {
-            .result-item-2.highlight {
-                border-top: none;
-                border-left: 2px solid var(--border);
-                padding-top: 0;
-                padding-left: 32px;
-            }
-        }
-
-        .result-item-2 .result-value {
-            font-size: 2rem;
-        }
-
-        .result-item-2.highlight .result-value {
-            font-size: 3.5rem;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            margin-top: 48px;
-        }
-
-        @media (min-width: 768px) {
-            .cards-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .option-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 32px 24px;
-            text-align: center;
-            transition: transform var(--transition), box-shadow var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .option-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--gold);
-        }
-
-        .option-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--cream);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: var(--green);
-            font-size: 1.5rem;
-        }
-
-        .option-title {
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--ink);
-            margin-bottom: 12px;
-        }
-
-        .option-desc {
-            font-size: 0.95rem;
-            color: var(--ink-muted);
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-
-        .option-link {
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--green);
-            text-decoration: none;
-            transition: color var(--transition);
-        }
-
-        .option-link:hover {
-            color: var(--gold-dark);
-        }
-
-        /* FAQ */
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 16px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            width: 100%;
-            text-align: left;
-            padding: 20px 24px;
-            background: none;
-            border: none;
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--ink);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
-            color: var(--gold);
-            transition: transform var(--transition);
-        }
-
-        .faq-item.active .faq-question::after {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            padding: 0 24px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height var(--transition), padding var(--transition);
-            color: var(--ink-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 24px 24px;
-            max-height: 500px;
-        }
-
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 32px;
-            font-size: 1.05rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: var(--radius);
-            transition: all var(--transition);
-            border: 2px solid transparent;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: var(--green);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--green-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--ink);
-            border-color: var(--border);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--gold);
-            color: var(--gold-dark);
-            background-color: var(--white);
-        }
-
-        /* Error state */
-        .price-input.error { border-color: #e74c3c; }
-        .result-value.error { color: var(--ink-light); font-size: 2rem; }
-    </style>
 <meta property="og:image" content="https://levnytt.se/assets/brand/og-brand.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="LevNytt — En oberoende NeoLife-distributör">
+<meta name="levnytt-template" content="rebuild-informational-article">
+<meta name="levnytt-cta" content="existing-content-cta">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-</head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
-
-    <!-- 1. Hero -->
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+</head><body data-template-family="informational-article"><header class="ln-site-header"><div class="ln-shell ln-header-inner"><a class="ln-brand" href="/" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><button class="ln-menu-toggle" type="button" aria-label="Meny" aria-expanded="false">Meny</button><nav class="ln-primary-nav" aria-label="Huvudnavigation"><a href="/" target="_blank" rel="noopener noreferrer">Hem</a>
+<a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a>
+<a href="/artiklar" target="_blank" rel="noopener noreferrer">Artiklar</a>
+<a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+<a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+<a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Produkter</a>
+<a href="/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+<a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Spara Pengar?</a><a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife →</a></nav></div></header><main class="ln-page ln-family-informational-article"><div class="ln-shell"><p class="ln-breadcrumbs"><a href="/" target="_blank" rel="noopener noreferrer">LevNytt</a> <span aria-hidden="true">›</span> Finns det billigare alternativ?</p><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · informational article</p><h1>Finns det billigare alternativ?</h1></header><div class="ln-article-body"><!-- 1. Hero -->
     <section class="hero">
         <div class="hero-inner">
-            <h1>Finns det billigare alternativ?</h1>
-            <div class="intro-text" style="color: rgba(255, 255, 255, 0.85);">
+
+            <div class="intro-text">
                 <p>Ett lågt inköpspris är inte alltid samma sak som en låg kostnad per användning.</p>
                 <p>Upptäck hur dryga produkter och rätt medlemskap kan göra att det som verkar dyrt faktiskt blir billigare över tid.</p>
             </div>
@@ -703,7 +38,7 @@
     <section class="section">
         <div class="container">
             <div class="video-container">
-                <header class="section-header" style="margin-bottom: 24px;">
+                <header class="section-header">
                     <span class="section-label">Värde för pengarna</span>
                     <h2 class="section-title">Koncentrat vs Färdigblandat</h2>
                     <div class="section-desc">
@@ -822,7 +157,7 @@
                         <li>En produkt som ofta tar slut snabbt</li>
                     </ul>
                 </div>
-                <div class="edu-card" style="border-top: 4px solid var(--green);">
+                <div class="edu-card">
                     <h3>Koncentrat för hemmet</h3>
                     <p>NeoLife levererar de aktiva ingredienserna. Du tillsätter vattnet hemma. Detta innebär:</p>
                     <ul class="edu-list">
@@ -850,7 +185,7 @@
             <div class="calc-card calc-card-wide">
                 <div class="input-group input-group-center">
                     <label for="monthly-purchase" class="input-label">Din uppskattade månatliga konsumtion (kundpris)</label>
-                    
+
                     <div class="slider-value-display">
                         <span id="purchase-display">1 000</span>
                         <span class="slider-value-unit">kr / månad</span>
@@ -869,7 +204,7 @@
                             <span class="result-currency">kr</span>
                         </div>
                     </div>
-                    
+
                     <div class="result-item-2 highlight">
                         <span class="result-label">Årlig besparing</span>
                         <div class="result-value-wrapper">
@@ -905,7 +240,7 @@
         <div class="option-icon">🏷️</div>
         <h3 class="option-title">Återförsäljare</h3>
         <p class="option-desc">För dig som använder produkterna regelbundet. Du betalar en årlig registreringsavgift och får rabatt på alla inköp. Inga krav på att sälja till andra.</p>
-        <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&sponsorId=41-830928" class="option-link" target="_blank" rel="noopener noreferrer">
+        <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&amp;sponsorId=41-830928" class="option-link" target="_blank" rel="noopener noreferrer">
            &rarr; Bli återförsäljare
         </a>
     </div>
@@ -914,7 +249,7 @@
         <div class="option-icon">💼</div>
         <h3 class="option-title">Verksamhet</h3>
         <p class="option-desc">För dig som vill rekommendera produkterna vidare och bygga en kundbas över tid. Du väljer själv hur aktiv du vill vara och i vilken takt du vill utveckla verksamheten.</p>
-        <a href="/neolife-affarsmojlighet" class="option-link">
+        <a href="/neolife-affarsmojlighet" class="option-link" target="_blank" rel="noopener noreferrer">
            &rarr; Läs mer om affärsmöjligheten
         </a>
     </div>
@@ -972,115 +307,14 @@
     </section>
 
     <!-- 8. CTA -->
-    <section class="section" style="text-align: center;">
+    <section class="section">
         <div class="container">
             <h2 class="section-title">Vilket alternativ passar dig?</h2>
-            <p class="section-desc" style="margin-bottom: 32px;">Du väljer själv om du vill handla som kund, använda återförsäljarpriser eller utforska verksamhetsmöjligheten vidare.</p>
-            
+            <p class="section-desc">Du väljer själv om du vill handla som kund, använda återförsäljarpriser eller utforska verksamhetsmöjligheten vidare.</p>
+
             <div class="btn-group">
-                <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&sponsor=41-830928" class="btn btn-primary" target="_blank" rel="nofollow noopener noreferrer sponsored">Bli återförsäljare</a>
+                <a href="https://se.neolifeshop.com/i/registration.html?type=reseller&amp;sponsor=41-830928" class="btn btn-primary" target="_blank" rel="nofollow noopener noreferrer sponsored">Bli återförsäljare</a>
                 <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="btn btn-outline" target="_blank" rel="nofollow noopener noreferrer sponsored">Handla i webbshoppen</a>
             </div>
         </div>
-    </section>
-
-    <script src="/footer.js" defer></script>
-    <script src="/components.js" defer></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Calculator 1 Logic ---
-            const ldcInput = document.getElementById('ldc-price');
-            const ldcResult = document.getElementById('ldc-result');
-            const super10Input = document.getElementById('super10-price');
-            const super10Result = document.getElementById('super10-result');
-
-            const LDC_YIELD = 6;
-            const SUPER10_YIELD = 11;
-
-            function formatCurrency(number) {
-                return new Intl.NumberFormat('sv-SE', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }).format(number);
-            }
-
-            function calculateCalc1() {
-                const ldcPrice = parseFloat(ldcInput.value);
-                const super10Price = parseFloat(super10Input.value);
-                
-                if (isNaN(ldcPrice) || ldcPrice < 0) {
-                    ldcResult.textContent = "—";
-                    ldcResult.classList.add('error');
-                    ldcInput.classList.add('error');
-                } else {
-                    ldcInput.classList.remove('error');
-                    ldcResult.classList.remove('error');
-                    const ldcPerLiter = ldcPrice / LDC_YIELD;
-                    ldcResult.textContent = formatCurrency(ldcPerLiter);
-                }
-
-                if (isNaN(super10Price) || super10Price < 0) {
-                    super10Result.textContent = "—";
-                    super10Result.classList.add('error');
-                    super10Input.classList.add('error');
-                } else {
-                    super10Input.classList.remove('error');
-                    super10Result.classList.remove('error');
-                    const super10PerLiter = super10Price / SUPER10_YIELD;
-                    super10Result.textContent = formatCurrency(super10PerLiter);
-                }
-            }
-
-            ldcInput.addEventListener('input', calculateCalc1);
-            super10Input.addEventListener('input', calculateCalc1);
-            calculateCalc1();
-
-            // --- Calculator 2 Logic ---
-            const purchaseSlider = document.getElementById('monthly-purchase');
-            const purchaseDisplay = document.getElementById('purchase-display');
-            const monthlySavingsDisplay = document.getElementById('monthly-savings');
-            const annualSavingsDisplay = document.getElementById('annual-savings');
-
-            const SAVINGS_RATE = 0.20;
-
-            function formatCurrencyNoDecimals(number) {
-                return new Intl.NumberFormat('sv-SE', {
-                    maximumFractionDigits: 0
-                }).format(number);
-            }
-
-            function calculateCalc2() {
-                const monthlyPurchase = parseInt(purchaseSlider.value, 10);
-                
-                purchaseDisplay.textContent = formatCurrencyNoDecimals(monthlyPurchase);
-
-                const monthlySavings = monthlyPurchase * SAVINGS_RATE;
-                const annualSavings = monthlySavings * 12;
-
-                monthlySavingsDisplay.textContent = formatCurrencyNoDecimals(monthlySavings);
-                annualSavingsDisplay.textContent = formatCurrencyNoDecimals(annualSavings);
-            }
-
-            purchaseSlider.addEventListener('input', calculateCalc2);
-            calculateCalc2();
-
-            // --- FAQ Accordion Logic ---
-            document.querySelectorAll('.faq-question').forEach(button => {
-                button.addEventListener('click', () => {
-                    const faqItem = button.parentElement;
-                    const isActive = faqItem.classList.contains('active');
-                    
-                    document.querySelectorAll('.faq-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-
-                    if (!isActive) {
-                        faqItem.classList.add('active');
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+    </section></div></article></div></main><footer class="ln-site-footer"><div class="ln-shell"><a class="ln-footer-brand" href="/" target="_blank" rel="noopener noreferrer"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><nav aria-label="Sidfot navigation"><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a><a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a><a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a><a href="/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a><a href="/var-metod" target="_blank" rel="noopener noreferrer">Vår metod</a><a href="/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a><a href="/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a><a href="/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a></nav><p>© 2026 LevNytt. Alla rättigheter förbehållna.</p></div></footer><script src="/assets/js/levnytt-rebuild.js" defer></script></body></html>

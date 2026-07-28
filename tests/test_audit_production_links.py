@@ -26,13 +26,13 @@ class LinkAuditTests(unittest.TestCase):
         report = audit.run(ROOT, fix=False)
         self.assertEqual([], [item for component in report["shared_components"] for item in component["issues"]])
 
-    def test_internal_absolute_link_is_same_tab_and_root_relative(self):
+    def test_internal_absolute_link_is_new_tab_and_root_relative(self):
         findings = []
         match = audit.ANCHOR_RE.search('<a href="https://levnytt.se/guide" target="_blank" rel="noopener noreferrer">')
         result = audit.transform_tag(match, Path("."), {"/guide": "/guide.html"}, {}, findings, True)
         self.assertIn('href="/guide"', result)
-        self.assertNotIn('target=', result)
-        self.assertIn("internal_new_tab", findings[0]["issues"])
+        self.assertIn('target="_blank"', result)
+        self.assertNotIn("internal_missing_new_tab", findings[0]["issues"])
 
     def test_external_new_tab_preserves_sponsored_and_adds_safe_tokens(self):
         findings = []

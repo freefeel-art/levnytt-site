@@ -1,0 +1,557 @@
+{
+  "generated_at": "2026-07-28T21:01:25+00:00",
+  "scope": "sitemap-listed production pages only",
+  "fixed": false,
+  "production_page_count": 107,
+  "issue_counts": {},
+  "unresolved_exceptions": [],
+  "pages": [
+    {
+      "url": "https://levnytt.se/",
+      "file": "index.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/artiklar",
+      "file": "artiklar.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/om-oss",
+      "file": "om-oss.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/integritetspolicy",
+      "file": "integritetspolicy.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/adaptogener-ashwagandha-rosenrot-ginseng",
+      "file": "adaptogener-ashwagandha-rosenrot-ginseng.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/ala-vs-epa-vs-dha",
+      "file": "ala-vs-epa-vs-dha.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/behoever-jag-kosttillskott-nar-racker-maten",
+      "file": "behoever-jag-kosttillskott-nar-racker-maten.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/behoever-jag-kosttillskott",
+      "file": "behoever-jag-kosttillskott.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/billig-dyr-multivitamin",
+      "file": "billig-dyr-multivitamin.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/d-vitamin-dosering-per-dag",
+      "file": "d-vitamin-dosering-per-dag.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/d-vitamin-immunforsvaret",
+      "file": "d-vitamin-immunforsvaret.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/d-vitamin-och-solen",
+      "file": "d-vitamin-och-solen.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/d-vitaminbrist-sverige",
+      "file": "d-vitaminbrist-sverige.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/den-fundersamma-mannen",
+      "file": "den-fundersamma-mannen.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/direktforsaljning-fakta",
+      "file": "direktforsaljning-fakta.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/ekologisk-stadning-greenwashing",
+      "file": "ekologisk-stadning-greenwashing.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/fiberrika-livsmedel",
+      "file": "fiberrika-livsmedel.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/fibrer-for-magen-forstoppning",
+      "file": "fibrer-for-magen-forstoppning.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/fibrer-for-viktminskning",
+      "file": "fibrer-for-viktminskning.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/fibrer-tarmflora-prebiotisk",
+      "file": "fibrer-tarmflora-prebiotisk.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/finns-det-billigare-alternativ",
+      "file": "finns-det-billigare-alternativ.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/fytosteroler-cellmembran",
+      "file": "fytosteroler-cellmembran.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/golden-home-care",
+      "file": "golden-home-care.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/hur-fungerar-natverksmarknadsforing-egentligen",
+      "file": "hur-fungerar-natverksmarknadsforing-egentligen.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/karotenoid-tillskott-vs-mat",
+      "file": "karotenoid-tillskott-vs-mat.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/kollagen",
+      "file": "kollagen.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/kostfiber-komplett-guide",
+      "file": "kostfiber-komplett-guide.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/kreatin",
+      "file": "kreatin.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/levnytt-principer",
+      "file": "levnytt-principer.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/magnesium-d-vitamin-kombination",
+      "file": "magnesium-d-vitamin-kombination.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/magnesium-for-somn",
+      "file": "magnesium-for-somn.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/magnesium-komplett-guide",
+      "file": "magnesium-komplett-guide.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/magnesium-och-stress",
+      "file": "magnesium-och-stress.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/magnesiumbrist-symptom-tester",
+      "file": "magnesiumbrist-symptom-tester.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/magnesiumformer-vilken-valja",
+      "file": "magnesiumformer-vilken-valja.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/magnesiumglycinat-och-somn",
+      "file": "magnesiumglycinat-och-somn.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/melatonin-och-somn",
+      "file": "melatonin-och-somn.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/mlm-foretag-skandaler-sverige-varlden",
+      "file": "mlm-foretag-skandaler-sverige-varlden.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/mlm-inkomstredovisningar-vad-sager-siffrorna",
+      "file": "mlm-inkomstredovisningar-vad-sager-siffrorna.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/mlm-konsumentratt-retur-angeratt",
+      "file": "mlm-konsumentratt-retur-angeratt.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/mlm-produkter-kosttillskott-pris",
+      "file": "mlm-produkter-kosttillskott-pris.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/mlm-rekrytering-social-press-taktiker",
+      "file": "mlm-rekrytering-social-press-taktiker.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/multivitamin-for-barn",
+      "file": "multivitamin-for-barn.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/multivitamin-for-kvinnor",
+      "file": "multivitamin-for-kvinnor.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/multivitamin-for-man",
+      "file": "multivitamin-for-man.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/multivitamin-komplett-guide",
+      "file": "multivitamin-komplett-guide.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/multivitamin-kvinnor-over-40",
+      "file": "multivitamin-kvinnor-over-40.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/naringsbrist",
+      "file": "naringsbrist.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/naringsbrist-symptom",
+      "file": "naringsbrist-symptom.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/nar-och-hur-ska-man-ta-omega-3",
+      "file": "nar-och-hur-ska-man-ta-omega-3.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/nar-ska-man-ta-kosttillskott-timingguide",
+      "file": "nar-ska-man-ta-kosttillskott-timingguide.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-acidophilus-plus",
+      "file": "neolife-acidophilus-plus.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-affarsmojlighet",
+      "file": "neolife-affarsmojlighet.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-all-c",
+      "file": "neolife-all-c.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-betaguard",
+      "file": "neolife-betaguard.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-botanical-balance",
+      "file": "neolife-botanical-balance.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-carotenoid-complex",
+      "file": "neolife-carotenoid-complex.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-chelated-zinc",
+      "file": "neolife-chelated-zinc.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-coq10",
+      "file": "neolife-coq10.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-cruciferous-plus",
+      "file": "neolife-cruciferous-plus.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-elevate",
+      "file": "neolife-elevate.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-flavonoid-complex",
+      "file": "neolife-flavonoid-complex.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-formula-iv",
+      "file": "neolife-formula-iv.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-garlic-allium-complex",
+      "file": "neolife-garlic-allium-complex.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-hallbarhet",
+      "file": "neolife-hallbarhet.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-historia",
+      "file": "neolife-historia.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-kalmag-plus-d",
+      "file": "neolife-kalmag-plus-d.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-magnesium-complex",
+      "file": "neolife-magnesium-complex.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-omega-3-plus",
+      "file": "neolife-omega-3-plus.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-pro-vitality",
+      "file": "neolife-pro-vitality.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-resp-x",
+      "file": "neolife-resp-x.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-shake-bar-tea",
+      "file": "neolife-shake-bar-tea.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-tre-en-en-cellnaring",
+      "file": "neolife-tre-en-en-cellnaring.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-tre-en-en",
+      "file": "neolife-tre-en-en.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-upbeet",
+      "file": "neolife-upbeet.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-vetenskap",
+      "file": "neolife-vetenskap.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-viktkontroll",
+      "file": "neolife-viktkontroll.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-vita-squares",
+      "file": "neolife-vita-squares.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-vitamin-d",
+      "file": "neolife-vitamin-d.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-vitamin-e",
+      "file": "neolife-vitamin-e.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/omega-3-fran-mat-racker-kosten",
+      "file": "omega-3-fran-mat-racker-kosten.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/omega-3-komplett-evidensbaserad-guide",
+      "file": "omega-3-komplett-evidensbaserad-guide.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/omega-3-kvalitet-renhet-hur-valja",
+      "file": "omega-3-kvalitet-renhet-hur-valja.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/omega-3-och-hjarthalsa-forskning",
+      "file": "omega-3-och-hjarthalsa-forskning.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/omega-3-och-inflammation-ledvark",
+      "file": "omega-3-och-inflammation-ledvark.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/personlig-vard",
+      "file": "personlig-vard.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/probiotika-dosering-timing",
+      "file": "probiotika-dosering-timing.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/probiotika-for-magen-ibs",
+      "file": "probiotika-for-magen-ibs.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/probiotika-komplett-guide",
+      "file": "probiotika-komplett-guide.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/probiotika-prebiotika-skillnad",
+      "file": "probiotika-prebiotika-skillnad.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/proteinpulver-och-proteintillskott",
+      "file": "proteinpulver-och-proteintillskott.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/super-10",
+      "file": "super-10.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/vad-ar-kostfiber",
+      "file": "vad-ar-kostfiber.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/vad-ar-probiotika",
+      "file": "vad-ar-probiotika.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/vad-ar-vitamin-b12",
+      "file": "vad-ar-vitamin-b12.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/varfor-fiskolja-inte-ar-likvardigt",
+      "file": "varfor-fiskolja-inte-ar-likvardigt.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/varfor-tar-d-vitamin-slut-pa-ditt-magnesium",
+      "file": "varfor-tar-d-vitamin-slut-pa-ditt-magnesium.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/vaxtbaserade-steroler-dagligen",
+      "file": "vaxtbaserade-steroler-dagligen.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/varfor-ar-jag-trott-hela-tiden",
+      "file": "varfor-ar-jag-trott-hela-tiden.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/viktuppgang-klimakteriet",
+      "file": "viktuppgang-klimakteriet.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/vitamin-d-komplett-guide",
+      "file": "vitamin-d-komplett-guide.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/zeaxantin-immunforsvar-2025",
+      "file": "zeaxantin-immunforsvar-2025.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/zink-immunforsvar-hud-testosteron",
+      "file": "zink-immunforsvar-hud-testosteron.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/neolife-sport",
+      "file": "neolife-sport.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/d-vitaminbrist-sverige",
+      "file": "d-vitaminbrist-sverige.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/nattblindhet",
+      "file": "nattblindhet.html",
+      "findings": []
+    },
+    {
+      "url": "https://levnytt.se/vad-ar-pyramidspel",
+      "file": "vad-ar-pyramidspel.html",
+      "findings": []
+    }
+  ],
+  "shared_components": [
+    {
+      "component": "nav.js",
+      "link_count": 14,
+      "issues": []
+    },
+    {
+      "component": "footer.js",
+      "link_count": 19,
+      "issues": []
+    }
+  ]
+}

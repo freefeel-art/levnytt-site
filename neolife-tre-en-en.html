@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
+<!doctype html><html lang="sv">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
@@ -87,135 +85,48 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
 
-  <style>
-    
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
-    body{font-family:'Inter',-apple-system,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;}
-    nav{position:sticky;top:0;z-index:100;background:rgba(251,248,240,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-    .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
-    .nav-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:var(--gold-dark);text-decoration:none;}
-    .nav-brand span{color:var(--green);}
-    .nav-links{display:flex;gap:8px;align-items:center;}
-    .nav-links a{font-size:0.85rem;font-weight:500;color:var(--ink-muted);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all var(--transition);}
-    .nav-links a:hover{color:var(--ink);background:var(--cream-dark);}
-    .nav-links a.active{color:var(--gold-dark);font-weight:700;}
-    .nav-cta{background:var(--green)!important;color:var(--white)!important;font-weight:600!important;padding:8px 18px!important;}
-    .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
-    .nav-hamburger svg{width:24px;height:24px;stroke:var(--ink);}
-    .freshness-banner{background:linear-gradient(135deg,var(--green-dark),var(--green));color:var(--white);text-align:center;padding:10px 24px;font-size:0.82rem;font-weight:500;}
-    .freshness-banner strong{color:var(--gold-light);}
-    .hero{position:relative;min-height:320px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#1B4332 0%,#2D6A4F 40%,#40916C 100%);}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,67,50,0.85) 0%,rgba(45,106,79,0.7) 50%,rgba(200,150,46,0.3) 100%);}
-    .hero-content{position:relative;z-index:2;max-width:var(--max-w);margin:0 auto;padding:64px 24px;width:100%;}
-    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:0.85rem;flex-wrap:wrap;}
-    .breadcrumb a{color:var(--gold-light);text-decoration:none;font-weight:500;}
-    .breadcrumb .sep{color:rgba(255,255,255,0.4);}
-    .breadcrumb .current{color:rgba(255,255,255,0.8);}
-    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:700;color:var(--white);line-height:1.15;max-width:720px;letter-spacing:-0.02em;}
-    .hero-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;}
-    .hero-stat .num{font-size:2rem;font-weight:800;color:var(--gold-light);display:block;}
-    .hero-stat .lbl{font-size:0.78rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.05em;}
-    .article-content{padding:64px 0 80px;}
-    .article-inner{max-width:800px;margin:0 auto;padding:0 24px;}
-    .article-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--ink);line-height:1.25;margin:48px 0 16px;letter-spacing:-0.02em;}
-    .article-inner h2:first-child{margin-top:0;}
-    .article-inner h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin:36px 0 12px;}
-    .article-inner p{font-size:1.02rem;color:var(--ink-muted);line-height:1.75;margin-bottom:20px;}
-    .article-inner ul,.article-inner ol{margin:0 0 20px 24px;color:var(--ink-muted);line-height:1.75;}
-    .article-inner li{margin-bottom:8px;font-size:1.02rem;}
-    .article-inner a{color:var(--green);text-decoration:underline;text-underline-offset:2px;font-weight:500;}
-    .article-inner a:hover{color:var(--gold-dark);}
-    .article-inner blockquote{border-left:4px solid var(--gold);background:var(--white);padding:20px 24px;margin:28px 0;border-radius:0 var(--radius) var(--radius) 0;font-style:italic;color:var(--ink-muted);}
-    .article-inner blockquote p{margin-bottom:0;}
-    .article-inner table{width:100%;border-collapse:collapse;margin:28px 0;font-size:0.92rem;background:var(--white);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
-    .article-inner th{background:var(--green);color:var(--white);font-weight:600;text-align:left;padding:12px 16px;font-size:0.85rem;}
-    .article-inner td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--ink-muted);}
-    .article-inner tr:last-child td{border-bottom:none;}
-    .article-inner tr:nth-child(even) td{background:var(--cream);}
-    .callout{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
-    .callout-gold{border-left-color:var(--gold);}
-    .callout h4{margin-top:0;color:var(--green);font-size:1.05rem;font-weight:700;margin-bottom:10px;}
-    .callout-gold h4{color:var(--gold-dark);}
-    .back-link-wrapper{max-width:800px;margin:0 auto;padding:12px 24px 0;}
-    .back-link{color:var(--gold);text-decoration:none;font-size:0.9rem;font-weight:500;}
-    .toc{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
-    .toc h4{color:var(--green);font-size:0.95rem;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;}
-    .toc ol{margin:0 0 0 20px;color:var(--ink-muted);}
-    .toc li{margin-bottom:6px;font-size:0.95rem;}
-    .toc a{color:var(--green);text-decoration:none;font-weight:500;}
-    .toc a:hover{color:var(--gold-dark);text-decoration:underline;}
-    .ingredient-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:20px 0 28px;}
-    .ingredient-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;}
-    .ingredient-card strong{display:block;color:var(--green);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;}
-    .ingredient-card ul{margin:0 0 0 16px;font-size:0.88rem;color:var(--ink-muted);}
-    .internal-links-section{background:var(--cream-dark);border-top:1px solid var(--border);padding:48px 0;}
-    .internal-links-section .container{max-width:800px;margin:0 auto;padding:0 24px;}
-    .internal-links-section h3{font-family:'Playfair Display',serif;color:var(--green);font-size:1.4rem;margin-bottom:16px;}
-    .internal-links-section ul{list-style:none;padding:0;margin:0;}
-    .internal-links-section li{margin-bottom:10px;}
-    .internal-links-section a{color:var(--gold);text-decoration:none;font-weight:500;}
-    .internal-links-section a:hover{color:var(--green);text-decoration:underline;}
-    .btn{display:inline-flex;align-items:center;padding:14px 28px;border-radius:var(--radius);font-size:0.95rem;font-weight:600;text-decoration:none;transition:all var(--transition);border:none;}
-    .btn-primary{background:var(--gold);color:var(--white);}
-    .btn-primary:hover{background:var(--gold-dark);}
-    .btn-green{background:var(--green);color:var(--white);}
-    .btn-green:hover{background:var(--green-dark);}
-    footer{background:var(--ink);color:rgba(255,255,255,0.6);padding:56px 0 32px;}
-    .footer-grid{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
-    .footer-brand{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--white);margin-bottom:12px;}
-    .footer-brand span{color:var(--gold-light);}
-    .footer-tagline{font-size:0.85rem;line-height:1.6;max-width:280px;}
-    .footer-col h5{color:var(--white);font-size:0.82rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
-    .footer-col a{display:block;color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.88rem;padding:4px 0;}
-    .footer-col a:hover{color:var(--gold-light);}
-    .footer-bottom{max-width:var(--max-w);margin:0 auto;padding:24px 24px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:0.78rem;}
-    .footer-disclaimer{margin-top:16px;font-size:0.72rem;color:rgba(255,255,255,0.35);line-height:1.6;}
-    @media(max-width:900px){.nav-links{display:none;}.nav-hamburger{display:block;}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:16px 24px;box-shadow:var(--shadow-lg);}.footer-grid{grid-template-columns:1fr 1fr;}.hero-stats{gap:20px;}}
-    @media(max-width:600px){.footer-grid{grid-template-columns:1fr;}.hero{min-height:260px;}.ingredient-grid{grid-template-columns:1fr;}}
-    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0.01ms!important;}}
-  </style>
-<link rel="stylesheet" href="/pillar.css">
+  
+
 <meta property="og:image" content="https://levnytt.se/assets/brand/og-brand.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="LevNytt — En oberoende NeoLife-distributör">
+<meta name="levnytt-template" content="rebuild-product-category">
+<meta name="levnytt-cta" content="existing-content-cta">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-</head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
-
-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+</head><body data-template-family="product-category"><header class="ln-site-header"><div class="ln-shell ln-header-inner"><a class="ln-brand" href="/" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><button class="ln-menu-toggle" type="button" aria-label="Meny" aria-expanded="false">Meny</button><nav class="ln-primary-nav" aria-label="Huvudnavigation"><a href="/" target="_blank" rel="noopener noreferrer">Hem</a>
+<a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a>
+<a href="/artiklar" target="_blank" rel="noopener noreferrer">Artiklar</a>
+<a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+<a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+<a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Produkter</a>
+<a href="/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+<a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Spara Pengar?</a><a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife →</a></nav></div></header><main class="ln-page ln-family-product-category"><div class="ln-shell"><p class="ln-breadcrumbs"><a href="/" target="_blank" rel="noopener noreferrer">LevNytt</a> <span aria-hidden="true">›</span> NeoLife Tre-en-en: Världens första fytonärings­tillskott — sedan 1958</p><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · product category</p><h1>NeoLife Tre-en-en: Världens första fytonärings­tillskott — sedan 1958</h1></header><div class="ln-article-body"><div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
 
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="breadcrumb">
-        <a href="/">Hem</a><span class="sep">/</span>
-        <a href="/neolife-kosttillskott">NeoLife Kosttillskott</a><span class="sep">/</span>
+        <a href="/" target="_blank" rel="noopener noreferrer">Hem</a><span class="sep">/</span>
+        <a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">NeoLife Kosttillskott</a><span class="sep">/</span>
         <span class="current">Tre-en-en</span>
       </div>
-      <h1>NeoLife Tre-en-en: Världens första fytonärings&shy;tillskott — sedan 1958</h1>
+
       <div class="hero-stats">
         <div class="hero-stat"><span class="num">1958</span><span class="lbl">Lanserades</span></div>
         <div class="hero-stat"><span class="num">32</span><span class="lbl">År före begreppet</span></div>
         <div class="hero-stat"><span class="num">3</span><span class="lbl">Fullkornkällor</span></div>
-        <div class="hero-stat"><span class="num">1987</span><span class="lbl">Texas A&M-studie</span></div>
+        <div class="hero-stat"><span class="num">1987</span><span class="lbl">Texas A&M-studie;</span></div>
       </div>
     </div>
   </section>
 
   <div class="back-link-wrapper">
-    <a href="/neolife-kosttillskott/" class="back-link">&larr; Tillbaka till NeoLife produktöversikt</a>
+    <a href="/neolife-kosttillskott/" class="back-link" target="_blank" rel="noopener noreferrer">&larr; Tillbaka till NeoLife produktöversikt</a>
   </div>
 
-  <div style="max-width:800px;margin:32px auto 0;padding:0 24px;">
-    <img src="/images/neolifetreenen.jpg"
-         alt="NeoLife Tre-en-en Kornkoncentrat — 120 kapslar, lipider och steroler från vetegroddar, riskli och soja, världens första fytonäringstillskott 1958"
-         width="100%"
-         style="border-radius:12px;display:block;"
-         loading="lazy">
+  <div>
+    <img src="/images/neolifetreenen.jpg" alt="NeoLife Tre-en-en Kornkoncentrat — 120 kapslar, lipider och steroler från vetegroddar, riskli och soja, världens första fytonäringstillskott 1958" width="100%" loading="lazy">
   </div>
 
   <div class="article-content">
@@ -223,21 +134,21 @@
 
       <div class="callout">
         <h4>Sammanfattning</h4>
-        <p style="margin-bottom:0;">NeoLife Tre-en-en Kornkoncentrat lanserades 1958 — 32 år innan begreppet "fytonäringsämne" etablerades inom nutritionsvetenskapen. Produkten levererar lipider och steroler från vetegroddar, riskli och soja: beta-sitosterol, gamma-oryzanol, stigmasterol, campesterol och oktakosanol. Texas A&M University dokumenterade 1987 förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering. Tre-en-en ingår som cellulär grund i Pro Vitality+-systemet.</p>
+        <p>NeoLife Tre-en-en Kornkoncentrat lanserades 1958 — 32 år innan begreppet "fytonäringsämne" etablerades inom nutritionsvetenskapen. Produkten levererar lipider och steroler från vetegroddar, riskli och soja: beta-sitosterol, gamma-oryzanol, stigmasterol, campesterol och oktakosanol. Texas A&M; University dokumenterade 1987 förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering. Tre-en-en ingår som cellulär grund i Pro Vitality+-systemet.</p>
       </div>
 
-      <p style="font-size:0.9rem;font-style:italic;color:var(--ink-light);">Levnytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Innehållet är informativt och utgör inte medicinsk rådgivning. Dessa påståenden har inte utvärderats av Livsmedelsverket. Produkten är inte avsedd att diagnostisera, behandla, bota eller förebygga sjukdom.</p>
+      <p>Levnytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Innehållet är informativt och utgör inte medicinsk rådgivning. Dessa påståenden har inte utvärderats av Livsmedelsverket. Produkten är inte avsedd att diagnostisera, behandla, bota eller förebygga sjukdom.</p>
 
       <div class="toc">
         <h4>Innehåll</h4>
         <ol>
-          <li><a href="#cellmembran">Varför cellmembran behöver lipider och steroler</a></li>
-          <li><a href="#historia">1958 — 32 år före begreppet</a></li>
-          <li><a href="#texas-am">Texas A&M University-forskning 1987</a></li>
-          <li><a href="#ingredienser">Ingredienser från tre fullkornkällor</a></li>
-          <li><a href="#pro-vitality">Tre-en-en i Pro Vitality+-systemet</a></li>
-          <li><a href="#svenska-kosten">Modern spannmålsförädling och svenska kostvanor</a></li>
-          <li><a href="#faq">Vanliga frågor</a></li>
+          <li><a href="/#cellmembran" target="_blank" rel="noopener noreferrer">Varför cellmembran behöver lipider och steroler</a></li>
+          <li><a href="/#historia" target="_blank" rel="noopener noreferrer">1958 — 32 år före begreppet</a></li>
+          <li><a href="/#texas-am" target="_blank" rel="noopener noreferrer">Texas A&M; University-forskning 1987</a></li>
+          <li><a href="/#ingredienser" target="_blank" rel="noopener noreferrer">Ingredienser från tre fullkornkällor</a></li>
+          <li><a href="/#pro-vitality" target="_blank" rel="noopener noreferrer">Tre-en-en i Pro Vitality+-systemet</a></li>
+          <li><a href="/#svenska-kosten" target="_blank" rel="noopener noreferrer">Modern spannmålsförädling och svenska kostvanor</a></li>
+          <li><a href="/#faq" target="_blank" rel="noopener noreferrer">Vanliga frågor</a></li>
         </ol>
       </div>
 
@@ -249,7 +160,7 @@
 
       <blockquote>
         <p>"Fetter och steroler är naturliga beståndsdelar i fullkorn och viktiga komponenter i våra cellmembran. Tyvärr kan bearbetningen av spannmål ta bort lipider, steroler och andra viktiga näringsämnen från de livsmedel som utgör våra basvaror."</p>
-        <cite style="display:block;margin-top:10px;font-size:0.85rem;font-style:normal;">— NeoLife Tre-en-en produktinformation (Svenska marknaden)</cite>
+        <cite>— NeoLife Tre-en-en produktinformation (Svenska marknaden)</cite>
       </blockquote>
 
       <p>När cellmembranet saknar tillräckliga mängder lipider och steroler styvnar det. Transportproteiner som sitter inbäddade i membranet fungerar sämre — näring tar sig svårare in i cellen och avfallsprodukter ansamlas. NeoLife formulerade Tre-en-en för att komplettera den lipid- och sterolfraktion som modern spannmålsförädling tar bort.</p>
@@ -262,15 +173,15 @@
 
       <div class="callout callout-gold">
         <h4>Historisk tidslinje</h4>
-        <p style="margin-bottom:0;">1958 — Tre-en-en lanseras av NeoLife som världens första fytonäringstillskott.<br>
-        1987 — Texas A&M University dokumenterar förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering.<br>
+        <p>1958 — Tre-en-en lanseras av NeoLife som världens första fytonäringstillskott.<br>
+        1987 — Texas A&M; University dokumenterar förbättrad näringsutnyttjandeeffektivitet med kornlipidkomplettering.<br>
         1990-talet — Begreppet "fytonäringsämne" etableras inom mainstream nutritionsvetenskap.<br>
         2026 — Tre-en-en ingår i Pro Vitality+-systemet som säljs i Sverige via se.neolifeshop.com.</p>
       </div>
 
-      <h2 id="texas-am">Texas A&M University-forskning 1987</h2>
+      <h2 id="texas-am">Texas A&M; University-forskning 1987</h2>
 
-      <p>1987 genomförde forskare vid Texas A&M University en sju veckors studie där den vanliga lipidfraktionen i försöksdjurens kost ersattes med Tre-en-en-koncentrat. Kontrollgruppen fick identisk kost med konventionella lipider.</p>
+      <p>1987 genomförde forskare vid Texas A&M; University en sju veckors studie där den vanliga lipidfraktionen i försöksdjurens kost ersattes med Tre-en-en-koncentrat. Kontrollgruppen fick identisk kost med konventionella lipider.</p>
 
       <table>
         <thead>
@@ -313,7 +224,7 @@
         </tbody>
       </table>
 
-      <p style="font-size:0.85rem;color:var(--ink-light);">Obs: Texas A&M-studien var ett djurförsök, inte en humanklinisk studie. Resultaten kan inte direkt extrapoleras till människor, men de dokumenterar mekanismen för kornlipiders roll i cellulär näring.</p>
+      <p>Obs: Texas A&M-studien; var ett djurförsök, inte en humanklinisk studie. Resultaten kan inte direkt extrapoleras till människor, men de dokumenterar mekanismen för kornlipiders roll i cellulär näring.</p>
 
       <h2 id="ingredienser">Ingredienser från tre fullkornkällor</h2>
 
@@ -353,7 +264,7 @@
 
       <h2 id="pro-vitality">Tre-en-en i Pro Vitality+-systemet</h2>
 
-      <p>NeoLife positionerar Tre-en-en som den cellulära grunden i <a href="/neolife-pro-vitality/">Pro Vitality+</a> — ett fyrakomponentsystem för daglig cellular näring. De fyra komponenterna adresserar olika aspekter av cellulär näring:</p>
+      <p>NeoLife positionerar Tre-en-en som den cellulära grunden i <a href="/neolife-pro-vitality/" target="_blank" rel="noopener noreferrer">Pro Vitality+</a> — ett fyrakomponentsystem för daglig cellular näring. De fyra komponenterna adresserar olika aspekter av cellulär näring:</p>
 
       <table>
         <thead>
@@ -407,9 +318,9 @@
       </div>
 
       <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 itemprop="name">Vad visar Texas A&M-forskningen?</h3>
+        <h3 itemprop="name">Vad visar Texas A&M-forskningen;?</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <p itemprop="text">Texas A&M University genomförde 1987 en 7 veckors studie. Tre-en-en-gruppen visade bättre tillväxt, snabbare mognad, mer utvecklade hjärt-kärlsystem och högre binjurefunktion jämfört med kontrollgruppen — trots identisk kalorimängd. Resultaten tolkades som förbättrad näringsutnyttjandeeffektivitet. Obs: detta var ett djurförsök, inte en humanklinisk studie.</p>
+          <p itemprop="text">Texas A&M; University genomförde 1987 en 7 veckors studie. Tre-en-en-gruppen visade bättre tillväxt, snabbare mognad, mer utvecklade hjärt-kärlsystem och högre binjurefunktion jämfört med kontrollgruppen — trots identisk kalorimängd. Resultaten tolkades som förbättrad näringsutnyttjandeeffektivitet. Obs: detta var ett djurförsök, inte en humanklinisk studie.</p>
         </div>
       </div>
 
@@ -435,10 +346,10 @@
       </div>
 
       <!-- INFOGRAFIIKKA -->
-      <div style="margin:40px 0;">
-        <svg viewBox="0 0 680 760" xmlns="http://www.w3.org/2000/svg" role="img" width="100%" style="display:block;border-radius:12px;overflow:hidden;">
+      <div>
+        <svg viewbox="0 0 680 760" xmlns="http://www.w3.org/2000/svg" role="img" width="100%">
           <title>Tre-en-en — Cellmembranvetenskap, ingredienser och historisk tidslinje</title>
-          <desc>Infografiikka: Cellmembranbehov, 3 livsmedelskällor, Texas A&M 1987, tidslinje 1958–idag.</desc>
+          <desc>Infografiikka: Cellmembranbehov, 3 livsmedelskällor, Texas A&M; 1987, tidslinje 1958–idag.</desc>
 
           <!-- Header -->
           <rect x="0" y="0" width="680" height="180" fill="#1B4332" rx="16"/>
@@ -519,18 +430,18 @@
       </div>
 
       <!-- CTA -->
-      <div style="background:linear-gradient(135deg,#e8f5e9 0%,#f1f8e9 100%);border:1px solid #2e7d32;padding:28px 32px;margin:40px 0;border-radius:12px;text-align:center;">
-        <p style="font-size:0.85rem;font-weight:600;color:#2e7d32;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Se produkten i NeoLife-butiken</p>
-        <p style="font-size:1.1em;margin-bottom:20px;color:var(--ink);">Tre-en-en finns i NeoLife-butiken — produktkod 927.</p>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-          <a href="https://se.neolifeshop.com/" style="display:inline-block;background:#2e7d32;color:#fff;padding:12px 28px;border-radius:6px;text-decoration:none;font-weight:600;" target="_blank" rel="nofollow noopener noreferrer sponsored">Till NeoLife-butiken &rarr;</a>
+      <div>
+        <p>Se produkten i NeoLife-butiken</p>
+        <p>Tre-en-en finns i NeoLife-butiken — produktkod 927.</p>
+        <div>
+          <a href="https://se.neolifeshop.com/" target="_blank" rel="nofollow noopener noreferrer sponsored">Till NeoLife-butiken &rarr;</a>
         </div>
       </div>
 
-      <p style="font-size:0.85em;color:#888;border-top:1px solid var(--border);padding-top:14px;margin-top:8px;">
+      <p>
         <strong>Källor och referenser:</strong><br>
-        <a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a><br>
-        <a href="/neolife-vetenskap/">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a><br>
+        <a href="/neolife-historia/" target="_blank" rel="noopener noreferrer">NeoLife Historia — Från 1958 till global cellulär nutrition</a><br>
+        <a href="/neolife-vetenskap/" target="_blank" rel="noopener noreferrer">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a><br>
         <a href="https://www.livsmedelsverket.se/matvanor-halsa--miljo/kostrad-och-matvanor/rad-om-mat/fullkorn" target="_blank" rel="noopener noreferrer">Livsmedelsverket — Kostråd om fullkorn</a><br>
         <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener noreferrer sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
       </p>
@@ -542,22 +453,12 @@
     <div class="container">
       <h3>Mer om NeoLife</h3>
       <ul>
-        <li><a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a></li>
-        <li><a href="/neolife-vetenskap/">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a></li>
-        <li><a href="/neolife-pro-vitality/">Pro Vitality+ — Det fyrakomponentbaserade grundsystemet</a></li>
-        <li><a href="/neolife-tre-en-en-cellnaring">Spannmålslipider och cellnäring — vetenskapen bakom</a></li>
-        <li><a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning</a></li>
-        <li><a href="/neolife-kosttillskott/">Alla NeoLife produkter — Komplett översikt</a></li>
+        <li><a href="/neolife-historia/" target="_blank" rel="noopener noreferrer">NeoLife Historia — Från 1958 till global cellulär nutrition</a></li>
+        <li><a href="/neolife-vetenskap/" target="_blank" rel="noopener noreferrer">NeoLife Scientific Advisory Board — Oberoende vetenskap sedan 1976</a></li>
+        <li><a href="/neolife-pro-vitality/" target="_blank" rel="noopener noreferrer">Pro Vitality+ — Det fyrakomponentbaserade grundsystemet</a></li>
+        <li><a href="/neolife-tre-en-en-cellnaring" target="_blank" rel="noopener noreferrer">Spannmålslipider och cellnäring — vetenskapen bakom</a></li>
+        <li><a href="/neolife-carotenoid-complex" target="_blank" rel="noopener noreferrer">Carotenoid Complex — USDA-forskning och 37% immunökning</a></li>
+        <li><a href="/neolife-kosttillskott/" target="_blank" rel="noopener noreferrer">Alla NeoLife produkter — Komplett översikt</a></li>
       </ul>
     </div>
-  </section>
-
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(function(a){
-      a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});
-    });
-  </script>
-<script src="/footer.js" defer></script>
-  <script src="/components.js" defer></script>
-</body>
-</html>
+  </section></div></article></div></main><footer class="ln-site-footer"><div class="ln-shell"><a class="ln-footer-brand" href="/" target="_blank" rel="noopener noreferrer"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><nav aria-label="Sidfot navigation"><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a><a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a><a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a><a href="/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a><a href="/var-metod" target="_blank" rel="noopener noreferrer">Vår metod</a><a href="/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a><a href="/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a><a href="/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a></nav><p>© 2026 LevNytt. Alla rättigheter förbehållna.</p></div></footer><script src="/assets/js/levnytt-rebuild.js" defer></script></body></html>

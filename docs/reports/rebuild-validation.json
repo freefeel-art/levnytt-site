@@ -1,0 +1,776 @@
+{
+  "schema_version": 1,
+  "pages_expected": 107,
+  "pages_checked": 107,
+  "unique_routes": 106,
+  "failures": [],
+  "passed": true,
+  "contrast_checks": {
+    "text_on_surface": 16.13,
+    "green_on_surface": 10.26,
+    "surface_on_green": 11.08,
+    "minimum_required": 4.5,
+    "passed": true
+  },
+  "pages": [
+    {
+      "path": "/",
+      "family": "home-editorial-hub",
+      "links": 56,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/artiklar",
+      "family": "library-category-index",
+      "links": 129,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/om-oss",
+      "family": "authority-editorial-trust",
+      "links": 40,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/integritetspolicy",
+      "family": "utility-legal",
+      "links": 26,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/adaptogener-ashwagandha-rosenrot-ginseng",
+      "family": "informational-article",
+      "links": 25,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/ala-vs-epa-vs-dha",
+      "family": "informational-article",
+      "links": 33,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/behoever-jag-kosttillskott-nar-racker-maten",
+      "family": "informational-article",
+      "links": 33,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/behoever-jag-kosttillskott",
+      "family": "informational-article",
+      "links": 37,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/billig-dyr-multivitamin",
+      "family": "informational-article",
+      "links": 38,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/d-vitamin-dosering-per-dag",
+      "family": "informational-article",
+      "links": 40,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/d-vitamin-immunforsvaret",
+      "family": "informational-article",
+      "links": 44,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/d-vitamin-och-solen",
+      "family": "informational-article",
+      "links": 32,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/d-vitaminbrist-sverige",
+      "family": "informational-article",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/den-fundersamma-mannen",
+      "family": "authority-editorial-trust",
+      "links": 31,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/direktforsaljning-fakta",
+      "family": "informational-article",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/ekologisk-stadning-greenwashing",
+      "family": "informational-article",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/fiberrika-livsmedel",
+      "family": "informational-article",
+      "links": 38,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/fibrer-for-magen-forstoppning",
+      "family": "informational-article",
+      "links": 32,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/fibrer-for-viktminskning",
+      "family": "informational-article",
+      "links": 37,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/fibrer-tarmflora-prebiotisk",
+      "family": "informational-article",
+      "links": 42,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/finns-det-billigare-alternativ",
+      "family": "informational-article",
+      "links": 27,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/fytosteroler-cellmembran",
+      "family": "informational-article",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/golden-home-care",
+      "family": "product-category",
+      "links": 38,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/hur-fungerar-natverksmarknadsforing-egentligen",
+      "family": "informational-article",
+      "links": 53,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/karotenoid-tillskott-vs-mat",
+      "family": "informational-article",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/kollagen",
+      "family": "informational-article",
+      "links": 28,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/kostfiber-komplett-guide",
+      "family": "informational-article",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/kreatin",
+      "family": "informational-article",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/levnytt-principer",
+      "family": "authority-editorial-trust",
+      "links": 43,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/magnesium-d-vitamin-kombination",
+      "family": "informational-article",
+      "links": 62,
+      "missing_tokens": [
+        "00001",
+        "blodtryck",
+        "hade",
+        "separat",
+        "större",
+        "sänktes"
+      ],
+      "failures": []
+    },
+    {
+      "path": "/magnesium-for-somn",
+      "family": "informational-article",
+      "links": 54,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/magnesium-komplett-guide",
+      "family": "informational-article",
+      "links": 45,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/magnesium-och-stress",
+      "family": "informational-article",
+      "links": 53,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/magnesiumbrist-symptom-tester",
+      "family": "informational-article",
+      "links": 52,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/magnesiumformer-vilken-valja",
+      "family": "informational-article",
+      "links": 47,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/magnesiumglycinat-och-somn",
+      "family": "informational-article",
+      "links": 43,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/melatonin-och-somn",
+      "family": "informational-article",
+      "links": 31,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/mlm-foretag-skandaler-sverige-varlden",
+      "family": "informational-article",
+      "links": 31,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/mlm-inkomstredovisningar-vad-sager-siffrorna",
+      "family": "informational-article",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/mlm-konsumentratt-retur-angeratt",
+      "family": "informational-article",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/mlm-produkter-kosttillskott-pris",
+      "family": "informational-article",
+      "links": 27,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/mlm-rekrytering-social-press-taktiker",
+      "family": "informational-article",
+      "links": 53,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/multivitamin-for-barn",
+      "family": "informational-article",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/multivitamin-for-kvinnor",
+      "family": "informational-article",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/multivitamin-for-man",
+      "family": "informational-article",
+      "links": 48,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/multivitamin-komplett-guide",
+      "family": "informational-article",
+      "links": 52,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/multivitamin-kvinnor-over-40",
+      "family": "informational-article",
+      "links": 40,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/naringsbrist",
+      "family": "informational-article",
+      "links": 38,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/naringsbrist-symptom",
+      "family": "informational-article",
+      "links": 44,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/nar-och-hur-ska-man-ta-omega-3",
+      "family": "informational-article",
+      "links": 38,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/nar-ska-man-ta-kosttillskott-timingguide",
+      "family": "informational-article",
+      "links": 24,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-acidophilus-plus",
+      "family": "product-category",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-affarsmojlighet",
+      "family": "product-category",
+      "links": 31,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-all-c",
+      "family": "product-category",
+      "links": 39,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-betaguard",
+      "family": "product-category",
+      "links": 50,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-botanical-balance",
+      "family": "product-category",
+      "links": 46,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-carotenoid-complex",
+      "family": "product-category",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-chelated-zinc",
+      "family": "product-category",
+      "links": 47,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-coq10",
+      "family": "product-category",
+      "links": 48,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-cruciferous-plus",
+      "family": "product-category",
+      "links": 45,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-elevate",
+      "family": "product-category",
+      "links": 34,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-flavonoid-complex",
+      "family": "product-category",
+      "links": 46,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-formula-iv",
+      "family": "product-category",
+      "links": 48,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-garlic-allium-complex",
+      "family": "product-category",
+      "links": 46,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-hallbarhet",
+      "family": "product-category",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-historia",
+      "family": "product-category",
+      "links": 40,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-kalmag-plus-d",
+      "family": "product-category",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-magnesium-complex",
+      "family": "product-category",
+      "links": 47,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-omega-3-plus",
+      "family": "product-category",
+      "links": 45,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-pro-vitality",
+      "family": "product-category",
+      "links": 50,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-resp-x",
+      "family": "product-category",
+      "links": 47,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-shake-bar-tea",
+      "family": "product-category",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-tre-en-en-cellnaring",
+      "family": "product-category",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-tre-en-en",
+      "family": "product-category",
+      "links": 44,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-upbeet",
+      "family": "product-category",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-vetenskap",
+      "family": "product-category",
+      "links": 57,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-viktkontroll",
+      "family": "product-category",
+      "links": 45,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-vita-squares",
+      "family": "product-category",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-vitamin-d",
+      "family": "product-category",
+      "links": 39,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-vitamin-e",
+      "family": "product-category",
+      "links": 38,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/omega-3-fran-mat-racker-kosten",
+      "family": "informational-article",
+      "links": 29,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/omega-3-komplett-evidensbaserad-guide",
+      "family": "informational-article",
+      "links": 30,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/omega-3-kvalitet-renhet-hur-valja",
+      "family": "informational-article",
+      "links": 29,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/omega-3-och-hjarthalsa-forskning",
+      "family": "informational-article",
+      "links": 33,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/omega-3-och-inflammation-ledvark",
+      "family": "informational-article",
+      "links": 27,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/personlig-vard",
+      "family": "product-category",
+      "links": 30,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/probiotika-dosering-timing",
+      "family": "informational-article",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/probiotika-for-magen-ibs",
+      "family": "informational-article",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/probiotika-komplett-guide",
+      "family": "informational-article",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/probiotika-prebiotika-skillnad",
+      "family": "informational-article",
+      "links": 44,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/proteinpulver-och-proteintillskott",
+      "family": "informational-article",
+      "links": 29,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/super-10",
+      "family": "product-category",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/vad-ar-kostfiber",
+      "family": "informational-article",
+      "links": 37,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/vad-ar-probiotika",
+      "family": "informational-article",
+      "links": 38,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/vad-ar-vitamin-b12",
+      "family": "informational-article",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/varfor-fiskolja-inte-ar-likvardigt",
+      "family": "informational-article",
+      "links": 32,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/varfor-tar-d-vitamin-slut-pa-ditt-magnesium",
+      "family": "informational-article",
+      "links": 42,
+      "missing_tokens": [
+        "00001",
+        "sänkte"
+      ],
+      "failures": []
+    },
+    {
+      "path": "/vaxtbaserade-steroler-dagligen",
+      "family": "informational-article",
+      "links": 35,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/varfor-ar-jag-trott-hela-tiden",
+      "family": "informational-article",
+      "links": 43,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/viktuppgang-klimakteriet",
+      "family": "informational-article",
+      "links": 34,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/vitamin-d-komplett-guide",
+      "family": "informational-article",
+      "links": 57,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/zeaxantin-immunforsvar-2025",
+      "family": "informational-article",
+      "links": 36,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/zink-immunforsvar-hud-testosteron",
+      "family": "informational-article",
+      "links": 32,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/neolife-sport",
+      "family": "product-category",
+      "links": 34,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/d-vitaminbrist-sverige",
+      "family": "informational-article",
+      "links": 49,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/nattblindhet",
+      "family": "informational-article",
+      "links": 30,
+      "missing_tokens": [],
+      "failures": []
+    },
+    {
+      "path": "/vad-ar-pyramidspel",
+      "family": "informational-article",
+      "links": 25,
+      "missing_tokens": [],
+      "failures": []
+    }
+  ]
+}

@@ -16,7 +16,7 @@ CLASS_RE = re.compile(r'class=["\'](?P<value>[^"\']+)["\']', re.I)
 BODY_RE = re.compile(r'<body\b[^>]*>', re.I)
 H1_RE = re.compile(r'<h1\b', re.I)
 IMAGE_RE = re.compile(r'<img\b[^>]*\bsrc=["\'](?P<src>[^"\']+)', re.I)
-KNOWN_TEMPLATES = {"informational-article-v1", "authority-editorial-trust-v1"}
+KNOWN_TEMPLATES = {"rebuild-home-editorial-hub", "rebuild-library-category-index", "rebuild-utility-legal", "rebuild-authority-editorial-trust", "rebuild-product-category", "rebuild-informational-article"}
 CANONICAL_COLOR_LITERALS = {"#1b4332", "#e8c870", "#c9a84c", "#f9f6ef", "#ddd8ce"}
 SHARED_STYLE_FILES = ("assets/css/levnytt-components.css", "assets/css/authority-trust.css")
 
@@ -72,12 +72,10 @@ def audit(root: Path) -> dict:
         cards=sorted({c for m in CLASS_RE.finditer(html) for c in m.group("value").split() if "card" in c.lower() or "box" in c.lower()})
         unclassified=[c for c in cards if c not in allowed_cards]
         issues=[]
-        for required in ("nav.js", "footer.js"):
-            if required not in html: issues.append(f"missing_{required}")
-        body = BODY_RE.search(html)
-        nav_mount = html.find('<div id="site-nav"></div>')
-        if not body or nav_mount < body.end() or html[body.end():nav_mount].strip():
-            issues.append("missing_canonical_nav_mount")
+        if 'class="ln-site-header"' not in html: issues.append("missing_canonical_header")
+        if 'class="ln-site-footer"' not in html: issues.append("missing_canonical_footer")
+        if "levnytt-rebuild.css" not in html: issues.append("missing_rebuild_styles")
+        if re.search(r"<style\b|\sstyle=", html, re.I): issues.append("inline_css_present")
         if len(H1_RE.findall(html)) != 1:
             issues.append("invalid_h1_count")
         missing_images = missing_local_images(root, file, html)
@@ -85,7 +83,7 @@ def audit(root: Path) -> dict:
             issues.append("missing_local_image")
         if "logo-light.svg" in html: issues.append("deprecated_logo")
         if metadata.get("levnytt-template") and metadata["levnytt-template"] not in KNOWN_TEMPLATES: issues.append("unknown_template")
-        if metadata.get("levnytt-template") == "informational-article-v1" and not metadata.get("levnytt-cta"): issues.append("missing_cta_classification")
+        if metadata.get("levnytt-template") == "rebuild-informational-article" and not metadata.get("levnytt-cta"): issues.append("missing_cta_classification")
         if metadata.get("levnytt-cta") in {"product-referral", "affiliate-referral"} and not metadata.get("levnytt-disclosure"): issues.append("missing_disclosure_metadata")
         if unclassified: issues.append("unclassified_card")
         if issues: failures.append({"file":file.name,"issues":issues,"unclassified_cards":unclassified,"missing_images":missing_images})

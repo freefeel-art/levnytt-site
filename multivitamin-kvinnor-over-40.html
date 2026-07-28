@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
+<!doctype html><html lang="sv">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
@@ -93,75 +91,34 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/pillar.css">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1a1a1a;line-height:1.7}
-.ia-wrap{max-width:780px;margin:0 auto;padding:32px 20px 60px}
-h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;color:#1B4332;line-height:1.25;margin-bottom:16px}
-.ia-wrap h2{font-family:'Playfair Display',Georgia,serif;font-size:1.45em;font-weight:700;color:#1B4332;margin:40px 0 14px;border-left:4px solid #C9A84C;padding-left:14px}
-.ia-wrap h3{font-size:1.05em;font-weight:700;color:#2D6A4F;margin:24px 0 8px}
-.ia-wrap p{margin-bottom:16px;font-size:1.02em}
-.ia-wrap ul{padding-left:22px;margin-bottom:16px}
-.ia-wrap li{margin:6px 0}
-.ia-punchline{font-size:1.3em;font-weight:600;border-left:4px solid #C9A84C;padding:18px 22px;background:#FBF8F0;margin:24px 0;border-radius:0 6px 6px 0;color:#1a1a1a}
-.ia-takeaways{background:#1B4332;color:#FBF8F0;border-radius:10px;padding:22px 26px;margin:26px 0}
-.ia-wrap .ia-takeaways h3{margin:0 0 14px;color:#C9A84C;font-size:1.05em;letter-spacing:0.04em;text-transform:uppercase;font-weight:700}
-.ia-takeaways ul{margin:0;padding-left:20px;color:#FBF8F0}
-.ia-takeaways li{margin:8px 0;line-height:1.55;color:#FBF8F0}
-.ia-takeaways a{color:#f0d080;text-decoration-color:#f0d080}
-.ia-hero-svg{width:100%;border-radius:10px;display:block;margin:24px 0 32px}
-.ia-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:26px 0}
-.ia-stat-card{background:#FBF8F0;border:1px solid #e0d9cc;border-radius:8px;padding:16px 18px;text-align:center}
-.ia-stat-card .num{font-size:1.9em;font-weight:700;color:#1B4332;display:block}
-.ia-stat-card .lbl{font-size:0.82em;color:#555;line-height:1.4;margin-top:4px;display:block}
-.ia-stat-card .src{font-size:0.72em;color:#999;margin-top:6px;display:block}
-.ia-method-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:0.93em}
-.ia-method-table th{background:#1B4332;color:#FBF8F0;padding:10px 14px;text-align:left}
-.ia-method-table td{padding:9px 14px;border-bottom:1px solid #e8e4db;vertical-align:top}
-.ia-method-table tr:nth-child(even) td{background:#f7f4ef}
-.ia-evidence-label{display:inline-block;font-size:0.72em;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:3px;vertical-align:middle;margin-left:6px}
-.ia-ev-t1{background:#1a3a2a;color:#4ade80}
-.ia-ev-t2{background:#1a2e3a;color:#60a5fa}
-.ia-ev-t3{background:#2e2a1a;color:#fbbf24}
-.ia-ev-t4{background:#2a1a1a;color:#f87171}
-.ia-faq{margin:32px 0}
-.ia-faq details{border:1px solid #e0d9cc;border-radius:6px;margin:8px 0;overflow:hidden}
-.ia-faq summary{padding:14px 18px;cursor:pointer;font-weight:600;color:#1B4332;list-style:none;background:#FBF8F0}
-.ia-faq summary::-webkit-details-marker{display:none}
-.ia-faq details[open] summary{border-bottom:1px solid #e0d9cc}
-.ia-cta{background:#2D6A4F;color:#FBF8F0;border-radius:10px;padding:24px 28px;margin:36px 0;text-align:center}
-.ia-wrap .ia-cta h3{color:#C9A84C;margin-bottom:10px;font-size:1.1em}
-.ia-cta p{color:#e0f0e8;margin-bottom:14px}
-.ia-author-box{border:1px solid #e0d9cc;border-radius:8px;padding:18px 22px;margin:40px 0;display:flex;gap:18px;align-items:flex-start;background:#fdfcf9}
-.ia-author-avatar{width:54px;height:54px;border-radius:50%;background:#2D6A4F;display:flex;align-items:center;justify-content:center;color:#FBF8F0;font-size:1.4em;font-weight:700;flex-shrink:0}
-.ia-method-note{background:#f0f4f0;border-left:3px solid #2D6A4F;padding:14px 18px;border-radius:0 6px 6px 0;font-size:0.86em;color:#444;margin:28px 0}
-@media(max-width:900px){}@media(max-width:768px){}@media(max-width:600px){}</style>
+<meta name="levnytt-template" content="rebuild-informational-article">
+<meta name="levnytt-cta" content="existing-content-cta">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-</head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+</head><body data-template-family="informational-article"><header class="ln-site-header"><div class="ln-shell ln-header-inner"><a class="ln-brand" href="/" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><button class="ln-menu-toggle" type="button" aria-label="Meny" aria-expanded="false">Meny</button><nav class="ln-primary-nav" aria-label="Huvudnavigation"><a href="/" target="_blank" rel="noopener noreferrer">Hem</a>
+<a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a>
+<a href="/artiklar" target="_blank" rel="noopener noreferrer">Artiklar</a>
+<a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+<a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+<a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Produkter</a>
+<a href="/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+<a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Spara Pengar?</a><a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife →</a></nav></div></header><main class="ln-page ln-family-informational-article"><div class="ln-shell"><p class="ln-breadcrumbs"><a href="/" target="_blank" rel="noopener noreferrer">LevNytt</a> <span aria-hidden="true">›</span> Multivitamin för kvinnor över 40 – vad behöver kroppen och vad säger forskningen?</p><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · informational article</p><h1>Multivitamin för kvinnor över 40 – vad behöver kroppen och vad säger forskningen?</h1><p class="ln-page-intro">Multivitamin för kvinnor över 40 är ett kosttillskott anpassat för de näringsbehov som förändras under perimenopaus och bortom den — framför allt D-vitamin, magnesium, B12 och kalcium — men inget multivitamin ersätter en varierad kost.</p></header><div class="ln-article-body"><div class="ia-wrap"><article>
 
-<div class="ia-wrap"><article>
+<p>Kost &amp; Näring · Kvinnohälsa</p>
 
-<p style="font-size:0.85em;color:#888;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px">Kost &amp; Näring · Kvinnohälsa</p>
 
-<h1>Multivitamin för kvinnor över 40 – vad behöver kroppen och vad säger forskningen?</h1>
 
-<p>Av <a href="/om-oss/">Jarmo Halonen</a> · Uppdaterad: juni 2026 · ~8 min läsning</p>
+<p>Av <a href="/om-oss/" target="_blank" rel="noopener noreferrer">Jarmo Halonen</a> · Uppdaterad: juni 2026 · ~8 min läsning</p>
 
 <p class="ia-punchline">Multivitamin för kvinnor över 40 är ett kosttillskott anpassat för de näringsbehov som förändras under perimenopaus och bortom den — framför allt D-vitamin, magnesium, B12 och kalcium — men inget multivitamin ersätter en varierad kost.</p>
 
 <!-- SVG Hero -->
-<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Multivitamin för kvinnor över 40 – LevNytt" class="ia-hero-svg">
+<svg viewbox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Multivitamin för kvinnor över 40 – LevNytt" class="ia-hero-svg">
   <defs>
-    <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+    <lineargradient id="hg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#1B4332"/>
       <stop offset="100%" stop-color="#2D6A4F"/>
-    </linearGradient>
+    </lineargradient>
   </defs>
   <rect width="900" height="300" fill="url(#hg)" rx="10"/>
   <rect x="0" y="0" width="900" height="4" fill="#C9A84C" rx="2"/>
@@ -176,13 +133,13 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
 <div class="ia-takeaways">
   <h3>Key Takeaways</h3>
   <ul>
-    <li>D-vitamin är det vanligaste bristen hos svenska vuxna; <a href="https://www.livsmedelsverket.se/livsmedel-och-innehall/naringsamne/vitaminer-och-antioxidanter/d-vitamin/">Livsmedelsverket</a> rekommenderar tillskott till de flesta under vinterhalvåret.</li>
+    <li>D-vitamin är det vanligaste bristen hos svenska vuxna; <a href="https://www.livsmedelsverket.se/livsmedel-och-innehall/naringsamne/vitaminer-och-antioxidanter/d-vitamin/" target="_blank" rel="noopener noreferrer">Livsmedelsverket</a> rekommenderar tillskott till de flesta under vinterhalvåret.</li>
     <li>Runt 25 % av kvinnor i perimenopaus drabbas av accelererad förlust av benmineraltäthet (PeKnO-studien, TU München, 2022). <span class="ia-evidence-label ia-ev-t2">Tier 2</span></li>
     <li>D-vitamin + magnesium-kosupplementering under 8 veckor förbättrade muskelstyrka och muskelfunktion hos medelålders kvinnor med D-vitaminbrist (PubMed, 2020). <span class="ia-evidence-label ia-ev-t2">Tier 2</span></li>
     <li>COSMOS-studien (21 442 deltagare) fann att multivitamin-/mineraltillskott förbättrade minnet hos äldre vuxna signifikant (Am J Clin Nutr, 2023). <span class="ia-evidence-label ia-ev-t1">Tier 1</span></li>
     <li>Järnbehovet minskar markant efter menopaus — produkter för äldre kvinnor exkluderar ofta järn av denna anledning.</li>
     <li>Magnesium är kofaktor för vitamin D-metabolism; tillskott av magnesium höjde D-vitaminnivåer signifikant i en RCT med 52 postmenopausala kvinnor (PubMed, 2020). <span class="ia-evidence-label ia-ev-t2">Tier 2</span></li>
-    <li><a href="/neolife-vetenskap">NeoLifes vetenskapliga råd (SAB)</a> har formulerat produkter som Formula IV specifikt utifrån näringsprofiler för hela livscykeln.</li>
+    <li><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">NeoLifes vetenskapliga råd (SAB)</a> har formulerat produkter som Formula IV specifikt utifrån näringsprofiler för hela livscykeln.</li>
   </ul>
 </div>
 
@@ -190,7 +147,7 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
 
 <p>Från ungefär 40-årsåldern inleds för de flesta kvinnor perimenopausen — en övergångsfas som kan pågå i upp till ett decennium innan menstruationerna upphör. Under denna period sjunker östrogennivåerna gradvis, vilket påverkar flera fysiologiska processer: benmineraltäthet, muskulatur, energimetabolism och hjärnfunktion.</p>
 
-<p>Dessa förändringar är inte sjukdomar, men de påverkar hur kroppen hanterar och förbrukar specifika mikronäringsämnen. En 2022 RCT från Technical University of Munich (PeKnO-studien) visade att <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8871419/">runt 25 % av perimenopausala kvinnor förlorar benmineraltäthet i accelererad takt</a> — direkt kopplat till minskad ovulationsaktivitet och sjunkande östrogen. <span class="ia-evidence-label ia-ev-t2">Tier 2</span></p>
+<p>Dessa förändringar är inte sjukdomar, men de påverkar hur kroppen hanterar och förbrukar specifika mikronäringsämnen. En 2022 RCT från Technical University of Munich (PeKnO-studien) visade att <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8871419/" target="_blank" rel="noopener noreferrer">runt 25 % av perimenopausala kvinnor förlorar benmineraltäthet i accelererad takt</a> — direkt kopplat till minskad ovulationsaktivitet och sjunkande östrogen. <span class="ia-evidence-label ia-ev-t2">Tier 2</span></p>
 
 <p>Det är inte automatiskt ett argument för multivitamin — men det förklarar varför näringsbehoven ser annorlunda ut än för en 25-åring.</p>
 
@@ -238,14 +195,14 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
 
 <h2>Vad säger kliniska studier om multivitamin för medelålders och äldre kvinnor?</h2>
 
-<p>Den största randomiserade studien om multivitamin och hälsoutfall är COSMOS-studien (COcoa Supplement and Multivitamin Outcomes Study), som inkluderade <a href="https://academic.oup.com/jbmr/article/40/5/591/8020503">21 442 deltagare varav 12 666 kvinnor (≥65 år)</a> och följdes under i genomsnitt fyra år. <span class="ia-evidence-label ia-ev-t1">Tier 1</span></p>
+<p>Den största randomiserade studien om multivitamin och hälsoutfall är COSMOS-studien (COcoa Supplement and Multivitamin Outcomes Study), som inkluderade <a href="https://academic.oup.com/jbmr/article/40/5/591/8020503" target="_blank" rel="noopener noreferrer">21 442 deltagare varav 12 666 kvinnor (≥65 år)</a> och följdes under i genomsnitt fyra år. <span class="ia-evidence-label ia-ev-t1">Tier 1</span></p>
 
 <p>Resultaten är blandade och förtjänar att presenteras ärligt:</p>
 
 <ul>
   <li><strong>Minne:</strong> Multivitaminsupplementering förbättrade minnet signifikant hos äldre vuxna jämfört med placebo (Am J Clin Nutr, 2023).</li>
   <li><strong>Skelett/frakturer:</strong> Multivitamin/mineral var inte signifikant associerat med minskad risk för kliniska frakturer i COSMOS (JBMR, 2025).</li>
-  <li><strong>Muskel:</strong> En RCT med 52 postmenopausala kvinnor visade att <a href="https://pubmed.ncbi.nlm.nih.gov/32955720/">D-vitamin + magnesiumsupplementering under 8 veckor förbättrade muskelstyrka och muskelfunktion</a>. <span class="ia-evidence-label ia-ev-t2">Tier 2</span></li>
+  <li><strong>Muskel:</strong> En RCT med 52 postmenopausala kvinnor visade att <a href="https://pubmed.ncbi.nlm.nih.gov/32955720/" target="_blank" rel="noopener noreferrer">D-vitamin + magnesiumsupplementering under 8 veckor förbättrade muskelstyrka och muskelfunktion</a>. <span class="ia-evidence-label ia-ev-t2">Tier 2</span></li>
 </ul>
 
 <p>Vad kan vi dra för slutsats? Multivitamin är inte ett mirakelmedel — men täcker det faktiska näringsgap som kliniska mätningar visar är vanliga, kan det ha kliniskt relevanta effekter på specifika utfall. Sammantaget är evidensen för multivitamin som ett komplement till god kost rimlig, men inte överväldigande för alla hälsoutfall.</p>
@@ -284,9 +241,9 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
 <p>Om du passerat menopaus och inte har konstaterat järnunderskott bör du välja ett järnfritt multivitamin. Överskott av järn hos postmenopausala kvinnor kan vara ogynnsamt.</p>
 
 <h3>Vad säger tillverkaren om forskning?</h3>
-<p>Välrenommerade varumärken refererar till <a href="/neolife-historia">dokumenterade formuleringsprocesser</a> och stöder sina produkter med klinisk dokumentation. Fråga dig: är det här ett kosttillskott som är hastig ihopfogat för att utnyttja en trend, eller finns det ett vetenskapligt råd bakom formuleringen?</p>
+<p>Välrenommerade varumärken refererar till <a href="/neolife-historia" target="_blank" rel="noopener noreferrer">dokumenterade formuleringsprocesser</a> och stöder sina produkter med klinisk dokumentation. Fråga dig: är det här ett kosttillskott som är hastig ihopfogat för att utnyttja en trend, eller finns det ett vetenskapligt råd bakom formuleringen?</p>
 
-<p>NeoLifes <a href="/neolife-vetenskap">vetenskapliga arbete</a> är ett exempel på hur produkter som Formula IV och Pro Vitality+ formulerats utifrån ett oberoende vetenskapligt råd — inte utifrån vad som ser bra ut på en förpackning.</p>
+<p>NeoLifes <a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">vetenskapliga arbete</a> är ett exempel på hur produkter som Formula IV och Pro Vitality+ formulerats utifrån ett oberoende vetenskapligt råd — inte utifrån vad som ser bra ut på en förpackning.</p>
 
 <h2>Vad är skillnaden mellan Formula IV, Pro Vitality+ och ett vanligt apotek-multivitamin?</h2>
 
@@ -320,7 +277,7 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
   </tr>
 </table>
 
-<p>Se LevNytts <a href="/finns-det-billigare-alternativ">jämförelse av billigare alternativ</a> om du vill granska pris och alternativ innan du väljer produkt.</p>
+<p>Se LevNytts <a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">jämförelse av billigare alternativ</a> om du vill granska pris och alternativ innan du väljer produkt.</p>
 
 <h2>Hur äter du ett multivitamin på bästa sätt — praktiska råd</h2>
 
@@ -333,17 +290,17 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
 <p>Om du är osäker på var du faktiskt har brister: ett enkelt blodprov via vårdcentral ger konkret information om ditt D-vitamin, B12 och järnstatus — och är ett bättre underlag för val av tillskott än produktbeskrivningar.</p>
 
 <div class="ia-tierbox">
-    <a class="ia-tier" href="/multivitamin-for-kvinnor">Multivitamin för kvinnor</a>
-    <a class="ia-tier" href="/neolife-pro-vitality">Pro Vitality</a>
-    <a class="ia-tier" href="/neolife-vetenskap">NeoLife Vetenskap</a>
-    <a class="ia-tier" href="/om-oss">Om LevNytt</a>
+    <a class="ia-tier" href="/multivitamin-for-kvinnor" target="_blank" rel="noopener noreferrer">Multivitamin för kvinnor</a>
+    <a class="ia-tier" href="/neolife-pro-vitality" target="_blank" rel="noopener noreferrer">Pro Vitality</a>
+    <a class="ia-tier" href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">NeoLife Vetenskap</a>
+    <a class="ia-tier" href="/om-oss" target="_blank" rel="noopener noreferrer">Om LevNytt</a>
   </div>
 
 <div class="ia-cta">
   <h3>Utforska NeoLifes multivitamin-alternativ</h3>
   <p>Formula IV och Pro Vitality+ är utformade utifrån NeoLifes vetenskapliga råds riktlinjer för breda näringsprofiler. Läs mer om forskningen bakom.</p>
-  <a href="/neolife-pro-vitality">Pro Vitality+</a>
-  <a href="/neolife-vetenskap">NeoLife Vetenskap</a>
+  <a href="/neolife-pro-vitality" target="_blank" rel="noopener noreferrer">Pro Vitality+</a>
+  <a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">NeoLife Vetenskap</a>
 </div>
 
 <div class="ia-faq">
@@ -366,7 +323,7 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
 
   <details>
     <summary>Kan multivitamin ersätta en bra kost?</summary>
-    <p>Nej. Livsmedelsverket och <a href="https://ods.od.nih.gov/factsheets/MVMS-HealthProfessional/">NIH Office of Dietary Supplements</a> betonar att kosttillskott är ett komplement, inte ett substitut. Många bioaktiva ämnen i hela livsmedel — fibrer, antioxidanter, polyfenoler — ingår inte i ett multivitamin.</p>
+    <p>Nej. Livsmedelsverket och <a href="https://ods.od.nih.gov/factsheets/MVMS-HealthProfessional/" target="_blank" rel="noopener noreferrer">NIH Office of Dietary Supplements</a> betonar att kosttillskott är ett komplement, inte ett substitut. Många bioaktiva ämnen i hela livsmedel — fibrer, antioxidanter, polyfenoler — ingår inte i ett multivitamin.</p>
   </details>
 
   <details>
@@ -381,7 +338,7 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
 
   <details>
     <summary>Vad innebär NeoLife Formula IV och Pro Vitality+ för kvinnor 40+?</summary>
-    <p>Formula IV är ett brett multivitamin- och mineralkomplex formulerat utifrån NeoLifes vetenskapliga råd (SAB). Pro Vitality+ är ett paket som kombinerar Formula IV med omega-3, carotener och <a href="/neolife-tre-en-en">Tre-en-en</a>. Ingen av dessa produkter marknadsförs som en medicinskt bevisad lösning, men de är utformade för att täcka vanliga näringsgap i en västerländsk kost.</p>
+    <p>Formula IV är ett brett multivitamin- och mineralkomplex formulerat utifrån NeoLifes vetenskapliga råd (SAB). Pro Vitality+ är ett paket som kombinerar Formula IV med omega-3, carotener och <a href="/neolife-tre-en-en" target="_blank" rel="noopener noreferrer">Tre-en-en</a>. Ingen av dessa produkter marknadsförs som en medicinskt bevisad lösning, men de är utformade för att täcka vanliga näringsgap i en västerländsk kost.</p>
   </details>
 
   <details>
@@ -398,13 +355,9 @@ h1{font-family:'Playfair Display',Georgia,serif;font-size:2.1em;font-weight:700;
   <div class="ia-author-avatar">JH</div>
   <div>
     <strong>Jarmo Halonen</strong><br>
-    NeoLife-distributör och hälsoskribent med fokus på evidensbaserad nutrition och kosttillskottskvalitet. Driver <a href="/">levnytt.se</a> — en oberoende informationsplattform om NeoLife-produkter på svenska marknaden. Baserad i Sverige sedan över 20 år.
+    NeoLife-distributör och hälsoskribent med fokus på evidensbaserad nutrition och kosttillskottskvalitet. Driver <a href="/" target="_blank" rel="noopener noreferrer">levnytt.se</a> — en oberoende informationsplattform om NeoLife-produkter på svenska marknaden. Baserad i Sverige sedan över 20 år.
   </div>
 </div>
 
 <p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
-</article>
-<script src="/footer.js" defer></script>
-<script src="/components.js" defer></script>
-</body>
-</html>
+</article></div></article></div></main><footer class="ln-site-footer"><div class="ln-shell"><a class="ln-footer-brand" href="/" target="_blank" rel="noopener noreferrer"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><nav aria-label="Sidfot navigation"><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a><a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a><a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a><a href="/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a><a href="/var-metod" target="_blank" rel="noopener noreferrer">Vår metod</a><a href="/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a><a href="/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a><a href="/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a></nav><p>© 2026 LevNytt. Alla rättigheter förbehållna.</p></div></footer><script src="/assets/js/levnytt-rebuild.js" defer></script></body></html>

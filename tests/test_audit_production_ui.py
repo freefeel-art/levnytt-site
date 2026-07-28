@@ -11,8 +11,8 @@ SPEC.loader.exec_module(audit)
 
 class ProductionUiAuditTests(unittest.TestCase):
     def test_known_template_set_is_explicit(self):
-        self.assertIn("informational-article-v1", audit.KNOWN_TEMPLATES)
-        self.assertIn("authority-editorial-trust-v1", audit.KNOWN_TEMPLATES)
+        self.assertIn("rebuild-informational-article", audit.KNOWN_TEMPLATES)
+        self.assertIn("rebuild-authority-editorial-trust", audit.KNOWN_TEMPLATES)
 
     def test_card_registry_classifies_shared_card(self):
         self.assertIn("article-card", audit.load_cards(ROOT))

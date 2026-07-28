@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """Audit and safely normalize links on LevNytt pages published in sitemap.xml.
 
-The optional --fix mode changes only the attributes of individual body anchor
-tags whose classification is deterministic: internal links become canonical
-root-relative same-tab links; external new-tab links gain noopener noreferrer.
-The global nav/footer exception is audited separately: every link emitted by
-nav.js or footer.js must open a new tab with safe rel attributes.
+The Owner's production policy requires every hyperlink to open in a new tab
+with safe relationship tokens. The audit applies the same rule to shared
+navigation, footers and page-body links.
 Unknown local targets are reported, never rewritten to a guessed destination.
 """
 from __future__ import annotations
@@ -152,16 +150,15 @@ def transform_tag(match: re.Match[str], root: Path, redirect_map: dict[str, str]
                     changed = True
             if not local_exists(root, redirect_map, canonical):
                 record["issues"].append("missing_local_target")
-        if target == "_blank":
-            record["issues"].append("internal_new_tab")
+        if target != "_blank":
+            record["issues"].append("internal_missing_new_tab")
             if fix:
-                attrs.pop("target", None)
-                attrs.pop("rel", None)
+                attrs["target"] = "_blank"
                 changed = True
-        elif rel_tokens & SAFE_REL:
-            record["issues"].append("unnecessary_internal_rel")
+        if not SAFE_REL.issubset(rel_tokens):
+            record["issues"].append("internal_missing_safe_rel")
             if fix:
-                attrs.pop("rel", None)
+                attrs["rel"] = " ".join(sorted(rel_tokens | SAFE_REL))
                 changed = True
     elif category == "external":
         if target == "_blank" and not SAFE_REL.issubset(rel_tokens):

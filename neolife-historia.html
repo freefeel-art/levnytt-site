@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
+<!doctype html><html lang="sv">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
@@ -85,91 +83,28 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/pillar.css">
-<style>
-    .freshness-banner{background:linear-gradient(135deg,var(--green-dark),var(--green));color:var(--white);text-align:center;padding:10px 24px;font-size:0.82rem;font-weight:500;}
-    .freshness-banner strong{color:var(--gold-light);}
-    .historia-hero{position:relative;min-height:320px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#1B4332 0%,#2D6A4F 40%,#40916C 100%);}
-    .historia-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,67,50,0.85) 0%,rgba(45,106,79,0.7) 50%,rgba(200,150,46,0.3) 100%);}
-    .historia-hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:64px 24px;width:100%;}
-    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:0.85rem;flex-wrap:wrap;}
-    .breadcrumb a{color:var(--gold-light);text-decoration:none;font-weight:500;}
-    .breadcrumb .sep{color:rgba(255,255,255,0.4);}
-    .breadcrumb .current{color:rgba(255,255,255,0.8);}
-    .historia-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:700;color:var(--white);line-height:1.15;max-width:720px;letter-spacing:-0.02em;}
-    .historia-hero-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;}
-    .historia-hero-stat .num{font-size:2rem;font-weight:800;color:var(--gold-light);display:block;}
-    .historia-hero-stat .lbl{font-size:0.78rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.05em;}
-    .article-content{padding:64px 0 80px;}
-    .article-inner{max-width:800px;margin:0 auto;padding:0 24px;}
-    .article-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--ink);line-height:1.25;margin:48px 0 16px;letter-spacing:-0.02em;}
-    .article-inner h2:first-child{margin-top:0;}
-    .article-inner h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin:36px 0 12px;}
-    .article-inner p{font-size:1.02rem;color:var(--ink-muted);line-height:1.75;margin-bottom:20px;}
-    .article-inner ul,.article-inner ol{margin:0 0 20px 24px;color:var(--ink-muted);line-height:1.75;}
-    .article-inner li{margin-bottom:8px;font-size:1.02rem;}
-    .article-inner a{color:var(--green);text-decoration:underline;text-underline-offset:2px;font-weight:500;}
-    .article-inner a:hover{color:var(--gold-dark);}
-    .article-inner blockquote{border-left:4px solid var(--gold);background:var(--white);padding:20px 24px;margin:28px 0;border-radius:0 var(--radius) var(--radius) 0;font-style:italic;color:var(--ink-muted);}
-    .article-inner blockquote p{margin-bottom:0;}
-    .article-inner table{width:100%;border-collapse:collapse;margin:28px 0;font-size:0.92rem;background:var(--white);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
-    .article-inner th{background:var(--green);color:var(--white);font-weight:600;text-align:left;padding:12px 16px;font-size:0.85rem;}
-    .article-inner td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--ink-muted);}
-    .article-inner tr:last-child td{border-bottom:none;}
-    .article-inner tr:nth-child(even) td{background:var(--cream);}
-    .callout{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
-    .callout-gold{border-left-color:var(--gold);}
-    .callout h4{margin-top:0;color:var(--green);font-size:1.05rem;font-weight:700;margin-bottom:10px;}
-    .callout-gold h4{color:var(--gold-dark);}
-    .back-link-wrapper{max-width:800px;margin:0 auto;padding:12px 24px 0;}
-    .back-link{color:var(--gold);text-decoration:none;font-size:0.9rem;font-weight:500;}
-    .toc{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
-    .toc h4{color:var(--green);font-size:0.95rem;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;}
-    .toc ol{margin:0 0 0 20px;color:var(--ink-muted);}
-    .toc li{margin-bottom:6px;font-size:0.95rem;}
-    .toc a{color:var(--green);text-decoration:none;font-weight:500;}
-    .toc a:hover{color:var(--gold-dark);text-decoration:underline;}
-    .timeline{position:relative;padding-left:32px;margin:28px 0;}
-    .timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border);}
-    .timeline-item{position:relative;margin-bottom:28px;}
-    .timeline-item::before{content:"";position:absolute;left:-28px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--white);box-shadow:0 0 0 2px var(--green);}
-    .timeline-year{font-size:0.82rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
-    .timeline-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:6px;}
-    .timeline-desc{font-size:0.92rem;color:var(--ink-muted);line-height:1.65;}
-    .arthur-furst-img{max-width:800px;margin:40px auto 0;padding:0 24px;}
-    .arthur-furst-img img{border-radius:12px;display:block;width:100%;}
-    .arthur-furst-img figcaption{font-size:0.82rem;color:#888;margin-top:8px;font-style:italic;text-align:center;}
-    .internal-links-section{background:var(--cream-dark);border-top:1px solid var(--border);padding:48px 0;}
-    .internal-links-section .container{max-width:800px;margin:0 auto;padding:0 24px;}
-    .internal-links-section h3{font-family:'Playfair Display',serif;color:var(--green);font-size:1.4rem;margin-bottom:16px;}
-    .internal-links-section ul{list-style:none;padding:0;margin:0;}
-    .internal-links-section li{margin-bottom:10px;}
-    .internal-links-section a{color:var(--gold);text-decoration:none;font-weight:500;}
-    .internal-links-section a:hover{color:var(--green);text-decoration:underline;}
-    @media(max-width:900px){.historia-hero-stats{gap:20px;}}
-    @media(max-width:600px){.historia-hero{min-height:260px;}}
-    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0.01ms!important;}}
-  </style>
+<meta name="levnytt-template" content="rebuild-product-category">
+<meta name="levnytt-cta" content="existing-content-cta">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-</head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
-
-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+</head><body data-template-family="product-category"><header class="ln-site-header"><div class="ln-shell ln-header-inner"><a class="ln-brand" href="/" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><button class="ln-menu-toggle" type="button" aria-label="Meny" aria-expanded="false">Meny</button><nav class="ln-primary-nav" aria-label="Huvudnavigation"><a href="/" target="_blank" rel="noopener noreferrer">Hem</a>
+<a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a>
+<a href="/artiklar" target="_blank" rel="noopener noreferrer">Artiklar</a>
+<a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+<a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+<a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Produkter</a>
+<a href="/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+<a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Spara Pengar?</a><a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife →</a></nav></div></header><main class="ln-page ln-family-product-category"><div class="ln-shell"><p class="ln-breadcrumbs"><a href="/" target="_blank" rel="noopener noreferrer">LevNytt</a> <span aria-hidden="true">›</span> NeoLifes historia: Från 1958 till global cellulär nutrition</p><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · product category</p><h1>NeoLifes historia: Från 1958 till global cellulär nutrition</h1></header><div class="ln-article-body"><div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
 
   <section class="historia-hero">
     <div class="historia-hero-overlay"></div>
     <div class="historia-hero-content">
       <div class="breadcrumb">
-        <a href="/">Hem</a><span class="sep">/</span>
-        <a href="/neolife-kosttillskott/">NeoLife</a><span class="sep">/</span>
+        <a href="/" target="_blank" rel="noopener noreferrer">Hem</a><span class="sep">/</span>
+        <a href="/neolife-kosttillskott/" target="_blank" rel="noopener noreferrer">NeoLife</a><span class="sep">/</span>
         <span class="current">NeoLifes historia</span>
       </div>
-      <h1>NeoLifes historia: Från 1958 till global cellulär nutrition</h1>
+
       <div class="historia-hero-stats">
         <div class="historia-hero-stat"><span class="num">1958</span><span class="lbl">Grundat</span></div>
         <div class="historia-hero-stat"><span class="num">68</span><span class="lbl">År i kontinuerlig drift</span></div>
@@ -180,15 +115,11 @@
   </section>
 
   <div class="back-link-wrapper">
-    <a href="/neolife-kosttillskott/" class="back-link">&larr; Tillbaka till NeoLife översikt</a>
+    <a href="/neolife-kosttillskott/" class="back-link" target="_blank" rel="noopener noreferrer">&larr; Tillbaka till NeoLife översikt</a>
   </div>
 
-  <div style="max-width:800px;margin:32px auto 0;padding:0 24px;">
-    <img src="/images/neolife-history.jpg"
-         alt="NeoLife historia — vintage produktflaska från 1950-talet, NeoLife grundat 1958 av Jerry Brassfield"
-         width="100%"
-         style="border-radius:12px;display:block;"
-         loading="lazy">
+  <div>
+    <img src="/images/neolife-history.jpg" alt="NeoLife historia — vintage produktflaska från 1950-talet, NeoLife grundat 1958 av Jerry Brassfield" width="100%" loading="lazy">
   </div>
 
   <div class="article-content">
@@ -196,20 +127,20 @@
 
       <div class="callout">
         <h4>Sammanfattning</h4>
-        <p style="margin-bottom:0;">NeoLife grundades 1958 av Jerry Brassfield i Fremont, Kalifornien — nästan sju decennier innan "biotillgänglighet", "helfodsbaserat" och "radikal transparens" blev branschstandarder. Tre-en-en, introducerat samma år, var världens första fytonäringstillskott — 32 år innan begreppet etablerades. 1976 grundade Dr. Arthur Furst — Stanford fil.dr., grundare av Stanford Cancer Chemotherapy Laboratory, internationellt erkänd som "toxikologins fader" — Scientific Advisory Board på tre standarder: Renhet, Styrka, Bevis. SAB-forskning har sedan publicerats i <em>American Journal of Clinical Nutrition</em>, <em>FASEB Journal</em> och <em>JACN</em>, i samarbete med USDA, UNESCO och University of San Francisco.</p>
+        <p>NeoLife grundades 1958 av Jerry Brassfield i Fremont, Kalifornien — nästan sju decennier innan "biotillgänglighet", "helfodsbaserat" och "radikal transparens" blev branschstandarder. Tre-en-en, introducerat samma år, var världens första fytonäringstillskott — 32 år innan begreppet etablerades. 1976 grundade Dr. Arthur Furst — Stanford fil.dr., grundare av Stanford Cancer Chemotherapy Laboratory, internationellt erkänd som "toxikologins fader" — Scientific Advisory Board på tre standarder: Renhet, Styrka, Bevis. SAB-forskning har sedan publicerats i <em>American Journal of Clinical Nutrition</em>, <em>FASEB Journal</em> och <em>JACN</em>, i samarbete med USDA, UNESCO och University of San Francisco.</p>
       </div>
 
-      <p style="font-size:0.9rem;font-style:italic;color:#888;">Levnytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Denna sida spårar NeoLifes dokumenterade historia från 1958 till 2026 med hjälp av företagsmaterial, universitetskällor och peer-reviewed publikationer. Där information kommer från företagskällor anges det.</p>
+      <p>Levnytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Denna sida spårar NeoLifes dokumenterade historia från 1958 till 2026 med hjälp av företagsmaterial, universitetskällor och peer-reviewed publikationer. Där information kommer från företagskällor anges det.</p>
 
       <div class="toc">
         <h4>Innehåll</h4>
         <ol>
-          <li><a href="#grundaren">Jerry Brassfields berättelse — 50 dollar och en vision</a></li>
-          <li><a href="#jim-rohn">Jim Rohn, Tony Robbins och Mark Hughes kopplingen</a></li>
-          <li><a href="#1958">1958 — Tre-en-en och Formula IV</a></li>
-          <li><a href="#tidslinje">Historisk tidslinje 1958–2026</a></li>
-          <li><a href="#filosofi">Cellulär nutritionsfilosofi — före sin tid</a></li>
-          <li><a href="#faq">Vanliga frågor</a></li>
+          <li><a href="/#grundaren" target="_blank" rel="noopener noreferrer">Jerry Brassfields berättelse — 50 dollar och en vision</a></li>
+          <li><a href="/#jim-rohn" target="_blank" rel="noopener noreferrer">Jim Rohn, Tony Robbins och Mark Hughes kopplingen</a></li>
+          <li><a href="/#1958" target="_blank" rel="noopener noreferrer">1958 — Tre-en-en och Formula IV</a></li>
+          <li><a href="/#tidslinje" target="_blank" rel="noopener noreferrer">Historisk tidslinje 1958–2026</a></li>
+          <li><a href="/#filosofi" target="_blank" rel="noopener noreferrer">Cellulär nutritionsfilosofi — före sin tid</a></li>
+          <li><a href="/#faq" target="_blank" rel="noopener noreferrer">Vanliga frågor</a></li>
         </ol>
       </div>
 
@@ -221,7 +152,7 @@
 
       <blockquote>
         <p>"Det finns inget sätt jag kunde ha föreställt mig var vi är idag. Det var helt enkelt inte möjligt. Om någon ens hade sagt det till mig hade det förmodligen skrämt mig."</p>
-        <cite style="display:block;margin-top:10px;font-size:0.85rem;font-style:normal;">— Jerry Brassfield, NeoLifes grundare</cite>
+        <cite>— Jerry Brassfield, NeoLifes grundare</cite>
       </blockquote>
 
       <h3>Två konkurser innan företaget som aldrig misslyckades</h3>
@@ -248,7 +179,7 @@
 
       <blockquote>
         <p>"Jag kallar det ett misstag — det är det jag verkligen missade."</p>
-        <cite style="display:block;margin-top:10px;font-size:0.85rem;font-style:normal;">— Jerry Brassfield, om Mark Hughes som lämnade för att grunda Herbalife</cite>
+        <cite>— Jerry Brassfield, om Mark Hughes som lämnade för att grunda Herbalife</cite>
       </blockquote>
 
       <h2 id="1958">1958 — Tre-en-en och Formula IV</h2>
@@ -308,13 +239,11 @@
   </div>
 
   <figure class="arthur-furst-img">
-    <img src="/images/arthurfurst.png"
-         alt="Dr. Arthur Furst — grundare av NeoLife Scientific Advisory Board 1976, Stanford PhD, toxikologins fader"
-         loading="lazy">
+    <img src="/images/arthurfurst.png" alt="Dr. Arthur Furst — grundare av NeoLife Scientific Advisory Board 1976, Stanford PhD, toxikologins fader" loading="lazy">
     <figcaption>Dr. Arthur Furst (1914–2005) — Stanford fil.dr., grundare av Stanford Cancer Chemotherapy Laboratory. Grundade NeoLife Scientific Advisory Board 1976 på tre standarder: Renhet, Styrka och Bevis.</figcaption>
   </figure>
 
-  <div class="article-content" style="padding-top:40px;">
+  <div class="article-content">
     <div class="article-inner">
 
       <h2 id="filosofi">Cellulär nutritionsfilosofi — före sin tid</h2>
@@ -323,7 +252,7 @@
 
       <div class="callout callout-gold">
         <h4>Den kompletta historiska sammanfattningen</h4>
-        <p style="margin-bottom:0;">NeoLifes 68-åriga historia representerar en konsekvent tillämpning av en enda princip: att nutrition bör utvärderas baserat på cellbiologi snarare än minimala regulatoriska trösklar.<br><br>
+        <p>NeoLifes 68-åriga historia representerar en konsekvent tillämpning av en enda princip: att nutrition bör utvärderas baserat på cellbiologi snarare än minimala regulatoriska trösklar.<br><br>
         Formula IV (1958) — första multifaktortillskottet.<br>
         Tre-en-en (1958) — världens första fytonäringstillskott, 32 år innan begreppet etablerades.<br>
         Golden Home Care (1960-talet) — biologiskt nedbrytbara koncentrat decennier innan regulatoriska mandat.<br>
@@ -361,11 +290,11 @@
         </div>
       </div>
 
-      <p style="font-size:0.85em;color:#888;border-top:1px solid var(--border);padding-top:14px;margin-top:32px;">
+      <p>
         <strong>Källor och referenser:</strong><br>
         <a href="https://pubmed.ncbi.nlm.nih.gov/8147336/" target="_blank" rel="noopener noreferrer">Carughi &amp; Hooper (1994) — American Journal of Clinical Nutrition, PMID: 8147336</a><br>
-        <a href="/neolife-vetenskap">NeoLife Vetenskapliga rådet — Oberoende vetenskap sedan 1976</a><br>
-        <a href="/neolife-tre-en-en">Tre-en-en — Världens första fytonäringstillskott sedan 1958</a><br>
+        <a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">NeoLife Vetenskapliga rådet — Oberoende vetenskap sedan 1976</a><br>
+        <a href="/neolife-tre-en-en" target="_blank" rel="noopener noreferrer">Tre-en-en — Världens första fytonäringstillskott sedan 1958</a><br>
         <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener noreferrer sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
       </p>
 
@@ -376,21 +305,11 @@
     <div class="container">
       <h3>Mer om NeoLife</h3>
       <ul>
-        <li><a href="/neolife-vetenskap">Vetenskapliga rådet — Oberoende vetenskap sedan 1976</a></li>
-        <li><a href="/neolife-tre-en-en">Tre-en-en — Världens första fytonäringstillskott</a></li>
-        <li><a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning</a></li>
-        <li><a href="/neolife-hallbarhet/">NeoLife Hållbarhet — Vetenskapsbaserade miljöstandarder</a></li>
-        <li><a href="/direktforsaljning-fakta">MLM vs pyramidspel — Juridiskt ramverk</a></li>
+        <li><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskapliga rådet — Oberoende vetenskap sedan 1976</a></li>
+        <li><a href="/neolife-tre-en-en" target="_blank" rel="noopener noreferrer">Tre-en-en — Världens första fytonäringstillskott</a></li>
+        <li><a href="/neolife-carotenoid-complex" target="_blank" rel="noopener noreferrer">Carotenoid Complex — USDA-forskning och 37% immunökning</a></li>
+        <li><a href="/neolife-hallbarhet/" target="_blank" rel="noopener noreferrer">NeoLife Hållbarhet — Vetenskapsbaserade miljöstandarder</a></li>
+        <li><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">MLM vs pyramidspel — Juridiskt ramverk</a></li>
       </ul>
     </div>
-  </section>
-
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(function(a){
-      a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});
-    });
-  </script>
-<script src="/footer.js" defer></script>
-  <script src="/components.js" defer></script>
-</body>
-</html>
+  </section></div></article></div></main><footer class="ln-site-footer"><div class="ln-shell"><a class="ln-footer-brand" href="/" target="_blank" rel="noopener noreferrer"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><nav aria-label="Sidfot navigation"><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a><a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a><a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a><a href="/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a><a href="/var-metod" target="_blank" rel="noopener noreferrer">Vår metod</a><a href="/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a><a href="/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a><a href="/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a></nav><p>© 2026 LevNytt. Alla rättigheter förbehållna.</p></div></footer><script src="/assets/js/levnytt-rebuild.js" defer></script></body></html>

@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
+<!doctype html><html lang="sv">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
@@ -22,63 +20,9 @@
 <meta name="twitter:description" content="Fytosteroler är växternas version av kolesterol. Vi undersöker cellmembranrollen och LDL-evidensen.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/pillar.css">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.75;font-size:17px;}
-h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.3;}
-a{color:var(--green-dark);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
-a:hover{color:var(--gold-dark);}
-.container{max-width:var(--max-width);margin:0 auto;padding:0 24px;}
-.ia-wrap{max-width:760px;margin:0 auto;padding:0 20px;font-family:Inter,system-ui,sans-serif;color:#1a1a1a;line-height:1.65}
-.ia-wrap h1{font-family:"Playfair Display",Georgia,serif;font-size:2.1em;line-height:1.2;color:#1B4332;margin:0.6em 0 0.4em}
-.ia-wrap h2{font-family:"Playfair Display",Georgia,serif;font-size:1.5em;color:#1B4332;margin:1.6em 0 0.6em}
-.ia-wrap h3{font-family:"Playfair Display",Georgia,serif;font-size:1.15em;color:#1B4332;margin:1.2em 0 0.5em}
-.ia-punchline{font-size:1.3em;font-weight:600;border-left:4px solid #C9A84C;padding:18px 22px;background:#F9F6EF;margin:24px 0;border-radius:0 6px 6px 0;color:#1B4332}
-.ia-takeaways{background:#1B4332;color:#F9F6EF;border-radius:10px;padding:22px 26px;margin:26px 0}
-.ia-wrap .ia-takeaways h3{margin:0 0 14px;color:#C9A84C;font-size:1.05em;letter-spacing:0.04em;text-transform:uppercase;font-weight:700}
-.ia-takeaways ul{margin:0;padding-left:20px;color:#F9F6EF}
-.ia-takeaways li{margin:9px 0;line-height:1.55;color:#F9F6EF}
-.ia-takeaways a{color:#ffd47a;text-decoration-color:#ffd47a}
-.ia-callout{background:#F9F6EF;border:1px solid #e3dcc9;border-radius:8px;padding:16px 20px;margin:22px 0}
-.ia-callout h4{margin:0 0 8px;color:#1B4332;font-size:1em}
-.ia-faq details{border-bottom:1px solid #e3dcc9;padding:14px 0}
-.ia-faq summary{font-weight:600;cursor:pointer;color:#1B4332}
-.ia-faq p{margin:10px 0 0}
-.ia-tierbox{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}
-.ia-tier{flex:1 1 150px;background:#1B4332;color:#F9F6EF;border-radius:8px;padding:14px 16px;text-decoration:none;font-size:0.9em}
-.ia-tier b{color:#C9A84C;display:block;font-size:0.8em;letter-spacing:0.05em;margin-bottom:4px}
-.ia-cta{background:#1B4332;color:#F9F6EF;border-radius:10px;padding:24px 26px;margin:30px 0;text-align:center}
-.ia-wrap .ia-cta h3{color:#C9A84C;margin-top:0}
-.ia-cta a{color:#F9F6EF;background:#C9A84C;padding:10px 20px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:10px;font-weight:600}
-.ia-author-box{display:flex;gap:16px;align-items:flex-start;background:#F9F6EF;border-radius:10px;padding:20px;margin:34px 0}
-.ia-author-avatar{width:48px;height:48px;border-radius:50%;background:#1B4332;color:#C9A84C;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
-.ia-disclosure{font-size:0.82em;color:#666;border-top:1px solid #e3dcc9;padding-top:16px;margin-top:30px}
-table{width:100%;border-collapse:collapse;font-size:15px;margin:24px 0}
-thead{background:#1B4332;color:var(--white);}
-thead th{padding:14px 18px;text-align:left;font-weight:600;font-size:13px;letter-spacing:0.04em;}
-tbody tr:nth-child(even){background:var(--cream);}
-tbody tr:nth-child(odd){background:var(--white);}
-tbody td{padding:12px 18px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
-tbody tr:last-child td{border-bottom:none;}
-.research-box{background:linear-gradient(135deg,#f0f7f3,#e8f4ed);border:1px solid #a8d5b8;border-radius:var(--radius);padding:26px 30px;margin:32px 0;}
-.research-box-label{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-dark);margin-bottom:10px;display:block;}
-.research-box h4{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--green-dark);margin-bottom:8px;}
-.research-box p{font-size:14.5px;color:var(--ink);margin:0;line-height:1.6;}
-.research-box p+p{margin-top:10px;}
-.research-box cite{font-size:12px;color:var(--ink-muted);display:block;margin-top:10px;font-style:normal;}
-.evidence-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-family:'Inter',sans-serif;margin-left:6px;vertical-align:middle;}
-.evidence-clinical{background:var(--green-light);color:var(--green-dark);}
-.evidence-observational{background:#E8EAF6;color:#3949AB;}
-.evidence-mixed{background:#F3E5F5;color:#6A1B9A;}
-@media(max-width:600px){
-  .ia-tierbox{flex-direction:column;}
-  .ia-punchline,.ia-takeaways{padding:20px 20px;}
-  .ia-cta{padding:28px 22px;}
-  .ia-author-box{flex-direction:column;}
-}
-</style>
+
+
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -120,15 +64,19 @@ tbody tr:last-child td{border-bottom:none;}
   ]
 }
 </script>
+<meta name="levnytt-template" content="rebuild-informational-article">
+<meta name="levnytt-cta" content="existing-content-cta">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-</head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
-
-<div class="ia-wrap"><article>
-<header class="ia-header"><h1>Vad är fytosteroler? Cellmembran, kolesterol och evidens</h1></header>
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+</head><body data-template-family="informational-article"><header class="ln-site-header"><div class="ln-shell ln-header-inner"><a class="ln-brand" href="/" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><button class="ln-menu-toggle" type="button" aria-label="Meny" aria-expanded="false">Meny</button><nav class="ln-primary-nav" aria-label="Huvudnavigation"><a href="/" target="_blank" rel="noopener noreferrer">Hem</a>
+<a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a>
+<a href="/artiklar" target="_blank" rel="noopener noreferrer">Artiklar</a>
+<a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+<a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+<a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Produkter</a>
+<a href="/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+<a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Spara Pengar?</a><a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife →</a></nav></div></header><main class="ln-page ln-family-informational-article"><div class="ln-shell"><p class="ln-breadcrumbs"><a href="/" target="_blank" rel="noopener noreferrer">LevNytt</a> <span aria-hidden="true">›</span> Vad är fytosteroler? Cellmembran, kolesterol och evidens</p><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · informational article</p><h1>Vad är fytosteroler? Cellmembran, kolesterol och evidens</h1><p class="ln-page-intro">Vad är fytosteroler? — Fytosteroler är växternas version av kolesterol. De bygger upp och stabiliserar cellmembranets struktur i alla växtceller, precis som kolesterol gör i djurceller. I den mänskliga kroppen konkurrerar de med kolesterol om absorptionen — med mätbar effekt på LDL-nivåer, bekräftad av EFSA. Vad de däremot inte bevisat gör är att minska risken för hjärtinfarkt — en distinktion som är viktig att förstå.</p></header><div class="ln-article-body"><div class="ia-wrap"><article>
+<header class="ia-header"></header>
 
 <div class="ia-punchline">
   <p>Vad är fytosteroler? — Fytosteroler är växternas version av kolesterol. De bygger upp och stabiliserar cellmembranets struktur i alla växtceller, precis som kolesterol gör i djurceller. <strong>I den mänskliga kroppen konkurrerar de med kolesterol om absorptionen — med mätbar effekt på LDL-nivåer, bekräftad av EFSA.</strong> Vad de däremot inte bevisat gör är att minska risken för hjärtinfarkt — en distinktion som är viktig att förstå.</p>
@@ -148,7 +96,7 @@ tbody tr:last-child td{border-bottom:none;}
 
 <h2>Vad är fytosteroler och var kommer de ifrån?</h2>
 <p>Fytosteroler — eller växtbaserade steroler — är en grupp naturliga föreningar som förekommer i alla växter. De tillhör samma kemiska familj som kolesterol (sterolerna) men produceras uteslutande av växter, alger och svampar. I växtceller fyller de exakt samma strukturella roll som kolesterol fyller i djurceller: de är inbyggda i cellmembranets fosfolipiddubbellager och reglerar dess fysikaliska egenskaper.</p>
-<p>Enligt en <a href="https://pubmed.ncbi.nlm.nih.gov/29627611/" rel="noopener noreferrer" target="_blank">översiktsartikel publicerad i PubMed (2018)</a> har mer än 250 olika fytosteroler identifierats. De tre vanligaste i mänsklig kost är beta-sitosterol (β-sitosterol), campesterol och stigmasterol. Vegetabiliska oljor, nötter, frön och fullkorn är de viktigaste kostmässiga källorna.</p>
+<p>Enligt en <a href="https://pubmed.ncbi.nlm.nih.gov/29627611/" target="_blank" rel="noopener noreferrer">översiktsartikel publicerad i PubMed (2018)</a> har mer än 250 olika fytosteroler identifierats. De tre vanligaste i mänsklig kost är beta-sitosterol (β-sitosterol), campesterol och stigmasterol. Vegetabiliska oljor, nötter, frön och fullkorn är de viktigaste kostmässiga källorna.</p>
 
 <div class="ia-callout">
   <h4>Fytosteroler vs kolesterol — strukturen är nyckeln</h4>
@@ -157,7 +105,7 @@ tbody tr:last-child td{border-bottom:none;}
 
 <h2>Vad gör fytosteroler i cellmembranet?</h2>
 <p>Cellmembranet är inte en passiv barriär — det är en dynamisk struktur som reglerar vad som passerar in och ut ur cellen, hur signaler förmedlas och hur enzymer fungerar. Dess fysikaliska egenskaper (fluiditet, ordning, permeabilitet) är centrala för cellens funktion.</p>
-<p>I växtceller fyller fytosteroler samma membranstrukturerande funktion som kolesterol fyller i djurceller. De interagerar med fosfolipiderna i dubbellagret och påverkar membraneegenskaperna. En <a href="https://pubmed.ncbi.nlm.nih.gov/21864283/" rel="noopener noreferrer" target="_blank">översiktsartikel i PubMed (2011)</a> sammanfattar att fytosteroler är integrerade komponenter i växtcellers membran med stabiliserande effekt på fosfolipiddubbellagret — precis som kolesterol i djurceller — och att deras strukturella likhet med kolesterol möjliggör den LDL-sänkande mekanismen i tarmen. En <a href="https://pubmed.ncbi.nlm.nih.gov/18676403/" rel="noopener noreferrer" target="_blank">studie i PubMed (2008)</a> visade att borttagning av fytosteroler från växtcellers membran ökade lipidkedjornas oordning och störde bildandet av lipidraftar — specialiserade membranmikrodomäner som är viktiga för signalöverföring.</p>
+<p>I växtceller fyller fytosteroler samma membranstrukturerande funktion som kolesterol fyller i djurceller. De interagerar med fosfolipiderna i dubbellagret och påverkar membraneegenskaperna. En <a href="https://pubmed.ncbi.nlm.nih.gov/21864283/" target="_blank" rel="noopener noreferrer">översiktsartikel i PubMed (2011)</a> sammanfattar att fytosteroler är integrerade komponenter i växtcellers membran med stabiliserande effekt på fosfolipiddubbellagret — precis som kolesterol i djurceller — och att deras strukturella likhet med kolesterol möjliggör den LDL-sänkande mekanismen i tarmen. En <a href="https://pubmed.ncbi.nlm.nih.gov/18676403/" target="_blank" rel="noopener noreferrer">studie i PubMed (2008)</a> visade att borttagning av fytosteroler från växtcellers membran ökade lipidkedjornas oordning och störde bildandet av lipidraftar — specialiserade membranmikrodomäner som är viktiga för signalöverföring.</p>
 
 <div class="research-box">
   <span class="research-box-label">Mekanistisk forskning <span class="evidence-tag evidence-observational">In vitro · Cellstudier</span></span>
@@ -184,7 +132,7 @@ tbody tr:last-child td{border-bottom:none;}
 </div>
 
 <h2>Hur mycket fytosteroler finns i vanlig kost?</h2>
-<p>Det genomsnittliga dagliga fytosterolintaget via vanlig kost i västvärlden uppgår till 150–400 mg per dag, enligt <a href="https://lpi.oregonstate.edu/mic/dietary-factors/phytochemicals/phytosterols" rel="noopener noreferrer" target="_blank">Linus Pauling Institute vid Oregon State University</a>. Det är väsentligt lägre än de 1,5–2 g som associeras med mätbar LDL-sänkning.</p>
+<p>Det genomsnittliga dagliga fytosterolintaget via vanlig kost i västvärlden uppgår till 150–400 mg per dag, enligt <a href="https://lpi.oregonstate.edu/mic/dietary-factors/phytochemicals/phytosterols" target="_blank" rel="noopener noreferrer">Linus Pauling Institute vid Oregon State University</a>. Det är väsentligt lägre än de 1,5–2 g som associeras med mätbar LDL-sänkning.</p>
 
 <table>
   <thead><tr><th>Livsmedel</th><th>Fytosterolinnehåll (per 100 g)</th><th>Notering</th></tr></thead>
@@ -210,26 +158,26 @@ tbody tr:last-child td{border-bottom:none;}
   <p>En sällsynt autosomalt recessiv störning (sitosterolemi) leder till kraftigt ökad absorption av fytosteroler i tarmen. Drabbade individer ackumulerar fytosteroler i blodet och vävnader, vilket kan ge aterosklerotiska förändringar. Tillståndet behandlas med strikt begränsning av fytosterolintag och specifik läkemedelsbehandling. För personer utan denna genetiska störning är normala till måttliga mängder fytosteroler säkra.</p>
 </div>
 
-<p>NeoLifes Tre-en-en är ett tillskott formulerat kring växtbaserade steroler och fetter med syfte att stödja cellmembranets funktion. Du kan läsa mer om hur NeoLife förhåller sig till fytonutrienter och cellnäring på <a href="/neolife-vetenskap">NeoLife Vetenskap</a>.</p>
+<p>NeoLifes Tre-en-en är ett tillskott formulerat kring växtbaserade steroler och fetter med syfte att stödja cellmembranets funktion. Du kan läsa mer om hur NeoLife förhåller sig till fytonutrienter och cellnäring på <a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">NeoLife Vetenskap</a>.</p>
 
 <div class="ia-cta">
   <h3>Vill du förstå fytosterolernas plats i en daglig näringsprofil?</h3>
   <p>LevNytt undersöker hur NeoLifes Tre-en-en är formulerat kring växtbaserade steroler och vad forskningen säger om daglig supplementering.</p>
-  <a href="/vaxtbaserade-steroler-dagligen">Växtbaserade steroler dagligen →</a>
+  <a href="/vaxtbaserade-steroler-dagligen" target="_blank" rel="noopener noreferrer">Växtbaserade steroler dagligen →</a>
 </div>
 
 <div class="ia-tierbox">
-  <a class="ia-tier" href="/neolife-historia"><b>Tier 1</b>NeoLife Historia</a>
-  <a class="ia-tier" href="/neolife-vetenskap"><b>Tier 2</b>NeoLife Vetenskap</a>
-  <a class="ia-tier" href="/forsknings-faq"><b>Tier 3</b>Forsknings-FAQ</a>
-  <a class="ia-tier" href="/levnytt-principer"><b>Tier 4</b>LevNytt Principer</a>
-  <a class="ia-tier" href="/karotenoid-tillskott-vs-mat"><b>Fördjupning</b>Karotenoider — mat vs tillskott</a>
+  <a class="ia-tier" href="/neolife-historia" target="_blank" rel="noopener noreferrer"><b>Tier 1</b>NeoLife Historia</a>
+  <a class="ia-tier" href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer"><b>Tier 2</b>NeoLife Vetenskap</a>
+  <a class="ia-tier" href="/forsknings-faq" target="_blank" rel="noopener noreferrer"><b>Tier 3</b>Forsknings-FAQ</a>
+  <a class="ia-tier" href="/levnytt-principer" target="_blank" rel="noopener noreferrer"><b>Tier 4</b>LevNytt Principer</a>
+  <a class="ia-tier" href="/karotenoid-tillskott-vs-mat" target="_blank" rel="noopener noreferrer"><b>Fördjupning</b>Karotenoider — mat vs tillskott</a>
 </div>
 
 <div class="ia-cta">
   <h3>Vill du veta mer om NeoLife Tre-en-en?</h3>
   <p>Tre-en-en är ett spannmålslipidtillskott med fytosteroler från vetegroddar, riskli och sojabönor — formulerat 1958 för cellmembranstöd.</p>
-  <a href="/neolife-tre-en-en">NeoLife Tre-en-en →</a>
+  <a href="/neolife-tre-en-en" target="_blank" rel="noopener noreferrer">NeoLife Tre-en-en →</a>
 </div>
 
 <div class="ia-faq">
@@ -243,7 +191,7 @@ tbody tr:last-child td{border-bottom:none;}
   <details><summary>Hur skiljer sig fytosteroler från fytostanoler?</summary><p>Fytostanoler är mättade versioner av fytosteroler — de saknar en dubbelbindning i sterolringen. Fytostanoler absorberas ännu sämre i tarmen. I praktiken visar kliniska studier liknande LDL-sänkande effekter för båda formerna vid jämförbara doser. Fytostanoler används bland annat i margariner som Becel pro.activ.</p></details>
 </div>
 
-<p class="ia-disclosure"><strong>Metodnotering:</strong> Hälsopåståenden sourcade från primärkällor (EFSA, PubMed). Evidensnivå anges explicit. <a href="/var-metod">Läs om vår metod →</a></p>
+<p class="ia-disclosure"><strong>Metodnotering:</strong> Hälsopåståenden sourcade från primärkällor (EFSA, PubMed). Evidensnivå anges explicit. <a href="/var-metod" target="_blank" rel="noopener noreferrer">Läs om vår metod →</a></p>
 
 <div class="ia-author-box">
   <div class="ia-author-avatar">JH</div>
@@ -256,9 +204,4 @@ tbody tr:last-child td{border-bottom:none;}
 
 <p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
 
-</article></div>
-
-<script src="/footer.js" defer></script>
-<script src="/components.js" defer></script>
-</body>
-</html>
+</article></div></div></article></div></main><footer class="ln-site-footer"><div class="ln-shell"><a class="ln-footer-brand" href="/" target="_blank" rel="noopener noreferrer"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><nav aria-label="Sidfot navigation"><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a><a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a><a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a><a href="/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a><a href="/var-metod" target="_blank" rel="noopener noreferrer">Vår metod</a><a href="/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a><a href="/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a><a href="/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a></nav><p>© 2026 LevNytt. Alla rättigheter förbehållna.</p></div></footer><script src="/assets/js/levnytt-rebuild.js" defer></script></body></html>

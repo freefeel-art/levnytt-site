@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
+<!doctype html><html lang="sv">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
@@ -85,91 +83,28 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/pillar.css">
-<style>
-    .freshness-banner{background:linear-gradient(135deg,var(--green-dark),var(--green));color:var(--white);text-align:center;padding:10px 24px;font-size:0.82rem;font-weight:500;}
-    .freshness-banner strong{color:var(--gold-light);}
-    .historia-hero{position:relative;min-height:320px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#1B4332 0%,#2D6A4F 40%,#40916C 100%);}
-    .historia-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,67,50,0.85) 0%,rgba(45,106,79,0.7) 50%,rgba(200,150,46,0.3) 100%);}
-    .historia-hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:64px 24px;width:100%;}
-    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:0.85rem;flex-wrap:wrap;}
-    .breadcrumb a{color:var(--gold-light);text-decoration:none;font-weight:500;}
-    .breadcrumb .sep{color:rgba(255,255,255,0.4);}
-    .breadcrumb .current{color:rgba(255,255,255,0.8);}
-    .historia-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:700;color:var(--white);line-height:1.15;max-width:720px;letter-spacing:-0.02em;}
-    .historia-hero-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;}
-    .historia-hero-stat .num{font-size:2rem;font-weight:800;color:var(--gold-light);display:block;}
-    .historia-hero-stat .lbl{font-size:0.78rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.05em;}
-    .article-content{padding:64px 0 80px;}
-    .article-inner{max-width:800px;margin:0 auto;padding:0 24px;}
-    .article-inner h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:700;color:var(--ink);line-height:1.25;margin:48px 0 16px;letter-spacing:-0.02em;}
-    .article-inner h2:first-child{margin-top:0;}
-    .article-inner h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin:36px 0 12px;}
-    .article-inner p{font-size:1.02rem;color:var(--ink-muted);line-height:1.75;margin-bottom:20px;}
-    .article-inner ul,.article-inner ol{margin:0 0 20px 24px;color:var(--ink-muted);line-height:1.75;}
-    .article-inner li{margin-bottom:8px;font-size:1.02rem;}
-    .article-inner a{color:var(--green);text-decoration:underline;text-underline-offset:2px;font-weight:500;}
-    .article-inner a:hover{color:var(--gold-dark);}
-    .article-inner blockquote{border-left:4px solid var(--gold);background:var(--white);padding:20px 24px;margin:28px 0;border-radius:0 var(--radius) var(--radius) 0;font-style:italic;color:var(--ink-muted);}
-    .article-inner blockquote p{margin-bottom:0;}
-    .article-inner table{width:100%;border-collapse:collapse;margin:28px 0;font-size:0.92rem;background:var(--white);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
-    .article-inner th{background:var(--green);color:var(--white);font-weight:600;text-align:left;padding:12px 16px;font-size:0.85rem;}
-    .article-inner td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--ink-muted);}
-    .article-inner tr:last-child td{border-bottom:none;}
-    .article-inner tr:nth-child(even) td{background:var(--cream);}
-    .callout{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--green);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
-    .callout-gold{border-left-color:var(--gold);}
-    .callout h4{margin-top:0;color:var(--green);font-size:1.05rem;font-weight:700;margin-bottom:10px;}
-    .callout-gold h4{color:var(--gold-dark);}
-    .back-link-wrapper{max-width:800px;margin:0 auto;padding:12px 24px 0;}
-    .back-link{color:var(--gold);text-decoration:none;font-size:0.9rem;font-weight:500;}
-    .toc{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
-    .toc h4{color:var(--green);font-size:0.95rem;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.05em;}
-    .toc ol{margin:0 0 0 20px;color:var(--ink-muted);}
-    .toc li{margin-bottom:6px;font-size:0.95rem;}
-    .toc a{color:var(--green);text-decoration:none;font-weight:500;}
-    .toc a:hover{color:var(--gold-dark);text-decoration:underline;}
-    .standard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 32px;}
-    .standard-card{background:var(--white);border:1px solid var(--border);border-top:4px solid var(--green);border-radius:var(--radius);padding:20px;text-align:center;}
-    .standard-card .icon{font-size:1.8rem;margin-bottom:10px;}
-    .standard-card h4{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--green);margin-bottom:8px;}
-    .standard-card p{font-size:0.88rem;color:var(--ink-muted);line-height:1.6;margin:0;}
-    .journal-list{list-style:none;margin:0;padding:0;}
-    .journal-list li{padding:10px 0;border-bottom:1px solid var(--border);font-size:0.95rem;color:var(--ink-muted);display:flex;align-items:center;gap:10px;}
-    .journal-list li:last-child{border-bottom:none;}
-    .journal-list li::before{content:"";width:8px;height:8px;background:var(--green);border-radius:50%;flex-shrink:0;}
-    .internal-links-section{background:var(--cream-dark);border-top:1px solid var(--border);padding:48px 0;}
-    .internal-links-section .container{max-width:800px;margin:0 auto;padding:0 24px;}
-    .internal-links-section h3{font-family:'Playfair Display',serif;color:var(--green);font-size:1.4rem;margin-bottom:16px;}
-    .internal-links-section ul{list-style:none;padding:0;margin:0;}
-    .internal-links-section li{margin-bottom:10px;}
-    .internal-links-section a{color:var(--gold);text-decoration:none;font-weight:500;}
-    .internal-links-section a:hover{color:var(--green);text-decoration:underline;}
-    .portrait{float:right;margin:0 0 24px 32px;width:220px;border-radius:var(--radius);border:1px solid var(--border);}
-    @media(max-width:900px){.historia-hero-stats{gap:20px;}.standard-grid{grid-template-columns:1fr;}.portrait{float:none;width:100%;margin:0 0 24px 0;}}
-    @media(max-width:600px){.historia-hero{min-height:260px;}}
-    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0.01ms!important;}}
-  </style>
+<meta name="levnytt-template" content="rebuild-product-category">
+<meta name="levnytt-cta" content="existing-content-cta">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-</head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
-
-  <div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+</head><body data-template-family="product-category"><header class="ln-site-header"><div class="ln-shell ln-header-inner"><a class="ln-brand" href="/" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><button class="ln-menu-toggle" type="button" aria-label="Meny" aria-expanded="false">Meny</button><nav class="ln-primary-nav" aria-label="Huvudnavigation"><a href="/" target="_blank" rel="noopener noreferrer">Hem</a>
+<a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a>
+<a href="/artiklar" target="_blank" rel="noopener noreferrer">Artiklar</a>
+<a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+<a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+<a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Produkter</a>
+<a href="/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+<a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Spara Pengar?</a><a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife →</a></nav></div></header><main class="ln-page ln-family-product-category"><div class="ln-shell"><p class="ln-breadcrumbs"><a href="/" target="_blank" rel="noopener noreferrer">LevNytt</a> <span aria-hidden="true">›</span> NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976</p><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · product category</p><h1>NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976</h1></header><div class="ln-article-body"><div class="freshness-banner">&#128300; <strong>Uppdaterad maj 2026</strong> &mdash; aktuell forskning, verifierade fakta, ingen föråldrad information.</div>
 
   <section class="historia-hero">
     <div class="historia-hero-overlay"></div>
     <div class="historia-hero-content">
       <div class="breadcrumb">
-        <a href="/">Hem</a><span class="sep">/</span>
-        <a href="/neolife-kosttillskott/">NeoLife</a><span class="sep">/</span>
+        <a href="/" target="_blank" rel="noopener noreferrer">Hem</a><span class="sep">/</span>
+        <a href="/neolife-kosttillskott/" target="_blank" rel="noopener noreferrer">NeoLife</a><span class="sep">/</span>
         <span class="current">Vetenskapliga rådet</span>
       </div>
-      <h1>NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976</h1>
+
       <div class="historia-hero-stats">
         <div class="historia-hero-stat"><span class="num">1976</span><span class="lbl">Grundat</span></div>
         <div class="historia-hero-stat"><span class="num">3</span><span class="lbl">Standarder: Renhet, Styrka, Bevis</span></div>
@@ -180,7 +115,7 @@
   </section>
 
   <div class="back-link-wrapper">
-    <a href="/neolife-kosttillskott/" class="back-link">&larr; Tillbaka till NeoLife översikt</a>
+    <a href="/neolife-kosttillskott/" class="back-link" target="_blank" rel="noopener noreferrer">&larr; Tillbaka till NeoLife översikt</a>
   </div>
 
   <div class="article-content">
@@ -188,20 +123,20 @@
 
       <div class="callout">
         <h4>Sammanfattning</h4>
-        <p style="margin-bottom:0;">NeoLife Scientific Advisory Board (SAB) grundades 1976 av Dr. Arthur Furst — fil.dr. från Stanford, grundare av Stanford Cancer Chemotherapy Laboratory, internationellt erkänd som "toxikologins fader". SAB styr all NeoLife-produktutveckling utifrån tre standarder: Renhet, Styrka och Bevis. Forskning publiceras i <em>American Journal of Clinical Nutrition</em>, <em>FASEB Journal</em> och <em>Journal of the American College of Nutrition</em>. Externa samarbetspartners inkluderar USDA, UNESCO och University of San Francisco.</p>
+        <p>NeoLife Scientific Advisory Board (SAB) grundades 1976 av Dr. Arthur Furst — fil.dr. från Stanford, grundare av Stanford Cancer Chemotherapy Laboratory, internationellt erkänd som "toxikologins fader". SAB styr all NeoLife-produktutveckling utifrån tre standarder: Renhet, Styrka och Bevis. Forskning publiceras i <em>American Journal of Clinical Nutrition</em>, <em>FASEB Journal</em> och <em>Journal of the American College of Nutrition</em>. Externa samarbetspartners inkluderar USDA, UNESCO och University of San Francisco.</p>
       </div>
 
-      <p style="font-size:0.9rem;font-style:italic;color:#888;">Levnytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Innehållet är informativt och baserat på företagsmaterial, universitetskällor och peer-reviewed publikationer.</p>
+      <p>Levnytt.se är en oberoende NeoLife-distributör (Sponsor-ID: 41-830928). Innehållet är informativt och baserat på företagsmaterial, universitetskällor och peer-reviewed publikationer.</p>
 
       <div class="toc">
         <h4>Innehåll</h4>
         <ol>
-          <li><a href="#tre-standarder">De tre standarderna — Renhet, Styrka, Bevis</a></li>
-          <li><a href="#arthur-furst">Dr. Arthur Furst — grundaren av SAB</a></li>
-          <li><a href="#publikationer">Peer-reviewed publikationer och samarbeten</a></li>
-          <li><a href="#cellulär-filosofi">Cellulär nutritionsfilosofi</a></li>
-          <li><a href="#produktpåverkan">SAB:s påverkan på NeoLife-produkterna</a></li>
-          <li><a href="#faq">Vanliga frågor</a></li>
+          <li><a href="/#tre-standarder" target="_blank" rel="noopener noreferrer">De tre standarderna — Renhet, Styrka, Bevis</a></li>
+          <li><a href="/#arthur-furst" target="_blank" rel="noopener noreferrer">Dr. Arthur Furst — grundaren av SAB</a></li>
+          <li><a href="/#publikationer" target="_blank" rel="noopener noreferrer">Peer-reviewed publikationer och samarbeten</a></li>
+          <li><a href="/#cellulär-filosofi" target="_blank" rel="noopener noreferrer">Cellulär nutritionsfilosofi</a></li>
+          <li><a href="/#produktpåverkan" target="_blank" rel="noopener noreferrer">SAB:s påverkan på NeoLife-produkterna</a></li>
+          <li><a href="/#faq" target="_blank" rel="noopener noreferrer">Vanliga frågor</a></li>
         </ol>
       </div>
 
@@ -229,15 +164,12 @@
 
       <blockquote>
         <p>"SAB:s engagemang för vetenskap förtjänade NeoLife det vetenskapliga samfundets förtroende och påverkade andra företag att ta mer evidensbaserade metoder."</p>
-        <cite style="display:block;margin-top:10px;font-size:0.85rem;font-style:normal;">— NeoLife: 65 Years of Nutrition Innovation and Scientific Leadership</cite>
+        <cite>— NeoLife: 65 Years of Nutrition Innovation and Scientific Leadership</cite>
       </blockquote>
 
       <h2 id="arthur-furst">Dr. Arthur Furst — grundaren av SAB</h2>
 
-      <img src="/images/arthurfurst.png"
-           alt="Dr. Arthur Furst — grundare av NeoLife Scientific Advisory Board, Stanford Ph.D., toxikologins fader"
-           class="portrait"
-           loading="lazy">
+      <img src="/images/arthurfurst.png" alt="Dr. Arthur Furst — grundare av NeoLife Scientific Advisory Board, Stanford Ph.D., toxikologins fader" class="portrait" loading="lazy">
 
       <p>Dr. Arthur Furst (1914–2005) tog sin fil.kand. från UCLA 1937, sin magister från Stanford 1940 och sin fil.dr. från Stanford 1948. Han erhöll senare ett hedersdoktorat i toxikologi från University of San Francisco — den institution som uppkallat sin Arthur Furst Research Awards och föreläsningsserie efter honom.</p>
 
@@ -247,7 +179,7 @@
 
       <div class="callout callout-gold">
         <h4>Dr. Arthur Fursts akademiska meriter</h4>
-        <p style="margin-bottom:0;">A.B. Kemi, UCLA (1937)<br>
+        <p>A.B. Kemi, UCLA (1937)<br>
         M.A. Stanford University (1940)<br>
         Ph.D. Stanford University (1948)<br>
         Hedersdoktor i toxikologi, University of San Francisco<br>
@@ -268,11 +200,11 @@
         <li><em>International Journal of Toxicology</em></li>
         <li><em>Annals of the New York Academy of Sciences</em> — USDA immunstudie</li>
         <li><em>Free Radical Biology and Medicine</em> — USDA oxidativ stress</li>
-        <li><a href="/varfor-ar-jag-trott-hela-tiden">Varför är jag trött hela tiden? — Vanliga orsaker till långvarig trötthet</a></li>
-        <li><a href="/naringsbrist">Näringsbrist — Vad det är och varför det spelar roll</a></li>
-        <li><a href="/naringsbrist">Näringsbrist symptom — Tidiga signaler att känna till</a></li>
-        <li><a href="/fytosteroler-cellmembran">Cellmembran funktion — Grunden för cellernas hälsa</a></li>
-        <li><a href="/vaxtbaserade-steroler-dagligen">Vad är växtsteroler? — Vetenskapen bakom växtsteroler</a></li>
+        <li><a href="/varfor-ar-jag-trott-hela-tiden" target="_blank" rel="noopener noreferrer">Varför är jag trött hela tiden? — Vanliga orsaker till långvarig trötthet</a></li>
+        <li><a href="/naringsbrist" target="_blank" rel="noopener noreferrer">Näringsbrist — Vad det är och varför det spelar roll</a></li>
+        <li><a href="/naringsbrist" target="_blank" rel="noopener noreferrer">Näringsbrist symptom — Tidiga signaler att känna till</a></li>
+        <li><a href="/fytosteroler-cellmembran" target="_blank" rel="noopener noreferrer">Cellmembran funktion — Grunden för cellernas hälsa</a></li>
+        <li><a href="/vaxtbaserade-steroler-dagligen" target="_blank" rel="noopener noreferrer">Vad är växtsteroler? — Vetenskapen bakom växtsteroler</a></li>
       </ul>
 
       <h3>Externa samarbetspartners</h3>
@@ -325,11 +257,11 @@
         <li><strong>Tre-en-en</strong> — världens första fytonäringstillskott 1958, specificerat av SAB baserat på insikten om spannmålsförädlingens borttagande av biologiskt aktiva fraktioner.</li>
         <li><strong>Omega-3 Plus</strong> — 8 standardiserade fettsyror snarare än bara EPA+DHA, baserat på SAB:s helfodsfilosofi. Molekylär särkiljningsprocess för renhet.</li>
         <li><strong>Pro Vitality+</strong> — fyrakomponentsystem specificerat av SAB för att adressera de fyra primära cellulära näringsgapen simultant.</li>
-        <li><a href="/varfor-ar-jag-trott-hela-tiden">Varför är jag trött hela tiden? — Vanliga orsaker till långvarig trötthet</a></li>
-        <li><a href="/naringsbrist">Näringsbrist — Vad det är och varför det spelar roll</a></li>
-        <li><a href="/naringsbrist">Näringsbrist symptom — Tidiga signaler att känna till</a></li>
-        <li><a href="/fytosteroler-cellmembran">Cellmembran funktion — Grunden för cellernas hälsa</a></li>
-        <li><a href="/vaxtbaserade-steroler-dagligen">Vad är växtsteroler? — Vetenskapen bakom växtsteroler</a></li>
+        <li><a href="/varfor-ar-jag-trott-hela-tiden" target="_blank" rel="noopener noreferrer">Varför är jag trött hela tiden? — Vanliga orsaker till långvarig trötthet</a></li>
+        <li><a href="/naringsbrist" target="_blank" rel="noopener noreferrer">Näringsbrist — Vad det är och varför det spelar roll</a></li>
+        <li><a href="/naringsbrist" target="_blank" rel="noopener noreferrer">Näringsbrist symptom — Tidiga signaler att känna till</a></li>
+        <li><a href="/fytosteroler-cellmembran" target="_blank" rel="noopener noreferrer">Cellmembran funktion — Grunden för cellernas hälsa</a></li>
+        <li><a href="/vaxtbaserade-steroler-dagligen" target="_blank" rel="noopener noreferrer">Vad är växtsteroler? — Vetenskapen bakom växtsteroler</a></li>
       </ul>
 
       <h2 id="faq">Vanliga frågor om Vetenskapliga rådet</h2>
@@ -362,11 +294,11 @@
         </div>
       </div>
 
-      <p style="font-size:0.85em;color:#888;border-top:1px solid var(--border);padding-top:14px;margin-top:32px;">
+      <p>
         <strong>Källor och referenser:</strong><br>
         <a href="https://pubmed.ncbi.nlm.nih.gov/8147336/" target="_blank" rel="noopener noreferrer">Carughi &amp; Hooper (1994) — American Journal of Clinical Nutrition, PMID: 8147336</a><br>
-        <a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a><br>
-        <a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning</a><br>
+        <a href="/neolife-historia/" target="_blank" rel="noopener noreferrer">NeoLife Historia — Från 1958 till global cellulär nutrition</a><br>
+        <a href="/neolife-carotenoid-complex" target="_blank" rel="noopener noreferrer">Carotenoid Complex — USDA-forskning och 37% immunökning</a><br>
         <a href="https://se.neolifeshop.com/?sponsorId=41-830928" target="_blank" rel="nofollow noopener noreferrer sponsored">NeoLife Northern Europe — Officiell produktdokumentation</a>
       </p>
 
@@ -377,28 +309,18 @@
     <div class="container">
       <h3>Mer om NeoLife</h3>
       <ul>
-        <li><a href="/neolife-historia/">NeoLife Historia — Från 1958 till global cellulär nutrition</a></li>
-        <li><a href="/neolife-carotenoid-complex">Carotenoid Complex — USDA-forskning och 37% immunökning på 20 dagar</a></li>
-        <li><a href="/neolife-tre-en-en">Tre-en-en — Världens första fytonäringstillskott sedan 1958</a></li>
-        <li><a href="/neolife-pro-vitality/">Pro Vitality+ — Det fyrakomponentbaserade grundsystemet</a></li>
-        <li><a href="/neolife-hallbarhet/">NeoLife Hållbarhet — Vetenskapsbaserade miljöstandarder</a></li>
-        <li><a href="/varfor-ar-jag-trott-hela-tiden">Varför är jag trött hela tiden? — Vanliga orsaker till långvarig trötthet</a></li>
-        <li><a href="/naringsbrist">Näringsbrist — Vad det är och varför det spelar roll</a></li>
-        <li><a href="/naringsbrist">Näringsbrist symptom — Tidiga signaler att känna till</a></li>
-        <li><a href="/fytosteroler-cellmembran">Cellmembran funktion — Grunden för cellernas hälsa</a></li>
-        <li><a href="/vaxtbaserade-steroler-dagligen">Vad är växtsteroler? — Vetenskapen bakom växtsteroler</a></li>
-        <li><a href="/karotenoid-tillskott-vs-mat">Karotenoider från tillskott vs mat — vad säger forskningen?</a></li>
-        <li><a href="/ekologisk-stadning-greenwashing/">Greenwashing inom ekologisk städning — så känner du igen det</a></li>
+        <li><a href="/neolife-historia/" target="_blank" rel="noopener noreferrer">NeoLife Historia — Från 1958 till global cellulär nutrition</a></li>
+        <li><a href="/neolife-carotenoid-complex" target="_blank" rel="noopener noreferrer">Carotenoid Complex — USDA-forskning och 37% immunökning på 20 dagar</a></li>
+        <li><a href="/neolife-tre-en-en" target="_blank" rel="noopener noreferrer">Tre-en-en — Världens första fytonäringstillskott sedan 1958</a></li>
+        <li><a href="/neolife-pro-vitality/" target="_blank" rel="noopener noreferrer">Pro Vitality+ — Det fyrakomponentbaserade grundsystemet</a></li>
+        <li><a href="/neolife-hallbarhet/" target="_blank" rel="noopener noreferrer">NeoLife Hållbarhet — Vetenskapsbaserade miljöstandarder</a></li>
+        <li><a href="/varfor-ar-jag-trott-hela-tiden" target="_blank" rel="noopener noreferrer">Varför är jag trött hela tiden? — Vanliga orsaker till långvarig trötthet</a></li>
+        <li><a href="/naringsbrist" target="_blank" rel="noopener noreferrer">Näringsbrist — Vad det är och varför det spelar roll</a></li>
+        <li><a href="/naringsbrist" target="_blank" rel="noopener noreferrer">Näringsbrist symptom — Tidiga signaler att känna till</a></li>
+        <li><a href="/fytosteroler-cellmembran" target="_blank" rel="noopener noreferrer">Cellmembran funktion — Grunden för cellernas hälsa</a></li>
+        <li><a href="/vaxtbaserade-steroler-dagligen" target="_blank" rel="noopener noreferrer">Vad är växtsteroler? — Vetenskapen bakom växtsteroler</a></li>
+        <li><a href="/karotenoid-tillskott-vs-mat" target="_blank" rel="noopener noreferrer">Karotenoider från tillskott vs mat — vad säger forskningen?</a></li>
+        <li><a href="/ekologisk-stadning-greenwashing/" target="_blank" rel="noopener noreferrer">Greenwashing inom ekologisk städning — så känner du igen det</a></li>
       </ul>
     </div>
-  </section>
-
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(function(a){
-      a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});
-    });
-  </script>
-<script src="/footer.js" defer></script>
-  <script src="/components.js" defer></script>
-</body>
-</html>
+  </section></div></article></div></main><footer class="ln-site-footer"><div class="ln-shell"><a class="ln-footer-brand" href="/" target="_blank" rel="noopener noreferrer"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><nav aria-label="Sidfot navigation"><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a><a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a><a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a><a href="/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a><a href="/var-metod" target="_blank" rel="noopener noreferrer">Vår metod</a><a href="/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a><a href="/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a><a href="/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a></nav><p>© 2026 LevNytt. Alla rättigheter förbehållna.</p></div></footer><script src="/assets/js/levnytt-rebuild.js" defer></script></body></html>

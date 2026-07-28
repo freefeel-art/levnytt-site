@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
+<!doctype html><html lang="sv">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
@@ -18,67 +16,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/pillar.css">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.75;font-size:17px;}
-h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.3;}
-a{color:var(--green-dark);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
-a:hover{color:var(--gold-dark);}
-.container{max-width:var(--max-width);margin:0 auto;padding:0 24px;}
-.ia-wrap{max-width:760px;margin:0 auto;padding:0 20px;font-family:Inter,system-ui,sans-serif;color:#1a1a1a;line-height:1.65}
-.ia-wrap h1{font-family:"Playfair Display",Georgia,serif;font-size:2.1em;line-height:1.2;color:#1B4332;margin:0.6em 0 0.4em}
-.ia-wrap h2{font-family:"Playfair Display",Georgia,serif;font-size:1.5em;color:#1B4332;margin:1.6em 0 0.6em}
-.ia-wrap h3{font-family:"Playfair Display",Georgia,serif;font-size:1.15em;color:#1B4332;margin:1.2em 0 0.5em}
-.ia-punchline{font-size:1.3em;font-weight:600;border-left:4px solid #C9A84C;padding:18px 22px;background:#F9F6EF;margin:24px 0;border-radius:0 6px 6px 0;color:#1B4332}
-.ia-takeaways{background:#1B4332;color:#F9F6EF;border-radius:10px;padding:22px 26px;margin:26px 0}
-.ia-wrap .ia-takeaways h3{margin:0 0 14px;color:#C9A84C;font-size:1.05em;letter-spacing:0.04em;text-transform:uppercase;font-weight:700}
-.ia-takeaways ul{margin:0;padding-left:20px;color:#F9F6EF}
-.ia-takeaways li{margin:9px 0;line-height:1.55;color:#F9F6EF}
-.ia-takeaways a{color:#ffd47a;text-decoration-color:#ffd47a}
-.ia-callout{background:#F9F6EF;border:1px solid #e3dcc9;border-radius:8px;padding:16px 20px;margin:22px 0}
-.ia-callout h4{margin:0 0 8px;color:#1B4332;font-size:1em}
-.ia-faq details{border-bottom:1px solid #e3dcc9;padding:14px 0}
-.ia-faq summary{font-weight:600;cursor:pointer;color:#1B4332}
-.ia-faq p{margin:10px 0 0}
-.ia-tierbox{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}
-.ia-tier{flex:1 1 150px;background:#1B4332;color:#F9F6EF;border-radius:8px;padding:14px 16px;text-decoration:none;font-size:0.9em}
-.ia-tier b{color:#C9A84C;display:block;font-size:0.8em;letter-spacing:0.05em;margin-bottom:4px}
-.ia-cta{background:#1B4332;color:#F9F6EF;border-radius:10px;padding:24px 26px;margin:30px 0;text-align:center}
-.ia-wrap .ia-cta h3{color:#C9A84C;margin-top:0}
-.ia-cta a{color:#F9F6EF;background:#C9A84C;padding:10px 20px;border-radius:6px;text-decoration:none;display:inline-block;margin-top:10px;font-weight:600}
-.ia-author-box{display:flex;gap:16px;align-items:flex-start;background:#F9F6EF;border-radius:10px;padding:20px;margin:34px 0}
-.ia-author-avatar{width:48px;height:48px;border-radius:50%;background:#1B4332;color:#C9A84C;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}
-.ia-disclosure{font-size:0.82em;color:#666;border-top:1px solid #e3dcc9;padding-top:16px;margin-top:30px}
-table{width:100%;border-collapse:collapse;font-size:15px;margin:24px 0}
-thead{background:#1B4332;color:var(--white);}
-thead th{padding:14px 18px;text-align:left;font-weight:600;font-size:13px;letter-spacing:0.04em;}
-tbody tr:nth-child(even){background:var(--cream);}
-tbody tr:nth-child(odd){background:var(--white);}
-tbody td{padding:12px 18px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5;}
-tbody tr:last-child td{border-bottom:none;}
-.badge{display:inline-block;padding:2px 9px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;font-family:'Inter',sans-serif;}
-.badge-green{background:var(--green-light);color:var(--green-dark);}
-.badge-amber{background:var(--amber-light);color:var(--amber);}
-.badge-grey{background:#ECEFF1;color:#546E7A;}
-.research-box{background:linear-gradient(135deg,#f0f7f3,#e8f4ed);border:1px solid #a8d5b8;border-radius:var(--radius);padding:26px 30px;margin:32px 0;}
-.research-box-label{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-dark);margin-bottom:10px;display:block;}
-.research-box h4{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--green-dark);margin-bottom:8px;}
-.research-box p{font-size:14.5px;color:var(--ink);margin:0;line-height:1.6;}
-.research-box p+p{margin-top:10px;}
-.research-box cite{font-size:12px;color:var(--ink-muted);display:block;margin-top:10px;font-style:normal;}
-.evidence-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-family:'Inter',sans-serif;margin-left:6px;vertical-align:middle;}
-.evidence-preclinical{background:#FFF3CD;color:#856404;}
-.evidence-clinical{background:var(--green-light);color:var(--green-dark);}
-@media(max-width:600px){
-  .ia-tierbox{flex-direction:column;}
-  .ia-punchline,.ia-takeaways{padding:20px 20px;}
-  .ia-cta{padding:28px 22px;}
-  .ia-author-box{flex-direction:column;}
-}
-</style>
+
+
+
 
 <script type="application/ld+json">
 {
@@ -158,15 +99,19 @@ tbody tr:last-child td{border-bottom:none;}
   ]
 }
 </script>
+<meta name="levnytt-template" content="rebuild-informational-article">
+<meta name="levnytt-cta" content="existing-content-cta">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-</head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
-
-<div class="ia-wrap"><article>
-<header class="ia-header"><h1>Vad är zeaxantin? Forskning om ögon och immunförsvar</h1></header>
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+</head><body data-template-family="informational-article"><header class="ln-site-header"><div class="ln-shell ln-header-inner"><a class="ln-brand" href="/" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><button class="ln-menu-toggle" type="button" aria-label="Meny" aria-expanded="false">Meny</button><nav class="ln-primary-nav" aria-label="Huvudnavigation"><a href="/" target="_blank" rel="noopener noreferrer">Hem</a>
+<a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a>
+<a href="/artiklar" target="_blank" rel="noopener noreferrer">Artiklar</a>
+<a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+<a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+<a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Produkter</a>
+<a href="/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+<a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Spara Pengar?</a><a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife →</a></nav></div></header><main class="ln-page ln-family-informational-article"><div class="ln-shell"><p class="ln-breadcrumbs"><a href="/" target="_blank" rel="noopener noreferrer">LevNytt</a> <span aria-hidden="true">›</span> Vad är zeaxantin? Forskning om ögon och immunförsvar</p><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · informational article</p><h1>Vad är zeaxantin? Forskning om ögon och immunförsvar</h1><p class="ln-page-intro">Påverkar zeaxantin immunförsvaret? — Preklinisk forskning från 2025 antyder det. Men den avgörande frågan — om effekten gäller hos människor — är ännu obesvarad. Det ögonen vet med större säkerhet: zeaxantin är ett av de bäst dokumenterade karotenoiderna för ögonhälsa, med kliniska RCT-data bakom sig.</p></header><div class="ln-article-body"><div class="ia-wrap"><article>
+<header class="ia-header"></header>
 
     <!-- PUNCHLINE -->
     <div class="ia-punchline">
@@ -189,13 +134,13 @@ tbody tr:last-child td{border-bottom:none;}
       <h2>Vad är zeaxantin?</h2>
       <p>Zeaxantin är ett xantofyll — en undergrupp av karotenoider som till skillnad från karotener (som betakaroten) innehåller syreatomer i sin molekylstruktur. Det tillhör samma familj som lutein och är ett av de karotenoiderna som kroppen faktiskt prioriterar: när zeaxantin intas via kosten transporteras det aktivt till specifika vävnader, framför allt ögats macula.</p>
       <p>Livsmedel rika på zeaxantin inkluderar majs och majsprodukter, orange och röd paprika, saffran, gojibär (wolfberries) och äggula. Intressant nog innehåller mörkgröna bladgrönsaker som spenat och grönkål — annars utmärkta karotenoidkällor — relativt lite zeaxantin jämfört med lutein. Majs är den av de vanligaste livsmedlen med högst zeaxantininnehåll.</p>
-      <p>Zeaxantin är en av de karotenoider som förekommer naturligt i den mänskliga blodcirkulationen. Tillsammans med lutein utgör de de två dominerande xantofyllerna i plasma, och de är de enda karotenoiderna som koncentreras i ögats näthinna. En <a href="https://pubmed.ncbi.nlm.nih.gov/41009015/" rel="noopener">översiktsartikel i PubMed (2025)</a> sammanfattar karotenoidernas immunmodulerande egenskaper och noterar att trots starka epidemiologiska samband är de kliniska studierna ännu ofullständiga.</p>
+      <p>Zeaxantin är en av de karotenoider som förekommer naturligt i den mänskliga blodcirkulationen. Tillsammans med lutein utgör de de två dominerande xantofyllerna i plasma, och de är de enda karotenoiderna som koncentreras i ögats näthinna. En <a href="https://pubmed.ncbi.nlm.nih.gov/41009015/" target="_blank" rel="noopener noreferrer">översiktsartikel i PubMed (2025)</a> sammanfattar karotenoidernas immunmodulerande egenskaper och noterar att trots starka epidemiologiska samband är de kliniska studierna ännu ofullständiga.</p>
 
       <!-- SVG: Zeaxantin i kroppen -->
-      <div style="margin:32px 0;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-        <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <div>
+        <svg viewbox="0 0 760 220" xmlns="http://www.w3.org/2000/svg">
           <rect width="760" height="220" fill="#FAF7F0"/>
-          <text x="380" y="30" text-anchor="middle" font-family="'Playfair Display',serif" font-size="14" fill="#1B4332" font-weight="700">Var samlas zeaxantin i kroppen?</text>
+          <text x="380" y="30" text-anchor="middle" font-family="&#x27;Playfair Display&#x27;,serif" font-size="14" fill="#1B4332" font-weight="700">Var samlas zeaxantin i kroppen?</text>
 
           <!-- Ögat -->
           <ellipse cx="160" cy="120" rx="60" ry="50" fill="#D8F3DC" stroke="#2D6A4F" stroke-width="1.5"/>
@@ -223,11 +168,11 @@ tbody tr:last-child td{border-bottom:none;}
           <text x="615" y="200" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#555550">Ny forskningsriktning</text>
           <text x="615" y="213" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#C0392B">Ej kliniskt bekräftat</text>
         </svg>
-        <p style="font-size:13px;color:var(--ink-muted);text-align:center;padding:10px 20px 16px;line-height:1.5;">Zeaxantin samlas selektivt i ögats macula och förekommer i hjärnvävnad. Immuneffekter är än så länge dokumenterade i prekliniska modeller.</p>
+        <p>Zeaxantin samlas selektivt i ögats macula och förekommer i hjärnvävnad. Immuneffekter är än så länge dokumenterade i prekliniska modeller.</p>
       </div>
 
       <h2>Vad säger forskningen om zeaxantin och ögonhälsa?</h2>
-      <p>Av alla karotenoidernas potentiella hälsoroller är zeaxantins och luteinets roll i ögonhälsan den med starkast klinisk evidensbas. Forskningen har pågått i decennier och kulminerat i ett av de mest citerade näringsstudieprogram i ögonmedicin: <a href="https://www.aoa.org/news/clinical-eye-care/health-and-wellness/lutein-zeaxanthin-reaffirmed-over-beta-carotene-in-areds2" rel="noopener">AREDS och AREDS2</a>.</p>
+      <p>Av alla karotenoidernas potentiella hälsoroller är zeaxantins och luteinets roll i ögonhälsan den med starkast klinisk evidensbas. Forskningen har pågått i decennier och kulminerat i ett av de mest citerade näringsstudieprogram i ögonmedicin: <a href="https://www.aoa.org/news/clinical-eye-care/health-and-wellness/lutein-zeaxanthin-reaffirmed-over-beta-carotene-in-areds2" target="_blank" rel="noopener noreferrer">AREDS och AREDS2</a>.</p>
 
       <div class="research-box">
         <span class="research-box-label">Klinisk evidens <span class="evidence-tag evidence-clinical">RCT · Tier 2</span></span>
@@ -311,7 +256,7 @@ tbody tr:last-child td{border-bottom:none;}
 
       <h2>Hur mycket zeaxantin finns i kosten — och räcker det?</h2>
       <p>Zeaxantin är ovanligare i kosten än lutein. Mörkgröna bladgrönsaker — i övrigt utmärkta karotenoidkällor — innehåller nästan inget zeaxantin. Majs innehåller ungefär 0,5 mg zeaxantin per 100 gram, vilket innebär att man skulle behöva äta nästan två kilo majs för att nå 10 mg zeaxantin enbart från denna källa.</p>
-      <p>Det genomsnittliga dagliga intaget av lutein och zeaxantin tillsammans i kosten är 1–3 mg, enligt <a href="https://www.sciencedirect.com/science/article/abs/pii/S0889157508001336" rel="noopener">forskning publicerad i Journal of Food Composition and Analysis</a>. Forskning kopplar ett dagligt intag på 6 mg xantofyller (lutein + zeaxantin) till reducerad AMD-risk — ett gap som för de flesta inte täcks av en genomsnittlig kost utan riktade kostförändringar eller tillskott.</p>
+      <p>Det genomsnittliga dagliga intaget av lutein och zeaxantin tillsammans i kosten är 1–3 mg, enligt <a href="https://www.sciencedirect.com/science/article/abs/pii/S0889157508001336" target="_blank" rel="noopener noreferrer">forskning publicerad i Journal of Food Composition and Analysis</a>. Forskning kopplar ett dagligt intag på 6 mg xantofyller (lutein + zeaxantin) till reducerad AMD-risk — ett gap som för de flesta inte täcks av en genomsnittlig kost utan riktade kostförändringar eller tillskott.</p>
 
       <div class="ia-callout">
         <h4>Biotillgänglighet</h4>
@@ -322,13 +267,13 @@ tbody tr:last-child td{border-bottom:none;}
       <p>För ögonhälsan är bilden tydligare: det finns klinisk evidens på RCT-nivå för att lutein och zeaxantin påverkar AMD-progression. AREDS2 är ett väldesignat försök med robusta data, och resultaten ligger till grund för kliniska rekommendationer. Det är inte ett löfte om att ögonen "räddas" — det är en statistisk riskreduktion i en specifik population med befintlig AMD.</p>
       <p>För immunförsvar är bilden preliminär. Studien från University of Chicago är vetenskapligt intressant och öppnar ett nytt fält — "nutritional immunology" enligt forskarnas egna ord — men det är preklinisk forskning. Effekterna är dokumenterade i celler och råttor, inte i kontrollerade studier på människa.</p>
       <p>Det vore att övertolka evidensen att säga att zeaxantin "stärker immunförsvaret." Det vore lika fel att säga att forskningen inte är relevant. Den är relevant som hypotes och utgångspunkt för vidare studier.</p>
-      <p>LevNytt följer <a href="/var-metod">vår metod</a>: vi beskriver vad forskningen faktiskt visar, på vilken evidensnivå, och vad som återstår att bevisa.</p>
+      <p>LevNytt följer <a href="/var-metod" target="_blank" rel="noopener noreferrer">vår metod</a>: vi beskriver vad forskningen faktiskt visar, på vilken evidensnivå, och vad som återstår att bevisa.</p>
 
       <!-- CTA -->
       <div class="ia-cta">
         <h3>Zeaxantin i ett bredare karotenoidperspektiv</h3>
         <p>Zeaxantin förekommer sällan ensamt i väldesignade tillskott — det ingår typiskt i ett spektrum av karotenoider. LevNytt undersöker vad som händer när hela karotenoidbilden tas i beaktande.</p>
-        <a href="/neolife-carotenoid-complex" class="ia-cta-btn">Karotenoider — hela spektrumet →</a>
+        <a href="/neolife-carotenoid-complex" class="ia-cta-btn" target="_blank" rel="noopener noreferrer">Karotenoider — hela spektrumet →</a>
       </div>
 
       <!-- FAQ -->
@@ -342,12 +287,12 @@ tbody tr:last-child td{border-bottom:none;}
 
         <details>
           <summary>Vad säger forskningen om zeaxantin och ögonhälsa?</summary>
-            <p>Det finns stark klinisk evidens för zeaxantins roll i ögonhälsa. <a href="https://pubmed.ncbi.nlm.nih.gov/24310343/" rel="noopener">AREDS2-studien</a> (Age-Related Eye Disease Study 2), en stor randomiserad kontrollerad studie finansierad av National Eye Institute, visade att supplementering med lutein och zeaxantin minskade risken för progression till avancerad åldersrelaterad makuladegeneration (AMD) med 18% jämfört med betakaroten — och med 25% i gruppen med lägst kostintag av dessa karotenoider vid baseline.</p>
+            <p>Det finns stark klinisk evidens för zeaxantins roll i ögonhälsa. <a href="https://pubmed.ncbi.nlm.nih.gov/24310343/" target="_blank" rel="noopener noreferrer">AREDS2-studien</a> (Age-Related Eye Disease Study 2), en stor randomiserad kontrollerad studie finansierad av National Eye Institute, visade att supplementering med lutein och zeaxantin minskade risken för progression till avancerad åldersrelaterad makuladegeneration (AMD) med 18% jämfört med betakaroten — och med 25% i gruppen med lägst kostintag av dessa karotenoider vid baseline.</p>
         </details>
 
         <details>
           <summary>Påverkar zeaxantin immunförsvaret?</summary>
-            <p>En <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12490228/" rel="noopener">studie publicerad i Cell Reports Medicine (september 2025)</a> från University of Chicago identifierade zeaxantin som en immunmodulator som kan förstärka CD8+ T-cellers aktivitet mot tumörceller. Forskningen är preklinisk — genomförd i cellkulturer och djurmodeller — och kliniska studier på människa saknas ännu. Ledande forskare betonar att fynden är lovande men att ytterligare forskning krävs.</p>
+            <p>En <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12490228/" target="_blank" rel="noopener noreferrer">studie publicerad i Cell Reports Medicine (september 2025)</a> från University of Chicago identifierade zeaxantin som en immunmodulator som kan förstärka CD8+ T-cellers aktivitet mot tumörceller. Forskningen är preklinisk — genomförd i cellkulturer och djurmodeller — och kliniska studier på människa saknas ännu. Ledande forskare betonar att fynden är lovande men att ytterligare forskning krävs.</p>
         </details>
 
         <details>
@@ -362,12 +307,12 @@ tbody tr:last-child td{border-bottom:none;}
 
         <details>
           <summary>Var i kroppen samlas zeaxantin?</summary>
-            <p>Zeaxantin samlas selektivt i ögats macula, framför allt i fovea (maculas centrum). Zeaxantin och lutein är de enda karotenoider som koncentreras i ögat. Dessutom finns zeaxantin och lutein i hjärnvävnad — <a href="https://www.medrxiv.org/content/10.1101/2023.09.22.23295947.full.pdf" rel="noopener">66–77% av hjärnans totala karotenoidinnehåll utgörs av dessa två</a>, enligt forskning i Frontiers in Nutrition. Zeaxantin cirkulerar också i plasma och når immunceller — vilket är grunden för den nya immunforskning som publicerades 2025.</p>
+            <p>Zeaxantin samlas selektivt i ögats macula, framför allt i fovea (maculas centrum). Zeaxantin och lutein är de enda karotenoider som koncentreras i ögat. Dessutom finns zeaxantin och lutein i hjärnvävnad — <a href="https://www.medrxiv.org/content/10.1101/2023.09.22.23295947.full.pdf" target="_blank" rel="noopener noreferrer">66–77% av hjärnans totala karotenoidinnehåll utgörs av dessa två</a>, enligt forskning i Frontiers in Nutrition. Zeaxantin cirkulerar också i plasma och når immunceller — vilket är grunden för den nya immunforskning som publicerades 2025.</p>
         </details>
 
         <details>
           <summary>Bör man ta zeaxantintillskott?</summary>
-            <p>LevNytt ger inte personliga hälsorekommendationer. Det vi kan säga är att: (1) klinisk evidens från AREDS2 stödjer att lutein/zeaxantin kan vara relevant för personer med intermediär AMD eller AMD-risk, och att det är ett samtal för läkaren; (2) för ögonhälsa generellt rekommenderar många kliniker kost rik på lutein och zeaxantin som ett första steg; (3) immuneffekter är i nuläget prekliniska och ger inte grund för tillskottsrekommendationer. Se <a href="/ar-dyra-kosttillskott-verkligen-battre">vår artikel om vad som skiljer bra från dåliga kosttillskott</a>.</p>
+            <p>LevNytt ger inte personliga hälsorekommendationer. Det vi kan säga är att: (1) klinisk evidens från AREDS2 stödjer att lutein/zeaxantin kan vara relevant för personer med intermediär AMD eller AMD-risk, och att det är ett samtal för läkaren; (2) för ögonhälsa generellt rekommenderar många kliniker kost rik på lutein och zeaxantin som ett första steg; (3) immuneffekter är i nuläget prekliniska och ger inte grund för tillskottsrekommendationer. Se <a href="/ar-dyra-kosttillskott-verkligen-battre" target="_blank" rel="noopener noreferrer">vår artikel om vad som skiljer bra från dåliga kosttillskott</a>.</p>
         </details>
       </div>
 
@@ -375,23 +320,23 @@ tbody tr:last-child td{border-bottom:none;}
 
       <!-- TIER BOXES -->
       <div class="ia-tierbox">
-          <a href="/neolife-carotenoid-complex" class="ia-tier">
+          <a href="/neolife-carotenoid-complex" class="ia-tier" target="_blank" rel="noopener noreferrer">
             <b>Produkt-Pillar</b>
             Vad är karotenoider?
           </a>
-          <a href="/neolife-vetenskap" class="ia-tier">
+          <a href="/neolife-vetenskap" class="ia-tier" target="_blank" rel="noopener noreferrer">
             <b>Om NeoLife</b>
             NeoLife och forskning
           </a>
-          <a href="/ar-dyra-kosttillskott-verkligen-battre" class="ia-tier">
+          <a href="/ar-dyra-kosttillskott-verkligen-battre" class="ia-tier" target="_blank" rel="noopener noreferrer">
             <b>Artikel</b>
             Är dyra kosttillskott bättre?
           </a>
-          <a href="/forsknings-faq" class="ia-tier">
+          <a href="/forsknings-faq" class="ia-tier" target="_blank" rel="noopener noreferrer">
             <b>LevNytt</b>
             Forsknings-FAQ
           </a>
-          <a href="/karotenoid-tillskott-vs-mat" class="ia-tier">
+          <a href="/karotenoid-tillskott-vs-mat" class="ia-tier" target="_blank" rel="noopener noreferrer">
             <b>Fördjupning</b>
             Karotenoider — mat vs tillskott
           </a>
@@ -409,9 +354,4 @@ tbody tr:last-child td{border-bottom:none;}
 
       <p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
 
-</article></div>
-
-<script src="/footer.js" defer></script>
-<script src="/components.js" defer></script>
-</body>
-</html>
+</article></div></div></article></div></main><footer class="ln-site-footer"><div class="ln-shell"><a class="ln-footer-brand" href="/" target="_blank" rel="noopener noreferrer"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><nav aria-label="Sidfot navigation"><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a><a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a><a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a><a href="/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a><a href="/var-metod" target="_blank" rel="noopener noreferrer">Vår metod</a><a href="/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a><a href="/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a><a href="/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a></nav><p>© 2026 LevNytt. Alla rättigheter förbehållna.</p></div></footer><script src="/assets/js/levnytt-rebuild.js" defer></script></body></html>

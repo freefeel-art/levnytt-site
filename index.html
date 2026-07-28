@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
+<!doctype html><html lang="sv">
 <meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
 <meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337"/>
 <meta charset="UTF-8">
@@ -20,9 +18,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/pillar.css">
+
+
 
 <script type="application/ld+json">
 {
@@ -43,468 +41,22 @@
   }
 }
 </script>
-
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.75; font-size: 17px; }
-.container { max-width: 1100px; }
-h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.3; }
-a { color: var(--green-dark); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--gold-dark); }
-.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
-.text-container { max-width: var(--text-width); margin: 0 auto; padding: 0 24px; }
-
-
-/* ── HERO ─────────────────────────────────────────────────────────── */
-.hero {
-  background: linear-gradient(145deg, #0d2218 0%, #1B4332 60%, #20503a 100%);
-  color: var(--white);
-  padding: 80px 0 72px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -100px; right: -100px;
-  width: 480px; height: 480px;
-  border-radius: 50%;
-  background: rgba(184,150,12,0.08);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -60px; left: -60px;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  background: rgba(184,150,12,0.05);
-  pointer-events: none;
-}
-.hero-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  position: relative;
-  z-index: 1;
-}
-.hero-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  margin-bottom: 20px;
-  font-family: 'Inter', sans-serif;
-  display: block;
-}
-.hero h1 {
-  font-size: clamp(34px, 6vw, 58px);
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 28px;
-  max-width: 820px;
-  line-height: 1.15;
-}
-.hero-tagline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 32px;
-  margin-bottom: 32px;
-}
-.hero-tagline-line {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(17px, 2.5vw, 22px);
-  color: rgba(255,255,255,0.7);
-  font-style: italic;
-  line-height: 1.6;
-}
-.hero-tagline-line strong {
-  color: var(--gold-light);
-  font-style: normal;
-  font-weight: 600;
-}
-.hero-desc {
-  font-size: 17px;
-  color: rgba(255,255,255,0.78);
-  max-width: 640px;
-  line-height: 1.7;
-  margin-bottom: 40px;
-}
-.hero-ctas {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.btn-primary {
-  display: inline-block;
-  background: var(--gold);
-  color: var(--white);
-  padding: 14px 30px;
-  border-radius: 7px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: 'Inter', sans-serif;
-  transition: background 0.2s;
-}
-.btn-primary:hover { background: var(--gold-dark); color: var(--white); }
-.btn-secondary {
-  display: inline-block;
-  background: transparent;
-  color: rgba(255,255,255,0.8);
-  padding: 13px 28px;
-  border-radius: 7px;
-  border: 1px solid rgba(255,255,255,0.28);
-  font-weight: 500;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: 'Inter', sans-serif;
-  transition: border-color 0.2s, color 0.2s;
-}
-.btn-secondary:hover { border-color: var(--gold-light); color: var(--gold-light); }
-
-/* ── LATEST ARTICLE BANNER ───────────────────────────────────────── */
-.latest-post { background: var(--gold); padding: 18px 0; }
-.latest-post-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.latest-post-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
-  white-space: nowrap;
-  font-family: 'Inter', sans-serif;
-}
-.latest-post-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #fff;
-  flex: 1;
-  min-width: 200px;
-}
-.latest-post-link {
-  background: #fff;
-  color: var(--gold-dark);
-  font-size: 0.85rem;
-  font-weight: 700;
-  padding: 8px 20px;
-  border-radius: 24px;
-  text-decoration: none;
-  white-space: nowrap;
-  font-family: 'Inter', sans-serif;
-  transition: background 0.2s;
-}
-.latest-post-link:hover { background: var(--cream); color: var(--gold-dark); }
-
-/* ── LATEST ARTICLES GRID ───────────────────────────────────────── */
-.articles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-}
-.article-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.18s;
-}
-.article-card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 4px 20px rgba(184,150,12,0.14);
-  transform: translateY(-2px);
-}
-.article-card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px;
-  color: var(--green-dark);
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-.article-card-meta {
-  font-size: 12px;
-  color: var(--ink-muted);
-  display: flex;
-  gap: 12px;
-  margin-top: auto;
-  font-family: 'Inter', sans-serif;
-}
-
-/* ── SECTION SHARED ──────────────────────────────────────────────── */
-.section { padding: 72px 0; }
-.section-alt { background: var(--white); }
-.section-dark { background: var(--green-dark); color: var(--white); }
-.section-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold-dark);
-  margin-bottom: 10px;
-  font-family: 'Inter', sans-serif;
-  display: block;
-}
-.section-dark .section-label { color: var(--gold-light); }
-.section-heading {
-  font-size: clamp(24px, 4vw, 36px);
-  color: var(--green-dark);
-  margin-bottom: 14px;
-}
-.section-dark .section-heading { color: var(--white); }
-.section-intro {
-  font-size: 16.5px;
-  color: var(--ink-muted);
-  max-width: 680px;
-  line-height: 1.7;
-  margin-bottom: 48px;
-}
-.section-dark .section-intro { color: rgba(255,255,255,0.72); }
-
-/* ── DECISION HUB ────────────────────────────────────────────────── */
-.decision-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-.decision-card {
-  background: var(--cream);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 26px 28px;
-  text-decoration: none;
-  display: block;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.18s;
-}
-.decision-card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 4px 20px rgba(184,150,12,0.14);
-  transform: translateY(-2px);
-}
-.decision-card-q {
-  font-family: 'Playfair Display', serif;
-  font-size: 17px;
-  color: var(--green-dark);
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-.decision-card-desc {
-  font-size: 13.5px;
-  color: var(--ink-muted);
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-.decision-card-cta {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--gold-dark);
-  font-family: 'Inter', sans-serif;
-}
-
-/* ── CONTENT CLUSTERS ────────────────────────────────────────────── */
-.cluster-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-.cluster-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: box-shadow 0.2s, transform 0.18s;
-}
-.cluster-card:hover {
-  box-shadow: 0 6px 24px rgba(0,0,0,0.09);
-  transform: translateY(-2px);
-}
-.cluster-card-header {
-  background: var(--green-dark);
-  padding: 18px 22px;
-  border-bottom: 3px solid var(--gold);
-}
-.cluster-card-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--gold-light);
-  margin-bottom: 4px;
-  font-family: 'Inter', sans-serif;
-  display: block;
-}
-.cluster-card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  color: var(--white);
-}
-.cluster-card-header a {
-  text-decoration: none;
-}
-.cluster-card-header a:hover { color: var(--gold-light); }
-.cluster-card-body {
-  padding: 20px 22px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.cluster-card-body p {
-  font-size: 14px;
-  color: var(--ink-muted);
-  line-height: 1.65;
-  margin-bottom: 14px;
-}
-.cluster-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-.cluster-links li a {
-  font-size: 13.5px;
-  color: var(--green-dark);
-  text-decoration: none;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.cluster-links li a::before {
-  content: '→';
-  color: var(--gold);
-  font-size: 12px;
-  flex-shrink: 0;
-}
-.cluster-links li a:hover { color: var(--gold-dark); }
-.cluster-card-more {
-  display: inline-block;
-  margin-top: auto;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--gold-dark);
-  text-decoration: none;
-  font-style: italic;
-}
-.cluster-card-more:hover { color: var(--green-dark); }
-
-
-
-/* ── FOOTER ──────────────────────────────────────────────────────── */
-.site-footer {
-  background: var(--green-dark);
-  color: rgba(255,255,255,0.75);
-  padding: 28px 0 0;
-  font-size: 14px;
-  line-height: 1.7;
-}
-.footer-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px 40px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-.footer-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: -0.01em;
-  text-decoration: none;
-  white-space: nowrap;
-}
-.footer-logo span { color: var(--gold); }
-.footer-nav-inline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 22px;
-  align-items: center;
-}
-.footer-nav-inline a {
-  color: rgba(255,255,255,0.72);
-  text-decoration: none;
-  font-size: 12.5px;
-  transition: color 0.18s;
-}
-.footer-nav-inline a:hover { color: var(--gold-light); }
-.footer-closing { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.12); }
-.footer-closing-lines { display: flex; gap: 6px 28px; flex-wrap: wrap; margin-bottom: 8px; }
-.footer-closing-line {
-  font-family: 'Playfair Display', serif;
-  font-size: 13px; font-weight: 600;
-  color: rgba(255,255,255,0.50); font-style: italic;
-  white-space: nowrap;
-}
-.footer-closing-line::before { content: '— '; color: var(--gold); font-style: normal; }
-.footer-results-note {
-  font-size: 11px;
-  font-style: italic;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.5;
-  margin: 0;
-  max-width: 560px;
-}
-.footer-legal {
-  padding: 12px 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px 20px;
-  flex-wrap: wrap;
-}
-.footer-copyright { font-size: 10.5px; color: rgba(255,255,255,0.35); line-height: 1.5; max-width: 480px; margin: 0; }
-.footer-legal-links { display: flex; gap: 20px; }
-.footer-legal-links a { font-size: 10.5px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.18s; white-space: nowrap; }
-.footer-legal-links a:hover { color: rgba(255,255,255,0.65); }
-@media (max-width: 540px) {
-  .footer-top { flex-direction: column; align-items: flex-start; }
-  .footer-legal { flex-direction: column; align-items: flex-start; }
-}
-
-/* ── RESPONSIVE ──────────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .hero h1 { font-size: clamp(28px, 5vw, 42px); }
-  .hero-desc { font-size: 15px; }
-  .decision-grid { grid-template-columns: repeat(2, 1fr); }
-  .cluster-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .section { padding: 52px 0; }
-  .hero { padding: 56px 0 52px; }
-  .decision-grid { grid-template-columns: 1fr; }
-  .cluster-grid { grid-template-columns: 1fr; }
-}
-</style>
+<meta name="levnytt-template" content="rebuild-home-editorial-hub">
+<meta name="levnytt-cta" content="existing-content-cta">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-</head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script><script src="/components.js" defer></script>
-
-<!-- ── HERO ─────────────────────────────────────────────────────── -->
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+</head><body data-template-family="home-editorial-hub"><header class="ln-site-header"><div class="ln-shell ln-header-inner"><a class="ln-brand" href="/" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><button class="ln-menu-toggle" type="button" aria-label="Meny" aria-expanded="false">Meny</button><nav class="ln-primary-nav" aria-label="Huvudnavigation"><a href="/" target="_blank" rel="noopener noreferrer">Hem</a>
+<a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a>
+<a href="/artiklar" target="_blank" rel="noopener noreferrer">Artiklar</a>
+<a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a>
+<a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a>
+<a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Produkter</a>
+<a href="/neolife-affarsmojlighet" target="_blank" rel="noopener noreferrer">Affärsmöjlighet</a>
+<a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Spara Pengar?</a><a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife →</a></nav></div></header><main class="ln-page ln-family-home-editorial-hub"><div class="ln-shell"><p class="ln-breadcrumbs"><a href="/" target="_blank" rel="noopener noreferrer">LevNytt</a> <span aria-hidden="true">›</span> LevNytt</p><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · home editorial hub</p><h1>LevNytt</h1></header><div class="ln-article-body"><!-- ── HERO ─────────────────────────────────────────────────────── -->
 <header class="hero">
   <div class="hero-inner">
     <span class="hero-eyebrow">Forskning · Jämförelser · Konsumentkunskap</span>
-    <h1>LevNytt</h1>
+
     <div class="hero-tagline">
       <span class="hero-tagline-line"><strong>Vi undersöker.</strong></span>
       <span class="hero-tagline-line"><strong>Du jämför.</strong></span>
@@ -513,8 +65,8 @@ a:hover { color: var(--gold-dark); }
     </div>
     <p class="hero-desc">LevNytt granskar forskning, jämför alternativ och förklarar vad du faktiskt betalar för – utan hype, utan press. Vi ger dig informationen. Beslutet är ditt.</p>
     <div class="hero-ctas">
-      <a href="#beslutshub" class="btn-primary">Utforska LevNytt →</a>
-      <a href="/neolife-vetenskap" class="btn-secondary">Vår forskning</a>
+      <a href="/#beslutshub" class="btn-primary" target="_blank" rel="noopener noreferrer">Utforska LevNytt →</a>
+      <a href="/neolife-vetenskap" class="btn-secondary" target="_blank" rel="noopener noreferrer">Vår forskning</a>
     </div>
   </div>
 </header>
@@ -525,7 +77,7 @@ a:hover { color: var(--gold-dark); }
   <div class="latest-post-inner">
     <span class="latest-post-label">Senaste artikeln</span>
     <span class="latest-post-title">Antioxidanter: Komplett guide till antioxidanter i mat och tillskott</span>
-    <a href="/antioxidanter-komplett-guide" class="latest-post-link">Läs artikeln →</a>
+    <a href="/antioxidanter-komplett-guide" class="latest-post-link" target="_blank" rel="noopener noreferrer">Läs artikeln →</a>
   </div>
 </div>
 <!-- /HP:LATEST-BANNER -->
@@ -538,42 +90,42 @@ a:hover { color: var(--gold-dark); }
     <h2 class="section-heading">Senaste artiklarna</h2>
     <p class="section-intro">De senaste konsumentguiderna och artikelarna från LevNytt.</p>
     <div class="articles-grid">
-    <a href="/antioxidanter-komplett-guide" class="article-card">
+    <a href="/antioxidanter-komplett-guide" class="article-card" target="_blank" rel="noopener noreferrer">
       <span class="article-card-title">Antioxidanter: Komplett guide till antioxidanter i mat och tillskott</span>
       <span class="article-card-meta">
         <span>1 juli 2026</span>
         <span>11 min läsning</span>
       </span>
     </a>
-    <a href="/content/articles/d-vitamin-allt-du-behover-veta" class="article-card">
+    <a href="/content/articles/d-vitamin-allt-du-behover-veta" class="article-card" target="_blank" rel="noopener noreferrer">
       <span class="article-card-title">D-vitamin: Allt du behöver veta om solskensvitaminet</span>
       <span class="article-card-meta">
         <span>1 juli 2026</span>
         <span>9 min läsning</span>
       </span>
     </a>
-    <a href="/tarmhalsa-komplett-guide" class="article-card">
+    <a href="/tarmhalsa-komplett-guide" class="article-card" target="_blank" rel="noopener noreferrer">
       <span class="article-card-title">Tarmhälsa: Komplett guide till en frisk tarmflora</span>
       <span class="article-card-meta">
         <span>1 juli 2026</span>
         <span>10 min läsning</span>
       </span>
     </a>
-    <a href="/multivitamin-for-kvinnor" class="article-card">
+    <a href="/multivitamin-for-kvinnor" class="article-card" target="_blank" rel="noopener noreferrer">
       <span class="article-card-title">Multivitamin för kvinnor — vad behöver kvinnor extra av?</span>
       <span class="article-card-meta">
         <span>29 juni 2026</span>
         <span>10 min läsning</span>
       </span>
     </a>
-    <a href="/fibrer-for-viktminskning" class="article-card">
+    <a href="/fibrer-for-viktminskning" class="article-card" target="_blank" rel="noopener noreferrer">
       <span class="article-card-title">Fibrer för viktminskning — hjälper fiber dig att gå ner i vikt?</span>
       <span class="article-card-meta">
         <span>29 juni 2026</span>
         <span>8 min läsning</span>
       </span>
     </a>
-    <a href="/magnesium-och-stress" class="article-card">
+    <a href="/magnesium-och-stress" class="article-card" target="_blank" rel="noopener noreferrer">
       <span class="article-card-title">Magnesium och stress — kan magnesium minska stress och ångest?</span>
       <span class="article-card-meta">
         <span>29 juni 2026</span>
@@ -593,37 +145,37 @@ a:hover { color: var(--gold-dark); }
     <p class="section-intro">Inte "vilka produkter ska jag köpa?" – utan de frågor som kommer före det beslutet.</p>
     <div class="decision-grid">
 
-      <a href="/finns-det-billigare-alternativ" class="decision-card">
+      <a href="/finns-det-billigare-alternativ" class="decision-card" target="_blank" rel="noopener noreferrer">
         <p class="decision-card-q">Hur vet man om något verkligen är billigare?</p>
         <p class="decision-card-desc">Butikspriset är sällan det riktiga priset. Koncentrat, refill och förpackningsstorlek förändrar kostnaden per användning avsevärt.</p>
         <span class="decision-card-cta">Räkna på det →</span>
       </a>
 
-      <a href="/ar-dyra-kosttillskott-verkligen-battre" class="decision-card">
+      <a href="/ar-dyra-kosttillskott-verkligen-battre" class="decision-card" target="_blank" rel="noopener noreferrer">
         <p class="decision-card-q">Vad avgör kvaliteten på ett kosttillskott?</p>
         <p class="decision-card-desc">Pris är ett dåligt mått på kvalitet. Vi reder ut vad som faktiskt skiljer ett välformulerat tillskott från ett billigt alternativ.</p>
         <span class="decision-card-cta">Läs analysen →</span>
       </a>
 
-      <a href="/direktforsaljning-fakta" class="decision-card">
+      <a href="/direktforsaljning-fakta" class="decision-card" target="_blank" rel="noopener noreferrer">
         <p class="decision-card-q">Är direktförsäljning ett seriöst affärsupplägg?</p>
         <p class="decision-card-desc">En genomgång av hur direktförsäljningsmodellen fungerar, vad den innebär för prisbilden, och hur NeoLife passar in.</p>
         <span class="decision-card-cta">Fakta om modellen →</span>
       </a>
 
-      <a href="/forsknings-faq" class="decision-card">
+      <a href="/forsknings-faq" class="decision-card" target="_blank" rel="noopener noreferrer">
         <p class="decision-card-q">Hur skiljer man forskning från marknadsföring?</p>
         <p class="decision-card-desc">Lär dig hur man tolkar studier, förstår evidens och undviker vanliga missförstånd när forskning används i marknadsföring.</p>
         <span class="decision-card-cta">Läs FAQ →</span>
       </a>
 
-      <a href="/ekologisk-stadning-greenwashing" class="decision-card">
+      <a href="/ekologisk-stadning-greenwashing" class="decision-card" target="_blank" rel="noopener noreferrer">
         <p class="decision-card-q">Hur skiljer man äkta miljöprodukter från greenwashing?</p>
         <p class="decision-card-desc">Marknadsföring och miljöprestanda är sällan samma sak. Vi går igenom vad du faktiskt bör titta på.</p>
         <span class="decision-card-cta">Läs genomgången →</span>
       </a>
 
-      <a href="/neolife-vetenskap" class="decision-card">
+      <a href="/neolife-vetenskap" class="decision-card" target="_blank" rel="noopener noreferrer">
         <p class="decision-card-q">Vad är NeoLifes vetenskapliga grund?</p>
         <p class="decision-card-desc">NeoLife hänvisar ofta till forskning. Vi förklarar vad den forskningen faktiskt säger – och var gränserna för bevisen går.</p>
         <span class="decision-card-cta">Granska forskningen →</span>
@@ -646,19 +198,19 @@ a:hover { color: var(--gold-dark); }
       <div class="cluster-card">
         <div class="cluster-card-header">
           <span class="cluster-card-label">Hälsa &amp; näring</span>
-          <a href="/neolife-kosttillskott" class="cluster-card-title">Kosttillskott</a>
+          <a href="/neolife-kosttillskott" class="cluster-card-title" target="_blank" rel="noopener noreferrer">Kosttillskott</a>
         </div>
         <div class="cluster-card-body">
           <p>Vitaminer, mineraler, antioxidanter och fettsyror – vad forskning säger om dem, hur man utvärderar kvalitet och vilka faktorer som faktiskt påverkar effekten.</p>
           <ul class="cluster-links">
-            <li><a href="/varfor-ar-jag-trott-hela-tiden">Varför är jag trött hela tiden?</a></li>
-            <li><a href="/multivitamin-kvinnor-over-40">Multivitamin för kvinnor över 40</a></li>
-            <li><a href="/magnesiumglycinat-och-somn">Magnesiumglycinat och sömn</a></li>
-            <li><a href="/ala-vs-epa-vs-dha">ALA vs EPA vs DHA – vad är skillnaden?</a></li>
-            <li><a href="/neolife-pro-vitality">Pro Vitality+</a></li>
-            <li><a href="/naringsbrist">Näringsbrist – vad det är och vad du kan göra</a></li>
+            <li><a href="/varfor-ar-jag-trott-hela-tiden" target="_blank" rel="noopener noreferrer">Varför är jag trött hela tiden?</a></li>
+            <li><a href="/multivitamin-kvinnor-over-40" target="_blank" rel="noopener noreferrer">Multivitamin för kvinnor över 40</a></li>
+            <li><a href="/magnesiumglycinat-och-somn" target="_blank" rel="noopener noreferrer">Magnesiumglycinat och sömn</a></li>
+            <li><a href="/ala-vs-epa-vs-dha" target="_blank" rel="noopener noreferrer">ALA vs EPA vs DHA – vad är skillnaden?</a></li>
+            <li><a href="/neolife-pro-vitality" target="_blank" rel="noopener noreferrer">Pro Vitality+</a></li>
+            <li><a href="/naringsbrist" target="_blank" rel="noopener noreferrer">Näringsbrist – vad det är och vad du kan göra</a></li>
           </ul>
-          <a href="/neolife-kosttillskott" class="cluster-card-more">Visa alla artiklar →</a>
+          <a href="/neolife-kosttillskott" class="cluster-card-more" target="_blank" rel="noopener noreferrer">Visa alla artiklar →</a>
         </div>
       </div>
 
@@ -666,16 +218,16 @@ a:hover { color: var(--gold-dark); }
       <div class="cluster-card">
         <div class="cluster-card-header">
           <span class="cluster-card-label">Hushåll &amp; ekonomi</span>
-          <a href="/golden-home-care" class="cluster-card-title">Golden Home Care</a>
+          <a href="/golden-home-care" class="cluster-card-title" target="_blank" rel="noopener noreferrer">Golden Home Care</a>
         </div>
         <div class="cluster-card-body">
           <p>Koncentrerade rengörings- och hushållsprodukter analyserade utifrån faktisk kostnad per användning, miljöprestanda och jämförelse med butiksalternativ.</p>
           <ul class="cluster-links">
-            <li><a href="/finns-det-billigare-alternativ">Finns det billigare alternativ? (kalkylator)</a></li>
-            <li><a href="/ekologisk-stadning-greenwashing">Ekologisk städning och greenwashing</a></li>
-            <li><a href="/super-10">Super 10 – grovrengöringsmedel</a></li>
+            <li><a href="/finns-det-billigare-alternativ" target="_blank" rel="noopener noreferrer">Finns det billigare alternativ? (kalkylator)</a></li>
+            <li><a href="/ekologisk-stadning-greenwashing" target="_blank" rel="noopener noreferrer">Ekologisk städning och greenwashing</a></li>
+            <li><a href="/super-10" target="_blank" rel="noopener noreferrer">Super 10 – grovrengöringsmedel</a></li>
           </ul>
-          <a href="/golden-home-care" class="cluster-card-more">Visa alla artiklar →</a>
+          <a href="/golden-home-care" class="cluster-card-more" target="_blank" rel="noopener noreferrer">Visa alla artiklar →</a>
         </div>
       </div>
 
@@ -683,17 +235,17 @@ a:hover { color: var(--gold-dark); }
       <div class="cluster-card">
         <div class="cluster-card-header">
           <span class="cluster-card-label">Kontext &amp; trovärdighet</span>
-          <a href="/neolife-historia" class="cluster-card-title">NeoLife Forskning</a>
+          <a href="/neolife-historia" class="cluster-card-title" target="_blank" rel="noopener noreferrer">NeoLife Forskning</a>
         </div>
         <div class="cluster-card-body">
           <p>Vem är NeoLife, vad säger deras vetenskapliga grund, hur fungerar direktförsäljningsmodellen – och vad innebär det för dig som konsument?</p>
           <ul class="cluster-links">
-            <li><a href="/neolife-historia">NeoLife Historia</a></li>
-            <li><a href="/neolife-vetenskap">NeoLife Vetenskap</a></li>
-            <li><a href="/neolife-hallbarhet">NeoLife Hållbarhet</a></li>
-            <li><a href="/direktforsaljning-fakta">Direktförsäljning – fakta och myter</a></li>
+            <li><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">NeoLife Historia</a></li>
+            <li><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">NeoLife Vetenskap</a></li>
+            <li><a href="/neolife-hallbarhet" target="_blank" rel="noopener noreferrer">NeoLife Hållbarhet</a></li>
+            <li><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning – fakta och myter</a></li>
           </ul>
-          <a href="/neolife-historia" class="cluster-card-more">Visa alla artiklar →</a>
+          <a href="/neolife-historia" class="cluster-card-more" target="_blank" rel="noopener noreferrer">Visa alla artiklar →</a>
         </div>
       </div>
 
@@ -701,7 +253,4 @@ a:hover { color: var(--gold-dark); }
   </div>
 </section>
 
-<!-- ── FOOTER ────────────────────────────────────────────────────── -->
-<script src="/footer.js" defer></script>
-</body>
-</html>
+<!-- ── FOOTER ────────────────────────────────────────────────────── --></div></article></div></main><footer class="ln-site-footer"><div class="ln-shell"><a class="ln-footer-brand" href="/" target="_blank" rel="noopener noreferrer"><img src="/assets/brand/header-logo.svg" alt="LevNytt"></a><nav aria-label="Sidfot navigation"><a href="/neolife-historia" target="_blank" rel="noopener noreferrer">Historia</a><a href="/neolife-vetenskap" target="_blank" rel="noopener noreferrer">Vetenskap</a><a href="/direktforsaljning-fakta" target="_blank" rel="noopener noreferrer">Direktförsäljning</a><a href="/neolife-kosttillskott" target="_blank" rel="noopener noreferrer">Kosttillskott</a><a href="/om-oss" target="_blank" rel="noopener noreferrer">Om oss</a><a href="/artiklar" target="_blank" rel="noopener noreferrer">Alla artiklar</a><a href="/var-metod" target="_blank" rel="noopener noreferrer">Vår metod</a><a href="/forsknings-faq" target="_blank" rel="noopener noreferrer">Forsknings-FAQ</a><a href="/levnytt-principer" target="_blank" rel="noopener noreferrer">LevNytt Principer</a><a href="/integritetspolicy" target="_blank" rel="noopener noreferrer">Integritetspolicy</a></nav><p>© 2026 LevNytt. Alla rättigheter förbehållna.</p></div></footer><script src="/assets/js/levnytt-rebuild.js" defer></script></body></html>
