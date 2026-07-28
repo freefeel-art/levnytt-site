@@ -396,7 +396,7 @@ def build_html(data, body_html):
     updated_sv = format_updated(data['updated'])
     reading_time = data['reading_time']
     author = data['author']
-    cta = data['cta']
+    cta = data.get('cta')
     cta_sec = data.get('cta_secondary')
     topic = title.split(' — ')[0].split(' - ')[0].lower()
 
@@ -424,7 +424,7 @@ def build_html(data, body_html):
 
     # CTA secondary
     cta_secondary_html = ''
-    if cta_sec:
+    if cta_sec and cta:
         cta_secondary_html = (
             f'\n<p class="ia-cta-secondary">'
             f'<a style="color:#F9F6EF;text-decoration:underline"'
@@ -501,11 +501,11 @@ def build_html(data, body_html):
 <strong>Metod:</strong> {attr(data["method_note"])}
 </div>
 
-<div class="ia-cta">
+{f'''<div class="ia-cta">
 <h3>{attr(cta["headline"])}</h3>
 <p>{attr(cta["body"])}</p>
 <a target="_blank" rel="noopener noreferrer" href="{attr(cta["url"])}">{attr(cta["link_text"])}</a>{cta_secondary_html}
-</div>
+</div>''' if cta else ''}
 
 <div class="ia-faq">
 <h2>Vanliga frågor om {attr(topic)}</h2>
@@ -539,7 +539,8 @@ def validate(data):
     """Return a list of error strings. Empty list = valid."""
     errors = []
 
-    for field in REQUIRED_FIELDS:
+    required_fields = REQUIRED_FIELDS if data.get('content_type') != 'neutral-medical-information' else [field for field in REQUIRED_FIELDS if field != 'cta']
+    for field in required_fields:
         if field not in data or data[field] is None:
             errors.append(f"Missing required field: '{field}'")
 
@@ -565,8 +566,8 @@ def validate(data):
         n = len(data['faq']) if isinstance(data['faq'], list) else 'non-list'
         errors.append(f"faq must have 6–10 items (found {n})")
 
-    cta = data.get('cta', {})
-    if isinstance(cta, dict):
+    cta = data.get('cta')
+    if cta is not None and isinstance(cta, dict):
         for sub in ('headline', 'body', 'url', 'link_text'):
             if sub not in cta:
                 errors.append(f"cta.{sub} is required")
