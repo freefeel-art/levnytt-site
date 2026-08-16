@@ -125,6 +125,34 @@
   }
 
   // ============================================================
+  // NEOLIFE CONVERSION-PROXY TRACKING — first-party, privacy-first
+  // Fires a best-effort beacon when a visitor clicks a NeoLife
+  // Sponsor-ID 41-830928 shop or registration link. No IP, user
+  // agent, cookie, or personal data is collected (see _worker.js).
+  // ============================================================
+  function trackNeoLifeClicks() {
+    document.addEventListener('click', function(e) {
+      var el = e.target;
+      var link = null;
+      while (el && el !== document) {
+        if (el.tagName === 'A' && (el.href || '').indexOf('neolifeshop.com') !== -1) { link = el; break; }
+        el = el.parentNode;
+      }
+      if (!link) return;
+      var href = link.href || '';
+      if (href.indexOf('sponsor=') === -1 && href.indexOf('sponsorId=') === -1) return;
+      if (href.indexOf('41-830928') === -1) return;
+      var ctaId = href.indexOf('registration') !== -1 ? 'levnytt-neolife-registration' : 'levnytt-neolife-shop';
+      if (navigator.sendBeacon) {
+        var payload = JSON.stringify({ cta_id: ctaId, page_path: window.location.pathname, destination: href });
+        try {
+          navigator.sendBeacon('/events/cta-click', new Blob([payload], { type: 'application/json' }));
+        } catch (err) { /* best-effort only */ }
+      }
+    });
+  }
+
+  // ============================================================
   // INIT — run on DOMContentLoaded
   // ============================================================
   function init() {
@@ -132,6 +160,7 @@
     injectBrandMeta();
     injectHeroWatermark();
     injectBrandAvatar();
+    trackNeoLifeClicks();
   }
 
   if (document.readyState === 'loading') {
@@ -139,6 +168,8 @@
   } else {
     init();
   }
+
+})();
 
   // CSS
 // ============================================================

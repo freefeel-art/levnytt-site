@@ -1,6 +1,11 @@
 // Cloudflare Pages Advanced Mode worker — language helper and first-party CTA event receiver.
 // CTA events are deliberately limited to configured, non-personal event fields.
 
+const NEO_LIFE_HOSTS = Object.freeze(["se.neolifeshop.com", "www.neolifeshop.com"]);
+const SPONSOR_ID = "41-830928";
+
+// Legacy cross-project OLSP CTA (inert — no client beacon). Kept for
+// compatibility only; it is not a LevNytt conversion target.
 const CTA_PATHS = Object.freeze({
   "levnytt-direktforsaljning-olsp-primary": Object.freeze({
     page_path: "/direktforsaljning-fakta",
@@ -16,6 +21,34 @@ function eventResponse(status, detail = "") {
       "Content-Type": "text/plain; charset=utf-8",
     },
   });
+}
+
+// Validate a NeoLife outbound destination and return the canonical destination
+// string, or null when it is not a Sponsor-ID 41-830928 link to the Swedish
+// NeoLife shop / registration. Privacy-first: only the validated destination
+// and page path are ever stored.
+function classifyNeoLifeDestination(ctaId, destination) {
+  if (typeof destination !== "string" || destination.length > 500) return null;
+  let url;
+  try {
+    url = new URL(destination);
+  } catch {
+    return null;
+  }
+  if (!NEO_LIFE_HOSTS.includes(url.hostname)) return null;
+  const sponsor = url.searchParams.get("sponsor") || url.searchParams.get("sponsorId");
+  if (sponsor !== SPONSOR_ID) return null;
+  if (ctaId === "levnytt-neolife-shop") {
+    return url.pathname.includes("shop") && !url.pathname.includes("registration") ? destination : null;
+  }
+  if (ctaId === "levnytt-neolife-registration") {
+    return url.pathname.includes("registration") ? destination : null;
+  }
+  return null;
+}
+
+function validPagePath(value) {
+  return typeof value === "string" && value.length > 0 && value.length <= 300 && value.startsWith("/");
 }
 
 async function recordCtaClick(request, env, url) {
@@ -34,9 +67,24 @@ async function recordCtaClick(request, env, url) {
   }
   if (!payload || typeof payload !== "object") return eventResponse(400, "Invalid event payload");
 
-  const expected = CTA_PATHS[payload.cta_id];
-  if (!expected || payload.page_path !== expected.page_path || payload.destination !== expected.destination) {
-    return eventResponse(400, "Unrecognized CTA event path");
+  let ctaId = "";
+  let pagePath = "";
+  let destination = "";
+
+  if (payload.cta_id === "levnytt-neolife-shop" || payload.cta_id === "levnytt-neolife-registration") {
+    destination = classifyNeoLifeDestination(payload.cta_id, payload.destination);
+    if (!destination) return eventResponse(400, "Unrecognized CTA event path");
+    if (!validPagePath(payload.page_path)) return eventResponse(400, "Invalid page path");
+    ctaId = payload.cta_id;
+    pagePath = payload.page_path;
+  } else {
+    const expected = CTA_PATHS[payload.cta_id];
+    if (!expected || payload.page_path !== expected.page_path || payload.destination !== expected.destination) {
+      return eventResponse(400, "Unrecognized CTA event path");
+    }
+    ctaId = payload.cta_id;
+    pagePath = expected.page_path;
+    destination = expected.destination;
   }
 
   await env.CTA_EVENTS_DB.prepare(
@@ -44,9 +92,9 @@ async function recordCtaClick(request, env, url) {
   ).bind(
     crypto.randomUUID(),
     new Date().toISOString(),
-    expected.page_path,
-    payload.cta_id,
-    expected.destination
+    pagePath,
+    ctaId,
+    destination
   ).run();
   return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
 }
