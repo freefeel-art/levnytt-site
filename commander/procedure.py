@@ -18,6 +18,7 @@ Production chain implemented here (each step is a bounded domain action):
 
 from __future__ import annotations
 
+import html as html_lib
 import importlib.util
 import json
 import re
@@ -249,6 +250,8 @@ class LevNyttProcedure:
             return self._execute_community_engagement(ctx, action)
         if capability == "community_intelligence":
             return self._execute_community_intelligence(ctx, action)
+        if capability == "social_publishing":
+            return self._execute_social_publishing(ctx, action)
         return {
             "status": "CAPABILITY_GAP",
             "detail": f"No bounded executor is wired for capability {capability!r}.",
@@ -657,6 +660,109 @@ class LevNyttProcedure:
             },
         }
 
+    def _execute_social_publishing(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Distribute the most recent, not-yet-distributed LevNytt article to
+        the LevNytt Facebook Page through the shared, safety-gated Reach
+        executor (kill switch, publication gate, duplicate ledger, and
+        provider confirmation all apply, scoped to LevNytt's own runtime --
+        never OLSP's or Cashbackkollen's identity, ledger, or gate
+        reservations).
+
+        Never invents a post: when the distribution evidence shows nothing
+        genuinely new to distribute, this is a truthful no-op, not a defect.
+        """
+        from app.commander.evidence import _levnytt_distribution
+
+        distribution = _levnytt_distribution(ctx.working_repository, ctx.runtime_directory)
+        candidate = distribution.get("candidate_to_distribute")
+        if not candidate:
+            return {
+                "status": "SUCCEEDED",
+                "detail": "No published LevNytt article is currently undistributed on Facebook; nothing to post.",
+                "evidence": {"skipped": True, "reason": "nothing_new_to_distribute"},
+            }
+
+        slug = str(candidate["slug"])
+        article_path = ctx.working_repository / "content" / "articles" / f"{slug}.html"
+        try:
+            article_html = article_path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            return {
+                "status": "CAPABILITY_GAP",
+                "detail": f"Candidate article {slug!r} disappeared from content/articles/ between evidence and execution.",
+                "evidence": {},
+            }
+        h1_match = re.search(r"<h1[^>]*>(.*?)</h1>", article_html, re.S)
+        desc_match = re.search(r'<meta name="description" content="([^"]*)"', article_html)
+        title = html_lib.unescape(re.sub(r"<[^>]+>", "", h1_match.group(1))).strip() if h1_match else slug.replace("-", " ")
+        excerpt = html_lib.unescape(desc_match.group(1)).strip() if desc_match else ""
+        message = _build_levnytt_facebook_message(title, excerpt)
+        url = str(candidate["url"])
+
+        assignment = {
+            "assignment_id": f"levnytt-reach-{slug}",
+            "project": "levnytt",
+            "asset_id": f"levnytt-article-{slug}",
+            "asset_type": "SOCIAL_POST",
+            "channel": "facebook",
+            "approved_content": message,
+            "destination_url": url,
+            "tracking_context": {
+                "source": "facebook",
+                "campaign": "levnytt_article_distribution",
+                "slug": slug,
+            },
+            "approval_status": "APPROVED",
+            "duplicate_ledger": "runtime/social/published.json",
+            "verification_condition": "A public Facebook permalink is captured via the Graph API.",
+            "retry_policy": {"max_attempts": 0, "rate_limit_action": "STOP", "transient_errors": []},
+            "stop_condition": "Stop after one receipt is produced.",
+            "handoff_consumers": ["commander"],
+            "source_evidence": [f"content/articles/{slug}.html"],
+        }
+
+        from agents.reach.run import run as reach_run
+
+        receipt = reach_run(assignment, project_id="levnytt")
+
+        evidence: dict[str, Any] = {
+            "slug": slug,
+            "url": url,
+            "reach_status": receipt.get("status"),
+            "failure_codes": receipt.get("failure_codes"),
+            "platform_id": receipt.get("platform_id"),
+            "permalink": receipt.get("permalink"),
+            "verification_status": receipt.get("verification_status"),
+        }
+
+        if receipt.get("status") == "PUBLISHED":
+            return {
+                "status": "SUCCEEDED",
+                "detail": f"Published LevNytt article {slug!r} to Facebook: {receipt.get('permalink')}",
+                "evidence": evidence,
+            }
+        if receipt.get("status") == "DUPLICATE":
+            evidence["skipped"] = True
+            return {
+                "status": "SUCCEEDED",
+                "detail": f"Article {slug!r} is already published to Facebook (duplicate-protected; no new post attempted).",
+                "evidence": evidence,
+            }
+        return {
+            "status": "BLOCKED",
+            "detail": f"Facebook distribution blocked/unverified: {receipt.get('status')} {receipt.get('failure_codes')}",
+            "evidence": evidence,
+            # Forward Reach's own structural durability classification
+            # unchanged (see agents/reach/run.py:_DURABLE_THIS_RUN_FAILURE_CODES)
+            # rather than re-deriving it here: a publication window already
+            # consumed, the daily cap reached, or the kill switch off cannot
+            # change again within this run, so Commander should not spend
+            # another decision re-selecting this action. Defaults to True
+            # (retry-eligible) when Reach did not classify it, so an unknown
+            # future failure mode is never silently treated as durable.
+            "retry_eligible_this_run": receipt.get("retry_eligible_this_run", True),
+        }
+
     def _execute_community_engagement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         """One bounded, policy-gated reply to one already-discovered comment.
 
@@ -784,19 +890,45 @@ class LevNyttProcedure:
             # returning zero discussion-shaped results, or a provider error
             # on one of several queries, is still a valid, honest pass).
             return execution.get("status") == "SUCCEEDED" and bool(evidence.get("read_only"))
+        if capability == "social_publishing":
+            if evidence.get("skipped"):
+                return True
+            return bool(evidence.get("permalink")) and evidence.get("reach_status") == "PUBLISHED"
         return False
 
     # ── measurement ───────────────────────────────────────────────
     def measure(self, ctx, action: dict[str, Any], execution: dict[str, Any]) -> dict[str, Any]:
+        capability = str(action.get("capability", "")).strip().casefold()
+        next_check = (date.today() + timedelta(days=1)).isoformat() if capability == "social_publishing" else (date.today() + timedelta(days=7)).isoformat()
         return {
             "summary": f"{action.get('summary')} — {execution.get('status')}. {execution.get('detail')}",
-            "data": {"capability": str(action.get("capability", "")).casefold(), "evidence": execution.get("evidence", {})},
-            "next_check": (date.today() + timedelta(days=7)).isoformat(),
+            "data": {"capability": capability, "evidence": execution.get("evidence", {})},
+            "next_check": next_check,
         }
 
 
 def build_procedure():
     return LevNyttProcedure()
+
+
+def _build_levnytt_facebook_message(title: str, excerpt: str) -> str:
+    """Compose an informational Facebook post from the article's own already
+    fact-gated H1/meta-description. No new health claim, savings figure, or
+    income promise is invented here -- content-level factual and
+    unsubstantiated-promise safety was already enforced by the content
+    production gate (the editorial constitution in _execute_content_production:
+    no income promises, no hype, no fabricated claims) when the article
+    itself was produced. This only formats what the article already says,
+    plus LevNytt's standing NeoLife disclosure -- Facebook distribution is
+    itself a point of commercial context, so the same disclosure principle
+    applied to every on-site page (Sponsor-ID 41-830928, "Oberoende
+    distributör") applies here too, in the exact phrasing already
+    established on /om-oss."""
+    body = excerpt.strip()
+    text = f"{title.strip()}\n\n{body}" if body else title.strip()
+    if len(text) > 350:
+        text = text[:347].rstrip() + "…"
+    return f"{text}\n\nLäs mer på LevNytt 👉\n\nOberoende NeoLife-distributör · Sponsor-ID {SPONSOR_ID}"
 
 
 # ── content lifecycle ─────────────────────────────────────────────
