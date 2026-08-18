@@ -77,6 +77,18 @@ _US_SERP_LOCATION = 2840  # United States
 # scope. Covers: direct NeoLife questions, MLM/direct-selling trust
 # questions (LevNytt's differentiated transparency content), and LevNytt's
 # core covered supplement/nutrition topics.
+#
+# Stage 4.5 (candidate-acquisition audit): the original 6 queries were 4
+# MLM/NeoLife-generic to 2 supplement-topic. Rebalanced with 4 more queries
+# grounded in subject areas LevNytt actually has real, published,
+# evidence-backed content on -- verified against the live site's own
+# content/articles/ inventory this session, not invented: probiotika (4 real
+# articles), omega-3 (4 real articles, including a sufficiency-relevant
+# evidence-based guide), antioxidanter (the one topic with a real
+# sufficiency-PASSED research packet), and multivitamin (5 real articles
+# spanning different audiences). Still fixed and human-reviewed, not
+# auto-generated from the full content inventory -- that would remove the
+# deliberate boundedness this capability was built with.
 _COMMUNITY_DISCOVERY_QUERIES = (
     "neolife recension flashback",
     "är neolife pyramidspel",
@@ -84,6 +96,10 @@ _COMMUNITY_DISCOVERY_QUERIES = (
     "mlm sverige recension flashback",
     "d-vitamin brist symptom forum",
     "magnesium kosttillskott vilken forum",
+    "probiotika kosttillskott forum",
+    "omega 3 kosttillskott vilken forum",
+    "antioxidanter kosttillskott forum",
+    "multivitamin vilken bäst forum",
 )
 
 # Public forums/platforms where Swedish product and MLM discussions occur.

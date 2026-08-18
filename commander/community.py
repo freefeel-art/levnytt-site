@@ -1079,7 +1079,7 @@ def fetch_thread_context(url: str, platform: str, *, scrape) -> dict[str, Any]:
         if not parsed["original_post"]:
             limitations.append("The original post could not be confidently distinguished from surrounding content.")
 
-    return {
+    result = {
         "fetch_status": "COMPLETE",
         "url": url,
         "platform": platform,
@@ -1096,6 +1096,17 @@ def fetch_thread_context(url: str, platform: str, *, scrape) -> dict[str, Any]:
         "limitations": limitations,
         "raw_markdown_length": len(markdown),
     }
+    # Stage 4.5 item 2: freshness fields recorded explicitly and separately
+    # from the raw post list, where the source exposes real timestamps --
+    # thread creation date (earliest extracted timestamp), latest meaningful
+    # reply date (reused from Stage 4's own staleness check), and age at
+    # discovery, all real, never fabricated when timestamps are unavailable.
+    created_at = _earliest_post_timestamp(result)
+    latest_at = _latest_post_timestamp(result)
+    result["thread_created_at"] = created_at.isoformat() if created_at else None
+    result["latest_reply_at"] = latest_at.isoformat() if latest_at else None
+    result["age_at_discovery_days"] = (datetime.now(timezone.utc) - created_at).days if created_at else None
+    return result
 
 
 def thread_context_text(fetch: dict[str, Any], *, max_chars: int = 3000) -> str | None:
@@ -1136,6 +1147,16 @@ def thread_fetch_eligible_candidates(runtime: Path, limit: int = _MAX_THREAD_FET
     fetch_history = store.get("thread_fetch_history", {})
     if not isinstance(fetch_history, dict):
         fetch_history = {}
+    # Stage 4.5: use known platform policy before spending an expensive
+    # fetch. Only a cache read (scrape=None) -- never a live fetch just to
+    # decide eligibility. Skips only platforms with a KNOWN prohibition;
+    # UNKNOWN never blocks bounded read-only fetching, since reading a
+    # thread doesn't itself violate anything -- only a future write would,
+    # and write remains impossible regardless.
+    prohibited_platforms = {
+        platform for platform in _FETCHABLE_PLATFORMS
+        if platform_policy_state(platform, runtime, scrape=None).get("overall_state") == "PROHIBITED"
+    }
 
     seen_urls: set[str] = set()
     eligible: list[dict[str, Any]] = []
@@ -1149,6 +1170,8 @@ def thread_fetch_eligible_candidates(runtime: Path, limit: int = _MAX_THREAD_FET
         if result.get("outcome") == "NO_ACTION":
             continue
         if result.get("source_platform") not in _FETCHABLE_PLATFORMS:
+            continue
+        if result.get("source_platform") in prohibited_platforms:
             continue
         prior = fetch_history.get(url) if isinstance(fetch_history.get(url), dict) else None
         status = _delta_status(prior)
@@ -1199,14 +1222,24 @@ def record_thread_evidence(runtime: Path, records: list[dict[str, Any]]) -> None
 # already Stage 2/3's job; this stage adds PLATFORM POLICY and SOCIAL
 # APPROPRIATENESS) into one recommendation.
 
-# Real, first-party rule pages, resolved and read live during the Stage 4
-# audit -- not guessed. Reddit and Facebook are deliberately absent: Stage 3
-# already proved both structurally unavailable for this mechanism
-# (robots.txt disallows/prohibits automated collection; both returned real
-# HTTP 403), and this phase does not attempt to bypass that.
+# Real, first-party rule pages, resolved and read live -- not guessed.
+# Reddit and Facebook are deliberately absent: Stage 3 already proved both
+# structurally unavailable for this mechanism (robots.txt disallows/
+# prohibits automated collection; both returned real HTTP 403), and this
+# phase does not attempt to bypass that.
+#
+# Familjeliv (Stage 4.5): the Stage 4 audit only reached /sakerhet-och-regler,
+# a client-side-rendered table of contents with zero real <a href> links
+# (confirmed live: Firecrawl's own "links" format returned an empty list for
+# it -- the page's "Läs mer om..." sections are JS expand-in-place, not
+# navigable sub-pages). A bounded, first-party investigation this session
+# found the actual rule text lives at a real, separately-resolving URL,
+# /medlemsvillkor (verified: plain HTTP 200, not linked from the rendered
+# page, discovered by trying the platform's own common URL naming pattern --
+# not guessed at the rule-text level, the URL was found first and then read).
 _PLATFORM_RULES_URLS = {
     "flashback_forum": "https://www.flashback.org/regler",
-    "familjeliv_forum": "https://www.familjeliv.se/sakerhet-och-regler",
+    "familjeliv_forum": "https://www.familjeliv.se/medlemsvillkor",
 }
 # Rules change far less often than individual threads -- one authoritative
 # fetch per platform is reused for every candidate on that platform until
@@ -1250,12 +1283,14 @@ def _extract_platform_policy_facts(platform: str, raw_text: str) -> list[dict[st
     explicitly PROHIBITED -- and a levnytt.se link is exactly a referral
     link for LevNytt's own declared NeoLife commercial relationship.
 
-    Familjeliv's real /sakerhet-och-regler page (verified live) is only a
-    table-of-contents linking to further sub-pages (e.g. "Medlemsvillkor",
-    which the index says covers "kommersiella tips, reklam") -- the actual
-    enforceable rule text was not resolved to a fetchable URL this
-    session, so only a REQUIRES_REVIEW-level fact is recorded, honestly
-    reflecting lower-confidence evidence than Flashback's.
+    Familjeliv's real /medlemsvillkor page (found and verified live during
+    Stage 4.5, after the Stage 4 audit only reached a client-side-rendered
+    table of contents with no real links) has genuine, authoritative rule
+    text in section 3.3: members may not post links to sites that "har
+    kommersiella intressen" (have commercial interests) -- with the exact
+    same "gäller ej oberoende tips" (does not apply to independent tips)
+    exception Flashback's own rules use. A levnytt.se link is exactly a
+    commercial-interest link given LevNytt's declared NeoLife relationship.
     """
     lowered = raw_text.casefold()
     facts: list[dict[str, Any]] = []
@@ -1274,10 +1309,8 @@ def _extract_platform_policy_facts(platform: str, raw_text: str) -> list[dict[st
         _add("independent_tips", "PERMITTED", "det är tillåtet att tipsa och länka till innehåll", "1.01 Reklam och annonsering")
         _add("consumer_questions", "PERMITTED", "det är tillåtet att ställa konsumentfrågor", "1.01 Reklam och annonsering")
     elif platform == "familjeliv_forum":
-        _add(
-            "commercial_topic_present", "REQUIRES_REVIEW", "kommersiella tips, reklam",
-            "Medlemsvillkor (index page only; full rule text not resolved to a fetchable URL)",
-        )
+        _add("referral_link", "PROHIBITED", "har kommersiella intressen", "Medlemsvillkor 3.3")
+        _add("independent_tips", "PERMITTED", "gäller ej oberoende tips", "Medlemsvillkor 3.3")
     return facts
 
 
@@ -1363,7 +1396,7 @@ _THREAD_STALE_DAYS = 365
 _HOSTILITY_MARKERS = ("idiot", "dum i huvudet", "håll käften", "dra åt helvete", "fan ta dig", "håll tyst")
 
 
-def _latest_post_timestamp(fetch: dict[str, Any]) -> datetime | None:
+def _extracted_timestamps(fetch: dict[str, Any]) -> list[datetime]:
     timestamps: list[datetime] = []
     for post in fetch.get("posts", []) or []:
         raw = post.get("timestamp") if isinstance(post, dict) else None
@@ -1381,7 +1414,17 @@ def _latest_post_timestamp(fetch: dict[str, Any]) -> datetime | None:
             timestamps.append(datetime.strptime(raw, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc))
         except ValueError:
             continue
+    return timestamps
+
+
+def _latest_post_timestamp(fetch: dict[str, Any]) -> datetime | None:
+    timestamps = _extracted_timestamps(fetch)
     return max(timestamps) if timestamps else None
+
+
+def _earliest_post_timestamp(fetch: dict[str, Any]) -> datetime | None:
+    timestamps = _extracted_timestamps(fetch)
+    return min(timestamps) if timestamps else None
 
 
 def _reply_count(fetch: dict[str, Any]) -> int:
@@ -1592,6 +1635,114 @@ def record_engagement_evaluations(runtime: Path, evaluations: list[dict[str, Any
     store["engagement_evaluations"] = existing[-20:]
     store["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_community_store(runtime, store)
+
+
+# ── Stage 4.5: candidate acquisition and monitoring ─────────────────
+# Finds and tracks the pipeline of candidates toward a possible future,
+# separately-authorized Stage 5 -- never authorizes one. Everything below
+# is derived from the existing persisted stores (discovery, reasoning,
+# thread_evidence, engagement_evaluations, and each stage's own delta
+# counter); no new parallel write-heavy store was introduced.
+
+_STAGE5_ELIGIBLE_RECOMMENDATIONS = {"POTENTIALLY_ENGAGE_WITHOUT_LINK", "POTENTIALLY_ENGAGE_WITH_DISCLOSED_LINK"}
+
+
+def is_stage5_eligible(evaluation: dict[str, Any]) -> bool:
+    """True only when every Stage 4 hard gate (relevance, grounding,
+    platform policy, social appropriateness, disclosure) was independently
+    satisfied. Derived directly from combine_engagement_recommendation's own
+    fail-closed combination -- never a separate, bypassable score. A
+    candidate cannot compensate for failing one gate by scoring well on
+    another; only these two recommendation values ever qualify."""
+    return evaluation.get("engagement_recommendation") in _STAGE5_ELIGIBLE_RECOMMENDATIONS
+
+
+def rank_stage5_candidates(evaluations: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Rank only candidates that already cleared every hard gate -- never a
+    numerical score that lets a candidate compensate for failing one.
+    Link-free candidates are listed first (Community Manager is not a
+    backlink generator); order is otherwise preserved, not weighted."""
+    eligible = [e for e in evaluations if is_stage5_eligible(e)]
+    without_link = [e for e in eligible if e.get("engagement_recommendation") == "POTENTIALLY_ENGAGE_WITHOUT_LINK"]
+    with_link = [e for e in eligible if e.get("engagement_recommendation") == "POTENTIALLY_ENGAGE_WITH_DISCLOSED_LINK"]
+    return without_link + with_link
+
+
+def _rejection_reason(evaluation: dict[str, Any]) -> str:
+    recommendation = evaluation.get("engagement_recommendation")
+    if recommendation == "DO_NOT_ENGAGE":
+        if evaluation.get("relevance") == "UNRELATED_NAMED_COMPANY":
+            return "Discussion is centered on a specific, different, named company."
+        policy_state = (evaluation.get("platform_policy") or {}).get("overall_state")
+        if policy_state == "PROHIBITED":
+            return "Platform policy explicitly prohibits the proposed response."
+        return "Reasoning outcome resolved as NO_ACTION."
+    if recommendation == "OBSERVE":
+        return "Relevance or grounding evidence was insufficient to reason further."
+    if recommendation == "DRAFT_ONLY":
+        social = evaluation.get("social_appropriateness") or {}
+        if social.get("thread_is_stale"):
+            return "Thread has had no recent meaningful activity (stale)."
+        if social.get("hostility_detected"):
+            return "Hostile or dismissive language was observed in the thread."
+        return "Social appropriateness was insufficient for engagement, even though grounded and permitted."
+    if recommendation == "REQUIRES_OWNER_REVIEW":
+        policy_state = (evaluation.get("platform_policy") or {}).get("overall_state")
+        if policy_state in {"UNKNOWN", "REQUIRES_REVIEW"}:
+            return f"Platform policy evidence is {policy_state}, not a confirmed permission."
+        return "Requires explicit Owner review before any further consideration."
+    return "Not currently eligible."
+
+
+def candidate_pipeline_summary(runtime: Path) -> dict[str, Any]:
+    """A concise, Commander-facing view of the candidate pipeline's current
+    lifecycle -- not dozens of raw discussions. Entirely derived from
+    existing persisted state at read time."""
+    store = load_community_store(runtime)
+    discovery = store.get("discovery", []) if isinstance(store.get("discovery"), list) else []
+    thread_evidence = store.get("thread_evidence", []) if isinstance(store.get("thread_evidence"), list) else []
+    evaluations = store.get("engagement_evaluations", []) if isinstance(store.get("engagement_evaluations"), list) else []
+    reasoning_history = store.get("community_reasoning_history", {}) if isinstance(store.get("community_reasoning_history"), dict) else {}
+    fetch_history = store.get("thread_fetch_history", {}) if isinstance(store.get("thread_fetch_history"), dict) else {}
+
+    fully_read_urls = {str(t.get("url")) for t in thread_evidence if isinstance(t, dict) and t.get("fetch_status") == "COMPLETE"}
+
+    latest_evaluation_by_url: dict[str, dict[str, Any]] = {}
+    for evaluation in evaluations:
+        if isinstance(evaluation, dict) and evaluation.get("source_url"):
+            latest_evaluation_by_url[evaluation["source_url"]] = evaluation  # append-only order -> last write wins
+
+    newly_strengthened = sorted({
+        url for url, record in {**reasoning_history, **fetch_history}.items()
+        if isinstance(record, dict) and int(record.get("times_seen", 0)) >= 2
+    })
+
+    rejected: list[dict[str, Any]] = []
+    awaiting_policy: list[str] = []
+    for url, evaluation in latest_evaluation_by_url.items():
+        if is_stage5_eligible(evaluation):
+            continue
+        policy_state = (evaluation.get("platform_policy") or {}).get("overall_state")
+        if policy_state in {"UNKNOWN", "REQUIRES_REVIEW"}:
+            awaiting_policy.append(url)
+        rejected.append({
+            "source_url": url,
+            "recommendation": evaluation.get("engagement_recommendation"),
+            "reason": _rejection_reason(evaluation),
+        })
+
+    stage5_candidates = rank_stage5_candidates(list(latest_evaluation_by_url.values()))
+
+    return {
+        "discovered_count": len(discovery),
+        "fully_read_count": len(fully_read_urls),
+        "evaluated_count": len(latest_evaluation_by_url),
+        "newly_strengthened_urls": newly_strengthened,
+        "rejected_candidates": rejected[-20:],
+        "awaiting_policy_evidence_urls": awaiting_policy,
+        "stage5_eligible_candidates": stage5_candidates,
+        "stage5_verdict": "STAGE_5_CANDIDATE_READY" if stage5_candidates else "NO_STAGE_5_CANDIDATE",
+    }
 
 
 def recurring_questions(runtime: Path, limit: int = 10) -> list[dict[str, Any]]:
