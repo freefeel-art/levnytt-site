@@ -377,6 +377,51 @@ def dataforseo_safe_keyword(text: str, max_words: int = 10, max_chars: int = 80)
     return value.strip(".-:'\"/ ")
 
 
+def _delta_status(prior: dict[str, Any] | None) -> str:
+    """NEW (never seen before) -> RECURRING (seen once before) ->
+    STRENGTHENED (seen 2+ times before, then plateaus). Shared by every
+    per-source-URL delta counter in this module (Scout promotion, Stage 2
+    reasoning eligibility) so "new vs. known vs. strengthened" means the
+    same thing everywhere, even though each consumer keeps its own
+    independent counter store -- rerunning Scout's own seeding must not
+    silently mark a candidate as already-reasoned-about, and vice versa."""
+    if prior is None:
+        return "NEW"
+    if int(prior.get("times_seen", prior.get("times_promoted", 0))) >= 2:
+        return "STRENGTHENED"
+    return "RECURRING"
+
+
+def _record_delta(counters: dict[str, Any], url: str, *, now: str) -> None:
+    record = counters.get(url) if isinstance(counters.get(url), dict) else {}
+    record["times_seen"] = int(record.get("times_seen", record.get("times_promoted", 0))) + 1
+    record.setdefault("first_seen_at", now)
+    record["last_seen_at"] = now
+    counters[url] = record
+
+
+def _qualifying_swedish_possible_reply_discoveries(store: dict[str, Any]) -> list[dict[str, Any]]:
+    """The one shared eligibility filter both Scout promotion and Stage 2
+    reasoning start from: recommended_action == POSSIBLE_REPLY (a real
+    question on a topic LevNytt covers), a Swedish-specific discussion
+    platform (excludes Facebook/Reddit -- confirmed cross-locale noise), and
+    a non-empty title. This is an INITIAL filter only, never treated as the
+    final engagement decision -- see reason_about_discovery_candidate for
+    the real relevance/grounding/link reasoning that follows."""
+    discovery = store.get("discovery", [])
+    if not isinstance(discovery, list):
+        return []
+    qualifying = [
+        item for item in discovery
+        if isinstance(item, dict)
+        and item.get("recommended_action") == "POSSIBLE_REPLY"
+        and item.get("platform") in _SWEDISH_DISCUSSION_PLATFORMS
+        and str(item.get("title", "")).strip()
+    ]
+    qualifying.sort(key=lambda item: str(item.get("observed_at", "")), reverse=True)
+    return qualifying
+
+
 def community_derived_candidates(runtime: Path, limit: int = 5) -> list[dict[str, Any]]:
     """Real third-party community discoveries that are sufficiently supported
     to become Scout demand-evidence inputs -- the Community Intelligence ->
@@ -475,6 +520,289 @@ def record_scout_promotions(runtime: Path, candidates: list[dict[str, Any]]) -> 
         record["last_promoted_at"] = now
         promotions[url] = record
     store["scout_promotions"] = promotions
+    save_community_store(runtime, store)
+
+
+# ── Stage 2: bounded third-party READ -> REASON -> DRAFT ───────────
+# This never constructs or authorizes a write. It reads persisted
+# community_intelligence discoveries (already real, already deduplicated,
+# already URL-canonicalized -- see procedure.py), reasons about each with
+# its own, independent NEW/RECURRING/STRENGTHENED delta counter (kept
+# separate from scout_promotions above -- Scout seeding and this reasoning
+# pass are different consumers of the same discovery data and must not
+# contaminate each other's "have I already looked at this" state), and
+# produces evidence for Commander. Nothing here ever builds a
+# community_engagement-shaped assignment or calls a Facebook interactor.
+
+# A general, evidence-based positive-identification list of NeoLife's own
+# real identifiers (brand name, actual product line names, the real
+# Sponsor-ID) -- not a blacklist of competitors. Matching this list is
+# strong, objective evidence a discussion is specifically about NeoLife;
+# matching nothing here says nothing about any other company.
+_NEOLIFE_SPECIFIC_MARKERS = (
+    "neolife", "neolifeshop", "neolife.com",
+    "carotenoid complex", "pro vitality", "pro-vitality", "tre en en", "tre-en-en",
+    "formula iv", "elevate", "upbeet", "super 10", "golden home care",
+    "41-830928", "sponsor-id",
+)
+
+# A bare domain/URL reference is the one general, structural, company-
+# agnostic signal that a discussion centers on a specific OTHER site --
+# unlike a bare capitalized name (e.g. "Amway"), a domain is unambiguous
+# and requires no per-company enumeration to detect. This deliberately
+# under-detects rather than guesses: a discussion naming a competitor only
+# by bare name, with no domain/URL evidence, falls through to the more
+# conservative GENERAL_MLM_DISCUSSION/GENERAL_TOPIC_DISCUSSION buckets
+# instead of being (possibly wrongly) flagged as company-specific.
+_NAMED_DOMAIN_PATTERN = re.compile(r"\b[a-z0-9][a-z0-9-]{1,60}\.(?:se|com|net|org|nu|info)\b")
+_LEVNYTT_OWN_DOMAINS = ("levnytt.se", "neolife.com", "neolifeshop.com")
+
+_ON_TOPIC_SIGNAL_TYPES = {"SCIENCE_HEALTH", "PRODUCT", "CONSUMER_DECISION", "CONTENT_QUESTION"}
+
+
+def classify_topical_relevance(text: str) -> dict[str, str]:
+    """Distinguish whether a real observed discussion is explicitly about
+    NeoLife, a general direct-selling/topic discussion with no specific
+    company named, a discussion centered on a specific, different, named
+    company/site, or too unclear to tell. A general, evidence-based rule --
+    see the module-level comments above on _NEOLIFE_SPECIFIC_MARKERS and
+    _NAMED_DOMAIN_PATTERN for why neither list is a competitor blacklist."""
+    lowered = (text or "").casefold()
+    neolife_hits = sorted({m for m in _NEOLIFE_SPECIFIC_MARKERS if m in lowered})
+    if neolife_hits:
+        return {
+            "relevance": "EXPLICITLY_NEOLIFE",
+            "relevance_evidence": f"Matched NeoLife-specific identifier(s): {', '.join(neolife_hits)}.",
+        }
+
+    domain_hits = sorted({m.group(0) for m in _NAMED_DOMAIN_PATTERN.finditer(lowered)})
+    other_domains = [d for d in domain_hits if not any(d == own or d.endswith("." + own) for own in _LEVNYTT_OWN_DOMAINS)]
+    if other_domains:
+        return {
+            "relevance": "UNRELATED_NAMED_COMPANY",
+            "relevance_evidence": f"References a specific, non-NeoLife domain/site: {', '.join(other_domains)}.",
+        }
+
+    classification = classify_levnytt_signal(text)
+    primary = classification.get("primary_signal_type")
+    if primary == "BUSINESS_DISTRIBUTOR":
+        return {
+            "relevance": "GENERAL_MLM_DISCUSSION",
+            "relevance_evidence": "Matched general direct-selling/MLM vocabulary with no specific company identified.",
+        }
+    if primary in _ON_TOPIC_SIGNAL_TYPES:
+        return {
+            "relevance": "GENERAL_TOPIC_DISCUSSION",
+            "relevance_evidence": f"Matched LevNytt's own editorial scope ({primary}) with no specific company identified.",
+        }
+    return {
+        "relevance": "UNCLEAR_CONTEXT",
+        "relevance_evidence": "No NeoLife-specific, other-company, or LevNytt-topical signal was matched.",
+    }
+
+
+_LEVNYTT_URL_PATTERN = re.compile(r"https?://\S*levnytt\.se\S*", re.IGNORECASE)
+_LEVNYTT_LINK_LEADIN_PATTERN = re.compile(r"\s*L[äa]s g[äa]rna[^:]*:\s*$")
+
+
+def _strip_levnytt_link(text: str) -> str:
+    """Remove any LevNytt URL (and its immediate lead-in clause) from a
+    drafted response. A draft returned for ANSWER_WITHOUT_LINK must never
+    carry a LevNytt URL or promotional CTA -- this makes that mechanically
+    true rather than relying on the response templates never adding one."""
+    stripped = _LEVNYTT_URL_PATTERN.sub("", text)
+    stripped = _LEVNYTT_LINK_LEADIN_PATTERN.sub("", stripped)
+    return stripped.strip()
+
+
+def _find_live_page_for_topic(working_repository: Path, topic: str) -> dict[str, str] | None:
+    """Real, published-page evidence that LevNytt has directly relevant
+    content for a topic -- not merely a research packet. Token-overlap
+    matched against actual on-disk HTML files (the same kind of matching
+    levnytt_grounding_facts already uses for research packets), never a
+    fabricated URL."""
+    topic_tokens = _tokens(topic)
+    if not topic_tokens:
+        return None
+    candidates = list(working_repository.glob("*.html"))
+    articles_dir = working_repository / "content" / "articles"
+    if articles_dir.is_dir():
+        candidates += list(articles_dir.rglob("*.html"))
+    best_path: Path | None = None
+    best_overlap = 0
+    for path in candidates:
+        overlap = len(topic_tokens & _tokens(path.stem))
+        if overlap > best_overlap:
+            best_overlap = overlap
+            best_path = path
+    if best_path is None or best_overlap < max(1, len(topic_tokens) // 2):
+        return None
+    relative = best_path.relative_to(working_repository)
+    return {"url": f"https://levnytt.se/{relative.stem}", "path": str(relative)}
+
+
+def _possible_relevant_content(classification: dict[str, Any], topic: str | None, working_repository: Path) -> dict[str, str] | None:
+    if classification.get("primary_signal_type") == "BUSINESS_DISTRIBUTOR":
+        page = working_repository / "direktforsaljning-fakta.html"
+        if page.is_file():
+            return {"url": "https://levnytt.se/direktforsaljning-fakta", "path": "direktforsaljning-fakta.html"}
+        return None
+    if not topic:
+        return None
+    return _find_live_page_for_topic(working_repository, topic)
+
+
+def reason_about_discovery_candidate(item: dict[str, Any], runtime: Path, working_repository: Path) -> dict[str, Any]:
+    """READ (one already-persisted, already real discovery item) -> REASON
+    -> DRAFT where evidence justifies it. Returns a full evidence record for
+    Commander -- never constructs or authorizes a write; community_engagement
+    (owned-page only) is a wholly separate path this never reaches.
+
+    Outcome is always exactly one of: NO_ACTION, OBSERVE, ANSWER_WITHOUT_LINK,
+    POSSIBLE_VALUE_ADDING_LINK, INSUFFICIENT_CONTEXT. None of these
+    authorizes execution -- they are reasoning results only.
+    """
+    url = str(item.get("url", ""))
+    title = str(item.get("title", "")).strip()
+    snippet = str(item.get("snippet", "")).strip()
+    text = f"{title} {snippet}".strip()
+
+    relevance = classify_topical_relevance(text)
+    record: dict[str, Any] = {
+        "source_platform": item.get("platform", ""),
+        "source_url": url,
+        "source_query": item.get("query", ""),
+        "observed_at": item.get("observed_at", ""),
+        "question_context": text,
+        "community_demand_status": item.get("community_demand_status"),
+        "relevance": relevance["relevance"],
+        "relevance_evidence": relevance["relevance_evidence"],
+        "reasoned_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+    if relevance["relevance"] == "UNRELATED_NAMED_COMPANY":
+        return {
+            **record,
+            "outcome": "NO_ACTION",
+            "outcome_reason": "This discussion is centered on a specific, different, named company/site; LevNytt has no basis to insert itself or its NeoLife content.",
+            "draft": None,
+            "possible_relevant_content": None,
+        }
+
+    if relevance["relevance"] == "UNCLEAR_CONTEXT":
+        return {
+            **record,
+            "outcome": "OBSERVE",
+            "outcome_reason": "The discussion did not clearly match a NeoLife-specific, general direct-selling, or LevNytt-topical signal.",
+            "draft": None,
+            "possible_relevant_content": None,
+        }
+
+    classification = classify_levnytt_signal(text)
+    topic = _matching_keyword(text, runtime)
+    # Facts and search-demand evidence are never treated as claim evidence
+    # here: GSC_DEMAND/COMMUNITY_DEMAND prove a question exists, not that
+    # any claim about it is true (see levnytt_grounding_facts, which only
+    # ever returns sourced AUTHORITY/GENERAL_SCIENCE/NEOLIFE_FIRST_PARTY
+    # claims from real research packets).
+    facts = levnytt_grounding_facts(topic, runtime) if topic else []
+    proposal = propose_levnytt_response(text, classification, facts)
+
+    if proposal.get("status") != "PROPOSED":
+        return {
+            **record,
+            "outcome": "INSUFFICIENT_CONTEXT",
+            "outcome_reason": proposal.get("reason", "No sourced evidence grounds an answer for this signal; refusing to improvise."),
+            "draft": None,
+            "possible_relevant_content": None,
+        }
+
+    draft_text = _strip_levnytt_link(str(proposal.get("proposed_text", "")))
+    possible_link = _possible_relevant_content(classification, topic, working_repository)
+
+    if possible_link is not None:
+        return {
+            **record,
+            "outcome": "POSSIBLE_VALUE_ADDING_LINK",
+            "outcome_reason": "A grounded answer is possible, and LevNytt has a directly relevant, published page that adds material value beyond it. This is a reasoning classification only -- it does not authorize posting the link.",
+            "draft": draft_text,
+            "possible_relevant_content": possible_link,
+        }
+    return {
+        **record,
+        "outcome": "ANSWER_WITHOUT_LINK",
+        "outcome_reason": "A grounded answer is possible, but no directly relevant, published LevNytt page was found to add material value beyond it. A useful answer does not by itself justify self-promotion.",
+        "draft": draft_text,
+        "possible_relevant_content": None,
+    }
+
+
+def community_reasoning_eligible_candidates(runtime: Path, limit: int = 5) -> list[dict[str, Any]]:
+    """The candidates Stage 2 reasoning should spend effort on this cycle:
+    the same initial POSSIBLE_REPLY/Swedish-platform filter
+    community_derived_candidates uses (a starting filter, never trusted as
+    the final engagement decision -- reason_about_discovery_candidate does
+    the real work), restricted to NEW or STRENGTHENED per this reasoning
+    pass's own delta counter. An unchanged RECURRING discovery is skipped:
+    it was already reasoned about last time and nothing changed, so
+    reprocessing it would be expensive busywork, not new intelligence."""
+    store = load_community_store(runtime)
+    reasoning_history = store.get("community_reasoning_history", {})
+    if not isinstance(reasoning_history, dict):
+        reasoning_history = {}
+
+    seen_topics: set[str] = set()
+    eligible: list[dict[str, Any]] = []
+    for item in _qualifying_swedish_possible_reply_discoveries(store):
+        topic_key = str(item.get("title", "")).strip().casefold()
+        if topic_key in seen_topics:
+            continue
+        seen_topics.add(topic_key)
+        url = str(item.get("url", ""))
+        prior = reasoning_history.get(url) if isinstance(reasoning_history.get(url), dict) else None
+        status = _delta_status(prior)
+        if status == "RECURRING":
+            continue
+        eligible.append({**item, "community_demand_status": status})
+        if len(eligible) >= limit:
+            break
+    return eligible
+
+
+def record_community_reasoning(runtime: Path, results: list[dict[str, Any]]) -> None:
+    """Update the small per-source-URL counter community_reasoning_eligible_
+    candidates uses -- kept entirely separate from scout_promotions (Stage
+    2 reasoning and Scout candidate seeding are different consumers of the
+    same discovery data and must not contaminate each other's delta
+    state)."""
+    store = load_community_store(runtime)
+    reasoning_history = store.get("community_reasoning_history", {})
+    if not isinstance(reasoning_history, dict):
+        reasoning_history = {}
+    now = datetime.now(timezone.utc).isoformat()
+    for result in results:
+        if not isinstance(result, dict):
+            continue
+        url = str(result.get("source_url", ""))
+        if not url:
+            continue
+        _record_delta(reasoning_history, url, now=now)
+    store["community_reasoning_history"] = reasoning_history
+    save_community_store(runtime, store)
+
+
+def record_reasoning_results(runtime: Path, results: list[dict[str, Any]]) -> None:
+    """Persist Stage 2's reasoning evidence for Commander visibility,
+    bounded the same way discovery_runs is (most recent 20)."""
+    if not results:
+        return
+    store = load_community_store(runtime)
+    existing = store.get("reasoning", [])
+    if not isinstance(existing, list):
+        existing = []
+    existing.extend(results)
+    store["reasoning"] = existing[-20:]
+    store["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_community_store(runtime, store)
 
 

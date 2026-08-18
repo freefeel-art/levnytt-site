@@ -754,6 +754,23 @@ class LevNyttProcedure:
         reports = [_classify_discovery_item(item) for item in discovered]
         new_item_count = levnytt_community.record_discovery(ctx.runtime_directory, reports)
 
+        # Stage 2 (bounded third-party READ -> REASON -> DRAFT): reasons
+        # about a small, delta-gated set of the persisted store's own
+        # POSSIBLE_REPLY discoveries -- never just this cycle's fresh
+        # results, so a NEW item from an earlier cycle that was never
+        # reasoned about still gets picked up. Produces evidence only; never
+        # constructs a community_engagement-shaped assignment or reaches the
+        # Facebook interactor. See commander/community.py for the full
+        # relevance/grounding/link-discipline logic.
+        eligible = levnytt_community.community_reasoning_eligible_candidates(ctx.runtime_directory, limit=5)
+        reasoning_results = [
+            levnytt_community.reason_about_discovery_candidate(item, ctx.runtime_directory, ctx.working_repository)
+            for item in eligible
+        ]
+        if reasoning_results:
+            levnytt_community.record_community_reasoning(ctx.runtime_directory, reasoning_results)
+            levnytt_community.record_reasoning_results(ctx.runtime_directory, reasoning_results)
+
         possible_reply = [r for r in reports if r["recommended_action"] == "POSSIBLE_REPLY"]
         # Diminishing-returns detection, mirroring legacy_audit's
         # already_current/skipped pattern: DataForSEO's live SERP results
@@ -772,9 +789,18 @@ class LevNyttProcedure:
             "errors": errors,
             "read_only": True,
             "results": reports,
+            "reasoning_results": reasoning_results,
         }
-        if new_item_count == 0:
+        if new_item_count == 0 and not reasoning_results:
             evidence["skipped"] = True
+        outcome_counts: dict[str, int] = {}
+        for r in reasoning_results:
+            outcome_counts[r["outcome"]] = outcome_counts.get(r["outcome"], 0) + 1
+        reasoning_summary = (
+            f" Reasoned about {len(reasoning_results)} eligible candidate(s): "
+            + ", ".join(f"{k}={v}" for k, v in sorted(outcome_counts.items())) + "."
+            if reasoning_results else ""
+        )
         return {
             "status": "SUCCEEDED",
             "detail": (
@@ -782,11 +808,11 @@ class LevNyttProcedure:
                 f"discussion-shaped result(s) seen, {new_item_count} genuinely new "
                 f"(not already known), {len(possible_reply)} flagged POSSIBLE_REPLY for "
                 "Owner/human review. Read-only: no post, reply, join, friend request, or "
-                "message was made."
+                "message was made." + reasoning_summary
             ) if reports else (
                 f"Community Intelligence discovery: {len(queries)} queries, no "
                 "discussion-shaped results found. Read-only: no post, reply, join, friend "
-                "request, or message was made."
+                "request, or message was made." + reasoning_summary
             ),
             "evidence": evidence,
         }
@@ -900,6 +926,16 @@ class LevNyttProcedure:
         Maximum one reply. Uses the shared Facebook interaction safety layer and
         grounds the reply text in genuine NeoLife evidence; a missing or
         ungrounded target fails closed rather than sending a fabricated reply.
+
+        Policy approval is never manufactured here. propose_levnytt_response
+        marks every proposal requires_policy_approval_before_sending=True;
+        this executor only ever forwards to the interactor whatever
+        policy_approved value the caller's own engagement_target explicitly
+        supplied (default False, fail-closed) -- mirroring the exact contract
+        agents/community_manager/run.py already uses for OLSP
+        (interaction.get("policy_approved", False)), not a second, parallel
+        approval mechanism. An unapproved proposal is reported back as
+        evidence for Commander/Owner review, never sent.
         """
         from app.commander.facebook_identity import levnytt_facebook_identity
         from app.providers.facebook_community_interactor import FacebookCommunityInteractor
@@ -934,6 +970,24 @@ class LevNyttProcedure:
         if not reply_text:
             return {"status": "BLOCKED", "detail": "No reply text was generated.", "evidence": {"interaction_blocked": True}}
 
+        # Strict identity against True, not bool(...) truthiness: a malformed
+        # or unexpected value (a non-empty string, a stray "1") must never
+        # accidentally coerce into approval. Fail closed on anything except
+        # an explicit boolean True.
+        policy_approved = target.get("policy_approved") is True
+        if proposal.get("requires_policy_approval_before_sending") and not policy_approved:
+            return {
+                "status": "BLOCKED",
+                "detail": "The proposed reply requires explicit policy approval before sending; engagement_target.policy_approved was not set to true, so no interaction was attempted.",
+                "evidence": {
+                    "interaction_blocked": True,
+                    "policy_approval_required": True,
+                    "proposed_text": reply_text,
+                    "signal_type": classification.get("primary_signal_type"),
+                    "grounding_source_type": proposal.get("grounding_source_type"),
+                },
+            }
+
         identity = levnytt_facebook_identity()
         interactor = FacebookCommunityInteractor(
             storage_state=Path(HERMES_REPO) / "config" / "storage_state.json",
@@ -947,7 +1001,7 @@ class LevNyttProcedure:
             comment_text=comment_text,
             reply_text=reply_text,
             target_scope="owned_page",
-            policy_approved=True,
+            policy_approved=policy_approved,
             no_mass_action=True,
         )
 
