@@ -334,6 +334,150 @@ def record_research_gaps(runtime: Path, gaps: list[str]) -> None:
     save_community_store(runtime, store)
 
 
+# Swedish-specific discussion platforms only. Facebook and Reddit discovery
+# results are not filtered by locale anywhere upstream (community_intelligence's
+# domain allowlist matches any facebook.com/reddit.com hit) -- confirmed
+# during the intelligence audit that a Croatian-language r/hrvatska thread
+# was matched by the same fixed Swedish query set. A global platform hit
+# cannot be trusted as Swedish-market community demand for a Swedish-only
+# site, so it is excluded from Scout promotion (though still retained as
+# community_intelligence discovery evidence -- this filter narrows only what
+# becomes a Scout candidate).
+_SWEDISH_DISCUSSION_PLATFORMS = {"flashback_forum", "familjeliv_forum", "flexans_forum"}
+
+
+# Allowlist, not a blocklist: keep only unicode word characters (letters incl.
+# å/ä/ö, digits), spaces, and a small set of punctuation confirmed live
+# against DataForSEO's own Google Ads keyword-volume endpoint (':', '/',
+# quotes, '-' all accepted). Everything else becomes a space. Allowlisting is
+# deliberate here -- a live commissioning cycle discovered DataForSEO rejects
+# '?', ',', '(', ')', en dash ('kollagen – hud' -> "Invalid Field: keywords
+# ... invalid characters or symbols") and fails the ENTIRE batch task for one
+# bad keyword, not just that keyword's own lookup. A blocklist would have to
+# anticipate every future forum-title character; this can't miss one.
+_DATAFORSEO_UNSAFE_CHARS = re.compile(r"[^\w\s.:/'\"-]", re.UNICODE)
+
+
+def dataforseo_safe_keyword(text: str, max_words: int = 10, max_chars: int = 80) -> str:
+    """Sanitize and truncate a real question/topic string to something
+    app.providers.dataforseo's keyword-volume endpoint will accept (see
+    _DATAFORSEO_UNSAFE_CHARS; also enforces the endpoint's own <=10-word,
+    <=80-char limits). Forum titles and audience questions are full
+    sentences with real punctuation, not search-style keywords, so this is
+    applied wherever a community-derived string becomes a
+    keyword-candidates.json 'keyword' value. The untruncated, unsanitized
+    original text is preserved separately (question_context) for
+    provenance -- this function only ever shortens/cleans the
+    DataForSEO-facing copy, never the evidence record."""
+    cleaned = _DATAFORSEO_UNSAFE_CHARS.sub(" ", text)
+    words = cleaned.split()[:max_words]
+    value = " ".join(words)
+    if len(value) > max_chars:
+        value = value[:max_chars].rstrip()
+    return value.strip(".-:'\"/ ")
+
+
+def community_derived_candidates(runtime: Path, limit: int = 5) -> list[dict[str, Any]]:
+    """Real third-party community discoveries that are sufficiently supported
+    to become Scout demand-evidence inputs -- the Community Intelligence ->
+    Scout join.
+
+    Promotes only ``store["discovery"]`` items that are all of:
+      - recommended_action == "POSSIBLE_REPLY" (community_intelligence's own
+        heuristic for "the title/snippet contains a real question on a topic
+        LevNytt covers" -- OBSERVE/NO_ACTION results are not demand evidence);
+      - on a Swedish-specific discussion platform (see
+        _SWEDISH_DISCUSSION_PLATFORMS above);
+      - carry a non-empty title (the minimum usable topic context).
+
+    Never invents search volume: every returned candidate carries only real
+    observed community provenance (platform, source URL, retrieval time,
+    the seed query, a confidence label, and question/context text) --
+    no monthly_search_volume or similar figure is ever attached. Ranked
+    freshest-first and deduplicated by topic text so one recurring thread
+    does not occupy multiple candidate slots. community_demand_status marks
+    whether this exact source URL is being promoted for the first time
+    (NEW), has been promoted once before (RECURRING), or has now been
+    promoted repeatedly (STRENGTHENED) -- see record_scout_promotions.
+    """
+    store = load_community_store(runtime)
+    discovery = store.get("discovery", [])
+    if not isinstance(discovery, list):
+        return []
+    promotions = store.get("scout_promotions", {})
+    if not isinstance(promotions, dict):
+        promotions = {}
+
+    qualifying = [
+        item for item in discovery
+        if isinstance(item, dict)
+        and item.get("recommended_action") == "POSSIBLE_REPLY"
+        and item.get("platform") in _SWEDISH_DISCUSSION_PLATFORMS
+        and str(item.get("title", "")).strip()
+    ]
+    qualifying.sort(key=lambda item: str(item.get("observed_at", "")), reverse=True)
+
+    seen_topics: set[str] = set()
+    candidates: list[dict[str, Any]] = []
+    for item in qualifying:
+        topic = str(item.get("title", "")).strip()
+        topic_key = topic.casefold()
+        if topic_key in seen_topics:
+            continue
+        seen_topics.add(topic_key)
+        url = str(item.get("url", ""))
+        prior = promotions.get(url) if isinstance(promotions.get(url), dict) else None
+        if prior is None:
+            status = "NEW"
+        elif int(prior.get("times_promoted", 0)) >= 2:
+            status = "STRENGTHENED"
+        else:
+            status = "RECURRING"
+        candidates.append({
+            "keyword": dataforseo_safe_keyword(topic),
+            "evidence_type": "COMMUNITY_DEMAND",
+            "community_demand_status": status,
+            "source_platform": item.get("platform", ""),
+            "source_url": url,
+            "source_query": item.get("query", ""),
+            "retrieved_at": item.get("observed_at", ""),
+            "confidence": "MEDIUM",
+            "question_context": str(item.get("snippet") or item.get("title", "")),
+        })
+        if len(candidates) >= limit:
+            break
+    return candidates
+
+
+def record_scout_promotions(runtime: Path, candidates: list[dict[str, Any]]) -> None:
+    """Update the small per-source-URL promotion counter that
+    community_derived_candidates uses to compute community_demand_status.
+
+    This is the smallest possible new/known/strengthened mechanism: one
+    counter and two timestamps per source URL, not a historical analytics
+    system. It exists specifically so a community-derived question that gets
+    rediscovered every day is not reported to Scout/Commander as fresh
+    intelligence every single cycle."""
+    store = load_community_store(runtime)
+    promotions = store.get("scout_promotions", {})
+    if not isinstance(promotions, dict):
+        promotions = {}
+    now = datetime.now(timezone.utc).isoformat()
+    for candidate in candidates:
+        if not isinstance(candidate, dict) or candidate.get("evidence_type") != "COMMUNITY_DEMAND":
+            continue
+        url = str(candidate.get("source_url", ""))
+        if not url:
+            continue
+        record = promotions.get(url) if isinstance(promotions.get(url), dict) else {}
+        record["times_promoted"] = int(record.get("times_promoted", 0)) + 1
+        record.setdefault("first_promoted_at", now)
+        record["last_promoted_at"] = now
+        promotions[url] = record
+    store["scout_promotions"] = promotions
+    save_community_store(runtime, store)
+
+
 def recurring_questions(runtime: Path, limit: int = 10) -> list[dict[str, Any]]:
     """Recurring consumer questions recorded as audience-demand evidence for the
     SEO/content opportunity loop. A question is 'recurring' when its observed

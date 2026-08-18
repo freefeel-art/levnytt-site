@@ -28,6 +28,7 @@ import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("Europe/Stockholm")
@@ -114,6 +115,38 @@ def _classify_discussion_platform(domain: str) -> str | None:
     return None
 
 
+# Conservative, source-aware URL canonicalization for discovery dedup.
+# Only Flashback's own real, documented URL variants are normalized -- a
+# trailing page number (t<id>p<page>, e.g. .../t2406654p2 is page 2 of
+# thread t2406654) or a single trailing letter (t<id>[a-z], e.g.
+# t3431890n/t3431890s -- observed variants of the exact same thread,
+# confirmed by identical titles in runtime/community/knowledge.json during
+# the intelligence audit). Post-permalink URLs (/p<digits>, a different,
+# unrelated numbering scheme with no reliable link back to a specific
+# thread id) are deliberately left untouched -- merging those would risk
+# conflating genuinely different threads, which this function must never do.
+_FLASHBACK_THREAD_VARIANT = re.compile(r"^(/t\d+)(?:p\d+|[a-z])?$")
+
+
+def _canonicalize_discussion_url(url: str) -> str:
+    """Fold known same-thread URL variants (currently: Flashback thread
+    pagination/anchor suffixes) into one canonical URL before dedup, so
+    /t123456, /t123456p2, and /t123456s are recognized as the same
+    discovery instead of three. Any URL this function doesn't specifically
+    recognize is returned unchanged -- conservative by construction."""
+    try:
+        parts = urlsplit(url)
+    except ValueError:
+        return url
+    domain = parts.netloc.lower().lstrip("www.")
+    if domain != "flashback.org":
+        return url
+    match = _FLASHBACK_THREAD_VARIANT.match(parts.path)
+    if not match:
+        return url
+    return urlunsplit((parts.scheme, parts.netloc, match.group(1), "", ""))
+
+
 def _classify_discovery_item(item: dict[str, Any]) -> dict[str, Any]:
     """Attach a recommended_action label and reasoning to one discovered
     item. This is a reporting classification for a human/Owner decision --
@@ -148,6 +181,73 @@ def _classify_discovery_item(item: dict[str, Any]) -> dict[str, Any]:
             "classified_by": "community_intelligence heuristic v1: platform + question-marker match on title/snippet only, no page content fetched",
         },
     }
+
+
+def _recover_historical_discovery_snippets(runtime: Path, production_root: Path) -> dict[str, int]:
+    """Truthful, idempotent repair for discovery items persisted before the
+    snippet field-name fix (code previously read item.get('description'),
+    but DataForSEO's real field is 'snippet', so every historical item was
+    saved with an empty snippet). Recovers the real snippet text from the raw
+    normalized DataForSEO SERP artifacts that originally produced each item,
+    matched by canonical URL -- the exact evidence that was actually
+    observed, never invented. An item whose raw provider evidence can no
+    longer be found (artifact rotated/deleted) is left untouched, snippet
+    still empty, per instruction: do not fabricate history that isn't there.
+
+    Re-classifies each recovered item with _classify_discovery_item so its
+    recommended_action reflects the real title+snippet instead of the
+    title-only classification computed at the time of the bug."""
+    levnytt_community = _levnytt_community()
+    store = levnytt_community.load_community_store(runtime)
+    discovery = store.get("discovery", [])
+    if not isinstance(discovery, list):
+        return {"recovered": 0, "unrecoverable": 0, "unchanged": 0}
+
+    url_to_snippet: dict[str, str] = {}
+    serp_dir = production_root / "dataforseo-serp"
+    for path in sorted(serp_dir.glob("*normalized.json")) if serp_dir.is_dir() else []:
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        results = payload.get("organic_results") if isinstance(payload, dict) else None
+        for result in results or []:
+            if not isinstance(result, dict):
+                continue
+            url = _canonicalize_discussion_url(str(result.get("url", "")))
+            snippet = str(result.get("snippet", "")).strip()
+            if url and snippet and url not in url_to_snippet:
+                url_to_snippet[url] = snippet
+
+    recovered = unrecoverable = unchanged = 0
+    for item in discovery:
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("snippet", "")).strip():
+            unchanged += 1
+            continue
+        canonical_url = _canonicalize_discussion_url(str(item.get("url", "")))
+        real_snippet = url_to_snippet.get(canonical_url)
+        if not real_snippet:
+            unrecoverable += 1
+            continue
+        item["snippet"] = real_snippet
+        reclassified = _classify_discovery_item(item)
+        item["recommended_action"] = reclassified["recommended_action"]
+        item["reason"] = reclassified["reason"]
+        item["provenance"] = reclassified["provenance"]
+        item["snippet_recovered_at"] = datetime.now(timezone.utc).isoformat()
+        item["snippet_recovery_note"] = (
+            "Recovered from persisted raw DataForSEO SERP evidence after the "
+            "snippet field-name bug fix; not fabricated."
+        )
+        recovered += 1
+
+    if recovered:
+        store["discovery"] = discovery
+        levnytt_community.save_community_store(runtime, store)
+    return {"recovered": recovered, "unrecoverable": unrecoverable, "unchanged": unchanged}
+
 
 # Small Swedish→English topic dictionary for the general-science SERP layer.
 _SE_EN_TERMS = {
@@ -644,9 +744,9 @@ class LevNyttProcedure:
                 discovered.append({
                     "query": query,
                     "platform": platform,
-                    "url": item.get("url"),
+                    "url": _canonicalize_discussion_url(str(item.get("url"))),
                     "title": item.get("title", ""),
-                    "snippet": item.get("description", ""),
+                    "snippet": item.get("snippet", ""),
                     "position": item.get("position"),
                     "observed_at": datetime.now(timezone.utc).isoformat(),
                 })
@@ -2068,11 +2168,73 @@ def _pages_missing_sponsor_disclosure(repo: Path) -> list[str]:
 
 
 def _seed_keyword_candidates(ctx) -> None:
-    """Re-seed the SEO Scout candidates from the freshest first-party GSC query
-    evidence (highest impressions first) plus recurring audience questions
-    observed by Community Manager. Bounded to 20 and off-strategy queries are
-    excluded. Community signals are evidence inputs, not production commands."""
+    """Re-seed the SEO Scout candidates from three real evidence sources,
+    each tagged with its own evidence_type so Commander/Scout can reason
+    about GSC_DEMAND (first-party measured search impressions) separately
+    from COMMUNITY_DEMAND (real discussion, never keyword-volume evidence --
+    a forum question is never converted into fabricated search volume).
+
+    Community-derived candidates are seeded FIRST and reserved dedicated
+    slots, ahead of the GSC ranking fill: without this, a GSC result set
+    with >=20 high-impression queries would silently crowd every community
+    signal out of the bounded 20-slot list every single cycle, defeating the
+    entire point of the Community Intelligence -> Scout join. Bounded to 20
+    overall; off-strategy queries excluded throughout."""
     candidates_path = ctx.runtime_directory / "intelligence" / "keyword-candidates.json"
+    levnytt_community = _levnytt_community()
+
+    candidates: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    def _add(keyword: str, **fields: Any) -> None:
+        # Universally enforced (not just at the community-derived call
+        # sites): app.providers.dataforseo.normalize_keywords rejects the
+        # ENTIRE keyword-volume batch if any single keyword exceeds its
+        # limits (confirmed live -- a real Flashback thread title broke a
+        # real Scout cycle this way), so one bad candidate from any future
+        # source must never be able to poison every other candidate's lookup.
+        keyword = levnytt_community.dataforseo_safe_keyword(keyword.strip())
+        key = keyword.casefold()
+        if not keyword or key in seen or _off_strategy(keyword):
+            return
+        seen.add(key)
+        candidates.append({"keyword": keyword, **fields})
+
+    # Real third-party forum discussions -- only sufficiently-supported
+    # discoveries are promoted (see community.community_derived_candidates);
+    # never every SERP result. This is the Community Intelligence -> Scout
+    # join and the phase's central objective.
+    community_candidates = levnytt_community.community_derived_candidates(ctx.runtime_directory, limit=5)
+    for item in community_candidates:
+        _add(
+            item["keyword"],
+            evidence_type=item["evidence_type"],
+            community_demand_status=item["community_demand_status"],
+            source_platform=item["source_platform"],
+            source_url=item["source_url"],
+            source_query=item["source_query"],
+            retrieved_at=item["retrieved_at"],
+            confidence=item["confidence"],
+            question_context=item["question_context"],
+        )
+    if community_candidates:
+        levnytt_community.record_scout_promotions(ctx.runtime_directory, community_candidates)
+
+    # Real audience questions from LevNytt's own Facebook page comments --
+    # also real community demand (not search volume), just first-party.
+    for entry in levnytt_community.recurring_questions(ctx.runtime_directory, limit=3):
+        question = str(entry.get("question", "")).strip()
+        _add(
+            levnytt_community.dataforseo_safe_keyword(question),
+            evidence_type="COMMUNITY_DEMAND",
+            community_demand_status="RECURRING" if int(entry.get("count") or 0) > 1 else "NEW",
+            source_platform="levnytt_facebook_page_comments",
+            confidence="MEDIUM",
+            question_context=question,
+        )
+
+    # First-party measured GSC search-impression evidence fills the
+    # remaining slots, ranked by impressions.
     gsc = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
     query = gsc.get("query") if isinstance(gsc.get("query"), dict) else {}
     rows = query.get("all_queries", []) if isinstance(query.get("all_queries"), list) else []
@@ -2080,15 +2242,15 @@ def _seed_keyword_candidates(ctx) -> None:
         [r for r in rows if isinstance(r, dict) and str(r.get("query", "")).strip() and not _off_strategy(str(r["query"]))],
         key=lambda r: -(int(r.get("impressions") or 0)),
     )
-    keywords = [str(r["query"]).strip() for r in ranked[:20]]
-    # Recurring audience questions become evidence inputs for SEO/content.
-    levnytt_community = _levnytt_community()
-    for entry in levnytt_community.recurring_questions(ctx.runtime_directory, limit=5):
-        question = str(entry.get("question", "")).strip()
-        if question and question not in keywords and not _off_strategy(question):
-            keywords.append(question)
-    if not keywords:
-        keywords = ["direktförsäljning", "kosttillskott", "magnesium", "omega 3", "d vitamin", "probiotika", "multivitamin", "neolife", "pyramidspel", "kostfiber"]
-    keywords = keywords[:20]
+    remaining = max(0, 20 - len(candidates))
+    for r in ranked[:remaining]:
+        _add(str(r["query"]), evidence_type="GSC_DEMAND", impressions=r.get("impressions"))
+
+    if not candidates:
+        candidates = [
+            {"keyword": k, "evidence_type": "GSC_DEMAND"}
+            for k in ("direktförsäljning", "kosttillskott", "magnesium", "omega 3", "d vitamin", "probiotika", "multivitamin", "neolife", "pyramidspel", "kostfiber")
+        ]
+    candidates = candidates[:20]
     candidates_path.parent.mkdir(parents=True, exist_ok=True)
-    candidates_path.write_text(json.dumps({"candidates": [{"keyword": k} for k in keywords]}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    candidates_path.write_text(json.dumps({"candidates": candidates}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
