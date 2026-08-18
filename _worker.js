@@ -99,6 +99,16 @@ async function recordCtaClick(request, env, url) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // Canonicalize www.levnytt.se -> levnytt.se (previously served both as
+    // identical, non-redirected duplicate hosts). _worker.js Advanced Mode
+    // bypasses _redirects, so this has to be handled here to actually take
+    // effect.
+    if (url.hostname === "www.levnytt.se") {
+      url.hostname = "levnytt.se";
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (url.pathname === "/events/cta-click") return recordCtaClick(request, env, url);
     const country = request.cf?.country;
 

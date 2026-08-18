@@ -74,12 +74,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://levnytt.se/d-vitaminbrist-sverige</loc>
-    <lastmod>2026-06-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://levnytt.se/den-fundersamma-mannen</loc>
     <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
@@ -673,4 +667,6 @@
   <url><loc>https://levnytt.se/antioxidanter-lista</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://levnytt.se/omega-3-epa</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://levnytt.se/sa-kallas-beta-karotenoider-vitamin-c-vitamin-e-och-selen</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://levnytt.se/var-metod</loc><lastmod>2026-08-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://levnytt.se/forsknings-faq</loc><lastmod>2026-08-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
