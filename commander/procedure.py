@@ -444,17 +444,30 @@ class LevNyttProcedure:
     def _execute_legacy_audit(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         """Discover + classify the legacy estate and persist the audit artifact.
 
-        Read-only with respect to content: it never modifies a page."""
+        Read-only with respect to content: it never modifies a page. When the
+        fresh classification is identical to the last persisted audit
+        (audit["already_current"]), evidence["skipped"] is set so the shared
+        no-new-work/supersession handling in autonomous.py recognizes a
+        repeat audit as exactly that -- not a fresh production accomplishment
+        to keep re-selecting."""
         audit = _build_legacy_audit(ctx)
         counts = audit.get("classification_counts", {})
+        already_current = bool(audit.get("already_current"))
+        evidence: dict[str, Any] = {
+            "legacy_page_count": audit.get("legacy_page_count", 0),
+            "classification_counts": counts,
+            "audit_path": str(ctx.runtime_directory / "intelligence" / LEGACY_AUDIT_FILENAME),
+        }
+        if already_current:
+            evidence["skipped"] = True
         return {
             "status": "SUCCEEDED",
-            "detail": f"Legacy audit complete: {audit.get('legacy_page_count', 0)} pages classified ({counts}).",
-            "evidence": {
-                "legacy_page_count": audit.get("legacy_page_count", 0),
-                "classification_counts": counts,
-                "audit_path": str(ctx.runtime_directory / "intelligence" / LEGACY_AUDIT_FILENAME),
-            },
+            "detail": (
+                f"Legacy audit unchanged since the last run: {audit.get('legacy_page_count', 0)} pages classified ({counts})."
+                if already_current else
+                f"Legacy audit complete: {audit.get('legacy_page_count', 0)} pages classified ({counts})."
+            ),
+            "evidence": evidence,
         }
 
     def _execute_legacy_migration(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -852,6 +865,35 @@ class LevNyttProcedure:
     def verify(self, ctx, action: dict[str, Any], execution: dict[str, Any]) -> bool:
         capability = str(action.get("capability", "")).strip().casefold()
         evidence = execution.get("evidence") or {}
+        if capability == "legacy_audit":
+            # Verified when the audit genuinely persisted and its artifact's
+            # classification_counts match what execution just reported --
+            # not merely "the capability returned SUCCEEDED". Previously
+            # missing entirely: with no branch here, verify() fell through
+            # to `return False` unconditionally, so a legacy_audit
+            # commitment could never resolve (see autonomous.py's
+            # `elif execution.get("status") == "SUCCEEDED": pass` -- an
+            # unverified SUCCEEDED execution leaves its commitment
+            # permanently OPEN), which is what let one open commitment
+            # consume an entire run's decision budget re-selecting the same
+            # already-completed audit.
+            audit_path = ctx.runtime_directory / "intelligence" / LEGACY_AUDIT_FILENAME
+            if not audit_path.is_file():
+                return False
+            try:
+                persisted = json.loads(audit_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                return False
+            return isinstance(persisted, dict) and persisted.get("classification_counts") == evidence.get("classification_counts")
+        if capability == "legacy_migration":
+            # Same missing-branch defect as legacy_audit, fixed the same way:
+            # a real artifact check, not a bare True/False guess.
+            if evidence.get("migratable") is False:
+                return True  # no actionable legacy page -- a genuine, verifiable no-op
+            slug = evidence.get("slug")
+            if evidence.get("lifecycle") == "STAGED" and slug:
+                return (ctx.working_repository / "content" / "articles" / f"{slug}.html").is_file()
+            return False  # BLOCKED (research-insufficient / gate-failed) is correctly left unverified
         if capability == "measurement":
             latest = ctx.runtime_directory / "intelligence" / "gsc-latest.json"
             if not latest.is_file():
@@ -1686,9 +1728,21 @@ def _classify_legacy_page(repo: Path, runtime: Path, path: Path) -> dict[str, An
 
 
 def _build_legacy_audit(ctx) -> dict[str, Any]:
-    """Discover and classify the legacy estate; persist the audit artifact."""
+    """Discover and classify the legacy estate; persist the audit artifact.
+
+    Preserves the prior artifact's "outcomes" list (per-slug migration
+    history written by _record_legacy_outcome) across rewrites -- a fresh
+    audit used to silently replace the whole file, discarding every
+    recently-processed-page suppression record _legacy_migration_target
+    depends on to avoid reselecting the same page every run. Also carries
+    forward "already_current" -- see the no-new-work note below.
+    """
     repo = ctx.working_repository
     runtime = ctx.runtime_directory
+    previous = _load_legacy_audit(runtime)
+    previous_counts = previous.get("classification_counts") if isinstance(previous, dict) else None
+    previous_pages = previous.get("pages") if isinstance(previous, dict) else None
+
     pages = _discover_legacy_pages(repo)
     results = [_classify_legacy_page(repo, runtime, path) for path in pages]
     counts: dict[str, int] = {}
@@ -1700,7 +1754,17 @@ def _build_legacy_audit(ctx) -> dict[str, Any]:
         "legacy_page_count": len(results),
         "classification_counts": counts,
         "pages": results,
+        # True when this run reclassified the exact same estate the last
+        # persisted audit already found -- i.e. genuinely no new work, not
+        # merely "the audit ran again." _execute_legacy_audit surfaces this
+        # as evidence["skipped"] so the shared no-new-work/supersession
+        # machinery (autonomous.py's _is_no_new_work /
+        # _supersede_no_new_work_siblings) recognizes a repeat audit for
+        # what it is instead of treating every run as fresh production work.
+        "already_current": bool(previous_counts is not None and previous_counts == counts and previous_pages == results),
     }
+    if isinstance(previous.get("outcomes"), list):
+        audit["outcomes"] = previous["outcomes"]
     path = runtime / "intelligence" / LEGACY_AUDIT_FILENAME
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
