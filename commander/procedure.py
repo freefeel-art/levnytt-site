@@ -74,32 +74,78 @@ _US_SERP_LOCATION = 2840  # United States
 # Fixed, small, human-reviewed query set for community_intelligence. Kept
 # deliberately bounded (not auto-expanded from arbitrary keyword candidates)
 # so a single capability run has a known, small cost and a known, reviewable
-# scope. Covers: direct NeoLife questions, MLM/direct-selling trust
-# questions (LevNytt's differentiated transparency content), and LevNytt's
-# core covered supplement/nutrition topics.
+# scope.
 #
-# Stage 4.5 (candidate-acquisition audit): the original 6 queries were 4
-# MLM/NeoLife-generic to 2 supplement-topic. Rebalanced with 4 more queries
-# grounded in subject areas LevNytt actually has real, published,
-# evidence-backed content on -- verified against the live site's own
-# content/articles/ inventory this session, not invented: probiotika (4 real
-# articles), omega-3 (4 real articles, including a sufficiency-relevant
-# evidence-based guide), antioxidanter (the one topic with a real
-# sufficiency-PASSED research packet), and multivitamin (5 real articles
-# spanning different audiences). Still fixed and human-reviewed, not
-# auto-generated from the full content inventory -- that would remove the
-# deliberate boundedness this capability was built with.
-_COMMUNITY_DISCOVERY_QUERIES = (
-    "neolife recension flashback",
-    "är neolife pyramidspel",
-    "neolife kosttillskott forum",
-    "mlm sverige recension flashback",
-    "d-vitamin brist symptom forum",
-    "magnesium kosttillskott vilken forum",
-    "probiotika kosttillskott forum",
-    "omega 3 kosttillskott vilken forum",
-    "antioxidanter kosttillskott forum",
-    "multivitamin vilken bäst forum",
+# Topic/category-map correction: the prior "rebalanced" 10-query set (4
+# MLM/NeoLife-generic + 6 supplement-topic, after Stage 4.5 added
+# probiotika/omega-3/antioxidanter/multivitamin) was itself still
+# supplement-heavy -- every added query was a supplement topic, so it never
+# represented LevNytt's other real, distinct content categories. Rebuilt
+# from real evidence, not assumption:
+#
+#   - content/products/categories.json (LevNytt's real product taxonomy)
+#     names five real categories: supplements/Kosttillskott,
+#     weight_management/Viktkontroll, home_care/"Golden Rengöring",
+#     personal_care/"Hår & Kroppsvård", skin_care/Hudvård (+ accessories,
+#     not a discussion topic).
+#   - config/content-inventory.json (139 real published content slugs)
+#     confirms the real, UNEQUAL distribution across those categories:
+#     supplements/nutrition dominate (~90+ real articles), business/MLM
+#     transparency content is substantial (~12 real articles), while
+#     personal_care+skin_care (~5), weight_management (~3), and home_care
+#     (~3) are each real but thin.
+#   - runtime/intelligence/gsc-latest.json (196 real GSC queries) confirms
+#     the same skew in actual search demand, and additionally shows ZERO
+#     current query demand for Rengöring or Personlig vård specifically,
+#     and only two low-volume Viktkontroll queries (both about
+#     klimakteriet/menopause weight gain). Demand signals alone would keep
+#     reinforcing the supplement skew forever, so the three thin
+#     categories below are seeded from real page titles/H1s in the content
+#     inventory (verified via the live built pages), not from demand.
+#
+# Allocation is a deliberate floor-plus-weighted rule, not equal weighting
+# and not proportional-to-content-share weighting (per-category source is
+# recorded in the tuple below): supplements keep the largest single share
+# (6 of 16) but far below their ~65% real content share, so one category
+# cannot consume the discovery budget merely because it has the most
+# searchable terms; MLM/business keeps 4 (above its ~9% content share,
+# reflecting LevNytt's own editorial differentiation as transparency
+# content); every thin-but-real category gets a guaranteed floor of 2 real,
+# content-derived queries so none is reduced to zero or tokenized as a
+# single bare category-name query. Total stays small and reviewable (16
+# queries, up from the prior 10) -- still fixed and human-reviewed, not
+# auto-generated at runtime from the full inventory.
+_COMMUNITY_DISCOVERY_TOPIC_MAP: dict[str, tuple[tuple[str, str], ...]] = {
+    "business_mlm": (
+        ("neolife recension flashback", "content-inventory.json: neolife-historia, neolife-affarsmojlighet"),
+        ("är neolife pyramidspel", "content-inventory.json: vad-ar-pyramidspel"),
+        ("neolife kosttillskott forum", "content-inventory.json: mlm-produkter-kosttillskott-pris"),
+        ("mlm sverige recension flashback", "content-inventory.json: hur-fungerar-natverksmarknadsforing-egentligen, mlm-foretag-skandaler-sverige-varlden"),
+    ),
+    "supplements_nutrition": (
+        ("d-vitamin brist symptom forum", "categories.json supplements > targeted nutrient subcategory"),
+        ("magnesium kosttillskott vilken forum", "categories.json supplements > mineral subcategory"),
+        ("probiotika kosttillskott forum", "categories.json supplements > probiotic subcategory"),
+        ("omega 3 kosttillskott vilken forum", "categories.json supplements > omega-3 subcategory"),
+        ("antioxidanter kosttillskott forum", "categories.json supplements + gsc-latest.json: 'antioxidanter' 98 impressions"),
+        ("multivitamin vilken bäst forum", "categories.json supplements > multivitamin subcategory"),
+    ),
+    "personal_care": (
+        ("hudvård rekommendationer forum", "categories.json personal_care/skin_care: personlig-vard.html real page (Nutriance Organic hudvård)"),
+        ("retinol hudvård forum", "content-inventory.json: retinol-pa-sommaren.html real article"),
+    ),
+    "weight_control": (
+        ("viktuppgång klimakteriet forum", "categories.json weight_management: viktuppgang-klimakteriet.html + gsc-latest.json: 'viktuppgång klimakteriet' real query"),
+        ("fibrer viktminskning forum", "content-inventory.json: fibrer-for-viktminskning.html real article"),
+    ),
+    "cleaning": (
+        ("miljövänliga rengöringsmedel forum", "categories.json home_care/Golden Rengöring: ar-miljovanliga-rengoringsmedel-lika-effektiva.html real article"),
+        ("ekologisk städning fungerar forum", "categories.json home_care/Golden Rengöring: ekologisk-stadning-greenwashing.html real article"),
+    ),
+}
+
+_COMMUNITY_DISCOVERY_QUERIES: tuple[str, ...] = tuple(
+    query for topic_queries in _COMMUNITY_DISCOVERY_TOPIC_MAP.values() for query, _source in topic_queries
 )
 
 # Public forums/platforms where Swedish product and MLM discussions occur.
@@ -717,9 +763,11 @@ class LevNyttProcedure:
         }
 
     def _execute_community_intelligence(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
-        """Read-only discovery of relevant Swedish discussions (NeoLife,
-        MLM/direct-selling, and LevNytt's covered supplement/nutrition
-        topics), reported as structured evidence.
+        """Read-only discovery of relevant Swedish discussions across
+        LevNytt's real category breadth (business/MLM/NeoLife,
+        supplements/nutrition, personal_care, weight_control, cleaning --
+        see _COMMUNITY_DISCOVERY_TOPIC_MAP), reported as structured
+        evidence.
 
         Never posts, replies, joins a group, sends a friend/connection
         request, or messages anyone. Runs a fixed, small query set through
