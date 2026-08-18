@@ -556,6 +556,15 @@ _NEOLIFE_SPECIFIC_MARKERS = (
 # instead of being (possibly wrongly) flagged as company-specific.
 _NAMED_DOMAIN_PATTERN = re.compile(r"\b[a-z0-9][a-z0-9-]{1,60}\.(?:se|com|net|org|nu|info)\b")
 _LEVNYTT_OWN_DOMAINS = ("levnytt.se", "neolife.com", "neolifeshop.com")
+# The discussion platforms themselves are never "the other company" --
+# real full-thread text (Stage 3) embeds the platform's own structural
+# links (image CDNs, quote-reply permalinks, outbound-link redirect
+# wrappers like flashback.org's leave.php?u=...) which otherwise
+# domain-match and would wrongly flag the platform's own infrastructure as
+# an unrelated named company. Confirmed live: a real fetched Flashback
+# thread's embedded links matched "flashback.org" itself before this
+# exclusion was added.
+_SOURCE_PLATFORM_DOMAINS = ("flashback.org", "familjeliv.se", "reddit.com", "facebook.com", "flexans.se")
 
 _ON_TOPIC_SIGNAL_TYPES = {"SCIENCE_HEALTH", "PRODUCT", "CONSUMER_DECISION", "CONTENT_QUESTION"}
 
@@ -575,8 +584,9 @@ def classify_topical_relevance(text: str) -> dict[str, str]:
             "relevance_evidence": f"Matched NeoLife-specific identifier(s): {', '.join(neolife_hits)}.",
         }
 
+    excluded_domains = _LEVNYTT_OWN_DOMAINS + _SOURCE_PLATFORM_DOMAINS
     domain_hits = sorted({m.group(0) for m in _NAMED_DOMAIN_PATTERN.finditer(lowered)})
-    other_domains = [d for d in domain_hits if not any(d == own or d.endswith("." + own) for own in _LEVNYTT_OWN_DOMAINS)]
+    other_domains = [d for d in domain_hits if not any(d == own or d.endswith("." + own) for own in excluded_domains)]
     if other_domains:
         return {
             "relevance": "UNRELATED_NAMED_COMPANY",
@@ -652,20 +662,30 @@ def _possible_relevant_content(classification: dict[str, Any], topic: str | None
     return _find_live_page_for_topic(working_repository, topic)
 
 
-def reason_about_discovery_candidate(item: dict[str, Any], runtime: Path, working_repository: Path) -> dict[str, Any]:
-    """READ (one already-persisted, already real discovery item) -> REASON
-    -> DRAFT where evidence justifies it. Returns a full evidence record for
-    Commander -- never constructs or authorizes a write; community_engagement
-    (owned-page only) is a wholly separate path this never reaches.
+def reason_about_discovery_candidate(
+    item: dict[str, Any],
+    runtime: Path,
+    working_repository: Path,
+    *,
+    thread_context: str | None = None,
+) -> dict[str, Any]:
+    """READ (one already-persisted, already real discovery item -- SERP
+    title+snippet by default, or real fetched full-thread text when
+    thread_context is supplied by Stage 3) -> REASON -> DRAFT where evidence
+    justifies it. Returns a full evidence record for Commander -- never
+    constructs or authorizes a write; community_engagement (owned-page only)
+    is a wholly separate path this never reaches.
 
     Outcome is always exactly one of: NO_ACTION, OBSERVE, ANSWER_WITHOUT_LINK,
     POSSIBLE_VALUE_ADDING_LINK, INSUFFICIENT_CONTEXT. None of these
-    authorizes execution -- they are reasoning results only.
+    authorizes execution -- they are reasoning results only. Factual
+    grounding rules are unchanged regardless of evidence_basis: thread text
+    tells us what people said, never that it is true.
     """
     url = str(item.get("url", ""))
     title = str(item.get("title", "")).strip()
     snippet = str(item.get("snippet", "")).strip()
-    text = f"{title} {snippet}".strip()
+    text = " ".join(part for part in (title, snippet, thread_context) if part).strip()
 
     relevance = classify_topical_relevance(text)
     record: dict[str, Any] = {
@@ -678,6 +698,7 @@ def reason_about_discovery_candidate(item: dict[str, Any], runtime: Path, workin
         "relevance": relevance["relevance"],
         "relevance_evidence": relevance["relevance_evidence"],
         "reasoned_at": datetime.now(timezone.utc).isoformat(),
+        "evidence_basis": "FULL_THREAD" if thread_context else "SERP_SNIPPET",
     }
 
     if relevance["relevance"] == "UNRELATED_NAMED_COMPANY":
@@ -802,6 +823,333 @@ def record_reasoning_results(runtime: Path, results: list[dict[str, Any]]) -> No
         existing = []
     existing.extend(results)
     store["reasoning"] = existing[-20:]
+    store["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_community_store(runtime, store)
+
+
+# ── Stage 3: bounded full-thread fetching ───────────────────────────
+# Adds only FULL THREAD CONTEXT before any future engagement decision --
+# still never constructs or authorizes a write. Fetchability was verified
+# for real (live fetches + robots.txt) during the Stage 3 audit:
+#   - flashback.org: robots.txt allows general crawling (Crawl-delay: 5);
+#     real fetch returns rich, individually-attributed posts (author,
+#     timestamp, post number).
+#   - familjeliv.se: robots.txt allows general crawling for a generic
+#     user-agent; real fetch returns the original post reliably, but
+#     individual replies are only loosely delimited and per-reply
+#     author/timestamp is not reliably available (only quoted replies show
+#     an author + timestamp).
+#   - reddit.com: robots.txt explicitly disallows all crawling
+#     ("User-agent: * / Disallow: /"); a real fetch returned HTTP 403.
+#   - facebook.com: robots.txt explicitly prohibits automated collection
+#     without permission; a real fetch returned HTTP 403.
+#   - flexans.se (present in the discussion-domain allowlist, but with zero
+#     real discoveries so far): the domain does not resolve at all.
+# Reddit, Facebook, and flexans.se are therefore excluded from fetch
+# eligibility entirely, not merely best-effort-attempted.
+_FETCHABLE_PLATFORMS = {"flashback_forum", "familjeliv_forum"}
+_MAX_THREAD_FETCHES_PER_RUN = 3
+_THREAD_FETCH_TIMEOUT_SECONDS = 30
+
+
+def find_discovery_item(runtime: Path, url: str) -> dict[str, Any] | None:
+    """Look up one persisted SERP discovery record by URL -- used to recover
+    the original title/snippet before re-reasoning with thread context,
+    without ever overwriting the original discovery record itself."""
+    store = load_community_store(runtime)
+    discovery = store.get("discovery", [])
+    if not isinstance(discovery, list):
+        return None
+    for item in discovery:
+        if isinstance(item, dict) and str(item.get("url", "")) == url:
+            return item
+    return None
+
+
+_FLASHBACK_POST_HEADER = re.compile(
+    r"# \[\*\*(?P<number>\d+)\*\*\]\([^)]+\)\s*\n\s*\n\[(?P<username>[^\]]+)\]\([^)]+\)"
+)
+_FLASHBACK_TIMESTAMP_LINE = re.compile(r"^\d{4}-\d{2}-\d{2}, \d{2}:\d{2}$")
+_FLASHBACK_BOILERPLATE_LINE = re.compile(
+    r"^(- .*|Medlem|Reg: .*|Inl[äa]gg: .*|\[Citera\]\(.*\)|\[!\[.*\]\(.*\)\]\(.*\)|Spoiler)$"
+)
+
+
+def _parse_flashback_thread(markdown: str) -> dict[str, Any]:
+    """Best-effort structural extraction, verified against real fetched
+    Flashback threads: post headers ('# [**N**](url)') reliably delimit
+    individually-attributed posts (author, timestamp, text). No evidence of
+    multi-page pagination markup was observed in the real threads fetched
+    during the audit -- reported honestly as single-page rather than assumed."""
+    matches = list(_FLASHBACK_POST_HEADER.finditer(markdown))
+    posts: list[dict[str, Any]] = []
+    for index, match in enumerate(matches):
+        start = match.end()
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(markdown)
+        body = markdown[start:end]
+        timestamp = None
+        lines: list[str] = []
+        for raw_line in body.splitlines():
+            line = raw_line.strip()
+            if not line:
+                continue
+            if _FLASHBACK_TIMESTAMP_LINE.match(line):
+                timestamp = line.replace(",", "")
+                continue
+            if _FLASHBACK_BOILERPLATE_LINE.match(line):
+                continue
+            lines.append(line)
+        posts.append({
+            "post_number": int(match.group("number")),
+            "author": match.group("username"),
+            "timestamp": timestamp,
+            "text": "\n".join(lines).strip(),
+        })
+    return {
+        "posts": posts,
+        "original_post": posts[0]["text"] if posts else None,
+        "pagination": {"pages_observed": 1, "additional_pages_detected": False},
+    }
+
+
+_FAMILJELIV_PAGINATION = re.compile(r"^Sida (?P<current>\d+) av (?P<total>\d+)$")
+_FAMILJELIV_REPLY_HEADER = re.compile(r"^Svar på tråden .*$")
+_FAMILJELIV_QUOTE_ATTRIBUTION = re.compile(
+    r"^(?P<author>.+?) skrev (?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) följande:$"
+)
+_FAMILJELIV_TITLE_HEADING = re.compile(r"^(?:-\s*)*#\s+(?P<title>.+)$")
+_FAMILJELIV_NAV_BULLET = re.compile(r"^(?:-\s*)*\[.*\]\(.*\)$")
+
+
+def _parse_familjeliv_thread(markdown: str) -> dict[str, Any]:
+    """Best-effort structural extraction, verified against a real fetched
+    Familjeliv thread. The original post is reliably distinguishable (the
+    first heading not naming the site itself, up to the first navigation/
+    pagination marker). Individual replies are only loosely delimited by
+    blank lines and are NOT reliably attributed to an author or timestamp --
+    only a reply that quotes an earlier one reveals an author + timestamp.
+    This limitation is real, not a parsing gap to be perfected here."""
+    lines = [line.strip() for line in markdown.splitlines()]
+    title_idx = None
+    title = None
+    for index, line in enumerate(lines):
+        match = _FAMILJELIV_TITLE_HEADING.match(line)
+        if match and "familjeliv" not in match.group("title").casefold():
+            title_idx = index
+            title = match.group("title")
+            break
+    if title_idx is None:
+        return {"title": None, "original_post": None, "replies": [], "quoted_authors": [], "pagination": None}
+
+    # Pagination ("Sida X av Y") is detected as a standalone full-text search,
+    # not tied to the original-post loop below: the real markdown places one
+    # or more plain navigation-arrow bullets (e.g. "- - [«](...)") BEFORE the
+    # "Sida X av Y" text on the same nav line group, so a loop that stops at
+    # the first nav-bullet-shaped line would otherwise never reach it.
+    pagination = None
+    for line in lines:
+        page_match = _FAMILJELIV_PAGINATION.match(line.lstrip("- ").strip())
+        if page_match:
+            pagination = {"current_page": int(page_match.group("current")), "total_pages": int(page_match.group("total"))}
+            break
+
+    original_post_lines: list[str] = []
+    cursor = title_idx + 1
+    while cursor < len(lines):
+        candidate = lines[cursor].lstrip("- ").strip()
+        if _FAMILJELIV_PAGINATION.match(candidate) or _FAMILJELIV_NAV_BULLET.match(lines[cursor]):
+            break
+        if lines[cursor]:
+            original_post_lines.append(lines[cursor])
+        cursor += 1
+    original_post = "\n".join(original_post_lines).strip()
+
+    reply_start = None
+    for index in range(cursor, len(lines)):
+        if _FAMILJELIV_REPLY_HEADER.match(lines[index]):
+            reply_start = index + 1
+            break
+
+    replies: list[str] = []
+    quoted_authors: list[dict[str, str]] = []
+    if reply_start is not None:
+        current: list[str] = []
+        for line in lines[reply_start:]:
+            candidate = line.lstrip("- ").strip()
+            if _FAMILJELIV_PAGINATION.match(candidate) or line.startswith("[Svara i tråden]"):
+                break
+            quote_match = _FAMILJELIV_QUOTE_ATTRIBUTION.match(candidate)
+            if quote_match:
+                quoted_authors.append({"author": quote_match.group("author"), "timestamp": quote_match.group("timestamp")})
+            if not candidate:
+                if current:
+                    replies.append("\n".join(current).strip())
+                    current = []
+                continue
+            current.append(candidate)
+        if current:
+            replies.append("\n".join(current).strip())
+    replies = [reply for reply in replies if reply]
+
+    return {
+        "title": title,
+        "original_post": original_post or None,
+        "replies": replies,
+        "quoted_authors": quoted_authors,
+        "pagination": pagination,
+    }
+
+
+def fetch_thread_context(url: str, platform: str, *, scrape) -> dict[str, Any]:
+    """One bounded, read-only fetch of a single third-party discussion
+    thread's first page, via the existing Firecrawl provider Scout already
+    uses (no second web-fetch stack). Read-only by construction: this
+    function only ever calls scrape() (Firecrawl's GET-equivalent) and
+    returns a structured evidence record -- it never constructs an
+    interaction, never calls FacebookCommunityInteractor, and never submits
+    anything. A failed or unsupported fetch is reported, never raised, so
+    one bad thread can never block a Community Intelligence cycle."""
+    now = datetime.now(timezone.utc).isoformat()
+    if platform not in _FETCHABLE_PLATFORMS:
+        return {
+            "fetch_status": "UNSUPPORTED_SOURCE", "url": url, "platform": platform,
+            "fetched_at": now, "provider": "none",
+            "limitations": [f"{platform!r} is not a supported full-thread-fetch source (see the Stage 3 fetchability audit)."],
+        }
+    try:
+        data = scrape(url, formats=("markdown",), timeout=_THREAD_FETCH_TIMEOUT_SECONDS)
+    except Exception as error:
+        return {
+            "fetch_status": "FAILED", "url": url, "platform": platform,
+            "fetched_at": now, "provider": "Firecrawl",
+            "error": f"{type(error).__name__}: {error}",
+        }
+    markdown = str(data.get("markdown") or "")
+    metadata = data.get("metadata") if isinstance(data.get("metadata"), dict) else {}
+    if not markdown.strip():
+        return {
+            "fetch_status": "EMPTY", "url": url, "platform": platform,
+            "fetched_at": now, "provider": "Firecrawl", "page_title": metadata.get("title", ""),
+        }
+
+    if platform == "flashback_forum":
+        parsed = _parse_flashback_thread(markdown)
+        confidence = "HIGH" if parsed["posts"] else "LOW"
+        limitations = [] if parsed["posts"] else ["No individually-attributed posts were recognized in the fetched content."]
+    else:
+        parsed = _parse_familjeliv_thread(markdown)
+        confidence = "MEDIUM" if parsed["original_post"] else "LOW"
+        limitations = ["Per-reply author/timestamp attribution is not reliably available for this source; only quoted replies reveal an author/timestamp."]
+        if not parsed["original_post"]:
+            limitations.append("The original post could not be confidently distinguished from surrounding content.")
+
+    return {
+        "fetch_status": "COMPLETE",
+        "url": url,
+        "platform": platform,
+        "fetched_at": now,
+        "provider": "Firecrawl",
+        "page_title": metadata.get("title", ""),
+        "thread_title": parsed.get("title") or metadata.get("title", ""),
+        "original_post": parsed.get("original_post"),
+        "posts": parsed.get("posts", []),
+        "replies": parsed.get("replies", []),
+        "quoted_authors": parsed.get("quoted_authors", []),
+        "pagination": parsed.get("pagination"),
+        "extraction_confidence": confidence,
+        "limitations": limitations,
+        "raw_markdown_length": len(markdown),
+    }
+
+
+def thread_context_text(fetch: dict[str, Any], *, max_chars: int = 3000) -> str | None:
+    """Flatten one fetch_thread_context() result into bounded plain text
+    suitable as reasoning context. Never fabricates structure that wasn't
+    extracted -- an EMPTY/FAILED/UNSUPPORTED fetch returns None, and
+    reasoning falls back to SERP snippet alone."""
+    if fetch.get("fetch_status") != "COMPLETE":
+        return None
+    parts: list[str] = []
+    if fetch.get("original_post"):
+        parts.append(str(fetch["original_post"]))
+    for post in fetch.get("posts", [])[1:]:
+        if isinstance(post, dict) and post.get("text"):
+            parts.append(str(post["text"]))
+    for reply in fetch.get("replies", []):
+        if reply:
+            parts.append(str(reply))
+    text = "\n".join(parts).strip()
+    if not text:
+        return None
+    return text[:max_chars]
+
+
+def thread_fetch_eligible_candidates(runtime: Path, limit: int = _MAX_THREAD_FETCHES_PER_RUN) -> list[dict[str, Any]]:
+    """Candidates for bounded full-thread fetching this cycle: already
+    reasoned about by Stage 2, not already resolved as NO_ACTION, on a
+    source Stage 3 can actually fetch (_FETCHABLE_PLATFORMS), and NEW or
+    STRENGTHENED per this stage's own delta counter -- kept independent of
+    both scout_promotions and community_reasoning_history, so seeding
+    Scout, Stage 2 reasoning, and Stage 3 fetching never contaminate each
+    other's "have I already done this" state. An unchanged RECURRING
+    candidate is skipped: it was already fetched and nothing has changed."""
+    store = load_community_store(runtime)
+    reasoning = store.get("reasoning", [])
+    if not isinstance(reasoning, list):
+        return []
+    fetch_history = store.get("thread_fetch_history", {})
+    if not isinstance(fetch_history, dict):
+        fetch_history = {}
+
+    seen_urls: set[str] = set()
+    eligible: list[dict[str, Any]] = []
+    for result in reversed(reasoning):  # most recent reasoning per URL wins
+        if not isinstance(result, dict):
+            continue
+        url = str(result.get("source_url", ""))
+        if not url or url in seen_urls:
+            continue
+        seen_urls.add(url)
+        if result.get("outcome") == "NO_ACTION":
+            continue
+        if result.get("source_platform") not in _FETCHABLE_PLATFORMS:
+            continue
+        prior = fetch_history.get(url) if isinstance(fetch_history.get(url), dict) else None
+        status = _delta_status(prior)
+        if status == "RECURRING":
+            continue
+        eligible.append({**result, "thread_fetch_status": status})
+        if len(eligible) >= limit:
+            break
+    return eligible
+
+
+def record_thread_fetch(runtime: Path, urls: list[str]) -> None:
+    """Update Stage 3's own per-source-URL delta counter."""
+    store = load_community_store(runtime)
+    fetch_history = store.get("thread_fetch_history", {})
+    if not isinstance(fetch_history, dict):
+        fetch_history = {}
+    now = datetime.now(timezone.utc).isoformat()
+    for url in urls:
+        if url:
+            _record_delta(fetch_history, url, now=now)
+    store["thread_fetch_history"] = fetch_history
+    save_community_store(runtime, store)
+
+
+def record_thread_evidence(runtime: Path, records: list[dict[str, Any]]) -> None:
+    """Persist full-thread evidence SEPARATELY from the original SERP
+    discovery record (store['thread_evidence'], never store['discovery']) --
+    the original discovery record is never overwritten."""
+    if not records:
+        return
+    store = load_community_store(runtime)
+    existing = store.get("thread_evidence", [])
+    if not isinstance(existing, list):
+        existing = []
+    existing.extend(records)
+    store["thread_evidence"] = existing[-20:]
     store["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_community_store(runtime, store)
 

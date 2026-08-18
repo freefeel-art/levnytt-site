@@ -771,6 +771,60 @@ class LevNyttProcedure:
             levnytt_community.record_community_reasoning(ctx.runtime_directory, reasoning_results)
             levnytt_community.record_reasoning_results(ctx.runtime_directory, reasoning_results)
 
+        # Stage 3 (bounded full-thread fetching): adds only FULL THREAD
+        # CONTEXT to a small, delta-gated set of Stage 2's own results --
+        # never a write. Reuses the existing Firecrawl provider Scout
+        # already uses (no second web-fetch stack). Fetchability was
+        # verified for real during the Stage 3 audit: Flashback/Familjeliv
+        # only -- Reddit's and Facebook's own robots.txt disallow/prohibit
+        # automated collection, and both returned a real HTTP 403 via
+        # Firecrawl; flexans.se does not resolve. See
+        # commander/community.py's _FETCHABLE_PLATFORMS. A failed or
+        # unsupported fetch is reported, never raised, so one bad thread can
+        # never block this cycle. Community/forum posting rules are NOT
+        # inferred here -- that remains a wholly separate, not-yet-built
+        # boundary; promotional_rules stays "unknown" where not
+        # independently known.
+        from app.providers.firecrawl import scrape as firecrawl_scrape
+
+        thread_eligible = levnytt_community.thread_fetch_eligible_candidates(ctx.runtime_directory)
+        thread_traces: list[dict[str, Any]] = []
+        fetched_urls: list[str] = []
+        fetch_records: list[dict[str, Any]] = []
+        updated_reasoning_records: list[dict[str, Any]] = []
+        for candidate in thread_eligible:
+            url = str(candidate.get("source_url", ""))
+            platform = str(candidate.get("source_platform", ""))
+            fetch = levnytt_community.fetch_thread_context(url, platform, scrape=firecrawl_scrape)
+            fetched_urls.append(url)
+            fetch_records.append(fetch)
+            context_text = levnytt_community.thread_context_text(fetch)
+            discovery_item = levnytt_community.find_discovery_item(ctx.runtime_directory, url) or {
+                "url": url, "title": candidate.get("question_context", ""), "snippet": "",
+                "platform": platform, "query": candidate.get("source_query", ""),
+                "observed_at": candidate.get("observed_at", ""),
+                "community_demand_status": candidate.get("community_demand_status"),
+            }
+            updated = None
+            if context_text:
+                updated = levnytt_community.reason_about_discovery_candidate(
+                    discovery_item, ctx.runtime_directory, ctx.working_repository, thread_context=context_text,
+                )
+                updated_reasoning_records.append(updated)
+            thread_traces.append({
+                "source_url": url,
+                "fetch_status": fetch.get("fetch_status"),
+                "before_outcome": candidate.get("outcome"),
+                "after_outcome": updated.get("outcome") if updated else None,
+                "outcome_changed": bool(updated and updated.get("outcome") != candidate.get("outcome")),
+            })
+        if fetched_urls:
+            levnytt_community.record_thread_fetch(ctx.runtime_directory, fetched_urls)
+        if fetch_records:
+            levnytt_community.record_thread_evidence(ctx.runtime_directory, fetch_records)
+        if updated_reasoning_records:
+            levnytt_community.record_reasoning_results(ctx.runtime_directory, updated_reasoning_records)
+
         possible_reply = [r for r in reports if r["recommended_action"] == "POSSIBLE_REPLY"]
         # Diminishing-returns detection, mirroring legacy_audit's
         # already_current/skipped pattern: DataForSEO's live SERP results
@@ -790,8 +844,9 @@ class LevNyttProcedure:
             "read_only": True,
             "results": reports,
             "reasoning_results": reasoning_results,
+            "thread_fetch_traces": thread_traces,
         }
-        if new_item_count == 0 and not reasoning_results:
+        if new_item_count == 0 and not reasoning_results and not thread_traces:
             evidence["skipped"] = True
         outcome_counts: dict[str, int] = {}
         for r in reasoning_results:
@@ -801,6 +856,12 @@ class LevNyttProcedure:
             + ", ".join(f"{k}={v}" for k, v in sorted(outcome_counts.items())) + "."
             if reasoning_results else ""
         )
+        changed = sum(1 for t in thread_traces if t["outcome_changed"])
+        thread_summary = (
+            f" Fetched full-thread context for {len(thread_traces)} eligible candidate(s); "
+            f"{changed} outcome(s) changed after full context."
+            if thread_traces else ""
+        )
         return {
             "status": "SUCCEEDED",
             "detail": (
@@ -808,11 +869,11 @@ class LevNyttProcedure:
                 f"discussion-shaped result(s) seen, {new_item_count} genuinely new "
                 f"(not already known), {len(possible_reply)} flagged POSSIBLE_REPLY for "
                 "Owner/human review. Read-only: no post, reply, join, friend request, or "
-                "message was made." + reasoning_summary
+                "message was made." + reasoning_summary + thread_summary
             ) if reports else (
                 f"Community Intelligence discovery: {len(queries)} queries, no "
                 "discussion-shaped results found. Read-only: no post, reply, join, friend "
-                "request, or message was made." + reasoning_summary
+                "request, or message was made." + reasoning_summary + thread_summary
             ),
             "evidence": evidence,
         }
