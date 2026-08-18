@@ -18,6 +18,7 @@ Production chain implemented here (each step is a bounded domain action):
 
 from __future__ import annotations
 
+import ast
 import html as html_lib
 import importlib.util
 import json
@@ -1404,11 +1405,50 @@ def _add_sitemap_entry(repo: Path, slug: str) -> bool:
     return True
 
 
+def _provenance_verified_slugs(repo: Path) -> set[str]:
+    """Slugs with a CONFIRMED content_production/legacy_migration commitment
+    recording a passed final-publication gate.
+
+    A file existing under content/articles/*.html is not by itself proof
+    Commander produced it for real -- a manual run of this pipeline (e.g. to
+    test a gate fix against a genuine keyword) writes an identical-looking
+    untracked HTML file with no ledger entry at all. Only a CONFIRMED
+    commitment -- written solely after a real Commander decision actually
+    executed and verified this exact slug -- proves it is legitimate staged
+    production work rather than a manual/verification artifact. Deployment
+    must never commit and push one of the latter."""
+    path = repo / "runtime" / "commander" / "commitments.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    rows = data.get("commitments") if isinstance(data, dict) else None
+    verified: set[str] = set()
+    for row in rows if isinstance(rows, list) else []:
+        if not isinstance(row, dict):
+            continue
+        if row.get("capability_id") not in ("content_production", "legacy_migration"):
+            continue
+        if row.get("status") != "CONFIRMED":
+            continue
+        reason = row.get("resolution_reason")
+        if not isinstance(reason, str):
+            continue
+        try:
+            parsed = ast.literal_eval(reason)
+        except (ValueError, SyntaxError):
+            continue
+        if isinstance(parsed, dict) and parsed.get("gate_passed") and parsed.get("slug"):
+            verified.add(str(parsed["slug"]))
+    return verified
+
+
 def _first_staged_slug(repo: Path) -> str | None:
     tracked = set(subprocess.run(["git", "-C", str(repo), "ls-files", "content/articles/"], capture_output=True, text=True, check=False).stdout.splitlines())
+    verified = _provenance_verified_slugs(repo)
     for path in sorted((repo / "content" / "articles").glob("*.html")):
         rel = str(path.relative_to(repo))
-        if rel not in tracked:
+        if rel not in tracked and path.stem in verified:
             return path.stem
     return None
 
