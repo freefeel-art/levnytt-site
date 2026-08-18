@@ -1639,15 +1639,25 @@ def _https_serves_200() -> bool:
 
 
 def _pages_missing_sponsor_disclosure(repo: Path) -> list[str]:
+    """Pages with a NeoLife shop/registration link but no point-of-content
+    disclosure marker. Presence of the Sponsor-ID string alone (e.g. buried
+    in an author bio) is not sufficient -- it must appear via one of the two
+    established disclosure mechanisms: the site-wide "ln-nav-disclosure" link
+    next to the header's commercial CTA (rendered by every page through
+    scripts/rebuild-production.py's shared_header(), or hand-applied to
+    index.html/artiklar.html, which sit outside that pipeline), or an
+    in-article "ia-disclosure" paragraph (the older per-article pattern used
+    on pages like direktforsaljning-fakta.html and om-oss.html)."""
     missing: list[str] = []
+    disclosure_markers = ("ln-nav-disclosure", "ia-disclosure")
     for path in sorted(repo.glob("*.html")):
         try:
             text = path.read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
-        if "41-830928" not in text and "neolifeshop.com" not in text:
+        if "neolifeshop.com" not in text:
             continue
-        if "41-830928" not in text:
+        if not any(marker in text for marker in disclosure_markers):
             missing.append(path.name)
         if len(missing) >= 50:
             break
