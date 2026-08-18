@@ -652,25 +652,43 @@ class LevNyttProcedure:
                 })
 
         reports = [_classify_discovery_item(item) for item in discovered]
-        levnytt_community.record_discovery(ctx.runtime_directory, reports)
+        new_item_count = levnytt_community.record_discovery(ctx.runtime_directory, reports)
 
         possible_reply = [r for r in reports if r["recommended_action"] == "POSSIBLE_REPLY"]
+        # Diminishing-returns detection, mirroring legacy_audit's
+        # already_current/skipped pattern: DataForSEO's live SERP results
+        # fluctuate run to run even for this fixed query list, so a nonzero
+        # result_count alone doesn't mean anything genuinely new was found --
+        # only new_item_count (post-dedup, against the persisted store) does.
+        # A zero-new-item run is truthfully "no new work", which lets the
+        # shared autonomous._is_no_new_work / _supersede_no_new_work_siblings
+        # machinery classify it correctly instead of every repeat run looking
+        # like fresh production activity forever.
+        evidence: dict[str, Any] = {
+            "query_count": len(queries),
+            "result_count": len(reports),
+            "new_item_count": new_item_count,
+            "possible_reply_count": len(possible_reply),
+            "errors": errors,
+            "read_only": True,
+            "results": reports,
+        }
+        if new_item_count == 0:
+            evidence["skipped"] = True
         return {
             "status": "SUCCEEDED",
             "detail": (
                 f"Community Intelligence discovery: {len(queries)} queries, {len(reports)} "
-                f"discussion-shaped result(s) recorded, {len(possible_reply)} flagged "
-                "POSSIBLE_REPLY for Owner/human review. Read-only: no post, reply, join, "
-                "friend request, or message was made."
+                f"discussion-shaped result(s) seen, {new_item_count} genuinely new "
+                f"(not already known), {len(possible_reply)} flagged POSSIBLE_REPLY for "
+                "Owner/human review. Read-only: no post, reply, join, friend request, or "
+                "message was made."
+            ) if reports else (
+                f"Community Intelligence discovery: {len(queries)} queries, no "
+                "discussion-shaped results found. Read-only: no post, reply, join, friend "
+                "request, or message was made."
             ),
-            "evidence": {
-                "query_count": len(queries),
-                "result_count": len(reports),
-                "possible_reply_count": len(possible_reply),
-                "errors": errors,
-                "read_only": True,
-                "results": reports,
-            },
+            "evidence": evidence,
         }
 
     def _execute_social_publishing(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -1995,27 +2013,55 @@ def _https_serves_200() -> bool:
         return False
 
 
+_DISCLOSURE_CLASS_PATTERN = re.compile(r'class="[^"]*\b(?:ln-nav-disclosure|ia-disclosure)\b[^"]*"')
+
+
+def _has_applied_disclosure_marker(text: str) -> bool:
+    """True only when a disclosure marker class is actually applied to an
+    element (a real class="..." attribute), never merely present anywhere in
+    the file. A naive substring check on "ia-disclosure" was a false-positive
+    risk: content/articles/*.html pages embed a shared <style> block defining
+    ".ia-disclosure{...}" on every page regardless of whether any element in
+    that specific page actually uses the class -- discovered on
+    kosttillskott-aldre-65.html during commissioning, where the substring
+    happened to be present (in CSS) alongside a genuinely correct, separately
+    applied disclosure paragraph elsewhere in the same file. The two facts
+    are unrelated; only the applied-class check proves the second one."""
+    return bool(_DISCLOSURE_CLASS_PATTERN.search(text))
+
+
 def _pages_missing_sponsor_disclosure(repo: Path) -> list[str]:
     """Pages with a NeoLife shop/registration link but no point-of-content
-    disclosure marker. Presence of the Sponsor-ID string alone (e.g. buried
-    in an author bio) is not sufficient -- it must appear via one of the two
-    established disclosure mechanisms: the site-wide "ln-nav-disclosure" link
-    next to the header's commercial CTA (rendered by every page through
-    scripts/rebuild-production.py's shared_header(), or hand-applied to
-    index.html/artiklar.html, which sit outside that pipeline), or an
-    in-article "ia-disclosure" paragraph (the older per-article pattern used
-    on pages like direktforsaljning-fakta.html and om-oss.html)."""
+    disclosure marker actually applied. Presence of the Sponsor-ID string
+    alone (e.g. buried in an author bio) is not sufficient -- it must appear
+    via one of the two established disclosure mechanisms: the site-wide
+    "ln-nav-disclosure" link next to the header's commercial CTA (rendered by
+    every page through scripts/rebuild-production.py's shared_header(), or
+    hand-applied to index.html/artiklar.html, which sit outside that
+    pipeline), or an in-article "ia-disclosure" paragraph (the pattern used
+    by both older root pages like direktforsaljning-fakta.html/om-oss.html
+    and every content_production/legacy_migration article under
+    content/articles/ -- e.g. kosttillskott-aldre-65.html).
+
+    Covers both live production content paths: root-level *.html (the
+    scripts/rebuild-production.py-owned estate) and content/articles/**/*.html
+    at any depth (the content_production/legacy_migration-owned estate,
+    including the rare nested per-locale layout -- e.g.
+    content/articles/nattblindhet/nattblindhet.html -- which _redirects can
+    still route live). The previous version of this check only scanned
+    root-level files, so no article produced through content_production or
+    legacy_migration was ever actually verified by this gate."""
     missing: list[str] = []
-    disclosure_markers = ("ln-nav-disclosure", "ia-disclosure")
-    for path in sorted(repo.glob("*.html")):
+    candidates = sorted(repo.glob("*.html")) + sorted((repo / "content" / "articles").rglob("*.html"))
+    for path in candidates:
         try:
             text = path.read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
         if "neolifeshop.com" not in text:
             continue
-        if not any(marker in text for marker in disclosure_markers):
-            missing.append(path.name)
+        if not _has_applied_disclosure_marker(text):
+            missing.append(str(path.relative_to(repo)))
         if len(missing) >= 50:
             break
     return missing

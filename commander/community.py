@@ -272,19 +272,34 @@ def record_signals(runtime: Path, signals: list[dict[str, Any]]) -> None:
     save_community_store(runtime, store)
 
 
-def record_discovery(runtime: Path, items: list[dict[str, Any]]) -> None:
+def record_discovery(runtime: Path, items: list[dict[str, Any]]) -> int:
     """Append newly discovered read-only Community Intelligence items to the
     project-scoped store, deduped by URL. This is discovery evidence only --
     nothing in this module or its callers posts, replies, joins a group,
     sends a connection request, or messages anyone. A discovered item's
     ``recommended_action`` (NO_ACTION / OBSERVE / POSSIBLE_REPLY) is a
     reporting label for a human/Owner decision, never a trigger for
-    automated action -- no code path consumes it to act."""
+    automated action -- no code path consumes it to act.
+
+    Returns the count of genuinely new (not previously seen) items this call
+    added -- the caller uses this to tell a run that surfaced real new
+    evidence apart from one that just rediscovered already-known items
+    (DataForSEO's live SERP results fluctuate run to run even for the same
+    fixed query list, so a nonzero raw result_count does not by itself mean
+    anything new was actually found).
+
+    Also appends a compact, bounded run-history entry (store["discovery_runs"],
+    kept to the most recent 20) recording when a run happened and how many
+    new items it actually contributed -- evidence._community_state reads this
+    to warn Commander when the most recent run already found ~nothing new,
+    the same "don't re-run something that just told you it has nothing new"
+    principle already applied to measurement_freshness."""
     store = load_community_store(runtime)
     existing = store.get("discovery", [])
     if not isinstance(existing, list):
         existing = []
     seen_urls = {str(d.get("url", "")) for d in existing if isinstance(d, dict)}
+    new_count = 0
     for item in items:
         if not isinstance(item, dict):
             continue
@@ -294,9 +309,17 @@ def record_discovery(runtime: Path, items: list[dict[str, Any]]) -> None:
         item["recorded_at"] = datetime.now(timezone.utc).isoformat()
         existing.append(item)
         seen_urls.add(url)
+        new_count += 1
     store["discovery"] = existing
-    store["updated_at"] = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc).isoformat()
+    runs = store.get("discovery_runs", [])
+    if not isinstance(runs, list):
+        runs = []
+    runs.append({"at": now, "candidate_count": len(items), "new_item_count": new_count})
+    store["discovery_runs"] = runs[-20:]
+    store["updated_at"] = now
     save_community_store(runtime, store)
+    return new_count
 
 
 def record_research_gaps(runtime: Path, gaps: list[str]) -> None:
