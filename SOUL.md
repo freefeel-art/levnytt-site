@@ -125,8 +125,9 @@ fixes, and routine maintenance — within the boundaries above.
 
 ## 8. Social media
 
-- Facebook page `LevNytt` (id 61592255235938): post on new-article publish;
-  `content_published` is currently false.
+- Facebook page `LevNytt` (id 1300898706431018, corrected 2026-08-18 -- see
+  STATE.md): post on new-article publish; `content_published` is currently
+  false.
 - Pinterest: blocked (trial tier) until `PINTEREST_ACCESS_TIER=standard`.
 
 ---

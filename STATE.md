@@ -48,9 +48,22 @@ Build and operate a profitable Swedish NeoLife organic acquisition asset
 
 ## Social
 
-- **Facebook:** page "LevNytt" (id 61592255235938) profile+cover set,
-  `content_published: false`. `social.py` (legacy standalone) holds 8 queued
-  Swedish articles; not wired into the autonomous loop.
+- **Facebook:** page "LevNytt", id **1300898706431018** (corrected
+  2026-08-18 -- the previously recorded id, 61592255235938, does not exist
+  / is not reachable with the current token; verified via a live read-only
+  Graph API call against `GET /me/accounts`, the set of pages
+  FACEBOOK_USER_ACCESS_TOKEN actually manages). Fixed in
+  `app/commander/facebook_identity.py`'s `LEVNYTT_FACEBOOK_PAGE_ID_DEFAULT`.
+  Verified live: 0 followers, category "News & media website", not
+  verified, About text matches LevNytt's positioning. Profile+cover
+  branding assets exist locally (`assets/brand/facebook-*.png`, now
+  git-tracked) but were not independently confirmed as uploaded to the
+  page (would require a page-scoped token, not fetched). No post history
+  was confirmed either way for the same reason. `content_published: false`
+  self-report is consistent with 0 followers but not independently proven.
+  `social.py` (legacy standalone) holds 8 queued Swedish articles and its
+  own hardcoded (now-also-stale) page id; not wired into the autonomous
+  loop -- see the Hermes-side classification note for disposition.
 - **Pinterest:** domain claimed, board verified, OAuth authorized,
   trial-blocked (`PINTEREST_ACCESS_TIER=standard` required).
 
