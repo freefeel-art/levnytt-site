@@ -1,0 +1,21 @@
+# Cloudflare _headers — LevNytt
+# Security headers applied to all HTML responses.
+# CORS headers for assets.
+# Language hint for multi-language support.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Language: sv
+
+/assets/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+
+/no/*
+  Content-Language: no
