@@ -2,3 +2,27 @@
 backup-2026-06-10/
 index-v1-before-repositioning.html
 .opencode/
+
+# Python bytecode cache
+__pycache__/
+*.pyc
+
+# Cloudflare Wrangler local state
+.wrangler/
+
+# Hermes Commander runtime state: evidence caches, commitment/publication
+# ledgers, GSC/DataForSEO snapshots, session state. Mutable production data
+# written by Hermes at runtime -- never source, never committed. Mirrors the
+# Cashbackkollen pattern (Commander source and project-defining docs ARE
+# tracked; only /runtime/ and secrets are not).
+/runtime/
+/secrets/
+/tmp/
+
+# Generated content-inventory cache, rewritten by commander/procedure.py
+/config/content-inventory.json
+
+# Sitewide GSC snapshot: a regenerated aggregate cache, unlike the per-topic
+# research/<category>/<slug>.json research briefs (which are tracked because
+# they document the research behind a specific published article).
+/research/gsc/sitewide.json

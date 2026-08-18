@@ -1,0 +1,1681 @@
+"""LevNytt domain adapters and executors for the shared Commander loop.
+
+Supplies only domain adapters/executors/evidence helpers. It does NOT encode
+LevNytt's leadership decisions: the Commander decision comes from
+``app.commander.decision.decide`` (the real LLM Commander), which loads the
+authoritative ``docs/commander/SOUL.md``, the LevNytt objectives, and the
+facts-only evidence. This file's ``execute`` maps the Commander's selected
+capability to one bounded, NeoLife-scoped domain action.
+
+LevNytt is the NeoLife project. No OLSP or Cashbackkollen objective,
+attribution, runtime state, or business logic is used here.
+
+Production chain implemented here (each step is a bounded domain action):
+    measurement -> intelligence -> content-gap -> production (full page)
+    -> acceptance gate -> staging -> deployment -> live verification
+    -> truthful commitment resolution.
+"""
+
+from __future__ import annotations
+
+import importlib.util
+import json
+import re
+import subprocess
+import urllib.error
+import urllib.request
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
+from typing import Any
+from zoneinfo import ZoneInfo
+
+TZ = ZoneInfo("Europe/Stockholm")
+SITE = "https://levnytt.se"
+GSC_PROPERTY = "sc-domain:levnytt.se"
+SPONSOR_ID = "41-830928"
+SHOP_URL = f"https://se.neolifeshop.com/i/shop.html?sponsor={SPONSOR_ID}"
+REGISTRATION_URL = f"https://se.neolifeshop.com/i/registration.html?type=reseller&sponsor={SPONSOR_ID}"
+D1_DATABASE = "levnytt-cta-events"
+USER_AGENT = "Mozilla/5.0 (compatible; LevNyttHermes/1.0; +https://levnytt.se)"
+HERMES_REPO = Path("/home/yampa/projects/active/hermes")
+HERMES_PYTHON = HERMES_REPO / ".venv" / "bin" / "python"
+
+AUTHOR = {
+    "name": "Jarmo Halonen",
+    "url": "https://levnytt.se/den-fundersamma-mannen",
+    "initials": "JH",
+    "bio": "Oberoende NeoLife-distributör (Sponsor-ID 41-830928) och grundare av LevNytt.",
+}
+
+# ── research-evidence source hierarchy ────────────────────────────
+# Public authorities (Swedish/EU) and authoritative reference sources.
+AUTHORITY_DOMAINS = (
+    "livsmedelsverket.se", "efsa.europa.eu", "efsa.onlinelibrary.wiley.com",
+    "who.int", "fda.gov", "konsumentverket.se", "1177.se",
+    "folkhalsomyndigheten.se", "europa.eu", "ec.europa.eu",
+)
+# Peer-reviewed / primary science and reference sources.
+SCIENCE_DOMAINS = (
+    "pubmed.ncbi.nlm.nih.gov", "pmc.ncbi.nlm.nih.gov", "ncbi.nlm.nih.gov",
+    "nih.gov", "ods.od.nih.gov", "link.springer.com", "cambridge.org",
+    "academic.oup.com", "sciencedirect.com", "mdpi.com", "nature.com",
+    "nejm.org", "thelancet.com", "doi.org", "jamanetwork.com",
+    "nutrition.org", "faseb.org", "frontiersin.org",
+)
+# First-party NeoLife + LevNytt material (never treated as independent science).
+NEOLIFE_DOMAINS = ("neolifeshop.com", "neolife.com", "levnytt.se")
+
+_SE_SERP_LOCATION = 2752  # Sweden
+_US_SERP_LOCATION = 2840  # United States
+
+# Small Swedish→English topic dictionary for the general-science SERP layer.
+_SE_EN_TERMS = {
+    "antioxidanter": "antioxidants",
+    "kosttillskott": "dietary supplements",
+    "magnesium": "magnesium",
+    "omega 3": "omega-3 fatty acids",
+    "omega-3": "omega-3 fatty acids",
+    "d vitamin": "vitamin d",
+    "vitamin d": "vitamin d",
+    "d-vitamin": "vitamin d",
+    "probiotika": "probiotics",
+    "multivitamin": "multivitamin",
+    "kostfiber": "dietary fiber",
+    "fibrer": "dietary fiber",
+    "selen": "selenium",
+    "zink": "zinc",
+    "jarn": "iron",
+    "kollagen": "collagen",
+    "kreatin": "creatine",
+    "melatonin": "melatonin",
+    "protein": "protein",
+    "karotenoider": "carotenoids",
+    "betakarotenoider": "beta-carotene",
+    "flavonoider": "flavonoids",
+    "fytosteroler": "phytosterols",
+    "direktforsaljning": "direct selling",
+    "pyramidspel": "pyramid scheme",
+    "neolife": "neolife",
+    "vitamin b12": "vitamin b12",
+    "c vitamin": "vitamin c",
+    "vitamin c": "vitamin c",
+    "vitamin e": "vitamin e",
+    "adaptogen": "adaptogens",
+    "adaptogener": "adaptogens",
+    "cell membran": "cell membrane",
+    "cellmembran": "cell membrane",
+}
+
+RESEARCH_CACHE_TTL_DAYS = 30
+
+_DEFAULT_TIERBOX = [
+    {"url": "/neolife-vetenskap", "label": "Vetenskap", "title": "Forskningen bakom produkterna"},
+    {"url": "/neolife-historia", "label": "Historia", "title": "NeoLife sedan 1958"},
+    {"url": "/direktforsaljning-fakta", "label": "Direktförsäljning", "title": "Fakta om modellen"},
+    {"url": "/om-oss", "label": "Om LevNytt", "title": "Varför plattformen finns"},
+]
+
+_LEVNYTT_EDITORIAL_CONTEXT = (
+    "LevNytt (levnytt.se) is an independent Swedish NeoLife distributor consumer-education site. "
+    "Write in Swedish (sv-SE). Editorial principles (binding): "
+    "(1) Fakta före hype — facts and transparency, never marketing claims or income promises. "
+    "(2) Värde före pris — value over price. "
+    "(3) Evidence-first: distinguish independent scientific/authority sources from NeoLife first-party claims; never present NeoLife marketing as independent scientific validation. "
+    "(4) No fabricated health claims, no guaranteed results, no urgency or scarcity, no income examples. "
+    "(5) Reader-first explanation: help the reader understand before they decide; never hard-sell. "
+    "(6) NeoLife is disclosed as the site's commercial interest (Sponsor-ID 41-830928); any CTA must be voluntary and proportionate. "
+    "(7) Do not force NeoLife into unrelated sections."
+)
+
+
+def _levnytt_community():
+    """Load the co-located LevNytt community domain-logic module. The procedure
+    is itself loaded via importlib with a synthetic package name, so a relative
+    ``from . import`` cannot resolve; load by explicit file path instead."""
+    import importlib.util
+
+    path = Path(__file__).resolve().parent / "community.py"
+    spec = importlib.util.spec_from_file_location("levnytt_community", str(path))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+class LevNyttProcedure:
+    project_id = "levnytt"
+
+    # ── execution ─────────────────────────────────────────────────
+    def execute(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        capability = str(action.get("capability", "")).strip().casefold()
+        if capability == "measurement":
+            return self._execute_measurement(ctx, action)
+        if capability == "seo_intelligence":
+            return self._execute_seo_intelligence(ctx, action)
+        if capability == "content_production":
+            return self._execute_content_production(ctx, action)
+        if capability == "deployment":
+            return self._execute_deployment(ctx, action)
+        if capability == "technical_repair":
+            return self._execute_technical_repair(ctx, action)
+        if capability == "content_repair":
+            return self._execute_content_repair(ctx, action)
+        if capability == "legacy_audit":
+            return self._execute_legacy_audit(ctx, action)
+        if capability == "legacy_migration":
+            return self._execute_legacy_migration(ctx, action)
+        if capability == "community_acquisition":
+            return self._execute_community_acquisition(ctx, action)
+        if capability == "community_engagement":
+            return self._execute_community_engagement(ctx, action)
+        return {
+            "status": "CAPABILITY_GAP",
+            "detail": f"No bounded executor is wired for capability {capability!r}.",
+            "evidence": {"capability": capability},
+        }
+
+    # ── measurement ───────────────────────────────────────────────
+    def _execute_measurement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        completed = subprocess.run(
+            [str(HERMES_PYTHON), "-m", "scripts.collect_gsc",
+             "--project", "levnytt", "--site", GSC_PROPERTY],
+            cwd=str(HERMES_REPO),
+            capture_output=True, text=True, check=False,
+        )
+        evidence = {"returncode": completed.returncode, "stdout_tail": (completed.stdout or "")[-500:]}
+        if completed.returncode != 0:
+            evidence["stderr_tail"] = (completed.stderr or "")[-500:]
+            return {"status": "BLOCKED", "detail": "GSC collection failed.", "evidence": evidence}
+        cta = _collect_cta_events(ctx)
+        evidence["cta_events"] = cta
+        return {
+            "status": "SUCCEEDED",
+            "detail": (
+                "Refreshed first-party Search Console evidence and NeoLife link-click "
+                f"events ({cta.get('total_events', 0)} events)."
+            ),
+            "evidence": evidence,
+        }
+
+    def _execute_seo_intelligence(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        _rebuild_content_inventory(ctx.working_repository)
+        _seed_keyword_candidates(ctx)
+        try:
+            from app.commander.scout_executor import execute as scout_execute
+            code, message = scout_execute(project=ctx.working_repository)
+        except Exception as error:
+            return {"status": "CAPABILITY_GAP", "detail": f"SEO Scout execution failed: {type(error).__name__}: {error}", "evidence": {}}
+        if code != 0:
+            return {"status": "BLOCKED", "detail": message, "evidence": {"scout_code": code}}
+        gap_count = _coverage_gap_count(ctx)
+        return {
+            "status": "SUCCEEDED",
+            "detail": message,
+            "evidence": {"scout_code": 0, "artifact": "runtime/intelligence/keywords.json", "content_gap_count": gap_count},
+        }
+
+    # ── content production (stage a full production page) ─────────
+    def _execute_content_production(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        keyword = _keyword_from_action(ctx, action)
+        if not keyword:
+            return {"status": "CAPABILITY_GAP", "detail": "No SEO Scout keyword evidence is available to select a content target.", "evidence": {}}
+        slug = _slugify(keyword)
+        off_strategy = _off_strategy(keyword)
+        if off_strategy:
+            return {"status": "SUCCEEDED", "detail": f"Keyword {keyword!r} is off-strategy ({off_strategy}); no article produced.", "evidence": {"slug": slug, "off_strategy": off_strategy, "skipped": True}}
+        repo = ctx.working_repository
+
+        lifecycle = _content_lifecycle(repo, slug)
+        if lifecycle == "LIVE":
+            return {"status": "SUCCEEDED", "detail": f"Article {slug!r} is already live at {SITE}/{slug}.", "evidence": {"slug": slug, "lifecycle": "LIVE", "already_live": True}}
+        if lifecycle == "DEPLOYED":
+            return {"status": "SUCCEEDED", "detail": f"Article {slug!r} is committed/deployed but not yet verified live.", "evidence": {"slug": slug, "lifecycle": "DEPLOYED", "already_deployed": True}}
+        if lifecycle == "STAGED":
+            return {"status": "SUCCEEDED", "detail": f"Article {slug!r} is already staged and awaiting deployment.", "evidence": {"slug": slug, "lifecycle": "STAGED", "already_staged": True}}
+
+        evidence, research_packet = _topic_scribe_evidence(ctx, keyword, slug)
+        if not research_packet.get("sufficiency", {}).get("passed"):
+            notes = "; ".join(research_packet["sufficiency"].get("notes", []))
+            return {
+                "status": "BLOCKED",
+                "detail": f"Research sufficiency not met for {keyword!r}: {notes}. Broaden/retry research rather than asking Scribe to fill gaps.",
+                "evidence": {"keyword": keyword, "slug": slug, "research_sufficiency": research_packet["sufficiency"], "claim_count": len(research_packet.get("claims", []))},
+            }
+        if not evidence:
+            return {"status": "CAPABILITY_GAP", "detail": f"Insufficient project evidence to ground an article for {keyword!r}; Commander should first delegate research.", "evidence": {"keyword": keyword}}
+
+        try:
+            from agents.scribe.run import run as scribe_run
+        except Exception as error:
+            return {"status": "CAPABILITY_GAP", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}}
+
+        max_attempts = 3
+        issues: list[str] = []
+        for attempt in range(1, max_attempts + 1):
+            brief = _scribe_brief(keyword, slug, evidence)
+            brief["title_requirements"] = _title_requirements(keyword, issues)
+            try:
+                scribe_result = scribe_run(brief, project_id="levnytt")
+            except Exception as error:
+                issues = [f"scribe_error:{type(error).__name__}"]
+                continue
+            if scribe_result.get("status") != "READY_FOR_HANDOFF":
+                issues = list(scribe_result.get("failure_codes") or []) or ["scribe_blocked"]
+                continue
+            ok, gate_issues = _content_gate(keyword, scribe_result)
+            if ok:
+                html = _assemble_page(slug, keyword, scribe_result, research_packet)
+                destination = repo / "content" / "articles" / f"{slug}.html"
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_text(html, encoding="utf-8")
+                _rebuild_content_inventory(repo)
+                return {
+                    "status": "SUCCEEDED",
+                    "detail": f"Staged production page {slug!r} at content/articles/{slug}.html (awaiting deployment).",
+                    "evidence": {"slug": slug, "keyword": keyword, "gate_passed": True, "attempt": attempt, "staged_path": str(destination), "lifecycle": "STAGED"},
+                }
+            issues = list(gate_issues)
+
+        return {"status": "BLOCKED", "detail": f"Content revision exhausted after {max_attempts} attempts for {keyword!r}: " + "; ".join(issues), "evidence": {"keyword": keyword, "slug": slug, "attempts": max_attempts, "gate_issues": issues}}
+
+    # ── deployment ────────────────────────────────────────────────
+    def _execute_deployment(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        repo = ctx.working_repository
+        slug = _first_staged_slug(repo)
+        if not slug:
+            return {"status": "SUCCEEDED", "detail": "No staged article is awaiting deployment.", "evidence": {"deployable": False}}
+
+        article = repo / "content" / "articles" / f"{slug}.html"
+        if not article.is_file():
+            return {"status": "BLOCKED", "detail": f"Staged article missing: {article}", "evidence": {"slug": slug}}
+
+        # 1. Repository/deployment safety checks.
+        safety = _deployment_safety(repo, slug)
+        if not safety["ok"]:
+            return {"status": "BLOCKED", "detail": "Deployment safety check failed: " + "; ".join(safety["reasons"]), "evidence": safety}
+
+        # 2. Update _redirects + sitemap for the new slug.
+        redirect_ok = _add_redirect(repo, slug)
+        sitemap_ok = _add_sitemap_entry(repo, slug)
+        if not (redirect_ok and sitemap_ok):
+            return {"status": "BLOCKED", "detail": "Could not register the slug in routing/sitemap.", "evidence": {"redirect_ok": redirect_ok, "sitemap_ok": sitemap_ok}}
+
+        # 3. Stage exactly the intended production files (never a broad add).
+        files = [str(article.relative_to(repo)), "_redirects", "sitemap.xml"]
+        add = subprocess.run(["git", "-C", str(repo), "add", "--", *files], capture_output=True, text=True, check=False)
+        if add.returncode != 0:
+            return {"status": "BLOCKED", "detail": f"git add failed: {(add.stderr or '')[-300:]}", "evidence": {"files": files}}
+
+        staged = subprocess.run(["git", "-C", str(repo), "status", "--porcelain"], capture_output=True, text=True, check=False)
+        staged_paths = [line[3:].strip() for line in staged.stdout.splitlines() if line[:2] in {"A ", "M "}]
+        unexpected = [p for p in staged_paths if p not in files and p != "config/content-inventory.json"]
+        if unexpected:
+            subprocess.run(["git", "-C", str(repo), "reset", "--", *files], capture_output=True, text=True, check=False)
+            return {"status": "BLOCKED", "detail": f"Refusing to commit unexpected staged files: {unexpected}", "evidence": {"unexpected": unexpected}}
+
+        commit = subprocess.run(
+            ["git", "-C", str(repo), "commit", "-m", f"Publish NeoLife article: {slug}"],
+            capture_output=True, text=True, check=False,
+        )
+        if commit.returncode != 0:
+            subprocess.run(["git", "-C", str(repo), "reset", "--", *files], capture_output=True, text=True, check=False)
+            return {"status": "BLOCKED", "detail": f"git commit failed: {(commit.stderr or commit.stdout or '')[-300:]}", "evidence": {}}
+
+        push = subprocess.run(["git", "-C", str(repo), "push", "origin", "main"], capture_output=True, text=True, check=False)
+        if push.returncode != 0:
+            # Remote diverged (e.g. the [skip ci] homepage auto-update bot).
+            # Recover by integrating remote changes and retrying once.
+            subprocess.run(["git", "-C", str(repo), "fetch", "origin"], capture_output=True, text=True, check=False)
+            rebase = subprocess.run(["git", "-C", str(repo), "pull", "--rebase", "origin", "main"], capture_output=True, text=True, check=False)
+            if rebase.returncode != 0:
+                subprocess.run(["git", "-C", str(repo), "rebase", "--abort"], capture_output=True, text=True, check=False)
+                return {"status": "BLOCKED", "detail": f"Deployment rebase failed (recoverable): {(rebase.stderr or '')[-300:]}", "evidence": {"commit_ok": True}}
+            push = subprocess.run(["git", "-C", str(repo), "push", "origin", "main"], capture_output=True, text=True, check=False)
+            if push.returncode != 0:
+                return {"status": "BLOCKED", "detail": f"git push failed after rebase (recoverable): {(push.stderr or '')[-300:]}", "evidence": {"commit_ok": True}}
+
+        # 4. Live verification (Cloudflare Pages auto-deploys on push).
+        live = _verify_live(slug, wait_seconds=120)
+        if not live:
+            return {"status": "BLOCKED", "detail": f"Committed and pushed {slug!r}, but live verification failed (not yet 200).", "evidence": {"slug": slug, "deployed": True, "live_verified": False}}
+
+        return {
+            "status": "SUCCEEDED",
+            "detail": f"Deployed {slug!r} and verified live at {SITE}/{slug}.",
+            "evidence": {"slug": slug, "live_url": f"{SITE}/{slug}", "live_verified": True, "deployed": True},
+        }
+
+    def _execute_technical_repair(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        if _https_serves_200():
+            return {"status": "SUCCEEDED", "detail": "levnytt.se serves HTTPS 200.", "evidence": {"https_ok": True}}
+        return {"status": "CAPABILITY_GAP", "detail": "The https/redirect repair executor is not wired; the deployment change is outside this domain executor.", "evidence": {"https_ok": False}}
+
+    def _execute_content_repair(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        missing = _pages_missing_sponsor_disclosure(ctx.working_repository)
+        if not missing:
+            return {"status": "SUCCEEDED", "detail": "No root production page is missing the Sponsor-ID disclosure.", "evidence": {"missing_disclosure_count": 0}}
+        return {"status": "BLOCKED", "detail": f"{len(missing)} pages are missing the Sponsor-ID disclosure.", "evidence": {"missing_disclosure_count": len(missing), "sample": missing[:10]}}
+
+    # ── legacy content estate ──────────────────────────────────────
+    def _execute_legacy_audit(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Discover + classify the legacy estate and persist the audit artifact.
+
+        Read-only with respect to content: it never modifies a page."""
+        audit = _build_legacy_audit(ctx)
+        counts = audit.get("classification_counts", {})
+        return {
+            "status": "SUCCEEDED",
+            "detail": f"Legacy audit complete: {audit.get('legacy_page_count', 0)} pages classified ({counts}).",
+            "evidence": {
+                "legacy_page_count": audit.get("legacy_page_count", 0),
+                "classification_counts": counts,
+                "audit_path": str(ctx.runtime_directory / "intelligence" / LEGACY_AUDIT_FILENAME),
+            },
+        }
+
+    def _execute_legacy_migration(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Migrate ONE legacy page through the normal research → Scribe → gate →
+        staging pipeline, preserving the page's slug and feeding its existing
+        content as an additional (clearly separated) source."""
+        repo = ctx.working_repository
+        runtime = ctx.runtime_directory
+        slug = _legacy_slug_from_action(ctx, action) or _legacy_migration_target(ctx)
+        if not slug:
+            return {"status": "SUCCEEDED", "detail": "No actionable legacy page is available to migrate.", "evidence": {"migratable": False}}
+
+        legacy_path = repo / f"{slug}.html"
+        if not legacy_path.is_file():
+            return {"status": "BLOCKED", "detail": f"Legacy page {slug!r} not found at root.", "evidence": {"slug": slug}}
+
+        keyword = _legacy_keyword_from_slug(slug)
+        evidence, research_packet = _topic_scribe_evidence(ctx, keyword, slug)
+        if not research_packet.get("sufficiency", {}).get("passed"):
+            notes = "; ".join(research_packet["sufficiency"].get("notes", []))
+            _record_legacy_outcome(runtime, slug, status="RESEARCH_INSUFFICIENT", note=notes)
+            return {"status": "BLOCKED", "detail": f"Research sufficiency not met for legacy page {slug!r}: {notes}.", "evidence": {"slug": slug, "keyword": keyword, "research_sufficiency": research_packet["sufficiency"]}}
+
+        legacy_title, legacy_body = _legacy_page_text(legacy_path)
+        # Preserve the legacy page's own information as an explicit legacy source,
+        # clearly separated from independent research evidence.
+        evidence.append({
+            "evidence_id": f"legacy-{slug}",
+            "claim": legacy_body[:1200],
+            "source_reference": f"{SITE}/{slug}",
+            "source_type": "NEOLIFE_FIRST_PARTY",
+        })
+
+        try:
+            from agents.scribe.run import run as scribe_run
+        except Exception as error:
+            return {"status": "CAPABILITY_GAP", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}}
+
+        max_attempts = 3
+        issues: list[str] = []
+        for attempt in range(1, max_attempts + 1):
+            brief = _scribe_brief(keyword, slug, evidence)
+            brief["title_requirements"] = _title_requirements(keyword, issues)
+            try:
+                scribe_result = scribe_run(brief, project_id="levnytt")
+            except Exception as error:
+                issues = [f"scribe_error:{type(error).__name__}"]
+                continue
+            if scribe_result.get("status") != "READY_FOR_HANDOFF":
+                issues = list(scribe_result.get("failure_codes") or []) or ["scribe_blocked"]
+                continue
+            ok, gate_issues = _content_gate(keyword, scribe_result)
+            if ok:
+                html = _assemble_page(slug, keyword, scribe_result, research_packet)
+                destination = repo / "content" / "articles" / f"{slug}.html"
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_text(html, encoding="utf-8")
+                _rebuild_content_inventory(repo)
+                _record_legacy_outcome(runtime, slug, status="STAGED", note="migrated, awaiting deployment")
+                return {
+                    "status": "SUCCEEDED",
+                    "detail": f"Staged migrated legacy page {slug!r} at content/articles/{slug}.html (awaiting deployment).",
+                    "evidence": {"slug": slug, "keyword": keyword, "gate_passed": True, "staged_path": str(destination), "lifecycle": "STAGED"},
+                }
+            issues = list(gate_issues)
+
+        _record_legacy_outcome(runtime, slug, status="GATE_FAILED", note="; ".join(issues))
+        return {"status": "BLOCKED", "detail": f"Legacy migration exhausted for {slug!r}: " + "; ".join(issues), "evidence": {"slug": slug, "gate_issues": issues}}
+
+    # ── community (NeoLife, owned page only) ──────────────────────
+    def _execute_community_acquisition(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Read-only observation of the owned LevNytt Facebook Page.
+
+        Never posts, comments, replies, joins, or sends. Classifies observed
+        candidates with the NeoLife taxonomy and persists them project-scoped.
+        """
+        from app.commander.facebook_identity import levnytt_facebook_identity
+        from app.providers.facebook_community_observer import FacebookCommunityObserver
+        levnytt_community = _levnytt_community()
+
+        identity = levnytt_facebook_identity()
+        observer = FacebookCommunityObserver(
+            storage_state=Path(HERMES_REPO) / "config" / "storage_state.json",
+            page_id=identity.page_id,
+            headless=True,
+            allow_network=True,
+        )
+        observation = observer.observe_owned_page()
+
+        if observation.status != "COMPLETE":
+            return {
+                "status": "BLOCKED",
+                "detail": "Owned-page observation did not complete: " + "; ".join(observation.failure_codes or observation.limitations or ["unknown"]),
+                "evidence": {"page_id": identity.page_id, "page_name": identity.page_name, "status": observation.status},
+            }
+
+        candidates = observation.conversation_candidates or []
+        signals: list[dict[str, Any]] = []
+        for candidate in candidates:
+            if not isinstance(candidate, dict):
+                continue
+            text = str(candidate.get("text", "")).strip()
+            if not text:
+                continue
+            classification = levnytt_community.classify_levnytt_signal(text)
+            signals.append({
+                "candidate_id": candidate.get("candidate_id", ""),
+                "text": text,
+                "classification": classification,
+                "observed_at": datetime.now(timezone.utc).isoformat(),
+                "source": "owned_facebook_page",
+            })
+
+        actionable = [s for s in signals if s.get("classification", {}).get("is_actionable")]
+        levnytt_community.record_signals(ctx.runtime_directory, signals)
+
+        return {
+            "status": "SUCCEEDED",
+            "detail": (
+                f"Observed owned LevNytt Facebook Page ({identity.page_name}, {identity.page_id}): "
+                f"{len(candidates)} candidate(s), {len(actionable)} actionable NeoLife signal(s)."
+            ),
+            "evidence": {
+                "page_id": identity.page_id,
+                "page_name": identity.page_name,
+                "candidate_count": len(candidates),
+                "actionable_signal_count": len(actionable),
+                "signals": actionable,
+                "read_only": True,
+            },
+        }
+
+    def _execute_community_engagement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """One bounded, policy-gated reply to one already-discovered comment.
+
+        Maximum one reply. Uses the shared Facebook interaction safety layer and
+        grounds the reply text in genuine NeoLife evidence; a missing or
+        ungrounded target fails closed rather than sending a fabricated reply.
+        """
+        from app.commander.facebook_identity import levnytt_facebook_identity
+        from app.providers.facebook_community_interactor import FacebookCommunityInteractor
+        levnytt_community = _levnytt_community()
+
+        target = action.get("engagement_target") or {}
+        comment_reference = str(target.get("comment_reference", "")).strip()
+        comment_text = str(target.get("comment_text", "")).strip()
+        if not comment_reference or not comment_text:
+            return {
+                "status": "BLOCKED",
+                "detail": "community_engagement requires an explicit engagement_target naming comment_reference and comment_text from a prior observation.",
+                "evidence": {"interaction_blocked": True},
+            }
+
+        classification = levnytt_community.classify_levnytt_signal(comment_text)
+        topic = levnytt_community._matching_keyword(comment_text, ctx.runtime_directory)
+        facts = levnytt_community.levnytt_grounding_facts(topic, ctx.runtime_directory) if topic else []
+        proposal = levnytt_community.propose_levnytt_response(comment_text, classification, facts)
+
+        if proposal.get("status") == "RESEARCH_REQUIRED":
+            levnytt_community.record_research_gaps(ctx.runtime_directory, [comment_text])
+            return {
+                "status": "BLOCKED",
+                "detail": f"No sourced NeoLife evidence grounds a reply; research required (evidence gap recorded): {proposal.get('reason', '')}",
+                "evidence": {"evidence_gap": True, "research_required": True},
+            }
+        if proposal.get("status") != "PROPOSED":
+            return {"status": "SUCCEEDED", "detail": proposal.get("reason", "No reply proposed."), "evidence": {"no_reply": True}}
+
+        reply_text = str(proposal.get("proposed_text", "")).strip()
+        if not reply_text:
+            return {"status": "BLOCKED", "detail": "No reply text was generated.", "evidence": {"interaction_blocked": True}}
+
+        identity = levnytt_facebook_identity()
+        interactor = FacebookCommunityInteractor(
+            storage_state=Path(HERMES_REPO) / "config" / "storage_state.json",
+            page_id=identity.page_id,
+            headless=True,
+            allow_network=True,
+        )
+        result = interactor.reply_to_comment(
+            interaction_id=f"levnytt-engagement-{int(datetime.now(timezone.utc).timestamp())}",
+            comment_reference=comment_reference,
+            comment_text=comment_text,
+            reply_text=reply_text,
+            target_scope="owned_page",
+            policy_approved=True,
+            no_mass_action=True,
+        )
+
+        if result.status != "REPLIED":
+            return {
+                "status": "BLOCKED",
+                "detail": f"Reply did not complete: {result.status}",
+                "evidence": {"interaction_status": result.status, "failure_codes": result.failure_codes or [], "limitations": result.limitations or []},
+            }
+
+        levnytt_community.record_signals(ctx.runtime_directory, [{
+            "candidate_id": "engagement",
+            "text": comment_text,
+            "classification": classification,
+            "replied": True,
+            "reply_text": reply_text,
+            "observed_at": datetime.now(timezone.utc).isoformat(),
+            "source": "owned_facebook_page",
+        }])
+
+        return {
+            "status": "SUCCEEDED",
+            "detail": f"Replied once to the owned-page comment with an evidence-bound NeoLife response.",
+            "evidence": {
+                "replied": True,
+                "permalink": result.permalink,
+                "signal_type": classification.get("primary_signal_type"),
+                "grounding_source_type": proposal.get("grounding_source_type"),
+            },
+        }
+
+    # ── verification ──────────────────────────────────────────────
+    def verify(self, ctx, action: dict[str, Any], execution: dict[str, Any]) -> bool:
+        capability = str(action.get("capability", "")).strip().casefold()
+        evidence = execution.get("evidence") or {}
+        if capability == "measurement":
+            latest = ctx.runtime_directory / "intelligence" / "gsc-latest.json"
+            if not latest.is_file():
+                return False
+            try:
+                return json.loads(latest.read_text(encoding="utf-8")).get("site") == GSC_PROPERTY
+            except (OSError, json.JSONDecodeError):
+                return False
+        if capability == "seo_intelligence":
+            return (ctx.runtime_directory / "intelligence" / "keywords.json").is_file()
+        if capability == "technical_repair":
+            return _https_serves_200()
+        if capability == "content_repair":
+            return not _pages_missing_sponsor_disclosure(ctx.working_repository)
+        if capability == "content_production":
+            if evidence.get("already_live") or evidence.get("already_deployed") or evidence.get("already_staged") or evidence.get("skipped"):
+                return True
+            slug = evidence.get("slug")
+            return bool(slug) and (ctx.working_repository / "content" / "articles" / f"{slug}.html").is_file()
+        if capability == "deployment":
+            if evidence.get("deployable") is False:
+                return True
+            slug = evidence.get("slug")
+            return bool(slug) and _verify_live(slug, wait_seconds=0)
+        if capability == "community_acquisition":
+            # Read-only observation is verified when the owned-page snapshot
+            # completed; a no-comment result is still a valid observation.
+            return execution.get("status") == "SUCCEEDED"
+        if capability == "community_engagement":
+            if evidence.get("no_reply") or evidence.get("research_required"):
+                return True
+            return bool(evidence.get("replied"))
+        return False
+
+    # ── measurement ───────────────────────────────────────────────
+    def measure(self, ctx, action: dict[str, Any], execution: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "summary": f"{action.get('summary')} — {execution.get('status')}. {execution.get('detail')}",
+            "data": {"capability": str(action.get("capability", "")).casefold(), "evidence": execution.get("evidence", {})},
+            "next_check": (date.today() + timedelta(days=7)).isoformat(),
+        }
+
+
+def build_procedure():
+    return LevNyttProcedure()
+
+
+# ── content lifecycle ─────────────────────────────────────────────
+def _content_lifecycle(repo: Path, slug: str) -> str:
+    """ABSENT -> STAGED -> DEPLOYED -> LIVE. A local untracked file is NOT live."""
+    if _verify_live(slug, wait_seconds=0):
+        return "LIVE"
+    tracked = subprocess.run(
+        ["git", "-C", str(repo), "ls-files", "--error-unmatch",
+         f"content/articles/{slug}.html", f"{slug}.html"],
+        capture_output=True, text=True, check=False,
+    )
+    if tracked.returncode == 0:
+        return "DEPLOYED"
+    if (repo / "content" / "articles" / f"{slug}.html").is_file() or (repo / f"{slug}.html").is_file():
+        return "STAGED"
+    return "ABSENT"
+
+
+def _verify_live(slug: str, wait_seconds: int = 0) -> bool:
+    import time
+
+    deadline = time.monotonic() + wait_seconds
+    while True:
+        try:
+            request = urllib.request.Request(f"{SITE}/{slug}", method="GET", headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(request, timeout=15) as response:
+                if response.status == 200:
+                    return True
+        except urllib.error.HTTPError:
+            return False
+        except Exception:
+            pass
+        if time.monotonic() >= deadline:
+            return False
+        time.sleep(5)
+
+
+def _verify_live_ok(slug: str) -> bool:
+    return _verify_live(slug, wait_seconds=0)
+
+
+def _deployment_safety(repo: Path, slug: str) -> dict[str, Any]:
+    """Refuse to deploy if any tracked file is modified or staged other than the
+    intended routing/sitemap edits. Untracked (??) files are expected (the
+    staged articles); they are never broad-added."""
+    reasons: list[str] = []
+    status = subprocess.run(
+        ["git", "-C", str(repo), "status", "--porcelain"],
+        capture_output=True, text=True, check=False,
+    ).stdout
+    for line in status.splitlines():
+        code = line[:2]
+        path = line[3:].strip()
+        if not path:
+            continue
+        if code == "??":
+            continue
+        if path in {"_redirects", "sitemap.xml"}:
+            continue
+        reasons.append(f"unexpected tracked change {code!r} {path}")
+    if reasons:
+        return {"ok": False, "reasons": reasons}
+    return {"ok": True, "reasons": []}
+
+
+def _add_redirect(repo: Path, slug: str) -> bool:
+    redirects = repo / "_redirects"
+    entry = f"/{slug} /content/articles/{slug} 200"
+    try:
+        text = redirects.read_text(encoding="utf-8")
+    except OSError:
+        return False
+    if f"/{slug} " in text:
+        return True
+    lines = text.splitlines()
+    catch_all = next((i for i, line in enumerate(lines) if line.strip().startswith("/* ")), len(lines))
+    lines.insert(catch_all, entry)
+    redirects.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return True
+
+
+def _add_sitemap_entry(repo: Path, slug: str) -> bool:
+    sitemap = repo / "sitemap.xml"
+    entry = f"  <url><loc>{SITE}/{slug}</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>"
+    try:
+        text = sitemap.read_text(encoding="utf-8")
+    except OSError:
+        return False
+    if f"{SITE}/{slug}" in text:
+        return True
+    if "</urlset>" not in text:
+        return False
+    text = text.replace("</urlset>", entry + "\n</urlset>")
+    sitemap.write_text(text, encoding="utf-8")
+    return True
+
+
+def _first_staged_slug(repo: Path) -> str | None:
+    tracked = set(subprocess.run(["git", "-C", str(repo), "ls-files", "content/articles/"], capture_output=True, text=True, check=False).stdout.splitlines())
+    for path in sorted((repo / "content" / "articles").glob("*.html")):
+        rel = str(path.relative_to(repo))
+        if rel not in tracked:
+            return path.stem
+    return None
+
+
+def _slug_from_action(ctx, action: dict[str, Any]) -> str | None:
+    keyword = _keyword_from_action(ctx, action)
+    return _slugify(keyword) if keyword else None
+
+
+# ── content inventory / coverage ──────────────────────────────────
+def _rebuild_content_inventory(repo: Path) -> Path:
+    paths: set[str] = set()
+    for p in repo.glob("*.html"):
+        if p.name == "404.html":
+            continue
+        paths.add(str(p.relative_to(repo)))
+    for p in repo.glob("content/**/*.html"):
+        paths.add(str(p.relative_to(repo)))
+    for p in repo.glob("*/index.html"):
+        if p.parts[0] == "no":
+            continue
+        paths.add(str(p.relative_to(repo)))
+    inventory = {"version": 1, "content_paths": sorted(paths)}
+    dest = repo / "config" / "content-inventory.json"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(inventory, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return dest
+
+
+def _coverage_gap_count(ctx) -> int:
+    coverage = _read_json(ctx.runtime_directory / "intelligence" / "content-coverage.json")
+    records = coverage.get("coverage") if isinstance(coverage.get("coverage"), list) else []
+    return sum(1 for r in records if isinstance(r, dict) and r.get("coverage") == "NONE")
+
+
+# ── page assembly (reuses the canonical LevNytt article template) ─
+def _load_md_to_article():
+    path = Path(__file__).resolve().parents[1] / "scripts" / "md-to-article.py"
+    spec = importlib.util.spec_from_file_location("md_to_article", str(path))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _assemble_page(slug: str, keyword: str, scribe_result: dict[str, Any], research_packet: dict[str, Any] | None = None) -> str:
+    module = _load_md_to_article()
+    title = str(scribe_result.get("title_or_subject") or "").strip()
+    sections = scribe_result.get("sections_or_messages") or []
+    bodies = [str(s.get("body", "")).strip() for s in sections if isinstance(s, dict) and str(s.get("body", "")).strip()]
+    first_body = bodies[0] if bodies else title
+    description = first_body[:155]
+    takeaways = bodies[:3]
+    faq = _build_faq(sections, keyword)
+    data = {
+        "title": title,
+        "description": description,
+        "slug": slug,
+        "category": "Kosttillskott & hälsa",
+        "eyebrow": "LevNytt · Konsumentguide",
+        "author": dict(AUTHOR),
+        "updated": date.today().isoformat(),
+        "reading_time": max(3, sum(len(b) for b in bodies) // 900),
+        "punchline": first_body,
+        "takeaways": takeaways,
+        "method_note": (
+            "Fakta baseras på tillgängligt källmaterial och evidens; LevNytt gör inga "
+            "hälso- eller inkomstlöften. Informationen är avsedd för utbildningssyfte."
+        ),
+        "tierbox": _DEFAULT_TIERBOX,
+        "cta": {
+            "headline": "Handla NeoLife till konsumentpris",
+            "body": "LevNytt är en oberoende NeoLife-distributörswebbplats (Sponsor-ID 41-830928). Besök den officiella shopen om du vill veta mer om produkterna.",
+            "url": SHOP_URL,
+            "link_text": "Till NeoLife-shopen →",
+        },
+        "disclosure": (
+            f"Denna artikel handlar om \"{keyword}\". LevNytt fokuserar på konsumentutbildning "
+            "och gör inga ogrundade hälsopåståenden eller inkomstlöften."
+        ),
+        "faq": faq,
+    }
+    body_html = _body_html(sections)
+    if research_packet:
+        sources_html = _sources_html(research_packet)
+        if sources_html:
+            body_html = body_html + "\n" + sources_html
+    return module.build_html(data, body_html)
+
+
+def _sources_html(packet: dict[str, Any]) -> str:
+    """Build a Källorna section that separates independent science/authority
+    sources from NeoLife first-party sources, so NeoLife marketing is never
+    presented as independent scientific validation."""
+    claims = packet.get("claims", []) if isinstance(packet, dict) else []
+    science: list[dict[str, Any]] = []
+    neo: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for c in claims:
+        url = str(c.get("source_url", "")).strip()
+        if not url or url in seen:
+            continue
+        if c.get("source_type") in {"AUTHORITY", "GENERAL_SCIENCE"}:
+            science.append(c)
+        elif c.get("source_type") == "NEOLIFE_FIRST_PARTY" and url != "https://levnytt.se/om-oss":
+            neo.append(c)
+        seen.add(url)
+    parts: list[str] = []
+    if science:
+        parts.append("<h2>Källor</h2>")
+        parts.append("<p><strong>Oberoende vetenskapliga och myndighetskällor:</strong></p><ul>")
+        for c in science[:6]:
+            label = c.get("source_title") or c.get("source_reference") or c["source_url"]
+            parts.append(f'<li><a target="_blank" rel="noopener noreferrer" href="{_escape_html(c["source_url"])}">{_escape_html(label)}</a></li>')
+        parts.append("</ul>")
+    if neo:
+        if not science:
+            parts.append("<h2>Källor</h2>")
+        parts.append("<p><strong>NeoLife (förstahandsinformation):</strong></p><ul>")
+        for c in neo[:3]:
+            label = c.get("source_title") or c.get("source_reference") or c["source_url"]
+            parts.append(f'<li><a target="_blank" rel="noopener noreferrer" href="{_escape_html(c["source_url"])}">{_escape_html(label)}</a></li>')
+        parts.append("</ul>")
+    return "\n".join(parts)
+
+
+def _body_html(sections: list[dict[str, Any]]) -> str:
+    parts: list[str] = []
+    for unit in sections:
+        if not isinstance(unit, dict):
+            continue
+        heading = str(unit.get("heading_or_subject") or "").strip()
+        body = str(unit.get("body") or "").strip()
+        if heading:
+            parts.append(f"<h2>{_escape_html(heading)}</h2>")
+        if body:
+            for paragraph in body.split("\n\n"):
+                paragraph = paragraph.strip()
+                if paragraph:
+                    parts.append(f"<p>{_escape_html(paragraph)}</p>")
+    return "\n".join(parts)
+
+
+def _build_faq(sections: list[dict[str, Any]], keyword: str) -> list[dict[str, str]]:
+    faq: list[dict[str, str]] = []
+    for unit in sections:
+        if not isinstance(unit, dict):
+            continue
+        heading = str(unit.get("heading_or_subject") or "").strip()
+        body = str(unit.get("body") or "").strip()
+        if heading and body and not heading.endswith("?"):
+            faq.append({"q": _question_form(heading), "a": body[:300]})
+        if len(faq) >= 6:
+            break
+    if len(faq) < 3:
+        generic = [
+            {"q": "Är informationen på LevNytt oberoende?",
+             "a": "LevNytt är en oberoende NeoLife-distributörswebbplats. Vi skiljer tydligt mellan oberoende forskning och NeoLifes egna produktpåståenden."},
+            {"q": "Hur väljer jag ett kosttillskott?",
+             "a": "Fokusera på evidens, kvalitet och tydlig information om vad produkten faktiskt innehåller — inte på marknadsföringslöften."},
+        ]
+        for g in generic:
+            if len(faq) < 3:
+                faq.append(g)
+    return faq[:8]
+
+
+def _question_form(heading: str) -> str:
+    heading = heading.rstrip(":.!?")
+    if heading.lower().startswith(("vad är", "hur", "varför", "när", "vilka", "vilken", "är")):
+        return heading + "?"
+    return f"{heading} — vad innebär det?"
+
+
+# ── scribe brief / gate / title requirements ──────────────────────
+def _scribe_brief(keyword: str, slug: str, evidence: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "assignment_id": f"levnytt-scribe-{slug}",
+        "project": "levnytt",
+        "brief_id": f"levnytt-{slug}",
+        "audience": "Svenska konsumenter som vill förstå kosttillskott, hälsa och direktförsäljning innan de bestämmer sig",
+        "user_problem": keyword,
+        "content_type": "ARTICLE",
+        "format": "production-ready evidence-bound draft",
+        "source_evidence": evidence,
+        "knowledge_gaps": [],
+        "project_context": _LEVNYTT_EDITORIAL_CONTEXT,
+        "link_requirements": {
+            "cta": "presenterar fakta om NeoLife och kosttillskott utan hype, inkomstlöften eller påhittade siffror; länkar vidare till NeoLife shop med Sponsor-ID 41-830928 endast som ett frivilligt nästa steg"
+        },
+        "language": "Swedish",
+        "handoff_consumer": "editorial_builder",
+        "stop_condition": "Return one bounded content result and stop.",
+    }
+
+
+def _content_gate(keyword: str, scribe_result: dict[str, Any]) -> tuple[bool, list[str]]:
+    issues: list[str] = []
+    title = str(scribe_result.get("title_or_subject") or "").strip()
+    if not title:
+        issues.append("missing_title")
+    elif len(title) > 60:
+        issues.append(f"title_too_long({len(title)})")
+    sections = scribe_result.get("sections_or_messages")
+    if not isinstance(sections, list) or len(sections) < 2:
+        issues.append("too_few_sections")
+    claims = scribe_result.get("claims")
+    if not isinstance(claims, list) or not claims:
+        issues.append("no_grounded_claims")
+    if _normalize(keyword) and _normalize(keyword) not in _normalize(title):
+        issues.append("keyword_absent_from_title")
+    body = _body_html(sections).casefold()
+    for marker in ("garanterad vinst", "säkert att", "gratis pengar", "riskfritt", "tjäna 50"):
+        if marker in body:
+            issues.append(f"unsubstantiated_promise({marker})")
+            break
+    # Editorial quality (deterministic): near-duplicate paragraphs, generic
+    # filler, and substantive length are rejected — these catch the "thin
+    # repeated filler" failure mode rather than passing it as content.
+    paragraphs = [p for p in re.split(r"</p>\s*<p>|<p>|</p>", body) if len(p.strip()) > 20]
+    normalized_paragraphs = [_normalize(p) for p in paragraphs]
+    if len(normalized_paragraphs) != len(set(normalized_paragraphs)):
+        issues.append("repeated_paragraphs")
+    filler = "på levnytt.se publicerar vi evidensbaserade"
+    if body.strip().startswith(filler) or filler in body[:400]:
+        issues.append("generic_filler_intro")
+    words = len(body.split())
+    if words < 180:
+        issues.append(f"insufficient_body_length({words})")
+    return (not issues), issues
+
+
+def _title_requirements(keyword: str, issues: list[str]) -> str:
+    lines = ["The title must be 60 characters or fewer.", f'The title must contain the keyword "{keyword}".']
+    if issues:
+        lines.append("Rejection reasons to correct from the previous attempt: " + "; ".join(issues) + ".")
+    return " ".join(lines)
+
+
+# ── general helpers ───────────────────────────────────────────────
+def _slugify(value: str) -> str:
+    slug = value.casefold().strip().replace("å", "a").replace("ä", "a").replace("ö", "o")
+    slug = re.sub(r"[^a-z0-9]+", "-", slug)
+    return slug.strip("-")[:80]
+
+
+def _normalize(value: str) -> str:
+    return "".join(ch for ch in value.casefold().replace("å", "a").replace("ä", "a").replace("ö", "o") if ch.isalnum())
+
+
+def _escape_html(value: str) -> str:
+    import html
+    return html.escape(value, quote=False)
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def _collect_cta_events(ctx) -> dict[str, Any]:
+    result = {"fetched_at": datetime.now(timezone.utc).isoformat(), "source": f"Cloudflare D1 {D1_DATABASE}", "status": "unavailable", "total_events": 0, "shop_clicks": 0, "registration_clicks": 0, "recent_events": []}
+    try:
+        completed = subprocess.run(
+            ["npx", "wrangler", "d1", "execute", D1_DATABASE, "--remote", "--command",
+             "SELECT cta_id, page_path, destination, observed_at FROM cta_click_events ORDER BY observed_at DESC LIMIT 100", "--json"],
+            cwd=str(ctx.working_repository), capture_output=True, text=True, check=False, timeout=90,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        result["error"] = f"{type(exc).__name__}: {exc}"
+        return result
+    if completed.returncode != 0:
+        result["error"] = (completed.stderr or completed.stdout or "")[-300:]
+        return result
+    try:
+        raw = json.loads(completed.stdout or "[]")
+    except json.JSONDecodeError as exc:
+        result["error"] = f"wrangler output parse failed: {exc}"
+        return result
+    rows = raw[0].get("results") if isinstance(raw, list) and raw and isinstance(raw[0], dict) else []
+    if not isinstance(rows, list):
+        rows = []
+    result.update({
+        "status": "available",
+        "total_events": len(rows),
+        "shop_clicks": sum(1 for r in rows if isinstance(r, dict) and r.get("cta_id") == "levnytt-neolife-shop"),
+        "registration_clicks": sum(1 for r in rows if isinstance(r, dict) and r.get("cta_id") == "levnytt-neolife-registration"),
+        "recent_events": [{k: r.get(k) for k in ("cta_id", "page_path", "destination", "observed_at") if r.get(k) is not None} for r in rows[:10] if isinstance(r, dict)],
+    })
+    destination = ctx.runtime_directory / "intelligence" / "cta-events-latest.json"
+    try:
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
+    except OSError:
+        pass
+    return result
+
+
+def _find_research_packet(ctx, keyword: str) -> dict[str, Any] | None:
+    """Locate the cached topic-research packet for a keyword, tolerant of
+    spacing/diacritic differences between the keyword candidate and the topic
+    that was actually researched (e.g. 'cellmembran' vs 'cell membran')."""
+    intel = ctx.runtime_directory / "intelligence"
+    direct = intel / f"research-{_slugify(keyword)}.json"
+    if direct.is_file():
+        try:
+            data = json.loads(direct.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                return data
+        except (OSError, json.JSONDecodeError):
+            pass
+    norm = _normalize(keyword)
+    if norm:
+        for path in intel.glob("research-*.json"):
+            try:
+                data = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            if isinstance(data, dict) and _normalize(str(data.get("topic", ""))) == norm:
+                return data
+    return None
+
+
+def _research_insufficient_recent(ctx, keyword: str) -> bool:
+    """True when a fresh (within TTL) research packet already found this topic
+    research-insufficient. An insufficient result is itself a durable finding:
+    it must not be re-selected until the research cache expires and the topic
+    becomes eligible for a fresh attempt."""
+    cached = _find_research_packet(ctx, keyword)
+    if cached is None:
+        return False
+    sufficiency = cached.get("sufficiency")
+    if not isinstance(sufficiency, dict) or sufficiency.get("passed") is not False:
+        return False
+    generated = str(cached.get("generated_at", "")).replace("Z", "+00:00")
+    try:
+        age = datetime.now(timezone.utc) - datetime.fromisoformat(generated)
+    except ValueError:
+        return True
+    return age.days < RESEARCH_CACHE_TTL_DAYS
+
+
+def _top_keyword(ctx) -> str | None:
+    data = _read_json(ctx.runtime_directory / "intelligence" / "keywords.json")
+    rows = data.get("keywords") if isinstance(data.get("keywords"), list) else []
+    ranked = [r for r in rows if isinstance(r, dict) and str(r.get("keyword", "")).strip()]
+    if not ranked:
+        return None
+    eligible = [r for r in ranked if not _research_insufficient_recent(ctx, str(r["keyword"]).strip())]
+    if not eligible:
+        return None
+    eligible.sort(key=lambda r: (isinstance(r.get("priority_score"), (int, float)), r.get("priority_score") or 0, isinstance(r.get("monthly_search_volume"), (int, float)), r.get("monthly_search_volume") or 0), reverse=True)
+    return str(eligible[0]["keyword"]).strip()
+
+
+def _keyword_from_action(ctx, action: dict[str, Any]) -> str | None:
+    action_text = str(action.get("summary") or action.get("action") or "").casefold()
+    data = _read_json(ctx.runtime_directory / "intelligence" / "keywords.json")
+    rows = data.get("keywords") if isinstance(data.get("keywords"), list) else []
+    candidates = [r for r in rows if isinstance(r, dict) and str(r.get("keyword", "")).strip()]
+    matches = [r for r in candidates if str(r["keyword"]).casefold() in action_text]
+    if matches:
+        matches.sort(key=lambda r: (-len(str(r["keyword"])), -(r.get("priority_score") or 0)))
+        for match in matches:
+            keyword = str(match["keyword"]).strip()
+            if not _research_insufficient_recent(ctx, keyword):
+                return keyword
+    return _top_keyword(ctx)
+
+
+OFF_STRATEGY_TERMS = ("casino", "betting", "spel", "lån", "loan", "kredit", "försäkring", "insurance", "crypto", "krypto", "aktier", "forex", "trading")
+
+
+def _off_strategy(keyword: str) -> str | None:
+    folded = keyword.casefold()
+    for marker in OFF_STRATEGY_TERMS:
+        if re.search(rf"\b{re.escape(marker)}\b", folded):
+            return marker
+    return None
+
+
+def _en_keyword(keyword: str) -> str:
+    """Best-effort Swedish→English topic translation for the general-science
+    SERP layer. Falls back to the raw keyword when no mapping exists."""
+    folded = keyword.casefold().strip()
+    if folded in _SE_EN_TERMS:
+        return _SE_EN_TERMS[folded]
+    return " ".join(_SE_EN_TERMS.get(word, word) for word in folded.split())
+
+
+def _source_type(domain: str) -> str | None:
+    d = (domain or "").casefold().strip()
+    if any(d == a or d.endswith("." + a) for a in AUTHORITY_DOMAINS):
+        return "AUTHORITY"
+    if any(d == s or d.endswith("." + s) for s in SCIENCE_DOMAINS):
+        return "GENERAL_SCIENCE"
+    if any(d == n or d.endswith("." + n) for n in NEOLIFE_DOMAINS):
+        return "NEOLIFE_FIRST_PARTY"
+    return None
+
+
+def _serp_organic(keyword: str, location: int, language: str) -> list[dict[str, Any]]:
+    try:
+        from app.providers.dataforseo import retrieve_organic_results
+
+        result = retrieve_organic_results(
+            keyword, location=location, language=language,
+            root=Path("/home/yampa/projects/active/levnytt-site/runtime/production-data"),
+        )
+    except Exception:
+        return []
+    if result.get("execution_status") != "COMPLETED":
+        return []
+    return [r for r in (result.get("organic_results") or []) if isinstance(r, dict) and r.get("url")]
+
+
+_NOISE_PATTERNS = (
+    r"^skip", r"expand all", r"table of contents", r"this fact sheet",
+    r"for health professionals", r"share this", r"last updated", r"^print",
+    r"^home", r"^news", r"^contact", r"^about", r"^privacy", r"cookie",
+    r"ai generated", r"how useful is this", r"^review article",
+    r"access to", r"sign in", r"log in", r"^download", r"^abstract",
+    r"full text", r"official websites use \.gov", r"secure \.gov websites",
+    r"share sensitive information", r"a lock \( lock", r"https? means you",
+    r"before sharing sensitive", r"inclusion in an nlm database",
+    r"does not imply endorsement", r"learn more: pmc", r"pmc disclaimer",
+    r"pmc copyright", r"received 20", r"revised 20", r"accepted 20",
+    r"collection date", r"© 20", r"this article is an open access",
+    r"distributed under the terms", r"licensee", r"creative commons",
+    r"^keywords", r"^citation", r"^references", r"^conflict of interest",
+    r"^funding", r"^ethics approval", r"^data availability",
+)
+
+
+def _is_noise(sentence: str) -> bool:
+    lowered = sentence.casefold()
+    return any(re.search(pattern, lowered, re.IGNORECASE) for pattern in _NOISE_PATTERNS)
+
+
+def _extract_sentences(markdown: str, limit: int) -> list[str]:
+    """Deterministic verbatim sentence extraction — no LLM summarization."""
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", markdown or "")
+    text = re.sub(r"#{1,6}\s*", "", text)
+    text = re.sub(r"[*_]{1,3}", "", text)
+    text = re.sub(r"\s+", " ", text)
+    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text)]
+    out: list[str] = []
+    for sentence in sentences:
+        if not (50 <= len(sentence) <= 340):
+            continue
+        if _is_noise(sentence):
+            continue
+        out.append(sentence)
+        if len(out) >= limit:
+            break
+    return out
+
+
+def _fetch_source(url: str) -> tuple[str, str] | None:
+    try:
+        from app.providers.firecrawl import scrape
+
+        data = scrape(url, formats=("markdown",), only_main_content=True)
+        md = (data.get("markdown") or "").strip()
+        title = (data.get("metadata") or {}).get("title") or ""
+        if not md:
+            return None
+        return md, title
+    except Exception:
+        return None
+
+
+def _detect_intent(ctx, keyword: str) -> str:
+    data = _read_json(ctx.runtime_directory / "intelligence" / "search-intent.json")
+    for item in data.get("intents", []) if isinstance(data.get("intents"), list) else []:
+        if isinstance(item, dict) and _normalize(str(item.get("keyword", ""))) == _normalize(keyword):
+            return str(item.get("detected_intent", "Unknown"))
+    return "Unknown"
+
+
+def _gsc_claim(ctx, keyword: str) -> dict[str, Any] | None:
+    gsc = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
+    query = gsc.get("query") if isinstance(gsc.get("query"), dict) else {}
+    rows = query.get("all_queries", []) if isinstance(query.get("all_queries"), list) else []
+    for row in rows:
+        if isinstance(row, dict) and _normalize(str(row.get("query", ""))) == _normalize(keyword):
+            return {
+                "evidence_id": f"gsc-{_slugify(keyword)}",
+                "claim": f"Google Search Console visar {row.get('impressions', 0)} visningar och genomsnittsposition {str(row.get('position', 0)).replace('.', ',')} för sökfrågan \"{keyword}\".",
+                "source_type": "SEO",
+                "source_title": "Google Search Console",
+                "source_reference": "runtime/intelligence/gsc-latest.json",
+                "source_url": "",
+                "retrieved_at": datetime.now(timezone.utc).isoformat(),
+                "confidence": "HIGH",
+            }
+    return None
+
+
+# ── legacy content estate (audit + classification) ────────────────
+# Legacy pages are the root .html files still served from the pre-rebuild
+# pillar.css template generation. They are a normal evidence-driven production
+# opportunity, not automatically bad: Commander classifies each page once,
+# persists the audit, and only migrates a page when evidence justifies it.
+LEGACY_STYLE_MARKER = "pillar.css"
+LEGACY_AUDIT_FILENAME = "legacy-audit.json"
+LEGACY_AUDIT_TTL_DAYS = 30
+_LEGACY_NON_CONTENT_PAGES = frozenset({
+    "404.html", "artiklar.html", "index.html", "integritetspolicy.html",
+    "den-fundersamma-mannen.html",
+})
+
+# Numeric/unit and scientific-claim markers: a legacy page carrying these
+# without a matching research packet is an EVIDENCE_RISK under the current
+# evidence standard.
+_LEGACY_EVIDENCE_MARKERS = re.compile(
+    r"\b\d+(?:[.,]\d+)?\s*(?:mg|mcg|µg|ug|g|kg|IE|NE|%|procent)\b"
+    r"|\b(studie|studier|studien|forskning|klinisk[a-z]*|dosering|rekommenderad[a-z]*|dagligt intag)\b",
+    re.IGNORECASE,
+)
+
+
+def _legacy_keyword_from_slug(slug: str) -> str:
+    """Derive a research keyword from a legacy page slug (first meaningful token)."""
+    tokens = [t for t in re.split(r"[^a-z0-9]+", slug.casefold()) if t]
+    if not tokens:
+        return slug
+    # Drop generic suffix tokens ("komplett", "guide", "symptom", "tillskott").
+    meaningful = [t for t in tokens if t not in {"komplett", "guide", "vad", "ar", "for", "och", "i"}]
+    if meaningful:
+        return " ".join(meaningful[:2])
+    return tokens[0]
+
+
+def _discover_legacy_pages(repo: Path) -> list[Path]:
+    """Root .html pages still using the legacy pillar.css template (excluding
+    non-content infrastructure pages)."""
+    pages: list[Path] = []
+    for path in sorted(repo.glob("*.html")):
+        if path.name in _LEGACY_NON_CONTENT_PAGES:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        if LEGACY_STYLE_MARKER in text:
+            pages.append(path)
+    return pages
+
+
+def _legacy_page_text(path: Path) -> tuple[str, str]:
+    """Return (title, plain-body) of a legacy page for deterministic inspection."""
+    try:
+        raw = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return "", ""
+    title_match = re.search(r"<title>(.*?)</title>", raw, re.IGNORECASE | re.DOTALL)
+    title = re.sub(r"<[^>]+>", " ", title_match.group(1)).strip() if title_match else path.stem
+    body = re.sub(r"<script.*?</script>|<style.*?</style>", " ", raw, flags=re.DOTALL | re.IGNORECASE)
+    body = re.sub(r"<[^>]+>", " ", body)
+    body = re.sub(r"\s+", " ", body).strip()
+    return title, body
+
+
+def _legacy_gsc_stats(runtime: Path, slug: str) -> dict[str, Any]:
+    """Return GSC impressions/clicks/position for a legacy page, if present."""
+    try:
+        gsc = json.loads((runtime / "intelligence" / "gsc-latest.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    page = gsc.get("page") if isinstance(gsc, dict) else {}
+    rows = page.get("all_pages") if isinstance(page, dict) and isinstance(page.get("all_pages"), list) else []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        url = str(row.get("page", ""))
+        if f"/{slug}" in url or f"/content/articles/{slug}" in url:
+            return {
+                "impressions": row.get("impressions", 0),
+                "clicks": row.get("clicks", 0),
+                "position": row.get("position"),
+            }
+    return {}
+
+
+def _legacy_overlaps(repo: Path, slug: str, keyword: str) -> list[str]:
+    """Other production pages whose slug/title shares the keyword's major term."""
+    norm = _normalize(keyword)
+    if not norm:
+        return []
+    overlaps: list[str] = []
+    for path in sorted(repo.glob("*.html")):
+        if path.stem == slug:
+            continue
+        if norm in _normalize(path.stem) or norm in _normalize(path.name):
+            overlaps.append(path.stem)
+    return overlaps[:5]
+
+
+def _classify_legacy_page(repo: Path, runtime: Path, path: Path) -> dict[str, Any]:
+    """Deterministically classify one legacy page. Classification priority:
+    EVIDENCE_RISK > LEGACY_CONTENT_WEAK > SEO_OPPORTUNITY >
+    CONSOLIDATION_CANDIDATE > LEGACY_STYLE_ONLY > CURRENT_OK."""
+    slug = path.stem
+    keyword = _legacy_keyword_from_slug(slug)
+    title, body = _legacy_page_text(path)
+    word_count = len(re.findall(r"\w+", body))
+    has_evidence_claims = bool(_LEGACY_EVIDENCE_MARKERS.search(body))
+    research_slug = _slugify(keyword)
+    has_research_packet = (runtime / "intelligence" / f"research-{research_slug}.json").is_file()
+    gsc = _legacy_gsc_stats(runtime, slug)
+    overlaps = _legacy_overlaps(repo, slug, keyword)
+    already_migrated = (repo / "content" / "articles" / f"{slug}.html").is_file()
+
+    if already_migrated:
+        classification = "CONSOLIDATION_CANDIDATE"
+        reason = "a new-style article already exists at content/articles; the legacy root page is superseded"
+    elif has_evidence_claims and not has_research_packet:
+        classification = "EVIDENCE_RISK"
+        reason = f"numeric/scientific/health claims present without a research packet for '{keyword}'"
+    elif word_count < 250:
+        classification = "LEGACY_CONTENT_WEAK"
+        reason = f"thin content ({word_count} words)"
+    elif gsc.get("impressions", 0) >= 10 and (int(gsc.get("clicks", 0)) < 1 or float(gsc.get("position") or 99) > 15):
+        classification = "SEO_OPPORTUNITY"
+        reason = f"{gsc.get('impressions')} impressions, {gsc.get('clicks')} clicks, position {gsc.get('position')}"
+    elif overlaps:
+        classification = "CONSOLIDATION_CANDIDATE"
+        reason = f"overlaps existing pages: {overlaps}"
+    elif has_research_packet:
+        classification = "CURRENT_OK"
+        reason = "sufficiently supported by an existing research packet"
+    else:
+        classification = "LEGACY_STYLE_ONLY"
+        reason = "substantive content on the older template; migration optional"
+
+    return {
+        "slug": slug,
+        "keyword": keyword,
+        "title": title[:180],
+        "classification": classification,
+        "reason": reason,
+        "word_count": word_count,
+        "has_evidence_claims": has_evidence_claims,
+        "has_research_packet": has_research_packet,
+        "already_migrated": already_migrated,
+        "gsc": gsc,
+        "overlaps": overlaps,
+    }
+
+
+def _build_legacy_audit(ctx) -> dict[str, Any]:
+    """Discover and classify the legacy estate; persist the audit artifact."""
+    repo = ctx.working_repository
+    runtime = ctx.runtime_directory
+    pages = _discover_legacy_pages(repo)
+    results = [_classify_legacy_page(repo, runtime, path) for path in pages]
+    counts: dict[str, int] = {}
+    for r in results:
+        counts[r["classification"]] = counts.get(r["classification"], 0) + 1
+    audit = {
+        "schema": "levnytt-legacy-audit-v1",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "legacy_page_count": len(results),
+        "classification_counts": counts,
+        "pages": results,
+    }
+    path = runtime / "intelligence" / LEGACY_AUDIT_FILENAME
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    except OSError:
+        pass
+    return audit
+
+
+def _load_legacy_audit(runtime: Path) -> dict[str, Any]:
+    try:
+        data = json.loads((runtime / "intelligence" / LEGACY_AUDIT_FILENAME).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def _actionable_legacy_classes() -> frozenset[str]:
+    return frozenset({"EVIDENCE_RISK", "LEGACY_CONTENT_WEAK", "SEO_OPPORTUNITY"})
+
+
+def _record_legacy_outcome(runtime: Path, slug: str, *, status: str, note: str) -> None:
+    """Append one legacy action outcome to the audit (loop prevention).
+
+    A page recorded as CURRENT_OK, RESEARCH_INSUFFICIENT, STAGED, or recently
+    audited is suppressed from reselection within the TTL window, so Commander
+    does not repeatedly select the same page."""
+    path = runtime / "intelligence" / LEGACY_AUDIT_FILENAME
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        data = {}
+    outcomes = data.get("outcomes") if isinstance(data, dict) and isinstance(data.get("outcomes"), list) else []
+    outcomes = [o for o in outcomes if isinstance(o, dict) and o.get("slug") != slug]
+    outcomes.append({"slug": slug, "status": status, "note": note, "at": datetime.now(timezone.utc).isoformat()})
+    data["outcomes"] = outcomes
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    except OSError:
+        pass
+
+
+def _legacy_migration_target(ctx) -> str | None:
+    """Select the highest-value actionable legacy page for one migration."""
+    repo = ctx.working_repository
+    runtime = ctx.runtime_directory
+    audit = _load_legacy_audit(runtime)
+    outcomes = audit.get("outcomes") if isinstance(audit.get("outcomes"), list) else []
+    recent = {o.get("slug") for o in outcomes if isinstance(o, dict) and o.get("slug")}
+    pages = audit.get("pages") if isinstance(audit.get("pages"), list) else []
+    actionable = [p for p in pages if isinstance(p, dict)
+                  and p.get("classification") in _actionable_legacy_classes()
+                  and p.get("slug") not in recent]
+    # EVIDENCE_RISK first, then by GSC impressions (objective impact).
+    order = {"EVIDENCE_RISK": 0, "LEGACY_CONTENT_WEAK": 1, "SEO_OPPORTUNITY": 2}
+    actionable.sort(key=lambda p: (order.get(p.get("classification"), 9), -(p.get("gsc", {}).get("impressions", 0) or 0)))
+    return actionable[0].get("slug") if actionable else None
+
+
+def _legacy_slug_from_action(ctx, action: dict[str, Any]) -> str | None:
+    """Resolve a legacy page slug from the action's evidence or its text."""
+    evidence = action.get("evidence") if isinstance(action.get("evidence"), dict) else {}
+    if evidence.get("slug"):
+        return str(evidence["slug"]).strip()
+    action_text = str(action.get("summary") or action.get("action") or "").casefold()
+    for path in _discover_legacy_pages(ctx.working_repository):
+        if path.stem.casefold() in action_text:
+            return path.stem
+    return None
+
+
+def _research_sufficiency(claims: list[dict[str, Any]]) -> dict[str, Any]:
+    sources = {c.get("source_url") for c in claims if c.get("source_url")}
+    substantive = [c for c in claims if c.get("source_type") in {"AUTHORITY", "GENERAL_SCIENCE"}]
+    substantive_sources = {c.get("source_url") for c in substantive if c.get("source_url")}
+    notes: list[str] = []
+    if len(substantive_sources) < 2:
+        notes.append("fewer than 2 distinct authoritative (AUTHORITY/GENERAL_SCIENCE) sources")
+    if len(substantive) < 4:
+        notes.append("fewer than 4 substantive authoritative claims")
+    if len(claims) < 4:
+        notes.append("insufficient claim count")
+    return {
+        "passed": not notes,
+        "source_count": len(sources),
+        "claim_count": len(claims),
+        "authoritative_claim_count": len(substantive),
+        "authoritative_source_count": len(substantive_sources),
+        "notes": notes,
+    }
+
+
+def _build_topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
+    """Topic-specific research: DataForSEO SERP (sv + en) → authoritative URL
+    discovery → Firecrawl scrape → deterministic verbatim claim extraction →
+    evidence packet. Never synthesizes facts; every claim carries provenance."""
+    now = datetime.now(timezone.utc).isoformat()
+    claims: list[dict[str, Any]] = []
+    seen_urls: set[str] = set()
+
+    en_query = _en_keyword(keyword)
+
+    candidates: list[dict[str, Any]] = []
+    for location, language in ((_SE_SERP_LOCATION, "sv"), (_US_SERP_LOCATION, "en")):
+        query = keyword if location == _SE_SERP_LOCATION else en_query
+        for item in _serp_organic(query, location, language):
+            if item.get("url") not in {c["url"] for c in candidates}:
+                candidates.append(item)
+
+    def _rank(item: dict[str, Any]) -> tuple[int, int]:
+        st = _source_type(item.get("domain", ""))
+        order = {"AUTHORITY": 0, "GENERAL_SCIENCE": 1, "NEOLIFE_FIRST_PARTY": 2}.get(st, 3)
+        return (order, int(item.get("position") or 99))
+
+    candidates.sort(key=_rank)
+
+    for item in candidates:
+        url = item.get("url", "")
+        domain = item.get("domain", "")
+        source_type = _source_type(domain)
+        if not source_type or url in seen_urls or "levnytt.se" in domain:
+            continue
+        if len({c["source_url"] for c in claims if c.get("source_url")}) >= 6:
+            break
+        fetched = _fetch_source(url)
+        if not fetched:
+            continue
+        markdown, title = fetched
+        sentences = _extract_sentences(markdown, 6)
+        if not sentences:
+            continue
+        seen_urls.add(url)
+        for sentence in sentences:
+            claims.append({
+                "evidence_id": f"{slug}-src{len(claims) + 1}",
+                "claim": sentence,
+                "source_type": source_type,
+                "source_title": title or domain,
+                "source_reference": domain,
+                "source_url": url,
+                "retrieved_at": now,
+                "confidence": "HIGH" if source_type in {"AUTHORITY", "GENERAL_SCIENCE"} else "MEDIUM",
+            })
+        if len(claims) >= 20:
+            break
+
+    gsc_claim = _gsc_claim(ctx, keyword)
+    if gsc_claim:
+        claims.append(gsc_claim)
+
+    claims.append({
+        "evidence_id": f"{slug}-neolife",
+        "claim": f"LevNytt är en oberoende NeoLife-distributörswebbplats med Sponsor-ID {SPONSOR_ID}; NeoLife är ett direktförsäljningsföretag grundat 1958.",
+        "source_type": "NEOLIFE_FIRST_PARTY",
+        "source_title": "LevNytt — om oss",
+        "source_reference": "levnytt.se",
+        "source_url": "https://levnytt.se/om-oss",
+        "retrieved_at": now,
+        "confidence": "HIGH",
+    })
+
+    return {
+        "schema": "levnytt-topic-research-v1",
+        "topic": keyword,
+        "slug": slug,
+        "search_intent": _detect_intent(ctx, keyword),
+        "reader_question": keyword,
+        "swedish_query": keyword,
+        "english_query": en_query,
+        "generated_at": now,
+        "claims": claims,
+        "knowledge_gaps": [],
+        "contradictions": [],
+        "sufficiency": _research_sufficiency(claims),
+    }
+
+
+def _topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
+    """Cache-aware topic research: reuse a fresh (≤30-day) packet, including an
+    insufficient one (an insufficient result is itself a durable finding — it
+    must not be re-researched every decision)."""
+    cache_path = ctx.runtime_directory / "intelligence" / f"research-{slug}.json"
+    if cache_path.is_file():
+        try:
+            cached = json.loads(cache_path.read_text(encoding="utf-8"))
+            generated = str(cached.get("generated_at", "")).replace("Z", "+00:00")
+            age = datetime.now(timezone.utc) - datetime.fromisoformat(generated)
+            if age.days < RESEARCH_CACHE_TTL_DAYS:
+                return cached
+        except (OSError, json.JSONDecodeError, ValueError):
+            pass
+    packet = _build_topic_research(ctx, keyword, slug)
+    try:
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cache_path.write_text(json.dumps(packet, ensure_ascii=False, indent=2), encoding="utf-8")
+    except OSError:
+        pass
+    return packet
+
+
+def _topic_scribe_evidence(ctx, keyword: str, slug: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    packet = _topic_research(ctx, keyword, slug)
+    evidence = [
+        {
+            "evidence_id": c["evidence_id"],
+            "claim": c["claim"],
+            "source_reference": c.get("source_url") or c.get("source_reference", ""),
+            "source_type": c.get("source_type", ""),
+        }
+        for c in packet.get("claims", [])
+    ]
+    return evidence, packet
+
+
+def _https_serves_200() -> bool:
+    class _NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, *args, **kwargs):
+            return None
+    opener = urllib.request.build_opener(_NoRedirect)
+    try:
+        request = urllib.request.Request(SITE, method="HEAD", headers={"User-Agent": USER_AGENT})
+        response = opener.open(request, timeout=15)
+        return response.status == 200
+    except urllib.error.HTTPError as error:
+        return error.code == 200
+    except Exception:
+        return False
+
+
+def _pages_missing_sponsor_disclosure(repo: Path) -> list[str]:
+    missing: list[str] = []
+    for path in sorted(repo.glob("*.html")):
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        if "41-830928" not in text and "neolifeshop.com" not in text:
+            continue
+        if "41-830928" not in text:
+            missing.append(path.name)
+        if len(missing) >= 50:
+            break
+    return missing
+
+
+def _seed_keyword_candidates(ctx) -> None:
+    """Re-seed the SEO Scout candidates from the freshest first-party GSC query
+    evidence (highest impressions first) plus recurring audience questions
+    observed by Community Manager. Bounded to 20 and off-strategy queries are
+    excluded. Community signals are evidence inputs, not production commands."""
+    candidates_path = ctx.runtime_directory / "intelligence" / "keyword-candidates.json"
+    gsc = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
+    query = gsc.get("query") if isinstance(gsc.get("query"), dict) else {}
+    rows = query.get("all_queries", []) if isinstance(query.get("all_queries"), list) else []
+    ranked = sorted(
+        [r for r in rows if isinstance(r, dict) and str(r.get("query", "")).strip() and not _off_strategy(str(r["query"]))],
+        key=lambda r: -(int(r.get("impressions") or 0)),
+    )
+    keywords = [str(r["query"]).strip() for r in ranked[:20]]
+    # Recurring audience questions become evidence inputs for SEO/content.
+    levnytt_community = _levnytt_community()
+    for entry in levnytt_community.recurring_questions(ctx.runtime_directory, limit=5):
+        question = str(entry.get("question", "")).strip()
+        if question and question not in keywords and not _off_strategy(question):
+            keywords.append(question)
+    if not keywords:
+        keywords = ["direktförsäljning", "kosttillskott", "magnesium", "omega 3", "d vitamin", "probiotika", "multivitamin", "neolife", "pyramidspel", "kostfiber"]
+    keywords = keywords[:20]
+    candidates_path.parent.mkdir(parents=True, exist_ok=True)
+    candidates_path.write_text(json.dumps({"candidates": [{"keyword": k} for k in keywords]}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
