@@ -272,6 +272,33 @@ def record_signals(runtime: Path, signals: list[dict[str, Any]]) -> None:
     save_community_store(runtime, store)
 
 
+def record_discovery(runtime: Path, items: list[dict[str, Any]]) -> None:
+    """Append newly discovered read-only Community Intelligence items to the
+    project-scoped store, deduped by URL. This is discovery evidence only --
+    nothing in this module or its callers posts, replies, joins a group,
+    sends a connection request, or messages anyone. A discovered item's
+    ``recommended_action`` (NO_ACTION / OBSERVE / POSSIBLE_REPLY) is a
+    reporting label for a human/Owner decision, never a trigger for
+    automated action -- no code path consumes it to act."""
+    store = load_community_store(runtime)
+    existing = store.get("discovery", [])
+    if not isinstance(existing, list):
+        existing = []
+    seen_urls = {str(d.get("url", "")) for d in existing if isinstance(d, dict)}
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        url = str(item.get("url", ""))
+        if not url or url in seen_urls:
+            continue
+        item["recorded_at"] = datetime.now(timezone.utc).isoformat()
+        existing.append(item)
+        seen_urls.add(url)
+    store["discovery"] = existing
+    store["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_community_store(runtime, store)
+
+
 def record_research_gaps(runtime: Path, gaps: list[str]) -> None:
     store = load_community_store(runtime)
     existing = store.get("research_gaps", [])

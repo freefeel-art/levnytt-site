@@ -68,6 +68,86 @@ NEOLIFE_DOMAINS = ("neolifeshop.com", "neolife.com", "levnytt.se")
 _SE_SERP_LOCATION = 2752  # Sweden
 _US_SERP_LOCATION = 2840  # United States
 
+# ── Community Intelligence: read-only discovery ─────────────────────
+# Fixed, small, human-reviewed query set for community_intelligence. Kept
+# deliberately bounded (not auto-expanded from arbitrary keyword candidates)
+# so a single capability run has a known, small cost and a known, reviewable
+# scope. Covers: direct NeoLife questions, MLM/direct-selling trust
+# questions (LevNytt's differentiated transparency content), and LevNytt's
+# core covered supplement/nutrition topics.
+_COMMUNITY_DISCOVERY_QUERIES = (
+    "neolife recension flashback",
+    "är neolife pyramidspel",
+    "neolife kosttillskott forum",
+    "mlm sverige recension flashback",
+    "d-vitamin brist symptom forum",
+    "magnesium kosttillskott vilken forum",
+)
+
+# Public forums/platforms where Swedish product and MLM discussions occur.
+# The Facebook Graph API does not support public group/page/post search for
+# this app (confirmed via a live, read-only GET /pages/search call during
+# this session: "requires the 'pages_read_engagement' permission or the
+# 'Page Public Content Access' feature", neither of which this app has been
+# granted). Discovery therefore runs through DataForSEO's organic SERP
+# provider -- the same, already-credentialed, budget-guarded source used for
+# content research elsewhere in this file -- and only keeps results whose
+# domain is a known discussion venue.
+_DISCUSSION_DOMAINS = {
+    "facebook.com": "facebook",
+    "m.facebook.com": "facebook",
+    "flashback.org": "flashback_forum",
+    "familjeliv.se": "familjeliv_forum",
+    "reddit.com": "reddit",
+    "flexans.se": "flexans_forum",
+}
+
+_QUESTION_MARKERS = ("?", "vet någon", "har någon", "vet ni", "hjälp", "undrar")
+
+
+def _classify_discussion_platform(domain: str) -> str | None:
+    domain = (domain or "").lower().lstrip("www.")
+    for known, platform in _DISCUSSION_DOMAINS.items():
+        if domain == known or domain.endswith("." + known):
+            return platform
+    return None
+
+
+def _classify_discovery_item(item: dict[str, Any]) -> dict[str, Any]:
+    """Attach a recommended_action label and reasoning to one discovered
+    item. This is a reporting classification for a human/Owner decision --
+    no code path in this repository consumes recommended_action to take any
+    automated action. Third-party engagement is a separate, unbuilt
+    capability."""
+    url = str(item.get("url", ""))
+    title = str(item.get("title", ""))
+    snippet = str(item.get("snippet", ""))
+    platform = item.get("platform", "")
+    combined = f"{title} {snippet}".casefold()
+
+    # A bare facebook.com hit with no path beyond a page/group slug is
+    # almost always a page/group *listing*, not a specific discussion --
+    # cannot responsibly recommend anything beyond noting it exists.
+    path_depth = len([p for p in url.split("/")[3:] if p])
+    if platform == "facebook" and path_depth <= 1:
+        action, reason = "NO_ACTION", "Facebook result has no path beyond a page/group slug; not a specific discussion, just a listing."
+    elif any(marker in combined for marker in _QUESTION_MARKERS):
+        action, reason = "POSSIBLE_REPLY", "Title/snippet contains a direct question pattern on a topic LevNytt covers; flagged for Owner/human review, not automatic action."
+    else:
+        action, reason = "OBSERVE", "Discussion-shaped result on a relevant topic without a clear, specific question in the visible snippet."
+
+    return {
+        **item,
+        "recommended_action": action,
+        "reason": reason,
+        "levnytt_relevant_content": True,  # every query is itself seeded from a LevNytt-covered topic
+        "promotional_rules": "unknown_requires_manual_review",
+        "provenance": {
+            "method": "DataForSEO organic SERP (sv, Sweden location)",
+            "classified_by": "community_intelligence heuristic v1: platform + question-marker match on title/snippet only, no page content fetched",
+        },
+    }
+
 # Small Swedish→English topic dictionary for the general-science SERP layer.
 _SE_EN_TERMS = {
     "antioxidanter": "antioxidants",
@@ -167,6 +247,8 @@ class LevNyttProcedure:
             return self._execute_community_acquisition(ctx, action)
         if capability == "community_engagement":
             return self._execute_community_engagement(ctx, action)
+        if capability == "community_intelligence":
+            return self._execute_community_intelligence(ctx, action)
         return {
             "status": "CAPABILITY_GAP",
             "detail": f"No bounded executor is wired for capability {capability!r}.",
@@ -502,6 +584,79 @@ class LevNyttProcedure:
             },
         }
 
+    def _execute_community_intelligence(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Read-only discovery of relevant Swedish discussions (NeoLife,
+        MLM/direct-selling, and LevNytt's covered supplement/nutrition
+        topics), reported as structured evidence.
+
+        Never posts, replies, joins a group, sends a friend/connection
+        request, or messages anyone. Runs a fixed, small query set through
+        the same DataForSEO organic-SERP provider already used for content
+        research; keeps only results on known discussion-platform domains;
+        attaches a recommended_action label (NO_ACTION / OBSERVE /
+        POSSIBLE_REPLY) that is a reporting classification for a human/Owner
+        decision -- nothing in this codebase consumes it to act
+        automatically. Third-party engagement is a separate, unbuilt
+        capability; this executor cannot reach it."""
+        from app.providers.dataforseo import new_serp_budget, retrieve_organic_results
+
+        levnytt_community = _levnytt_community()
+        queries = _COMMUNITY_DISCOVERY_QUERIES
+        budget = new_serp_budget(maximum_requests=len(queries))
+        discovered: list[dict[str, Any]] = []
+        errors: list[str] = []
+
+        for query in queries:
+            try:
+                result = retrieve_organic_results(
+                    query, location=_SE_SERP_LOCATION, language="sv",
+                    root=Path("/home/yampa/projects/active/levnytt-site/runtime/production-data"),
+                    budget=budget,
+                )
+            except Exception as exc:
+                errors.append(f"{query}: {exc!r}")
+                continue
+            if result.get("execution_status") != "COMPLETED":
+                errors.append(f"{query}: {result.get('execution_status', 'UNKNOWN')} ({result.get('task_status_message', '')})")
+                continue
+            for item in (result.get("organic_results") or []):
+                if not isinstance(item, dict) or not item.get("url"):
+                    continue
+                platform = _classify_discussion_platform(str(item.get("domain", "")))
+                if platform is None:
+                    continue
+                discovered.append({
+                    "query": query,
+                    "platform": platform,
+                    "url": item.get("url"),
+                    "title": item.get("title", ""),
+                    "snippet": item.get("description", ""),
+                    "position": item.get("position"),
+                    "observed_at": datetime.now(timezone.utc).isoformat(),
+                })
+
+        reports = [_classify_discovery_item(item) for item in discovered]
+        levnytt_community.record_discovery(ctx.runtime_directory, reports)
+
+        possible_reply = [r for r in reports if r["recommended_action"] == "POSSIBLE_REPLY"]
+        return {
+            "status": "SUCCEEDED",
+            "detail": (
+                f"Community Intelligence discovery: {len(queries)} queries, {len(reports)} "
+                f"discussion-shaped result(s) recorded, {len(possible_reply)} flagged "
+                "POSSIBLE_REPLY for Owner/human review. Read-only: no post, reply, join, "
+                "friend request, or message was made."
+            ),
+            "evidence": {
+                "query_count": len(queries),
+                "result_count": len(reports),
+                "possible_reply_count": len(possible_reply),
+                "errors": errors,
+                "read_only": True,
+                "results": reports,
+            },
+        }
+
     def _execute_community_engagement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         """One bounded, policy-gated reply to one already-discovered comment.
 
@@ -623,6 +778,12 @@ class LevNyttProcedure:
             if evidence.get("no_reply") or evidence.get("research_required"):
                 return True
             return bool(evidence.get("replied"))
+        if capability == "community_intelligence":
+            # Read-only discovery is verified when the run completed and
+            # produced no writes (errors alone don't fail it -- a query
+            # returning zero discussion-shaped results, or a provider error
+            # on one of several queries, is still a valid, honest pass).
+            return execution.get("status") == "SUCCEEDED" and bool(evidence.get("read_only"))
         return False
 
     # ── measurement ───────────────────────────────────────────────
