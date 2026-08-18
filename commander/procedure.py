@@ -792,6 +792,7 @@ class LevNyttProcedure:
         fetched_urls: list[str] = []
         fetch_records: list[dict[str, Any]] = []
         updated_reasoning_records: list[dict[str, Any]] = []
+        evaluated_candidates: list[tuple[dict[str, Any], dict[str, Any], dict[str, Any]]] = []
         for candidate in thread_eligible:
             url = str(candidate.get("source_url", ""))
             platform = str(candidate.get("source_platform", ""))
@@ -818,12 +819,29 @@ class LevNyttProcedure:
                 "after_outcome": updated.get("outcome") if updated else None,
                 "outcome_changed": bool(updated and updated.get("outcome") != candidate.get("outcome")),
             })
+            evaluated_candidates.append((discovery_item, fetch, updated or candidate))
         if fetched_urls:
             levnytt_community.record_thread_fetch(ctx.runtime_directory, fetched_urls)
         if fetch_records:
             levnytt_community.record_thread_evidence(ctx.runtime_directory, fetch_records)
         if updated_reasoning_records:
             levnytt_community.record_reasoning_results(ctx.runtime_directory, updated_reasoning_records)
+
+        # Stage 4 (Community Rules + Engagement Policy): a separate
+        # question from Stages 2-3 -- even if LevNytt can help, would
+        # participation be appropriate and permitted? Combines platform
+        # policy (a real, cached, first-party rules fetch -- never
+        # re-fetched per discussion), social appropriateness, and
+        # commercial disclosure into one recommendation, on top of the
+        # existing Stage 2/3 outcome. None of these recommendations
+        # authorizes execution; write_authorized is always False. See
+        # commander/community.py::evaluate_engagement.
+        engagement_evaluations = [
+            levnytt_community.evaluate_engagement(item, fetch, reasoning, ctx.runtime_directory, scrape=firecrawl_scrape)
+            for item, fetch, reasoning in evaluated_candidates
+        ]
+        if engagement_evaluations:
+            levnytt_community.record_engagement_evaluations(ctx.runtime_directory, engagement_evaluations)
 
         possible_reply = [r for r in reports if r["recommended_action"] == "POSSIBLE_REPLY"]
         # Diminishing-returns detection, mirroring legacy_audit's
@@ -845,6 +863,7 @@ class LevNyttProcedure:
             "results": reports,
             "reasoning_results": reasoning_results,
             "thread_fetch_traces": thread_traces,
+            "engagement_evaluations": engagement_evaluations,
         }
         if new_item_count == 0 and not reasoning_results and not thread_traces:
             evidence["skipped"] = True
@@ -862,6 +881,15 @@ class LevNyttProcedure:
             f"{changed} outcome(s) changed after full context."
             if thread_traces else ""
         )
+        recommendation_counts: dict[str, int] = {}
+        for evaluation in engagement_evaluations:
+            key = evaluation["engagement_recommendation"]
+            recommendation_counts[key] = recommendation_counts.get(key, 0) + 1
+        engagement_summary = (
+            f" Engagement policy evaluated for {len(engagement_evaluations)} candidate(s): "
+            + ", ".join(f"{k}={v}" for k, v in sorted(recommendation_counts.items())) + ". No write authorized."
+            if engagement_evaluations else ""
+        )
         return {
             "status": "SUCCEEDED",
             "detail": (
@@ -869,7 +897,7 @@ class LevNyttProcedure:
                 f"discussion-shaped result(s) seen, {new_item_count} genuinely new "
                 f"(not already known), {len(possible_reply)} flagged POSSIBLE_REPLY for "
                 "Owner/human review. Read-only: no post, reply, join, friend request, or "
-                "message was made." + reasoning_summary + thread_summary
+                "message was made." + reasoning_summary + thread_summary + engagement_summary
             ) if reports else (
                 f"Community Intelligence discovery: {len(queries)} queries, no "
                 "discussion-shaped results found. Read-only: no post, reply, join, friend "

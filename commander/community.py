@@ -31,10 +31,27 @@ _SCIENCE_HEALTH_MARKERS = (
     "kosttillskott", "kostfiber", "omega", "selen", "zink", "kollagen", "hälsa",
     "hjälper", "forskning", "evidens", "studier", "biverkning", "säker",
 )
-_BUSINESS_DISTRIBUTOR_MARKERS = (
-    "återförsäljare", "aterforsaljare", "distributör", "distributor", "tjäna pengar",
-    "tjana pengar", "inkomst", "sponsor", "registrera", "registrera sig",
-    "affärsmöjlighet", "affarsmojlighet", "sälja", "salja", "pyramidspel", "mlm",
+# Split by how unambiguous each term is on its own. STRONG terms name the
+# business/distributor topic directly and are safe to trigger classification
+# alone. WEAK terms are common, generic Swedish words that appear constantly
+# in totally unrelated contexts (an account "registrera"-tion, a general
+# "sälja"/"sell" mention, "inkomst"/income in any context, a bare "sponsor")
+# -- one of these alone is not real evidence of a business/distributor
+# discussion. Confirmed live: a real magnesium-supplement thread was
+# misclassified as BUSINESS_DISTRIBUTOR purely because "registrera" appeared
+# once, incidentally, with no other business-shaped language anywhere in the
+# thread. Two or more independent weak markers together is treated as real
+# corroborating evidence; one alone is not.
+_BUSINESS_DISTRIBUTOR_STRONG_MARKERS = (
+    "återförsäljare", "aterforsaljare", "distributör", "distributor",
+    "affärsmöjlighet", "affarsmojlighet", "pyramidspel", "mlm",
+)
+_BUSINESS_DISTRIBUTOR_WEAK_MARKERS = (
+    # "registrera sig" is deliberately not listed separately: it is a
+    # substring superset of "registrera" and would otherwise silently count
+    # as two independent markers for one single occurrence, defeating the
+    # "two independent weak markers" corroboration requirement below.
+    "tjäna pengar", "tjana pengar", "inkomst", "sponsor", "registrera", "sälja", "salja",
 )
 _CONSUMER_DECISION_MARKERS = (
     "värt", "vart", "billigare", "pris", "kostar", "vilket ska jag", "jämför",
@@ -46,21 +63,32 @@ _CONTENT_QUESTION_MARKERS = (
 )
 
 
+_SIGNAL_CATEGORY_PRIORITY = ("BUSINESS_DISTRIBUTOR", "PRODUCT", "SCIENCE_HEALTH", "CONSUMER_DECISION", "CONTENT_QUESTION")
+
+
 def classify_levnytt_signal(text: str) -> dict[str, Any]:
     """Classify one observed Facebook text into the NeoLife consumer taxonomy.
 
     Returns matched categories and a primary category. Text matching nothing is
     UNKNOWN (not actionable). A user statement is USER_CLAIM, never verified fact.
+
+    Evidence-combination, not first-match-wins: BUSINESS_DISTRIBUTOR requires
+    either one unambiguous strong marker or two or more independent weak
+    (generic, ambiguous) markers together -- see
+    _BUSINESS_DISTRIBUTOR_STRONG_MARKERS/_WEAK_MARKERS. The primary category
+    is whichever matched category has the strongest evidence (most matched
+    markers), not merely whichever fixed-priority category happened to match
+    first -- so a handful of health markers correctly outweighs one
+    borderline business-shaped word, while ties still fall back to the same
+    priority order as before.
     """
     stripped = (text or "").strip()
     if not stripped:
         return {"signal_types": [], "primary_signal_type": "UNKNOWN", "is_actionable": False, "matched_markers": []}
 
     lowered = stripped.casefold()
-    matched: list[str] = []
-    markers: list[str] = []
+    category_hits: dict[str, list[str]] = {}
     for category, marker_list in (
-        ("BUSINESS_DISTRIBUTOR", _BUSINESS_DISTRIBUTOR_MARKERS),
         ("PRODUCT", _PRODUCT_MARKERS),
         ("SCIENCE_HEALTH", _SCIENCE_HEALTH_MARKERS),
         ("CONSUMER_DECISION", _CONSUMER_DECISION_MARKERS),
@@ -68,17 +96,25 @@ def classify_levnytt_signal(text: str) -> dict[str, Any]:
     ):
         hits = [m for m in marker_list if m in lowered]
         if hits:
-            matched.append(category)
-            markers.extend(hits)
+            category_hits[category] = hits
 
-    if not matched:
+    strong_hits = [m for m in _BUSINESS_DISTRIBUTOR_STRONG_MARKERS if m in lowered]
+    weak_hits = [m for m in _BUSINESS_DISTRIBUTOR_WEAK_MARKERS if m in lowered]
+    if strong_hits or len(weak_hits) >= 2:
+        category_hits["BUSINESS_DISTRIBUTOR"] = strong_hits + weak_hits
+
+    if not category_hits:
         return {"signal_types": [], "primary_signal_type": "UNKNOWN", "is_actionable": False, "matched_markers": []}
+
+    matched = sorted(category_hits, key=_SIGNAL_CATEGORY_PRIORITY.index)
+    primary = max(matched, key=lambda c: (len(category_hits[c]), -_SIGNAL_CATEGORY_PRIORITY.index(c)))
+    markers = [m for c in matched for m in category_hits[c]]
 
     # A direct question is always actionable; otherwise only substantive matches are.
     is_question = "?" in stripped or lowered.startswith(("vad", "hur", "varför", "vilken", "vilket", "är", "hjälper", "kan"))
     return {
         "signal_types": matched,
-        "primary_signal_type": matched[0],
+        "primary_signal_type": primary,
         "is_actionable": is_question or bool(matched),
         "matched_markers": markers,
     }
@@ -1150,6 +1186,410 @@ def record_thread_evidence(runtime: Path, records: list[dict[str, Any]]) -> None
         existing = []
     existing.extend(records)
     store["thread_evidence"] = existing[-20:]
+    store["updated_at"] = datetime.now(timezone.utc).isoformat()
+    save_community_store(runtime, store)
+
+
+# ── Stage 4: community rules + engagement policy ─────────────────────
+# Answers a separate question from Stages 2-3: even if LevNytt can help,
+# would participation be appropriate and permitted? Nothing here authorizes
+# a write -- every function returns a recommendation only, and
+# write_authorized is always False. See evaluate_engagement for the single
+# entry point that ties the four dimensions (RELEVANCE/GROUNDING are
+# already Stage 2/3's job; this stage adds PLATFORM POLICY and SOCIAL
+# APPROPRIATENESS) into one recommendation.
+
+# Real, first-party rule pages, resolved and read live during the Stage 4
+# audit -- not guessed. Reddit and Facebook are deliberately absent: Stage 3
+# already proved both structurally unavailable for this mechanism
+# (robots.txt disallows/prohibits automated collection; both returned real
+# HTTP 403), and this phase does not attempt to bypass that.
+_PLATFORM_RULES_URLS = {
+    "flashback_forum": "https://www.flashback.org/regler",
+    "familjeliv_forum": "https://www.familjeliv.se/sakerhet-och-regler",
+}
+# Rules change far less often than individual threads -- one authoritative
+# fetch per platform is reused for every candidate on that platform until
+# stale, rather than re-fetched per discussion.
+_RULES_FRESHNESS_DAYS = 30
+
+
+def fetch_platform_rules(platform: str, *, scrape) -> dict[str, Any]:
+    """One bounded, read-only fetch of a platform's own first-party rules
+    page, via the same Firecrawl provider Stage 3 already uses. A failed or
+    unsupported fetch is reported, never raised."""
+    now = datetime.now(timezone.utc).isoformat()
+    url = _PLATFORM_RULES_URLS.get(platform)
+    if not url:
+        return {"fetch_status": "UNSUPPORTED_SOURCE", "platform": platform, "url": None, "fetched_at": now}
+    try:
+        data = scrape(url, formats=("markdown",), timeout=_THREAD_FETCH_TIMEOUT_SECONDS)
+    except Exception as error:
+        return {"fetch_status": "FAILED", "platform": platform, "url": url, "fetched_at": now, "error": f"{type(error).__name__}: {error}"}
+    markdown = str(data.get("markdown") or "")
+    if not markdown.strip():
+        return {"fetch_status": "EMPTY", "platform": platform, "url": url, "fetched_at": now}
+    return {
+        "fetch_status": "COMPLETE", "platform": platform, "url": url, "fetched_at": now,
+        "provider": "Firecrawl", "raw_text": markdown, "raw_text_length": len(markdown),
+    }
+
+
+def _extract_platform_policy_facts(platform: str, raw_text: str) -> list[dict[str, Any]]:
+    """Bounded, deterministic extraction of specific rule facts from a
+    platform's real, freshly-fetched rules text. Only recognizes exact
+    phrases this session verified appear in the real, live rules page --
+    never infers a rule from absence, never fabricates rule text beyond
+    what the fetch actually contains.
+
+    Flashback's real rules page (verified live, rule 1.01 "Reklam och
+    annonsering") is unambiguous and directly relevant to LevNytt's own
+    situation: independent tips/links and consumer questions ARE
+    permitted, but "referallänkar" (referral links) and marketing for
+    "egen eller andras verksamhet" (one's own or others' business) are
+    explicitly PROHIBITED -- and a levnytt.se link is exactly a referral
+    link for LevNytt's own declared NeoLife commercial relationship.
+
+    Familjeliv's real /sakerhet-och-regler page (verified live) is only a
+    table-of-contents linking to further sub-pages (e.g. "Medlemsvillkor",
+    which the index says covers "kommersiella tips, reklam") -- the actual
+    enforceable rule text was not resolved to a fetchable URL this
+    session, so only a REQUIRES_REVIEW-level fact is recorded, honestly
+    reflecting lower-confidence evidence than Flashback's.
+    """
+    lowered = raw_text.casefold()
+    facts: list[dict[str, Any]] = []
+
+    def _add(scope: str, state: str, phrase: str, rule_reference: str) -> None:
+        if phrase.casefold() in lowered:
+            facts.append({"scope": scope, "state": state, "evidence_phrase": phrase, "rule_reference": rule_reference})
+
+    if platform == "flashback_forum":
+        _add("referral_link", "PROHIBITED", "referallänkar är förbjudna", "1.01 Reklam och annonsering")
+        _add(
+            "self_promotion", "PROHIBITED",
+            "inte tillåtet att använda forumet för att skapa eller sprida marknadsföring för egen eller andras verksamhet",
+            "1.01 Reklam och annonsering",
+        )
+        _add("independent_tips", "PERMITTED", "det är tillåtet att tipsa och länka till innehåll", "1.01 Reklam och annonsering")
+        _add("consumer_questions", "PERMITTED", "det är tillåtet att ställa konsumentfrågor", "1.01 Reklam och annonsering")
+    elif platform == "familjeliv_forum":
+        _add(
+            "commercial_topic_present", "REQUIRES_REVIEW", "kommersiella tips, reklam",
+            "Medlemsvillkor (index page only; full rule text not resolved to a fetchable URL)",
+        )
+    return facts
+
+
+def _aggregate_policy_state(facts: list[dict[str, Any]]) -> str:
+    """Absence of evidence is UNKNOWN, never PERMITTED -- fail closed."""
+    if not facts:
+        return "UNKNOWN"
+    scopes = {fact["scope"]: fact["state"] for fact in facts}
+    link_prohibited = scopes.get("referral_link") == "PROHIBITED" or scopes.get("self_promotion") == "PROHIBITED"
+    discussion_permitted = scopes.get("independent_tips") == "PERMITTED" or scopes.get("consumer_questions") == "PERMITTED"
+    if link_prohibited and discussion_permitted:
+        return "PERMITTED_WITHOUT_LINK"
+    if link_prohibited:
+        return "PROHIBITED"
+    if discussion_permitted:
+        return "PERMITTED"
+    return "REQUIRES_REVIEW"
+
+
+def _is_rules_cache_fresh(cached: dict[str, Any] | None) -> bool:
+    if not cached or not cached.get("retrieved_at"):
+        return False
+    try:
+        retrieved = datetime.fromisoformat(str(cached["retrieved_at"]))
+    except ValueError:
+        return False
+    if retrieved.tzinfo is None:
+        retrieved = retrieved.replace(tzinfo=timezone.utc)
+    return (datetime.now(timezone.utc) - retrieved).days < _RULES_FRESHNESS_DAYS
+
+
+def platform_policy_state(platform: str, runtime: Path, *, scrape=None) -> dict[str, Any]:
+    """Cached, freshness-aware platform rules lookup -- one authoritative
+    fetch per platform (bounded to _RULES_FRESHNESS_DAYS) supports every
+    candidate on that platform, never a fetch per discussion. Returns
+    overall_state UNKNOWN whenever no rules evidence exists and none can be
+    fetched right now; never infers PERMITTED from an empty cache."""
+    store = load_community_store(runtime)
+    cache = store.get("platform_rules", {})
+    if not isinstance(cache, dict):
+        cache = {}
+    cached = cache.get(platform)
+    fresh = _is_rules_cache_fresh(cached)
+
+    if not fresh and scrape is not None:
+        fetch = fetch_platform_rules(platform, scrape=scrape)
+        if fetch.get("fetch_status") == "COMPLETE":
+            facts = _extract_platform_policy_facts(platform, fetch["raw_text"])
+            cached = {
+                "platform": platform,
+                "source_url": fetch["url"],
+                "retrieved_at": fetch["fetched_at"],
+                "facts": facts,
+                "overall_state": _aggregate_policy_state(facts),
+                "confidence": "HIGH" if facts else "LOW",
+                "raw_text_length": fetch.get("raw_text_length"),
+            }
+            cache[platform] = cached
+            store["platform_rules"] = cache
+            save_community_store(runtime, store)
+            fresh = True
+        elif cached is None:
+            return {
+                "platform": platform, "overall_state": "UNKNOWN", "facts": [], "source_url": fetch.get("url"),
+                "retrieved_at": None, "confidence": "NONE", "cache_fresh": False,
+                "note": f"Rules fetch did not complete ({fetch.get('fetch_status')}); no cached rules exist for this platform.",
+            }
+
+    if cached is None:
+        return {
+            "platform": platform, "overall_state": "UNKNOWN", "facts": [], "source_url": None,
+            "retrieved_at": None, "confidence": "NONE", "cache_fresh": False,
+            "note": "No rules evidence has been fetched for this platform yet.",
+        }
+    return {**cached, "cache_fresh": fresh}
+
+
+_THREAD_STALE_DAYS = 365
+# A small, explicitly heuristic marker set -- absence never asserts "not
+# hostile," only "not detected." A deterministic keyword check cannot
+# reliably judge tone; this is used only to lower confidence, never to
+# confidently clear a thread as friendly.
+_HOSTILITY_MARKERS = ("idiot", "dum i huvudet", "håll käften", "dra åt helvete", "fan ta dig", "håll tyst")
+
+
+def _latest_post_timestamp(fetch: dict[str, Any]) -> datetime | None:
+    timestamps: list[datetime] = []
+    for post in fetch.get("posts", []) or []:
+        raw = post.get("timestamp") if isinstance(post, dict) else None
+        if not raw:
+            continue
+        try:
+            timestamps.append(datetime.strptime(raw, "%Y-%m-%d %H:%M").replace(tzinfo=timezone.utc))
+        except ValueError:
+            continue
+    for quote in fetch.get("quoted_authors", []) or []:
+        raw = quote.get("timestamp") if isinstance(quote, dict) else None
+        if not raw:
+            continue
+        try:
+            timestamps.append(datetime.strptime(raw, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc))
+        except ValueError:
+            continue
+    return max(timestamps) if timestamps else None
+
+
+def _reply_count(fetch: dict[str, Any]) -> int:
+    if fetch.get("posts"):
+        return max(0, len(fetch["posts"]) - 1)  # exclude the original post
+    return len(fetch.get("replies", []) or [])
+
+
+def _combined_thread_text(fetch: dict[str, Any]) -> str:
+    parts = [str(fetch.get("original_post") or "")]
+    parts += [str(post.get("text", "")) for post in fetch.get("posts", []) or [] if isinstance(post, dict)]
+    parts += [str(reply) for reply in fetch.get("replies", []) or []]
+    return " ".join(parts)
+
+
+def assess_social_appropriateness(fetch: dict[str, Any] | None, reasoning: dict[str, Any]) -> dict[str, Any]:
+    """A separate, deterministic judgment of whether participation would
+    actually be useful -- distinct from whether it is technically permitted
+    or grounded. Optimizes for useful participation, not reply volume.
+    Every factor is a real, checkable signal from fetched evidence; nothing
+    reliably assessable from available evidence returns UNKNOWN/reduced
+    confidence rather than a guessed confident answer."""
+    outcome = reasoning.get("outcome")
+    if outcome in {"NO_ACTION", "OBSERVE", "INSUFFICIENT_CONTEXT"} or fetch is None:
+        return {
+            "social_value": "NOT_APPLICABLE",
+            "thread_is_stale": None, "reply_count": None, "hostility_detected": None,
+            "has_commercial_interest": None, "addresses_question": None,
+            "reasons": ["No draft exists at this reasoning outcome; social value is not applicable."],
+            "concerns": [],
+        }
+
+    reasons: list[str] = []
+    concerns: list[str] = []
+
+    latest = _latest_post_timestamp(fetch)
+    thread_is_stale = None
+    if latest is not None:
+        age_days = (datetime.now(timezone.utc) - latest).days
+        thread_is_stale = age_days > _THREAD_STALE_DAYS
+        reasons.append(f"Latest observed reply was {age_days} day(s) ago.")
+        if thread_is_stale:
+            concerns.append("No thread activity in over a year; reviving it may read as necroposting.")
+    else:
+        reasons.append("No reliable reply timestamp was extracted; thread recency is unknown.")
+
+    reply_count = _reply_count(fetch)
+    reasons.append(f"{reply_count} real reply/replies observed in the fetched thread.")
+
+    hostility_hits = [m for m in _HOSTILITY_MARKERS if m in _combined_thread_text(fetch).casefold()]
+    if hostility_hits:
+        concerns.append(f"Hostile/dismissive language observed: {', '.join(hostility_hits)}.")
+
+    has_commercial_interest = reasoning.get("relevance") == "EXPLICITLY_NEOLIFE" or "BUSINESS_DISTRIBUTOR" in str(reasoning.get("relevance", ""))
+    addresses_question = bool(reasoning.get("draft"))
+
+    if hostility_hits:
+        social_value = "LOW"
+    elif thread_is_stale:
+        social_value = "LOW"
+    elif not addresses_question:
+        social_value = "LOW"
+        concerns.append("No draft text was actually produced for this candidate.")
+    elif thread_is_stale is None:
+        social_value = "MEDIUM"
+        reasons.append("Thread recency could not be established, so social value is capped at MEDIUM.")
+    else:
+        social_value = "HIGH"
+
+    return {
+        "social_value": social_value,
+        "thread_is_stale": thread_is_stale,
+        "reply_count": reply_count,
+        "hostility_detected": bool(hostility_hits),
+        "has_commercial_interest": has_commercial_interest,
+        "addresses_question": addresses_question,
+        "reasons": reasons,
+        "concerns": concerns,
+    }
+
+
+def assess_disclosure_requirement(reasoning: dict[str, Any]) -> dict[str, Any]:
+    """Whether a proposed response requires LevNytt's commercial-relationship
+    disclosure -- kept separate from platform rules. Never invents a legal
+    conclusion; returns REQUIRES_REVIEW where confidence is insufficient."""
+    outcome = reasoning.get("outcome")
+    if outcome in {"NO_ACTION", "OBSERVE", "INSUFFICIENT_CONTEXT"}:
+        return {"disclosure_state": "NOT_APPLICABLE", "reasons": ["No response is proposed at this outcome."]}
+
+    draft = str(reasoning.get("draft") or "")
+    discusses_neolife = reasoning.get("relevance") == "EXPLICITLY_NEOLIFE" or "neolife" in draft.casefold()
+    links_levnytt = reasoning.get("possible_relevant_content") is not None
+    could_be_commercial_recommendation = outcome == "POSSIBLE_VALUE_ADDING_LINK"
+
+    if discusses_neolife or links_levnytt or could_be_commercial_recommendation:
+        reasons = [
+            reason for reason, present in (
+                ("The response discusses NeoLife specifically.", discusses_neolife),
+                ("The response identifies LevNytt content as a possible resource.", links_levnytt),
+                ("The outcome could reasonably be read as a commercial recommendation.", could_be_commercial_recommendation),
+            ) if present
+        ]
+        return {"disclosure_state": "DISCLOSURE_REQUIRED", "reasons": reasons, "existing_disclosure_text": _LEVNYTT_DISCLOSURE}
+
+    if outcome == "ANSWER_WITHOUT_LINK":
+        return {
+            "disclosure_state": "NOT_REQUIRED",
+            "reasons": ["The proposed response does not discuss NeoLife, does not link LevNytt content, and is not a commercial recommendation."],
+        }
+    return {"disclosure_state": "REQUIRES_REVIEW", "reasons": ["The commercial character of this specific response could not be confidently established."]}
+
+
+def combine_engagement_recommendation(
+    reasoning: dict[str, Any],
+    policy: dict[str, Any],
+    social: dict[str, Any],
+    disclosure: dict[str, Any],
+) -> dict[str, Any]:
+    """Combine RELEVANCE/GROUNDING (Stage 2/3's existing outcome),
+    PLATFORM POLICY, and SOCIAL APPROPRIATENESS into one recommendation.
+    write_authorized is always False -- none of these outcomes may invoke
+    an interactor. Enriches the existing Stage 2/3 outcome; never replaces
+    it."""
+    outcome = reasoning.get("outcome")
+
+    if outcome == "NO_ACTION":
+        recommendation = "DO_NOT_ENGAGE"
+    elif outcome in {"OBSERVE", "INSUFFICIENT_CONTEXT"}:
+        recommendation = "OBSERVE"
+    else:
+        policy_state = policy.get("overall_state")
+        social_value = social.get("social_value")
+        disclosure_state = disclosure.get("disclosure_state")
+
+        # Fail closed first: a prohibited or unproven platform policy state
+        # ends the decision here regardless of how favorable grounding or
+        # social value are -- e.g. POSSIBLE_VALUE_ADDING_LINK + UNKNOWN must
+        # never "magically become permission."
+        if policy_state == "PROHIBITED":
+            recommendation = "DO_NOT_ENGAGE"
+        elif policy_state in {"UNKNOWN", "REQUIRES_REVIEW"}:
+            recommendation = "REQUIRES_OWNER_REVIEW"
+        elif social_value in {"LOW", None}:
+            recommendation = "DRAFT_ONLY"
+        elif outcome == "ANSWER_WITHOUT_LINK":
+            # policy_state is PERMITTED or PERMITTED_WITHOUT_LINK here --
+            # either way a link-free answer is allowed.
+            recommendation = "POTENTIALLY_ENGAGE_WITHOUT_LINK" if social_value == "HIGH" else "DRAFT_ONLY"
+        else:  # POSSIBLE_VALUE_ADDING_LINK
+            if policy_state == "PERMITTED_WITHOUT_LINK":
+                # Real evidence-grounded downgrade: the platform permits
+                # discussion but explicitly prohibits the link itself.
+                recommendation = "POTENTIALLY_ENGAGE_WITHOUT_LINK" if social_value == "HIGH" else "DRAFT_ONLY"
+            elif policy_state == "PERMITTED" and disclosure_state == "DISCLOSURE_REQUIRED" and social_value == "HIGH":
+                recommendation = "POTENTIALLY_ENGAGE_WITH_DISCLOSED_LINK"
+            else:
+                recommendation = "REQUIRES_OWNER_REVIEW"
+
+    return {"engagement_recommendation": recommendation, "write_authorized": False}
+
+
+def evaluate_engagement(
+    item: dict[str, Any],
+    fetch: dict[str, Any] | None,
+    reasoning: dict[str, Any],
+    runtime: Path,
+    *,
+    scrape=None,
+) -> dict[str, Any]:
+    """The complete Stage 4 decision packet for one candidate: existing
+    Stage 2/3 reasoning, platform policy, social appropriateness,
+    disclosure, and a final recommendation. Never authorizes a write --
+    write_authorized is always False, structurally, regardless of input."""
+    platform = str(reasoning.get("source_platform") or item.get("platform") or "")
+    policy = platform_policy_state(platform, runtime, scrape=scrape)
+    social = assess_social_appropriateness(fetch, reasoning)
+    disclosure = assess_disclosure_requirement(reasoning)
+    decision = combine_engagement_recommendation(reasoning, policy, social, disclosure)
+
+    return {
+        "source_platform": platform,
+        "source_url": reasoning.get("source_url"),
+        "thread_context_status": (fetch or {}).get("fetch_status", "NOT_FETCHED"),
+        "relevance": reasoning.get("relevance"),
+        "grounding_sufficiency": "GROUNDED" if reasoning.get("draft") else "INSUFFICIENT",
+        "reasoning_outcome": reasoning.get("outcome"),
+        "draft": reasoning.get("draft"),
+        "possible_relevant_content": reasoning.get("possible_relevant_content"),
+        "platform_policy": policy,
+        "social_appropriateness": social,
+        "disclosure": disclosure,
+        "engagement_recommendation": decision["engagement_recommendation"],
+        "write_authorized": decision["write_authorized"],
+        "evaluated_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def record_engagement_evaluations(runtime: Path, evaluations: list[dict[str, Any]]) -> None:
+    """Persist Stage 4 decision packets for Commander visibility, bounded
+    the same way every other list in this store is (most recent 20)."""
+    if not evaluations:
+        return
+    store = load_community_store(runtime)
+    existing = store.get("engagement_evaluations", [])
+    if not isinstance(existing, list):
+        existing = []
+    existing.extend(evaluations)
+    store["engagement_evaluations"] = existing[-20:]
     store["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_community_store(runtime, store)
 
