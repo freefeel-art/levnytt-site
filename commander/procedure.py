@@ -511,15 +511,19 @@ class LevNyttProcedure:
             ok, gate_issues = _content_gate(keyword, scribe_result)
             if ok:
                 html = _assemble_page(slug, keyword, scribe_result, research_packet)
-                destination = repo / "content" / "articles" / f"{slug}.html"
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.write_text(html, encoding="utf-8")
-                _rebuild_content_inventory(repo)
-                return {
-                    "status": "SUCCEEDED",
-                    "detail": f"Staged production page {slug!r} at content/articles/{slug}.html (awaiting deployment).",
-                    "evidence": {"slug": slug, "keyword": keyword, "gate_passed": True, "attempt": attempt, "staged_path": str(destination), "lifecycle": "STAGED"},
-                }
+                final_ok, final_issues = _final_publication_gate(html)
+                if final_ok:
+                    destination = repo / "content" / "articles" / f"{slug}.html"
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_text(html, encoding="utf-8")
+                    _rebuild_content_inventory(repo)
+                    return {
+                        "status": "SUCCEEDED",
+                        "detail": f"Staged production page {slug!r} at content/articles/{slug}.html (awaiting deployment).",
+                        "evidence": {"slug": slug, "keyword": keyword, "gate_passed": True, "final_gate_passed": True, "attempt": attempt, "staged_path": str(destination), "lifecycle": "STAGED"},
+                    }
+                issues = list(final_issues)
+                continue
             issues = list(gate_issues)
 
         return {"status": "BLOCKED", "detail": f"Content revision exhausted after {max_attempts} attempts for {keyword!r}: " + "; ".join(issues), "evidence": {"keyword": keyword, "slug": slug, "attempts": max_attempts, "gate_issues": issues}}
@@ -684,16 +688,20 @@ class LevNyttProcedure:
             ok, gate_issues = _content_gate(keyword, scribe_result)
             if ok:
                 html = _assemble_page(slug, keyword, scribe_result, research_packet)
-                destination = repo / "content" / "articles" / f"{slug}.html"
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.write_text(html, encoding="utf-8")
-                _rebuild_content_inventory(repo)
-                _record_legacy_outcome(runtime, slug, status="STAGED", note="migrated, awaiting deployment")
-                return {
-                    "status": "SUCCEEDED",
-                    "detail": f"Staged migrated legacy page {slug!r} at content/articles/{slug}.html (awaiting deployment).",
-                    "evidence": {"slug": slug, "keyword": keyword, "gate_passed": True, "staged_path": str(destination), "lifecycle": "STAGED"},
-                }
+                final_ok, final_issues = _final_publication_gate(html)
+                if final_ok:
+                    destination = repo / "content" / "articles" / f"{slug}.html"
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_text(html, encoding="utf-8")
+                    _rebuild_content_inventory(repo)
+                    _record_legacy_outcome(runtime, slug, status="STAGED", note="migrated, awaiting deployment")
+                    return {
+                        "status": "SUCCEEDED",
+                        "detail": f"Staged migrated legacy page {slug!r} at content/articles/{slug}.html (awaiting deployment).",
+                        "evidence": {"slug": slug, "keyword": keyword, "gate_passed": True, "final_gate_passed": True, "staged_path": str(destination), "lifecycle": "STAGED"},
+                    }
+                issues = list(final_issues)
+                continue
             issues = list(gate_issues)
 
         _record_legacy_outcome(runtime, slug, status="GATE_FAILED", note="; ".join(issues))
@@ -1281,16 +1289,18 @@ def build_procedure():
 def _build_levnytt_facebook_message(title: str, excerpt: str) -> str:
     """Compose an informational Facebook post from the article's own already
     fact-gated H1/meta-description. No new health claim, savings figure, or
-    income promise is invented here -- content-level factual and
-    unsubstantiated-promise safety was already enforced by the content
-    production gate (the editorial constitution in _execute_content_production:
-    no income promises, no hype, no fabricated claims) when the article
-    itself was produced. This only formats what the article already says,
-    plus LevNytt's standing NeoLife disclosure -- Facebook distribution is
-    itself a point of commercial context, so the same disclosure principle
-    applied to every on-site page (Sponsor-ID 41-830928, "Oberoende
-    distributör") applies here too, in the exact phrasing already
-    established on /om-oss."""
+    income promise is invented here -- the article itself already passed
+    _final_publication_gate before it could ship: a rendered disclosure
+    marker, at least one independent (non-NeoLife) citation link, the
+    financial/scam-promise marker check, and a sentence-scoped check for
+    bare affirmative treatment/cure/prevention claims and sensational
+    language (not a full semantic guarantee -- see that gate's own
+    docstring for its known limitation on compound sentences). This only
+    formats what the article already says, plus LevNytt's standing NeoLife
+    disclosure -- Facebook distribution is itself a point of commercial
+    context, so the same disclosure principle applied to every on-site page
+    (Sponsor-ID 41-830928, "Oberoende distributör") applies here too, in the
+    exact phrasing already established on /om-oss."""
     body = excerpt.strip()
     text = f"{title.strip()}\n\n{body}" if body else title.strip()
     if len(text) > 350:
@@ -1594,7 +1604,20 @@ def _scribe_brief(keyword: str, slug: str, evidence: list[dict[str, Any]]) -> di
     }
 
 
+# Shared with the final publication gate below -- one authoritative
+# definition, never duplicated. These are the specific financial/scam
+# phrasing patterns the editorial constitution's "no income examples, no
+# guaranteed results" rule has always meant in practice.
+_UNSUBSTANTIATED_PROMISE_MARKERS = ("garanterad vinst", "säkert att", "gratis pengar", "riskfritt", "tjäna 50")
+
+
 def _content_gate(keyword: str, scribe_result: dict[str, Any]) -> tuple[bool, list[str]]:
+    """Draft-level editorial-quality gate: runs on Scribe's raw output,
+    before assembly. Catches defects that are only visible in the draft
+    (title shape, section count, near-duplicate/filler prose, length) and
+    are meaningfully retry-able by asking Scribe again. Does NOT verify what
+    actually ships -- see _final_publication_gate for the artifact-level
+    gate that runs after _assemble_page."""
     issues: list[str] = []
     title = str(scribe_result.get("title_or_subject") or "").strip()
     if not title:
@@ -1610,7 +1633,7 @@ def _content_gate(keyword: str, scribe_result: dict[str, Any]) -> tuple[bool, li
     if _normalize(keyword) and _normalize(keyword) not in _normalize(title):
         issues.append("keyword_absent_from_title")
     body = _body_html(sections).casefold()
-    for marker in ("garanterad vinst", "säkert att", "gratis pengar", "riskfritt", "tjäna 50"):
+    for marker in _UNSUBSTANTIATED_PROMISE_MARKERS:
         if marker in body:
             issues.append(f"unsubstantiated_promise({marker})")
             break
@@ -1627,6 +1650,118 @@ def _content_gate(keyword: str, scribe_result: dict[str, Any]) -> tuple[bool, li
     words = len(body.split())
     if words < 180:
         issues.append(f"insufficient_body_length({words})")
+    return (not issues), issues
+
+
+_SOURCES_SECTION_PATTERN = re.compile(r"<h2>Källor</h2>(.*?)(?=<h2>|\Z)", re.S)
+
+
+def _has_rendered_sources(html: str) -> bool:
+    """True only when the page's Källor section exists AND contains at
+    least one real citation link to a domain outside LevNytt/NeoLife's own
+    (levnytt.se, neolifeshop.com, neolife.com) -- i.e. genuine independent
+    provenance, not merely the heading, and not merely a self-referential or
+    NeoLife-marketing link standing in for evidence. This is the exact
+    property _sources_html is supposed to guarantee; this function verifies
+    it survived into the artifact that will actually ship, rather than
+    trusting that the pre-assembly research packet had it."""
+    match = _SOURCES_SECTION_PATTERN.search(html)
+    if not match:
+        return False
+    for url in re.findall(r'href="(https?://[^"]+)"', match.group(1)):
+        domain = urlsplit(url).netloc.casefold()
+        if not any(domain == d or domain.endswith("." + d) for d in NEOLIFE_DOMAINS):
+            return True
+    return False
+
+
+# Prohibited when used as a bare, unhedged, unattributed affirmative claim.
+# These are exactly the finite present-tense forms the editorial rules
+# (originally documented only in the neolife-product-pillar Claude Code
+# skill, now enforced here) single out: "bidrar till"/"stödjer" are fine,
+# "behandlar"/"botar"/"förebygger" stated as plain fact are not.
+_PROHIBITED_HEALTH_VERBS = ("behandlar", "botar", "förebygger", "förhindrar", "kurerar")
+_SENSATIONAL_MARKERS = ("mirakel", "revolutionerande", "hemlighet", "genombrott", "bevisat att")
+# A bare negation word anywhere in the same sentence as a prohibited verb or
+# sensational marker means the sentence is negating the claim rather than
+# asserting it -- e.g. "Det finns inget vetenskapligt stöd för att X
+# förebygger Y" must pass despite containing "förebygger". Word-boundary
+# matched (\b) so "inte" never matches inside an unrelated word like
+# "vinter"; deliberately NOT a fixed multi-word phrase like "inget stöd
+# för", which breaks the moment a real sentence inserts another word (e.g.
+# "vetenskapligt") between "inget" and "stöd för".
+_HEALTH_CLAIM_NEGATION_PATTERN = re.compile(r"\b(inte|inget|ingen|inga|saknas)\b", re.I)
+# Multi-word hedge phrases: lower collision risk as substrings since they're
+# several words long, so no word-boundary regex needed.
+_HEALTH_CLAIM_HEDGE_PHRASES = (
+    "kan bidra till", "kan bidra", "tyder på att", "misstänks",
+    "möjligen", "eventuellt", "i vissa fall", "påstås", "påstår",
+)
+
+
+def _strip_html_tags(html: str) -> str:
+    return re.sub(r"<[^>]+>", " ", html)
+
+
+def _split_sentences(plain_text: str) -> list[str]:
+    text = re.sub(r"\s+", " ", plain_text).strip()
+    return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
+
+
+def _health_claim_violations(html: str) -> list[str]:
+    """Sentence-scoped, negation/hedge/quote-aware check for bare affirmative
+    treatment/cure/prevention claims and sensational certainty language.
+
+    Deliberately NOT a whole-document substring ban -- that would fail a
+    sentence explaining research does NOT show something prevents a
+    condition, purely for containing "förebygger". Scoping to the sentence
+    and checking it for a negation/hedge marker (or a quotation, i.e.
+    attributed discussion rather than a site claim) before flagging is the
+    smallest mechanism that distinguishes a prohibited affirmative claim
+    from an appropriately hedged one. It is not a full semantic checker: a
+    compound sentence that hedges one clause while smuggling a bare claim
+    into another joined by "och" can still slip through. Known, accepted
+    limitation -- see the commissioning report for this gate."""
+    plain = _strip_html_tags(html)
+    violations: list[str] = []
+    for sentence in _split_sentences(plain):
+        lowered = sentence.casefold()
+        if '"' in sentence or "”" in sentence or "»" in sentence:
+            continue  # quoted/attributed, not a direct site claim
+        if _HEALTH_CLAIM_NEGATION_PATTERN.search(sentence) or any(p in lowered for p in _HEALTH_CLAIM_HEDGE_PHRASES):
+            continue
+        for verb in _PROHIBITED_HEALTH_VERBS:
+            if verb in lowered:
+                violations.append(f"affirmative_health_claim({verb}): {sentence[:120]!r}")
+        for marker in _SENSATIONAL_MARKERS:
+            if marker in lowered:
+                violations.append(f"sensational_language({marker}): {sentence[:120]!r}")
+    return violations
+
+
+def _final_publication_gate(html: str) -> tuple[bool, list[str]]:
+    """The one authoritative gate over the artifact that will actually ship.
+
+    Runs on the fully assembled HTML (after _assemble_page), never the
+    pre-assembly draft, so it can catch defects that only exist once
+    assembly has happened -- a missing disclosure marker, a Källor heading
+    with no real citation inside it -- which _content_gate structurally
+    cannot see. Both content_production and legacy_migration call this
+    immediately before writing the article to disk; neither path may bypass
+    it. Verifies: disclosure structure, rendered independent source
+    presentation, the existing financial/scam-promise markers, and
+    sentence-scoped health-claim/sensational-language safety."""
+    issues: list[str] = []
+    if not _has_applied_disclosure_marker(html):
+        issues.append("missing_disclosure_marker")
+    if not _has_rendered_sources(html):
+        issues.append("missing_rendered_sources")
+    body = html.casefold()
+    for marker in _UNSUBSTANTIATED_PROMISE_MARKERS:
+        if marker in body:
+            issues.append(f"unsubstantiated_promise({marker})")
+            break
+    issues.extend(_health_claim_violations(html))
     return (not issues), issues
 
 
