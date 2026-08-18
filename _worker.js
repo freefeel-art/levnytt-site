@@ -4,14 +4,11 @@
 const NEO_LIFE_HOSTS = Object.freeze(["se.neolifeshop.com", "www.neolifeshop.com"]);
 const SPONSOR_ID = "41-830928";
 
-// Legacy cross-project OLSP CTA (inert — no client beacon). Kept for
-// compatibility only; it is not a LevNytt conversion target.
-const CTA_PATHS = Object.freeze({
-  "levnytt-direktforsaljning-olsp-primary": Object.freeze({
-    page_path: "/direktforsaljning-fakta",
-    destination: "https://olsp.profitandprivilege.com",
-  }),
-});
+// Allowlist for any approved non-NeoLife CTA event path. Empty: OLSP is not
+// part of the LevNytt project (config/conversion-attribution.json), and the
+// one outbound OLSP link this validated (/direktforsaljning-fakta) has been
+// removed from the page. Kept as a generic mechanism for future use.
+const CTA_PATHS = Object.freeze({});
 
 function eventResponse(status, detail = "") {
   return new Response(detail, {

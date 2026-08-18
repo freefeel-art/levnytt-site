@@ -1,5 +1,8 @@
--- Cloudflare D1 schema for the approved LevNytt → OLSP CTA event path.
--- No IP addresses, user agents, cookies, referrers, or personal data are stored.
+-- Cloudflare D1 schema for approved LevNytt CTA event paths (NeoLife shop /
+-- registration outbound clicks). No IP addresses, user agents, cookies,
+-- referrers, or personal data are stored. Column names are generic and were
+-- never OLSP-specific; only this file's top comment previously said
+-- otherwise. OLSP is not part of the LevNytt project.
 CREATE TABLE IF NOT EXISTS cta_click_events (
   event_id TEXT PRIMARY KEY,
   observed_at TEXT NOT NULL,

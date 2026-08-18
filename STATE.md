@@ -2,7 +2,7 @@ ROLE: OPERATIONAL
 
 # LevNytt — State
 
-**Last updated:** 2026-08-16
+**Last updated:** 2026-08-18
 
 ## Primary Business Objective (Owner-set)
 
@@ -30,17 +30,21 @@ Build and operate a profitable Swedish NeoLife organic acquisition asset
 - Leading indicator: Google Search Console organic traffic — **available**
   (`scripts/collect_gsc.py --project levnytt --site sc-domain:levnytt.se`).
 
-## Cross-project artifacts (isolated, not part of LevNytt's business)
+## Cross-project artifacts (resolved 2026-08-18)
 
-- **OLSP CTA:** `https://olsp.profitandprivilege.com` CTA links exist on 5 pages
-  (`direktforsaljning-fakta`, `neolife-affarsmojlighet`,
-  `neolife-carotenoid-complex`, `neolife-flavonoid-complex`,
-  `fytosteroler-cellmembran`) and the D1 `cta_click_events` table + `_worker.js`
-  CTA_PATHS currently reference OLSP. These are historical cross-project
-  artifacts. They do **not** define LevNytt's objective, attribution, or
-  autonomous decisions. Keeping or removing the OLSP CTA links is an Owner
-  business decision (pending); they are isolated from LevNytt's measurement
-  and evidence.
+- **OLSP CTA:** removed. On direct re-verification, only 1 page
+  (`direktforsaljning-fakta`) actually contained a live
+  `https://olsp.profitandprivilege.com` link — the "5 pages" figure in the
+  prior version of this note was stale/inaccurate; `neolife-affarsmojlighet`,
+  `neolife-carotenoid-complex`, `neolife-flavonoid-complex`, and
+  `fytosteroler-cellmembran` do not and did not contain an OLSP reference at
+  time of check. The one real link (and its content-source entry in
+  `content/data/production-pages.json`) has been removed; `_worker.js`'s
+  `CTA_PATHS` allowlist entry for it has been cleared; the D1 schema file's
+  top comment (which referenced "OLSP" only in a comment, never in actual
+  column names) has been corrected. OLSP is not part of the LevNytt project
+  (`config/conversion-attribution.json`) — this is no longer a pending Owner
+  decision, it is the current, implemented state.
 
 ## Social
 
