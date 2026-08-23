@@ -2,6 +2,7 @@
 backup-2026-06-10/
 index-v1-before-repositioning.html
 .opencode/
+node_modules/
 
 # Python bytecode cache
 __pycache__/

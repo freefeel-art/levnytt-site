@@ -22,8 +22,11 @@ import ast
 import html as html_lib
 import importlib.util
 import json
+import os
 import re
+import shutil
 import subprocess
+import tempfile
 import urllib.error
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
@@ -39,6 +42,8 @@ SPONSOR_ID = "41-830928"
 SHOP_URL = f"https://se.neolifeshop.com/i/shop.html?sponsor={SPONSOR_ID}"
 REGISTRATION_URL = f"https://se.neolifeshop.com/i/registration.html?type=reseller&sponsor={SPONSOR_ID}"
 D1_DATABASE = "levnytt-cta-events"
+CTA_LATEST_FILENAME = "cta-events-latest.json"
+CTA_ATTEMPT_FILENAME = "cta-events-last-attempt.json"
 USER_AGENT = "Mozilla/5.0 (compatible; LevNyttHermes/1.0; +https://levnytt.se)"
 HERMES_REPO = Path("/home/yampa/projects/active/hermes")
 HERMES_PYTHON = HERMES_REPO / ".venv" / "bin" / "python"
@@ -359,7 +364,7 @@ _DEFAULT_TIERBOX = [
     {"url": "/om-oss", "label": "Om LevNytt", "title": "Varför plattformen finns"},
 ]
 
-_LEVNYTT_EDITORIAL_CONTEXT = (
+_LEVNYTT_IDENTITY_CONTEXT = (
     "LevNytt (levnytt.se) is an independent Swedish NeoLife distributor consumer-education site. "
     "Write in Swedish (sv-SE). Editorial principles (binding): "
     "(1) Fakta före hype — facts and transparency, never marketing claims or income promises. "
@@ -370,6 +375,31 @@ _LEVNYTT_EDITORIAL_CONTEXT = (
     "(6) NeoLife is disclosed as the site's commercial interest (Sponsor-ID 41-830928); any CTA must be voluntary and proportionate. "
     "(7) Do not force NeoLife into unrelated sections."
 )
+
+_LEVNYTT_WRITING_INSTRUCTION_SOURCE = "docs/LEVNYTT-EDITORIAL-SYSTEM.md"
+
+
+def _levnytt_editorial_context() -> str:
+    """Load the project-owned writing rules used by autonomous Scribe.
+
+    The global informational-article skill explicitly describes itself as
+    operator assistance rather than a Commander production dependency.  The
+    checked-in editorial system is therefore the durable instruction source.
+    Missing instructions fail closed instead of borrowing another project's
+    skill or silently falling back to generic copy.
+    """
+    source = Path(__file__).resolve().parents[1] / _LEVNYTT_WRITING_INSTRUCTION_SOURCE
+    try:
+        instructions = source.read_text(encoding="utf-8").strip()
+    except OSError as error:
+        raise RuntimeError(
+            f"LevNytt writing instructions are unavailable at {_LEVNYTT_WRITING_INSTRUCTION_SOURCE}"
+        ) from error
+    if not instructions:
+        raise RuntimeError(
+            f"LevNytt writing instructions are empty at {_LEVNYTT_WRITING_INSTRUCTION_SOURCE}"
+        )
+    return f"{_LEVNYTT_IDENTITY_CONTEXT}\n\n{instructions}"
 
 
 def _levnytt_community():
@@ -423,25 +453,61 @@ class LevNyttProcedure:
 
     # ── measurement ───────────────────────────────────────────────
     def _execute_measurement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        attempted_at = datetime.now(timezone.utc).isoformat()
+        previous_gsc = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
         completed = subprocess.run(
             [str(HERMES_PYTHON), "-m", "scripts.collect_gsc",
              "--project", "levnytt", "--site", GSC_PROPERTY],
             cwd=str(HERMES_REPO),
             capture_output=True, text=True, check=False,
         )
-        evidence = {"returncode": completed.returncode, "stdout_tail": (completed.stdout or "")[-500:]}
-        if completed.returncode != 0:
-            evidence["stderr_tail"] = (completed.stderr or "")[-500:]
-            return {"status": "BLOCKED", "detail": "GSC collection failed.", "evidence": evidence}
+        gsc: dict[str, Any] = {
+            "source": GSC_PROPERTY,
+            "attempted_at": attempted_at,
+            "status": "available" if completed.returncode == 0 else "unavailable",
+            "returncode": completed.returncode,
+        }
+        gsc_diagnostic = _bounded_provider_diagnostic(completed.stderr, completed.stdout)
+        if gsc_diagnostic:
+            gsc["diagnostic"] = gsc_diagnostic
+        if completed.returncode == 0:
+            latest = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
+            if (
+                latest.get("site") == GSC_PROPERTY
+                and latest.get("fetched_at")
+                and latest.get("fetched_at") != previous_gsc.get("fetched_at")
+            ):
+                gsc["fetched_at"] = latest["fetched_at"]
+            else:
+                gsc["status"] = "unavailable"
+                gsc["diagnostic"] = (
+                    "GSC collector returned success without a newly fetched matching project artifact."
+                )
+
         cta = _collect_cta_events(ctx)
-        evidence["cta_events"] = cta
+        evidence = {"sources": {"gsc": gsc, "cta_d1": cta}}
+        available = [name for name, source in evidence["sources"].items() if source.get("status") == "available"]
+        failed = [name for name, source in evidence["sources"].items() if source.get("status") != "available"]
+        if not failed:
+            status = "SUCCEEDED"
+            detail = (
+                "Refreshed independent Search Console and NeoLife link-click evidence "
+                f"({cta['total_events']} CTA events)."
+            )
+        elif available:
+            status = "PARTIAL"
+            detail = (
+                f"Measurement is degraded: refreshed {', '.join(available)}, but "
+                f"{', '.join(failed)} is unavailable. No zero-event inference was made."
+            )
+        else:
+            status = "BLOCKED"
+            detail = "Measurement failed: neither Search Console nor CTA/D1 evidence was refreshed."
         return {
-            "status": "SUCCEEDED",
-            "detail": (
-                "Refreshed first-party Search Console evidence and NeoLife link-click "
-                f"events ({cta.get('total_events', 0)} events)."
-            ),
+            "status": status,
+            "detail": detail,
             "evidence": evidence,
+            "retry_eligible_this_run": not bool(available),
         }
 
     def _execute_seo_intelligence(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -1229,13 +1295,21 @@ class LevNyttProcedure:
                 return (ctx.working_repository / "content" / "articles" / f"{slug}.html").is_file()
             return False  # BLOCKED (research-insufficient / gate-failed) is correctly left unverified
         if capability == "measurement":
-            latest = ctx.runtime_directory / "intelligence" / "gsc-latest.json"
-            if not latest.is_file():
-                return False
-            try:
-                return json.loads(latest.read_text(encoding="utf-8")).get("site") == GSC_PROPERTY
-            except (OSError, json.JSONDecodeError):
-                return False
+            sources = evidence.get("sources") if isinstance(evidence.get("sources"), dict) else {}
+            gsc = sources.get("gsc") if isinstance(sources.get("gsc"), dict) else {}
+            cta = sources.get("cta_d1") if isinstance(sources.get("cta_d1"), dict) else {}
+            verified_sources = 0
+            if gsc.get("status") == "available":
+                latest = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
+                if latest.get("site") != GSC_PROPERTY or latest.get("fetched_at") != gsc.get("fetched_at"):
+                    return False
+                verified_sources += 1
+            if cta.get("status") == "available":
+                latest = _read_json(ctx.runtime_directory / "intelligence" / CTA_LATEST_FILENAME)
+                if latest.get("status") != "available" or latest.get("fetched_at") != cta.get("fetched_at"):
+                    return False
+                verified_sources += 1
+            return verified_sources > 0
         if capability == "seo_intelligence":
             return (ctx.runtime_directory / "intelligence" / "keywords.json").is_file()
         if capability == "technical_repair":
@@ -1634,7 +1708,12 @@ def _scribe_brief(keyword: str, slug: str, evidence: list[dict[str, Any]]) -> di
         "format": "production-ready evidence-bound draft",
         "source_evidence": evidence,
         "knowledge_gaps": [],
-        "project_context": _LEVNYTT_EDITORIAL_CONTEXT,
+        "project_context": _levnytt_editorial_context(),
+        # Claude Code has no production authentication on this host. LevNytt
+        # selects the already-configured shared OpenAI provider explicitly;
+        # OLSP's default Claude + olsp-article contract remains unchanged.
+        "writer_provider": "openai",
+        "writing_instruction_source": _LEVNYTT_WRITING_INSTRUCTION_SOURCE,
         "link_requirements": {
             "cta": "presenterar fakta om NeoLife och kosttillskott utan hype, inkomstlöften eller påhittade siffror; länkar vidare till NeoLife shop med Sponsor-ID 41-830928 endast som ett frivilligt nästa steg"
         },
@@ -1836,41 +1915,150 @@ def _read_json(path: Path) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
 
+def _bounded_provider_diagnostic(*parts: str | None) -> str:
+    """Return a short provider diagnostic with common secret shapes redacted."""
+    value = "\n".join(str(part or "") for part in parts).strip()
+    value = re.sub(
+        r"(?i)\b(authorization|api[_-]?key|token|password)\b\s*[:=]\s*\S+",
+        r"\1=[REDACTED]",
+        value,
+    )
+    return value[-500:]
+
+
+def _atomic_json_write(path: Path, value: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{path.name}.", dir=path.parent, text=True,
+    )
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+            json.dump(value, handle, indent=2, sort_keys=True, ensure_ascii=False)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary_name, path)
+    except Exception:
+        Path(temporary_name).unlink(missing_ok=True)
+        raise
+
+
+def _persist_cta_attempt(ctx, result: dict[str, Any]) -> None:
+    _atomic_json_write(
+        ctx.runtime_directory / "intelligence" / CTA_ATTEMPT_FILENAME,
+        result,
+    )
+
+
 def _collect_cta_events(ctx) -> dict[str, Any]:
-    result = {"fetched_at": datetime.now(timezone.utc).isoformat(), "source": f"Cloudflare D1 {D1_DATABASE}", "status": "unavailable", "total_events": 0, "shop_clicks": 0, "registration_clicks": 0, "recent_events": []}
+    attempted_at = datetime.now(timezone.utc).isoformat()
+    result: dict[str, Any] = {
+        "attempted_at": attempted_at,
+        "source": f"Cloudflare D1 {D1_DATABASE}",
+        "status": "unavailable",
+        "provider": "wrangler",
+    }
+    node = shutil.which("node")
+    npx = shutil.which("npx")
+    result["runtime"] = {"node": node or "not-found", "npx": npx or "not-found"}
+    if not node or not npx:
+        result["diagnostic"] = "Supported Node/npm runtime was not found on the scheduled PATH."
+        _persist_cta_attempt(ctx, result)
+        return result
+
+    version = subprocess.run(
+        [node, "--version"], capture_output=True, text=True, check=False, timeout=10,
+    )
+    node_version = (version.stdout or version.stderr or "").strip()
+    result["runtime"]["node_version"] = node_version
+    match = re.match(r"v?(\d+)", node_version)
+    if version.returncode != 0 or not match or int(match.group(1)) < 22:
+        result["diagnostic"] = _bounded_provider_diagnostic(
+            f"Wrangler requires Node 22 or newer; scheduled runtime reported {node_version or 'unknown'}."
+        )
+        _persist_cta_attempt(ctx, result)
+        return result
+
+    aggregate_sql = (
+        "SELECT COUNT(*) AS total_events, "
+        "COALESCE(SUM(CASE WHEN cta_id = 'levnytt-neolife-shop' THEN 1 ELSE 0 END), 0) AS shop_clicks, "
+        "COALESCE(SUM(CASE WHEN cta_id = 'levnytt-neolife-registration' THEN 1 ELSE 0 END), 0) AS registration_clicks "
+        "FROM cta_click_events"
+    )
+    recent_sql = (
+        "SELECT cta_id, page_path, destination, observed_at FROM cta_click_events "
+        "ORDER BY observed_at DESC LIMIT 10"
+    )
+    command_prefix = [npx, "--no-install", "wrangler", "d1", "execute", D1_DATABASE, "--remote", "--command"]
     try:
         completed = subprocess.run(
-            ["npx", "wrangler", "d1", "execute", D1_DATABASE, "--remote", "--command",
-             "SELECT cta_id, page_path, destination, observed_at FROM cta_click_events ORDER BY observed_at DESC LIMIT 100", "--json"],
+            [*command_prefix, aggregate_sql, "--json"],
             cwd=str(ctx.working_repository), capture_output=True, text=True, check=False, timeout=90,
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
-        result["error"] = f"{type(exc).__name__}: {exc}"
+        result["diagnostic"] = _bounded_provider_diagnostic(f"{type(exc).__name__}: {exc}")
+        _persist_cta_attempt(ctx, result)
         return result
     if completed.returncode != 0:
-        result["error"] = (completed.stderr or completed.stdout or "")[-300:]
+        result["returncode"] = completed.returncode
+        result["diagnostic"] = _bounded_provider_diagnostic(completed.stderr, completed.stdout)
+        _persist_cta_attempt(ctx, result)
         return result
     try:
         raw = json.loads(completed.stdout or "[]")
     except json.JSONDecodeError as exc:
-        result["error"] = f"wrangler output parse failed: {exc}"
+        result["diagnostic"] = _bounded_provider_diagnostic(f"Wrangler output parse failed: {exc}")
+        _persist_cta_attempt(ctx, result)
         return result
-    rows = raw[0].get("results") if isinstance(raw, list) and raw and isinstance(raw[0], dict) else []
-    if not isinstance(rows, list):
-        rows = []
+    aggregate_rows = raw[0].get("results") if isinstance(raw, list) and raw and isinstance(raw[0], dict) else None
+    if not isinstance(aggregate_rows, list) or len(aggregate_rows) != 1 or not isinstance(aggregate_rows[0], dict):
+        result["diagnostic"] = "Wrangler returned no aggregate results row."
+        _persist_cta_attempt(ctx, result)
+        return result
+    aggregate = aggregate_rows[0]
+    try:
+        counts = {
+            "total_events": int(aggregate["total_events"]),
+            "shop_clicks": int(aggregate["shop_clicks"]),
+            "registration_clicks": int(aggregate["registration_clicks"]),
+        }
+    except (KeyError, TypeError, ValueError):
+        result["diagnostic"] = "Wrangler returned malformed CTA aggregate counts."
+        _persist_cta_attempt(ctx, result)
+        return result
+
+    recent_events: list[dict[str, Any]] = []
+    recent_status = "available"
+    try:
+        recent = subprocess.run(
+            [*command_prefix, recent_sql, "--json"],
+            cwd=str(ctx.working_repository), capture_output=True, text=True, check=False, timeout=90,
+        )
+        recent_raw = json.loads(recent.stdout or "[]") if recent.returncode == 0 else []
+        recent_rows = (
+            recent_raw[0].get("results")
+            if isinstance(recent_raw, list) and recent_raw and isinstance(recent_raw[0], dict)
+            else None
+        )
+        if not isinstance(recent_rows, list):
+            recent_status = "unavailable"
+        else:
+            recent_events = [
+                {k: row.get(k) for k in ("cta_id", "page_path", "destination", "observed_at") if row.get(k) is not None}
+                for row in recent_rows[:10]
+                if isinstance(row, dict)
+            ]
+    except (OSError, subprocess.TimeoutExpired, json.JSONDecodeError):
+        recent_status = "unavailable"
     result.update({
         "status": "available",
-        "total_events": len(rows),
-        "shop_clicks": sum(1 for r in rows if isinstance(r, dict) and r.get("cta_id") == "levnytt-neolife-shop"),
-        "registration_clicks": sum(1 for r in rows if isinstance(r, dict) and r.get("cta_id") == "levnytt-neolife-registration"),
-        "recent_events": [{k: r.get(k) for k in ("cta_id", "page_path", "destination", "observed_at") if r.get(k) is not None} for r in rows[:10] if isinstance(r, dict)],
+        "fetched_at": attempted_at,
+        **counts,
+        "recent_events": recent_events,
+        "recent_events_status": recent_status,
     })
-    destination = ctx.runtime_directory / "intelligence" / "cta-events-latest.json"
-    try:
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
-    except OSError:
-        pass
+    _atomic_json_write(ctx.runtime_directory / "intelligence" / CTA_LATEST_FILENAME, result)
+    _persist_cta_attempt(ctx, result)
     return result
 
 
