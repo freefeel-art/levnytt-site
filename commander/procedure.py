@@ -467,9 +467,10 @@ class LevNyttProcedure:
             "status": "available" if completed.returncode == 0 else "unavailable",
             "returncode": completed.returncode,
         }
-        gsc_diagnostic = _bounded_provider_diagnostic(completed.stderr, completed.stdout)
-        if gsc_diagnostic:
-            gsc["diagnostic"] = gsc_diagnostic
+        if completed.returncode != 0:
+            gsc_diagnostic = _bounded_provider_diagnostic(completed.stderr, completed.stdout)
+            if gsc_diagnostic:
+                gsc["diagnostic"] = gsc_diagnostic
         if completed.returncode == 0:
             latest = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
             if (

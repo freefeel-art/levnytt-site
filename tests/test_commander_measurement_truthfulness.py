@@ -107,6 +107,7 @@ def test_gsc_success_and_cta_failure_is_truthful_partial_measurement(tmp_path, m
     assert "No zero-event inference" in execution["detail"]
     assert "total_events" not in execution["evidence"]["sources"]["cta_d1"]
     assert execution["evidence"]["sources"]["gsc"]["fetched_at"] == fetched_at
+    assert "diagnostic" not in execution["evidence"]["sources"]["gsc"]
     assert procedure.LevNyttProcedure().verify(ctx, action, execution) is True
 
 
