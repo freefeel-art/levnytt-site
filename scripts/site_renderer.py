@@ -24,6 +24,18 @@ OG_IMAGE = f"{SITE}/assets/brand/og-brand.png"
 GOOGLE_VERIFY = "kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0"
 PINTEREST_VERIFY = "6a9e88f7014abe0735767f464c08f337"
 
+
+def asset_url(root: Path, href: str) -> str:
+    """Return a content-versioned URL for a repository-owned static asset."""
+    if not href.startswith("/") or "?" in href:
+        return href
+    path = root / href.lstrip("/")
+    if not path.is_file():
+        return href
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+    return f"{href}?v={digest}"
+
+
 FAMILY_LABELS = {
     "sv": {
         "home-editorial-hub": "Redaktionell kunskapsplattform",
@@ -554,7 +566,7 @@ def render_head(page: dict, body_html: str, root: Path) -> str:
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">',
     ]
-    lines += [f'<link rel="stylesheet" href="{href}">' for href in style_hrefs]
+    lines += [f'<link rel="stylesheet" href="{asset_url(root, href)}">' for href in style_hrefs]
     for schema in schemas:
         lines.append('<script type="application/ld+json">' + json.dumps(schema, ensure_ascii=False, separators=(",", ":")) + "</script>")
     lines += [
@@ -610,11 +622,11 @@ def render_page(page: dict, root: Path) -> str:
             f'<a href="{home_href}">{home_label}</a> <span aria-hidden="true">›</span> '
             f'<span aria-current="page">{html_lib.escape(page["h1"])}</span></nav>'
         )
-    scripts = ['<script src="/assets/js/levnytt-rebuild.js" defer></script>']
+    scripts = [f'<script src="{asset_url(root, "/assets/js/levnytt-rebuild.js")}" defer></script>']
     if page["family"] == "library-category-index":
-        scripts.append('<script src="/assets/js/article-index.js" defer></script>')
+        scripts.append(f'<script src="{asset_url(root, "/assets/js/article-index.js")}" defer></script>')
     if page["path"] == "/finns-det-billigare-alternativ":
-        scripts.append('<script src="/assets/js/savings-calculator.js" defer></script>')
+        scripts.append(f'<script src="{asset_url(root, "/assets/js/savings-calculator.js")}" defer></script>')
     head = render_head(page, body_html, root)
     skip_label = "Hopp til innhold" if language == "no" else "Hoppa till innehåll"
     return (

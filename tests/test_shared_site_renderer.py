@@ -42,6 +42,15 @@ def test_shared_fragments_have_disclosure_and_accessible_menu_contract():
     assert '<a href="/artiklar">' in header and 'href="/artiklar" target="_blank"' not in header
 
 
+def test_shared_assets_are_content_versioned_and_not_immutable():
+    renderer = load_script("site_renderer_assets", "scripts/site_renderer.py")
+    rendered_url = renderer.asset_url(ROOT, "/assets/js/levnytt-rebuild.js")
+    assert re.fullmatch(r"/assets/js/levnytt-rebuild\.js\?v=[0-9a-f]{12}", rendered_url)
+    headers = (ROOT / "_headers").read_text(encoding="utf-8")
+    assert "immutable" not in headers
+    assert "must-revalidate" in headers
+
+
 def test_worker_geo_banner_uses_valid_body_insertion_without_inline_code():
     source = (ROOT / "_worker.js").read_text(encoding="utf-8")
     assert "html.replace(/<body([^>]*)>/i" in source
