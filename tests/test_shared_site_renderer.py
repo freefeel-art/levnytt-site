@@ -32,6 +32,28 @@ def test_commander_markdown_article_inherits_shared_shell_and_policy():
         json.loads(raw_schema)
 
 
+def test_commander_source_gate_accepts_phase1_heading_ids():
+    procedure = load_script("levnytt_procedure_source_gate", "commander/procedure.py")
+    rendered = (
+        '<h2 id="kallor" class="article-heading"> Källor </h2><ul><li>'
+        '<a href="https://www.livsmedelsverket.se/example">Myndighetskälla</a>'
+        '</li></ul><h2 id="nasta">Nästa avsnitt</h2>'
+    )
+
+    assert procedure._has_rendered_sources(rendered) is True
+
+
+def test_commander_source_gate_still_rejects_only_neolife_sources_with_heading_attributes():
+    procedure = load_script("levnytt_procedure_source_gate_neolife", "commander/procedure.py")
+    rendered = (
+        '<h2 id="kallor">Källor</h2><ul><li>'
+        '<a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928">NeoLife</a>'
+        '</li></ul>'
+    )
+
+    assert procedure._has_rendered_sources(rendered) is False
+
+
 def test_shared_fragments_have_disclosure_and_accessible_menu_contract():
     header = (ROOT / "assets/fragments/header-sv.html").read_text(encoding="utf-8")
     footer = (ROOT / "assets/fragments/footer-sv.html").read_text(encoding="utf-8")

@@ -417,6 +417,19 @@ def _levnytt_community():
 
 class LevNyttProcedure:
     project_id = "levnytt"
+    procedure_contract = {
+        "contract_id": "hermes-autonomous-procedure",
+        "contract_version": "1.0",
+        "project_id": "levnytt",
+        "opportunity_selection": "EXACT_OPPORTUNITY_ID",
+        "execution_receipt": "PRESERVE_AND_NORMALIZE",
+        "recoverable_failures": [
+            "RECOVERABLE_CAPABILITY_GAP",
+            "RECOVERABLE_EXECUTOR_FAILURE",
+            "RECOVERABLE_PUBLICATION_FAILURE",
+            "RECOVERABLE_QA_REJECTION",
+        ],
+    }
 
     # ── execution ─────────────────────────────────────────────────
     def execute(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -447,6 +460,7 @@ class LevNyttProcedure:
             return self._execute_social_publishing(ctx, action)
         return {
             "status": "CAPABILITY_GAP",
+            "failure_class": "RECOVERABLE_CAPABILITY_GAP",
             "detail": f"No bounded executor is wired for capability {capability!r}.",
             "evidence": {"capability": capability},
         }
@@ -518,7 +532,7 @@ class LevNyttProcedure:
             from app.commander.scout_executor import execute as scout_execute
             code, message = scout_execute(project=ctx.working_repository)
         except Exception as error:
-            return {"status": "CAPABILITY_GAP", "detail": f"SEO Scout execution failed: {type(error).__name__}: {error}", "evidence": {}}
+            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"SEO Scout execution failed: {type(error).__name__}: {error}", "evidence": {}}
         if code != 0:
             return {"status": "BLOCKED", "detail": message, "evidence": {"scout_code": code}}
         gap_count = _coverage_gap_count(ctx)
@@ -532,7 +546,7 @@ class LevNyttProcedure:
     def _execute_content_production(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         keyword = _keyword_from_action(ctx, action)
         if not keyword:
-            return {"status": "CAPABILITY_GAP", "detail": "No SEO Scout keyword evidence is available to select a content target.", "evidence": {}}
+            return {"status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED", "detail": "No SEO Scout keyword evidence is available to select a content target.", "evidence": {"external_effect_attempted": False}}
         slug = _slugify(keyword)
         off_strategy = _off_strategy(keyword)
         if off_strategy:
@@ -556,12 +570,12 @@ class LevNyttProcedure:
                 "evidence": {"keyword": keyword, "slug": slug, "research_sufficiency": research_packet["sufficiency"], "claim_count": len(research_packet.get("claims", []))},
             }
         if not evidence:
-            return {"status": "CAPABILITY_GAP", "detail": f"Insufficient project evidence to ground an article for {keyword!r}; Commander should first delegate research.", "evidence": {"keyword": keyword}}
+            return {"status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED", "detail": f"Insufficient project evidence to ground an article for {keyword!r}; Commander should first delegate research.", "evidence": {"keyword": keyword, "external_effect_attempted": False}}
 
         try:
             from agents.scribe.run import run as scribe_run
         except Exception as error:
-            return {"status": "CAPABILITY_GAP", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}}
+            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}}
 
         max_attempts = 3
         issues: list[str] = []
@@ -594,7 +608,7 @@ class LevNyttProcedure:
                 continue
             issues = list(gate_issues)
 
-        return {"status": "BLOCKED", "detail": f"Content revision exhausted after {max_attempts} attempts for {keyword!r}: " + "; ".join(issues), "evidence": {"keyword": keyword, "slug": slug, "attempts": max_attempts, "gate_issues": issues}}
+        return {"status": "BLOCKED", "failure_class": "RECOVERABLE_QA_REJECTION", "detail": f"Content revision exhausted after {max_attempts} attempts for {keyword!r}: " + "; ".join(issues), "evidence": {"keyword": keyword, "slug": slug, "attempts": max_attempts, "gate_issues": issues}}
 
     # ── deployment ────────────────────────────────────────────────
     def _execute_deployment(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -666,7 +680,7 @@ class LevNyttProcedure:
     def _execute_technical_repair(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         if _https_serves_200():
             return {"status": "SUCCEEDED", "detail": "levnytt.se serves HTTPS 200.", "evidence": {"https_ok": True}}
-        return {"status": "CAPABILITY_GAP", "detail": "The https/redirect repair executor is not wired; the deployment change is outside this domain executor.", "evidence": {"https_ok": False}}
+        return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_CAPABILITY_GAP", "detail": "The https/redirect repair executor is not wired; the deployment change is outside this domain executor.", "evidence": {"https_ok": False}}
 
     def _execute_content_repair(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         missing = _pages_missing_sponsor_disclosure(ctx.working_repository)
@@ -738,7 +752,7 @@ class LevNyttProcedure:
         try:
             from agents.scribe.run import run as scribe_run
         except Exception as error:
-            return {"status": "CAPABILITY_GAP", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}}
+            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}}
 
         max_attempts = 3
         issues: list[str] = []
@@ -773,7 +787,7 @@ class LevNyttProcedure:
             issues = list(gate_issues)
 
         _record_legacy_outcome(runtime, slug, status="GATE_FAILED", note="; ".join(issues))
-        return {"status": "BLOCKED", "detail": f"Legacy migration exhausted for {slug!r}: " + "; ".join(issues), "evidence": {"slug": slug, "gate_issues": issues}}
+        return {"status": "BLOCKED", "failure_class": "RECOVERABLE_QA_REJECTION", "detail": f"Legacy migration exhausted for {slug!r}: " + "; ".join(issues), "evidence": {"slug": slug, "gate_issues": issues}}
 
     # ── community (NeoLife, owned page only) ──────────────────────
     def _execute_community_acquisition(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -1060,8 +1074,22 @@ class LevNyttProcedure:
         from app.commander.evidence import _levnytt_distribution
 
         distribution = _levnytt_distribution(ctx.working_repository, ctx.runtime_directory)
-        candidate = distribution.get("candidate_to_distribute")
+        candidates = distribution.get("distribution_candidates") or []
+        action_text = str(action.get("summary") or "")
+        candidate = next(
+            (
+                item for item in candidates
+                if isinstance(item, dict) and str(item.get("opportunity_id") or "") in action_text
+            ),
+            None,
+        )
         if not candidate:
+            if candidates:
+                return {
+                    "status": "BLOCKED",
+                    "detail": "Social publishing requires one exact social-distribution:<slug> opportunity_id; no article was substituted.",
+                    "evidence": {"external_effect_attempted": False},
+                }
             return {
                 "status": "SUCCEEDED",
                 "detail": "No published LevNytt article is currently undistributed on Facebook; nothing to post.",
@@ -1075,6 +1103,7 @@ class LevNyttProcedure:
         except OSError:
             return {
                 "status": "CAPABILITY_GAP",
+                "failure_class": "RECOVERABLE_EXECUTOR_FAILURE",
                 "detail": f"Candidate article {slug!r} disappeared from content/articles/ between evidence and execution.",
                 "evidence": {},
             }
@@ -1112,6 +1141,7 @@ class LevNyttProcedure:
         receipt = reach_run(assignment, project_id="levnytt")
 
         evidence: dict[str, Any] = {
+            "opportunity_id": candidate["opportunity_id"],
             "slug": slug,
             "url": url,
             "reach_status": receipt.get("status"),
@@ -1773,7 +1803,10 @@ def _content_gate(keyword: str, scribe_result: dict[str, Any]) -> tuple[bool, li
     return (not issues), issues
 
 
-_SOURCES_SECTION_PATTERN = re.compile(r"<h2>Källor</h2>(.*?)(?=<h2>|\Z)", re.S)
+_SOURCES_SECTION_PATTERN = re.compile(
+    r"<h2\b[^>]*>\s*Källor\s*</h2>(.*?)(?=<h2\b|\Z)",
+    re.I | re.S,
+)
 
 
 def _has_rendered_sources(html: str) -> bool:
