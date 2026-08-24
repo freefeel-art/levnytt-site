@@ -532,7 +532,7 @@ class LevNyttProcedure:
             from app.commander.scout_executor import execute as scout_execute
             code, message = scout_execute(project=ctx.working_repository)
         except Exception as error:
-            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"SEO Scout execution failed: {type(error).__name__}: {error}", "evidence": {}}
+            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"SEO Scout execution failed: {type(error).__name__}: {error}", "evidence": {}, "repair": {"repository_kind": "HERMES", "allowed_write_scope": ["app/commander/scout_executor.py"]}}
         if code != 0:
             return {"status": "BLOCKED", "detail": message, "evidence": {"scout_code": code}}
         gap_count = _coverage_gap_count(ctx)
@@ -575,7 +575,7 @@ class LevNyttProcedure:
         try:
             from agents.scribe.run import run as scribe_run
         except Exception as error:
-            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}}
+            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}, "repair": {"repository_kind": "HERMES", "allowed_write_scope": ["agents/scribe/run.py"]}}
 
         max_attempts = 3
         issues: list[str] = []
@@ -752,7 +752,7 @@ class LevNyttProcedure:
         try:
             from agents.scribe.run import run as scribe_run
         except Exception as error:
-            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}}
+            return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"Scribe import failed: {type(error).__name__}: {error}", "evidence": {}, "repair": {"repository_kind": "HERMES", "allowed_write_scope": ["agents/scribe/run.py"]}}
 
         max_attempts = 3
         issues: list[str] = []
