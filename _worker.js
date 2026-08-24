@@ -128,13 +128,13 @@ export default {
 
     const html = await response.text();
     const banner = `
-<div style="background:#1B4332;color:#F9F6EF;padding:10px 20px;text-align:center;font-family:Inter,sans-serif;font-size:14px;z-index:9999;position:relative">
+<aside class="ln-geo-banner" aria-label="Språkförslag">
   🇳🇴 Hei! Vi har norsk innhold tilgjengelig.
-  <a href="/no/" style="color:#E8C870;font-weight:600;margin-left:8px">Gå til norsk versjon →</a>
-  <button onclick="this.parentElement.remove()" style="background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;margin-left:12px;font-size:16px" title="Lukk">✕</button>
-</div>`;
+  <a href="/no/">Gå til norsk versjon <span aria-hidden="true">→</span></a>
+  <button type="button" data-dismiss-geo aria-label="Lukk språkforslag">✕</button>
+</aside>`;
 
-    return new Response(html.replace("<body", "<body" + banner), {
+    return new Response(html.replace(/<body([^>]*)>/i, `<body$1>${banner}`), {
       status: response.status,
       headers: response.headers,
     });

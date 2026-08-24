@@ -13,7 +13,7 @@ from urllib.parse import urlsplit
 
 def text_tokens(value: str) -> set[str]:
     value = re.sub(r"<script\b.*?</script\s*>|<style\b.*?</style\s*>", " ", value, flags=re.I | re.S)
-    value = re.sub(r"<[^>]+>", " ", html.unescape(value))
+    value = html.unescape(re.sub(r"<[^>]+>", " ", value))
     return {w for w in re.findall(r"[\wåäöÅÄÖ]{4,}", value.casefold())}
 
 
@@ -35,8 +35,8 @@ def check_page(data: dict, file: Path) -> dict:
         failures.append("h1_count_not_one")
     if "levnytt-rebuild.css" not in source or "levnytt-foundations.css" not in source:
         failures.append("canonical_styles_missing")
-    if re.search(r"<style\b|\sstyle=", source, flags=re.I):
-        failures.append("inline_css_present")
+    if re.search(r"<style\b|\sstyle=|\son\w+=", source, flags=re.I):
+        failures.append("inline_code_present")
     if "nav.js" in source or "footer.js" in source or "components.js" in source:
         failures.append("legacy_shell_script_present")
     links = []
@@ -45,11 +45,29 @@ def check_page(data: dict, file: Path) -> dict:
         href = attrs.get("href", "")
         if href:
             links.append(href)
-            if attrs.get("target") != "_blank":
-                failures.append("link_missing_target")
             rel = set(attrs.get("rel", "").lower().split())
-            if not {"noopener", "noreferrer"}.issubset(rel):
-                failures.append("link_missing_safe_rel")
+            split = urlsplit(href)
+            internal = not split.netloc or (split.hostname or "").lower() in {"levnytt.se", "www.levnytt.se"}
+            if internal and attrs.get("target") == "_blank":
+                failures.append("internal_link_opens_new_tab")
+            if not internal and attrs.get("target") == "_blank" and not {"noopener", "noreferrer"}.issubset(rel):
+                failures.append("external_link_missing_safe_rel")
+            if "neolifeshop.com" in (split.hostname or ""):
+                if "41-830928" not in href:
+                    failures.append("sponsor_id_missing")
+                if not {"nofollow", "sponsored"}.issubset(rel):
+                    failures.append("commercial_rel_missing")
+    if source.count("<head>") != 1 or source.count("</head>") != 1:
+        failures.append("invalid_head_structure")
+    if page_path := data.get("path"):
+        canonical = re.search(r'<link rel="canonical" href="([^"]+)"', source, re.I)
+        if page_path != "/404" and not canonical:
+            failures.append("canonical_missing")
+    for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>', source, re.I | re.S):
+        try:
+            json.loads(raw)
+        except json.JSONDecodeError:
+            failures.append("invalid_jsonld")
     # The bootstrap data is the preservation baseline.  All meaningful source
     # words must remain present in the generated page; shell words are ignored.
     source_words = set(data.get("source_tokens", []))

@@ -12,27 +12,27 @@ SPEC.loader.exec_module(audit)
 
 
 class LinkAuditTests(unittest.TestCase):
-    def test_shared_component_requires_new_tab_and_safe_rel(self):
-        source = '<a href="/inside" target="_blank" rel="noopener noreferrer">Inside</a><a href="https://example.test" target="_blank" rel="noopener noreferrer">External</a>'
+    def test_shared_component_requires_internal_same_tab_and_external_safe_rel(self):
+        source = '<a href="/inside">Inside</a><a href="https://example.test" target="_blank" rel="noopener noreferrer">External</a>'
         result = audit.audit_shared_component(source, "fixture")
         self.assertEqual(2, result["link_count"])
         self.assertEqual([], result["issues"])
 
-    def test_shared_component_rejects_missing_policy(self):
-        result = audit.audit_shared_component('<a href="/inside">Inside</a>', "fixture")
-        self.assertEqual({"shared_navigation_link_missing_new_tab", "shared_navigation_link_missing_safe_rel"}, {item["issue"] for item in result["issues"]})
+    def test_shared_component_rejects_internal_new_tab(self):
+        result = audit.audit_shared_component('<a href="/inside" target="_blank">Inside</a>', "fixture")
+        self.assertEqual({"shared_internal_opens_new_tab"}, {item["issue"] for item in result["issues"]})
 
     def test_real_shared_components_follow_policy(self):
         report = audit.run(ROOT, fix=False)
         self.assertEqual([], [item for component in report["shared_components"] for item in component["issues"]])
 
-    def test_internal_absolute_link_is_new_tab_and_root_relative(self):
+    def test_internal_absolute_link_is_same_tab_and_root_relative(self):
         findings = []
         match = audit.ANCHOR_RE.search('<a href="https://levnytt.se/guide" target="_blank" rel="noopener noreferrer">')
         result = audit.transform_tag(match, Path("."), {"/guide": "/guide.html"}, {}, findings, True)
         self.assertIn('href="/guide"', result)
-        self.assertIn('target="_blank"', result)
-        self.assertNotIn("internal_missing_new_tab", findings[0]["issues"])
+        self.assertNotIn('target="_blank"', result)
+        self.assertIn("internal_opens_new_tab", findings[0]["issues"])
 
     def test_external_new_tab_preserves_sponsored_and_adds_safe_tokens(self):
         findings = []

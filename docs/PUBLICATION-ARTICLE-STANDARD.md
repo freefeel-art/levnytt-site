@@ -1,4 +1,12 @@
-# Publication Article Standard — LevNytt V1.0
+# Publication Article Standard — LevNytt V1.0 (historical source contract)
+
+> **Current rendering authority (2026-08-24):** `scripts/site_renderer.py`,
+> `assets/fragments/`, and the external `assets/css/levnytt-*.css` files own
+> the production document shell. The inline-CSS, English “Key Takeaways”,
+> JavaScript-injected shell and internal-new-tab requirements below document
+> the former PAS output and are no longer production requirements. Markdown
+> source validation remains applicable; `scripts/md-to-article.py` normalizes
+> its output through the current shared renderer.
 
 **Date:** 2026-06-30
 **Status:** FROZEN — single source of truth for all LevNytt informational articles

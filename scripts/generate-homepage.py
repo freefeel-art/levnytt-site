@@ -17,14 +17,18 @@ import json
 import os
 import re
 import sys
+import importlib.util
+import subprocess
 from datetime import datetime
 from html.parser import HTMLParser
+from pathlib import Path
 
 ARTICLES_DIR = "content/articles"
 INDEX_FILE = "index.html"
 MAX_LATEST_ARTICLES = 6
 
 SITE_DOMAIN = "https://levnytt.se"
+ROOT = Path(__file__).resolve().parents[1]
 
 SWEDISH_MONTHS = {
     1: "januari", 2: "februari", 3: "mars", 4: "april",
@@ -150,12 +154,15 @@ def extract_article_data(filepath: str) -> dict | None:
                 break
 
     if not date_str:
-        return None
+        result = subprocess.run(["git", "log", "--follow", "--diff-filter=A", "-1", "--format=%aI", "--", filepath], capture_output=True, text=True)
+        date_str = result.stdout.strip() or datetime.fromtimestamp(os.path.getmtime(filepath)).isoformat()
 
     try:
         pub_date = datetime.fromisoformat(date_str)
     except (ValueError, TypeError):
         return None
+    if pub_date.tzinfo is not None:
+        pub_date = pub_date.replace(tzinfo=None)
 
     # headline/title
     headline = None
@@ -257,7 +264,7 @@ def render_latest_banner(article: dict) -> str:
   <div class="latest-post-inner">
     <span class="latest-post-label">Senaste artikeln</span>
     <span class="latest-post-title">{title_escaped}</span>
-    <a href="{article['path']}" class="latest-post-link" target="_blank" rel="noopener noreferrer">Läs artikeln →</a>
+    <a href="{article['path']}" class="latest-post-link">Läs artikeln →</a>
   </div>
 </div>"""
 
@@ -271,7 +278,7 @@ def render_articles_section(articles: list) -> str:
         title_escaped = a["title"].replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
         date_str = format_swedish_date(a["date"])
         rt = a["reading_time"]
-        cards.append(f"""    <a href="{a['path']}" class="article-card" target="_blank" rel="noopener noreferrer">
+        cards.append(f"""    <a href="{a['path']}" class="article-card">
       <span class="article-card-title">{title_escaped}</span>
       <span class="article-card-meta">
         <span>{date_str}</span>
@@ -285,7 +292,7 @@ def render_articles_section(articles: list) -> str:
   <div class="container">
     <span class="section-label">Senaste publicerat</span>
     <h2 class="section-heading">Senaste artiklarna</h2>
-    <p class="section-intro">De senaste konsumentguiderna och artikelarna från LevNytt.</p>
+    <p class="section-intro">De senaste konsumentguiderna och artiklarna från LevNytt.</p>
     <div class="articles-grid">
 {cards_html}
     </div>
@@ -302,10 +309,15 @@ def main():
         print(f"Error: {ARTICLES_DIR} not found", file=sys.stderr)
         sys.exit(1)
 
-    for fname in os.listdir(ARTICLES_DIR):
-        if not fname.endswith(".html"):
+    spec = importlib.util.spec_from_file_location("levnytt_rebuild_home", ROOT / "scripts/rebuild-production.py")
+    rebuild = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(rebuild)
+    excluded = {"/", "/artiklar", "/om-oss", "/integritetspolicy", "/no/"}
+    for url, path in rebuild.sitemap_routes(ROOT):
+        if (url.replace(SITE_DOMAIN, "") or "/") in excluded:
             continue
-        fpath = os.path.join(ARTICLES_DIR, fname)
+        fpath = str(path)
         data = extract_article_data(fpath)
         if data:
             articles.append(data)

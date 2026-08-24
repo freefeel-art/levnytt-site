@@ -8,6 +8,10 @@
   --ln-color-surface-muted: #EDE8DC;
   --ln-color-caution-surface: #FFF7E8;
   --ln-color-caution-border: #B56A00;
+  --ln-color-evidence-strong: #155E3B;
+  --ln-color-evidence-standard: #1D4E72;
+  --ln-color-evidence-context: #72520E;
+  --ln-color-evidence-opinion: #7B2D2D;
   --ln-color-text: #1A1A1A;
   --ln-color-text-muted: #555550;
   --ln-color-border: #DDD8CE;
@@ -28,8 +32,12 @@
   --ln-width-shell: 75rem;
   --ln-image-editorial: 3 / 2;
   --ln-image-social: 2 / 3;
+  --ln-shadow: 0 0.625rem 1.75rem rgba(20, 53, 38, 0.1);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 img { height: auto; max-width: 100%; }
 :focus-visible { outline: 3px solid var(--ln-color-brand-gold); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}

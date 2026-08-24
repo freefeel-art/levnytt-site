@@ -1,110 +1,24 @@
-(function() {
-  var current = window.location.pathname;
-
-  function isActive(path) {
-    return current === path || current.startsWith(path) ? ' nav-active' : '';
-  }
-
-  var html = `
-<style>
-  #levnytt-nav{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--ln-color-surface,#F9F6EF) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--ln-color-border,#DDD8CE);font-family:var(--ln-font-body,'Inter',-apple-system,sans-serif);}
-  .lnav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
-  .lnav-brand{text-decoration:none;display:flex;align-items:center;}
-  .lnav-brand img{display:block;height:32px;width:auto;}
-  .lnav-links{display:flex;gap:4px;align-items:center;}
-  .lnav-links a{font-size:0.85rem;font-weight:500;color:var(--ln-color-brand-green,#1B4332);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all 0.2s;white-space:nowrap;}
-  .lnav-links a:hover{color:var(--ln-color-text,#1A1A1A);background:var(--ln-color-surface-muted,#EDE8DC);}
-  .lnav-links a.nav-active{color:var(--ln-color-brand-gold,#E8C870);font-weight:700;}
-  .lnav-dropdown{position:relative;}
-  .lnav-dropdown-btn{font-size:0.85rem;font-weight:500;color:var(--ln-color-brand-green,#1B4332);background:none;border:none;cursor:pointer;padding:6px 12px;border-radius:6px;display:flex;align-items:center;gap:4px;transition:all 0.2s;font-family:var(--ln-font-body,'Inter',-apple-system,sans-serif);}
-  .lnav-dropdown-btn:hover{color:var(--ln-color-text,#1A1A1A);background:var(--ln-color-surface-muted,#EDE8DC);}
-  .lnav-dropdown-btn.nav-active{color:var(--ln-color-brand-gold,#E8C870);font-weight:700;}
-  .lnav-dropdown-btn svg{width:14px;height:14px;stroke:currentColor;transition:transform 0.2s;}
-  .lnav-dropdown-btn.open svg{transform:rotate(180deg);}
-  .lnav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;background:var(--ln-color-surface-raised,#fff);border:1px solid var(--ln-color-border,#DDD8CE);border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,0.12);min-width:220px;padding:8px;display:none;z-index:200;}
-  .lnav-dropdown-menu.open{display:block;}
-  .lnav-dropdown-menu a{display:block;font-size:0.85rem;font-weight:500;color:var(--ln-color-brand-green,#1B4332);text-decoration:none;padding:8px 14px;border-radius:6px;transition:all 0.2s;}
-  .lnav-dropdown-menu a:hover{color:var(--ln-color-text,#1A1A1A);background:var(--ln-color-surface-muted,#EDE8DC);}
-  .lnav-dropdown-menu a.nav-active{color:var(--ln-color-brand-gold,#E8C870);font-weight:700;}
-  .lnav-dropdown-divider{height:1px;background:var(--ln-color-border,#DDD8CE);margin:4px 0;}
-  .lnav-dropdown-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#888;padding:6px 14px 2px;}
-  .lnav-cta{background:var(--green,#2D6A4F)!important;color:#fff!important;font-weight:600!important;padding:8px 18px!important;}
-  .lnav-cta:hover{background:var(--ln-color-brand-green,#1B4332)!important;color:#fff!important;}
-  .lnav-savings{background:var(--ln-color-brand-gold,#E8C870)!important;color:#111!important;}
-  .lnav-savings:hover{background:#d4b85e!important;color:#111!important;}
-
-  .lnav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;}
-  .lnav-hamburger svg{width:24px;height:24px;stroke:var(--ln-color-text,#1A1A1A);}
-  @media(max-width:900px){
-    .lnav-links{display:none;}
-    .lnav-hamburger{display:block;}
-    .lnav-links.open{display:flex;flex-direction:column;align-items:stretch;position:absolute;top:64px;left:0;right:0;background:var(--ln-color-surface,#F9F6EF);border-bottom:1px solid var(--ln-color-border,#DDD8CE);padding:12px 24px;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
-    .lnav-dropdown-menu{position:static;box-shadow:none;border:none;border-left:2px solid var(--ln-color-border,#DDD8CE);border-radius:0;padding:4px 0 4px 12px;margin:4px 0;}
-    .lnav-dropdown-btn{justify-content:space-between;width:100%;}
-  }
-</style>
-<nav id="levnytt-nav">
-  <div class="lnav-inner">
-    <a href="/" class="lnav-brand" target="_blank" rel="noopener noreferrer" aria-label="LevNytt — Hem">
-      <img src="/assets/brand/header-logo.svg" alt="LevNytt">
-    </a>
-    <button class="lnav-hamburger" id="lnavHamburger" aria-label="Meny">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-    <div class="lnav-links" id="lnavLinks">
-      <a href="/" target="_blank" rel="noopener noreferrer"${isActive('/')}>Hem</a>
-      <a href="/om-oss" target="_blank" rel="noopener noreferrer"${isActive('/om-oss')}>Om oss</a>
-      <a href="/artiklar" target="_blank" rel="noopener noreferrer"${isActive('/artiklar')}>Artiklar</a>
-
-      <a href="/neolife-historia/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-historia/')}>Historia</a>
-      <a href="/neolife-vetenskap/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-vetenskap/')}>Vetenskap</a>
-
-      <div class="lnav-dropdown" id="lnavDropdown">
-        <button class="lnav-dropdown-btn${isActive('/neolife-kosttillskott/') || isActive('/personlig-vard/') || isActive('/golden-home-care/') || isActive('/nutriance-organic/') ? ' nav-active' : ''}" id="lnavDropBtn">
-          Produkter
-          <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div class="lnav-dropdown-menu" id="lnavDropMenu">
-          <p class="lnav-dropdown-label">Kosttillskott</p>
-          <a href="/neolife-pro-vitality/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-pro-vitality/')}>Pro Vitality+</a>
-          <a href="/multivitamin-kvinnor-over-40/" target="_blank" rel="noopener noreferrer"${isActive('/multivitamin-kvinnor-over-40/')}>Multivitamin för kvinnor över 40</a>
-          <a href="/neolife-kosttillskott/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-kosttillskott/')}>Alla kosttillskott</a>
-          <div class="lnav-dropdown-divider"></div>
-          <p class="lnav-dropdown-label">Personlig vård</p>
-          <a href="/personlig-vard/" target="_blank" rel="noopener noreferrer"${isActive('/personlig-vard/')}>Personlig vård — översikt</a>
-          <div class="lnav-dropdown-divider"></div>
-          <p class="lnav-dropdown-label">Hem & Städning</p>
-          <a href="/golden-home-care/" target="_blank" rel="noopener noreferrer"${isActive('/golden-home-care/')}>Golden Home Care</a>
-        </div>
-      </div>
-
-      <a href="/neolife-affarsmojlighet/" target="_blank" rel="noopener noreferrer"${isActive('/neolife-affarsmojlighet/')}>Affärsmöjlighet</a>
-      <a href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" class="lnav-cta" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife &rarr;</a>
-      <a href="/finns-det-billigare-alternativ/" class="lnav-cta lnav-savings" target="_blank" rel="noopener noreferrer">Spara Pengar?</a>
-    </div>
-  </div>
-</nav>`;
-
-  var existing = document.getElementById('levnytt-nav');
-  if (existing) existing.remove();
-
-  var existingNavs = document.querySelectorAll('nav');
-  existingNavs.forEach(function(n) { n.remove(); });
-
-  document.body.insertAdjacentHTML('afterbegin', html);
-
-  document.getElementById('lnavHamburger').addEventListener('click', function() {
-    document.getElementById('lnavLinks').classList.toggle('open');
-  });
-
-  document.getElementById('lnavDropBtn').addEventListener('click', function(e) {
-    e.stopPropagation();
-    this.classList.toggle('open');
-    document.getElementById('lnavDropMenu').classList.toggle('open');
-  });
-
-  document.addEventListener('click', function() {
-    document.getElementById('lnavDropBtn').classList.remove('open');
-    document.getElementById('lnavDropMenu').classList.remove('open');
-  });
-})();
+/* Compatibility loader for legacy pages outside the canonical rebuild. */
+(function () {
+  'use strict';
+  var language = document.documentElement.lang && document.documentElement.lang.toLowerCase().indexOf('no') === 0 ? 'no' : 'sv';
+  fetch('/assets/fragments/header-' + language + '.html')
+    .then(function (response) { if (!response.ok) throw new Error('header unavailable'); return response.text(); })
+    .then(function (markup) {
+      var old = document.querySelector('#site-nav, #levnytt-nav, .ln-site-header');
+      if (old) old.outerHTML = markup;
+      else document.body.insertAdjacentHTML('afterbegin', markup);
+      var current = window.location.pathname.replace(/\/$/, '') || '/';
+      document.querySelectorAll('.ln-primary-nav a[href^="/"]').forEach(function (link) {
+        var path = new URL(link.href, window.location.origin).pathname.replace(/\/$/, '') || '/';
+        if (path === current) link.setAttribute('aria-current', 'page');
+      });
+      if (!document.querySelector('script[src="/assets/js/levnytt-rebuild.js"]')) {
+        var script = document.createElement('script');
+        script.src = '/assets/js/levnytt-rebuild.js';
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+    })
+    .catch(function () { /* Content remains usable without the enhancement. */ });
+}());

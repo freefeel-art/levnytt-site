@@ -14,12 +14,17 @@ import json
 import os
 import re
 import sys
+import importlib.util
+import subprocess
 from datetime import datetime
 from html.parser import HTMLParser
+from pathlib import Path
 
 ROOT_DIR = "."
 INDEX_FILE = "artiklar.html"
 SITE_DOMAIN = "https://levnytt.se"
+ROOT = Path(__file__).resolve().parents[1]
+INDEXABLE_TYPES = ("Article", "WebPage", "CollectionPage", "Product")
 
 EXCLUDED_FILES = {
     "index.html", "artiklar.html", "404.html", "integritetspolicy.html",
@@ -193,10 +198,10 @@ def extract_article_data(filepath: str) -> dict | None:
     if ld:
         if "@graph" in ld:
             for item in ld["@graph"]:
-                if item.get("@type") in ("Article", "WebPage"):
+                if item.get("@type") in INDEXABLE_TYPES:
                     article_obj = item
                     break
-        elif ld.get("@type") in ("Article", "WebPage"):
+        elif ld.get("@type") in INDEXABLE_TYPES:
             article_obj = ld
 
         if article_obj:
@@ -228,20 +233,20 @@ def extract_article_data(filepath: str) -> dict | None:
 
     if not date_str:
         # Only use fallback if no JSON-LD exists at all, or if the LD was Article/WebPage
-        if ld and article_obj is None and ld.get("@type") not in (None, "Article", "WebPage"):
+        if ld and article_obj is None and ld.get("@type") not in (None, *INDEXABLE_TYPES):
             return None
         if raw_lds and not date_str:
             has_article_ld = False
             for raw in raw_lds:
-                if '"@type":"Article"' in raw or '"@type":"WebPage"' in raw:
+                if any(f'"@type":"{schema_type}"' in raw for schema_type in INDEXABLE_TYPES):
                     has_article_ld = True
                     break
             if not has_article_ld:
                 # If JSON-LD exists but isn't Article/WebPage type, skip
                 return None
-        # Fallback: file modification time
-        mtime = os.path.getmtime(filepath)
-        date_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d")
+        # Git creation time is stable across deploys, unlike filesystem mtime.
+        result = subprocess.run(["git", "log", "--follow", "--diff-filter=A", "-1", "--format=%aI", "--", filepath], capture_output=True, text=True)
+        date_str = result.stdout.strip() or datetime.fromtimestamp(os.path.getmtime(filepath)).isoformat()
 
     try:
         pub_date = datetime.fromisoformat(date_str)
@@ -318,49 +323,24 @@ def get_slug_from_filepath(filepath: str, is_subdir: bool = False) -> str:
 
 
 def discover_articles():
-    """Discover all published articles in root directory."""
+    """Discover actual public files, including Cloudflare rewrite targets."""
     articles = []
-
-    # Scan flat .html files in root
-    for fname in os.listdir(ROOT_DIR):
-        if not fname.endswith(".html"):
+    spec = importlib.util.spec_from_file_location("levnytt_rebuild_index", ROOT / "scripts/rebuild-production.py")
+    rebuild = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(rebuild)
+    excluded = {"/", "/artiklar", "/404", "/integritetspolicy", "/om-oss", "/no/"}
+    for url, path in rebuild.sitemap_routes(ROOT):
+        public_path = url.replace(SITE_DOMAIN, "") or "/"
+        if public_path in excluded or public_path.startswith("/no/"):
             continue
-        if fname in EXCLUDED_FILES:
-            continue
-
-        fpath = os.path.join(ROOT_DIR, fname)
-        if not os.path.isfile(fpath):
-            continue
-
-        data = extract_article_data(fpath)
+        data = extract_article_data(str(path))
         if data:
-            data["slug"] = get_slug_from_filepath(fpath)
-            data["filepath"] = fpath
+            data["slug"] = public_path.strip("/")
+            data["filepath"] = str(path)
             articles.append(data)
         else:
-            print(f"  [skip] {fpath} — no valid article metadata", file=sys.stderr)
-
-    # Scan subdirectory articles (root/subdir/index.html)
-    for entry in os.listdir(ROOT_DIR):
-        subdir = os.path.join(ROOT_DIR, entry)
-        if not os.path.isdir(subdir):
-            continue
-        if entry.startswith("."):
-            continue
-        if entry in ("assets", "content", "docs", "scripts", "images", ".github", ".opencode"):
-            continue
-
-        index_path = os.path.join(subdir, "index.html")
-        if not os.path.isfile(index_path):
-            continue
-
-        data = extract_article_data(index_path)
-        if data:
-            data["slug"] = entry
-            data["filepath"] = index_path
-            articles.append(data)
-        else:
-            print(f"  [skip] {index_path} — no valid article metadata", file=sys.stderr)
+            print(f"  [skip] {path} — no valid article metadata", file=sys.stderr)
 
     return articles
 

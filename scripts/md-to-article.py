@@ -19,6 +19,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent))
+from site_renderer import canonicalize_html
+
 REPO_ROOT = Path(__file__).parent.parent
 BASE_URL = "https://levnytt.se"
 GOOGLE_VERIFY = "kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0"
@@ -427,7 +430,7 @@ def build_html(data, body_html):
     if cta_sec and cta:
         cta_secondary_html = (
             f'\n<p class="ia-cta-secondary">'
-            f'<a style="color:#F9F6EF;text-decoration:underline"'
+            f'<a'
             f' target="_blank" rel="noopener noreferrer"'
             f' href="{attr(cta_sec["url"])}">{attr(cta_sec["text"])}</a>'
             f'</p>'
@@ -435,7 +438,7 @@ def build_html(data, body_html):
 
     json_ld = build_json_ld(data, canonical_url)
 
-    return f"""<!DOCTYPE html>
+    legacy_html = f"""<!DOCTYPE html>
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
@@ -474,7 +477,7 @@ def build_html(data, body_html):
 <div class="ia-wrap">
 <article>
 
-<p style="font-size:0.85em;color:#888;text-transform:uppercase;letter-spacing:0.05em">{attr(data["category"])}</p>
+<p class="ia-category">{attr(data["category"])}</p>
 
 <div class="ia-eyebrow">{attr(data["eyebrow"])}</div>
 <h1>{attr(title)}</h1>
@@ -484,7 +487,7 @@ def build_html(data, body_html):
 <p class="ia-punchline">{data["punchline"]}</p>
 
 <div class="ia-takeaways">
-<h3>Key Takeaways</h3>
+<h3>Det viktigaste</h3>
 <ul>
 {takeaways_html}
 </ul>
@@ -531,6 +534,7 @@ def build_html(data, body_html):
 <script src="/components.js" defer></script>
 </body>
 </html>"""
+    return canonicalize_html(legacy_html, canonical_url, f"content/articles/{slug}/{slug}.html", REPO_ROOT)
 
 
 # ─── Validation ─────────────────────────────────────────────────────────────

@@ -6,8 +6,8 @@ import re
 import sys
 from pathlib import Path
 
-ALLOWED_TEMPLATES = {"informational-article-v1"}
-CTA_VALUES = {"none", "internal", "product-referral", "affiliate-referral"}
+ALLOWED_TEMPLATES = {"rebuild-informational-article"}
+CTA_VALUES = {"none", "internal", "product-referral", "affiliate-referral", "existing-content-cta"}
 LITERAL_BRAND_COLORS = ("#1B4332", "#E8C870", "#C9A84C", "#F9F6EF")
 
 
@@ -21,13 +21,15 @@ def validate(path: Path) -> list[str]:
     errors: list[str] = []
     template = meta(html, "levnytt-template")
     if template not in ALLOWED_TEMPLATES:
-        errors.append("template must be informational-article-v1")
-    for required in ('/assets/css/levnytt-foundations.css', '/assets/css/informational-article.css', '<div id="site-nav">', 'nav.js', 'footer.js'):
+        errors.append("template must be rebuild-informational-article")
+    for required in ('/assets/css/levnytt-foundations.css', '/assets/css/levnytt-components.css', '/assets/css/levnytt-rebuild.css', '/assets/css/informational-article.css', 'class="ln-site-header"', 'class="ln-site-footer"'):
         if required not in html:
             errors.append(f"missing shared shell requirement: {required}")
     for color in LITERAL_BRAND_COLORS:
         if color.lower() in html.lower():
             errors.append(f"unapproved literal brand color in template: {color}")
+    if re.search(r"<style\b|\sstyle=|\son\w+=", html, re.I):
+        errors.append("inline code is not allowed")
     cta = meta(html, "levnytt-cta")
     if cta not in CTA_VALUES:
         errors.append("CTA behavior is missing or unclassified")

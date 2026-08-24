@@ -1,396 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alla artiklar — kunskapsbibliotek | LevNytt</title>
-  <meta name="description" content="Bläddra bland LevNytts kompletta artikelbibliotek: evidensbaserade guider om vitaminer, mineraler, fettsyror, antioxidanter, tarmhälsa, kostfiber, Golden Home Care och direktförsäljning. 95 artiklar, 6 ämnesgrupper.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://levnytt.se/artiklar">
-  <meta property="og:title" content="Alla artiklar — kunskapsbibliotek | LevNytt">
-  <meta property="og:description" content="107 evidensbaserade artiklar om vitaminer, mineraler, fettsyror, antioxidanter, tarmhälsa, Golden Home Care och direktförsäljning. Sök och filtrera bland alla guider.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://levnytt.se/artiklar">
-  <meta property="og:site_name" content="LevNytt">
-  <meta property="og:image" content="https://levnytt.se/assets/brand/og-brand.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Alla artiklar | LevNytt">
-  <meta name="twitter:description" content="95 evidensbaserade artiklar om vitaminer, mineraler, fettsyror, antioxidanter, tarmhälsa, Golden Home Care och direktförsäljning. Sök och filtrera bland alla guider.">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Alla artiklar — kunskapsbibliotek",
-    "description": "Fullständigt artikelindex för LevNytt — 95 evidensbaserade guider i 6 ämnesgrupper: vitaminer & mineraler, fettsyror & antioxidanter, tarmhälsa & kostfiber, hälsa & livsstil, Golden Home Care och direktförsäljning.",
-    "url": "https://levnytt.se/artiklar",
-    "publisher": {
-      "@type": "Organization",
-      "name": "LevNytt",
-      "url": "https://levnytt.se"
-    },
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type":"ListItem","position":1,"name":"Hem","item":"https://levnytt.se"},
-        {"@type":"ListItem","position":2,"name":"Alla artiklar","item":"https://levnytt.se/artiklar"}
-      ]
-    }
-  }
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/pillar.css">
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ── HERO ─────────────────────────────────────── */
-    .idx-hero {
-      background: linear-gradient(145deg, #0d2218 0%, var(--green-dark) 60%, #20503a 100%);
-      color: var(--white);
-      padding: 72px 24px 64px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .idx-hero::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -80px;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: rgba(201,168,76,0.06);
-      pointer-events: none;
-    }
-    .idx-hero-eye {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-      display: block;
-      position: relative;
-    }
-    .idx-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 14px;
-      position: relative;
-    }
-    .idx-hero-desc {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.78);
-      max-width: 580px;
-      margin: 0 auto 28px;
-      line-height: 1.6;
-      position: relative;
-    }
-    .idx-hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      position: relative;
-    }
-    .idx-stat {
-      text-align: center;
-    }
-    .idx-stat-n {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--gold);
-      display: block;
-    }
-    .idx-stat-l {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.55);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-
-    /* ── BREADCRUMBS ─────────────────────────────── */
-    .idx-breadcrumbs {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 24px;
-      font-size: 13px;
-      color: var(--ink-muted);
-    }
-    .idx-breadcrumbs a {
-      color: var(--ink-muted);
-      text-decoration: none;
-    }
-    .idx-breadcrumbs a:hover { color: var(--green); }
-    .idx-breadcrumbs span { margin: 0 6px; }
-
-    /* ── CONTROLS ─────────────────────────────────── */
-    .idx-controls {
-      position: sticky;
-      top: 64px;
-      z-index: 50;
-      background: rgba(249,246,239,0.94);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 24px;
-    }
-    .idx-controls-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .idx-search-wrap {
-      position: relative;
-      flex: 1;
-      min-width: 180px;
-      max-width: 380px;
-    }
-    .idx-search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #999;
-      pointer-events: none;
-    }
-    #idx-search {
-      width: 100%;
-      padding: 10px 14px 10px 38px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--ink);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    #idx-search:focus { border-color: var(--green); }
-    #idx-search::placeholder { color: #aaa; }
-
-    .idx-chip-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      flex: 1;
-    }
-    .idx-chip {
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1.5px solid var(--border);
-      background: var(--white);
-      color: var(--ink-muted);
-      font-size: 0.78rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.18s;
-      white-space: nowrap;
-      font-family: 'Inter', sans-serif;
-    }
-    .idx-chip:hover { border-color: var(--green); color: var(--green-dark); }
-    .idx-chip.active {
-      background: var(--green-dark);
-      border-color: var(--green-dark);
-      color: var(--white);
-    }
-    #idx-count {
-      font-size: 0.78rem;
-      color: var(--ink-muted);
-      white-space: nowrap;
-      margin-left: auto;
-    }
-
-    /* ── MAIN LAYOUT ──────────────────────────────── */
-    .idx-main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-
-    /* ── CATEGORY SECTION ─────────────────────────── */
-    .idx-cat {
-      margin-bottom: 52px;
-    }
-    .idx-cat[data-hidden="true"] { display: none; }
-
-    .idx-cat-head {
-      margin-bottom: 16px;
-    }
-    .idx-cat-eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold-dark);
-      margin-bottom: 6px;
-      display: block;
-    }
-    .idx-cat-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--green-dark);
-      margin-bottom: 6px;
-      line-height: 1.3;
-    }
-    .idx-cat-count {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--ink-muted);
-      background: var(--cream-dark);
-      padding: 2px 10px;
-      border-radius: 12px;
-      margin-left: 6px;
-      vertical-align: middle;
-    }
-    .idx-cat-intro {
-      font-size: 0.9rem;
-      color: var(--ink-muted);
-      line-height: 1.55;
-      margin-bottom: 18px;
-      max-width: 620px;
-    }
-
-    /* ── ARTICLE GRID ──────────────────────────────── */
-    .idx-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 14px;
-    }
-
-    /* ── ARTICLE CARD ──────────────────────────────── */
-    .idx-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 22px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: all 0.2s;
-      position: relative;
-    }
-    .idx-card:hover {
-      border-color: var(--gold);
-      box-shadow: 0 4px 18px rgba(201,168,76,0.14);
-      transform: translateY(-2px);
-    }
-    .idx-card[data-hidden="true"] { display: none; }
-
-    .idx-card-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 2px;
-    }
-    .idx-card-badge.star {
-      color: var(--gold-dark);
-    }
-    .idx-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--green-dark);
-      line-height: 1.3;
-    }
-    .idx-card-desc {
-      font-size: 0.82rem;
-      color: var(--ink-muted);
-      line-height: 1.55;
-      flex: 1;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .idx-card-meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.72rem;
-      color: #aaa;
-      margin-top: 4px;
-    }
-    .idx-card-meta-sep { color: #ddd; }
-    .idx-card-arrow {
-      position: absolute;
-      right: 18px;
-      bottom: 18px;
-      font-size: 0.85rem;
-      color: var(--gold);
-      opacity: 0;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .idx-card:hover .idx-card-arrow {
-      opacity: 1;
-      transform: translateX(3px);
-    }
-
-    /* ── NO RESULTS ────────────────────────────────── */
-    .idx-empty {
-      display: none;
-      text-align: center;
-      padding: 64px 24px;
-      color: var(--ink-muted);
-    }
-    .idx-empty.visible { display: block; }
-    .idx-empty h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--green-dark);
-      margin-bottom: 8px;
-    }
-
-    /* ── RESPONSIVE ────────────────────────────────── */
-    @media (max-width: 768px) {
-      .idx-hero { padding: 48px 16px 40px; }
-      .idx-hero-stats { gap: 24px; }
-      .idx-controls { top: 0; padding: 12px 16px; }
-      .idx-main { padding: 28px 16px 60px; }
-      .idx-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .idx-stat-n { font-size: 1.6rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alla artiklar — kunskapsbibliotek | LevNytt</title>
+<meta name="description" content="Bläddra bland LevNytts kompletta artikelbibliotek: evidensbaserade guider om vitaminer, mineraler, fettsyror, antioxidanter, tarmhälsa, kostfiber, Golden Home Care och direktförsäljning. 95 artiklar, 6 ämnesgrupper.">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Alla artiklar | LevNytt">
+<meta name="twitter:description" content="95 evidensbaserade artiklar om vitaminer, mineraler, fettsyror, antioxidanter, tarmhälsa, Golden Home Care och direktförsäljning. Sök och filtrera bland alla guider.">
+<meta name="google-site-verification" content="kAcoLDFGCpGh42gIFRgPeWlC253vTP3OLBs6wI8KDQ0">
+<meta name="p:domain_verify" content="6a9e88f7014abe0735767f464c08f337">
+<link rel="canonical" href="https://levnytt.se/artiklar">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alla artiklar — kunskapsbibliotek | LevNytt">
+<meta property="og:description" content="138 evidensbaserade artiklar om vitaminer, mineraler, fettsyror, antioxidanter, tarmhälsa, Golden Home Care och direktförsäljning. Sök och filtrera bland alla guider.">
+<meta property="og:url" content="https://levnytt.se/artiklar">
+<meta property="og:site_name" content="LevNytt">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:image" content="https://levnytt.se/assets/brand/og-brand.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LevNytt">
+<link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
 <link rel="stylesheet" href="/assets/css/levnytt-components.css">
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
+<link rel="stylesheet" href="/assets/css/editorial-components.css">
+<link rel="stylesheet" href="/assets/css/article-index.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Alla artiklar — kunskapsbibliotek","description":"Fullständigt artikelindex för LevNytt — 95 evidensbaserade guider i 6 ämnesgrupper: vitaminer & mineraler, fettsyror & antioxidanter, tarmhälsa & kostfiber, hälsa & livsstil, Golden Home Care och direktförsäljning.","url":"https://levnytt.se/artiklar","publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LevNytt","item":"https://levnytt.se/"},{"@type":"ListItem","position":2,"name":"Alla artiklar","item":"https://levnytt.se/artiklar"}]}}</script>
+<meta name="levnytt-template" content="rebuild-library-category-index">
+<meta name="levnytt-cta" content="existing-content-cta">
 </head>
-<body>
-<div id="site-nav"></div>
-<script src="/nav.js" defer></script>
-
-<!-- HERO -->
+<body data-template-family="library-category-index">
+<a class="ln-skip-link" href="#main-content">Hoppa till innehåll</a>
+<header class="ln-site-header">
+  <div class="ln-shell ln-header-inner">
+    <a class="ln-brand" href="/" aria-label="LevNytt — Hem">
+      <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
+    </a>
+    <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
+      <a href="/">Hem</a>
+      <a href="/om-oss">Om oss</a>
+      <a href="/artiklar" aria-current="page">Artiklar</a>
+      <a href="/neolife-historia">Historia</a>
+      <a href="/neolife-vetenskap">Vetenskap</a>
+      <a href="/neolife-kosttillskott">Produkter</a>
+      <a href="/neolife-affarsmojlighet">Affärsmöjlighet</a>
+      <a href="/finns-det-billigare-alternativ">Spara pengar</a>
+      <span class="ln-nav-commercial-group">
+        <a class="ln-nav-commercial" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow sponsored noopener noreferrer">Handla NeoLife <span aria-hidden="true">→</span></a>
+        <a class="ln-nav-disclosure" href="/om-oss">Oberoende distributör · Sponsor-ID 41-830928</a>
+      </span>
+    </nav>
+  </div>
+</header>
+<main id="main-content" class="ln-page ln-family-library-category-index"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Alla artiklar</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Kunskapsbibliotek</p><h1>Alla artiklar</h1></header><div class="ln-article-body"><!-- HERO -->
 <section class="idx-hero">
   <span class="idx-hero-eye">Kunskapsbibliotek</span>
-  <h1>Alla artiklar</h1>
+
   <p class="idx-hero-desc">Evidensbaserade guider om vitaminer, mineraler, fettsyror, tarmhälsa, Golden Home Care och direktförsäljning. Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     <div class="idx-hero-stats">
       <div class="idx-stat">
-        <span class="idx-stat-n" id="js-total-n"><!-- IDX:ARTICLE-COUNT -->107<!-- /IDX:ARTICLE-COUNT --></span>
+        <span class="idx-stat-n" id="js-total-n"><!-- IDX:ARTICLE-COUNT -->138<!-- /IDX:ARTICLE-COUNT --></span>
         <span class="idx-stat-l">Artiklar</span>
       </div>
       <div class="idx-stat">
@@ -398,22 +75,20 @@
         <span class="idx-stat-l">Ämnesgrupper</span>
       </div>
       <div class="idx-stat">
-        <span class="idx-stat-n"><!-- IDX:PORTAL-COUNT -->11<!-- /IDX:PORTAL-COUNT --></span>
+        <span class="idx-stat-n"><!-- IDX:PORTAL-COUNT -->14<!-- /IDX:PORTAL-COUNT --></span>
         <span class="idx-stat-l">Portalguider</span>
       </div>
     </div>
 </section>
 
 <!-- BREADCRUMBS -->
-<div class="idx-breadcrumbs">
-  <a href="/">Hem</a><span>/</span>Alla artiklar
-</div>
+
 
 <!-- CONTROLS -->
 <div class="idx-controls" id="js-controls">
   <div class="idx-controls-inner">
     <div class="idx-search-wrap">
-      <svg class="idx-search-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+      <svg class="idx-search-icon" width="16" height="16" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
       <input type="search" id="idx-search" placeholder="Sök artiklar…" aria-label="Sök artiklar" autocomplete="off">
     </div>
     <div class="idx-chip-row" id="js-chips">
@@ -425,47 +100,51 @@
       <button class="idx-chip" data-cat="goldenhomecare">Golden Home Care</button>
       <button class="idx-chip" data-cat="direktforsaljning">Direktförsäljning</button>
     </div>
-    <span id="idx-count"><!-- IDX:DISPLAY-COUNT -->107 artiklar<!-- /IDX:DISPLAY-COUNT --></span>
+    <span id="idx-count"><!-- IDX:DISPLAY-COUNT -->138 artiklar<!-- /IDX:DISPLAY-COUNT --></span>
   </div>
 </div>
 
 <!-- MAIN -->
-<main class="idx-main" id="js-main">
+
   <!-- IDX:ARTICLE-CARDS -->
   <section class="idx-cat" id="cat-vitaminer" data-category="vitaminer">
     <h2 class="idx-cat-h">VITAMINER & MINERALER</h2>
     <div class="idx-cat-grid">
 
-      <a href="/zink-immunforsvar-hud-testosteron" class="idx-card" data-cat="vitaminer" data-search="zink.—.immunforsvar,.hud.och.testosteron.[komplett.guide.2026].vad.ar.zink?.grundlig.genomgang.av.zinkets.roll.for.immunforsvar,.hudalsa.och.testosteron.baserat.pa.vetenskaplig.forskning..kostrad.och.kallor..zink.immunforsvar.hud.testosteron">
-        <span class="idx-card-badge star">&#9733; Portalguide</span>
-        <span class="idx-card-title">Zink — immunförsvar, hud och testosteron [Komplett guide 2026]</span>
-        <span class="idx-card-desc">Vad är zink? Grundlig genomgång av zinkets roll för immunförsvar, hudälsa och testosteron baserat på vetenskaplig forskning. Kostråd och källor.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+      <a href="/kosttillskott-aldre-65" class="idx-card" data-cat="vitaminer" data-search="kosttillskott.aldre:.vad.du.behover.veta.kosttillskott.ar.vitaminer.och.mineraler.i.koncentrerad.form,.avsedda.att.komplettera.den.vanliga.kosten..de.saljs.som.kapslar,.tabletter,.pulver,.ampuller.kosttillskott.aldre.65">
+        <span class="idx-card-title">Kosttillskott äldre: vad du behöver veta</span>
+        <span class="idx-card-desc">Kosttillskott är vitaminer och mineraler i koncentrerad form, avsedda att komplettera den vanliga kosten. De säljs som kapslar, tabletter, pulver, ampuller</span>
+        <div class="idx-card-meta"><span>18 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/behoever-jag-kosttillskott" class="idx-card" data-cat="vitaminer" data-search="behover.jag.kosttillskott?.nar.racker.maten.(2026.guide).behover.jag.kosttillskott?.for.de.flesta.racker.en.varierad.kost,.men.vissa.grupper.behover.extra.naring..livsmedelsverkets.nya.rad.for.2026..behoever.jag.kosttillskott.nar.racker.maten">
-        <span class="idx-card-title">Behöver jag kosttillskott? När räcker maten (2026 Guide)</span>
-        <span class="idx-card-desc">Behöver jag kosttillskott? För de flesta räcker en varierad kost, men vissa grupper behöver extra näring. Livsmedelsverkets nya råd för 2026.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/all-trans-beta-carotene" class="idx-card" data-cat="vitaminer" data-search="all.trans.beta.carotene.–.vad.ar.det?.all.trans.beta.karoten.ar.en.form.av.betakaroten,.en.antioxidant.som.kroppen.kan.omvandla.till.vitamin.a..det.ar.en.vanlig.ingrediens.i.kosttillskott.och.f.all.trans.beta.carotene">
+        <span class="idx-card-title">All trans beta carotene – vad är det?</span>
+        <span class="idx-card-desc">All trans beta karoten är en form av betakaroten, en antioxidant som kroppen kan omvandla till vitamin A. Det är en vanlig ingrediens i kosttillskott och f</span>
+        <div class="idx-card-meta"><span>17 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/nar-ska-man-ta-kosttillskott-timingguide" class="idx-card" data-cat="vitaminer" data-search="nar.ska.man.ta.kosttillskott?.timingguide.for.optimal.absorption.nar.ska.man.ta.kosttillskott.for.bast.effekt?.upptack.det.optimala.timingen.for.vitaminer.och.mineraler...morgon,.kvall,.med.mat.eller.pa.tom.mage..nar.ska.man.ta.kosttillskott.timingguide">
-        <span class="idx-card-title">När ska man ta kosttillskott? Timingguide för optimal absorption</span>
-        <span class="idx-card-desc">När ska man ta kosttillskott för bäst effekt? Upptäck det optimala timingen för vitaminer och mineraler - morgon, kväll, med mat eller på tom mage.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/antioxidanter-bra-for" class="idx-card" data-cat="vitaminer" data-search="antioxidanter.bra.for.din.halsa.–.vad.sager.forskningen?.antioxidanter.ar.amnen.som.skyddar.kroppens.celler.fran.skador.orsakade.av.fria.radikaler..fria.radikaler.bildas.naturligt.vid.amnesomsattningen.men.kan.oc.antioxidanter.bra.for">
+        <span class="idx-card-title">Antioxidanter bra för din hälsa – vad säger forskningen?</span>
+        <span class="idx-card-desc">Antioxidanter är ämnen som skyddar kroppens celler från skador orsakade av fria radikaler. Fria radikaler bildas naturligt vid ämnesomsättningen men kan oc</span>
+        <div class="idx-card-meta"><span>17 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/finns-det-billigare-alternativ" class="idx-card" data-cat="vitaminer" data-search="finns.det.billigare.alternativ?.|.levnytt.se.ett.lagt.inkopspris.ar.inte.alltid.samma.sak.som.lag.kostnad.per.anvandning..rakna.ut.ditt.verkliga.pris.och.se.nar.ett.medlemskap.lonar.sig..finns.det.billigare.alternativ">
-        <span class="idx-card-title">Finns det billigare alternativ? | LevNytt.se</span>
-        <span class="idx-card-desc">Ett lågt inköpspris är inte alltid samma sak som låg kostnad per användning. Räkna ut ditt verkliga pris och se när ett medlemskap lönar sig.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/antioxidanter-kosttillskott" class="idx-card" data-cat="vitaminer" data-search="antioxidanter.kosttillskott:.vad.du.bor.veta.antioxidanter.ar.amnen.som.skyddar.kroppens.celler.fran.skador.orsakade.av.fria.radikaler..fria.radikaler.bildas.naturligt.vid.amnesomsattningen.men.aven.g.antioxidanter.kosttillskott">
+        <span class="idx-card-title">Antioxidanter kosttillskott: Vad du bör veta</span>
+        <span class="idx-card-desc">Antioxidanter är ämnen som skyddar kroppens celler från skador orsakade av fria radikaler. Fria radikaler bildas naturligt vid ämnesomsättningen men även g</span>
+        <div class="idx-card-meta"><span>17 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/proteinpulver-och-proteintillskott" class="idx-card" data-cat="vitaminer" data-search="proteinpulver.och.proteintillskott:.en.komplett.guide.till.kvalitet.och.anvandning.vad.ar.proteinpulver?.allt.om.olika.typer.(whey,.kasein,.vaxtbaserat),.proteinbehov,.kvalitetsmarkorer,.dosering.och.timing..fakta.om.proteintillskott.vs.mat..proteinpulver.och.proteintillskott">
-        <span class="idx-card-badge star">&#9733; Portalguide</span>
-        <span class="idx-card-title">Proteinpulver och proteintillskott: En komplett guide till kvalitet och användning</span>
-        <span class="idx-card-desc">Vad är proteinpulver? Allt om olika typer (whey, kasein, växtbaserat), proteinbehov, kvalitetsmarkörer, dosering och timing. Fakta om proteintillskott vs mat.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+      <a href="/antioxidanter-lista" class="idx-card" data-cat="vitaminer" data-search="antioxidanter.lista:.vad.du.behover.veta.antioxidanter.ar.amnen.som.skyddar.kroppens.celler.fran.skador.orsakade.av.fria.radikaler..dessa.skador.kan.bidra.till.aldrande.och.olika.sjukdomar..enligt.antioxidanter.lista">
+        <span class="idx-card-title">Antioxidanter lista: Vad du behöver veta</span>
+        <span class="idx-card-desc">Antioxidanter är ämnen som skyddar kroppens celler från skador orsakade av fria radikaler. Dessa skador kan bidra till åldrande och olika sjukdomar. Enligt</span>
+        <div class="idx-card-meta"><span>17 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/sa-kallas-beta-karotenoider-vitamin-c-vitamin-e-och-selen" class="idx-card" data-cat="vitaminer" data-search="sa.kallas.beta.karotenoider.vitamin.c.vitamin.e.och.selen.beta.karotenoider,.vitamin.c,.vitamin.e.och.selen.ar.alla.exempel.pa.antioxidanter..dessa.amnen.skyddar.kroppens.celler.fran.skador.orsakade.av.fria.radika.sa.kallas.beta.karotenoider.vitamin.c.vitamin.e.och.selen">
+        <span class="idx-card-title">Så kallas beta karotenoider vitamin c vitamin e och selen</span>
+        <span class="idx-card-desc">Beta karotenoider, vitamin C, vitamin E och selen är alla exempel på antioxidanter. Dessa ämnen skyddar kroppens celler från skador orsakade av fria radika</span>
+        <div class="idx-card-meta"><span>17 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/nattblindhet" class="idx-card" data-cat="vitaminer" data-search="nattblindhet.(nyktalopi).—.vad.betyder.det?.nattblindhet,.eller.nyktalopi,.betyder.svarigheter.att.se.i.morker.eller.svagt.ljus..las.vad.begreppet.betyder.och.nar.synbesvar.bor.bedomas..nattblindhet">
@@ -481,16 +160,16 @@
         <div class="idx-card-meta"><span>2 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/jarnbrist-symptom-tillskott" class="idx-card" data-cat="vitaminer" data-search="jarnbrist.—.symptom,.orsaker.och.tillskott.jarnbrist.drabbar.30%.av.kvinnor.i.fertil.alder.globalt..lar.dig.kanna.igen.symptom,.forsta.ferritinvarden,.och.jamfor.jarntillskott.—.fran.heme.jarn.till.icke.heme..jarnbrist.symptom.tillskott">
-        <span class="idx-card-title">Järnbrist — symptom, orsaker och tillskott</span>
-        <span class="idx-card-desc">Järnbrist drabbar 30% av kvinnor i fertil ålder globalt. Lär dig känna igen symptom, förstå ferritinvärden, och jämför järntillskott — från heme-järn till icke-heme.</span>
-        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/d-vitaminbrist-sverige" class="idx-card" data-cat="vitaminer" data-search="d.vitaminbrist.i.sverige.—.statistik,.riskgrupper.och.vad.du.kan.gora.40%.av.svenska.vuxna.har.laga.d.vitaminnivaer.pa.vintern..20%.ligger.under.rekommenderad.niva.aret.om..har.ar.siffrorna,.riskgrupperna.—.och.vad.livsmedelsverket.rekommenderar..d.vitaminbrist.sverige">
+        <span class="idx-card-title">D-vitaminbrist i Sverige — statistik, riskgrupper och vad du kan göra</span>
+        <span class="idx-card-desc">40% av svenska vuxna har låga D-vitaminnivåer på vintern. 20% ligger under rekommenderad nivå året om. Här är siffrorna, riskgrupperna — och vad Livsmedelsverket rekommenderar.</span>
+        <div class="idx-card-meta"><span>2 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/kosttillskott-aldre-65" class="idx-card" data-cat="vitaminer" data-search="kosttillskott.for.aldre.65+.—.vad.behover.du.veta?.vilka.kosttillskott.behover.aldre.65+?.har.ar.vad.forskningen.visar.om.protein,.d.vitamin,.b12.och.andra.viktiga.naringsamnen.efter.65..kosttillskott.aldre.65">
-        <span class="idx-card-title">Kosttillskott för äldre 65+ — vad behöver du veta?</span>
-        <span class="idx-card-desc">Vilka kosttillskott behöver äldre 65+? Här är vad forskningen visar om protein, D-vitamin, B12 och andra viktiga näringsämnen efter 65.</span>
-        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/kalcium-brist-symtom" class="idx-card" data-cat="vitaminer" data-search="kalciumbrist.—.symtom.och.behandling.kalciumbrist.ger.muskelvark,.domningar.och.trotthet..lar.dig.kanna.igen.symtomen,.vilka.riskgrupper.som.drabbas.och.vad.du.kan.gora..kalcium.brist.symtom">
+        <span class="idx-card-title">Kalciumbrist — symtom och behandling</span>
+        <span class="idx-card-desc">Kalciumbrist ger muskelvärk, domningar och trötthet. Lär dig känna igen symtomen, vilka riskgrupper som drabbas och vad du kan göra.</span>
+        <div class="idx-card-meta"><span>2 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/antioxidanter-komplett-guide" class="idx-card" data-cat="vitaminer" data-search="antioxidanter:.komplett.guide.till.antioxidanter.i.mat.och.tillskott.vad.ar.antioxidanter.och.behover.kroppen.flera.olika.sorter?.komplett.guide.med.forskning.om.betakaroten,.c.vitamin,.e.vitamin,.selen,.coq10.och.polyfenoler.—.evidensbaserat.och.praktiskt..antioxidanter.komplett.guide">
@@ -500,11 +179,36 @@
         <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
+      <a href="/d-vitamin-allt-du-behover-veta" class="idx-card" data-cat="vitaminer" data-search="d.vitamin:.allt.du.behover.veta.om.solskensvitaminet.nastan.alla.i.sverige.har.for.laga.d.vitaminnivaer.under.vinterhalvaret..denna.kompletta.guide.tacker.vetenskap,.dosering,.kallor.och.praktiska.rad..d.vitamin.allt.du.behover.veta">
+        <span class="idx-card-title">D-vitamin: Allt du behöver veta om solskensvitaminet</span>
+        <span class="idx-card-desc">Nästan alla i Sverige har för låga D-vitaminnivåer under vinterhalvåret. Denna kompletta guide täcker vetenskap, dosering, källor och praktiska råd.</span>
+        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/jarnbrist-symptom-tillskott" class="idx-card" data-cat="vitaminer" data-search="jarnbrist.—.symptom,.orsaker.och.tillskott.jarnbrist.drabbar.30%.av.kvinnor.i.fertil.alder.globalt..lar.dig.kanna.igen.symptom,.forsta.ferritinvarden,.och.jamfor.jarntillskott.—.fran.heme.jarn.till.icke.heme..jarnbrist.symptom.tillskott">
+        <span class="idx-card-title">Järnbrist — symptom, orsaker och tillskott</span>
+        <span class="idx-card-desc">Järnbrist drabbar 30% av kvinnor i fertil ålder globalt. Lär dig känna igen symptom, förstå ferritinvärden, och jämför järntillskott — från heme-järn till icke-heme.</span>
+        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
       <a href="/selen-komplett-guide" class="idx-card" data-cat="vitaminer" data-search="selen.—.komplett.guide:.behov,.brist,.forskning.och.halsofordelar.vad.ar.selen.och.varfor.ar.det.extra.viktigt.i.sverige?.har.far.du.forskningen,.rekommendationerna.och.livsmedelskallorna..selen.komplett.guide">
         <span class="idx-card-badge star">&#9733; Portalguide</span>
         <span class="idx-card-title">Selen — komplett guide: behov, brist, forskning och hälsofördelar</span>
         <span class="idx-card-desc">Vad är selen och varför är det extra viktigt i Sverige? Här får du forskningen, rekommendationerna och livsmedelskällorna.</span>
         <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/vad-ar-coq10" class="idx-card" data-cat="vitaminer" data-search="vad.ar.coq10.—.en.komplett.guide.till.koenzym.q10.vad.ar.coq10?.koenzym.q10.ar.kroppens.egen.energibooster.och.antioxidant..lar.dig.om.ubikinon,.ubikinol,.dosering.och.varfor.nivaerna.sjunker.med.aldern..vad.ar.coq10">
+        <span class="idx-card-badge star">&#9733; Portalguide</span>
+        <span class="idx-card-title">Vad är CoQ10 — en komplett guide till koenzym Q10</span>
+        <span class="idx-card-desc">Vad är CoQ10? Koenzym Q10 är kroppens egen energibooster och antioxidant. Lär dig om ubikinon, ubikinol, dosering och varför nivåerna sjunker med åldern.</span>
+        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/vad-ar-inflammation" class="idx-card" data-cat="vitaminer" data-search="vad.ar.inflammation?.guide.akut.och.kronisk.inflammation.vad.ar.inflammation?.guide.om.akut.vs.kronisk.inflammation,.symptom,.kost.och.vetenskapligt.beprovade.strategier.for.att.minska.laggradig.inflammation..vad.ar.inflammation">
+        <span class="idx-card-title">Vad är inflammation? Guide akut och kronisk inflammation</span>
+        <span class="idx-card-desc">Vad är inflammation? Guide om akut vs kronisk inflammation, symptom, kost och vetenskapligt beprövade strategier för att minska låggradig inflammation.</span>
+        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/vad-ar-lutein" class="idx-card" data-cat="vitaminer" data-search="vad.ar.lutein?.—.karotenoiden.for.ogon,.hud.och.hjarna.lutein.ar.en.karotenoid.som.ar.avgorande.for.ogonhalsan.—.men.ny.forskning.visar.effekter.aven.pa.hud,.hjarna.och.aldrande..har.ar.evidensen..vad.ar.lutein">
@@ -513,22 +217,53 @@
         <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/magnesium-komplett-guide" class="idx-card" data-cat="vitaminer" data-search="magnesium.—.komplett.guide:.former,.dosering,.fordelar.och.forskning.vad.ar.magnesium.och.varfor.behover.kroppen.det?.har.gar.vi.igenom.former,.dosering,.forskning.och.hur.du.valjer.ratt.magnesiumtillskott..magnesium.komplett.guide">
+      <a href="/vad-ar-zink" class="idx-card" data-cat="vitaminer" data-search="vad.ar.zink?.—.en.komplett.guide.till.mineralen.vad.ar.zink?.zink.ar.ett.essentiellt.sparmineral.som.behovs.for.over.300.enzymer..lar.dig.allt.om.zink,.dosering,.forskning.och.basta.kallorna..vad.ar.zink">
         <span class="idx-card-badge star">&#9733; Portalguide</span>
-        <span class="idx-card-title">Magnesium — komplett guide: former, dosering, fördelar och forskning</span>
-        <span class="idx-card-desc">Vad är magnesium och varför behöver kroppen det? Här går vi igenom former, dosering, forskning och hur du väljer rätt magnesiumtillskott.</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="idx-card-title">Vad är zink? — En komplett guide till mineralen</span>
+        <span class="idx-card-desc">Vad är zink? Zink är ett essentiellt spårmineral som behövs för över 300 enzymer. Lär dig allt om zink, dosering, forskning och bästa källorna.</span>
+        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/magnesiumbrist-symptom-tester" class="idx-card" data-cat="vitaminer" data-search="magnesiumbrist.—.symptom.och.tester.—.hur.vet.du.om.du.har.brist?.magnesiumbrist.ger.symptom.som.muskelkramper,.trotthet,.angest.och.somnproblem..sa.vet.du.om.du.har.brist.—.fran.blodprov.till.rbc.test..magnesiumbrist.symptom.tester">
-        <span class="idx-card-title">Magnesiumbrist — symptom och tester — hur vet du om du har brist?</span>
-        <span class="idx-card-desc">Magnesiumbrist ger symptom som muskelkramper, trötthet, ångest och sömnproblem. Så vet du om du har brist — från blodprov till RBC-test.</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/behoever-jag-kosttillskott-nar-racker-maten" class="idx-card" data-cat="vitaminer" data-search="behover.jag.kosttillskott?.nar.racker.maten.och.vem.behover.extra.vitaminer.behover.jag.kosttillskott?.for.de.flesta.racker.en.varierad.kost,.men.vissa.grupper.behover.extra.naring..livsmedelsverkets.nya.rad.for.2026..behoever.jag.kosttillskott.nar.racker.maten">
+        <span class="idx-card-title">Behöver jag kosttillskott? När räcker maten och vem behöver extra vitaminer</span>
+        <span class="idx-card-desc">Behöver jag kosttillskott? För de flesta räcker en varierad kost, men vissa grupper behöver extra näring. Livsmedelsverkets nya råd för 2026.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/d-vitamin-och-solen" class="idx-card" data-cat="vitaminer" data-search="d.vitamin.och.solen.—.hur.mycket.sol.behovs.i.sverige?.hur.mycket.sol.behovs.i.sverige.for.d.vitaminproduktion?.lar.dig.om.solvinkel,.uv.index,.arstider.och.hur.du.undviker.brist.—.oavsett.breddgrad..d.vitamin.och.solen">
-        <span class="idx-card-title">D-vitamin och solen — hur mycket sol behövs i Sverige?</span>
-        <span class="idx-card-desc">Hur mycket sol behövs i Sverige för D-vitaminproduktion? Lär dig om solvinkel, UV-index, årstider och hur du undviker brist — oavsett breddgrad.</span>
+      <a href="/nar-ska-man-ta-kosttillskott-timingguide" class="idx-card" data-cat="vitaminer" data-search="nar.ska.man.ta.kosttillskott?.timingguide.for.optimal.absorption.nar.ska.man.ta.kosttillskott.for.bast.effekt?.upptack.det.optimala.timingen.for.vitaminer.och.mineraler...morgon,.kvall,.med.mat.eller.pa.tom.mage..nar.ska.man.ta.kosttillskott.timingguide">
+        <span class="idx-card-title">När ska man ta kosttillskott? Timingguide för optimal absorption</span>
+        <span class="idx-card-desc">När ska man ta kosttillskott för bäst effekt? Upptäck det optimala timingen för vitaminer och mineraler - morgon, kväll, med mat eller på tom mage.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/proteinpulver-och-proteintillskott" class="idx-card" data-cat="vitaminer" data-search="proteinpulver.och.proteintillskott:.en.komplett.guide.till.kvalitet.och.anvandning.vad.ar.proteinpulver?.allt.om.olika.typer.(whey,.kasein,.vaxtbaserat),.proteinbehov,.kvalitetsmarkorer,.dosering.och.timing..fakta.om.proteintillskott.vs.mat..proteinpulver.och.proteintillskott">
+        <span class="idx-card-badge star">&#9733; Portalguide</span>
+        <span class="idx-card-title">Proteinpulver och proteintillskott: En komplett guide till kvalitet och användning</span>
+        <span class="idx-card-desc">Vad är proteinpulver? Allt om olika typer (whey, kasein, växtbaserat), proteinbehov, kvalitetsmarkörer, dosering och timing. Fakta om proteintillskott vs mat.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/zink-immunforsvar-hud-testosteron" class="idx-card" data-cat="vitaminer" data-search="zink.—.immunforsvar,.hud.och.testosteron.vad.ar.zink?.grundlig.genomgang.av.zinkets.roll.for.immunforsvar,.hudalsa.och.testosteron.baserat.pa.vetenskaplig.forskning..kostrad.och.kallor..zink.immunforsvar.hud.testosteron">
+        <span class="idx-card-title">Zink — immunförsvar, hud och testosteron</span>
+        <span class="idx-card-desc">Vad är zink? Grundlig genomgång av zinkets roll för immunförsvar, hudälsa och testosteron baserat på vetenskaplig forskning. Kostråd och källor.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/behoever-jag-kosttillskott" class="idx-card" data-cat="vitaminer" data-search="behover.jag.kosttillskott?.(nar.racker.maten?).behover.jag.kosttillskott?.en.evidensbaserad.guide.som.forklarar.nar.maten.racker.och.nar.kosttillskott.kan.vara.motiverade.enligt.svensk.forskning.och.livsmedelsverket..behoever.jag.kosttillskott">
+        <span class="idx-card-title">Behöver jag kosttillskott? (När räcker maten?)</span>
+        <span class="idx-card-desc">Behöver jag kosttillskott? En evidensbaserad guide som förklarar när maten räcker och när kosttillskott kan vara motiverade enligt svensk forskning och Livsmedelsverket.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/ar-kosttillskott-farligt" class="idx-card" data-cat="vitaminer" data-search="ar.kosttillskott.farligt?.—.risker,.biverkningar.och.sakerhet.en.evidensbaserad.genomgang.av.kosttillskotts.sakerhet:.risker,.biverkningar,.lagstiftning.och.praktisk.vagledning.—.med.kallhanvisningar.till.livsmedelsverket,.efsa.och.systematiska.forskningsoversikter..ar.kosttillskott.farligt">
+        <span class="idx-card-title">Är kosttillskott farligt? — risker, biverkningar och säkerhet</span>
+        <span class="idx-card-desc">En evidensbaserad genomgång av kosttillskotts säkerhet: risker, biverkningar, lagstiftning och praktisk vägledning — med källhänvisningar till Livsmedelsverket, EFSA och systematiska forskningsöversikter.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/billig-dyr-multivitamin" class="idx-card" data-cat="vitaminer" data-search="billig.vs.dyr.multivitamin.—.vad.far.du.for.pengarna?.en.detaljerad.jamforelse.mellan.billiga.och.dyra.multivitamin.—.ravarukvalitet,.biotillganglighet,.tillsatser.och.vad.priset.faktiskt.speglar..billig.dyr.multivitamin">
+        <span class="idx-card-title">Billig vs dyr multivitamin — vad får du för pengarna?</span>
+        <span class="idx-card-desc">En detaljerad jämförelse mellan billiga och dyra multivitamin — råvarukvalitet, biotillgänglighet, tillsatser och vad priset faktiskt speglar.</span>
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -538,15 +273,58 @@
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
+      <a href="/d-vitamin-immunforsvaret" class="idx-card" data-cat="vitaminer" data-search="d.vitamin.for.immunforsvaret.—.vad.sager.forskningen?.d.vitamin.ar.avgorande.for.immunforsvaret..har.gar.vi.igenom.vad.forskningen.sager.om.d.vitaminets.roll,.dosering.for.immunitet.och.kopplingen.till.infektioner..d.vitamin.immunforsvaret">
+        <span class="idx-card-title">D-vitamin för immunförsvaret — vad säger forskningen?</span>
+        <span class="idx-card-desc">D-vitamin är avgörande för immunförsvaret. Här går vi igenom vad forskningen säger om D-vitaminets roll, dosering för immunitet och kopplingen till infektioner.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/d-vitamin-och-solen" class="idx-card" data-cat="vitaminer" data-search="d.vitamin.och.solen.—.hur.mycket.sol.behovs.i.sverige?.hur.mycket.sol.behovs.i.sverige.for.d.vitaminproduktion?.lar.dig.om.solvinkel,.uv.index,.arstider.och.hur.du.undviker.brist.—.oavsett.breddgrad..d.vitamin.och.solen">
+        <span class="idx-card-title">D-vitamin och solen — hur mycket sol behövs i Sverige?</span>
+        <span class="idx-card-desc">Hur mycket sol behövs i Sverige för D-vitaminproduktion? Lär dig om solvinkel, UV-index, årstider och hur du undviker brist — oavsett breddgrad.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
       <a href="/magnesium-d-vitamin-kombination" class="idx-card" data-cat="vitaminer" data-search="magnesium.och.d.vitamin.—.varfor.de.fungerar.bast.tillsammans.magnesium.och.d.vitamin.—.varfor.de.fungerar.bast.tillsammans..forskning.visar.att.magnesium.ar.nodvandigt.for.d.vitaminaktivering.och.att.kombinationen....magnesium.d.vitamin.kombination">
         <span class="idx-card-title">Magnesium och D-vitamin — varför de fungerar bäst tillsammans</span>
         <span class="idx-card-desc">Magnesium och D-vitamin — varför de fungerar bäst tillsammans. Forskning visar att magnesium är nödvändigt för D-vitaminaktivering och att kombinationen...</span>
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/neolife-affarsmojlighet" class="idx-card" data-cat="vitaminer" data-search="hur.mycket.kan.du.faktiskt.spara.som.neolife.aterforsaljare?.se.exakt.hur.mycket.du.sparar.som.neolife.aterforsaljare..jamfor.priser,.rakna.pa.din.besparing,.och.fatta.ett.valgrundat.beslut.utan.hype.eller.inkomstansprak..neolife.affarsmojlighet">
-        <span class="idx-card-title">Hur mycket kan du faktiskt spara som NeoLife återförsäljare?</span>
-        <span class="idx-card-desc">Se exakt hur mycket du sparar som NeoLife återförsäljare. Jämför priser, räkna på din besparing, och fatta ett välgrundat beslut utan hype eller inkomstanspråk.</span>
+      <a href="/magnesium-komplett-guide" class="idx-card" data-cat="vitaminer" data-search="magnesium.—.komplett.guide:.former,.dosering,.fordelar.och.forskning.vad.ar.magnesium.och.varfor.behover.kroppen.det?.har.gar.vi.igenom.former,.dosering,.forskning.och.hur.du.valjer.ratt.magnesiumtillskott..magnesium.komplett.guide">
+        <span class="idx-card-badge star">&#9733; Portalguide</span>
+        <span class="idx-card-title">Magnesium — komplett guide: former, dosering, fördelar och forskning</span>
+        <span class="idx-card-desc">Vad är magnesium och varför behöver kroppen det? Här går vi igenom former, dosering, forskning och hur du väljer rätt magnesiumtillskott.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/magnesium-och-stress" class="idx-card" data-cat="vitaminer" data-search="magnesium.och.stress.—.kan.magnesium.minska.stress.och.angest?.magnesium.och.stress.—.forskningen.visar.att.magnesium.kan.paverka.stressresponsen.via.hpa.axeln,.kortisolreglering.och.gaba.systemet..har.ar.vad.studie....magnesium.och.stress">
+        <span class="idx-card-title">Magnesium och stress — kan magnesium minska stress och ångest?</span>
+        <span class="idx-card-desc">Magnesium och stress — forskningen visar att magnesium kan påverka stressresponsen via HPA-axeln, kortisolreglering och GABA-systemet. Här är vad studie...</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/magnesiumbrist-symptom-tester" class="idx-card" data-cat="vitaminer" data-search="magnesiumbrist.—.symptom.och.tester.—.hur.vet.du.om.du.har.brist?.magnesiumbrist.ger.symptom.som.muskelkramper,.trotthet,.angest.och.somnproblem..sa.vet.du.om.du.har.brist.—.fran.blodprov.till.rbc.test..magnesiumbrist.symptom.tester">
+        <span class="idx-card-title">Magnesiumbrist — symptom och tester — hur vet du om du har brist?</span>
+        <span class="idx-card-desc">Magnesiumbrist ger symptom som muskelkramper, trötthet, ångest och sömnproblem. Så vet du om du har brist — från blodprov till RBC-test.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/magnesiumformer-vilken-valja" class="idx-card" data-cat="vitaminer" data-search="magnesiumformer.—.vilken.ska.man.valja?.glycinat,.citrat,.malat.och.fler.vilken.magnesiumform.ska.du.valja?.glycinat,.citrat,.malat,.treonat.eller.oxid.—.sa.skiljer.de.sig.at.i.upptag,.effekt.och.pris.enligt.forskningen..magnesiumformer.vilken.valja">
+        <span class="idx-card-title">Magnesiumformer — vilken ska man välja? Glycinat, citrat, malat och fler</span>
+        <span class="idx-card-desc">Vilken magnesiumform ska du välja? Glycinat, citrat, malat, treonat eller oxid — så skiljer de sig åt i upptag, effekt och pris enligt forskningen.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/multivitamin-for-kvinnor" class="idx-card" data-cat="vitaminer" data-search="multivitamin.for.kvinnor.—.vad.behover.kvinnor.extra.av?.kvinnors.naringsbehov.skiljer.sig.fran.mans.pa.flera.punkter..har.gar.vi.igenom.jarn,.kalcium,.folat,.magnesium.och.d.vitamin.—.och.vad.en.bra.multivitamin.for.kvinnor.bor.innehalla..multivitamin.for.kvinnor">
+        <span class="idx-card-title">Multivitamin för kvinnor — vad behöver kvinnor extra av?</span>
+        <span class="idx-card-desc">Kvinnors näringsbehov skiljer sig från mäns på flera punkter. Här går vi igenom järn, kalcium, folat, magnesium och D-vitamin — och vad en bra multivitamin för kvinnor bör innehålla.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/multivitamin-for-man" class="idx-card" data-cat="vitaminer" data-search="multivitamin.for.man.—.vilka.vitaminer.behover.man?.man.har.specifika.naringsbehov:.magnesium,.zink,.d.vitamin.och.b.vitaminer..lar.dig.vilka.vitaminer.du.som.man.verkligen.behover.och.hur.du.undviker.nar....multivitamin.for.man">
+        <span class="idx-card-title">Multivitamin för män — vilka vitaminer behöver män?</span>
+        <span class="idx-card-desc">Män har specifika näringsbehov: magnesium, zink, D-vitamin och B-vitaminer. Lär dig vilka vitaminer du som man verkligen behöver och hur du undviker när...</span>
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -557,6 +335,12 @@
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
+      <a href="/neolife-affarsmojlighet" class="idx-card" data-cat="vitaminer" data-search="hur.mycket.kan.du.faktiskt.spara.som.neolife.aterforsaljare?.se.exakt.hur.mycket.du.sparar.som.neolife.aterforsaljare..jamfor.priser,.rakna.pa.din.besparing,.och.fatta.ett.valgrundat.beslut.utan.hype.eller.inkomstansprak..neolife.affarsmojlighet">
+        <span class="idx-card-title">Hur mycket kan du faktiskt spara som NeoLife återförsäljare?</span>
+        <span class="idx-card-desc">Se exakt hur mycket du sparar som NeoLife återförsäljare. Jämför priser, räkna på din besparing, och fatta ett välgrundat beslut utan hype eller inkomstanspråk.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
       <a href="/vitamin-d-komplett-guide" class="idx-card" data-cat="vitaminer" data-search="vitamin.d.—.komplett.guide:.allt.du.behover.veta.om.d.vitamin.vad.ar.vitamin.d.och.varfor.behover.kroppen.det?.komplett.guide.om.d.vitamin.—.dosering,.kallor,.brist,.forskning.och.hur.du.valjer.ratt.tillskott..vitamin.d.komplett.guide">
         <span class="idx-card-badge star">&#9733; Portalguide</span>
         <span class="idx-card-title">Vitamin D — komplett guide: allt du behöver veta om D-vitamin</span>
@@ -564,52 +348,34 @@
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/d-vitaminbrist-sverige" class="idx-card" data-cat="vitaminer" data-search="d.vitaminbrist.i.sverige.—.hur.vanligt.ar.det.och.vem.drabbas?.d.vitaminbrist.ar.vanligare.i.sverige.an.manga.tror..har.gar.vi.igenom.hur.utbredd.bristen.ar,.vilka.som.drabbas.och.vad.du.kan.gora.at.det..d.vitaminbrist.sverige">
-        <span class="idx-card-title">D-vitaminbrist i Sverige — hur vanligt är det och vem drabbas?</span>
-        <span class="idx-card-desc">D-vitaminbrist är vanligare i Sverige än många tror. Här går vi igenom hur utbredd bristen är, vilka som drabbas och vad du kan göra åt det.</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/multivitamin-for-man" class="idx-card" data-cat="vitaminer" data-search="multivitamin.for.man.—.vilka.vitaminer.behover.man?.man.har.specifika.naringsbehov:.magnesium,.zink,.d.vitamin.och.b.vitaminer..lar.dig.vilka.vitaminer.du.som.man.verkligen.behover.och.hur.du.undviker.nar....multivitamin.for.man">
-        <span class="idx-card-title">Multivitamin för män — vilka vitaminer behöver män?</span>
-        <span class="idx-card-desc">Män har specifika näringsbehov: magnesium, zink, D-vitamin och B-vitaminer. Lär dig vilka vitaminer du som man verkligen behöver och hur du undviker när...</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/multivitamin-for-kvinnor" class="idx-card" data-cat="vitaminer" data-search="multivitamin.for.kvinnor.—.vad.behover.kvinnor.extra.av?.kvinnors.naringsbehov.skiljer.sig.fran.mans.pa.flera.punkter..har.gar.vi.igenom.jarn,.kalcium,.folat,.magnesium.och.d.vitamin.—.och.vad.en.bra.multivitamin.for.kvinnor.bor.innehalla..multivitamin.for.kvinnor">
-        <span class="idx-card-title">Multivitamin för kvinnor — vad behöver kvinnor extra av?</span>
-        <span class="idx-card-desc">Kvinnors näringsbehov skiljer sig från mäns på flera punkter. Här går vi igenom järn, kalcium, folat, magnesium och D-vitamin — och vad en bra multivitamin för kvinnor bör innehålla.</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/d-vitamin-immunforsvaret" class="idx-card" data-cat="vitaminer" data-search="d.vitamin.for.immunforsvaret.—.vad.sager.forskningen?.d.vitamin.ar.avgorande.for.immunforsvaret..har.gar.vi.igenom.vad.forskningen.sager.om.d.vitaminets.roll,.dosering.for.immunitet.och.kopplingen.till.infektioner..d.vitamin.immunforsvaret">
-        <span class="idx-card-title">D-vitamin för immunförsvaret — vad säger forskningen?</span>
-        <span class="idx-card-desc">D-vitamin är avgörande för immunförsvaret. Här går vi igenom vad forskningen säger om D-vitaminets roll, dosering för immunitet och kopplingen till infektioner.</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/magnesiumformer-vilken-valja" class="idx-card" data-cat="vitaminer" data-search="magnesiumformer.—.vilken.ska.man.valja?.glycinat,.citrat,.malat.och.fler.vilken.magnesiumform.ska.du.valja?.glycinat,.citrat,.malat,.treonat.eller.oxid.—.sa.skiljer.de.sig.at.i.upptag,.effekt.och.pris.enligt.forskningen..magnesiumformer.vilken.valja">
-        <span class="idx-card-title">Magnesiumformer — vilken ska man välja? Glycinat, citrat, malat och fler</span>
-        <span class="idx-card-desc">Vilken magnesiumform ska du välja? Glycinat, citrat, malat, treonat eller oxid — så skiljer de sig åt i upptag, effekt och pris enligt forskningen.</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/billig-dyr-multivitamin" class="idx-card" data-cat="vitaminer" data-search="billig.vs.dyr.multivitamin.—.vad.far.du.for.pengarna?.en.detaljerad.jamforelse.mellan.billiga.och.dyra.multivitamin.—.ravarukvalitet,.biotillganglighet,.tillsatser.och.vad.priset.faktiskt.speglar..billig.dyr.multivitamin">
-        <span class="idx-card-title">Billig vs dyr multivitamin — vad får du för pengarna?</span>
-        <span class="idx-card-desc">En detaljerad jämförelse mellan billiga och dyra multivitamin — råvarukvalitet, biotillgänglighet, tillsatser och vad priset faktiskt speglar.</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/magnesium-och-stress" class="idx-card" data-cat="vitaminer" data-search="magnesium.och.stress.—.kan.magnesium.minska.stress.och.angest?.magnesium.och.stress.—.forskningen.visar.att.magnesium.kan.paverka.stressresponsen.via.hpa.axeln,.kortisolreglering.och.gaba.systemet..har.ar.vad.studie....magnesium.och.stress">
-        <span class="idx-card-title">Magnesium och stress — kan magnesium minska stress och ångest?</span>
-        <span class="idx-card-desc">Magnesium och stress — forskningen visar att magnesium kan påverka stressresponsen via HPA-axeln, kortisolreglering och GABA-systemet. Här är vad studie...</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
       <a href="/vad-ar-vitamin-b12" class="idx-card" data-cat="vitaminer" data-search="vad.ar.vitamin.b12.—.och.varfor.racker.inte.alltid.kosten?.vitamin.b12.(kobalamin).behovs.for.nervsystemet.och.roda.blodkroppar..men.kroppen.kan.ibland.inte.ta.upp.det..las.om.absorptionsmekanismen,.riskgrupper.och.b12.former..vad.ar.vitamin.b12">
         <span class="idx-card-title">Vad är vitamin B12 — och varför räcker inte alltid kosten?</span>
         <span class="idx-card-desc">Vitamin B12 (kobalamin) behövs för nervsystemet och röda blodkroppar. Men kroppen kan ibland inte ta upp det. Läs om absorptionsmekanismen, riskgrupper och B12-former.</span>
         <div class="idx-card-meta"><span>28 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/c-vitamin-tillskott-vs-serum-huden" class="idx-card" data-cat="vitaminer" data-search="c.vitamin.tillskott.vs.serum.for.huden.–.vad.sager.forskningen?.c.vitamintillskott.eller.c.vitaminserum.—.vad.gor.egentligen.mest.for.huden?.har.ar.vad.kontrollerade.studier.och.oberoende.forskning.visar..c.vitamin.tillskott.vs.serum.huden">
+        <span class="idx-card-title">C-vitamin tillskott vs serum för huden – vad säger forskningen?</span>
+        <span class="idx-card-desc">C-vitamintillskott eller C-vitaminserum — vad gör egentligen mest för huden? Här är vad kontrollerade studier och oberoende forskning visar.</span>
+        <div class="idx-card-meta"><span>22 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/lutein-zeaxantin-huden" class="idx-card" data-cat="vitaminer" data-search="lutein.och.zeaxantin.for.huden.–.utover.ogonen.lutein.och.zeaxantin.ar.mest.kanda.for.ogonhalsa..har.ar.vad.kontrollerade.kliniska.studier.visar.om.effekten.pa.hud,.fuktbalans.och.uv.skydd..lutein.zeaxantin.huden">
+        <span class="idx-card-title">Lutein och zeaxantin för huden – utöver ögonen</span>
+        <span class="idx-card-desc">Lutein och zeaxantin är mest kända för ögonhälsa. Här är vad kontrollerade kliniska studier visar om effekten på hud, fuktbalans och UV-skydd.</span>
+        <div class="idx-card-meta"><span>22 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/vilken-magnesiumform-ar-bast" class="idx-card" data-cat="vitaminer" data-search="vilken.magnesiumform.ar.bast.—.och.spelar.det.nagon.roll?.vilken.magnesiumform.ar.bast?.citrat.och.glycinat.har.hogre.biotillganglighet.an.oxid.enligt.forskning.—.sa.valjer.du.ratt.form.for.ditt.syfte..vilken.magnesiumform.ar.bast">
+        <span class="idx-card-title">Vilken magnesiumform är bäst — och spelar det någon roll?</span>
+        <span class="idx-card-desc">Vilken magnesiumform är bäst? Citrat och glycinat har högre biotillgänglighet än oxid enligt forskning — så väljer du rätt form för ditt syfte.</span>
+        <div class="idx-card-meta"><span>21 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/nya-kostrad-65-plus-d-vitamin-magnesium" class="idx-card" data-cat="vitaminer" data-search="livsmedelsverkets.nya.kostrad.for.65+:.d.vitamin,.protein.och.den.bortglomda.magnesiumkopplingen.livsmedelsverkets.nya.kostrad.for.65+.lyfter.d.vitamin.och.protein.—.men.vad.har.det.att.gora.med.magnesium?.har.ar.sambandet.ingen.namner..nya.kostrad.65.plus.d.vitamin.magnesium">
+        <span class="idx-card-title">Livsmedelsverkets nya kostråd för 65+: D-vitamin, protein och den bortglömda magnesiumkopplingen</span>
+        <span class="idx-card-desc">Livsmedelsverkets nya kostråd för 65+ lyfter D-vitamin och protein — men vad har det att göra med magnesium? Här är sambandet ingen nämner.</span>
+        <div class="idx-card-meta"><span>20 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/varfor-tar-d-vitamin-slut-pa-ditt-magnesium" class="idx-card" data-cat="vitaminer" data-search="varfor.tar.d.vitamin.slut.pa.ditt.magnesium?.varfor.tar.d.vitamin.slut.pa.magnesium?.hog.dos.d.vitamin.aktiveras.via.enzymsteg.som.kraver.magnesium.—.sa.funkar.sambandet.och.vad.du.kan.gora..varfor.tar.d.vitamin.slut.pa.ditt.magnesium">
@@ -624,15 +390,15 @@
         <div class="idx-card-meta"><span>17 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/multivitamin-kvinnor-over-40" class="idx-card" data-cat="vitaminer" data-search="multivitamin.for.kvinnor.over.40.–.vad.behover.kroppen.och.vad.sager.forskningen?.evidensbaserad.genomgang.av.vilka.vitaminer.och.mineraler.som.forandras.for.kvinnor.efter.40,.vad.kliniska.studier.visar.och.hur.du.valjer.ett.multivitamin.anpassat.for.dina.behov..multivitamin.kvinnor.over.40">
-        <span class="idx-card-title">Multivitamin för kvinnor över 40 – vad behöver kroppen och vad säger forskningen?</span>
-        <span class="idx-card-desc">Evidensbaserad genomgång av vilka vitaminer och mineraler som förändras för kvinnor efter 40, vad kliniska studier visar och hur du väljer ett multivitamin anpassat för dina behov.</span>
-        <div class="idx-card-meta"><span>16 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
       <a href="/karotenoid-tillskott-vs-mat" class="idx-card" data-cat="vitaminer" data-search="karotenoider.fran.mat.eller.tillskott.—.spelar.kallan.roll?.syntetiskt.betakaroten.och.helfodskarotenoider.beter.sig.olika..caret.visade.okad.cancerrisk.hos.rokare.vid.megadoser..vi.undersoker.forskningen..karotenoid.tillskott.vs.mat">
         <span class="idx-card-title">Karotenoider från mat eller tillskott — spelar källan roll?</span>
         <span class="idx-card-desc">Syntetiskt betakaroten och helfodskarotenoider beter sig olika. CARET visade ökad cancerrisk hos rökare vid megadoser. Vi undersöker forskningen.</span>
+        <div class="idx-card-meta"><span>16 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/multivitamin-kvinnor-over-40" class="idx-card" data-cat="vitaminer" data-search="multivitamin.for.kvinnor.over.40.–.vad.behover.kroppen.och.vad.sager.forskningen?.evidensbaserad.genomgang.av.vilka.vitaminer.och.mineraler.som.forandras.for.kvinnor.efter.40,.vad.kliniska.studier.visar.och.hur.du.valjer.ett.multivitamin.anpassat.for.dina.behov..multivitamin.kvinnor.over.40">
+        <span class="idx-card-title">Multivitamin för kvinnor över 40 – vad behöver kroppen och vad säger forskningen?</span>
+        <span class="idx-card-desc">Evidensbaserad genomgång av vilka vitaminer och mineraler som förändras för kvinnor efter 40, vad kliniska studier visar och hur du väljer ett multivitamin anpassat för dina behov.</span>
         <div class="idx-card-meta"><span>16 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -642,57 +408,9 @@
         <div class="idx-card-meta"><span>16 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/neolife-vita-squares" class="idx-card" data-cat="vitaminer" data-search="vad.behover.barn.for.daglig.naring.—.och.vad.saknas.ofta?.barns.naringsbehov.skiljer.sig.fran.vuxnas..vi.undersoker.vitaminer.och.mineraler.som.vanligast.saknas.hos.svenska.barn.och.vad.livsmedelsverket.rekommenderar..neolife.vita.squares">
-        <span class="idx-card-title">Vad behöver barn för daglig näring — och vad saknas ofta?</span>
-        <span class="idx-card-desc">Barns näringsbehov skiljer sig från vuxnas. Vi undersöker vitaminer och mineraler som vanligast saknas hos svenska barn och vad Livsmedelsverket rekommenderar.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/neolife-coq10" class="idx-card" data-cat="vitaminer" data-search="vad.ar.coq10.—.och.varfor.minskar.det.med.aldern?.koenzym.q10.ar.en.nyckelkomponent.i.cellernas.energiproduktion..vi.undersoker.vad.forskningen.sager.om.coq10,.aldrande,.statiner.och.kardiovaskular.halsa..neolife.coq10">
-        <span class="idx-card-title">Vad är CoQ10 — och varför minskar det med åldern?</span>
-        <span class="idx-card-desc">Koenzym Q10 är en nyckelkomponent i cellernas energiproduktion. Vi undersöker vad forskningen säger om CoQ10, åldrande, statiner och kardiovaskulär hälsa.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/neolife-magnesium-complex" class="idx-card" data-cat="vitaminer" data-search="vad.ar.magnesium.—.och.varfor.racker.inte.kosten.for.alla?.magnesium.deltar.i.300+.enzymatiska.reaktioner..vi.undersoker.varfor.brist.ar.vanligt.i.sverige,.vad.forskningen.sager.om.olika.mineralformer.och.hur.du.identifierar.gap..neolife.magnesium.complex">
-        <span class="idx-card-title">Vad är magnesium — och varför räcker inte kosten för alla?</span>
-        <span class="idx-card-desc">Magnesium deltar i 300+ enzymatiska reaktioner. Vi undersöker varför brist är vanligt i Sverige, vad forskningen säger om olika mineralformer och hur du identifierar gap.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/neolife-upbeet" class="idx-card" data-cat="vitaminer" data-search="vad.ar.nitrater.fran.rodbeta.—.och.vad.sager.forskningen?.rodbeta.ar.rik.pa.oorganiska.nitrater.som.kroppen.omvandlar.till.kvaveoxid..vi.undersoker.vad.forskningen.sager.om.blodtryck,.uthallighet.och.nitrat.no.vagen..neolife.upbeet">
-        <span class="idx-card-title">Vad är nitrater från rödbeta — och vad säger forskningen?</span>
-        <span class="idx-card-desc">Rödbeta är rik på oorganiska nitrater som kroppen omvandlar till kväveoxid. Vi undersöker vad forskningen säger om blodtryck, uthållighet och nitrat-NO-vägen.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/neolife-garlic-allium-complex" class="idx-card" data-cat="vitaminer" data-search="vad.ar.allicin.—.och.vad.sager.forskningen.om.vitlok?.vitlok.innehaller.alliin.som.omvandlas.till.allicin.vid.krossning..vi.undersoker.vad.forskningen.sager.om.vitloks.bioaktiva.foreningar.och.kardiovaskular.halsa..neolife.garlic.allium.complex">
-        <span class="idx-card-title">Vad är allicin — och vad säger forskningen om vitlök?</span>
-        <span class="idx-card-desc">Vitlök innehåller alliin som omvandlas till allicin vid krossning. Vi undersöker vad forskningen säger om vitlöks bioaktiva föreningar och kardiovaskulär hälsa.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/neolife-cruciferous-plus" class="idx-card" data-cat="vitaminer" data-search="vad.ar.glukosinolater.—.och.varfor.lyfts.korsblommiga.gronsaker?.broccoli.och.kal.innehaller.glukosinolater.som.omvandlas.till.sulforafan.via.myrosinas..vi.undersoker.vad.forskningen.sager.om.dessa.unika.fytonutrienter..neolife.cruciferous.plus">
-        <span class="idx-card-title">Vad är glukosinolater — och varför lyfts korsblommiga grönsaker?</span>
-        <span class="idx-card-desc">Broccoli och kål innehåller glukosinolater som omvandlas till sulforafan via myrosinas. Vi undersöker vad forskningen säger om dessa unika fytonutrienter.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/neolife-formula-iv" class="idx-card" data-cat="vitaminer" data-search="vad.ska.ett.multivitamin.egentligen.innehalla?.alla.multivitaminer.ser.inte.likadana.ut..vi.undersoker.vad.forskningen.sager.om.helfodskallor,.chelat.mineraler.och.syntetiska.isolat.—.och.vad.som.faktiskt.absorberas..neolife.formula.iv">
-        <span class="idx-card-title">Vad ska ett multivitamin egentligen innehålla?</span>
-        <span class="idx-card-desc">Alla multivitaminer ser inte likadana ut. Vi undersöker vad forskningen säger om helfodskällor, chelat-mineraler och syntetiska isolat — och vad som faktiskt absorberas.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/neolife-chelated-zinc" class="idx-card" data-cat="vitaminer" data-search="vad.ar.zink.—.och.varfor.spelar.chelatformen.roll?.zink.deltar.i.300+.enzymer.och.ar.kritiskt.for.immunsystemet..vi.undersoker.varfor.chelatformen.absorberas.battre.och.vad.forskningen.sager.om.zinkstatus..neolife.chelated.zinc">
-        <span class="idx-card-title">Vad är zink — och varför spelar chelatformen roll?</span>
-        <span class="idx-card-desc">Zink deltar i 300+ enzymer och är kritiskt för immunsystemet. Vi undersöker varför chelatformen absorberas bättre och vad forskningen säger om zinkstatus.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/neolife-kalmag-plus-d" class="idx-card" data-cat="vitaminer" data-search="kalcium,.magnesium.och.d.vitamin.—.varfor.kombineras.de?.kalcium,.magnesium.och.d.vitamin.samverkar.tatt..vi.undersoker.varfor.de.kombineras,.vad.forskningen.sager.om.benhalsa.och.vilken.roll.varje.mineral.spelar..neolife.kalmag.plus.d">
-        <span class="idx-card-title">Kalcium, magnesium och D-vitamin — varför kombineras de?</span>
-        <span class="idx-card-desc">Kalcium, magnesium och D-vitamin samverkar tätt. Vi undersöker varför de kombineras, vad forskningen säger om benhälsa och vilken roll varje mineral spelar.</span>
+      <a href="/neolife-all-c" class="idx-card" data-cat="vitaminer" data-search="vad.ar.c.vitamin.—.och.hur.mycket.behover.man?.c.vitamin.ar.vattenlosligt.och.maste.fyllas.pa.dagligen..vi.undersoker.efsa,.optimala.doser.och.bioflavonoidsynergi.baserat.pa.forskning..neolife.all.c">
+        <span class="idx-card-title">Vad är C-vitamin — och hur mycket behöver man?</span>
+        <span class="idx-card-desc">C-vitamin är vattenlösligt och måste fyllas på dagligen. Vi undersöker EFSA, optimala doser och bioflavonoidsynergi baserat på forskning.</span>
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -702,21 +420,21 @@
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/neolife-resp-x" class="idx-card" data-cat="vitaminer" data-search="vad.stodjer.andningsvagars.funktion.—.och.vad.sager.forskningen?.andningsvagars.immunforsvar.beror.pa.flera.faktorer..vi.undersoker.c.vitamin,.zink,.alderbar.och.fytonutrienter.for.luftvagshalsa.baserat.pa.forskning..neolife.resp.x">
-        <span class="idx-card-title">Vad stödjer andningsvägars funktion — och vad säger forskningen?</span>
-        <span class="idx-card-desc">Andningsvägars immunförsvar beror på flera faktorer. Vi undersöker C-vitamin, zink, älderbär och fytonutrienter för luftvägshälsa baserat på forskning.</span>
+      <a href="/neolife-chelated-zinc" class="idx-card" data-cat="vitaminer" data-search="vad.ar.zink.—.och.varfor.spelar.chelatformen.roll?.zink.deltar.i.300+.enzymer.och.ar.kritiskt.for.immunsystemet..vi.undersoker.varfor.chelatformen.absorberas.battre.och.vad.forskningen.sager.om.zinkstatus..neolife.chelated.zinc">
+        <span class="idx-card-title">Vad är zink — och varför spelar chelatformen roll?</span>
+        <span class="idx-card-desc">Zink deltar i 300+ enzymer och är kritiskt för immunsystemet. Vi undersöker varför chelatformen absorberas bättre och vad forskningen säger om zinkstatus.</span>
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/neolife-all-c" class="idx-card" data-cat="vitaminer" data-search="vad.ar.c.vitamin.—.och.hur.mycket.behover.man?.c.vitamin.ar.vattenlosligt.och.maste.fyllas.pa.dagligen..vi.undersoker.efsa,.optimala.doser.och.bioflavonoidsynergi.baserat.pa.forskning..neolife.all.c">
-        <span class="idx-card-title">Vad är C-vitamin — och hur mycket behöver man?</span>
-        <span class="idx-card-desc">C-vitamin är vattenlösligt och måste fyllas på dagligen. Vi undersöker EFSA, optimala doser och bioflavonoidsynergi baserat på forskning.</span>
+      <a href="/neolife-coq10" class="idx-card" data-cat="vitaminer" data-search="vad.ar.coq10.—.och.varfor.minskar.det.med.aldern?.koenzym.q10.ar.en.nyckelkomponent.i.cellernas.energiproduktion..vi.undersoker.vad.forskningen.sager.om.coq10,.aldrande,.statiner.och.kardiovaskular.halsa..neolife.coq10">
+        <span class="idx-card-title">Vad är CoQ10 — och varför minskar det med åldern?</span>
+        <span class="idx-card-desc">Koenzym Q10 är en nyckelkomponent i cellernas energiproduktion. Vi undersöker vad forskningen säger om CoQ10, åldrande, statiner och kardiovaskulär hälsa.</span>
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/neolife-vitamin-e" class="idx-card" data-cat="vitaminer" data-search="vad.ar.e.vitamin.—.naturlig.vs.syntetisk.form?.e.vitamin.skyddar.cellmembranets.fettsyror..vi.undersoker.d.alfa.vs.dl.alfa.tokoferol.och.vad.forskningen.sager.om.form.och.retention..neolife.vitamin.e">
-        <span class="idx-card-title">Vad är E-vitamin — naturlig vs syntetisk form?</span>
-        <span class="idx-card-desc">E-vitamin skyddar cellmembranets fettsyror. Vi undersöker d-alfa vs dl-alfa-tokoferol och vad forskningen säger om form och retention.</span>
+      <a href="/neolife-cruciferous-plus" class="idx-card" data-cat="vitaminer" data-search="vad.ar.glukosinolater.—.och.varfor.lyfts.korsblommiga.gronsaker?.broccoli.och.kal.innehaller.glukosinolater.som.omvandlas.till.sulforafan.via.myrosinas..vi.undersoker.vad.forskningen.sager.om.dessa.unika.fytonutrienter..neolife.cruciferous.plus">
+        <span class="idx-card-title">Vad är glukosinolater — och varför lyfts korsblommiga grönsaker?</span>
+        <span class="idx-card-desc">Broccoli och kål innehåller glukosinolater som omvandlas till sulforafan via myrosinas. Vi undersöker vad forskningen säger om dessa unika fytonutrienter.</span>
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -726,16 +444,58 @@
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
+      <a href="/neolife-formula-iv" class="idx-card" data-cat="vitaminer" data-search="vad.ska.ett.multivitamin.egentligen.innehalla?.alla.multivitaminer.ser.inte.likadana.ut..vi.undersoker.vad.forskningen.sager.om.helfodskallor,.chelat.mineraler.och.syntetiska.isolat.—.och.vad.som.faktiskt.absorberas..neolife.formula.iv">
+        <span class="idx-card-title">Vad ska ett multivitamin egentligen innehålla?</span>
+        <span class="idx-card-desc">Alla multivitaminer ser inte likadana ut. Vi undersöker vad forskningen säger om helfodskällor, chelat-mineraler och syntetiska isolat — och vad som faktiskt absorberas.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/neolife-garlic-allium-complex" class="idx-card" data-cat="vitaminer" data-search="vad.ar.allicin.—.och.vad.sager.forskningen.om.vitlok?.vitlok.innehaller.alliin.som.omvandlas.till.allicin.vid.krossning..vi.undersoker.vad.forskningen.sager.om.vitloks.bioaktiva.foreningar.och.kardiovaskular.halsa..neolife.garlic.allium.complex">
+        <span class="idx-card-title">Vad är allicin — och vad säger forskningen om vitlök?</span>
+        <span class="idx-card-desc">Vitlök innehåller alliin som omvandlas till allicin vid krossning. Vi undersöker vad forskningen säger om vitlöks bioaktiva föreningar och kardiovaskulär hälsa.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/neolife-kalmag-plus-d" class="idx-card" data-cat="vitaminer" data-search="kalcium,.magnesium.och.d.vitamin.—.varfor.kombineras.de?.kalcium,.magnesium.och.d.vitamin.samverkar.tatt..vi.undersoker.varfor.de.kombineras,.vad.forskningen.sager.om.benhalsa.och.vilken.roll.varje.mineral.spelar..neolife.kalmag.plus.d">
+        <span class="idx-card-title">Kalcium, magnesium och D-vitamin — varför kombineras de?</span>
+        <span class="idx-card-desc">Kalcium, magnesium och D-vitamin samverkar tätt. Vi undersöker varför de kombineras, vad forskningen säger om benhälsa och vilken roll varje mineral spelar.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/neolife-magnesium-complex" class="idx-card" data-cat="vitaminer" data-search="vad.ar.magnesium.—.och.varfor.racker.inte.kosten.for.alla?.magnesium.deltar.i.300+.enzymatiska.reaktioner..vi.undersoker.varfor.brist.ar.vanligt.i.sverige,.vad.forskningen.sager.om.olika.mineralformer.och.hur.du.identifierar.gap..neolife.magnesium.complex">
+        <span class="idx-card-title">Vad är magnesium — och varför räcker inte kosten för alla?</span>
+        <span class="idx-card-desc">Magnesium deltar i 300+ enzymatiska reaktioner. Vi undersöker varför brist är vanligt i Sverige, vad forskningen säger om olika mineralformer och hur du identifierar gap.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/neolife-resp-x" class="idx-card" data-cat="vitaminer" data-search="vad.stodjer.andningsvagars.funktion.—.och.vad.sager.forskningen?.andningsvagars.immunforsvar.beror.pa.flera.faktorer..vi.undersoker.c.vitamin,.zink,.alderbar.och.fytonutrienter.for.luftvagshalsa.baserat.pa.forskning..neolife.resp.x">
+        <span class="idx-card-title">Vad stödjer andningsvägars funktion — och vad säger forskningen?</span>
+        <span class="idx-card-desc">Andningsvägars immunförsvar beror på flera faktorer. Vi undersöker C-vitamin, zink, älderbär och fytonutrienter för luftvägshälsa baserat på forskning.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/neolife-upbeet" class="idx-card" data-cat="vitaminer" data-search="vad.ar.nitrater.fran.rodbeta.—.och.vad.sager.forskningen?.rodbeta.ar.rik.pa.oorganiska.nitrater.som.kroppen.omvandlar.till.kvaveoxid..vi.undersoker.vad.forskningen.sager.om.blodtryck,.uthallighet.och.nitrat.no.vagen..neolife.upbeet">
+        <span class="idx-card-title">Vad är nitrater från rödbeta — och vad säger forskningen?</span>
+        <span class="idx-card-desc">Rödbeta är rik på oorganiska nitrater som kroppen omvandlar till kväveoxid. Vi undersöker vad forskningen säger om blodtryck, uthållighet och nitrat-NO-vägen.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/neolife-vita-squares" class="idx-card" data-cat="vitaminer" data-search="vad.behover.barn.for.daglig.naring.—.och.vad.saknas.ofta?.barns.naringsbehov.skiljer.sig.fran.vuxnas..vi.undersoker.vitaminer.och.mineraler.som.vanligast.saknas.hos.svenska.barn.och.vad.livsmedelsverket.rekommenderar..neolife.vita.squares">
+        <span class="idx-card-title">Vad behöver barn för daglig näring — och vad saknas ofta?</span>
+        <span class="idx-card-desc">Barns näringsbehov skiljer sig från vuxnas. Vi undersöker vitaminer och mineraler som vanligast saknas hos svenska barn och vad Livsmedelsverket rekommenderar.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
       <a href="/neolife-vitamin-d" class="idx-card" data-cat="vitaminer" data-search="vad.ar.d.vitamin.—.och.vem.riskerar.brist.i.sverige?.d.vitamin.produceras.av.solljus.—.men.sverige.ligger.pa.56–69°n..vad.sager.forskningen.om.d.vitaminstatus,.riskgrupper.och.optimala.nivaer?.vi.undersoker.evidensen..neolife.vitamin.d">
         <span class="idx-card-title">Vad är D-vitamin — och vem riskerar brist i Sverige?</span>
         <span class="idx-card-desc">D-vitamin produceras av solljus — men Sverige ligger på 56–69°N. Vad säger forskningen om D-vitaminstatus, riskgrupper och optimala nivåer? Vi undersöker evidensen.</span>
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/neolife-tre-en-en-cellnaring" class="idx-card" data-cat="vitaminer" data-search="vad.ar.spannmalslipider.—.och.varfor.spelar.de.roll.for.cellerna?.spannmalslipider.och.fytosteroler.fran.fullkorn.stodjer.cellmembranets.funktion..vi.undersoker.vad.forskningen.faktiskt.sager.om.dessa.amnen.och.varifran.de.kommer..neolife.tre.en.en.cellnaring">
-        <span class="idx-card-title">Vad är spannmålslipider — och varför spelar de roll för cellerna?</span>
-        <span class="idx-card-desc">Spannmålslipider och fytosteroler från fullkorn stödjer cellmembranets funktion. Vi undersöker vad forskningen faktiskt säger om dessa ämnen och varifrån de kommer.</span>
-        <div class="idx-card-meta"><span>14 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/neolife-vitamin-e" class="idx-card" data-cat="vitaminer" data-search="vad.ar.e.vitamin.—.naturlig.vs.syntetisk.form?.e.vitamin.skyddar.cellmembranets.fettsyror..vi.undersoker.d.alfa.vs.dl.alfa.tokoferol.och.vad.forskningen.sager.om.form.och.retention..neolife.vitamin.e">
+        <span class="idx-card-title">Vad är E-vitamin — naturlig vs syntetisk form?</span>
+        <span class="idx-card-desc">E-vitamin skyddar cellmembranets fettsyror. Vi undersöker d-alfa vs dl-alfa-tokoferol och vad forskningen säger om form och retention.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/neolife-carotenoid-complex" class="idx-card" data-cat="vitaminer" data-search="vad.ar.karotenoider.–.och.varfor.spelar.kallan.roll?.karotenoider.finns.i.tomater,.morotter.och.spenat.–.men.hur.mycket.nar.kroppen.egentligen?.vi.undersoker.vad.forskningen.sager.om.biotillganglighet,.immunforsvar.och.helfodsbaserade.tillskott..neolife.carotenoid.complex">
@@ -744,9 +504,9 @@
         <div class="idx-card-meta"><span>14 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/fytosteroler-cellmembran" class="idx-card" data-cat="vitaminer" data-search="vad.ar.fytosteroler?.cellmembran,.kolesterol.och.evidens.fytosteroler.ar.vaxtbaserade.steroler.som.liknar.kolesterol.strukturellt..vad.gor.de.i.cellmembranet,.hur.paverkar.de.ldl.kolesterol,.och.vad.sager.evidensen?.fytosteroler.cellmembran">
-        <span class="idx-card-title">Vad är fytosteroler? Cellmembran, kolesterol och evidens</span>
-        <span class="idx-card-desc">Fytosteroler är växtbaserade steroler som liknar kolesterol strukturellt. Vad gör de i cellmembranet, hur påverkar de LDL-kolesterol, och vad säger evidensen?</span>
+      <a href="/neolife-tre-en-en-cellnaring" class="idx-card" data-cat="vitaminer" data-search="vad.ar.spannmalslipider.—.och.varfor.spelar.de.roll.for.cellerna?.spannmalslipider.och.fytosteroler.fran.fullkorn.stodjer.cellmembranets.funktion..vi.undersoker.vad.forskningen.faktiskt.sager.om.dessa.amnen.och.varifran.de.kommer..neolife.tre.en.en.cellnaring">
+        <span class="idx-card-title">Vad är spannmålslipider — och varför spelar de roll för cellerna?</span>
+        <span class="idx-card-desc">Spannmålslipider och fytosteroler från fullkorn stödjer cellmembranets funktion. Vi undersöker vad forskningen faktiskt säger om dessa ämnen och varifrån de kommer.</span>
         <div class="idx-card-meta"><span>14 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -756,10 +516,46 @@
         <div class="idx-card-meta"><span>14 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
+      <a href="/ar-dyra-kosttillskott-verkligen-battre" class="idx-card" data-cat="vitaminer" data-search="ar.dyra.kosttillskott.verkligen.battre.an.billiga.alternativ?.en.genomgang.av.de.faktorer.som.faktiskt.avgor.ett.kosttillskotts.kvalitet.—.och.varfor.pris.ensamt.sallan.berattar.hela.historien..ar.dyra.kosttillskott.verkligen.battre">
+        <span class="idx-card-title">Är dyra kosttillskott verkligen bättre än billiga alternativ?</span>
+        <span class="idx-card-desc">En genomgång av de faktorer som faktiskt avgör ett kosttillskotts kvalitet — och varför pris ensamt sällan berättar hela historien.</span>
+        <div class="idx-card-meta"><span>10 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
       <a href="/levnytt-principer" class="idx-card" data-cat="vitaminer" data-search="levnytt.principer.–.de.fem.redaktionella.principerna.|.levnytt.de.fem.principerna.som.styr.allt.levnytt.publicerar,.med.konkreta.exempel.pa.vad.de.innebar.i.praktiken..levnytt.principer">
         <span class="idx-card-title">LevNytt Principer – De fem redaktionella principerna | LevNytt</span>
         <span class="idx-card-desc">De fem principerna som styr allt LevNytt publicerar, med konkreta exempel på vad de innebär i praktiken.</span>
         <div class="idx-card-meta"><span>9 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/var-metod" class="idx-card" data-cat="vitaminer" data-search="var.metod.–.hur.levnytt.granskar.information.|.levnytt.hur.levnytt.utvarderar.kallor,.tolkar.forskning.och.hanterar.kommersiella.relationer..var.metod">
+        <span class="idx-card-title">Vår metod – Hur LevNytt granskar information | LevNytt</span>
+        <span class="idx-card-desc">Hur LevNytt utvärderar källor, tolkar forskning och hanterar kommersiella relationer.</span>
+        <div class="idx-card-meta"><span>9 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/forsknings-faq" class="idx-card" data-cat="vitaminer" data-search="forsknings.faq.–.vad.betyder.vetenskapliga.begrepp?.|.levnytt.enkel.forklaring.av.vanliga.forskningsbegrepp.for.lasare.utan.vetenskaplig.bakgrund..forsknings.faq">
+        <span class="idx-card-title">Forsknings-FAQ – Vad betyder vetenskapliga begrepp? | LevNytt</span>
+        <span class="idx-card-desc">Enkel förklaring av vanliga forskningsbegrepp för läsare utan vetenskaplig bakgrund.</span>
+        <div class="idx-card-meta"><span>9 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/finns-det-billigare-alternativ" class="idx-card" data-cat="vitaminer" data-search="finns.det.billigare.alternativ?.ett.lagt.inkopspris.ar.inte.alltid.samma.sak.som.lag.kostnad.per.anvandning..rakna.ut.ditt.verkliga.pris.och.se.nar.ett.medlemskap.lonar.sig..finns.det.billigare.alternativ">
+        <span class="idx-card-title">Finns det billigare alternativ?</span>
+        <span class="idx-card-desc">Ett lågt inköpspris är inte alltid samma sak som låg kostnad per användning. Räkna ut ditt verkliga pris och se när ett medlemskap lönar sig.</span>
+        <div class="idx-card-meta"><span>8 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/cellmembran-funktion" class="idx-card" data-cat="vitaminer" data-search="cellmembran.funktion.–.vad.gor.cellmembranet.och.varfor.spelar.det.roll?.vad.gor.cellmembranet.egentligen?.lar.dig.om.fosfolipider,.transport,.signalering.och.varfor.membranets.sammansattning.spelar.roll.for.cellens.funktion.–.pa.enkel.svenska..cellmembran.funktion">
+        <span class="idx-card-title">Cellmembran funktion – vad gör cellmembranet och varför spelar det roll?</span>
+        <span class="idx-card-desc">Vad gör cellmembranet egentligen? Lär dig om fosfolipider, transport, signalering och varför membranets sammansättning spelar roll för cellens funktion – på enkel svenska.</span>
+        <div class="idx-card-meta"><span>8 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/vad-ar-vaxtsteroler" class="idx-card" data-cat="vitaminer" data-search="vad.ar.vaxtsteroler?.funktion,.kallor.och.skillnaden.mot.kolesterol.vad.ar.vaxtsteroler?.lar.dig.vad.fytosteroler.ar,.hur.de.fungerar.i.vaxtceller,.hur.de.skiljer.sig.fran.kolesterol.och.varfor.de.diskuteras.i.naringsforskning..vad.ar.vaxtsteroler">
+        <span class="idx-card-title">Vad är växtsteroler? Funktion, källor och skillnaden mot kolesterol</span>
+        <span class="idx-card-desc">Vad är växtsteroler? Lär dig vad fytosteroler är, hur de fungerar i växtceller, hur de skiljer sig från kolesterol och varför de diskuteras i näringsforskning.</span>
+        <div class="idx-card-meta"><span>8 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/den-fundersamma-mannen" class="idx-card" data-cat="vitaminer" data-search="den.fundersamma.mannen.–.berattelsen.bakom.levnytt.den.fundersamma.mannen.ar.berattelsen.bakom.levnytt.—.om.finland,.lastbilsaren,.nykterhet.sedan.2020.och.varfor.fakta.alltid.kommer.fore.hype..den.fundersamma.mannen">
@@ -768,21 +564,33 @@
         <div class="idx-card-meta"><span>7 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
+      <a href="/neolife-sustained-vitamin-c" class="idx-card" data-cat="vitaminer" data-search="neolife.sustained.release.vitamin.c.—.fordrojd.frisattning.6–8.timmar.|.levnytt.se.c.vitamin.med.fordrojd.frisattning.under.6–8.timmar..citrusbioflavonoider,.nypon.och.acerola..kod.551..neolife.sustained.vitamin.c">
+        <span class="idx-card-title">NeoLife Sustained Release Vitamin C — Fördröjd frisättning 6–8 timmar | LevNytt.se</span>
+        <span class="idx-card-desc">C-vitamin med fördröjd frisättning under 6–8 timmar. Citrusbioflavonoider, nypon och acerola. Kod 551.</span>
+        <div class="idx-card-meta"><span>17 maj 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
       <a href="/neolife-elevate" class="idx-card" data-cat="vitaminer" data-search="neolife.elevate.—.energi.och.fokus.via.hjarnkemi.neolife.elevate.ar.en.energidryck.med.200.mg.suntheanine,.120.mg.naturligt.koffein.fran.gront.te,.b.vitaminer.och.elektrolytmineraler..minskad.trotthet,.normal.energiomsattning..neolife.elevate">
         <span class="idx-card-title">NeoLife Elevate — energi och fokus via hjärnkemi</span>
         <span class="idx-card-desc">NeoLife Elevate är en energidryck med 200 mg Suntheanine, 120 mg naturligt koffein från grönt te, B-vitaminer och elektrolytmineraler. Minskad trötthet, normal energiomsättning.</span>
         <div class="idx-card-meta"><span>16 maj 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/neolife-vetenskap" class="idx-card" data-cat="vitaminer" data-search="neolife.vetenskapliga.radet:.oberoende.vetenskap.sedan.1976.neolife.scientific.advisory.board.grundat.1976.av.dr..arthur.furst..tre.standarder:.renhet,.styrka,.bevis..peer.reviewed.publikationer.i.ajcn,.faseb.journal.och.jacn..neolife.vetenskap">
-        <span class="idx-card-title">NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976</span>
-        <span class="idx-card-desc">NeoLife Scientific Advisory Board grundat 1976 av Dr. Arthur Furst. Tre standarder: Renhet, Styrka, Bevis. Peer-reviewed publikationer i AJCN, FASEB Journal och JACN.</span>
+      <a href="/fytosteroler-cellmembran" class="idx-card" data-cat="vitaminer" data-search="vad.ar.fytosteroler?.cellmembran,.kolesterol.och.evidens.fytosteroler.ar.vaxtbaserade.steroler.som.liknar.kolesterol.strukturellt..vad.gor.de.i.cellmembranet,.hur.paverkar.de.ldl.kolesterol,.och.vad.sager.evidensen?.fytosteroler.cellmembran">
+        <span class="idx-card-title">Vad är fytosteroler? Cellmembran, kolesterol och evidens</span>
+        <span class="idx-card-desc">Fytosteroler är växtbaserade steroler som liknar kolesterol strukturellt. Vad gör de i cellmembranet, hur påverkar de LDL-kolesterol, och vad säger evidensen?</span>
         <div class="idx-card-meta"><span>12 maj 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/neolife-historia" class="idx-card" data-cat="vitaminer" data-search="neolifes.historia:.fran.1958.till.global.cellular.nutrition.neolife.grundat.1958.av.jerry.brassfield..tre.en.en.varldens.forsta.fytonaringstillskott..sab.1976.av.dr..arthur.furst..jim.rohn,.tony.robbins,.mark.hughes.kopplingen..neolife.historia">
         <span class="idx-card-title">NeoLifes historia: Från 1958 till global cellulär nutrition</span>
         <span class="idx-card-desc">NeoLife grundat 1958 av Jerry Brassfield. Tre-en-en världens första fytonäringstillskott. SAB 1976 av Dr. Arthur Furst. Jim Rohn, Tony Robbins, Mark Hughes kopplingen.</span>
+        <div class="idx-card-meta"><span>12 maj 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/neolife-vetenskap" class="idx-card" data-cat="vitaminer" data-search="neolife.vetenskapliga.radet:.oberoende.vetenskap.sedan.1976.neolife.scientific.advisory.board.grundat.1976.av.dr..arthur.furst..tre.standarder:.renhet,.styrka,.bevis..peer.reviewed.publikationer.i.ajcn,.faseb.journal.och.jacn..neolife.vetenskap">
+        <span class="idx-card-title">NeoLife Vetenskapliga rådet: Oberoende vetenskap sedan 1976</span>
+        <span class="idx-card-desc">NeoLife Scientific Advisory Board grundat 1976 av Dr. Arthur Furst. Tre standarder: Renhet, Styrka, Bevis. Peer-reviewed publikationer i AJCN, FASEB Journal och JACN.</span>
         <div class="idx-card-meta"><span>12 maj 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -800,47 +608,60 @@
     <h2 class="idx-cat-h">FETTSYROR & ANTIOXIDANTER</h2>
     <div class="idx-cat-grid">
 
-      <a href="/multivitamin-for-barn" class="idx-card" data-cat="fettsyror" data-search="multivitamin.for.barn.—.behover.barn.kosttillskott?.behover.barn.multivitamin?.vi.gar.igenom.naringsbehov,.d.vitamin,.jarn,.omega.3.och.nar.kosttillskott.kan.vara.motiverat.for.barn..multivitamin.for.barn">
-        <span class="idx-card-title">Multivitamin för barn — behöver barn kosttillskott?</span>
-        <span class="idx-card-desc">Behöver barn multivitamin? Vi går igenom näringsbehov, D-vitamin, järn, omega-3 och när kosttillskott kan vara motiverat för barn.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/omega-3-epa" class="idx-card" data-cat="fettsyror" data-search="omega.3.epa:.vad.du.bor.veta.intresset.for.omega.3.epa.ar.tydligt.i.sokmonster..enligt.google.search.console.har.sokfragan.&quot;omega.3.epa&quot;.genererat.27.visningar.med.en.genomsnittlig.pos.omega.3.epa">
+        <span class="idx-card-title">Omega 3 EPA: Vad du bör veta</span>
+        <span class="idx-card-desc">Intresset för omega 3 EPA är tydligt i sökmönster. Enligt Google Search Console har sökfrågan &amp;quot;omega 3 epa&amp;quot; genererat 27 visningar med en genomsnittlig pos</span>
+        <div class="idx-card-meta"><span>17 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/nar-och-hur-ska-man-ta-omega-3" class="idx-card" data-cat="fettsyror" data-search="nar.och.hur.ska.man.ta.omega.3?.—.praktisk.guide.for.optimal.absorption.nar.ska.man.ta.omega.3?.forskning.visar.att.omega.3.absorberas.bast.med.maltid..lar.dig.optimal.timing,.dosering.och.hur.du.undviker.fisksmaken..nar.och.hur.ska.man.ta.omega.3">
-        <span class="idx-card-title">När och hur ska man ta omega-3? — Praktisk guide för optimal absorption</span>
-        <span class="idx-card-desc">När ska man ta omega-3? Forskning visar att omega-3 absorberas bäst med måltid. Lär dig optimal timing, dosering och hur du undviker fisksmaken.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/fiskolja-vs-algolja-vs-krillolja" class="idx-card" data-cat="fettsyror" data-search="fiskolja.vs.algolja.vs.krillolja.—.vad.ar.skillnaden?.fiskolja,.algolja.eller.krillolja.—.vilken.omega.3.kalla.ar.bast?.en.vetenskapligt.underbyggd.jamforelse.av.dha/epa.innehall,.biotillganglighet,.hallbarhet.och.pris..fiskolja.vs.algolja.vs.krillolja">
+        <span class="idx-card-title">Fiskolja vs algolja vs krillolja — vad är skillnaden?</span>
+        <span class="idx-card-desc">Fiskolja, algolja eller krillolja — vilken omega-3-källa är bäst? En vetenskapligt underbyggd jämförelse av DHA/EPA-innehåll, biotillgänglighet, hållbarhet och pris.</span>
+        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/adaptogener-ashwagandha-rosenrot-ginseng" class="idx-card" data-cat="fettsyror" data-search="adaptogener.—.ashwagandha,.rosenrot,.ginseng.|.vetenskaplig.guide.adaptogener.ar.vaxter.som.hjalper.kroppen.hantera.stress..lar.dig.om.ashwagandha,.rosenrot.och.ginseng.—.forskning,.fordelar.och.saker.anvandning..adaptogener.ashwagandha.rosenrot.ginseng">
-        <span class="idx-card-title">Adaptogener — Ashwagandha, Rosenrot, Ginseng | Vetenskaplig Guide</span>
-        <span class="idx-card-desc">Adaptogener är växter som hjälper kroppen hantera stress. Lär dig om ashwagandha, rosenrot och ginseng — forskning, fördelar och säker användning.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/omega-3-och-hjarthalsa-forskning" class="idx-card" data-cat="fettsyror" data-search="omega.3.och.hjarthalsa.—.vad.sager.forskningen?.|.levnytt.omega.3.och.hjarthalsa.—.vad.sager.forskningen?.vetenskaplig.evidens.visar.att.omega.3.fettsyror.kan.minska.risken.for.hjartdod.och.koronar.hjartsjukdom..epa.studier.visar.starkare.effekter.an.epa+dha.kombinationer.enligt.metaanalyser.av.149.000.deltagare..omega.3.och.hjarthalsa.forskning">
-        <span class="idx-card-title">Omega-3 och hjärthälsa — vad säger forskningen? | LevNytt</span>
-        <span class="idx-card-desc">Omega-3 och hjärthälsa — vad säger forskningen? Vetenskaplig evidens visar att omega-3-fettsyror kan minska risken för hjärtdöd och koronär hjärtsjukdom. EPA-studier visar starkare effekter än EPA+DHA kombinationer enligt metaanalyser av 149 000 deltagare.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/omega-3-fran-mat-racker-kosten" class="idx-card" data-cat="fettsyror" data-search="omega.3.fran.mat.—.racker.kosten?.fullstandig.guide.2026.omega.3.fran.mat.—.racker.kosten?.ja,.med.ratt.livsmedelsval..fisk,.notter.och.fron.ger.epa,.dha.och.ala..upptack.basta.kallor.och.praktisk.maltidsplanering..omega.3.fran.mat.racker.kosten">
-        <span class="idx-card-title">Omega-3 från mat — räcker kosten? Fullständig guide 2026</span>
-        <span class="idx-card-desc">Omega-3 från mat — räcker kosten? Ja, med rätt livsmedelsval. Fisk, nötter och frön ger EPA, DHA och ALA. Upptäck bästa källor och praktisk måltidsplanering.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/omega-3-komplett-evidensbaserad-guide" class="idx-card" data-cat="fettsyror" data-search="omega.3.—.komplett.evidensbaserad.guide.|.levnytt.omega.3.fettsyror.ar.essentiella.naringsamnen.som.kroppen.behover.men.inte.kan.tillverka.sjalv..omfattande.guide.med.forskningsbaserade.fakta.om.epa,.dha.och.ala..omega.3.komplett.evidensbaserad.guide">
+      <a href="/vad-ar-omega-3" class="idx-card" data-cat="fettsyror" data-search="vad.ar.omega.3?.en.komplett.guide.till.omega.3.fettsyror.vad.ar.omega.3?.guide.om.ala,.epa.och.dha.—.halsoeffekter,.livsmedelskallor,.dosering.och.klinisk.evidens.fran.over.127.000.studiedeltagare..vad.ar.omega.3">
         <span class="idx-card-badge star">&#9733; Portalguide</span>
-        <span class="idx-card-title">Omega-3 — komplett evidensbaserad guide | LevNytt</span>
-        <span class="idx-card-desc">Omega-3 fettsyror är essentiella näringsämnen som kroppen behöver men inte kan tillverka själv. Omfattande guide med forskningsbaserade fakta om EPA, DHA och ALA.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="idx-card-title">Vad är omega-3? En komplett guide till omega-3-fettsyror</span>
+        <span class="idx-card-desc">Vad är omega-3? Guide om ALA, EPA och DHA — hälsoeffekter, livsmedelskällor, dosering och klinisk evidens från över 127 000 studiedeltagare.</span>
+        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/omega-3-kvalitet-renhet-hur-valja" class="idx-card" data-cat="fettsyror" data-search="omega.3.kvalitet.och.renhet.—.hur.valjer.man.ratt?.|.levnytt.omega.3.kvalitet.avgors.av.renhet,.processer.som.molekyldestillation,.oxidationsskydd.och.tredjepartstestning..sa.bedomer.du.kvalitetsmarkorer.for.basta.val.av.kosttillskott..omega.3.kvalitet.renhet.hur.valja">
-        <span class="idx-card-title">Omega-3 kvalitet och renhet — hur väljer man rätt? | LevNytt</span>
+      <a href="/adaptogener-ashwagandha-rosenrot-ginseng" class="idx-card" data-cat="fettsyror" data-search="adaptogener.—.ashwagandha,.rosenrot,.ginseng.adaptogener.ar.vaxter.som.hjalper.kroppen.hantera.stress..lar.dig.om.ashwagandha,.rosenrot.och.ginseng.—.forskning,.fordelar.och.saker.anvandning..adaptogener.ashwagandha.rosenrot.ginseng">
+        <span class="idx-card-title">Adaptogener — Ashwagandha, Rosenrot, Ginseng</span>
+        <span class="idx-card-desc">Adaptogener är växter som hjälper kroppen hantera stress. Lär dig om ashwagandha, rosenrot och ginseng — forskning, fördelar och säker användning.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/nar-och-hur-ska-man-ta-omega-3" class="idx-card" data-cat="fettsyror" data-search="nar.och.hur.ska.man.ta.omega.3?.nar.ska.man.ta.omega.3?.forskning.visar.att.omega.3.absorberas.bast.med.maltid..lar.dig.optimal.timing,.dosering.och.hur.du.undviker.fisksmaken..nar.och.hur.ska.man.ta.omega.3">
+        <span class="idx-card-title">När och hur ska man ta omega-3?</span>
+        <span class="idx-card-desc">När ska man ta omega-3? Forskning visar att omega-3 absorberas bäst med måltid. Lär dig optimal timing, dosering och hur du undviker fisksmaken.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/omega-3-fran-mat-racker-kosten" class="idx-card" data-cat="fettsyror" data-search="omega.3.fran.mat.—.racker.kosten?.omega.3.fran.mat.—.racker.kosten?.ja,.med.ratt.livsmedelsval..fisk,.notter.och.fron.ger.epa,.dha.och.ala..upptack.basta.kallor.och.praktisk.maltidsplanering..omega.3.fran.mat.racker.kosten">
+        <span class="idx-card-title">Omega-3 från mat — räcker kosten?</span>
+        <span class="idx-card-desc">Omega-3 från mat — räcker kosten? Ja, med rätt livsmedelsval. Fisk, nötter och frön ger EPA, DHA och ALA. Upptäck bästa källor och praktisk måltidsplanering.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/omega-3-komplett-evidensbaserad-guide" class="idx-card" data-cat="fettsyror" data-search="omega.3.—.komplett.evidensbaserad.guide.omega.3.fettsyror.ar.essentiella.naringsamnen.som.kroppen.behover.men.inte.kan.tillverka.sjalv..omfattande.guide.med.forskningsbaserade.fakta.om.epa,.dha.och.ala..omega.3.komplett.evidensbaserad.guide">
+        <span class="idx-card-badge star">&#9733; Portalguide</span>
+        <span class="idx-card-title">Omega-3 — komplett evidensbaserad guide</span>
+        <span class="idx-card-desc">Omega-3 fettsyror är essentiella näringsämnen som kroppen behöver men inte kan tillverka själv. Omfattande guide med forskningsbaserade fakta om EPA, DHA och ALA.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/omega-3-kvalitet-renhet-hur-valja" class="idx-card" data-cat="fettsyror" data-search="omega.3.kvalitet.och.renhet.—.hur.valjer.man.ratt?.omega.3.kvalitet.avgors.av.renhet,.processer.som.molekyldestillation,.oxidationsskydd.och.tredjepartstestning..sa.bedomer.du.kvalitetsmarkorer.for.basta.val.av.kosttillskott..omega.3.kvalitet.renhet.hur.valja">
+        <span class="idx-card-title">Omega-3 kvalitet och renhet — hur väljer man rätt?</span>
         <span class="idx-card-desc">Omega-3 kvalitet avgörs av renhet, processer som molekyldestillation, oxidationsskydd och tredjepartstestning. Så bedömer du kvalitetsmarkörer för bästa val av kosttillskott.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/omega-3-och-hjarthalsa-forskning" class="idx-card" data-cat="fettsyror" data-search="omega.3.och.hjarthalsa.—.vad.sager.forskningen?.omega.3.och.hjarthalsa.—.vad.sager.forskningen?.vetenskaplig.evidens.visar.att.omega.3.fettsyror.kan.minska.risken.for.hjartdod.och.koronar.hjartsjukdom..epa.studier.visar.starkare.effekter.an.epa+dha.kombinationer.enligt.metaanalyser.av.149.000.deltagare..omega.3.och.hjarthalsa.forskning">
+        <span class="idx-card-title">Omega-3 och hjärthälsa — vad säger forskningen?</span>
+        <span class="idx-card-desc">Omega-3 och hjärthälsa — vad säger forskningen? Vetenskaplig evidens visar att omega-3-fettsyror kan minska risken för hjärtdöd och koronär hjärtsjukdom. EPA-studier visar starkare effekter än EPA+DHA kombinationer enligt metaanalyser av 149 000 deltagare.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/omega-3-och-inflammation-ledvark" class="idx-card" data-cat="fettsyror" data-search="omega.3.och.inflammation.—.hjalper.det.mot.ledvark?.omega.3.fettsyror.kan.minska.inflammation.genom.flera.mekanismer,.men.forskningsresultaten.for.ledvark.ar.blandade..las.vad.studier.visar.om.epa/dha.och.ledsmartor..omega.3.och.inflammation.ledvark">
@@ -855,6 +676,12 @@
         <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
+      <a href="/multivitamin-for-barn" class="idx-card" data-cat="fettsyror" data-search="multivitamin.for.barn.—.behover.barn.kosttillskott?.behover.barn.multivitamin?.vi.gar.igenom.naringsbehov,.d.vitamin,.jarn,.omega.3.och.nar.kosttillskott.kan.vara.motiverat.for.barn..multivitamin.for.barn">
+        <span class="idx-card-title">Multivitamin för barn — behöver barn kosttillskott?</span>
+        <span class="idx-card-desc">Behöver barn multivitamin? Vi går igenom näringsbehov, D-vitamin, järn, omega-3 och när kosttillskott kan vara motiverat för barn.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
       <a href="/ala-vs-epa-vs-dha" class="idx-card" data-cat="fettsyror" data-search="ala.vs.epa.vs.dha.—.varfor.kan.inte.vaxtomega.3.ersatta.fisk?.ala.fran.linfron.konverteras.till.epa.med.0–8%.och.dha.med.under.4%..vi.undersoker.varfor.omega.3.kallan.spelar.roll.och.vad.isotopstudierna.visar..ala.vs.epa.vs.dha">
         <span class="idx-card-title">ALA vs EPA vs DHA — varför kan inte växtomega-3 ersätta fisk?</span>
         <span class="idx-card-desc">ALA från linfrön konverteras till EPA med 0–8% och DHA med under 4%. Vi undersöker varför omega-3-källan spelar roll och vad isotopstudierna visar.</span>
@@ -867,16 +694,22 @@
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
+      <a href="/neolife-omega-3-plus" class="idx-card" data-cat="fettsyror" data-search="vad.ar.epa.och.dha.—.och.varfor.spelar.formen.roll?.epa.och.dha.ar.omega.3.fettsyror.som.kroppen.inte.kan.tillverka.sjalv..vi.undersoker.vad.forskningen.sager.om.triglyceridform.vs.etylester.och.vad.som.faktiskt.absorberas..neolife.omega.3.plus">
+        <span class="idx-card-title">Vad är EPA och DHA — och varför spelar formen roll?</span>
+        <span class="idx-card-desc">EPA och DHA är omega-3-fettsyror som kroppen inte kan tillverka själv. Vi undersöker vad forskningen säger om triglyceridform vs etylester och vad som faktiskt absorberas.</span>
+        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
       <a href="/neolife-pro-vitality" class="idx-card" data-cat="fettsyror" data-search="vad.ar.ett.fullstandigt.dagligt.naringssystem.—.och.vad.bor.det.innehalla?.daglig.grundnaring.handlar.om.mer.an.vitaminer..vi.undersoker.vad.forskningen.sager.om.cellular.naring,.omega.3,.karotenoider.och.spannmalslipider.i.kombination..neolife.pro.vitality">
         <span class="idx-card-title">Vad är ett fullständigt dagligt näringssystem — och vad bör det innehålla?</span>
         <span class="idx-card-desc">Daglig grundnäring handlar om mer än vitaminer. Vi undersöker vad forskningen säger om cellulär näring, omega-3, karotenoider och spannmålslipider i kombination.</span>
         <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/neolife-omega-3-plus" class="idx-card" data-cat="fettsyror" data-search="vad.ar.epa.och.dha.—.och.varfor.spelar.formen.roll?.epa.och.dha.ar.omega.3.fettsyror.som.kroppen.inte.kan.tillverka.sjalv..vi.undersoker.vad.forskningen.sager.om.triglyceridform.vs.etylester.och.vad.som.faktiskt.absorberas..neolife.omega.3.plus">
-        <span class="idx-card-title">Vad är EPA och DHA — och varför spelar formen roll?</span>
-        <span class="idx-card-desc">EPA och DHA är omega-3-fettsyror som kroppen inte kan tillverka själv. Vi undersöker vad forskningen säger om triglyceridform vs etylester och vad som faktiskt absorberas.</span>
-        <div class="idx-card-meta"><span>15 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/neolife-kosttillskott" class="idx-card" data-cat="fettsyror" data-search="neolife.kosttillskott.—.vetenskapligt.baserade.produkter.|.levnytt.se.alla.neolife.kosttillskott.samlade..helfodskallor.med.oberoende.peer.reviewed.forskning..pro.vitality+,.carotenoid.complex,.omega.3.plus.och.mer..sponsor.id:.41.830928..neolife.kosttillskott">
+        <span class="idx-card-title">NeoLife Kosttillskott — Vetenskapligt baserade produkter | LevNytt.se</span>
+        <span class="idx-card-desc">Alla NeoLife-kosttillskott samlade. Helfodskällor med oberoende peer-reviewed forskning. Pro Vitality+, Carotenoid Complex, Omega-3 Plus och mer. Sponsor-ID: 41-830928.</span>
+        <div class="idx-card-meta"><span>10 maj 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
 
@@ -887,15 +720,28 @@
     <h2 class="idx-cat-h">TARMHÄLSA & KOSTFIBER</h2>
     <div class="idx-cat-grid">
 
-      <a href="/probiotika-dosering-timing" class="idx-card" data-cat="tarmhalsa" data-search="probiotika.dosering.och.timing.—.hur.mycket.cfu.behovs?.hur.mycket.cfu.probiotika.behover.du.egentligen?.forskning.om.dosering,.timing,.mat.timing.och.hur.lange.du.bor.ta.probiotika..probiotika.dosering.timing">
-        <span class="idx-card-title">Probiotika dosering och timing — hur mycket CFU behövs?</span>
-        <span class="idx-card-desc">Hur mycket CFU probiotika behöver du egentligen? Forskning om dosering, timing, mat-timing och hur länge du bör ta probiotika.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/tarmhalsa-komplett-guide" class="idx-card" data-cat="tarmhalsa" data-search="tarmhalsa:.komplett.guide.till.en.frisk.tarmflora.tarmhalsa.paverkar.allt.fran.immunforsvar.till.humor..har.ar.vetenskapen.bakom.tarmfloran,.probiotika,.prebiotika.och.kosten.som.starker.den..tarmhalsa.komplett.guide">
+        <span class="idx-card-badge star">&#9733; Portalguide</span>
+        <span class="idx-card-title">Tarmhälsa: Komplett guide till en frisk tarmflora</span>
+        <span class="idx-card-desc">Tarmhälsa påverkar allt från immunförsvar till humör. Här är vetenskapen bakom tarmfloran, probiotika, prebiotika och kosten som stärker den.</span>
+        <div class="idx-card-meta"><span>1 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/fibrer-tarmflora-prebiotisk" class="idx-card" data-cat="tarmhalsa" data-search="fibrer.och.tarmflora.—.den.prebiotiska.effekten.fibrer.som.prebiotika.—.hur.paverkar.kostfiber.tarmfloran?.lar.dig.om.prebiotiska.fibrer,.kortkedjiga.fettsyror.(scfa).och.hur.du.stodjer.din.tarmhalsa.med.ratt.fibrer..fibrer.tarmflora.prebiotisk">
-        <span class="idx-card-title">Fibrer och tarmflora — den prebiotiska effekten</span>
-        <span class="idx-card-desc">Fibrer som prebiotika — hur påverkar kostfiber tarmfloran? Lär dig om prebiotiska fibrer, kortkedjiga fettsyror (SCFA) och hur du stödjer din tarmhälsa med rätt fibrer.</span>
+      <a href="/probiotika-dosering-timing" class="idx-card" data-cat="tarmhalsa" data-search="probiotika.dosering.och.timing.—.hur.mycket.cfu.behovs.egentligen?.hur.mycket.cfu.probiotika.behover.du.egentligen?.forskning.om.dosering,.timing,.mat.timing.och.hur.lange.du.bor.ta.probiotika..probiotika.dosering.timing">
+        <span class="idx-card-title">Probiotika dosering och timing — hur mycket CFU behövs egentligen?</span>
+        <span class="idx-card-desc">Hur mycket CFU probiotika behöver du egentligen? Forskning om dosering, timing, mat-timing och hur länge du bör ta probiotika.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/fiberrika-livsmedel" class="idx-card" data-cat="tarmhalsa" data-search="fiberrika.livsmedel.—.20.basta.kallorna.och.hur.du.ater.mer.vilka.livsmedel.har.mest.fibrer?.rankad.lista.med.20.fiberrika.livsmedel,.jamforelsetabell,.portionsstorlekar.och.tips.for.att.oka.fiberintaget..fiberrika.livsmedel">
+        <span class="idx-card-title">Fiberrika livsmedel — 20 bästa källorna och hur du äter mer</span>
+        <span class="idx-card-desc">Vilka livsmedel har mest fibrer? Rankad lista med 20 fiberrika livsmedel, jämförelsetabell, portionsstorlekar och tips för att öka fiberintaget.</span>
+        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/fibrer-for-magen-forstoppning" class="idx-card" data-cat="tarmhalsa" data-search="fibrer.for.magen.—.hjalper.fiber.mot.forstoppning?.vilken.fiber.fungerar.bast.mot.forstoppning?.lar.dig.skillnaden.mellan.loslig.och.oloslig.fiber,.ratt.dosering.och.basta.matkallorna..fibrer.for.magen.forstoppning">
+        <span class="idx-card-title">Fibrer för magen — hjälper fiber mot förstoppning?</span>
+        <span class="idx-card-desc">Vilken fiber fungerar bäst mot förstoppning? Lär dig skillnaden mellan löslig och olöslig fiber, rätt dosering och bästa matkällorna.</span>
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -905,9 +751,9 @@
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/probiotika-prebiotika-skillnad" class="idx-card" data-cat="tarmhalsa" data-search="probiotika.och.prebiotika.—.skillnad.och.samband.probiotika.och.prebiotika.—.vad.ar.skillnaden.och.hur.samverkar.de?.vi.reder.ut.definitionerna,.forklarar.synbiotika.och.ger.praktiska.rad.for.din.tarmhalsa..probiotika.prebiotika.skillnad">
-        <span class="idx-card-title">Probiotika och prebiotika — skillnad och samband</span>
-        <span class="idx-card-desc">Probiotika och prebiotika — vad är skillnaden och hur samverkar de? Vi reder ut definitionerna, förklarar synbiotika och ger praktiska råd för din tarmhälsa.</span>
+      <a href="/fibrer-tarmflora-prebiotisk" class="idx-card" data-cat="tarmhalsa" data-search="fibrer.och.tarmflora.—.den.prebiotiska.effekten.fibrer.som.prebiotika.—.hur.paverkar.kostfiber.tarmfloran?.lar.dig.om.prebiotiska.fibrer,.kortkedjiga.fettsyror.(scfa).och.hur.du.stodjer.din.tarmhalsa.med.ratt.fibrer..fibrer.tarmflora.prebiotisk">
+        <span class="idx-card-title">Fibrer och tarmflora — den prebiotiska effekten</span>
+        <span class="idx-card-desc">Fibrer som prebiotika — hur påverkar kostfiber tarmfloran? Lär dig om prebiotiska fibrer, kortkedjiga fettsyror (SCFA) och hur du stödjer din tarmhälsa med rätt fibrer.</span>
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -918,9 +764,9 @@
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/fibrer-for-magen-forstoppning" class="idx-card" data-cat="tarmhalsa" data-search="fibrer.for.magen.—.hjalper.fiber.mot.forstoppning?.vilken.fiber.fungerar.bast.mot.forstoppning?.lar.dig.skillnaden.mellan.loslig.och.oloslig.fiber,.ratt.dosering.och.basta.matkallorna..fibrer.for.magen.forstoppning">
-        <span class="idx-card-title">Fibrer för magen — hjälper fiber mot förstoppning?</span>
-        <span class="idx-card-desc">Vilken fiber fungerar bäst mot förstoppning? Lär dig skillnaden mellan löslig och olöslig fiber, rätt dosering och bästa matkällorna.</span>
+      <a href="/probiotika-for-magen-ibs" class="idx-card" data-cat="tarmhalsa" data-search="probiotika.for.magen.—.ibs,.uppblasthet.och.forstoppning.hjalper.probiotika.mot.ibs,.uppblasthet.och.forstoppning?.evidensbaserad.genomgang.av.specifika.stammar,.kliniska.studier.och.praktiska.rad.for.magbesvar..probiotika.for.magen.ibs">
+        <span class="idx-card-title">Probiotika för magen — IBS, uppblåsthet och förstoppning</span>
+        <span class="idx-card-desc">Hjälper probiotika mot IBS, uppblåsthet och förstoppning? Evidensbaserad genomgång av specifika stammar, kliniska studier och praktiska råd för magbesvär.</span>
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -931,15 +777,9 @@
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Portalguide</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/probiotika-for-magen-ibs" class="idx-card" data-cat="tarmhalsa" data-search="probiotika.for.magen.—.ibs,.uppblasthet.och.forstoppning.hjalper.probiotika.mot.ibs,.uppblasthet.och.forstoppning?.evidensbaserad.genomgang.av.specifika.stammar,.kliniska.studier.och.praktiska.rad.for.magbesvar..probiotika.for.magen.ibs">
-        <span class="idx-card-title">Probiotika för magen — IBS, uppblåsthet och förstoppning</span>
-        <span class="idx-card-desc">Hjälper probiotika mot IBS, uppblåsthet och förstoppning? Evidensbaserad genomgång av specifika stammar, kliniska studier och praktiska råd för magbesvär.</span>
-        <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/fiberrika-livsmedel" class="idx-card" data-cat="tarmhalsa" data-search="fiberrika.livsmedel.—.20.basta.kallorna.och.hur.du.ater.mer.vilka.livsmedel.har.mest.fibrer?.rankad.lista.med.20.fiberrika.livsmedel,.jamforelsetabell,.portionsstorlekar.och.tips.for.att.oka.fiberintaget..fiberrika.livsmedel">
-        <span class="idx-card-title">Fiberrika livsmedel — 20 bästa källorna och hur du äter mer</span>
-        <span class="idx-card-desc">Vilka livsmedel har mest fibrer? Rankad lista med 20 fiberrika livsmedel, jämförelsetabell, portionsstorlekar och tips för att öka fiberintaget.</span>
+      <a href="/probiotika-prebiotika-skillnad" class="idx-card" data-cat="tarmhalsa" data-search="probiotika.och.prebiotika.—.skillnad.och.samband.probiotika.och.prebiotika.—.vad.ar.skillnaden.och.hur.samverkar.de?.vi.reder.ut.definitionerna,.forklarar.synbiotika.och.ger.praktiska.rad.for.din.tarmhalsa..probiotika.prebiotika.skillnad">
+        <span class="idx-card-title">Probiotika och prebiotika — skillnad och samband</span>
+        <span class="idx-card-desc">Probiotika och prebiotika — vad är skillnaden och hur samverkar de? Vi reder ut definitionerna, förklarar synbiotika och ger praktiska råd för din tarmhälsa.</span>
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -953,6 +793,12 @@
         <span class="idx-card-title">Vad är kostfiber — och varför spelar källan roll?</span>
         <span class="idx-card-desc">Svenskar äter i snitt hälften av rekommenderat fiberintag. Källan till fibret påverkar mer än bara mängden — vi går igenom forskningen.</span>
         <div class="idx-card-meta"><span>24 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/neolife-fibre-tablets" class="idx-card" data-cat="tarmhalsa" data-search="neolife.fibre.tablets.—.losliga.och.olosliga.fibrer.|.levnytt.se.fibertabletter.med.losliga.och.olosliga.fibrer.fran.frukt,.gronsaker.och.spannmal..kod.850..neolife.fibre.tablets">
+        <span class="idx-card-title">NeoLife Fibre Tablets — Lösliga och olösliga fibrer | LevNytt.se</span>
+        <span class="idx-card-desc">Fibertabletter med lösliga och olösliga fibrer från frukt, grönsaker och spannmål. Kod 850.</span>
+        <div class="idx-card-meta"><span>17 maj 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/neolife-acidophilus-plus" class="idx-card" data-cat="tarmhalsa" data-search="neolife.acidophilus.plus:.5.miljarder.mjolksyrabakterier,.fem.stammar.neolife.acidophilus.plus.–.fem.stammar,.5.miljarder.cfu.per.kapsel,.skyddssystem.mot.magsyra..kod.560..neolife.acidophilus.plus">
@@ -978,13 +824,13 @@
       <a href="/kollagen" class="idx-card" data-cat="halsa" data-search="kollagen:.vad.det.ar,.typer.och.tillskott.–.vetenskaplig.guide.2026.vad.ar.kollagen.och.fungerar.kollagentillskott?.evidensbaserad.guide.om.kollagens.typer.(i,.ii,.iii),.matbaser,.biotillganglighet.och.vetenskaplig.forskning..kollagen">
         <span class="idx-card-title">Kollagen: Vad det är, Typer och Tillskott – Vetenskaplig Guide 2026</span>
         <span class="idx-card-desc">Vad är kollagen och fungerar kollagentillskott? Evidensbaserad guide om kollagens typer (I, II, III), matbaser, biotillgänglighet och vetenskaplig forskning.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/kreatin" class="idx-card" data-cat="halsa" data-search="kreatin.—.vad.det.ar,.hur.det.fungerar.och.varfor.det.ar.det.mest.studerade.kosttillskottet.kreatin.ar.ett.naturligt.amne.som.hjalper.muskler.producera.energi.under.intensiv.traning..en.omfattande.guide.om.fordelar,.dosering.och.sakerhet..kreatin">
         <span class="idx-card-title">Kreatin — Vad det är, hur det fungerar och varför det är det mest studerade kosttillskottet</span>
         <span class="idx-card-desc">Kreatin är ett naturligt ämne som hjälper muskler producera energi under intensiv träning. En omfattande guide om fördelar, dosering och säkerhet.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/melatonin-och-somn" class="idx-card" data-cat="halsa" data-search="melatonin.och.somn:.fakta.om.somnhormonet.som.reglerar.dygnsrytmen.melatonin.reglerar.naturligt.somnvakcykeln.genom.att.signalera.till.kroppen.nar.det.ar.dags.att.sova..lar.dig.hur.somnhormonet.fungerar,.forskning.om.dosering.och.sakerhet..melatonin.och.somn">
@@ -997,6 +843,24 @@
         <span class="idx-card-title">Magnesium för sömn — hjälper magnesium dig att sova bättre?</span>
         <span class="idx-card-desc">Magnesium för sömn — forskningen visar att magnesium kan påverka sömnkvalitet via GABA-receptorer, melatoninproduktion och stresshormoner. Här är vad st...</span>
         <div class="idx-card-meta"><span>29 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/hudtecken-naringsbrist" class="idx-card" data-cat="halsa" data-search="hudtecken.pa.naringsbrist.–.vad.sager.forskningen?.vilka.hudforandringar.kan.bero.pa.naringsbrist?.vad.peer.reviewed.forskning.visar.om.zink,.c.vitamin,.a.vitamin,.b.vitaminer,.jarn.och.fettsyror..hudtecken.naringsbrist">
+        <span class="idx-card-title">Hudtecken på näringsbrist – vad säger forskningen?</span>
+        <span class="idx-card-desc">Vilka hudförändringar kan bero på näringsbrist? Vad peer-reviewed forskning visar om zink, C-vitamin, A-vitamin, B-vitaminer, järn och fettsyror.</span>
+        <div class="idx-card-meta"><span>22 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/retinol-pa-sommaren" class="idx-card" data-cat="halsa" data-search="gor.retinol.pa.sommaren.huden.kansligare.for.solen?.gor.retinol.pa.sommaren.huden.kansligare.for.solen?.har.ar.vad.kontrollerade.studier,.en.svensk.hudlakare.och.nya.eu.regler.faktiskt.sager..retinol.pa.sommaren">
+        <span class="idx-card-title">Gör retinol på sommaren huden känsligare för solen?</span>
+        <span class="idx-card-desc">Gör retinol på sommaren huden känsligare för solen? Här är vad kontrollerade studier, en svensk hudläkare och nya EU-regler faktiskt säger.</span>
+        <div class="idx-card-meta"><span>21 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/vad-ar-niacinamid" class="idx-card" data-cat="halsa" data-search="vad.ar.niacinamid.–.och.vad.gor.det.for.huden?.vad.ar.niacinamid?.har.ar.vad.kontrollerade.kliniska.studier.visar.om.effekten.pa.hudbarriar,.talgproduktion.och.pigmentflackar..vad.ar.niacinamid">
+        <span class="idx-card-title">Vad är niacinamid – och vad gör det för huden?</span>
+        <span class="idx-card-desc">Vad är niacinamid? Här är vad kontrollerade kliniska studier visar om effekten på hudbarriär, talgproduktion och pigmentfläckar.</span>
+        <div class="idx-card-meta"><span>21 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/naringsbrist-symptom" class="idx-card" data-cat="halsa" data-search="naringsbrist.symptom.–.vanliga.tecken.och.vad.de.kan.bero.pa.en.evidensbaserad.guide.till.de.vanligaste.symptomen.vid.naringsbrist,.inklusive.jarn,.d.vitamin,.b12.och.magnesium.–.och.vad.som.kan.paverka.din.naringsstatus..naringsbrist.symptom">
@@ -1037,9 +901,9 @@
     <h2 class="idx-cat-h">GOLDEN HOME CARE</h2>
     <div class="idx-cat-grid">
 
-      <a href="/ar-miljovanliga-rengoringsmedel-lika-effektiva" class="idx-card" data-cat="goldenhomecare" data-search="miljomarkta.rengoringsmedel:.ar.de.lika.effektiva?.svanen.och.kemikalieforskning.miljomarkta.rengoringsmedel.testade.mot.vanliga.—.svanens.officiella.kriterier,.effektivitetsjamforelse.och.vad.kemikalieforskningen.faktiskt.sager.om.rengoringsformaga.och.miljopaverkan..ar.miljovanliga.rengoringsmedel.lika.effektiva">
-        <span class="idx-card-title">Miljömärkta rengöringsmedel: Är de lika effektiva? Svanen och kemikalieforskning</span>
-        <span class="idx-card-desc">Miljömärkta rengöringsmedel testade mot vanliga — Svanens officiella kriterier, effektivitetsjämförelse och vad kemikalieforskningen faktiskt säger om rengöringsförmåga och miljöpåverkan.</span>
+      <a href="/ar-miljovanliga-rengoringsmedel-lika-effektiva" class="idx-card" data-cat="goldenhomecare" data-search="ar.miljovanliga.rengoringsmedel.lika.effektiva.som.vanliga?.ar.miljovanliga.rengoringsmedel.lika.effektiva.som.vanliga?.har.ar.vad.svanens.officiella.kriterier.och.kemikalieforskning.faktiskt.sager..ar.miljovanliga.rengoringsmedel.lika.effektiva">
+        <span class="idx-card-title">Är miljövänliga rengöringsmedel lika effektiva som vanliga?</span>
+        <span class="idx-card-desc">Är miljövänliga rengöringsmedel lika effektiva som vanliga? Här är vad Svanens officiella kriterier och kemikalieforskning faktiskt säger.</span>
         <div class="idx-card-meta"><span>21 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
@@ -1081,34 +945,34 @@
     <h2 class="idx-cat-h">DIREKTFÖRSÄLJNING</h2>
     <div class="idx-cat-grid">
 
-      <a href="/mlm-konsumentratt-retur-angeratt.html" class="idx-card" data-cat="direktforsaljning" data-search="konsumentratt.vid.mlm.kop.—.returratt,.angerratt.och.anmalan.vilka.rattigheter.har.du.vid.mlm.kop?.lar.dig.om.14.dagars.angerratt,.hur.du.returnerar.produkter.och.anmaler.till.arn.och.konsumentverket..mlm.konsumentratt.retur.angeratt">
-        <span class="idx-card-title">Konsumenträtt vid MLM-köp — returrätt, ångerrätt och anmälan</span>
-        <span class="idx-card-desc">Vilka rättigheter har du vid MLM-köp? Lär dig om 14-dagars ångerrätt, hur du returnerar produkter och anmäler till ARN och Konsumentverket.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+      <a href="/vad-ar-pyramidspel" class="idx-card" data-cat="direktforsaljning" data-search="vad.ar.ett.pyramidspel?.sa.kanner.du.igen.varningssignalerna.en.svensk.konsumentguide.till.pyramidspel,.varningssignaler.och.skillnaden.mot.direktforsaljning..vad.ar.pyramidspel">
+        <span class="idx-card-title">Vad är ett pyramidspel? Så känner du igen varningssignalerna</span>
+        <span class="idx-card-desc">En svensk konsumentguide till pyramidspel, varningssignaler och skillnaden mot direktförsäljning.</span>
+        <div class="idx-card-meta"><span>28 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
-      <a href="/mlm-inkomstredovisningar-vad-sager-siffrorna" class="idx-card" data-cat="direktforsaljning" data-search="mlm.inkomstredovisningar.—.vad.sager.siffrorna.egentligen?.|.levnytt.vad.avslojar.mlm.foretagens.egna.inkomstredovisningar.egentligen?.en.evidensbaserad.analys.av.vad.siffrorna.faktiskt.visar.om.earnings.i.natverksmarknadsforing..mlm.inkomstredovisningar.vad.sager.siffrorna">
-        <span class="idx-card-title">MLM Inkomstredovisningar — vad säger siffrorna egentligen? | LevNytt</span>
+      <a href="/mlm-foretag-skandaler-sverige-varlden" class="idx-card" data-cat="direktforsaljning" data-search="kanda.mlm.foretag.och.skandaler.i.sverige.och.varlden.mlm.foretag.som.herbalife,.amway.och.lularoe.har.praglats.av.skandaler.och.rattsliga.konflikter..lar.dig.skilja.legitima.foretag.fran.pyramidspel.och.forsta.vad.tillsynsmyndigheter.letar.efter..mlm.foretag.skandaler.sverige.varlden">
+        <span class="idx-card-title">Kända MLM-företag och skandaler i Sverige och världen</span>
+        <span class="idx-card-desc">MLM-företag som Herbalife, Amway och LuLaRoe har präglats av skandaler och rättsliga konflikter. Lär dig skilja legitima företag från pyramidspel och förstå vad tillsynsmyndigheter letar efter.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/mlm-inkomstredovisningar-vad-sager-siffrorna" class="idx-card" data-cat="direktforsaljning" data-search="mlm.inkomstredovisningar.—.vad.sager.siffrorna.egentligen?.vad.avslojar.mlm.foretagens.egna.inkomstredovisningar.egentligen?.en.evidensbaserad.analys.av.vad.siffrorna.faktiskt.visar.om.earnings.i.natverksmarknadsforing..mlm.inkomstredovisningar.vad.sager.siffrorna">
+        <span class="idx-card-title">MLM Inkomstredovisningar — vad säger siffrorna egentligen?</span>
         <span class="idx-card-desc">Vad avslöjar MLM-företagens egna inkomstredovisningar egentligen? En evidensbaserad analys av vad siffrorna faktiskt visar om earnings i nätverksmarknadsföring.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <span class="idx-card-arrow">→</span>
+      </a>
+      <a href="/mlm-konsumentratt-retur-angeratt" class="idx-card" data-cat="direktforsaljning" data-search="konsumentratt.vid.mlm.kop.—.returratt,.angerratt.och.anmalan.vilka.rattigheter.har.du.vid.mlm.kop?.lar.dig.om.14.dagars.angerratt,.hur.du.returnerar.produkter.och.anmaler.till.arn.och.konsumentverket..mlm.konsumentratt.retur.angeratt">
+        <span class="idx-card-title">Konsumenträtt vid MLM-köp — returrätt, ångerrätt och anmälan</span>
+        <span class="idx-card-desc">Vilka rättigheter har du vid MLM-köp? Lär dig om 14-dagars ångerrätt, hur du returnerar produkter och anmäler till ARN och Konsumentverket.</span>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/mlm-rekrytering-social-press-taktiker" class="idx-card" data-cat="direktforsaljning" data-search="mlm.rekrytering.—.social.press,.taktiker.och.hur.man.sager.nej.mlm.rekrytering.anvander.social.press.och.manipulativa.taktiker.for.att.varva.nya.medlemmar..lar.dig.kanna.igen.varningssignaler.och.hur.du.sager.nej.pa.ett.vanligt.satt..mlm.rekrytering.social.press.taktiker">
         <span class="idx-card-title">MLM-rekrytering — social press, taktiker och hur man säger nej</span>
         <span class="idx-card-desc">MLM-rekrytering använder social press och manipulativa taktiker för att värva nya medlemmar. Lär dig känna igen varningssignaler och hur du säger nej på ett vänligt sätt.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/mlm-foretag-skandaler-sverige-varlden" class="idx-card" data-cat="direktforsaljning" data-search="kanda.mlm.foretag.och.skandaler.i.sverige.och.varlden...levnytt.mlm.foretag.som.herbalife,.amway.och.lularoe.har.praglats.av.skandaler.och.rattsliga.konflikter..lar.dig.skilja.legitima.foretag.fran.pyramidspel.och.forsta.vad.tillsynsmyndigheter.letar.efter..mlm.foretag.skandaler.sverige.varlden">
-        <span class="idx-card-title">Kända MLM-företag och skandaler i Sverige och världen - LevNytt</span>
-        <span class="idx-card-desc">MLM-företag som Herbalife, Amway och LuLaRoe har präglats av skandaler och rättsliga konflikter. Lär dig skilja legitima företag från pyramidspel och förstå vad tillsynsmyndigheter letar efter.</span>
-        <div class="idx-card-meta"><span>23 augusti 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
-        <span class="idx-card-arrow">→</span>
-      </a>
-      <a href="/vad-ar-pyramidspel" class="idx-card" data-cat="direktforsaljning" data-search="vad.ar.ett.pyramidspel?.sa.kanner.du.igen.varningssignalerna.en.svensk.konsumentguide.till.pyramidspel,.varningssignaler.och.skillnaden.mot.direktforsaljning..vad.ar.pyramidspel">
-        <span class="idx-card-title">Vad är ett pyramidspel? Så känner du igen varningssignalerna</span>
-        <span class="idx-card-desc">En svensk konsumentguide till pyramidspel, varningssignaler och skillnaden mot direktförsäljning.</span>
-        <div class="idx-card-meta"><span>28 juli 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
+        <div class="idx-card-meta"><span>30 juni 2026</span><span class="idx-card-meta-sep">·</span><span>Artikel</span></div>
         <span class="idx-card-arrow">→</span>
       </a>
       <a href="/mlm-produkter-kosttillskott-pris" class="idx-card" data-cat="direktforsaljning" data-search="mlm.produkter.och.kosttillskott.—.varfor.kostar.de.mer?.varfor.kostar.mlm.kosttillskott.mer.an.butiksprodukter?.vi.forklarar.direktforsaljningens.affarsmodell,.kompensationsplaner.och.vad.som.driver.priserna..mlm.produkter.kosttillskott.pris">
@@ -1132,69 +996,34 @@
 
     </div>
   </section>
-<!-- /IDX:ARTICLE-CARDS -->
-</main>
-
-<script src="/footer.js" defer></script>
-
-<script>
-(function() {
-  var searchInput = document.getElementById('idx-search');
-  var chips = document.querySelectorAll('#js-chips .idx-chip');
-  var cards = document.querySelectorAll('.idx-card');
-  var sections = document.querySelectorAll('.idx-cat');
-  var empty = document.getElementById('js-empty');
-  var countEl = document.getElementById('idx-count');
-
-  var activeCat = 'alla';
-  var term = '';
-
-  function norm(s) {
-    return s.toLowerCase()
-      .replace(/[åä]/g, 'a')
-      .replace(/ö/g, 'o')
-      .replace(/é/g, 'e');
-  }
-
-  function filter() {
-    var total = 0;
-
-    cards.forEach(function(c) {
-      var catOk = (activeCat === 'alla') || (c.dataset.cat === activeCat);
-      var searchData = norm((c.dataset.search || '') + ' ' + c.textContent);
-      var searchOk = !term || searchData.indexOf(norm(term)) !== -1;
-      var show = catOk && searchOk;
-      c.dataset.hidden = show ? 'false' : 'true';
-      if (show) total++;
-    });
-
-    sections.forEach(function(s) {
-      var visible = s.querySelectorAll('.idx-card[data-hidden="false"]').length > 0;
-      s.dataset.hidden = visible ? 'false' : 'true';
-    });
-
-    countEl.textContent = total === 1 ? '1 artikel' : total + ' artiklar';
-    empty.classList.toggle('visible', total === 0);
-  }
-
-  searchInput.addEventListener('input', function() {
-    term = this.value.trim();
-    filter();
-  });
-
-  chips.forEach(function(ch) {
-    ch.addEventListener('click', function() {
-      chips.forEach(function(c) { c.classList.remove('active'); });
-      ch.classList.add('active');
-      activeCat = ch.dataset.cat;
-      filter();
-    });
-  });
-
-  filter();
-})();
-</script>
-
-<script src="/components.js" defer></script>
+<!-- /IDX:ARTICLE-CARDS --></div></article></div></main>
+<footer class="ln-site-footer">
+  <div class="ln-shell ln-footer-grid">
+    <div class="ln-footer-about">
+      <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
+        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+      </a>
+      <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
+    </div>
+    <nav class="ln-footer-nav" aria-label="Sidfotsnavigation">
+      <a href="/artiklar">Alla artiklar</a>
+      <a href="/neolife-historia">Historia</a>
+      <a href="/neolife-vetenskap">Vetenskap</a>
+      <a href="/neolife-kosttillskott">Produkter</a>
+      <a href="/direktforsaljning-fakta">Direktförsäljning</a>
+      <a href="/om-oss">Om oss</a>
+      <a href="/var-metod">Vår metod</a>
+      <a href="/forsknings-faq">Forsknings-FAQ</a>
+      <a href="/levnytt-principer">LevNytts principer</a>
+      <a href="/integritetspolicy">Integritetspolicy</a>
+    </nav>
+    <div class="ln-footer-disclosure">
+      <p><strong>Kommersiell transparens:</strong> LevNytt är en oberoende NeoLife-distributörswebbplats. Sponsor-ID: 41-830928. NeoLife® är ett registrerat varumärke tillhörande NeoLife International, LLC.</p>
+      <p>© 2026 LevNytt. Alla rättigheter förbehållna.</p>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/levnytt-rebuild.js" defer></script>
+<script src="/assets/js/article-index.js" defer></script>
 </body>
 </html>

@@ -21,15 +21,15 @@ This is the production reference for shared visual foundations and page-family c
 
 The required common components are: site shell, navigation, footer, brand mark, breadcrumbs, editorial header, approved hero variants, metadata/byline/disclosure, semantic callouts, cards/grids, responsive tables, FAQ accordion, internal-link cluster, author block, CTA block, and image frame/caption.
 
-`nav.js` and `footer.js` own global shell rendering. The footer uses the registered canonical `header-logo.svg`; `logo-light.svg` is legacy-only and must not be introduced into new shared work.
+`scripts/site_renderer.py` and the language-specific files in `assets/fragments/` own the server-rendered global shell. `nav.js` and `footer.js` are compatibility loaders only for noncanonical legacy pages. The footer uses the registered canonical `header-logo.svg`; `logo-light.svg` is legacy-only and must not be introduced into new shared work.
 
 `assets/css/levnytt-components.css` supplies the only approved card variants: editorial, article/index, authority/trust, product, evidence/info, and warning/caution. Existing page classes are mapped in `config/ui-card-classification.json`; a new production card class must be added to that explicit registry and use the shared visual contract.
 
 ## Site-wide migration guarantees
 
-The shell migrator places exactly one `#site-nav` mount immediately inside `body`, loads `nav.js` and `footer.js`, and loads the foundations and component styles for every sitemap-listed production page. The production UI audit verifies these contracts across the entire sitemap, including card classification and declared template requirements.
+The production renderer emits exactly one semantic header, main landmark and footer, and loads the foundations, components and family stylesheet for every sitemap-listed production page. The production UI audit resolves Cloudflare rewrites before checking the actual served file.
 
-The link audit treats `levnytt.se`, relative and root-relative destinations as internal. Ordinary body links are canonicalized to same-tab root-relative links. The Owner-approved global navigation exception is explicit: every actual link emitted by `nav.js` or `footer.js`, including internal links and clickable logos, opens a new tab and carries `noopener noreferrer`; sponsored links preserve their relationship token. Menu buttons and other non-link controls are not affected.
+The link audit treats `levnytt.se`, relative and root-relative destinations as internal. All internal links, including header and footer links, are canonicalized to same-tab root-relative navigation. External links may open a new tab and must carry `noopener noreferrer`; NeoLife commercial links additionally retain `nofollow sponsored` and Sponsor ID 41-830928.
 
 ## Informational Article v1
 

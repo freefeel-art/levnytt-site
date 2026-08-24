@@ -20,12 +20,14 @@ class InformationalPageValidatorTests(unittest.TestCase):
         path = Path(directory.name) / "page.html"
         path.write_text(
             """<!doctype html><html><head>
-<meta name="levnytt-template" content="informational-article-v1">
+<meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="none">
 <link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
+<link rel="stylesheet" href="/assets/css/levnytt-components.css">
+<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
 <link rel="stylesheet" href="/assets/css/informational-article.css">
-</head><body><div id="site-nav"></div><script src="/nav.js"></script>
-<article class="ia-wrap">Test</article><script src="/footer.js"></script>""" + extra + "</body></html>",
+</head><body><header class="ln-site-header"></header>
+<article class="ia-wrap">Test</article><footer class="ln-site-footer"></footer>""" + extra + "</body></html>",
             encoding="utf-8",
         )
         return path
