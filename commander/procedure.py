@@ -19,6 +19,7 @@ Production chain implemented here (each step is a bounded domain action):
 from __future__ import annotations
 
 import ast
+import hashlib
 import html as html_lib
 import importlib.util
 import json
@@ -44,6 +45,7 @@ REGISTRATION_URL = f"https://se.neolifeshop.com/i/registration.html?type=reselle
 D1_DATABASE = "levnytt-cta-events"
 CTA_LATEST_FILENAME = "cta-events-latest.json"
 CTA_ATTEMPT_FILENAME = "cta-events-last-attempt.json"
+PENDING_DEPLOYMENT_FILENAME = "pending-deployment-verification.json"
 USER_AGENT = "Mozilla/5.0 (compatible; LevNyttHermes/1.0; +https://levnytt.se)"
 HERMES_REPO = Path("/home/yampa/projects/active/hermes")
 HERMES_PYTHON = HERMES_REPO / ".venv" / "bin" / "python"
@@ -438,6 +440,8 @@ class LevNyttProcedure:
             return self._execute_measurement(ctx, action)
         if capability == "seo_intelligence":
             return self._execute_seo_intelligence(ctx, action)
+        if capability == "content_improvement":
+            return self._execute_content_improvement(ctx, action)
         if capability == "content_production":
             return self._execute_content_production(ctx, action)
         if capability == "deployment":
@@ -542,6 +546,176 @@ class LevNyttProcedure:
             "evidence": {"scout_code": 0, "artifact": "runtime/intelligence/keywords.json", "content_gap_count": gap_count},
         }
 
+    # ── existing-page improvement (stage, never publish directly) ─
+    def _execute_content_improvement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        try:
+            opportunity = _content_improvement_target(action)
+        except Exception as error:
+            return {
+                "status": "CAPABILITY_GAP",
+                "failure_class": "RECOVERABLE_EXECUTOR_FAILURE",
+                "detail": f"LevNytt improvement evidence contract failed: {type(error).__name__}: {error}",
+                "evidence": {"external_effect_attempted": False},
+                "repair": {
+                    "repository_kind": "HERMES",
+                    "allowed_write_scope": [
+                        "app/commander/evidence.py",
+                        "app/commander/procedure_contract.py",
+                    ],
+                },
+            }
+        if opportunity is None:
+            return {
+                "status": "BLOCKED",
+                "failure_class": "EVIDENCE_REQUIRED",
+                "detail": (
+                    "Content improvement requires one exact current "
+                    "content-improvement:<slug> opportunity_id; no page was guessed or substituted."
+                ),
+                "evidence": {"external_effect_attempted": False},
+                "retry_eligible_this_run": False,
+            }
+
+        repo = ctx.working_repository.resolve()
+        slug = str(opportunity["slug"])
+        keyword = str(opportunity.get("research_topic") or opportunity.get("title") or slug)
+        source_rel = str(opportunity["source_file"])
+        source = (repo / source_rel).resolve()
+        try:
+            source.relative_to(repo)
+        except ValueError:
+            return {
+                "status": "BLOCKED",
+                "failure_class": "EVIDENCE_REQUIRED",
+                "detail": "Improvement source resolves outside the LevNytt repository.",
+                "evidence": {"slug": slug, "external_effect_attempted": False},
+                "retry_eligible_this_run": False,
+            }
+        if not source.is_file():
+            return {
+                "status": "BLOCKED",
+                "failure_class": "EVIDENCE_REQUIRED",
+                "detail": f"Current improvement source is missing: {source_rel}",
+                "evidence": {"slug": slug, "external_effect_attempted": False},
+                "retry_eligible_this_run": False,
+            }
+
+        evidence, research_packet = _topic_scribe_evidence(ctx, keyword, slug)
+        sufficiency = research_packet.get("sufficiency", {})
+        if not sufficiency.get("passed") or not evidence:
+            notes = "; ".join(sufficiency.get("notes", [])) or "no authoritative source evidence"
+            return {
+                "status": "BLOCKED",
+                "failure_class": "EVIDENCE_REQUIRED",
+                "detail": (
+                    f"Research sufficiency not met for existing page {slug!r}: {notes}. "
+                    "Obtain evidence through the normal research capability before revising it."
+                ),
+                "evidence": {
+                    "opportunity_id": opportunity["opportunity_id"],
+                    "slug": slug,
+                    "research_sufficiency": sufficiency,
+                    "external_effect_attempted": False,
+                },
+                "retry_eligible_this_run": False,
+            }
+
+        try:
+            from agents.scribe.run import run as scribe_run
+        except Exception as error:
+            return {
+                "status": "CAPABILITY_GAP",
+                "failure_class": "RECOVERABLE_EXECUTOR_FAILURE",
+                "detail": f"Scribe import failed: {type(error).__name__}: {error}",
+                "evidence": {"slug": slug, "external_effect_attempted": False},
+                "repair": {
+                    "repository_kind": "HERMES",
+                    "allowed_write_scope": ["agents/scribe/run.py"],
+                },
+            }
+
+        issues: list[str] = []
+        for attempt in range(1, 4):
+            brief = _scribe_brief(keyword, slug, evidence)
+            brief.update({
+                "assignment_id": f"levnytt-improve-{slug}",
+                "brief_id": f"levnytt-improve-{slug}",
+                "format": "evidence-bound replacement for one existing canonical page",
+                "existing_page": _existing_page_context(source, opportunity),
+                "improvement_evidence": opportunity.get("gsc", {}),
+                "title_requirements": _title_requirements(keyword, issues),
+            })
+            try:
+                scribe_result = scribe_run(brief, project_id="levnytt")
+            except Exception as error:
+                issues = [f"scribe_error:{type(error).__name__}"]
+                continue
+            if scribe_result.get("status") != "READY_FOR_HANDOFF":
+                issues = list(scribe_result.get("failure_codes") or []) or ["scribe_blocked"]
+                continue
+            draft_ok, draft_issues = _content_gate(keyword, scribe_result)
+            if not draft_ok:
+                issues = list(draft_issues)
+                continue
+            try:
+                rendered, production_data = _render_improved_production_page(
+                    repo, opportunity, scribe_result, research_packet,
+                )
+            except (OSError, ValueError, json.JSONDecodeError) as error:
+                return {
+                    "status": "BLOCKED",
+                    "failure_class": "RECOVERABLE_QA_REJECTION",
+                    "detail": f"Canonical Phase 1 render failed: {type(error).__name__}: {error}",
+                    "evidence": {"slug": slug, "external_effect_attempted": False},
+                    "retry_eligible_this_run": False,
+                }
+            final_ok, final_issues = _final_publication_gate(rendered)
+            if not final_ok:
+                issues = list(final_issues)
+                continue
+
+            data_path = repo / "content" / "data" / "production-pages.json"
+            _atomic_text_write(source, rendered)
+            _atomic_text_write(data_path, production_data)
+            return {
+                "status": "SUCCEEDED",
+                "detail": (
+                    f"Staged evidence-backed improvement for {slug!r} through the current "
+                    "Phase 1 renderer; normal deployment remains pending."
+                ),
+                "evidence": {
+                    "opportunity_id": opportunity["opportunity_id"],
+                    "slug": slug,
+                    "keyword": keyword,
+                    "gate_passed": True,
+                    "final_gate_passed": True,
+                    "attempt": attempt,
+                    "source_file": source_rel,
+                    "staged_path": str(source),
+                    "production_data_path": str(data_path),
+                    "staged_content_sha256": _file_sha256(source),
+                    "production_data_sha256": _file_sha256(data_path),
+                    "public_url_preserved": opportunity["canonical_url"],
+                    "date_published_preserved": True,
+                    "sponsor_id_preserved": SPONSOR_ID,
+                    "renderer": "scripts/site_renderer.py",
+                    "lifecycle": "STAGED",
+                },
+            }
+
+        return {
+            "status": "BLOCKED",
+            "failure_class": "RECOVERABLE_QA_REJECTION",
+            "detail": f"Content improvement exhausted after 3 gated attempts for {slug!r}: " + "; ".join(issues),
+            "evidence": {
+                "opportunity_id": opportunity["opportunity_id"],
+                "slug": slug,
+                "attempts": 3,
+                "gate_issues": issues,
+                "external_effect_attempted": False,
+            },
+        }
+
     # ── content production (stage a full production page) ─────────
     def _execute_content_production(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         keyword = _keyword_from_action(ctx, action)
@@ -613,68 +787,92 @@ class LevNyttProcedure:
     # ── deployment ────────────────────────────────────────────────
     def _execute_deployment(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         repo = ctx.working_repository
-        slug = _first_staged_slug(repo)
-        if not slug:
-            return {"status": "SUCCEEDED", "detail": "No staged article is awaiting deployment.", "evidence": {"deployable": False}}
+        pending_path = ctx.runtime_directory / "commander" / PENDING_DEPLOYMENT_FILENAME
+        pending = _read_json(pending_path)
+        if pending:
+            return _resume_pending_deployment(repo, pending_path, pending)
 
-        article = repo / "content" / "articles" / f"{slug}.html"
+        work = _first_staged_work(repo)
+        if work is None:
+            return {"status": "SUCCEEDED", "detail": "No staged article is awaiting deployment.", "evidence": {"deployable": False}}
+        slug = work["slug"]
+
+        article = repo / work["source_file"]
         if not article.is_file():
-            return {"status": "BLOCKED", "detail": f"Staged article missing: {article}", "evidence": {"slug": slug}}
+            return {"status": "BLOCKED", "detail": f"Provenance-authorized staged source is missing: {article}", "evidence": {"slug": slug, "external_effect_attempted": False}}
 
         # 1. Repository/deployment safety checks.
-        safety = _deployment_safety(repo, slug)
+        allowed_paths = set(work["files"])
+        safety = _deployment_safety(repo, slug, allowed_paths)
         if not safety["ok"]:
-            return {"status": "BLOCKED", "detail": "Deployment safety check failed: " + "; ".join(safety["reasons"]), "evidence": safety}
+            return {"status": "BLOCKED", "detail": "Deployment safety check failed: " + "; ".join(safety["reasons"]), "evidence": {**safety, "external_effect_attempted": False}}
 
-        # 2. Update _redirects + sitemap for the new slug.
-        redirect_ok = _add_redirect(repo, slug)
-        sitemap_ok = _add_sitemap_entry(repo, slug)
-        if not (redirect_ok and sitemap_ok):
-            return {"status": "BLOCKED", "detail": "Could not register the slug in routing/sitemap.", "evidence": {"redirect_ok": redirect_ok, "sitemap_ok": sitemap_ok}}
+        # 2. Register routing only for a newly produced page. An improvement
+        # preserves its existing canonical route and must never manufacture a
+        # stale /content/articles rewrite for a root-backed page.
+        if work["capability_id"] == "content_improvement":
+            if not _sitemap_has_slug(repo, slug):
+                return {"status": "BLOCKED", "detail": "Existing canonical page is missing from the sitemap; refusing to invent a route during improvement deployment.", "evidence": {"slug": slug, "external_effect_attempted": False}}
+        else:
+            redirect_ok = _add_redirect(repo, slug)
+            sitemap_ok = _add_sitemap_entry(repo, slug)
+            if not (redirect_ok and sitemap_ok):
+                return {"status": "BLOCKED", "detail": "Could not register the slug in routing/sitemap.", "evidence": {"redirect_ok": redirect_ok, "sitemap_ok": sitemap_ok, "external_effect_attempted": False}}
 
         # 3. Stage exactly the intended production files (never a broad add).
-        files = [str(article.relative_to(repo)), "_redirects", "sitemap.xml"]
+        files = list(work["files"])
+        for candidate in ("_redirects", "sitemap.xml"):
+            changed = subprocess.run(
+                ["git", "-C", str(repo), "status", "--porcelain", "--", candidate],
+                capture_output=True, text=True, check=False,
+            ).stdout.strip()
+            if changed and candidate not in files:
+                files.append(candidate)
         add = subprocess.run(["git", "-C", str(repo), "add", "--", *files], capture_output=True, text=True, check=False)
         if add.returncode != 0:
-            return {"status": "BLOCKED", "detail": f"git add failed: {(add.stderr or '')[-300:]}", "evidence": {"files": files}}
+            return {"status": "BLOCKED", "detail": f"git add failed: {(add.stderr or '')[-300:]}", "evidence": {"files": files, "external_effect_attempted": False}}
 
         staged = subprocess.run(["git", "-C", str(repo), "status", "--porcelain"], capture_output=True, text=True, check=False)
         staged_paths = [line[3:].strip() for line in staged.stdout.splitlines() if line[:2] in {"A ", "M "}]
         unexpected = [p for p in staged_paths if p not in files and p != "config/content-inventory.json"]
         if unexpected:
             subprocess.run(["git", "-C", str(repo), "reset", "--", *files], capture_output=True, text=True, check=False)
-            return {"status": "BLOCKED", "detail": f"Refusing to commit unexpected staged files: {unexpected}", "evidence": {"unexpected": unexpected}}
+            return {"status": "BLOCKED", "detail": f"Refusing to commit unexpected staged files: {unexpected}", "evidence": {"unexpected": unexpected, "external_effect_attempted": False}}
 
+        verb = "Improve" if work["capability_id"] == "content_improvement" else "Publish"
         commit = subprocess.run(
-            ["git", "-C", str(repo), "commit", "-m", f"Publish NeoLife article: {slug}"],
+            ["git", "-C", str(repo), "commit", "-m", f"{verb} NeoLife page: {slug}"],
             capture_output=True, text=True, check=False,
         )
         if commit.returncode != 0:
             subprocess.run(["git", "-C", str(repo), "reset", "--", *files], capture_output=True, text=True, check=False)
-            return {"status": "BLOCKED", "detail": f"git commit failed: {(commit.stderr or commit.stdout or '')[-300:]}", "evidence": {}}
+            return {"status": "BLOCKED", "detail": f"git commit failed: {(commit.stderr or commit.stdout or '')[-300:]}", "evidence": {"external_effect_attempted": False}}
 
-        push = subprocess.run(["git", "-C", str(repo), "push", "origin", "main"], capture_output=True, text=True, check=False)
-        if push.returncode != 0:
-            # Remote diverged (e.g. the [skip ci] homepage auto-update bot).
-            # Recover by integrating remote changes and retrying once.
-            subprocess.run(["git", "-C", str(repo), "fetch", "origin"], capture_output=True, text=True, check=False)
-            rebase = subprocess.run(["git", "-C", str(repo), "pull", "--rebase", "origin", "main"], capture_output=True, text=True, check=False)
-            if rebase.returncode != 0:
-                subprocess.run(["git", "-C", str(repo), "rebase", "--abort"], capture_output=True, text=True, check=False)
-                return {"status": "BLOCKED", "detail": f"Deployment rebase failed (recoverable): {(rebase.stderr or '')[-300:]}", "evidence": {"commit_ok": True}}
-            push = subprocess.run(["git", "-C", str(repo), "push", "origin", "main"], capture_output=True, text=True, check=False)
-            if push.returncode != 0:
-                return {"status": "BLOCKED", "detail": f"git push failed after rebase (recoverable): {(push.stderr or '')[-300:]}", "evidence": {"commit_ok": True}}
+        pending = {
+            "slug": slug,
+            "commit": _git_head(repo),
+            "pushed": False,
+            "files": files,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+        _atomic_json_write(pending_path, pending)
+        push_ok, push_detail = _push_main_with_rebase(repo)
+        if not push_ok:
+            return {"status": "BLOCKED", "detail": push_detail, "evidence": {"slug": slug, "commit_ok": True, "pending_recovery": True, "external_effect_attempted": True}}
+        pending["pushed"] = True
+        pending["commit"] = _git_head(repo)
+        _atomic_json_write(pending_path, pending)
 
         # 4. Live verification (Cloudflare Pages auto-deploys on push).
         live = _verify_live(slug, wait_seconds=120)
         if not live:
-            return {"status": "BLOCKED", "detail": f"Committed and pushed {slug!r}, but live verification failed (not yet 200).", "evidence": {"slug": slug, "deployed": True, "live_verified": False}}
+            return {"status": "BLOCKED", "detail": f"Committed and pushed {slug!r}, but live verification failed (not yet 200).", "evidence": {"slug": slug, "deployed": True, "live_verified": False, "pending_recovery": True, "external_effect_attempted": True}}
 
+        pending_path.unlink(missing_ok=True)
         return {
             "status": "SUCCEEDED",
             "detail": f"Deployed {slug!r} and verified live at {SITE}/{slug}.",
-            "evidence": {"slug": slug, "live_url": f"{SITE}/{slug}", "live_verified": True, "deployed": True},
+            "evidence": {"slug": slug, "live_url": f"{SITE}/{slug}", "live_verified": True, "deployed": True, "external_effect_attempted": True},
         }
 
     def _execute_technical_repair(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -1352,6 +1550,26 @@ class LevNyttProcedure:
                 return True
             slug = evidence.get("slug")
             return bool(slug) and (ctx.working_repository / "content" / "articles" / f"{slug}.html").is_file()
+        if capability == "content_improvement":
+            source_file = str(evidence.get("source_file") or "")
+            source = ctx.working_repository / source_file
+            data_path = ctx.working_repository / "content" / "data" / "production-pages.json"
+            if not source_file or not source.is_file() or not data_path.is_file():
+                return False
+            if _file_sha256(source) != evidence.get("staged_content_sha256"):
+                return False
+            if _file_sha256(data_path) != evidence.get("production_data_sha256"):
+                return False
+            html = source.read_text(encoding="utf-8", errors="ignore")
+            final_ok, _issues = _final_publication_gate(html)
+            return bool(
+                evidence.get("gate_passed")
+                and evidence.get("final_gate_passed")
+                and final_ok
+                and evidence.get("sponsor_id_preserved") == SPONSOR_ID
+                and f'<link rel="canonical" href="{evidence.get("public_url_preserved")}"' in html
+                and "levnytt-rebuild.js?v=" in html
+            )
         if capability == "deployment":
             if evidence.get("deployable") is False:
                 return True
@@ -1454,13 +1672,106 @@ def _verify_live_ok(slug: str) -> bool:
     return _verify_live(slug, wait_seconds=0)
 
 
-def _deployment_safety(repo: Path, slug: str) -> dict[str, Any]:
-    """Refuse to deploy if any tracked file is modified or staged other than the
-    intended routing/sitemap edits. Untracked (??) files are expected (the
-    staged articles); they are never broad-added."""
+def _git_head(repo: Path) -> str:
+    completed = subprocess.run(
+        ["git", "-C", str(repo), "rev-parse", "HEAD"],
+        capture_output=True, text=True, check=False,
+    )
+    return completed.stdout.strip() if completed.returncode == 0 else ""
+
+
+def _push_main_with_rebase(repo: Path) -> tuple[bool, str]:
+    push = subprocess.run(
+        ["git", "-C", str(repo), "push", "origin", "main"],
+        capture_output=True, text=True, check=False,
+    )
+    if push.returncode == 0:
+        return True, ""
+    subprocess.run(
+        ["git", "-C", str(repo), "fetch", "origin"],
+        capture_output=True, text=True, check=False,
+    )
+    rebase = subprocess.run(
+        ["git", "-C", str(repo), "pull", "--rebase", "origin", "main"],
+        capture_output=True, text=True, check=False,
+    )
+    if rebase.returncode != 0:
+        subprocess.run(
+            ["git", "-C", str(repo), "rebase", "--abort"],
+            capture_output=True, text=True, check=False,
+        )
+        return False, f"Deployment rebase failed (recoverable): {(rebase.stderr or '')[-300:]}"
+    push = subprocess.run(
+        ["git", "-C", str(repo), "push", "origin", "main"],
+        capture_output=True, text=True, check=False,
+    )
+    if push.returncode != 0:
+        return False, f"git push failed after rebase (recoverable): {(push.stderr or '')[-300:]}"
+    return True, ""
+
+
+def _resume_pending_deployment(
+    repo: Path,
+    pending_path: Path,
+    pending: dict[str, Any],
+) -> dict[str, Any]:
+    """Resume the existing commit/push/live-verification deployment lifecycle."""
+    slug = str(pending.get("slug") or "").strip()
+    commit = str(pending.get("commit") or "").strip()
+    if not slug or not commit:
+        return {
+            "status": "BLOCKED",
+            "detail": "Pending deployment continuation state is malformed.",
+            "evidence": {"pending_recovery": True, "external_effect_attempted": False},
+            "retry_eligible_this_run": False,
+        }
+    if not pending.get("pushed"):
+        if _git_head(repo) != commit:
+            return {
+                "status": "BLOCKED",
+                "detail": "Pending deployment commit is not repository HEAD; refusing to push unrelated commits.",
+                "evidence": {"slug": slug, "pending_recovery": True, "external_effect_attempted": False},
+                "retry_eligible_this_run": False,
+            }
+        push_ok, push_detail = _push_main_with_rebase(repo)
+        if not push_ok:
+            return {
+                "status": "BLOCKED",
+                "detail": push_detail,
+                "evidence": {"slug": slug, "pending_recovery": True, "external_effect_attempted": True},
+            }
+        pending["pushed"] = True
+        pending["commit"] = _git_head(repo)
+        _atomic_json_write(pending_path, pending)
+    if not _verify_live(slug, wait_seconds=120):
+        return {
+            "status": "BLOCKED",
+            "detail": f"Deployment continuation still cannot verify {slug!r} live.",
+            "evidence": {"slug": slug, "deployed": True, "live_verified": False, "pending_recovery": True, "external_effect_attempted": True},
+        }
+    pending_path.unlink(missing_ok=True)
+    return {
+        "status": "SUCCEEDED",
+        "detail": f"Resumed deployment and verified {slug!r} live at {SITE}/{slug}.",
+        "evidence": {
+            "slug": slug,
+            "live_url": f"{SITE}/{slug}",
+            "live_verified": True,
+            "deployed": True,
+            "recovered_pending_deployment": True,
+            "external_effect_attempted": True,
+        },
+    }
+
+
+def _deployment_safety(
+    repo: Path, slug: str, allowed_paths: set[str] | None = None,
+) -> dict[str, Any]:
+    """Permit only the exact provenance-bound files and routing metadata."""
     reasons: list[str] = []
+    allowed = set(allowed_paths or ()) | {"_redirects", "sitemap.xml"}
     status = subprocess.run(
-        ["git", "-C", str(repo), "status", "--porcelain"],
+        ["git", "-C", str(repo), "status", "--porcelain", "--untracked-files=all"],
         capture_output=True, text=True, check=False,
     ).stdout
     for line in status.splitlines():
@@ -1468,14 +1779,21 @@ def _deployment_safety(repo: Path, slug: str) -> dict[str, Any]:
         path = line[3:].strip()
         if not path:
             continue
-        if code == "??":
+        if code == "??" and path in allowed:
             continue
-        if path in {"_redirects", "sitemap.xml"}:
+        if path in allowed:
             continue
         reasons.append(f"unexpected tracked change {code!r} {path}")
     if reasons:
         return {"ok": False, "reasons": reasons}
     return {"ok": True, "reasons": []}
+
+
+def _sitemap_has_slug(repo: Path, slug: str) -> bool:
+    try:
+        return f"{SITE}/{slug}" in (repo / "sitemap.xml").read_text(encoding="utf-8")
+    except OSError:
+        return False
 
 
 def _add_redirect(repo: Path, slug: str) -> bool:
@@ -1511,8 +1829,11 @@ def _add_sitemap_entry(repo: Path, slug: str) -> bool:
 
 
 def _provenance_verified_slugs(repo: Path) -> set[str]:
-    """Slugs with a CONFIRMED content_production/legacy_migration commitment
-    recording a passed final-publication gate.
+    """Slugs with a CONFIRMED production/migration/improvement commitment.
+
+    This is historical provenance only. Deployment eligibility is stricter:
+    ``_first_staged_work`` additionally binds existing-page improvements to
+    the exact source and production-data hashes in the confirmation receipt.
 
     A file existing under content/articles/*.html is not by itself proof
     Commander produced it for real -- a manual run of this pipeline (e.g. to
@@ -1532,7 +1853,9 @@ def _provenance_verified_slugs(repo: Path) -> set[str]:
     for row in rows if isinstance(rows, list) else []:
         if not isinstance(row, dict):
             continue
-        if row.get("capability_id") not in ("content_production", "legacy_migration"):
+        if row.get("capability_id") not in (
+            "content_production", "content_improvement", "legacy_migration",
+        ):
             continue
         if row.get("status") != "CONFIRMED":
             continue
@@ -1548,14 +1871,92 @@ def _provenance_verified_slugs(repo: Path) -> set[str]:
     return verified
 
 
+def _confirmed_staged_work(repo: Path) -> list[dict[str, Any]]:
+    ledger = _read_json(repo / "runtime" / "commander" / "commitments.json")
+    rows = ledger.get("commitments") if isinstance(ledger.get("commitments"), list) else []
+    records: list[dict[str, Any]] = []
+    for row in rows:
+        if not isinstance(row, dict) or row.get("status") != "CONFIRMED":
+            continue
+        capability = str(row.get("capability_id") or "")
+        if capability not in {"content_production", "content_improvement", "legacy_migration"}:
+            continue
+        reason = row.get("resolution_reason")
+        if not isinstance(reason, str):
+            continue
+        try:
+            parsed = ast.literal_eval(reason)
+        except (ValueError, SyntaxError):
+            continue
+        if not isinstance(parsed, dict) or not parsed.get("gate_passed") or not parsed.get("slug"):
+            continue
+        slug = str(parsed["slug"])
+        source_file = str(parsed.get("source_file") or f"content/articles/{slug}.html")
+        record = {
+            "capability_id": capability,
+            "slug": slug,
+            "source_file": source_file,
+            "files": [source_file],
+        }
+        if capability == "content_improvement":
+            content_hash = str(parsed.get("staged_content_sha256") or "")
+            data_hash = str(parsed.get("production_data_sha256") or "")
+            if not content_hash or not data_hash:
+                continue
+            record.update({
+                "staged_content_sha256": content_hash,
+                "production_data_sha256": data_hash,
+                "files": [source_file, "content/data/production-pages.json"],
+            })
+        records.append(record)
+    return records
+
+
+def _git_status_paths(repo: Path) -> dict[str, str]:
+    completed = subprocess.run(
+        ["git", "-C", str(repo), "status", "--porcelain", "--untracked-files=all"],
+        capture_output=True, text=True, check=False,
+    )
+    if completed.returncode != 0:
+        return {}
+    return {
+        line[3:].strip(): line[:2]
+        for line in completed.stdout.splitlines()
+        if len(line) > 3 and line[3:].strip()
+    }
+
+
+def _first_staged_work(repo: Path) -> dict[str, Any] | None:
+    status = _git_status_paths(repo)
+    eligible: list[dict[str, Any]] = []
+    for record in _confirmed_staged_work(repo):
+        source = repo / record["source_file"]
+        if not source.is_file() or record["source_file"] not in status:
+            continue
+        if record["capability_id"] == "content_improvement":
+            data = repo / "content" / "data" / "production-pages.json"
+            if "content/data/production-pages.json" not in status:
+                continue
+            if _file_sha256(source) != record["staged_content_sha256"]:
+                continue
+            if _file_sha256(data) != record["production_data_sha256"]:
+                continue
+        elif status[record["source_file"]] != "??":
+            continue
+        eligible.append(record)
+    return sorted(eligible, key=lambda item: item["slug"])[0] if eligible else None
+
+
 def _first_staged_slug(repo: Path) -> str | None:
-    tracked = set(subprocess.run(["git", "-C", str(repo), "ls-files", "content/articles/"], capture_output=True, text=True, check=False).stdout.splitlines())
-    verified = _provenance_verified_slugs(repo)
-    for path in sorted((repo / "content" / "articles").glob("*.html")):
-        rel = str(path.relative_to(repo))
-        if rel not in tracked and path.stem in verified:
-            return path.stem
-    return None
+    work = _first_staged_work(repo)
+    return str(work["slug"]) if work else None
+
+
+def _staged_article_path(repo: Path, slug: str) -> Path | None:
+    work = _first_staged_work(repo)
+    if work is None or work["slug"] != slug:
+        return None
+    return repo / work["source_file"]
 
 
 def _slug_from_action(ctx, action: dict[str, Any]) -> str | None:
@@ -1587,6 +1988,112 @@ def _coverage_gap_count(ctx) -> int:
     coverage = _read_json(ctx.runtime_directory / "intelligence" / "content-coverage.json")
     records = coverage.get("coverage") if isinstance(coverage.get("coverage"), list) else []
     return sum(1 for r in records if isinstance(r, dict) and r.get("coverage") == "NONE")
+
+
+def _content_improvement_target(action: dict[str, Any]) -> dict[str, Any] | None:
+    """Resolve exactly one current opportunity through the Hermes contract."""
+    from app.commander.evidence import build_factual_evidence
+    from app.commander.procedure_contract import select_exact_opportunity
+
+    snapshot = build_factual_evidence(project_id="levnytt")
+    levnytt = (snapshot.get("sources") or {}).get("levnytt") or {}
+    bundle = levnytt.get("content_improvement_opportunities") or {}
+    candidates = bundle.get("opportunities") if isinstance(bundle, dict) else []
+    selected = select_exact_opportunity(action, candidates or [])
+    if selected is None:
+        return None
+    required = {
+        "opportunity_id", "slug", "canonical_url", "public_path", "source_file",
+    }
+    if not required.issubset(selected) or any(not str(selected[key]).strip() for key in required):
+        raise ValueError("Selected content-improvement opportunity lacks canonical identity fields")
+    return selected
+
+
+def _load_site_renderer():
+    path = Path(__file__).resolve().parents[1] / "scripts" / "site_renderer.py"
+    spec = importlib.util.spec_from_file_location("levnytt_content_improvement_renderer", str(path))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _existing_page_context(source: Path, opportunity: dict[str, Any]) -> dict[str, Any]:
+    """Bound the existing page context supplied to Scribe."""
+    current = source.read_text(encoding="utf-8", errors="replace")
+    visible = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", " ", current, flags=re.I | re.S)
+    visible = html_lib.unescape(re.sub(r"<[^>]+>", " ", visible))
+    visible = re.sub(r"\s+", " ", visible).strip()
+    return {
+        "canonical_url": opportunity["canonical_url"],
+        "source_file": opportunity["source_file"],
+        "current_title": opportunity.get("title"),
+        "current_content_excerpt": visible[:6000],
+        "instruction": (
+            "Revise this exact existing page using the supplied research. Preserve its "
+            "canonical identity and do not invent claims or create a different article."
+        ),
+    }
+
+
+def _render_improved_production_page(
+    repo: Path,
+    opportunity: dict[str, Any],
+    scribe_result: dict[str, Any],
+    research_packet: dict[str, Any],
+) -> tuple[str, str]:
+    """Render one replacement with the canonical Phase 1 renderer and data."""
+    data_path = repo / "content" / "data" / "production-pages.json"
+    data = json.loads(data_path.read_text(encoding="utf-8"))
+    pages = data.get("pages")
+    if not isinstance(pages, list):
+        raise ValueError("production-pages.json has no pages list")
+    index = next(
+        (
+            index for index, page in enumerate(pages)
+            if isinstance(page, dict) and page.get("path") == opportunity["public_path"]
+        ),
+        None,
+    )
+    if index is None:
+        raise ValueError(f"Canonical production page is missing for {opportunity['public_path']}")
+    previous = pages[index]
+    if previous.get("source_file") != opportunity["source_file"]:
+        raise ValueError("Current production source no longer matches the selected opportunity")
+    if previous.get("url") != opportunity["canonical_url"]:
+        raise ValueError("Current canonical URL no longer matches the selected opportunity")
+
+    draft = _assemble_page(
+        str(opportunity["slug"]),
+        str(opportunity.get("research_topic") or opportunity.get("title") or opportunity["slug"]),
+        scribe_result,
+        research_packet,
+    )
+    renderer = _load_site_renderer()
+    updated = renderer.extract_document(
+        previous["url"], draft, previous["source_file"], repo,
+    )
+    for key in ("url", "path", "family", "language", "source_file", "date_published"):
+        updated[key] = previous.get(key, updated.get(key))
+    updated["date_modified"] = date.today().isoformat()
+    pages[index] = updated
+    data["generated_at"] = datetime.now(timezone.utc).isoformat()
+    rendered = renderer.render_page(updated, repo)
+    return rendered, json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+
+
+def _atomic_text_write(path: Path, value: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        "w", encoding="utf-8", dir=path.parent, delete=False,
+    ) as handle:
+        handle.write(value)
+        temporary = Path(handle.name)
+    os.replace(temporary, path)
+
+
+def _file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 # ── page assembly (reuses the canonical LevNytt article template) ─

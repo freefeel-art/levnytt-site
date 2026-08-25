@@ -17,6 +17,7 @@ exact slug.
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import subprocess
 import sys
@@ -42,11 +43,11 @@ def _write_commitments(repo: Path, commitments: list[dict]) -> None:
     path.write_text(json.dumps({"commitments": commitments}), encoding="utf-8")
 
 
-def _confirmed_commitment(slug: str) -> dict:
+def _confirmed_commitment(slug: str, *, capability_id: str = "content_production", **evidence) -> dict:
     return {
-        "capability_id": "content_production",
+        "capability_id": capability_id,
         "status": "CONFIRMED",
-        "resolution_reason": str({"slug": slug, "gate_passed": True, "staged_path": f"/repo/content/articles/{slug}.html"}),
+        "resolution_reason": str({"slug": slug, "gate_passed": True, "staged_path": f"/repo/content/articles/{slug}.html", **evidence}),
     }
 
 
@@ -87,6 +88,47 @@ def test_deployed_article_is_not_reselected(tmp_path: Path):
     _write_commitments(repo, [_confirmed_commitment("deployed-slug")])
 
     assert _first_staged_slug(repo) is None
+
+
+def test_hash_bound_content_improvement_selects_only_the_confirmed_existing_bytes(tmp_path: Path):
+    repo = _init_repo(tmp_path)
+    data = repo / "content" / "data" / "production-pages.json"
+    data.parent.mkdir(parents=True)
+    article = repo / "existing.html"
+    article.write_text("<h1>Original</h1>", encoding="utf-8")
+    data.write_text('{"pages": []}', encoding="utf-8")
+    _git("add", "existing.html", "content/data/production-pages.json", cwd=repo)
+    _git("commit", "-m", "seed", cwd=repo)
+    article.write_text("<h1>Improved</h1>", encoding="utf-8")
+    data.write_text('{"pages": [{"path": "/existing"}]}', encoding="utf-8")
+    sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+    _write_commitments(repo, [_confirmed_commitment(
+        "existing",
+        capability_id="content_improvement",
+        source_file="existing.html",
+        staged_content_sha256=sha(article),
+        production_data_sha256=sha(data),
+    )])
+
+    assert _first_staged_slug(repo) == "existing"
+    assert procedure._staged_article_path(repo, "existing") == article
+
+    article.write_text("<h1>Later manual edit</h1>", encoding="utf-8")
+    assert _first_staged_slug(repo) is None
+    assert procedure._staged_article_path(repo, "existing") is None
+
+
+def test_random_modified_existing_page_without_commitment_is_never_selected(tmp_path: Path):
+    repo = _init_repo(tmp_path)
+    article = repo / "manual.html"
+    article.write_text("<h1>Original</h1>", encoding="utf-8")
+    _git("add", "manual.html", cwd=repo)
+    _git("commit", "-m", "seed", cwd=repo)
+    article.write_text("<h1>Manual change</h1>", encoding="utf-8")
+    _write_commitments(repo, [])
+
+    assert _first_staged_slug(repo) is None
+    assert procedure._staged_article_path(repo, "manual") is None
 
 
 def test_mixed_pool_only_returns_the_verified_slug(tmp_path: Path):
