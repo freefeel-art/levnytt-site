@@ -989,65 +989,55 @@ class LevNyttProcedure:
 
     # ── community (NeoLife, owned page only) ──────────────────────
     def _execute_community_acquisition(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
-        """Read-only observation of the owned LevNytt Facebook Page.
+        """Route one bounded, read-only community observation through the shared
+        Community Manager, under LevNytt's own project context.
 
-        Never posts, comments, replies, joins, or sends. Classifies observed
-        candidates with the NeoLife taxonomy and persists them project-scoped.
+        This is project-level routing, not a second Community Manager
+        implementation: the shared executor (agents/community_manager) performs
+        discovery, evaluation, evidence grounding, and destination/attribution,
+        all resolved from the active LevNytt project (commander/community.json
+        and the levnytt_health_evidence provider). Never sends, posts, joins, or
+        replies.
+
+        A truthful no-opportunity observation is a success, not a failure.
         """
-        from app.commander.facebook_identity import levnytt_facebook_identity
-        from app.providers.facebook_community_observer import FacebookCommunityObserver
-        levnytt_community = _levnytt_community()
+        from agents.community_manager.run import observation_assignment
+        from agents.community_manager.run import run as run_community_manager
 
-        identity = levnytt_facebook_identity()
-        observer = FacebookCommunityObserver(
-            storage_state=Path(HERMES_REPO) / "config" / "storage_state.json",
-            page_id=identity.page_id,
-            headless=True,
-            allow_network=True,
-        )
-        observation = observer.observe_owned_page()
+        assignment = observation_assignment(self.project_id)
+        result = run_community_manager(assignment)
 
-        if observation.status != "COMPLETE":
+        status = str(result.get("status") or "FAILED").upper()
+        signals = result.get("routed_signals") or []
+        qualified = result.get("qualified_engagement_candidate") or {}
+        evidence: dict[str, Any] = {
+            "external_effect_attempted": False,
+            "community_status": status,
+            "signals_found": len(signals),
+            "groups_assessed": len(result.get("group_assessments") or []),
+            "qualified_engagement_candidate": qualified.get("status"),
+            "project": result.get("project"),
+            "language": assignment["response_policy"]["language"],
+        }
+        if result.get("failure_codes"):
+            evidence["failure_codes"] = result["failure_codes"]
+
+        if status in {"COMPLETE", "PARTIAL"}:
             return {
-                "status": "BLOCKED",
-                "detail": "Owned-page observation did not complete: " + "; ".join(observation.failure_codes or observation.limitations or ["unknown"]),
-                "evidence": {"page_id": identity.page_id, "page_name": identity.page_name, "status": observation.status},
+                "status": "SUCCEEDED",
+                "detail": (
+                    f"Community observation completed: {len(signals)} signal(s), "
+                    f"{len(result.get('group_assessments') or [])} group(s) assessed; "
+                    f"engagement candidate: {qualified.get('status')}."
+                ),
+                "evidence": evidence,
             }
 
-        candidates = observation.conversation_candidates or []
-        signals: list[dict[str, Any]] = []
-        for candidate in candidates:
-            if not isinstance(candidate, dict):
-                continue
-            text = str(candidate.get("text", "")).strip()
-            if not text:
-                continue
-            classification = levnytt_community.classify_levnytt_signal(text)
-            signals.append({
-                "candidate_id": candidate.get("candidate_id", ""),
-                "text": text,
-                "classification": classification,
-                "observed_at": datetime.now(timezone.utc).isoformat(),
-                "source": "owned_facebook_page",
-            })
-
-        actionable = [s for s in signals if s.get("classification", {}).get("is_actionable")]
-        levnytt_community.record_signals(ctx.runtime_directory, signals)
-
+        detail = "; ".join(result.get("limitations") or []) or status
         return {
-            "status": "SUCCEEDED",
-            "detail": (
-                f"Observed owned LevNytt Facebook Page ({identity.page_name}, {identity.page_id}): "
-                f"{len(candidates)} candidate(s), {len(actionable)} actionable NeoLife signal(s)."
-            ),
-            "evidence": {
-                "page_id": identity.page_id,
-                "page_name": identity.page_name,
-                "candidate_count": len(candidates),
-                "actionable_signal_count": len(actionable),
-                "signals": actionable,
-                "read_only": True,
-            },
+            "status": "BLOCKED",
+            "detail": detail,
+            "evidence": evidence,
         }
 
     def _execute_community_intelligence(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -1378,116 +1368,76 @@ class LevNyttProcedure:
         }
 
     def _execute_community_engagement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
-        """One bounded, policy-gated reply to one already-discovered comment.
+        """Route one bounded reply through the shared Community Manager, using a
+        qualified candidate from the durable Community Knowledge Store.
 
-        Maximum one reply. Uses the shared Facebook interaction safety layer and
-        grounds the reply text in genuine NeoLife evidence; a missing or
-        ungrounded target fails closed rather than sending a fabricated reply.
-
-        Policy approval is never manufactured here. propose_levnytt_response
-        marks every proposal requires_policy_approval_before_sending=True;
-        this executor only ever forwards to the interactor whatever
-        policy_approved value the caller's own engagement_target explicitly
-        supplied (default False, fail-closed) -- mirroring the exact contract
-        agents/community_manager/run.py already uses for OLSP
-        (interaction.get("policy_approved", False)), not a second, parallel
-        approval mechanism. An unapproved proposal is reported back as
-        evidence for Commander/Owner review, never sent.
+        This is project-level routing, not a second Community Manager
+        implementation. The specific target is derived deterministically from the
+        durable store (the same select_engagement_candidate the OLSP
+        operating-loop planner uses), never named by the LLM decision. At most
+        one reply; a reply occurs only when a genuinely qualified, current,
+        on-subject candidate exists and all shared gates (evidence, safety,
+        duplicate-prevention, policy) pass. No candidate is a truthful
+        NO_ACTION, not a defect.
         """
-        from app.commander.facebook_identity import levnytt_facebook_identity
-        from app.providers.facebook_community_interactor import FacebookCommunityInteractor
-        levnytt_community = _levnytt_community()
+        from agents.community_manager.engagement_targeting import select_engagement_candidate
+        from agents.community_manager.knowledge import load_store
+        from agents.community_manager.run import engagement_assignment
+        from agents.community_manager.run import run as run_community_manager
 
-        target = action.get("engagement_target") or {}
-        comment_reference = str(target.get("comment_reference", "")).strip()
-        comment_text = str(target.get("comment_text", "")).strip()
-        if not comment_reference or not comment_text:
+        store = load_store(ctx.runtime_directory / "intelligence" / "community" / "knowledge.json")
+        selection = select_engagement_candidate(store)
+
+        if selection.get("status") != "QUALIFIED":
             return {
-                "status": "BLOCKED",
-                "detail": "community_engagement requires an explicit engagement_target naming comment_reference and comment_text from a prior observation.",
-                "evidence": {"interaction_blocked": True},
-            }
-
-        classification = levnytt_community.classify_levnytt_signal(comment_text)
-        topic = levnytt_community._matching_keyword(comment_text, ctx.runtime_directory)
-        facts = levnytt_community.levnytt_grounding_facts(topic, ctx.runtime_directory) if topic else []
-        proposal = levnytt_community.propose_levnytt_response(comment_text, classification, facts)
-
-        if proposal.get("status") == "RESEARCH_REQUIRED":
-            levnytt_community.record_research_gaps(ctx.runtime_directory, [comment_text])
-            return {
-                "status": "BLOCKED",
-                "detail": f"No sourced NeoLife evidence grounds a reply; research required (evidence gap recorded): {proposal.get('reason', '')}",
-                "evidence": {"evidence_gap": True, "research_required": True},
-            }
-        if proposal.get("status") != "PROPOSED":
-            return {"status": "SUCCEEDED", "detail": proposal.get("reason", "No reply proposed."), "evidence": {"no_reply": True}}
-
-        reply_text = str(proposal.get("proposed_text", "")).strip()
-        if not reply_text:
-            return {"status": "BLOCKED", "detail": "No reply text was generated.", "evidence": {"interaction_blocked": True}}
-
-        # Strict identity against True, not bool(...) truthiness: a malformed
-        # or unexpected value (a non-empty string, a stray "1") must never
-        # accidentally coerce into approval. Fail closed on anything except
-        # an explicit boolean True.
-        policy_approved = target.get("policy_approved") is True
-        if proposal.get("requires_policy_approval_before_sending") and not policy_approved:
-            return {
-                "status": "BLOCKED",
-                "detail": "The proposed reply requires explicit policy approval before sending; engagement_target.policy_approved was not set to true, so no interaction was attempted.",
+                "status": "SUCCEEDED",
+                "detail": selection.get("reason", "No qualified community engagement opportunity."),
                 "evidence": {
-                    "interaction_blocked": True,
-                    "policy_approval_required": True,
-                    "proposed_text": reply_text,
-                    "signal_type": classification.get("primary_signal_type"),
-                    "grounding_source_type": proposal.get("grounding_source_type"),
+                    "external_effect_attempted": False,
+                    "qualified": False,
+                    "candidates_considered": len(selection.get("candidates_considered") or []),
                 },
             }
 
-        identity = levnytt_facebook_identity()
-        interactor = FacebookCommunityInteractor(
-            storage_state=Path(HERMES_REPO) / "config" / "storage_state.json",
-            page_id=identity.page_id,
-            headless=True,
-            allow_network=True,
-        )
-        result = interactor.reply_to_comment(
-            interaction_id=f"levnytt-engagement-{int(datetime.now(timezone.utc).timestamp())}",
-            comment_reference=comment_reference,
-            comment_text=comment_text,
-            reply_text=reply_text,
-            target_scope="owned_page",
-            policy_approved=policy_approved,
-            no_mass_action=True,
-        )
+        candidate = selection["selected_candidate"]
+        target = {
+            "platform": "facebook",
+            "target_scope": "group",
+            "group_reference": candidate.get("canonical_group_id") or candidate.get("group_reference"),
+            "comment_reference": candidate.get("permalink"),
+            "comment_text": candidate.get("candidate_text"),
+            "group_rules_observed": True,
+        }
+        assignment = engagement_assignment(self.project_id, target)
+        result = run_community_manager(assignment)
 
-        if result.status != "REPLIED":
+        status = str(result.get("status") or "FAILED").upper()
+        receipts = result.get("interaction_receipts") or []
+        receipt = receipts[0] if receipts else {}
+        replied = receipt.get("action") == "REPLIED"
+        evidence: dict[str, Any] = {
+            "external_effect_attempted": replied,
+            "qualified": True,
+            "group_reference": target["group_reference"],
+            "comment_reference": target["comment_reference"],
+            "community_status": status,
+            "replied": replied,
+            "project": result.get("project"),
+            "language": assignment["response_policy"]["language"],
+        }
+        if result.get("failure_codes"):
+            evidence["failure_codes"] = result["failure_codes"]
+
+        if status == "COMPLETE" and replied:
             return {
-                "status": "BLOCKED",
-                "detail": f"Reply did not complete: {result.status}",
-                "evidence": {"interaction_status": result.status, "failure_codes": result.failure_codes or [], "limitations": result.limitations or []},
+                "status": "SUCCEEDED",
+                "detail": "Replied once to the qualified LevNytt community conversation.",
+                "evidence": evidence,
             }
-
-        levnytt_community.record_signals(ctx.runtime_directory, [{
-            "candidate_id": "engagement",
-            "text": comment_text,
-            "classification": classification,
-            "replied": True,
-            "reply_text": reply_text,
-            "observed_at": datetime.now(timezone.utc).isoformat(),
-            "source": "owned_facebook_page",
-        }])
-
         return {
-            "status": "SUCCEEDED",
-            "detail": f"Replied once to the owned-page comment with an evidence-bound NeoLife response.",
-            "evidence": {
-                "replied": True,
-                "permalink": result.permalink,
-                "signal_type": classification.get("primary_signal_type"),
-                "grounding_source_type": proposal.get("grounding_source_type"),
-            },
+            "status": "BLOCKED",
+            "detail": "; ".join(result.get("limitations") or []) or status,
+            "evidence": evidence,
         }
 
     # ── verification ──────────────────────────────────────────────
@@ -1576,11 +1526,12 @@ class LevNyttProcedure:
             slug = evidence.get("slug")
             return bool(slug) and _verify_live(slug, wait_seconds=0)
         if capability == "community_acquisition":
-            # Read-only observation is verified when the owned-page snapshot
-            # completed; a no-comment result is still a valid observation.
-            return execution.get("status") == "SUCCEEDED"
+            # Read-only observation through the shared Community Manager is
+            # verified when its own status is a completed/partial observation;
+            # a no-comment result is still a valid observation.
+            return bool(evidence.get("community_status") in {"COMPLETE", "PARTIAL"})
         if capability == "community_engagement":
-            if evidence.get("no_reply") or evidence.get("research_required"):
+            if evidence.get("qualified") is False:
                 return True
             return bool(evidence.get("replied"))
         if capability == "community_intelligence":
@@ -1598,7 +1549,10 @@ class LevNyttProcedure:
     # ── measurement ───────────────────────────────────────────────
     def measure(self, ctx, action: dict[str, Any], execution: dict[str, Any]) -> dict[str, Any]:
         capability = str(action.get("capability", "")).strip().casefold()
-        next_check = (date.today() + timedelta(days=1)).isoformat() if capability == "social_publishing" else (date.today() + timedelta(days=7)).isoformat()
+        if capability in {"social_publishing", "community_acquisition", "community_engagement"}:
+            next_check = (date.today() + timedelta(days=1)).isoformat()
+        else:
+            next_check = (date.today() + timedelta(days=7)).isoformat()
         return {
             "summary": f"{action.get('summary')} — {execution.get('status')}. {execution.get('detail')}",
             "data": {"capability": capability, "evidence": execution.get("evidence", {})},
