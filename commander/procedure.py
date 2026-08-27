@@ -58,11 +58,16 @@ AUTHOR = {
 }
 
 # ── research-evidence source hierarchy ────────────────────────────
-# Public authorities (Swedish/EU) and authoritative reference sources.
+# Public authorities (Swedish/EU) and authoritative reference sources. The
+# skincare/hair and home-care product lines resolve to different authorities
+# than the supplement lines: NHS/Mayo/MedlinePlus/AAD for skin and hair,
+# the US EPA (and existing konsumentverket.se) for cleaning-product safety.
 AUTHORITY_DOMAINS = (
     "livsmedelsverket.se", "efsa.europa.eu", "efsa.onlinelibrary.wiley.com",
     "who.int", "fda.gov", "konsumentverket.se", "1177.se",
     "folkhalsomyndigheten.se", "europa.eu", "ec.europa.eu",
+    "nhs.uk", "mayoclinic.org", "medlineplus.gov", "aad.org",
+    "health.harvard.edu", "dermnetnz.org", "epa.gov",
 )
 # Peer-reviewed / primary science and reference sources.
 SCIENCE_DOMAINS = (
@@ -355,6 +360,20 @@ _SE_EN_TERMS = {
     "adaptogener": "adaptogens",
     "cell membran": "cell membrane",
     "cellmembran": "cell membrane",
+    # Personlig vård (skincare / hair) and Rengöring (home care) anchors: the
+    # general-science SERP layer must query the English topic, otherwise a
+    # Swedish e-commerce term is looked up on the US SERP and returns no
+    # authoritative source (observed live: "hudvård" researched as "hudvård").
+    "hudvård": "skin care",
+    "hudvard": "skin care",
+    "schampo": "shampoo",
+    "håravfall": "hair loss",
+    "haravfall": "hair loss",
+    "torr hud": "dry skin",
+    "miljövänlig rengöring": "eco-friendly cleaning products",
+    "miljovanlig rengoring": "eco-friendly cleaning products",
+    "diskmedel": "dish soap",
+    "tvättmedel": "laundry detergent",
 }
 
 RESEARCH_CACHE_TTL_DAYS = 30
@@ -2717,6 +2736,25 @@ def _extract_sentences(markdown: str, limit: int) -> list[str]:
     return out
 
 
+_FETCH_USER_AGENT = (
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+)
+
+
+def _html_to_text(raw: str) -> str:
+    """Strip script/style/tags and unescape entities into plain text."""
+    text = re.sub(r"<(script|style|noscript)[^>]*>[\s\S]*?</\1>", " ", raw, flags=re.IGNORECASE)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = html_lib.unescape(text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _html_title(raw: str) -> str:
+    match = re.search(r"<title[^>]*>(.*?)</title>", raw, flags=re.IGNORECASE | re.DOTALL)
+    return html_lib.unescape(match.group(1)).strip() if match else ""
+
+
 def _fetch_source(url: str) -> tuple[str, str] | None:
     try:
         from app.providers.firecrawl import scrape
@@ -2724,9 +2762,22 @@ def _fetch_source(url: str) -> tuple[str, str] | None:
         data = scrape(url, formats=("markdown",), only_main_content=True)
         md = (data.get("markdown") or "").strip()
         title = (data.get("metadata") or {}).get("title") or ""
-        if not md:
+        if md:
+            return md, title
+    except Exception:
+        pass
+    # Fallback: direct bounded GET when the scraping provider is rate-limited
+    # or out of credits. One URL, one read-only request, plain-text extraction
+    # via the same deterministic sentence pipeline. The research-sufficiency
+    # gate still applies verbatim source-type filtering afterwards.
+    try:
+        request = urllib.request.Request(url, headers={"User-Agent": _FETCH_USER_AGENT})
+        with urllib.request.urlopen(request, timeout=20) as response:
+            raw = response.read().decode("utf-8", errors="ignore")
+        text = _html_to_text(raw)
+        if not text:
             return None
-        return md, title
+        return text, _html_title(raw)
     except Exception:
         return None
 
@@ -3285,12 +3336,21 @@ def _seed_keyword_candidates(ctx) -> None:
     if community_candidates:
         levnytt_community.record_scout_promotions(ctx.runtime_directory, community_candidates)
 
-    # Category floor: the three NeoLife product lines each get at least one
-    # Scout seed, reserved before the demand-driven GSC fill, so a supplement-
-    # heavy GSC/forum result set cannot permanently starve Personlig vård and
-    # Rengöring of search research and content. _add deduplicates, so a line
-    # already represented by GSC/community is left untouched.
-    for anchor in ("kosttillskott", "hudvård", "miljövänlig rengöring"):
+    # Category floor: the three NeoLife product lines each get Scout seeds,
+    # reserved before the demand-driven GSC fill, so a supplement-heavy
+    # GSC/forum result set cannot permanently starve Personlig vård and
+    # Rengöring of search research and content. Each line seeds its full
+    # anchor set, not only the broad category name: the broad name ("hudvård")
+    # resolves to e-commerce SERPs with no authoritative source, while the
+    # specific topics ("håravfall", "torr hud", "diskmedel", ...) resolve to
+    # medical/authority sources the research-sufficiency gate can use. _add
+    # deduplicates, so a line already represented by GSC/community is left
+    # untouched.
+    for anchor in (
+        "kosttillskott",
+        "hudvård", "schampo", "håravfall", "torr hud",
+        "miljövänlig rengöring", "diskmedel", "tvättmedel",
+    ):
         _add(anchor, evidence_type="GSC_DEMAND")
 
     # First-party measured GSC search-impression evidence fills the
