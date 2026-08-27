@@ -3285,6 +3285,14 @@ def _seed_keyword_candidates(ctx) -> None:
     if community_candidates:
         levnytt_community.record_scout_promotions(ctx.runtime_directory, community_candidates)
 
+    # Category floor: the three NeoLife product lines each get at least one
+    # Scout seed, reserved before the demand-driven GSC fill, so a supplement-
+    # heavy GSC/forum result set cannot permanently starve Personlig vård and
+    # Rengöring of search research and content. _add deduplicates, so a line
+    # already represented by GSC/community is left untouched.
+    for anchor in ("kosttillskott", "hudvård", "miljövänlig rengöring"):
+        _add(anchor, evidence_type="GSC_DEMAND")
+
     # First-party measured GSC search-impression evidence fills the
     # remaining slots, ranked by impressions.
     gsc = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
