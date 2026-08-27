@@ -3180,7 +3180,13 @@ def _build_topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
 def _topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
     """Cache-aware topic research: reuse a fresh (≤30-day) packet, including an
     insufficient one (an insufficient result is itself a durable finding — it
-    must not be re-researched every decision)."""
+    must not be re-researched every decision).
+
+    A packet whose only claim is the NeoLife first-party fallback (source_count
+    == 1) means no real source was reached — e.g. the scraping provider was
+    down or out of credits. That is a transient outage, not a durable finding,
+    so it is NOT cached: caching it would freeze a one-off provider failure
+    into a 30-day research block for that topic."""
     cache_path = ctx.runtime_directory / "intelligence" / f"research-{slug}.json"
     if cache_path.is_file():
         try:
@@ -3192,11 +3198,12 @@ def _topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
         except (OSError, json.JSONDecodeError, ValueError):
             pass
     packet = _build_topic_research(ctx, keyword, slug)
-    try:
-        cache_path.parent.mkdir(parents=True, exist_ok=True)
-        cache_path.write_text(json.dumps(packet, ensure_ascii=False, indent=2), encoding="utf-8")
-    except OSError:
-        pass
+    if packet.get("sufficiency", {}).get("source_count", 0) > 1:
+        try:
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            cache_path.write_text(json.dumps(packet, ensure_ascii=False, indent=2), encoding="utf-8")
+        except OSError:
+            pass
     return packet
 
 
