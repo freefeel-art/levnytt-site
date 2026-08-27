@@ -620,7 +620,9 @@ class LevNyttProcedure:
                 "retry_eligible_this_run": False,
             }
 
-        evidence, research_packet = _topic_scribe_evidence(ctx, keyword, slug)
+        evidence, research_packet = _topic_scribe_evidence(
+            ctx, keyword, slug, refresh=_recovery_refresh(action),
+        )
         sufficiency = research_packet.get("sufficiency", {})
         if not sufficiency.get("passed") or not evidence:
             notes = "; ".join(sufficiency.get("notes", [])) or "no authoritative source evidence"
@@ -755,13 +757,17 @@ class LevNyttProcedure:
         if lifecycle == "STAGED":
             return {"status": "SUCCEEDED", "detail": f"Article {slug!r} is already staged and awaiting deployment.", "evidence": {"slug": slug, "lifecycle": "STAGED", "already_staged": True}}
 
-        evidence, research_packet = _topic_scribe_evidence(ctx, keyword, slug)
+        evidence, research_packet = _topic_scribe_evidence(
+            ctx, keyword, slug, refresh=_recovery_refresh(action),
+        )
         if not research_packet.get("sufficiency", {}).get("passed"):
             notes = "; ".join(research_packet["sufficiency"].get("notes", []))
             return {
                 "status": "BLOCKED",
+                "failure_class": "EVIDENCE_REQUIRED",
                 "detail": f"Research sufficiency not met for {keyword!r}: {notes}. Broaden/retry research rather than asking Scribe to fill gaps.",
                 "evidence": {"keyword": keyword, "slug": slug, "research_sufficiency": research_packet["sufficiency"], "claim_count": len(research_packet.get("claims", []))},
+                "retry_eligible_this_run": False,
             }
         if not evidence:
             return {"status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED", "detail": f"Insufficient project evidence to ground an article for {keyword!r}; Commander should first delegate research.", "evidence": {"keyword": keyword, "external_effect_attempted": False}}
@@ -951,7 +957,9 @@ class LevNyttProcedure:
             return {"status": "BLOCKED", "detail": f"Legacy page {slug!r} not found at root.", "evidence": {"slug": slug}}
 
         keyword = _legacy_keyword_from_slug(slug)
-        evidence, research_packet = _topic_scribe_evidence(ctx, keyword, slug)
+        evidence, research_packet = _topic_scribe_evidence(
+            ctx, keyword, slug, refresh=_recovery_refresh(action),
+        )
         if not research_packet.get("sufficiency", {}).get("passed"):
             notes = "; ".join(research_packet["sufficiency"].get("notes", []))
             _record_legacy_outcome(runtime, slug, status="RESEARCH_INSUFFICIENT", note=notes)
@@ -3213,7 +3221,14 @@ def _build_topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
     }
 
 
-def _topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
+def _recovery_refresh(action: dict[str, Any]) -> bool:
+    """True when this is a Commander recovery re-dispatch that must re-acquire
+    evidence instead of replaying a cached research packet."""
+    recovery = action.get("_recovery") if isinstance(action, dict) else None
+    return bool(isinstance(recovery, dict) and recovery.get("refresh_evidence"))
+
+
+def _topic_research(ctx, keyword: str, slug: str, *, refresh: bool = False) -> dict[str, Any]:
     """Cache-aware topic research: reuse a fresh (≤30-day) packet, including an
     insufficient one (an insufficient result is itself a durable finding — it
     must not be re-researched every decision).
@@ -3222,9 +3237,13 @@ def _topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
     == 1) means no real source was reached — e.g. the scraping provider was
     down or out of credits. That is a transient outage, not a durable finding,
     so it is NOT cached: caching it would freeze a one-off provider failure
-    into a 30-day research block for that topic."""
+    into a 30-day research block for that topic.
+
+    ``refresh=True`` is the Commander recovery directive: it bypasses the cache
+    so the topic is re-researched right now rather than replaying a stale or
+    insufficient packet (used by the autonomous BLOCKED-recovery loop)."""
     cache_path = ctx.runtime_directory / "intelligence" / f"research-{slug}.json"
-    if cache_path.is_file():
+    if cache_path.is_file() and not refresh:
         try:
             cached = json.loads(cache_path.read_text(encoding="utf-8"))
             generated = str(cached.get("generated_at", "")).replace("Z", "+00:00")
@@ -3243,8 +3262,8 @@ def _topic_research(ctx, keyword: str, slug: str) -> dict[str, Any]:
     return packet
 
 
-def _topic_scribe_evidence(ctx, keyword: str, slug: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    packet = _topic_research(ctx, keyword, slug)
+def _topic_scribe_evidence(ctx, keyword: str, slug: str, *, refresh: bool = False) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    packet = _topic_research(ctx, keyword, slug, refresh=refresh)
     evidence = [
         {
             "evidence_id": c["evidence_id"],

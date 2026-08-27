@@ -94,7 +94,7 @@ def test_exact_existing_page_is_revised_and_receipt_conforms(tmp_path: Path, mon
     monkeypatch.setattr(
         procedure,
         "_topic_scribe_evidence",
-        lambda current, keyword, slug: (
+        lambda current, keyword, slug, refresh=False: (
             [{"url": "https://www.livsmedelsverket.se/example"}],
             {"sufficiency": {"passed": True}},
         ),
@@ -149,7 +149,7 @@ def test_insufficient_research_blocks_before_scribe_or_source_change(tmp_path: P
     monkeypatch.setattr(
         procedure,
         "_topic_scribe_evidence",
-        lambda *args: ([], {"sufficiency": {"passed": False, "notes": ["no independent source"]}}),
+        lambda *args, **kwargs: ([], {"sufficiency": {"passed": False, "notes": ["no independent source"]}}),
     )
 
     result = procedure.LevNyttProcedure().execute(
@@ -170,7 +170,7 @@ def test_final_publication_gate_prevents_staging(tmp_path: Path, monkeypatch):
     monkeypatch.setattr(
         procedure,
         "_topic_scribe_evidence",
-        lambda *args: ([{"url": "https://authority.example"}], {"sufficiency": {"passed": True}}),
+        lambda *args, **kwargs: ([{"url": "https://authority.example"}], {"sufficiency": {"passed": True}}),
     )
     monkeypatch.setattr(procedure, "_content_gate", lambda *args: (True, []))
     monkeypatch.setattr(procedure, "_render_improved_production_page", lambda *args: ("unsafe", "{}\n"))
