@@ -165,41 +165,20 @@ def _tokens(value: str) -> set[str]:
     return {t for t in re.findall(r"[a-z0-9]+", _slugify(value)) if len(t) >= 3}
 
 
-def levnytt_grounding_facts(topic: str, runtime: Path) -> list[dict[str, Any]]:
-    """Return sourced factual claims from a LevNytt research packet for a topic,
-    each with source provenance. Falls back to token-overlap matching across all
-    research packets when the exact slug has no packet. Never synthesizes facts."""
-    slug = _slugify(topic)
-    packet = _read_json(runtime / "intelligence" / f"research-{slug}.json")
-    if not packet.get("claims"):
-        topic_tokens = _tokens(topic)
-        best_packet: dict[str, Any] = {}
-        best_overlap = 0
-        for path in sorted((runtime / "intelligence").glob("research-*.json")):
-            candidate = _read_json(path)
-            candidate_tokens = _tokens(str(candidate.get("topic", "")))
-            overlap = len(topic_tokens & candidate_tokens)
-            if overlap > best_overlap:
-                best_overlap = overlap
-                best_packet = candidate
-        if best_overlap > 0:
-            packet = best_packet
-    claims = packet.get("claims", []) if isinstance(packet.get("claims"), list) else []
-    facts: list[dict[str, Any]] = []
-    for c in claims:
-        if not isinstance(c, dict):
-            continue
-        claim = str(c.get("claim", "")).strip()
-        if not claim:
-            continue
-        facts.append({
-            "evidence_id": str(c.get("evidence_id", f"levnytt-{slug}")),
-            "claim": claim,
-            "source": str(c.get("source_title") or c.get("source_reference") or ""),
-            "source_type": str(c.get("source_type", "")),
-            "source_url": str(c.get("source_url", "")),
-        })
-    return facts
+def _shared_grounding_facts(topic: str, runtime: Path) -> list[dict[str, Any]]:
+    """Ground a reasoning draft in the one shared LevNytt evidence provider.
+
+    This is the canonical LevNytt factual-evidence path
+    (app.commander.levnytt_health_evidence), which reads the same research
+    packets but applies the evidence-quality filter and the health/wellness
+    claim-safety gate -- never the raw research packets directly, so a
+    disease/treatment/dosage/weight-loss claim cannot become a draft merely
+    because it exists in a packet. Facts are source-linked with provenance;
+    nothing is synthesized.
+    """
+    from app.commander.levnytt_health_evidence import collect_evidence
+
+    return collect_evidence(topic, runtime_directory=runtime)
 
 
 # ── response proposal ─────────────────────────────────────────────
@@ -265,7 +244,7 @@ def propose_levnytt_response(
         "signal_type": primary,
         "responds_to": candidate_text[:300],
         "grounding_evidence_id": fact.get("evidence_id", ""),
-        "grounding_source": str(fact.get("source", "")),
+        "grounding_source": str(fact.get("source") or fact.get("source_title") or fact.get("source_reference") or ""),
         "grounding_source_type": str(fact.get("source_type", "")),
         "requires_policy_approval_before_sending": True,
     }
@@ -284,28 +263,6 @@ def save_community_store(runtime: Path, store: dict[str, Any]) -> None:
     path = _community_store_path(runtime)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(store, ensure_ascii=False, indent=2), encoding="utf-8")
-
-
-def record_signals(runtime: Path, signals: list[dict[str, Any]]) -> None:
-    """Append newly observed signals to the project-scoped store, deduped by
-    observed text so a handled comment is not re-processed every run."""
-    store = load_community_store(runtime)
-    existing = store.get("signals", [])
-    if not isinstance(existing, list):
-        existing = []
-    seen_texts = {str(s.get("text", "")) for s in existing if isinstance(s, dict)}
-    for signal in signals:
-        if not isinstance(signal, dict):
-            continue
-        text = str(signal.get("text", ""))
-        if not text or text in seen_texts:
-            continue
-        signal["recorded_at"] = datetime.now(timezone.utc).isoformat()
-        existing.append(signal)
-        seen_texts.add(text)
-    store["signals"] = existing
-    store["updated_at"] = datetime.now(timezone.utc).isoformat()
-    save_community_store(runtime, store)
 
 
 def record_discovery(runtime: Path, items: list[dict[str, Any]]) -> int:
@@ -356,18 +313,6 @@ def record_discovery(runtime: Path, items: list[dict[str, Any]]) -> int:
     store["updated_at"] = now
     save_community_store(runtime, store)
     return new_count
-
-
-def record_research_gaps(runtime: Path, gaps: list[str]) -> None:
-    store = load_community_store(runtime)
-    existing = store.get("research_gaps", [])
-    if not isinstance(existing, list):
-        existing = []
-    for gap in gaps:
-        if gap not in existing:
-            existing.append(gap)
-    store["research_gaps"] = existing
-    save_community_store(runtime, store)
 
 
 # Swedish-specific discussion platforms only. Facebook and Reddit discovery
@@ -664,9 +609,9 @@ def _strip_levnytt_link(text: str) -> str:
 def _find_live_page_for_topic(working_repository: Path, topic: str) -> dict[str, str] | None:
     """Real, published-page evidence that LevNytt has directly relevant
     content for a topic -- not merely a research packet. Token-overlap
-    matched against actual on-disk HTML files (the same kind of matching
-    levnytt_grounding_facts already uses for research packets), never a
-    fabricated URL."""
+    matched against actual on-disk HTML files (the same kind of matching the
+    shared evidence provider uses for research packets), never a fabricated
+    URL."""
     topic_tokens = _tokens(topic)
     if not topic_tokens:
         return None
@@ -757,12 +702,13 @@ def reason_about_discovery_candidate(
 
     classification = classify_levnytt_signal(text)
     topic = _matching_keyword(text, runtime)
-    # Facts and search-demand evidence are never treated as claim evidence
-    # here: GSC_DEMAND/COMMUNITY_DEMAND prove a question exists, not that
-    # any claim about it is true (see levnytt_grounding_facts, which only
-    # ever returns sourced AUTHORITY/GENERAL_SCIENCE/NEOLIFE_FIRST_PARTY
-    # claims from real research packets).
-    facts = levnytt_grounding_facts(topic, runtime) if topic else []
+    # Grounding uses the one shared LevNytt evidence provider (which applies
+    # evidence-quality and health/wellness claim-safety gates), never the raw
+    # research packets directly: GSC_DEMAND/COMMUNITY_DEMAND prove a question
+    # exists, not that any claim about it is true, and a disease/dosage/
+    # weight-loss claim must not become a draft merely because it exists in a
+    # research packet.
+    facts = _shared_grounding_facts(topic, runtime) if topic else []
     proposal = propose_levnytt_response(text, classification, facts)
 
     if proposal.get("status") != "PROPOSED":
@@ -1635,127 +1581,3 @@ def record_engagement_evaluations(runtime: Path, evaluations: list[dict[str, Any
     store["engagement_evaluations"] = existing[-20:]
     store["updated_at"] = datetime.now(timezone.utc).isoformat()
     save_community_store(runtime, store)
-
-
-# ── Stage 4.5: candidate acquisition and monitoring ─────────────────
-# Finds and tracks the pipeline of candidates toward a possible future,
-# separately-authorized Stage 5 -- never authorizes one. Everything below
-# is derived from the existing persisted stores (discovery, reasoning,
-# thread_evidence, engagement_evaluations, and each stage's own delta
-# counter); no new parallel write-heavy store was introduced.
-
-_STAGE5_ELIGIBLE_RECOMMENDATIONS = {"POTENTIALLY_ENGAGE_WITHOUT_LINK", "POTENTIALLY_ENGAGE_WITH_DISCLOSED_LINK"}
-
-
-def is_stage5_eligible(evaluation: dict[str, Any]) -> bool:
-    """True only when every Stage 4 hard gate (relevance, grounding,
-    platform policy, social appropriateness, disclosure) was independently
-    satisfied. Derived directly from combine_engagement_recommendation's own
-    fail-closed combination -- never a separate, bypassable score. A
-    candidate cannot compensate for failing one gate by scoring well on
-    another; only these two recommendation values ever qualify."""
-    return evaluation.get("engagement_recommendation") in _STAGE5_ELIGIBLE_RECOMMENDATIONS
-
-
-def rank_stage5_candidates(evaluations: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Rank only candidates that already cleared every hard gate -- never a
-    numerical score that lets a candidate compensate for failing one.
-    Link-free candidates are listed first (Community Manager is not a
-    backlink generator); order is otherwise preserved, not weighted."""
-    eligible = [e for e in evaluations if is_stage5_eligible(e)]
-    without_link = [e for e in eligible if e.get("engagement_recommendation") == "POTENTIALLY_ENGAGE_WITHOUT_LINK"]
-    with_link = [e for e in eligible if e.get("engagement_recommendation") == "POTENTIALLY_ENGAGE_WITH_DISCLOSED_LINK"]
-    return without_link + with_link
-
-
-def _rejection_reason(evaluation: dict[str, Any]) -> str:
-    recommendation = evaluation.get("engagement_recommendation")
-    if recommendation == "DO_NOT_ENGAGE":
-        if evaluation.get("relevance") == "UNRELATED_NAMED_COMPANY":
-            return "Discussion is centered on a specific, different, named company."
-        policy_state = (evaluation.get("platform_policy") or {}).get("overall_state")
-        if policy_state == "PROHIBITED":
-            return "Platform policy explicitly prohibits the proposed response."
-        return "Reasoning outcome resolved as NO_ACTION."
-    if recommendation == "OBSERVE":
-        return "Relevance or grounding evidence was insufficient to reason further."
-    if recommendation == "DRAFT_ONLY":
-        social = evaluation.get("social_appropriateness") or {}
-        if social.get("thread_is_stale"):
-            return "Thread has had no recent meaningful activity (stale)."
-        if social.get("hostility_detected"):
-            return "Hostile or dismissive language was observed in the thread."
-        return "Social appropriateness was insufficient for engagement, even though grounded and permitted."
-    if recommendation == "REQUIRES_OWNER_REVIEW":
-        policy_state = (evaluation.get("platform_policy") or {}).get("overall_state")
-        if policy_state in {"UNKNOWN", "REQUIRES_REVIEW"}:
-            return f"Platform policy evidence is {policy_state}, not a confirmed permission."
-        return "Requires explicit Owner review before any further consideration."
-    return "Not currently eligible."
-
-
-def candidate_pipeline_summary(runtime: Path) -> dict[str, Any]:
-    """A concise, Commander-facing view of the candidate pipeline's current
-    lifecycle -- not dozens of raw discussions. Entirely derived from
-    existing persisted state at read time."""
-    store = load_community_store(runtime)
-    discovery = store.get("discovery", []) if isinstance(store.get("discovery"), list) else []
-    thread_evidence = store.get("thread_evidence", []) if isinstance(store.get("thread_evidence"), list) else []
-    evaluations = store.get("engagement_evaluations", []) if isinstance(store.get("engagement_evaluations"), list) else []
-    reasoning_history = store.get("community_reasoning_history", {}) if isinstance(store.get("community_reasoning_history"), dict) else {}
-    fetch_history = store.get("thread_fetch_history", {}) if isinstance(store.get("thread_fetch_history"), dict) else {}
-
-    fully_read_urls = {str(t.get("url")) for t in thread_evidence if isinstance(t, dict) and t.get("fetch_status") == "COMPLETE"}
-
-    latest_evaluation_by_url: dict[str, dict[str, Any]] = {}
-    for evaluation in evaluations:
-        if isinstance(evaluation, dict) and evaluation.get("source_url"):
-            latest_evaluation_by_url[evaluation["source_url"]] = evaluation  # append-only order -> last write wins
-
-    newly_strengthened = sorted({
-        url for url, record in {**reasoning_history, **fetch_history}.items()
-        if isinstance(record, dict) and int(record.get("times_seen", 0)) >= 2
-    })
-
-    rejected: list[dict[str, Any]] = []
-    awaiting_policy: list[str] = []
-    for url, evaluation in latest_evaluation_by_url.items():
-        if is_stage5_eligible(evaluation):
-            continue
-        policy_state = (evaluation.get("platform_policy") or {}).get("overall_state")
-        if policy_state in {"UNKNOWN", "REQUIRES_REVIEW"}:
-            awaiting_policy.append(url)
-        rejected.append({
-            "source_url": url,
-            "recommendation": evaluation.get("engagement_recommendation"),
-            "reason": _rejection_reason(evaluation),
-        })
-
-    stage5_candidates = rank_stage5_candidates(list(latest_evaluation_by_url.values()))
-
-    return {
-        "discovered_count": len(discovery),
-        "fully_read_count": len(fully_read_urls),
-        "evaluated_count": len(latest_evaluation_by_url),
-        "newly_strengthened_urls": newly_strengthened,
-        "rejected_candidates": rejected[-20:],
-        "awaiting_policy_evidence_urls": awaiting_policy,
-        "stage5_eligible_candidates": stage5_candidates,
-        "stage5_verdict": "STAGE_5_CANDIDATE_READY" if stage5_candidates else "NO_STAGE_5_CANDIDATE",
-    }
-
-
-def recurring_questions(runtime: Path, limit: int = 10) -> list[dict[str, Any]]:
-    """Recurring consumer questions recorded as audience-demand evidence for the
-    SEO/content opportunity loop. A question is 'recurring' when its observed
-    text appears more than once."""
-    store = load_community_store(runtime)
-    signals = store.get("signals", []) if isinstance(store.get("signals"), list) else []
-    counts: dict[str, int] = {}
-    for s in signals:
-        if not isinstance(s, dict):
-            continue
-        text = str(s.get("text", "")).strip()
-        if text and s.get("classification", {}).get("is_actionable") if isinstance(s.get("classification"), dict) else False:
-            counts[text] = counts.get(text, 0) + 1
-    return [{"question": t, "count": c} for t, c in sorted(counts.items(), key=lambda kv: -kv[1]) if c >= 1][:limit]

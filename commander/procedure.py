@@ -3285,19 +3285,6 @@ def _seed_keyword_candidates(ctx) -> None:
     if community_candidates:
         levnytt_community.record_scout_promotions(ctx.runtime_directory, community_candidates)
 
-    # Real audience questions from LevNytt's own Facebook page comments --
-    # also real community demand (not search volume), just first-party.
-    for entry in levnytt_community.recurring_questions(ctx.runtime_directory, limit=3):
-        question = str(entry.get("question", "")).strip()
-        _add(
-            levnytt_community.dataforseo_safe_keyword(question),
-            evidence_type="COMMUNITY_DEMAND",
-            community_demand_status="RECURRING" if int(entry.get("count") or 0) > 1 else "NEW",
-            source_platform="levnytt_facebook_page_comments",
-            confidence="MEDIUM",
-            question_context=question,
-        )
-
     # First-party measured GSC search-impression evidence fills the
     # remaining slots, ranked by impressions.
     gsc = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
