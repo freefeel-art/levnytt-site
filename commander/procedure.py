@@ -2652,6 +2652,41 @@ def _keyword_from_action(ctx, action: dict[str, Any]) -> str | None:
 OFF_STRATEGY_TERMS = ("casino", "betting", "spel", "lån", "loan", "kredit", "försäkring", "insurance", "crypto", "krypto", "aktier", "forex", "trading")
 
 
+# Semantic exclusions for the Scout project-fit guard. LevNytt's "Personlig
+# vård" product line means personal-care PRODUCTS (skincare/haircare/body
+# care); in Swedish the word "vård" also means healthcare/nursing, so
+# DataForSEO can return "vård och omsorg" (nursing/elderly care) terms that are
+# a different market. These markers are the small, principled healthcare-
+# service vocabulary that distinguishes that market -- not a general blacklist.
+_HEALTHCARE_SERVICE_EXCLUSIONS = (
+    "omsorg", "demens", "äldreomsorg", "äldreboende", "hemtjänst",
+    "personlig assistans", "undersköterska", "sjuksköterska", "vårdbiträde",
+    "vårdcentral", "vård och omsorg",
+)
+
+# Per product line: the semantic scope the Scout fit guard uses to decide
+# whether a provider-discovered term belongs to LevNytt's search universe.
+_PRODUCT_LINE_SCOPE = {
+    "kosttillskott": (
+        "NeoLife nutritional supplements and weight management (vitamins, "
+        "minerals, omega-3, probiotics, protein, greens) and consumer "
+        "nutrition questions -- not pharmaceuticals or clinical treatment."
+    ),
+    "personlig_vard": (
+        "NeoLife Nutriance personal-care PRODUCTS: skincare, haircare and "
+        "body care (shampoo, conditioner, cleansing, moisturizing) and their "
+        "consumer needs/problems -- NOT healthcare, nursing, elderly care or "
+        "clinical services."
+    ),
+    "rengoring": (
+        "NeoLife Golden Home Care eco-friendly household CLEANING PRODUCTS "
+        "(all-purpose cleaner, dish soap, laundry detergent, fabric softener) "
+        "and household cleaning needs -- NOT industrial/commercial cleaning "
+        "services."
+    ),
+}
+
+
 def _off_strategy(keyword: str) -> str | None:
     folded = keyword.casefold()
     for marker in OFF_STRATEGY_TERMS:
@@ -3341,14 +3376,43 @@ def _build_scout_discovery_context(ctx) -> dict[str, Any]:
             terms.append(line["label_sv"])
         return terms
 
+    def _allowed_concepts_for_line(line: dict[str, Any]) -> list[str]:
+        # Canonical, unambiguous semantic anchors: the category labels and
+        # subcategory (product-type) labels for this line's categories. The
+        # ambiguous product-line label ("Personlig vård") is deliberately NOT an
+        # anchor -- its meaning is disambiguated by these product concepts.
+        concepts: list[str] = []
+        for cid in line["category_ids"]:
+            cat = by_id.get(cid)
+            if not cat:
+                continue
+            label = cat.get("label_sv")
+            if label and label not in concepts:
+                concepts.append(label)
+            for sub in cat.get("subcategories", []) or []:
+                sub_label = sub.get("label_sv") if isinstance(sub, dict) else None
+                if sub_label and sub_label not in concepts:
+                    concepts.append(sub_label)
+        return concepts
+
     per_line = []
     all_seed_concepts: list[str] = []
+    all_allowed_concepts: list[str] = []
     for line in product_lines:
         line_terms = _seed_terms_for_line(line)
-        per_line.append({**line, "seed_concepts": line_terms})
+        allowed = _allowed_concepts_for_line(line)
+        per_line.append({
+            **line,
+            "seed_concepts": line_terms,
+            "allowed_concepts": allowed,
+            "scope_description": _PRODUCT_LINE_SCOPE.get(line["id"], ""),
+        })
         for term in line_terms:
             if term not in all_seed_concepts:
                 all_seed_concepts.append(term)
+        for concept in allowed:
+            if concept not in all_allowed_concepts:
+                all_allowed_concepts.append(concept)
 
     # Product entities -> product-name seed concepts (skip accessories, which
     # are not searchable topics), grouped under their product line.
@@ -3372,8 +3436,15 @@ def _build_scout_discovery_context(ctx) -> dict[str, Any]:
 
     context = {
         "project_id": "levnytt",
+        "business_scope": (
+            "NeoLife nutritional supplements, personal-care (skincare/haircare/"
+            "body-care) products and eco-friendly home-cleaning products, sold "
+            "in Sweden through direct selling."
+        ),
         "product_lines": per_line,
         "seed_concepts": all_seed_concepts,
+        "allowed_concepts": all_allowed_concepts,
+        "excluded_concepts": list(OFF_STRATEGY_TERMS) + list(_HEALTHCARE_SERVICE_EXCLUSIONS),
         "product_seed_concepts": {
             line_id: names for line_id, names in product_names_by_line.items() if names
         },
