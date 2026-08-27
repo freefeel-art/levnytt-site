@@ -551,6 +551,7 @@ class LevNyttProcedure:
     def _execute_seo_intelligence(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         _rebuild_content_inventory(ctx.working_repository)
         _seed_keyword_candidates(ctx)
+        _build_scout_discovery_context(ctx)
         try:
             from app.commander.scout_executor import execute as scout_execute
             code, message = scout_execute(project=ctx.working_repository)
@@ -3288,6 +3289,102 @@ def _pages_missing_sponsor_disclosure(repo: Path) -> list[str]:
         if len(missing) >= 50:
             break
     return missing
+
+
+def _build_scout_discovery_context(ctx) -> dict[str, Any]:
+    """Build the project discovery context for the shared Scout engine from
+    LevNytt's canonical product catalogue -- never a hardcoded keyword list.
+
+    Derives bootstrap seed concepts from the canonical category/product-entity
+    data (category label -> product type -> Swedish search concept), so the
+    Scout bootstraps market discovery from the real business scope instead of
+    a pre-supplied keyword list. This is the product -> need -> query
+    bootstrap: a product/category fact seeds a search concept; the provider
+    validates demand. Product marketing facts are seed concepts only -- they
+    are not automatically factual health claims.
+    """
+    repo = ctx.working_repository
+    categories = _read_json(repo / "content" / "products" / "categories.json")
+    cat_list = categories.get("categories") if isinstance(categories.get("categories"), list) else []
+    by_id: dict[str, dict[str, Any]] = {str(c.get("id")): c for c in cat_list if isinstance(c, dict)}
+
+    # The three NeoLife product lines -> their canonical category ids.
+    product_lines = [
+        {"id": "kosttillskott", "label_sv": "Kosttillskott", "category_ids": ["supplements", "weight_management"]},
+        {"id": "personlig_vard", "label_sv": "Personlig vård", "category_ids": ["personal_care", "skin_care"]},
+        {"id": "rengoring", "label_sv": "Rengöring", "category_ids": ["home_care"]},
+    ]
+
+    def _seed_terms_for_line(line: dict[str, Any]) -> list[str]:
+        # Specific product-type (subcategory) labels first: they are the
+        # searchable, unambiguous concepts. The broad product-line label comes
+        # last because it can be ambiguous in Swedish ("Personlig vård" is both
+        # skincare/personal care AND healthcare services) and would otherwise
+        # spend the discovery budget on the wrong market.
+        terms: list[str] = []
+        for cid in line["category_ids"]:
+            cat = by_id.get(cid)
+            if not cat:
+                continue
+            for sub in cat.get("subcategories", []) or []:
+                sub_label = sub.get("label_sv") if isinstance(sub, dict) else None
+                if sub_label and sub_label not in terms:
+                    terms.append(sub_label)
+        for cid in line["category_ids"]:
+            cat = by_id.get(cid)
+            if not cat:
+                continue
+            label = cat.get("label_sv")
+            if label and label not in terms:
+                terms.append(label)
+        if line["label_sv"] not in terms:
+            terms.append(line["label_sv"])
+        return terms
+
+    per_line = []
+    all_seed_concepts: list[str] = []
+    for line in product_lines:
+        line_terms = _seed_terms_for_line(line)
+        per_line.append({**line, "seed_concepts": line_terms})
+        for term in line_terms:
+            if term not in all_seed_concepts:
+                all_seed_concepts.append(term)
+
+    # Product entities -> product-name seed concepts (skip accessories, which
+    # are not searchable topics), grouped under their product line.
+    entities_dir = repo / "content" / "products" / "entities"
+    product_names_by_line: dict[str, list[str]] = {line["id"]: [] for line in product_lines}
+    if entities_dir.is_dir():
+        for path in sorted(entities_dir.glob("*/sv.json")):
+            try:
+                entity = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                continue
+            category = entity.get("category")
+            if category == "accessories" or not entity.get("product_name"):
+                continue
+            for line in product_lines:
+                if category in line["category_ids"]:
+                    name = str(entity["product_name"]).strip()
+                    if name and name not in product_names_by_line[line["id"]]:
+                        product_names_by_line[line["id"]].append(name)
+                    break
+
+    context = {
+        "project_id": "levnytt",
+        "product_lines": per_line,
+        "seed_concepts": all_seed_concepts,
+        "product_seed_concepts": {
+            line_id: names for line_id, names in product_names_by_line.items() if names
+        },
+        "excluded_terms": list(OFF_STRATEGY_TERMS),
+        "language": "sv",
+        "location_code": _SE_SERP_LOCATION,
+    }
+    path = ctx.runtime_directory / "intelligence" / "scout-discovery-context.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(context, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return context
 
 
 def _seed_keyword_candidates(ctx) -> None:
