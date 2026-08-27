@@ -3299,9 +3299,20 @@ def _seed_keyword_candidates(ctx) -> None:
         _add(str(r["query"]), evidence_type="GSC_DEMAND", impressions=r.get("impressions"))
 
     if not candidates:
+        # The fallback covers LevNytt's full three product categories
+        # (kosttillskott, personlig vård, rengöring) plus the direct-selling
+        # model -- never supplements alone, so the Scout researches the whole
+        # NeoLife business scope even before any community/forum evidence
+        # exists.
         candidates = [
             {"keyword": k, "evidence_type": "GSC_DEMAND"}
-            for k in ("direktförsäljning", "kosttillskott", "magnesium", "omega 3", "d vitamin", "probiotika", "multivitamin", "neolife", "pyramidspel", "kostfiber")
+            for k in (
+                "kosttillskott", "multivitamin", "magnesium", "omega 3",
+                "d vitamin", "probiotika", "kostfiber", "viktminskning",
+                "hudvård", "schampo", "håravfall", "torr hud",
+                "miljövänlig rengöring", "diskmedel", "tvättmedel",
+                "neolife", "direktförsäljning", "pyramidspel",
+            )
         ]
     candidates = candidates[:20]
     candidates_path.parent.mkdir(parents=True, exist_ok=True)
