@@ -37,14 +37,19 @@
 .ln-article-body :where(.featured-section, .cta-section) { margin-block: var(--ln-space-6); border-radius: var(--ln-radius-lg); background: var(--ln-color-brand-green); color: var(--ln-color-surface-raised); padding: var(--ln-space-6); }
 .ln-article-body :where(.featured-section, .cta-section) :where(h2, h3, p) { color: inherit; }
 .ln-article-body :where(.featured-section, .cta-section) a { color: var(--ln-color-brand-gold); }
+.ln-article-body .cta-section :where(h2, h3, p) { background: transparent; border: 0; padding: 0; }
 .ln-article-body :where(.featured-inner, .slide, .pro-card, .pcard) { min-width: 0; }
 .ln-article-body :where(.pcard, .pro-card) { display: grid; gap: var(--ln-space-3); height: 100%; }
 .ln-article-body :where(.pcard-img, .pro-card-img, .slide-img, .hero-img) { width: 100%; aspect-ratio: var(--ln-image-editorial); object-fit: contain; background: var(--ln-color-surface-raised); }
+.ln-article-body :where(.pcard-img, .pro-card-img, .slide-img) { aspect-ratio: 16 / 9; }
 .ln-article-body :where(.pcard-tag, .pro-card-tag, .slide-tag) { color: var(--ln-color-evidence-context); font-size: 0.74rem; font-weight: 750; text-transform: uppercase; }
 .ln-article-body :where(.pcard-footer, .pcard-meta) { color: var(--ln-color-text-muted); font-size: 0.84rem; }
 .ln-article-body .slider-wrapper { margin-block: var(--ln-space-5); }
 .ln-article-body .slider-track { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--ln-space-4); transform: none !important; }
 .ln-article-body .slide { position: static !important; width: auto !important; border: 1px solid var(--ln-color-border); border-radius: var(--ln-radius-md); background: var(--ln-color-surface-raised); padding: var(--ln-space-4); }
+.ln-article-body .slide { display: flex; flex-direction: column; gap: var(--ln-space-3); }
+.ln-article-body .slide-content { display: flex; flex-direction: column; gap: var(--ln-space-2); flex: 1 1 auto; }
+.ln-article-body .slide :where(.slide-tag, .slide-title, .slide-desc, .slide-cta) { margin: 0; }
 .ln-article-body :where(.slider-btn, .slider-dots) { display: none; }
 .ln-article-body :where(.btn-gold, .btn-ghost, .slide-cta, .featured-link) { display: inline-flex; min-height: 2.75rem; align-items: center; border: 1px solid var(--ln-color-brand-gold-deep); border-radius: var(--ln-radius-sm); padding: var(--ln-space-2) var(--ln-space-4); font-weight: 700; text-decoration: none; }
 
