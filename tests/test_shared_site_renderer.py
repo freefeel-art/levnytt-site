@@ -106,5 +106,10 @@ def test_redirect_catch_all_is_last_and_all_canonical_pages_are_indexed():
 def test_article_index_discovers_every_swedish_content_route_once():
     generator = load_script("article_index_generator", "scripts/generate-article-index.py")
     articles = generator.discover_articles()
-    assert len(articles) == 139
+    # Every published Swedish article route must be discovered exactly once.
+    # The count matches the article routes present in sitemap.xml (see
+    # scripts/generate-article-index.py::discover_articles, which walks
+    # rebuild-production.sitemap_routes). Publishing a new article updates the
+    # sitemap and therefore this count; the assertion documents that invariant.
+    assert len(articles) == 140
     assert len({article["path"] for article in articles}) == len(articles)
