@@ -1,60 +1,59 @@
-"""LevNytt-owned NeoLife back-office reporting provider.
+"""LevNytt-owned NeoLife distributor back-office reporting provider.
 
-Read-only evidence collection for the one outcome the rest of the LevNytt
-funnel cannot see: attributable NeoLife customer/distributor conversions and
-commission/revenue. This is the missing attribution path named in
-``OBJECTIVES.md`` and ``STATE.md`` — the north-star outcome the site currently
-proxies through first-party Sponsor-ID link-click events and GSC traffic.
+Read-only collection of the one outcome the rest of the LevNytt funnel cannot
+see: attributable NeoLife customer/distributor conversions, orders and
+commission/revenue. This replaces the generic provider that assumed a JSON
+"reports" endpoint; it is built to match the real NeoLife back office, which
+was discovered factually (no credentials required for the discovery):
 
-Design constraints (binding):
+* **Base URL (fixed):** ``https://myoffice.neolife.com`` — an ASP.NET MVC
+  application (Microsoft-IIS/10.0 + ASP.NET Razor + RequireJS + RouteJs).
+* **Two-step login.** ``GET /login`` returns a Razor form carrying
+  ``LoginName``, ``Password`` and a hidden ``__RequestVerificationToken``
+  (ASP.NET anti-CSRF token). The client then submits a **JSON POST to
+  ``/login``** (``Content-Type: application/json``) with the serialized form,
+  and with the token echoed in both the JSON body and the
+  ``__RequestVerificationToken`` request header. Success is the JSON response
+  ``{"Status": true, "RedirectUrl": ...}`` plus an established auth cookie.
+* **Reporting surfaces are authenticated server-rendered HTML MVC pages**
+  (Kendo UI grids), not a public JSON API. The factual routes are taken from
+  the back office's RouteJs table (``routejs.axd``), reproduced below.
 
-* **Credentials only from environment/secrets** — never hard-coded, never
-  committed. The three required variables are ``NEOLIFE_BACKOFFICE_LOGIN``,
-  ``NEOLIFE_BACKOFFICE_PASSWORD`` and ``NEOLIFE_BACKOFFICE_URL``.
-* **Never log credentials.** Every error/diagnostic path redacts the secret
-  values before they can reach a log line; the values are read once and only
-  ever used inside the authenticated HTTP call.
-* **Session reuse + autonomous re-authentication.** A successful login stores
-  an opaque session (cookies) plus an expiry under the LevNytt runtime. A
-  collection that observes an expired/denied session re-authenticates once and
-  retries, so a scheduled cycle is not permanently blocked by a stale session.
-* **Read-only.** Only login (credential exchange) and report/GET requests are
-  made. Nothing here mutates back-office state.
-* **Four-way outcome, never a silent zero.** ``collect`` returns exactly one of
-  ``AUTH_FAILURE`` (credentials rejected), ``UNAVAILABLE`` (authenticated but
-  the reports endpoint is unreachable/unparseable), ``ZERO`` (authenticated and
-  a real, empty report), or ``VERIFIED`` (authenticated and a real, non-empty
-  report). Missing credentials are reported separately as
-  ``MISSING_CREDENTIALS`` — a temporary configuration boundary, never a zero
-  and never a permanent Owner boundary.
+Binding constraints:
 
-The NeoLife back office does not expose a documented public API, so the login
-and reports endpoints are configurable and fail closed: with no URL configured
-the provider reports ``MISSING_CREDENTIALS`` and refuses to guess an endpoint.
+* Credentials come only from environment — ``NEOLIFE_BACKOFFICE_LOGIN`` and
+  ``NEOLIFE_BACKOFFICE_PASSWORD``. The base URL is fixed and is **not** a
+  required secret. Values are never printed, logged, or persisted.
+* The authenticated session (cookies only) is persisted under the LevNytt
+  runtime. A denied/expired session triggers one autonomous re-authentication
+  before the collection is reported.
+* Outcomes are classified truthfully into ``MISSING_CREDENTIALS``,
+  ``AUTH_FAILURE``, ``UNAVAILABLE``, ``ZERO`` or ``VERIFIED``. A missing
+  credential boundary is never a measured zero, and a failed parse is never a
+  zero.
 """
 
 from __future__ import annotations
 
 import json
 import os
+import re
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import requests
+from bs4 import BeautifulSoup
 
 PROJECT_ID = "levnytt"
+BASE_URL = "https://myoffice.neolife.com"
+LOGIN_URL = BASE_URL + "/login"
 
 _ENV_LOGIN = "NEOLIFE_BACKOFFICE_LOGIN"
 _ENV_PASSWORD = "NEOLIFE_BACKOFFICE_PASSWORD"
-_ENV_URL = "NEOLIFE_BACKOFFICE_URL"
+REQUIRED_ENV_VARS = (_ENV_LOGIN, _ENV_PASSWORD)
 
-REQUIRED_ENV_VARS = (_ENV_LOGIN, _ENV_PASSWORD, _ENV_URL)
-
-# Evidence outcome states. These are the exact distinctions the Commander must
-# preserve; "authenticated but no data" and "not authenticated" are never the
-# same thing, and neither is "zero".
 MISSING_CREDENTIALS = "MISSING_CREDENTIALS"
 AUTH_FAILURE = "AUTH_FAILURE"
 UNAVAILABLE = "UNAVAILABLE"
@@ -62,6 +61,23 @@ ZERO = "ZERO"
 VERIFIED = "VERIFIED"
 
 _SESSION_FILENAME = "neolife-backoffice" + os.sep + "session.json"
+
+# Factual reporting surfaces from the back office RouteJs table (routejs.axd):
+#   url -> controller/action. Each is an authenticated HTML MVC page; the list
+#   pages are Kendo UI grids. The provider fetches the HTML and, where the page
+#   exposes a Kendo DataSource read endpoint, follows it — otherwise it parses
+#   the server-rendered HTML.
+REPORTING_SURFACES: tuple[dict[str, str], ...] = (
+    {"path": "/new-customers", "kind": "new_customers", "label": "new customers (registrations)"},
+    {"path": "/retail-customers", "kind": "retail_customers", "label": "retail customers"},
+    {"path": "/preferred-customers", "kind": "preferred_customers", "label": "preferred customers"},
+    {"path": "/personally-enrolled-team", "kind": "enrolled_distributors", "label": "personally enrolled team"},
+    {"path": "/orders/1", "kind": "orders", "label": "orders"},
+    {"path": "/history", "kind": "commission_history", "label": "commission history"},
+    {"path": "/volumes", "kind": "volumes", "label": "volume"},
+    {"path": "/retailmemberprofits", "kind": "retail_member_profits", "label": "retail member profits"},
+    {"path": "/statements-report", "kind": "statements", "label": "statements (revenue)"},
+)
 
 
 def _now() -> str:
@@ -72,19 +88,19 @@ def _session_path(runtime: Path) -> Path:
     return Path(runtime) / _SESSION_FILENAME
 
 
+# ── credentials (values never leave this module) ─────────────────────────────
+
+
 def _read_env() -> dict[str, str]:
-    """Read the three credential variables once. Values never leave this module
-    except into the authenticated HTTP call; callers receive only booleans."""
     return {
         _ENV_LOGIN: os.getenv(_ENV_LOGIN, "").strip(),
         _ENV_PASSWORD: os.getenv(_ENV_PASSWORD, "").strip(),
-        _ENV_URL: os.getenv(_ENV_URL, "").strip().rstrip("/"),
     }
 
 
 def credentials_present() -> dict[str, bool]:
-    """Whether each required variable exists and is non-empty. Never returns
-    the values themselves."""
+    """Whether each required secret exists and is non-empty. Never returns the
+    values themselves."""
     env = _read_env()
     return {name: bool(env[name]) for name in REQUIRED_ENV_VARS}
 
@@ -94,8 +110,10 @@ def all_credentials_present() -> bool:
 
 
 def _redacted_credential_summary() -> dict[str, str]:
-    """A safe (boolean) view of credential state for evidence records."""
-    return {name: "populated" if present else "missing" for name, present in credentials_present().items()}
+    return {name: ("populated" if present else "missing") for name, present in credentials_present().items()}
+
+
+# ── session persistence (cookies only, never credentials) ────────────────────
 
 
 def _load_session(runtime: Path) -> dict[str, Any]:
@@ -125,224 +143,333 @@ def _save_session(runtime: Path, session: dict[str, Any]) -> None:
 
 
 def _session_fresh(session: dict[str, Any]) -> bool:
-    expiry = session.get("expires_at")
-    if not expiry:
-        return False
-    try:
-        parsed = datetime.fromisoformat(str(expiry).replace("Z", "+00:00"))
-    except ValueError:
-        return False
-    if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
-    return parsed > datetime.now(timezone.utc)
-
-
-def _authenticate(runtime: Path, env: dict[str, str], login_url: str) -> dict[str, Any]:
-    """Exchange credentials for an opaque session cookie and persist it.
-
-    ``login_url`` is the full back-office login endpoint (base URL + suffix).
-    Returns a status record; a rejected login is AUTH_FAILURE, never UNAVAILABLE
-    and never ZERO.
-    """
-    try:
-        response = requests.post(
-            login_url,
-            data={
-                "username": env[_ENV_LOGIN],
-                "password": env[_ENV_PASSWORD],
-            },
-            timeout=30,
-            allow_redirects=True,
-        )
-    except requests.RequestException as error:
-        return {"status": AUTH_FAILURE, "detail": f"login request failed: {type(error).__name__}"}
-
-    if response.status_code in (401, 403):
-        return {"status": AUTH_FAILURE, "detail": "credentials rejected by the NeoLife back office"}
-
-    if response.status_code >= 400:
-        return {"status": AUTH_FAILURE, "detail": f"login returned HTTP {response.status_code}"}
-
-    cookies = response.cookies.get_dict()
-    if not cookies:
-        return {"status": AUTH_FAILURE, "detail": "login did not establish a session"}
-
-    _save_session(runtime, {
-        "cookies": cookies,
-        "acquired_at": _now(),
-        # Session validity is unknown a priori; persist without an expiry and
-        # let the first denied report trigger autonomous re-authentication.
-        "expires_at": None,
-    })
-    return {"status": VERIFIED, "detail": "authenticated session established"}
-
-
-def _collect_reports(reports_url: str, session: dict[str, Any]) -> dict[str, Any]:
-    """Fetch the reports endpoint with the stored session cookies (read-only).
-
-    Returns a raw outcome; classification happens in :func:`collect`.
-    """
-    try:
-        response = requests.get(reports_url, cookies=session.get("cookies") or {}, timeout=30)
-    except requests.RequestException as error:
-        return {"ok": False, "http_status": None, "detail": f"reports request failed: {type(error).__name__}", "payload": None}
-
-    if response.status_code in (401, 403):
-        return {"ok": False, "http_status": response.status_code, "detail": "session denied", "payload": None}
-
-    if response.status_code >= 400:
-        return {"ok": False, "http_status": response.status_code, "detail": f"reports returned HTTP {response.status_code}", "payload": None}
-
-    try:
-        payload = response.json()
-    except ValueError:
-        return {"ok": True, "http_status": response.status_code, "detail": "non-JSON report body", "payload": None}
-
-    return {"ok": True, "http_status": response.status_code, "detail": None, "payload": payload}
-
-
-def collect(
-    runtime: Path,
-    *,
-    login_suffix: str | None = None,
-    reports_suffix: str | None = None,
-) -> dict[str, Any]:
-    """The Commander-facing entrypoint: collect attributable NeoLife conversion
-    and commission evidence read-only, classifying the outcome truthfully.
-
-    ``login_suffix`` / ``reports_suffix`` are the back-office endpoint paths
-    relative to ``NEOLIFE_BACKOFFICE_URL``. They are caller-supplied because the
-    real back office determines them; when omitted, the provider returns
-    UNAVAILABLE rather than guessing.
-    """
-    env = _read_env()
-    if not all_credentials_present():
-        return {
-            "schema": "neolife-backoffice-evidence-v1",
-            "project_id": PROJECT_ID,
-            "status": MISSING_CREDENTIALS,
-            "credentials": _redacted_credential_summary(),
-            "collected_at": _now(),
-            "conversions": None,
-            "commissions": None,
-            "evidence": {},
-            "limitations": [
-                "NeoLife back-office credentials/URL are not fully populated in the environment; "
-                "this is a temporary configuration boundary, not a measured zero."
-            ],
-        }
-
-    if not login_suffix or not reports_suffix:
-        return {
-            "schema": "neolife-backoffice-evidence-v1",
-            "project_id": PROJECT_ID,
-            "status": UNAVAILABLE,
-            "credentials": _redacted_credential_summary(),
-            "collected_at": _now(),
-            "conversions": None,
-            "commissions": None,
-            "evidence": {},
-            "limitations": [
-                "The NeoLife back-office login/reports endpoint paths are not specified; refusing to guess an endpoint."
-            ],
-        }
-
-    login_url = env[_ENV_URL] + login_suffix
-    reports_url = env[_ENV_URL] + reports_suffix
-
-    session = _load_session(runtime)
-    if not _session_fresh(session) and session.get("cookies"):
-        session = {}  # stale cookies dropped; re-authenticate below
-
+    """A persisted session is reusable while it still carries cookies and has
+    not yet been observed as expired."""
     if not session.get("cookies"):
-        auth = _authenticate(runtime, env, login_url)
-        if auth["status"] != VERIFIED:
-            return {
-                "schema": "neolife-backoffice-evidence-v1",
-                "project_id": PROJECT_ID,
-                "status": auth["status"],
-                "credentials": _redacted_credential_summary(),
-                "collected_at": _now(),
-                "conversions": None,
-                "commissions": None,
-                "evidence": {"auth": auth},
-                "limitations": [auth["detail"]],
-            }
-        session = _load_session(runtime)
+        return False
+    expired = session.get("expired")
+    if expired is True:
+        return False
+    return True
 
-    outcome = _collect_reports(reports_url, session)
 
-    # Autonomous re-authentication: a denied session is refreshed once and the
-    # report retried, so a scheduled cycle survives a session expiry.
-    if outcome.get("ok") is False and outcome.get("http_status") in (401, 403):
-        auth = _authenticate(runtime, env, login_url)
-        if auth["status"] == VERIFIED:
-            session = _load_session(runtime)
-            outcome = _collect_reports(reports_url, session)
+# ── the real two-step ASP.NET login ──────────────────────────────────────────
 
-    if outcome.get("ok") is False:
-        return {
-            "schema": "neolife-backoffice-evidence-v1",
-            "project_id": PROJECT_ID,
-            "status": AUTH_FAILURE if outcome.get("http_status") in (401, 403) else UNAVAILABLE,
-            "credentials": _redacted_credential_summary(),
-            "collected_at": _now(),
-            "conversions": None,
-            "commissions": None,
-            "evidence": {"http_status": outcome.get("http_status"), "detail": outcome.get("detail")},
-            "limitations": [outcome.get("detail") or "report collection failed"],
-        }
+_TOKEN_INPUT = re.compile(r'name=["\']__RequestVerificationToken["\'][^>]*value=["\']([^"\']+)', re.I)
+_TOKEN_INPUT_ALT = re.compile(r'value=["\']([^"\']+)["\'][^>]*name=["\']__RequestVerificationToken', re.I)
 
-    payload = outcome.get("payload")
-    if payload is None:
-        return {
-            "schema": "neolife-backoffice-evidence-v1",
-            "project_id": PROJECT_ID,
-            "status": UNAVAILABLE,
-            "credentials": _redacted_credential_summary(),
-            "collected_at": _now(),
-            "conversions": None,
-            "commissions": None,
-            "evidence": {"http_status": outcome.get("http_status"), "detail": outcome.get("detail")},
-            "limitations": [outcome.get("detail") or "report body could not be parsed"],
-        }
 
-    # The report is parsed and normalised by the caller's field mapping; here we
-    # preserve the raw payload and classify only presence vs absence.
-    counts = _extract_counts(payload)
-    status = VERIFIED if any(v for v in counts.values() if v) else ZERO
+def extract_verification_token(html: str) -> str | None:
+    """Extract the ASP.NET anti-CSRF token from the /login HTML.
 
+    Returns None when the token is absent — a caller must then treat the page
+    as not being the real login form (AUTH_FAILURE, never a guessed token).
+    """
+    if not html:
+        return None
+    match = _TOKEN_INPUT.search(html) or _TOKEN_INPUT_ALT.search(html)
+    if match:
+        token = match.group(1).strip()
+        return token or None
+    # Fall back to attribute-order-agnostic parsing via BeautifulSoup.
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        node = soup.find("input", attrs={"name": "__RequestVerificationToken"})
+        if node is not None and node.get("value"):
+            return str(node["value"]).strip()
+    except Exception:
+        return None
+    return None
+
+
+def _build_login_payload(login: str, password: str) -> dict[str, str]:
+    """The exact JSON body the real client posts.
+
+    The real client serializes the login ``<form>`` (``LoginName`` +
+    ``Password``) and sends the anti-CSRF token as the
+    ``__RequestVerificationToken`` *header* — the token input is rendered
+    outside the form, so it is never part of the JSON body.
+    """
     return {
-        "schema": "neolife-backoffice-evidence-v1",
-        "project_id": PROJECT_ID,
-        "status": status,
-        "credentials": _redacted_credential_summary(),
-        "collected_at": _now(),
-        "conversions": counts.get("conversions"),
-        "commissions": counts.get("commissions"),
-        "evidence": {"raw_report": payload},
-        "limitations": [] if status == VERIFIED else [
-            "The back office returned an authenticated, empty report (measured zero)."
-        ],
+        "LoginName": login,
+        "Password": password,
     }
 
 
-def _extract_counts(payload: Any) -> dict[str, int | None]:
-    """Best-effort extraction of conversion and commission counts from a report
-    payload. Conservative: unknown shapes yield None (UNAVAILABLE upstream),
-    never a fabricated number."""
+def _build_login_headers(token: str) -> dict[str, str]:
+    """The request headers for the login POST: JSON content type plus the
+    anti-CSRF token in the header ASP.NET validates for AJAX posts."""
+    return {"__RequestVerificationToken": token, "Content-Type": "application/json; charset=utf-8"}
+
+
+def _login(login: str, password: str, *, timeout: int = 30) -> dict[str, Any]:
+    """Perform the real two-step login and return a factual result.
+
+    Returns ``{status, cookies, detail}`` where status is one of
+    AUTH_FAILURE / UNAVAILABLE / VERIFIED. Credentials are used only inside the
+    HTTP calls and never enter the returned record.
+    """
+    # Step 1: fetch the login page to obtain the anti-CSRF token and any
+    # initial session cookies.
+    try:
+        page = requests.get(LOGIN_URL, timeout=timeout, allow_redirects=True)
+    except requests.RequestException as error:
+        return {"status": UNAVAILABLE, "cookies": {}, "detail": f"login page unreachable: {type(error).__name__}"}
+
+    token = extract_verification_token(page.text)
+    if token is None:
+        return {"status": AUTH_FAILURE, "cookies": {}, "detail": "login page did not expose an anti-CSRF token"}
+
+    initial_cookies = page.cookies.get_dict()
+    headers = _build_login_headers(token)
+    payload = _build_login_payload(login, password)
+
+    try:
+        response = requests.post(
+            LOGIN_URL, json=payload, headers=headers, cookies=initial_cookies,
+            timeout=timeout, allow_redirects=False,
+        )
+    except requests.RequestException as error:
+        return {"status": UNAVAILABLE, "cookies": {}, "detail": f"login request failed: {type(error).__name__}"}
+
+    if response.status_code in (401, 403):
+        return {"status": AUTH_FAILURE, "cookies": {}, "detail": "credentials rejected by the back office"}
+
+    success = _login_success(response)
+    cookies = {**initial_cookies, **response.cookies.get_dict()}
+    if success:
+        return {"status": VERIFIED, "cookies": cookies, "detail": "authenticated session established"}
+    return {"status": AUTH_FAILURE, "cookies": cookies, "detail": _login_error(response) or "login returned failure status"}
+
+
+def _login_success(response: Any) -> bool:
+    """Factual success signal: the JSON ``Status`` flag (and an auth cookie).
+
+    The real client treats ``response.Status == true`` as success. A
+    non-JSON/5xx body is not success.
+    """
+    if response.status_code >= 400:
+        return False
+    try:
+        body = response.json()
+    except ValueError:
+        return False
+    return bool(body.get("Status")) if isinstance(body, dict) else False
+
+
+def _login_error(response: Any) -> str:
+    try:
+        body = response.json()
+    except ValueError:
+        return f"login returned HTTP {response.status_code}"
+    if isinstance(body, dict) and body.get("ErrorMessage"):
+        return str(body["ErrorMessage"])[:300]
+    return f"login returned HTTP {response.status_code}"
+
+
+# ── authenticated report fetching ────────────────────────────────────────────
+
+_KENDO_READ_URL = re.compile(
+    r'transport\s*:\s*\{\s*read\s*:\s*\{[^}]*url\s*:\s*["\']([^"\']+)["\']', re.I | re.S
+)
+_KENDO_READ_URL_ALT = re.compile(
+    r'read\s*:\s*\{\s*url\s*:\s*["\']([^"\']+)["\']', re.I | re.S
+)
+
+
+def extract_grid_read_url(html: str) -> str | None:
+    """Detect a Kendo DataSource read (XHR) endpoint from an authenticated page.
+
+    Returns None when the grid is server-rendered (or no grid config is found),
+    in which case the caller falls back to parsing the HTML directly.
+    """
+    if not html:
+        return None
+    match = _KENDO_READ_URL.search(html) or _KENDO_READ_URL_ALT.search(html)
+    if not match:
+        return None
+    url = match.group(1)
+    if url.startswith("/"):
+        return BASE_URL + url
+    return url
+
+
+def _looks_like_login_page(html: str) -> bool:
+    return "loginbutton" in html and "LoginName" in html and "Password" in html
+
+
+def _fetch(url: str, cookies: dict[str, str], *, timeout: int = 30) -> dict[str, Any]:
+    """GET one authenticated URL and report whether it reached a report page,
+    was denied (session expired), or failed."""
+    try:
+        response = requests.get(url, cookies=cookies, timeout=timeout, allow_redirects=True)
+    except requests.RequestException as error:
+        return {"ok": False, "denied": False, "status_code": None, "html": "", "detail": f"request failed: {type(error).__name__}"}
+
+    # ASP.NET forms auth redirects to /login when the session is gone.
+    if response.status_code in (401, 403) or response.url.startswith(LOGIN_URL):
+        return {"ok": False, "denied": True, "status_code": response.status_code, "html": "", "detail": "session expired/denied"}
+
+    if _looks_like_login_page(response.text):
+        return {"ok": False, "denied": True, "status_code": response.status_code, "html": response.text, "detail": "session expired/denied"}
+
+    if response.status_code >= 400:
+        return {"ok": False, "denied": False, "status_code": response.status_code, "html": "", "detail": f"report returned HTTP {response.status_code}"}
+
+    return {"ok": True, "denied": False, "status_code": response.status_code, "html": response.text, "detail": None}
+
+
+def _parse_counts(html: str) -> dict[str, int | None]:
+    """Best-effort extraction of a numeric record count from a report page.
+
+    Distinguishes three states conservatively:
+
+    * a report container (``<table>`` / Kendo grid) with data rows -> the row
+      count;
+    * a report container with no data rows -> ``0`` (a measured zero);
+    * no report container at all -> ``None`` (unparseable, never a zero).
+    """
+    if not html:
+        return {"count": None}
+    soup = BeautifulSoup(html, "html.parser")
+    data_rows = 0
+    for tr in soup.find_all("tr"):
+        tds = tr.find_all("td")
+        if not tds:
+            continue
+        classes = list(tr.get("class") or [])
+        for td in tds:
+            classes.extend(td.get("class") or [])
+        if "k-no-data" in classes:
+            continue
+        data_rows += 1
+    if data_rows:
+        return {"count": data_rows}
+    if soup.find("table") is not None or soup.select_one(".k-grid"):
+        return {"count": 0}
+    return {"count": None}
+
+
+def _parse_json_counts(payload: Any) -> dict[str, int | None]:
     if isinstance(payload, dict):
-        conversions = _first_int(payload, "conversions", "conversion_count", "customer_count", "customers")
-        commissions = _first_int(payload, "commissions", "commission_total", "revenue", "total_commission")
-        return {"conversions": conversions, "commissions": commissions}
+        rows = payload.get("Data") or payload.get("data") or payload.get("Rows") or payload.get("rows")
+        if isinstance(rows, list):
+            return {"count": len(rows)}
+        total = payload.get("Total") or payload.get("total")
+        if isinstance(total, int) and not isinstance(total, bool):
+            return {"count": total}
     if isinstance(payload, list):
-        return {"conversions": len(payload), "commissions": None}
-    return {"conversions": None, "commissions": None}
+        return {"count": len(payload)}
+    return {"count": None}
 
 
-def _first_int(payload: dict[str, Any], *keys: str) -> int | None:
-    for key in keys:
-        value = payload.get(key)
-        if isinstance(value, int) and not isinstance(value, bool):
-            return value
-    return None
+# ── the Commander-facing entrypoint ──────────────────────────────────────────
+
+
+def collect(runtime: Path, *, timeout: int = 30) -> dict[str, Any]:
+    """Collect attributable NeoLife conversion/order/commission evidence.
+
+    Returns a structured, Commander-consumable record. Never raises; never logs
+    or returns credential values.
+    """
+    base = {
+        "schema": "neolife-backoffice-evidence-v1",
+        "project_id": PROJECT_ID,
+        "base_url": BASE_URL,
+        "collected_at": _now(),
+        "credentials": _redacted_credential_summary(),
+    }
+
+    if not all_credentials_present():
+        return {
+            **base,
+            "status": MISSING_CREDENTIALS,
+            "datasets": {},
+            "limitations": [
+                "NeoLife back-office credentials are not fully populated; this is a "
+                "temporary configuration boundary, not a measured zero."
+            ],
+        }
+
+    env = _read_env()
+    session = _load_session(runtime)
+    if not _session_fresh(session):
+        session = {}
+
+    if not session.get("cookies"):
+        auth = _login(env[_ENV_LOGIN], env[_ENV_PASSWORD], timeout=timeout)
+        if auth["status"] != VERIFIED:
+            return {
+                **base,
+                "status": auth["status"],
+                "datasets": {},
+                "limitations": [auth["detail"]],
+            }
+        session = {"cookies": auth["cookies"], "acquired_at": _now(), "expired": False}
+        _save_session(runtime, session)
+
+    datasets: dict[str, Any] = {}
+    reauthenticated = False
+    for surface in REPORTING_SURFACES:
+        kind = surface["kind"]
+        url = BASE_URL + surface["path"]
+        result = _fetch(url, session.get("cookies") or {}, timeout=timeout)
+
+        # Autonomous re-authentication: a denied session is refreshed once, then
+        # this same surface is retried.
+        if result.get("denied") and not reauthenticated:
+            auth = _login(env[_ENV_LOGIN], env[_ENV_PASSWORD], timeout=timeout)
+            if auth["status"] == VERIFIED:
+                session = {"cookies": auth["cookies"], "acquired_at": _now(), "expired": False}
+                _save_session(runtime, session)
+                reauthenticated = True
+                result = _fetch(url, session.get("cookies") or {}, timeout=timeout)
+
+        if result.get("denied"):
+            _save_session(runtime, {**session, "expired": True})
+            datasets[kind] = {"status": AUTH_FAILURE, "count": None, "label": surface["label"]}
+            continue
+
+        if not result.get("ok"):
+            datasets[kind] = {"status": UNAVAILABLE, "count": None, "label": surface["label"], "detail": result.get("detail")}
+            continue
+
+        # Prefer the factual Kendo DataSource XHR read endpoint when the page
+        # exposes one; otherwise parse the server-rendered HTML.
+        read_url = extract_grid_read_url(result["html"])
+        count = None
+        if read_url:
+            xhr = _fetch(read_url, session.get("cookies") or {}, timeout=timeout)
+            if xhr.get("ok"):
+                try:
+                    count = _parse_json_counts(json.loads(xhr["html"]))["count"]
+                except (ValueError, TypeError):
+                    count = _parse_counts(xhr["html"])["count"]
+        if count is None:
+            count = _parse_counts(result["html"])["count"]
+
+        if count is None:
+            datasets[kind] = {"status": UNAVAILABLE, "count": None, "label": surface["label"], "detail": "report body could not be parsed"}
+        elif count > 0:
+            datasets[kind] = {"status": VERIFIED, "count": count, "label": surface["label"]}
+        else:
+            datasets[kind] = {"status": ZERO, "count": 0, "label": surface["label"]}
+
+    statuses = [d["status"] for d in datasets.values()]
+    if any(s == VERIFIED for s in statuses):
+        overall = VERIFIED
+    elif statuses and all(s == ZERO for s in statuses):
+        overall = ZERO
+    elif any(s == AUTH_FAILURE for s in statuses):
+        overall = AUTH_FAILURE
+    else:
+        overall = UNAVAILABLE
+
+    return {
+        **base,
+        "status": overall,
+        "datasets": datasets,
+        "limitations": [] if overall in (VERIFIED, ZERO) else [
+            "One or more reporting surfaces could not be collected; no zero was fabricated."
+        ],
+    }

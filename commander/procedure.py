@@ -46,6 +46,7 @@ D1_DATABASE = "levnytt-cta-events"
 CTA_LATEST_FILENAME = "cta-events-latest.json"
 CTA_ATTEMPT_FILENAME = "cta-events-last-attempt.json"
 PENDING_DEPLOYMENT_FILENAME = "pending-deployment-verification.json"
+NEOLIFE_LATEST_FILENAME = "neolife-backoffice-latest.json"
 USER_AGENT = "Mozilla/5.0 (compatible; LevNyttHermes/1.0; +https://levnytt.se)"
 HERMES_REPO = Path("/home/yampa/projects/active/hermes")
 HERMES_PYTHON = HERMES_REPO / ".venv" / "bin" / "python"
@@ -523,14 +524,16 @@ class LevNyttProcedure:
                 )
 
         cta = _collect_cta_events(ctx)
-        evidence = {"sources": {"gsc": gsc, "cta_d1": cta}}
+        neolife = _collect_neolife_backoffice(ctx)
+        evidence = {"sources": {"gsc": gsc, "cta_d1": cta, "neolife_backoffice": neolife}}
         available = [name for name, source in evidence["sources"].items() if source.get("status") == "available"]
         failed = [name for name, source in evidence["sources"].items() if source.get("status") != "available"]
+        neolife_verified = neolife.get("neolife_status") == "VERIFIED"
         if not failed:
             status = "SUCCEEDED"
             detail = (
-                "Refreshed independent Search Console and NeoLife link-click evidence "
-                f"({cta['total_events']} CTA events)."
+                "Refreshed independent Search Console, NeoLife link-click, and direct "
+                f"NeoLife back-office evidence ({cta['total_events']} CTA events)."
             )
         elif available:
             status = "PARTIAL"
@@ -540,7 +543,9 @@ class LevNyttProcedure:
             )
         else:
             status = "BLOCKED"
-            detail = "Measurement failed: neither Search Console nor CTA/D1 evidence was refreshed."
+            detail = "Measurement failed: no first-party evidence source was refreshed."
+        if neolife_verified:
+            detail += " Direct NeoLife back-office revenue/conversions are VERIFIED and replace the link-click proxy."
         return {
             "status": status,
             "detail": detail,
@@ -1505,6 +1510,7 @@ class LevNyttProcedure:
             sources = evidence.get("sources") if isinstance(evidence.get("sources"), dict) else {}
             gsc = sources.get("gsc") if isinstance(sources.get("gsc"), dict) else {}
             cta = sources.get("cta_d1") if isinstance(sources.get("cta_d1"), dict) else {}
+            neolife = sources.get("neolife_backoffice") if isinstance(sources.get("neolife_backoffice"), dict) else {}
             verified_sources = 0
             if gsc.get("status") == "available":
                 latest = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
@@ -1514,6 +1520,11 @@ class LevNyttProcedure:
             if cta.get("status") == "available":
                 latest = _read_json(ctx.runtime_directory / "intelligence" / CTA_LATEST_FILENAME)
                 if latest.get("status") != "available" or latest.get("fetched_at") != cta.get("fetched_at"):
+                    return False
+                verified_sources += 1
+            if neolife.get("status") == "available":
+                latest = _read_json(ctx.runtime_directory / "intelligence" / NEOLIFE_LATEST_FILENAME)
+                if latest.get("project_id") != "levnytt" or latest.get("status") not in ("VERIFIED", "ZERO"):
                     return False
                 verified_sources += 1
             return verified_sources > 0
@@ -2582,6 +2593,46 @@ def _collect_cta_events(ctx) -> dict[str, Any]:
     })
     _atomic_json_write(ctx.runtime_directory / "intelligence" / CTA_LATEST_FILENAME, result)
     _persist_cta_attempt(ctx, result)
+    return result
+
+
+def _collect_neolife_backoffice(ctx) -> dict[str, Any]:
+    """Collect direct NeoLife back-office revenue/conversion evidence.
+
+    Wires ``commander.neolife_backoffice`` into the measurement capability as a
+    third first-party source alongside GSC and D1 link clicks. The provider's
+    outcome is mapped to the measurement contract: ``VERIFIED``/``ZERO`` are a
+    real, authenticated collection (``available``); ``MISSING_CREDENTIALS``,
+    ``AUTH_FAILURE`` and ``UNAVAILABLE`` are ``unavailable`` — never a
+    fabricated zero. The full record is persisted so the evidence builder can
+    surface direct revenue/conversions and replace the link-click proxy when
+    back-office data is actually verified.
+    """
+    result: dict[str, Any] = {
+        "source": "NeoLife back office (myoffice.neolife.com)",
+        "attempted_at": datetime.now(timezone.utc).isoformat(),
+        "status": "unavailable",
+        "provider": "neolife_backoffice",
+    }
+    try:
+        import importlib
+
+        module = importlib.import_module("commander.neolife_backoffice")
+        record = module.collect(ctx.runtime_directory)
+    except Exception as error:
+        result["diagnostic"] = _bounded_provider_diagnostic(
+            f"NeoLife back-office provider unavailable: {type(error).__name__}"
+        )
+        return result
+
+    neolife_status = str(record.get("status") or "")
+    result["status"] = "available" if neolife_status in ("VERIFIED", "ZERO") else "unavailable"
+    result["neolife_status"] = neolife_status
+    result["datasets"] = record.get("datasets") or {}
+    result["credentials"] = record.get("credentials") or {}
+    result["collected_at"] = record.get("collected_at")
+    result["limitations"] = record.get("limitations") or []
+    _atomic_json_write(ctx.runtime_directory / "intelligence" / NEOLIFE_LATEST_FILENAME, record)
     return result
 
 

@@ -1,0 +1,1008 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>     <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>        <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>        <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <script>window.maker_optimize = window.maker_optimize || {};</script>
+    <script src="https://embed.maker.co/optimize.js?id=4rcFebelH" async></script>
+
+    <style>
+        .maker-anti-flicker {
+            opacity: 0 !important
+        }
+    </style>
+    <script>
+        (function () {
+            document.documentElement.classList.add("maker-anti-flicker");
+            setTimeout(function () {
+                document.documentElement.classList.remove("maker-anti-flicker")
+            }, 5000);
+        })();
+    </script>
+
+
+    <!-- Start of TrueVault Polaris Code Block -->
+    <script src="https://polaris.truevaultcdn.com/static/pc/624ZP7A3F/polaris.js">
+    </script>
+    <!-- End of TrueVault Polaris Code Block -->
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-MSNZPTSZ');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="mobileoptimized" content="0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="published" content="8/31/2026 3:21:39 AM" />
+    <meta name="description" content="" />
+    <meta name="format-detection" content="telephone=no">
+
+    <title>Login - NeoLife</title>
+
+    <link rel="dns-prefetch" href="//api.exigo.com">
+    <link rel="app" id="apppath" href="/" />
+    <link rel="app" id="appauthenticated" href="False" />
+    <link rel="app" id="appsessiontimeout" href="30" />
+
+    <link rel="shortcut icon" href="/favicon_n.ico" type="image/x-icon" />
+    <meta property="og:image" content="/iconneolife.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.2/toastr.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/0.9.12/css/jquery.Jcrop.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css" rel="stylesheet" />
+    <link href="https://select2.github.io/select2-bootstrap-theme/css/select2-bootstrap.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Noto Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto Serif:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="/Content/scripts/vendor/slick/slick.css" rel="stylesheet" />
+    <link href="/Content/scripts/vendor/slick/slick-theme.css" rel="stylesheet" />
+    <link href="/bundles/styles/vendor?v=zPBXGKmb1Xkl6kQBff1kXLJJy7az5ktpq0eXGH375K81" rel="stylesheet"/>
+
+    
+    <link href="/Content/styles/site.min.css?v=202608310321" rel="stylesheet" />
+
+    
+    <script src="/routejs.axd/68049a7e14d6d2db62258dce76639bcbeeb2e908/router.min.js"></script>
+    <script src="/app/culture"></script>
+    <script src="/app/resource?name=Resources.Common&amp;path=Common"></script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.min.js" data-main="/Content/scripts/main.js"></script>
+    <script>
+        require.config({
+            baseUrl: '/Content/scripts',
+  urlArgs: "bust=202608310321",             paths: {
+                'addresses': 'modules/addresses',
+                'americanexpress': 'modules/amex',
+                'twofactorauth': 'modules/TwoFactorAuthentication',
+                'anythingllm': 'https://bot.neolifeafrica.info/embed/anythingllm-chat-widget.min',
+                'app': 'modules/app',
+                'ajax': 'modules/ajax',
+                'browser': 'modules/browser',
+                'calendars': 'modules/calendars',
+                'console': 'modules/console',
+                'containers': 'modules/containers',
+                'cookies': 'modules/cookies',
+                'customsort': 'modules/customsort',
+                'datalayerGTM': 'modules/DataLayerGTM',
+                'debug': 'modules/debug',
+                'encryptions': 'modules/encryptions',
+                'extensions': 'modules/extensions',
+                'forms': 'modules/forms',
+                'guids': 'modules/guids',
+                'idletimeout': 'modules/idletimeout',
+                'kendogrids': 'modules/exigoweb.kendogrids',
+                'passwords': 'modules/passwords',
+                'popups': 'modules/popups',
+                'profiles': 'modules/profiles',
+                'pubsub': 'modules/pubsub',
+                'shopping': 'modules/shopping',
+                'urls': 'modules/urls',
+                'widgets': 'modules/widgets',
+                'trees': 'modules/trees',
+                'login': 'modules/login',
+
+                'select2': 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min',
+                'amcharts': 'https://cdnjs.cloudflare.com/ajax/libs/amcharts/3.13.0/amcharts',
+                'amcharts.pie': 'https://cdnjs.cloudflare.com/ajax/libs/amcharts/3.13.0/pie',
+                'amcharts.serial': 'https://cdnjs.cloudflare.com/ajax/libs/amcharts/3.13.0/serial',
+                'bootstrap': 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min',
+                'enquire': 'https://cdnjs.cloudflare.com/ajax/libs/enquire.js/2.1.2/enquire.min',
+                'fullcalendar': 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min',
+                'fullcalendar-lang': 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/lang-all',
+                'gcal': 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/gcal',
+                'handlebars': '/bundles/scripts/handlebars?v=X7_RK-FAOAkx1rICvOL0NYNI-85lam6FmCns0oaEHnU1',
+                'jcrop': 'https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/0.9.12/js/jquery.Jcrop.min',
+                'jquery': 'vendor/jquery-3.5.1.min',
+                'jquery-color': 'https://code.jquery.com/color/jquery.color-2.1.2.min',
+                'jquery-form': 'https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min',
+                'jquery-knob': 'https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.11/jquery.knob.min',
+                'jquery-scrollto': 'https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min',
+                'jquery-ui': 'vendor/jquery-ui/jquery-ui.min',
+                'jquery-validate': 'vendor/jquery.validate.min',
+                'jquery-validate-unobtrusive': 'vendor/jquery.validate.unobtrusive',
+                //'jquery-validate-unobtrusive-custom': 'vendor/jquery.validate.unobtrusive.custom',    //having timing issues with "jquery-validate-unobtrusive" self extracting function
+                'jquery-unobtrusive-ajax': 'vendor/jquery.unobtrusive-ajax',
+                'jquery-mask': 'vendor/jquery.mask.min',
+                'slick': 'vendor/slick/slick.min',
+                'jszip': 'vendor/kendo/scripts/jszip',
+                'jstimezonedetect': 'https://cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.6/jstz.min',
+                'kendo.all.min': 'vendor/kendo/scripts/kendo.all.min',
+                'kendo-cultures': 'vendor/kendo/scripts/kendo.culture.min',
+                'kendo-timezones': 'vendor/kendo/scripts/kendo.timezones.min',
+                'moment': 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min',
+                'moment-timezone': 'https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.32/moment-timezone-with-data.min',
+                'scrollreveal': 'vendor/scrollReveal',
+                'toastr': 'vendor/toastr_cart.min',
+                'md5': 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.7.0/js/md5.min',
+                'typeahead': 'vendor/typeahead',
+                'neolifeCMS': 'modules/NeolifeCMS',//'https://www.neolife.com/static/javascripts/neolife.min',
+                'fsModal': 'vendor/fs-modal.min',
+                'hammer': 'vendor/hammer-2.0.8',
+                'heic2any': 'vendor/heic2any',
+                'monri': 'https://ipg.monri.com/dist/components',
+                'confetti': 'vendor/confetti.min',
+            },
+            bundles: {
+                'typeahead-bundle': ['typeahead', 'bloodhound']
+            },
+            shim: {
+                'amcharts.pie': {
+                    deps: ['amcharts'],
+                    exports: 'AmCharts',
+                    init: function () {
+                        AmCharts.isReady = true;
+                    }
+                },
+                'amcharts.serial': {
+                    deps: ['amcharts'],
+                    exports: 'AmCharts',
+                    init: function () {
+                        AmCharts.isReady = true;
+                    }
+                },
+                'bootstrap': {
+                    deps: ["jquery"]
+                },
+                'gcal': {
+                    deps: ["fullcalendar"]
+                },
+                'jcrop': {
+                    deps: ["jquery", "jquery-color"]
+                },
+                'jquery-knob': {
+                    deps: ["jquery"]
+                },
+                'jquery-validate-unobtrusive': {
+                    deps: ['jquery-validate']
+                },
+                'jquery-unobtrusive-ajax': {
+                    deps: ['jquery']
+                },
+                'jquery-mask': {
+                    deps: ["jquery"]
+                },
+                'fsModal': {
+                    deps: ["jquery"]
+                },
+                'handlebars': {
+                    exports: 'Handlebars'
+                },
+                'kendo.all.min': {
+                    deps: ['jquery']
+                },
+                'kendo-timezones': {
+                    deps: ['kendo.all.min']
+                },
+                'kendogrids': {
+                    deps: ['kendo.all.min', 'kendo-cultures']
+                },
+                'typeahead': {
+                    deps: ['bloodhound']
+                },
+                'moment-timezone': {
+                    deps: ['moment']
+                },
+                'hammer': {
+                    deps: ['jquery']
+                },
+            },
+            deps: ["bootstrap", "extensions", "forms"]
+        });
+    </script>
+
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- MailChimp connection code for BO -->
+    <script id="mcjs">!function (c, h, i, m, p) { m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p) }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/0a1c99b005ee58c59a4798acd/1d364b097ee1893fa3d4dd9e6.js");</script>
+
+    <!-- Hotjar Tracking Code -->
+        <!-- Hotjar Tracking Code for Back Office (MyOffice.NeoLIfe.com) -->
+        <script>
+            (function (h, o, t, j, a, r) {
+                h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+                h._hjSettings = { hjid: 3509887, hjsv: 6 };
+                a = o.getElementsByTagName('head')[0];
+                r = o.createElement('script'); r.async = 1;
+                r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+        </script>
+    <!-- End Hotjar Tracking Code -->
+    <!-- Clarity Tracking Code -->
+        <script type="text/javascript">
+            (
+                function (c, l, a, r, i, t, y) {
+                    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+                    t = l.createElement(r);
+                    t.async = 1;
+                    t.src = "https://www.clarity.ms/tag/" + i;
+                    y = l.getElementsByTagName(r)[0];
+                    y.parentNode.insertBefore(t, y);
+                })(window, document, "clarity", "script", "ttohby43i8");</script>
+    <!-- End Clarity Tracking Code -->
+      
+
+    <!-- Maker -->
+    <link rel="preload" href="https://app.maker.co/enhance/neolife.js" as="script">
+    <script type="text/javascript">
+        !(function () {
+            var e = {
+                enhanceId: 'neolife',
+                enhanceTimeout: 4e3
+            }, t = document.getElementById('js-maker-enhance-style'),
+                n = setTimeout(function () {
+                    t && t.parentElement.removeChild(t), (window
+                        .mk_enhance_timeout = !0)
+                }, e.enhanceTimeout), a = !1, c = document
+                    .createElement('script'), f = window.location.search
+                        .match(/mk_experience_preview/) ? '?_t=' + new Date().getTime() : ''; (c.src =
+                            'https://app.maker.co/enhance/' + e.enhanceId + '.js' + f), (c.type =
+                                'text/javascript'), (c.async = 'true'), (c.onload = c.onreadystatechange =
+                                    function () {
+                                        var e = this.readyState; a || (e && 'complete' != e && 'loaded' != e) || ((
+                                            a = !0), clearTimeout(n))
+                                    }); var o = document.getElementsByTagName('script')[0];
+            o.parentNode.insertBefore(c, o)
+        })()
+    </script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MSNZPTSZ"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+
+    
+
+<main class="" id="site-content">
+    
+<style>
+    body {
+        font-family: "Noto Sans", Helvetica, Arial, sans-serif;
+        font-size: .875rem;
+    }
+</style>
+
+<div id="view-sitelogin-na-aunz">
+    <div id="logo-container">
+        <div class="navul">
+            <div class="navli">
+                <img src="/Content/images/Logo_NeoLife_n.svg" class="logo img-fluid img-responsive" style="background-color:#FFF; width: 230px; height: 75px; margin-left: 35px;" />
+            </div>
+            <div class="navli push-right">
+                <div>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-bs-toggle="dropdown">
+                                Country: &nbsp;United States&nbsp;<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-limit">
+                                    <li>
+                                        <a data-market="AU" href="#">
+                                            Australia
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="AT" href="#">
+                                            Austria
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="BE" href="#">
+                                            Belgium
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="BJ" href="#">
+                                            Benin
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="BA" href="#">
+                                            Bosnia and Herzegovina
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="BW" href="#">
+                                            Botswana
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="BG" href="#">
+                                            Bulgaria
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="CM" href="#">
+                                            Cameroon
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="CA" href="#">
+                                            Canada
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="CE" href="#">
+                                            Central Europe
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="HR" href="#">
+                                            Croatia
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="CY" href="#">
+                                            Cyprus
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="CZ" href="#">
+                                            Czech Republic
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="DK" href="#">
+                                            Denmark
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="EE" href="#">
+                                            Estonia
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="SZ" href="#">
+                                            Eswatini
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="FI" href="#">
+                                            Finland
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="FR" href="#">
+                                            France
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="DE" href="#">
+                                            Germany
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="GH" href="#">
+                                            Ghana
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="GR" href="#">
+                                            Greece
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="HU" href="#">
+                                            Hungary
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="IS" href="#">
+                                            Iceland
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="IE" href="#">
+                                            Ireland
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="IT" href="#">
+                                            Italy
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="CI" href="#">
+                                            Ivory Coast
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="KE" href="#">
+                                            Kenya
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="LV" href="#">
+                                            Latvia
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="LS" href="#">
+                                            Lesotho
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="LT" href="#">
+                                            Lithuania
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="LU" href="#">
+                                            Luxembourg
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="MT" href="#">
+                                            Malta
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="MX" href="#">
+                                            Latin America
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="MZ" href="#">
+                                            Mozambique
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="NA" href="#">
+                                            Namibia
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="NL" href="#">
+                                            Netherlands
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="NZ" href="#">
+                                            New Zealand
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="NG" href="#">
+                                            Nigeria
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="NO" href="#">
+                                            Norway
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="PH" href="#">
+                                            Philippines
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="PL" href="#">
+                                            Poland
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="PT" href="#">
+                                            Portugal
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="RO" href="#">
+                                            Romania
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="SG" href="#">
+                                            Singapore
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="SK" href="#">
+                                            Slovak Republic
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="SI" href="#">
+                                            Slovenia
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="ZA" href="#">
+                                            South Africa
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="ES" href="#">
+                                            Spain
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="SE" href="#">
+                                            Sweden
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="CH" href="#">
+                                            Switzerland
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="TZ" href="#">
+                                            Tanzania
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="TG" href="#">
+                                            Togo
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="UG" href="#">
+                                            Uganda
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="GB" href="#">
+                                            United Kingdom
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-market="US" href="#">
+                                            United States
+                                        </a>
+                                    </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="margin-left-15">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-bs-toggle="dropdown">
+                                <img src="/Content/images/country-flags/16/US.png" />  &nbsp;English&nbsp;<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-limit">
+                                    <li>
+                                        <a data-language="en-US" href="#">
+                                            English
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-language="es-US" href="#">
+                                            Espa&#241;ol
+                                        </a>
+                                    </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="view-login-na-aunz">
+        <div class="container">
+            <div class="space-50"></div>
+            <div class="row">
+                <div class="col-12 col-lg-5 container-left">
+                    <div class="row">
+                        <h2>Login</h2>
+                    </div>
+                    <div class="space-40"></div>
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <b>Username (or ID)</b>
+                            <input class="form-control" data-val="true" data-val-required="The LoginName field is required." id="LoginName" name="LoginName" placeholder="Username*" type="text" value="" />
+                        </div>
+                        <div class="space-10"></div>
+                        <div class="form-group">
+                            <b>Password (or PIN)</b>
+                            <div class="position-relative">
+                                <input class="form-control" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" placeholder="Password*" type="password" value="" />
+                                <i class="fa fa-eye-slash eye-toggle-password" id="togglePassword"></i>
+                            </div>
+                        </div>
+                        <div class="space-20"></div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" id="loginbutton" data-loading-text="Loading..." class="btn btn-primary">Login</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 forgot-password-link">
+                                    <div class="space-10"></div>
+                                    <a href="/account/forgot-password" class="pull-left">Forgot Login?</a>
+                                </div>
+                            </div>
+                            <div style="display: none" class="checkbox col-sm-5" id="keep-me-signed-in-checkbox">
+                                <label>
+                                    <input type="checkbox"> Keep me signed in
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-lg-7 vertical-rule container-right">
+                    <div class="perks-container">
+                        <h2>Don&#39;t have an account yet?</h2>
+                        <br />
+                        <p>Become a member and save! <a href="https://shopneolife.com/www/enrollment/enrollmentconfiguration">Compare our plans</a> to see which works best for you.</p>
+                        <br />
+                        <div class="perk-squares">
+                            <div class="square-top">
+                                <h3><img src="/Content/images/icons/login_icon_1.png" />Retail Members Enjoy Fast and Easy Checkout <span>(Free)</span></h3>
+                                <p>Create a free NeoLife account when you checkout.</p>
+                                <a href="https://shopneolife.com/www/shop/products">Start Shopping</a>
+                            </div>
+                            <div class="square-middle">
+                                <h3><img src="/Content/images/icons/login_icon_2.png" />Members Enjoy Additional Savings <span>(Free)</span></h3>
+                                <p>Save 10% on all orders OR 20% on NeoShip orders.</p>
+                                <small><i>Join FREE with Minimum purchase of 1PV</i></small>
+                                <br />
+                                <a href="https://shopneolife.com/www/enrollment/enrollmentconfiguration">Compare Memberships</a>
+                            </div>
+                            <div class="square-bottom">
+                                <h3><img src="/Content/images/icons/login_icon_3.png" />Promote Wellness to Save and Earn</h3>
+                                <p>Start a business with NeoLife products and save 25% on all orders.</p>
+                                <p>Enrollment fee applies, see member options and details.</p>
+                                <a href="https://shopneolife.com/www/enrollment/enrollmentconfiguration">Compare Memberships</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footWrapper">
+        <div class="hidden-print ">
+            <div id="cms-container" data-cmsfill="static" data-cms-section="static" data-cms-product="promoter2018/Footer">
+                <footer>
+                    <div class="container">
+                        <div class="space-20"></div>
+                        <div class="row">
+                            <div class="col-md-4 footer-left">
+                                <div class="row margin-0">
+                                    <div class="col-sm-1 col-md-3">
+                                        <a href="https://www.dsasa.co.za/modules_fe/layout2/code-of-conduct.asp#code_conduct" target="_blank">
+                                            <img src="/Content/images/footer_dsa.jpg" class="img-responsive" style="width: 40px" />
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-11 col-md-9">
+                                        <p>We are proud members of the DSA. To view the Code of Ethics by which we abide please click here <a href="http://www.dsasa.co.za/modules_fe/layout2/code-of-conduct.asp#code_conduct" target="_blank">Code of Ethics</a>. To file a complaint, please contact us at NeoLife International at 081 3177 1532.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <p class="copyright">Copyright &#169; 2026 NeoLife International (Pty) Ltd. No reproduction in whole or in part without written permission. All Rights Reserved. All trademarks and product images exhibited on this site, unless otherwise indicated, are the property of NeoLife International (Pty) Ltd.</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <p class="text-center clear-cookies-cache">
+                <span>Experiencing odd issues with the website?</span>
+                <a href="#"><img class="margin-right-10" src="/Content/images/icons/cookie.svg" /> Clear cookies and cached files from this website</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- Product Search Modal -->
+    <div class="modal fade" id="product-search-modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Product Search Results</h4>
+                    <button type="button" class="btn-close position-absolute end-0 me-4" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="product-search-results-container">
+                        <!-- Injected Dynamically -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info pull-right" style="margin-right: 10px;" data-bs-dismiss="modal">Close</button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+    
+    <div class="modal modal-fullscreen fade" id="help-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100">
+                        Help
+                    </h4>
+                    <button type="button" class="btn-close position-absolute end-0 me-4" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="min-height: 50px;">
+                    <div class="col-md-12">
+                        <div data-cms-placeholder="" data-cmsfill="" data-cms-section="help" data-cms-product=""></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-right" style="margin-right: 10px;" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+        require(["jquery", "ajax", "cookies", "toastr", "neolifeCMS"], function ($, ajax, cookies, toastr, neolifeCMS) {
+            // Settings            
+            var languageCookieName = 'NeolifeSelectedLanguage',
+                countryCookieName = 'NeolifeSelectedCountry',
+                shoppingCountryCookieName = 'NeolifeShoppingCountry';
+            
+            // Helpers
+            var helpers = {
+                overrideCMSLinks: function () {
+                    var $cmsOverrideLinks = $('.exigo-override-link');
+                    $cmsOverrideLinks.each(function (index) {
+                        var rootUrl = location.origin,
+                            overridenUrl = rootUrl + $(this).attr("data-urlendpoint");
+                        $(this).attr("href", overridenUrl);
+                    });
+                }                
+            };
+
+            function init() {
+                neolifeCMS.FillPage(cookies.get(languageCookieName), cookies.get(countryCookieName), undefined, cookies.get(shoppingCountryCookieName));
+                setTimeout(function () {
+                    helpers.overrideCMSLinks();
+                }, 1000);
+            }
+
+            init();
+        });
+    </script>
+
+    
+    <script>
+    require(["jquery", "ajax", "cookies", "urls", "app", "toastr", "neolifeCMS", "forms", "bootstrap", "login", "fsModal"], function ($, ajax, cookies, url, app, toastr, CMS) {
+
+        // Settings
+        var context = '#view-sitelogin-na-aunz',
+            $context = $(context),
+            cookiename = 'NeolifeLoginName',
+            getCultureCodeURL = '/app/getculturecode',
+            timeZoneCookieName = 'NeolifeTimeZoneIANA',
+            oneYearFromNow = '9/2/2027',
+            languageCookieName = 'NeolifeSelectedLanguage',
+            countryCookieName = 'NeolifeSelectedCountry',
+            shoppingCountryCookieName = 'NeolifeShoppingCountry',
+            landingUrl = ('False' == "True") ? '/authentication/continue' : '/';
+
+        // Event Handlers
+        function registerEventHandlers() {
+
+            /* Event fired when <i> is clicked */
+            $('#togglePassword', $context).on('click', function () {
+                $(this).toggleClass("fa-eye fa-eye-slash")
+                $('#Password').attr('type') === 'password' ? $('#Password').attr('type', 'text') : $('#Password').attr('type', 'password')
+            });
+            // Login Form
+            $('#loginbutton', $context).on('click', function (event) {
+                event.preventDefault();
+                $("#loginbutton").buttonState("loading");
+                actions.signin();
+            });
+            $('input', $context).on('keypress', function (event) {
+                if (event.which == 13) {
+                    event.preventDefault();
+                    actions.signin();
+                }
+            });
+            $('[data-market]').on("click", function () {
+                var countryCode = $(this).data("market");
+                cookies.set(countryCookieName, countryCode, {
+                    expires: new Date(oneYearFromNow),
+                    path: '/'
+                });
+                ajax.json({
+                    url: getCultureCodeURL,
+                    data: { countryCode },
+                    success: function (response) {
+                        if (response.success) {
+                            cookies.set(languageCookieName, response.cultureCode, {
+                                expires: new Date(oneYearFromNow),
+                                path: '/'
+                            });
+                            location.reload();
+                        }
+                    }
+                });
+            });
+            $('[data-language]').on("click", function () {
+                var languageID = $(this).data("language");
+
+                cookies.set(languageCookieName, languageID, {
+                    expires: new Date(oneYearFromNow),
+                    path: '/'
+                });
+                location.reload();
+            });
+        }
+
+
+        // Actions
+        var actions = {
+            clearCookies: function () {
+                cookies.clear(cookiename);
+            },
+            loadCookies: function () {
+                var savedLoginName = cookies.get(cookiename);
+                if (savedLoginName) $('#LoginName').val(savedLoginName);
+            },
+            saveCookies: function () {
+                // Get the expiration date of the cookie
+                var expires = new Date();
+                expires.setDate(expires.getDate() + 365);
+
+                // Set the cookies
+                cookies.set(cookiename, $('#LoginName').val(), {
+                    expires: expires
+                });
+            },
+            signin: function () {
+
+                // Validate the form
+                if (!$('form', $context).valid()) {
+                    $("#loginbutton").buttonState("reset");
+                    return false;
+                }
+
+                // Submit the form
+                ajax.json({
+                    url: '/login',
+                    data: $('form').serializeObject(),
+                    beforeSend: function () {
+                        toastr.clear();
+                    },
+                    success: function (response) {
+                        if (!response.Status) {
+                            actions.throwError(Resources.Common.LoginFailed, response.ErrorMessage);
+                            $("#loginbutton").buttonState("reset");
+                        }
+                        else {
+                            // Save the cookies
+                            actions.saveCookies();
+
+                            localStorage.clear();
+
+                            // Redirect
+                            var decodedUrlQueryReturnUrl = decodeURIComponent(url.current.queryKey.ReturnUrl || landingUrl);
+                            var finalLandingUrl = (decodedUrlQueryReturnUrl != "/") ? decodedUrlQueryReturnUrl : landingUrl;
+
+                            window.location = (response.RedirectUrl != '') ? response.RedirectUrl : finalLandingUrl;
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        actions.throwError(Resources.Common.LoginFailed, error);
+                        $("#loginbutton").buttonState("reset");
+                    }
+                });
+            },
+            throwError: function (title, error) {
+                toastr.error(error, title);
+                $('#Password').focus();
+                $("#loginbutton").buttonState("reset");
+            },
+            handleCMS: function() {
+                var $help = $('#help-modal div[data-cms-section="help"]');
+                if ($help) {
+                    $help.attr("data-cms-product", "login");
+                    CMS.FillPage(cookies.get(languageCookieName), cookies.get(countryCookieName),);
+                }
+            }
+        };
+
+
+        // Initialization
+        function _init() {
+            cookies.set(timeZoneCookieName, Intl.DateTimeFormat().resolvedOptions().timeZone, {
+                expires: new Date(oneYearFromNow),
+                path: '/',
+                domain: false,
+                secure: false
+            });
+
+            // Register the event handlers
+            registerEventHandlers();
+
+            // Load the saved cookies into the form
+            actions.loadCookies();
+
+            actions.handleCMS();
+
+            // Focus on the right field
+            if ($('#LoginName').val() == '') $('#LoginName').focus();
+            else $('#Password').focus();
+        }
+        _init();
+
+    });
+    </script>
+
+
+    
+    <input name="__RequestVerificationToken" type="hidden" value="Nrmb9M3SMmmSAlYqGf-YJ8b8PWu0FXtMOT0q3TKHP_poxLlfnInsEV2JWH4S4tOXbvwYfvqJvgIQPzNQpQUb1HCeArE1" />
+
+    <div class="d-print-none">
+    </div>
+
+    <script src=https://r2.ddlnk.net/DM-4018602434-02/ddgtag.js></script>
+    <script>
+    </script>
+</body>
+</html>
