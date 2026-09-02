@@ -18,7 +18,9 @@ from commander import repairs
 from commander.operating_loop import (
     _action_for,
     _commitment_for,
+    _confirmation_evidence,
     _reconcile_legacy_commitments,
+    _reconcile_staged_commitments,
 )
 from commander.operating_loop import run_cycle  # noqa: F401
 
@@ -144,3 +146,56 @@ def test_reconcile_legacy_commitments_is_idempotent_and_forward_only(tmp_path: P
     assert records["levnytt:social_publishing-1d995c06"] == "SUPERSEDED"
     assert records["levnytt:content_production:content-improvement:x"] == "OPEN"
     assert records["levnytt:deployment:deployment:staged"] == "CONFIRMED"
+
+
+def test_confirmation_evidence_is_structured_for_staged_content():
+    decision = {"kind": "opportunity", "capability_id": "content_improvement"}
+    outcome = {"evidence": {"gate_passed": True, "slug": "x", "source_file": "content/articles/x.html",
+                            "staged_content_sha256": "abc", "production_data_sha256": "def"}}
+    evidence = _confirmation_evidence(decision, outcome, {"detail": "plain detail"})
+    import ast
+    assert ast.literal_eval(evidence)["staged_content_sha256"] == "abc"
+    assert evidence != "plain detail"
+
+
+def test_confirmation_evidence_is_plain_for_non_staged_capabilities():
+    decision = {"kind": "opportunity", "capability_id": "measurement"}
+    outcome = {"evidence": {"sources": {}}}
+    assert _confirmation_evidence(decision, outcome, {"detail": "refreshed"}) == "refreshed"
+
+
+def test_reconcile_staged_commitments_repairs_plain_string_receipt(tmp_path, monkeypatch):
+    runtime = tmp_path / "runtime"
+    (runtime / "commander").mkdir(parents=True)
+    # Seed a confirmed content_improvement commitment with a plain-string receipt.
+    (runtime / "commander" / "commitments.json").write_text(json.dumps({"commitments": [{
+        "commitment_id": "levnytt:content_improvement:content-improvement:cellmembran-funktion",
+        "capability_id": "content_improvement", "status": "CONFIRMED",
+        "resolution_reason": "Staged evidence-backed improvement ... deployment remains pending.",
+    }]}, ensure_ascii=False), encoding="utf-8")
+    # Seed the Commander's persisted decision with the matching structured evidence.
+    import hashlib
+    (tmp_path / "content" / "articles").mkdir(parents=True)
+    (tmp_path / "content" / "data").mkdir(parents=True)
+    staged = tmp_path / "content" / "articles" / "cellmembran-funktion.html"
+    staged.write_text("<html>improved</html>", encoding="utf-8")
+    data = tmp_path / "content" / "data" / "production-pages.json"
+    data.write_text('{"pages": []}', encoding="utf-8")
+    staged_sha = hashlib.sha256(staged.read_bytes()).hexdigest()
+    data_sha = hashlib.sha256(data.read_bytes()).hexdigest()
+    state = {"prior_decisions": [{
+        "capability_id": "content_improvement",
+        "execution": {"evidence": {"gate_passed": True, "slug": "cellmembran-funktion",
+                                  "source_file": "content/articles/cellmembran-funktion.html",
+                                  "staged_content_sha256": staged_sha,
+                                  "production_data_sha256": data_sha}},
+    }]}
+    from commander import identity
+    identity.save_state(state, runtime=runtime)
+
+    repaired = _reconcile_staged_commitments(runtime, tmp_path)
+    assert repaired == 1
+    import ast
+    ledger = json.loads((runtime / "commander" / "commitments.json").read_text(encoding="utf-8"))
+    reason = ledger["commitments"][0]["resolution_reason"]
+    assert ast.literal_eval(reason)["staged_content_sha256"] == staged_sha

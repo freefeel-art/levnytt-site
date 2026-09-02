@@ -17,6 +17,8 @@ live page, a refreshed artifact, a permalink) before it may be marked verified.
 
 from __future__ import annotations
 
+import ast
+import hashlib
 import json
 import re
 from datetime import datetime
@@ -28,6 +30,7 @@ from zoneinfo import ZoneInfo
 from app.commander.commitment_ledger import (
     commitment_records,
     confirm_commitment,
+    ledger_path,
     open_commitments,
     record_commitment,
     record_commitment_resolution,
@@ -36,11 +39,18 @@ from app.commander.operational_defects import (
     close_defect,
     load_active_defects,
 )
+from app.core.files import atomic_json_write, load_json_dict
 
 from commander import decision as decision_model
 from commander import evidence as evidence_module
 from commander import identity, repairs
 from commander.procedure import LevNyttProcedure
+
+# Capabilities that stage content for a later deployment step. Their confirmed
+# receipts must carry the executor's structured evidence (file hashes) so the
+# evidence layer and the deployment executor recognise them as awaiting
+# deployment.
+_STAGED_CONTENT_CAPABILITIES = frozenset({"content_improvement", "content_production", "legacy_migration"})
 
 TZ = ZoneInfo("Europe/Stockholm")
 
@@ -189,6 +199,94 @@ def _commitment_for(decision: dict[str, Any]) -> dict[str, Any] | None:
     }
 
 
+def _confirmation_evidence(decision: dict[str, Any], outcome: dict[str, Any], verification: dict[str, Any]) -> str:
+    """The durable receipt written into a confirmed commitment.
+
+    Staged-content capabilities must persist the executor's structured evidence
+    (the exact file hashes) so ``_staged_articles`` / ``_confirmed_staged_work``
+    can later recognise the artifact as awaiting deployment. A plain detail
+    string breaks that recognition (the defect this fixes). Other capabilities
+    keep a plain, human-readable receipt.
+    """
+    capability = str(decision.get("capability_id") or "")
+    evidence = outcome.get("evidence")
+    if capability in _STAGED_CONTENT_CAPABILITIES and isinstance(evidence, dict) and evidence:
+        return repr(evidence)
+    return verification.get("detail", "verified external effect")
+
+
+def _sha256(project_root: Path, rel: str) -> str | None:
+    try:
+        return hashlib.sha256((project_root / rel).read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+
+def _slug_from_commitment_row(row: dict[str, Any]) -> str:
+    """Best-effort slug for a staged-content commitment: the last segment of its
+    ``commitment_id`` (e.g. ``levnytt:content_improvement:content-improvement:x``
+    -> ``x``)."""
+    return str(row.get("commitment_id") or "").rsplit(":", 1)[-1]
+
+
+def _reconcile_staged_commitments(runtime: Path, project_root: Path) -> int:
+    """Repair confirmed staged-content commitments whose receipt is a plain
+    string (from the historical defect) into a structured, hash-bound receipt.
+
+    The structured evidence is recovered from the Commander's own persisted
+    decision records, and only accepted when the staged files on disk still
+    match those hashes — so a regenerated/stale variant is never repaired into
+    a deployable receipt. Idempotent; returns the number of receipts repaired.
+    """
+    state = identity.load_state(runtime=runtime)
+    evidence_by_slug: dict[str, dict[str, Any]] = {}
+    for decision in state.get("prior_decisions", []):
+        if decision.get("capability_id") not in _STAGED_CONTENT_CAPABILITIES:
+            continue
+        ev = (decision.get("execution") or {}).get("evidence")
+        if not isinstance(ev, dict) or not ev.get("gate_passed"):
+            continue
+        slug = ev.get("slug")
+        source_file = ev.get("source_file")
+        if not slug or not source_file:
+            continue
+        # Only accept evidence whose artifact hashes match the files on disk.
+        if _sha256(project_root, str(source_file)) != ev.get("staged_content_sha256"):
+            continue
+        if _sha256(project_root, "content/data/production-pages.json") != ev.get("production_data_sha256"):
+            continue
+        evidence_by_slug[str(slug)] = ev
+
+    ledger = load_json_dict(ledger_path(runtime))
+    rows = ledger.get("commitments")
+    if not isinstance(rows, list):
+        return 0
+    repaired = 0
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        if row.get("capability_id") not in _STAGED_CONTENT_CAPABILITIES:
+            continue
+        if row.get("status") != "CONFIRMED":
+            continue
+        reason = row.get("resolution_reason")
+        try:
+            parsed = ast.literal_eval(reason) if isinstance(reason, str) else None
+        except (ValueError, SyntaxError):
+            parsed = None
+        if isinstance(parsed, dict) and parsed.get("gate_passed"):
+            continue  # already structured
+        slug = _slug_from_commitment_row(row)
+        ev = evidence_by_slug.get(slug)
+        if not ev:
+            continue
+        row["resolution_reason"] = repr(ev)
+        repaired += 1
+    if repaired:
+        atomic_json_write(ledger_path(runtime), ledger)
+    return repaired
+
+
 def _persist(state, decision, outcome, verification, runtime) -> None:
     decision_record = {
         "selected_at": _iso(),
@@ -237,6 +335,10 @@ def run_cycle(
     evidence = evidence_module.build_evidence(project_root, runtime, today)
     evidence_module.detect_defects(project_root, runtime)
     _reconcile_legacy_commitments(runtime)
+    _reconcile_staged_commitments(runtime, project_root)
+    # Re-read evidence now that the reconciliation may have made staged content
+    # recognisable as awaiting deployment.
+    evidence = evidence_module.build_evidence(project_root, runtime, today)
     defects = load_active_defects(runtime)
     commitments = open_commitments(runtime)
 
@@ -283,7 +385,7 @@ def run_cycle(
     if commitment is not None and verification.get("verified"):
         confirm_commitment(
             commitment_id=commitment["commitment_id"],
-            evidence=verification.get("detail", "verified external effect"),
+            evidence=_confirmation_evidence(decision, outcome, verification),
             runtime=runtime,
         )
 
