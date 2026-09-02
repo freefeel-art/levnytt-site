@@ -1,0 +1,28 @@
+<form name="login" id="login" action="/plugin/neolife_shop_in_shop/reseller_admin/login" method="POST">
+                  <div class="row">
+        <div class="column small-12 medium-4 large-3" data-neolife-tooltip>
+          <label for="id_nr" data-neolife-tooltip-button>
+            Landskod
+            <div class="neolife-tooltip">
+              <button type="button" class="neolife-tooltip-button">?</button>
+              <div class="neolife-tooltip-info" data-neolife-tooltip-info>
+                <table>(country list omitted)</table>
+              </div>
+            </div>
+          </label>
+          		<input type="text" id="id_nr" name="login[country_code]" />
+
+        </div>
+        <div class="column small-12 medium-8 large-4">
+          <label for="id_nr">ID nummer</label>
+          		<input type="text" id="id_nr2" name="login[id]" />
+
+        </div>
+        <div class="column small-12 medium-12 large-5">
+          <label for="pin">Pinkod</label>
+          		<input type="password" id="pin" name="login[pincode]" />
+
+        </div>
+              </div>
+      <button type="submit" class="button">Logga in</button>
+    </form>
