@@ -64,7 +64,7 @@ def family_for(public_path: str) -> str:
         return "library-category-index"
     if name in {"integritetspolicy", "404"}:
         return "utility-legal"
-    if name in {"om-oss", "den-fundersamma-mannen", "var-metod", "forsknings-faq", "levnytt-principer"}:
+    if name in {"om-oss", "den-fundersamma-mannen", "var-metod", "levnytt-principer"}:
         return "authority-editorial-trust"
     if name.startswith("neolife-") or name in {"golden-home-care", "personlig-vard", "super-10"}:
         return "product-category"
