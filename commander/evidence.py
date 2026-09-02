@@ -19,13 +19,92 @@ as UNKNOWN/UNAVAILABLE rather than zero.
 
 from __future__ import annotations
 
+import ast
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-from app.commander.commitment_ledger import open_commitments
+from app.commander.commitment_ledger import ledger_path, open_commitments
 from app.commander.operational_defects import load_active_defects, register_defect
+from app.core.files import load_json_dict
 
 from commander import identity, repairs
+
+# A content_improvement is suppressed from re-selection for one GSC data window
+# after it is confirmed, so the Commander does not re-improve a page using
+# search evidence that predates the just-deployed revision.
+_IMPROVEMENT_SUPPRESSION_DAYS = 28
+
+
+def _recently_improved_slugs(runtime: Path) -> set[str]:
+    """Slugs with a CONFIRMED content_improvement commitment resolved within the
+    GSC data window. These must not be re-selected until fresh GSC evidence can
+    actually reflect the deployed revision."""
+    ledger = load_json_dict(ledger_path(runtime))
+    rows = ledger.get("commitments")
+    if not isinstance(rows, list):
+        return set()
+    cutoff = datetime.now(timezone.utc) - timedelta(days=_IMPROVEMENT_SUPPRESSION_DAYS)
+    suppressed: set[str] = set()
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        if row.get("capability_id") != "content_improvement" or row.get("status") != "CONFIRMED":
+            continue
+        resolved_at = row.get("resolved_at")
+        if isinstance(resolved_at, str):
+            try:
+                resolved = datetime.fromisoformat(resolved_at.replace("Z", "+00:00"))
+            except ValueError:
+                resolved = None
+            if resolved is not None and resolved.tzinfo is None:
+                resolved = resolved.replace(tzinfo=timezone.utc)
+            if resolved is not None and resolved < cutoff:
+                continue
+        slug = None
+        try:
+            parsed = ast.literal_eval(str(row.get("resolution_reason") or ""))
+            if isinstance(parsed, dict):
+                slug = parsed.get("slug")
+        except (ValueError, SyntaxError):
+            slug = None
+        if not slug:
+            slug = str(row.get("commitment_id") or "").rsplit(":", 1)[-1]
+        if slug:
+            suppressed.add(str(slug))
+    return suppressed
+
+
+def _suppress_completed_improvements(packet: dict[str, Any], runtime: Path) -> dict[str, Any]:
+    """Remove content_improvement opportunities for slugs that already have a
+    recently-confirmed improvement, so the Commander moves on to fresh work
+    instead of re-selecting a just-deployed page on stale GSC evidence."""
+    suppressed = _recently_improved_slugs(runtime)
+    opportunities = packet.get("content_improvement_opportunities")
+    if not isinstance(opportunities, dict):
+        return packet
+    rows = opportunities.get("opportunities")
+    if not isinstance(rows, list):
+        return packet
+    kept = [o for o in rows if isinstance(o, dict) and str(o.get("slug") or "") not in suppressed]
+    if len(kept) == len(rows):
+        return packet
+    opportunities = dict(opportunities)
+    opportunities["opportunities"] = kept
+    opportunities["suppressed_recently_improved"] = sorted(suppressed)
+    packet["content_improvement_opportunities"] = opportunities
+
+    availability = packet.get("runtime_capability_availability")
+    if isinstance(availability, dict):
+        ci = availability.get("content_improvement")
+        if isinstance(ci, dict):
+            ci = dict(ci)
+            ci["executable_now"] = bool(kept)
+            if not kept:
+                ci["blocking_reasons"] = ["ALL_RECENTLY_IMPROVED"]
+            availability["content_improvement"] = ci
+            packet["runtime_capability_availability"] = availability
+    return packet
 
 
 def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, Any]:
@@ -33,6 +112,7 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
     from app.commander.evidence import _levnytt
 
     packet = _levnytt(project_root, runtime, today, identity.PROJECT_ID)
+    packet = _suppress_completed_improvements(packet, runtime)
 
     # Reconcile open durable state so the decision sees everything at once.
     packet["open_defects"] = load_active_defects(runtime)
