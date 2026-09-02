@@ -3530,6 +3530,24 @@ def _seed_keyword_candidates(ctx) -> None:
     if community_candidates:
         levnytt_community.record_scout_promotions(ctx.runtime_directory, community_candidates)
 
+    # Search Demand Scout -> seo_intelligence join: externally discovered new
+    # demand that Commander classified CREATE (a verified content gap with no
+    # owned page) is handed to the Scout as reserved EXTERNAL_DEMAND seeds, so
+    # it flows through the same research -> content_production gates rather
+    # than becoming a parallel publishing path. Bounded and deduplicated.
+    scout_candidates = _read_json(
+        ctx.runtime_directory / "intelligence" / "scout-demand-candidates.json"
+    )
+    for item in (scout_candidates.get("candidates") if isinstance(scout_candidates.get("candidates"), list) else [])[:8]:
+        if not isinstance(item, dict) or not str(item.get("keyword", "")).strip():
+            continue
+        _add(
+            str(item["keyword"]),
+            evidence_type=item.get("evidence_type", "EXTERNAL_DEMAND"),
+            scout_signal=item.get("scout_signal"),
+            impressions=None,
+        )
+
     # Category floor: the three NeoLife product lines each get Scout seeds,
     # reserved before the demand-driven GSC fill, so a supplement-heavy
     # GSC/forum result set cannot permanently starve Personlig vård and
