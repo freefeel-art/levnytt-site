@@ -111,5 +111,5 @@ def test_article_index_discovers_every_swedish_content_route_once():
     # scripts/generate-article-index.py::discover_articles, which walks
     # rebuild-production.sitemap_routes). Publishing a new article updates the
     # sitemap and therefore this count; the assertion documents that invariant.
-    assert len(articles) == 140
+    assert len(articles) == 141
     assert len({article["path"] for article in articles}) == len(articles)

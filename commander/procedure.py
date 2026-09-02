@@ -1812,7 +1812,7 @@ def _add_sitemap_entry(repo: Path, slug: str) -> bool:
         text = sitemap.read_text(encoding="utf-8")
     except OSError:
         return False
-    if f"{SITE}/{slug}" in text:
+    if f"{SITE}/{slug}<" in text:
         return True
     if "</urlset>" not in text:
         return False
