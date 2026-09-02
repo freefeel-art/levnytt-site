@@ -42,6 +42,8 @@
 .ln-article-body :where(.pcard, .pro-card) { display: grid; gap: var(--ln-space-3); height: 100%; }
 .ln-article-body :where(.pcard-img, .pro-card-img, .slide-img, .hero-img) { width: 100%; aspect-ratio: var(--ln-image-editorial); object-fit: contain; background: var(--ln-color-surface-raised); }
 .ln-article-body :where(.pcard-img, .pro-card-img, .slide-img) { aspect-ratio: 16 / 9; }
+.ln-article-body .hero-img { aspect-ratio: auto; background: transparent; }
+.ln-article-body .hero-img img { width: 100%; height: auto; }
 .ln-article-body :where(.pcard-tag, .pro-card-tag, .slide-tag) { color: var(--ln-color-evidence-context); font-size: 0.74rem; font-weight: 750; text-transform: uppercase; }
 .ln-article-body :where(.pcard-footer, .pcard-meta) { color: var(--ln-color-text-muted); font-size: 0.84rem; }
 .ln-article-body .slider-wrapper { margin-block: var(--ln-space-5); }
