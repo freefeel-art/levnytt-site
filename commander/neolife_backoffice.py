@@ -37,6 +37,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -63,11 +64,16 @@ VERIFIED = "VERIFIED"
 
 _SESSION_FILENAME = "neolife-backoffice" + os.sep + "session.json"
 
-# Reporting surfaces are discovered only after the first authenticated session
-# (the reseller-admin area requires a live login to enumerate its routes). The
-# collector therefore reports UNAVAILABLE — never ZERO — until real surfaces
-# are recorded here post-authentication.
-REPORTING_SURFACES: tuple[dict[str, str], ...] = ()
+# Factual reporting surfaces of the regional reseller account, discovered from
+# the authenticated account (2026-09-02). Orders are server-rendered; the
+# dashboard exposes Personal Volume and turnover server-side; the invoice pages
+# are Vue.js templates whose rows are loaded client-side (see _parse_surface).
+REPORTING_SURFACES: tuple[dict[str, str], ...] = (
+    {"path": "/account_history.php", "kind": "orders", "label": "orders"},
+    {"path": "/account.php", "kind": "turnover", "label": "turnover / personal volume"},
+    {"path": "/account.php?sub_page=commission_invoices", "kind": "commission_invoices", "label": "commission invoices"},
+    {"path": "/account.php?sub_page=invoices", "kind": "purchase_invoices", "label": "purchase invoices"},
+)
 
 
 def _now() -> str:
@@ -236,7 +242,8 @@ def _parse_counts(html: str) -> dict[str, int | None]:
 
     Distinguishes three states conservatively: a report container with data
     rows -> the row count; a report container with no data rows -> 0 (measured
-    zero); no report container -> None (unparseable, never a zero).
+    zero); no report container -> None (unparseable, never a zero). Vue.js
+    template placeholder rows (``{{ ... }}``) are not real data and are skipped.
     """
     if not html:
         return {"count": None}
@@ -245,6 +252,9 @@ def _parse_counts(html: str) -> dict[str, int | None]:
     for tr in soup.find_all("tr"):
         tds = tr.find_all("td")
         if not tds:
+            continue
+        cell_text = " ".join(td.get_text() for td in tds)
+        if "{{" in cell_text:
             continue
         classes = list(tr.get("class") or [])
         for td in tds:
@@ -257,6 +267,82 @@ def _parse_counts(html: str) -> dict[str, int | None]:
     if soup.find("table") is not None or soup.select_one(".k-grid"):
         return {"count": 0}
     return {"count": None}
+
+
+def _is_client_rendered(html: str) -> bool:
+    """True when a page's data is rendered client-side (Vue.js template) rather
+    than server-rendered — its rows exist only as placeholders, so a raw fetch
+    cannot observe real records."""
+    return "{{" in html and ("vue" in html.lower() or "v-" in html.lower())
+
+
+_TURNOVER_PATTERN = re.compile(r"PV:\s*(\d+)")
+_TOTAL_SPAN = ".total"
+
+
+def _extract_turnover(html: str) -> dict[str, Any] | None:
+    """Extract the dashboard's Personal Volume and turnover from server-rendered
+    HTML. The account dashboard renders ``<span class="pv-amount">PV: N</span>``
+    and ``<span class="total"><amount></span>`` server-side."""
+    soup = BeautifulSoup(html or "", "html.parser")
+    pv_el = soup.select_one(".pv-amount")
+    total_el = soup.select_one(_TOTAL_SPAN)
+    if pv_el is None or total_el is None:
+        return None
+    pv_match = _TURNOVER_PATTERN.search(pv_el.get_text())
+    if not pv_match:
+        return None
+    return {
+        "personal_volume": int(pv_match.group(1)),
+        "turnover": total_el.get_text(strip=True),
+    }
+
+
+def _count_order_rows(html: str) -> int | None:
+    """Count real order rows on the order-history page.
+
+    The order-history table renders its header with ``<td>`` too, so a plain row
+    count over-counts by one. A real order row's first cell is a numeric order
+    id; the header's first cell is the label ``IDOrdernummer``.
+    """
+    soup = BeautifulSoup(html or "", "html.parser")
+    rows = 0
+    for tr in soup.find_all("tr"):
+        tds = tr.find_all("td")
+        if not tds:
+            continue
+        if tds[0].get_text(strip=True).isdigit():
+            rows += 1
+    return rows
+
+
+def _parse_surface(html: str, kind: str) -> dict[str, Any]:
+    """Parse one authenticated surface into a truthful dataset record.
+
+    Returns ``{"status", "count", "value"}``. Client-side (Vue.js) surfaces are
+    UNAVAILABLE rather than zero, because a raw fetch cannot see their records.
+    """
+    if kind == "turnover":
+        value = _extract_turnover(html)
+        if value is None:
+            return {"status": UNAVAILABLE, "count": None, "value": None}
+        return {"status": VERIFIED, "count": None, "value": value}
+
+    if _is_client_rendered(html):
+        return {"status": UNAVAILABLE, "count": None, "value": None, "detail": "client-side rendered; no server-visible records"}
+
+    if kind == "orders":
+        count = _count_order_rows(html)
+        if count is None:
+            return {"status": UNAVAILABLE, "count": None, "value": None, "detail": "report body could not be parsed"}
+        return {"status": VERIFIED if count > 0 else ZERO, "count": count, "value": None}
+
+    count = _parse_counts(html)["count"]
+    if count is None:
+        return {"status": UNAVAILABLE, "count": None, "value": None, "detail": "report body could not be parsed"}
+    if count > 0:
+        return {"status": VERIFIED, "count": count, "value": None}
+    return {"status": ZERO, "count": 0, "value": None}
 
 
 # ── the Commander-facing entrypoint ──────────────────────────────────────────
@@ -305,21 +391,6 @@ def collect(runtime: Path, *, timeout: int = 30) -> dict[str, Any]:
         session = {"cookies": auth["cookies"], "acquired_at": _now(), "expired": False}
         _save_session(runtime, session)
 
-    # No reporting surfaces are known yet for the regional reseller-admin area
-    # (they require a live login to enumerate). Report honestly as UNAVAILABLE
-    # rather than fabricating a zero.
-    if not REPORTING_SURFACES:
-        return {
-            **base,
-            "status": UNAVAILABLE,
-            "datasets": {},
-            "authenticated": True,
-            "limitations": [
-                "Authenticated successfully, but the reseller-admin reporting surfaces "
-                "have not been enumerated yet; nothing was reported as zero."
-            ],
-        }
-
     datasets: dict[str, Any] = {}
     reauthenticated = False
     for surface in REPORTING_SURFACES:
@@ -344,13 +415,8 @@ def collect(runtime: Path, *, timeout: int = 30) -> dict[str, Any]:
             datasets[kind] = {"status": UNAVAILABLE, "count": None, "label": surface["label"], "detail": result.get("detail")}
             continue
 
-        count = _parse_counts(result["html"])["count"]
-        if count is None:
-            datasets[kind] = {"status": UNAVAILABLE, "count": None, "label": surface["label"], "detail": "report body could not be parsed"}
-        elif count > 0:
-            datasets[kind] = {"status": VERIFIED, "count": count, "label": surface["label"]}
-        else:
-            datasets[kind] = {"status": ZERO, "count": 0, "label": surface["label"]}
+        parsed = _parse_surface(result["html"], kind)
+        datasets[kind] = {"label": surface["label"], **parsed}
 
     statuses = [d["status"] for d in datasets.values()]
     if any(s == VERIFIED for s in statuses):

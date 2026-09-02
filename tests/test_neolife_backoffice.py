@@ -134,6 +134,28 @@ def test_parse_counts_no_report_container_is_none():
     assert nb._parse_counts("<html><body>not a report</body></html>")["count"] is None
 
 
+def test_extract_turnover_from_dashboard():
+    html = '<span class="pv-amount">PV: 123</span><span class="total">1 824,00</span>'
+    assert nb._extract_turnover(html) == {"personal_volume": 123, "turnover": "1 824,00"}
+    assert nb._extract_turnover("<html>no dashboard</html>") is None
+
+
+def test_count_order_rows_excludes_header_row():
+    html = (
+        "<table><tr><td>IDOrdernummer</td><td>Datum</td></tr>"
+        "<tr><td>479091</td><td>2026-08-14</td></tr>"
+        "<tr><td>430564</td><td>2025-10-27</td></tr></table>"
+    )
+    assert nb._count_order_rows(html) == 2
+
+
+def test_parse_surface_client_rendered_is_unavailable():
+    html = '<div id="app">{{ order.label }} {{ order.invoiceNo }}</div><script>var app = new Vue()</script>'
+    assert nb._is_client_rendered(html) is True
+    parsed = nb._parse_surface(html, "commission_invoices")
+    assert parsed["status"] == nb.UNAVAILABLE
+
+
 # ── ZERO vs VERIFIED vs UNAVAILABLE + re-auth + isolation ────────────────────
 
 
@@ -146,15 +168,21 @@ def test_collect_missing_credentials_is_not_zero(tmp_path, monkeypatch):
     assert record["status"] != nb.ZERO
 
 
-def test_authenticated_without_known_surfaces_is_unavailable_not_zero(tmp_path, monkeypatch):
+def test_authenticated_client_side_surfaces_are_unavailable_not_zero(tmp_path, monkeypatch):
     monkeypatch.setenv("NEOLIFE_BACKOFFICE_COUNTRY_CODE", "41")
     monkeypatch.setenv("NEOLIFE_BACKOFFICE_ID", "id")
     monkeypatch.setenv("NEOLIFE_BACKOFFICE_PIN", "pin")
     monkeypatch.setattr(nb, "_login", lambda *a, **k: {"status": nb.VERIFIED, "cookies": {"sid": "1"}, "detail": "ok"})
+    # All real surfaces are client-side Vue templates or empty: nothing is zero.
+    monkeypatch.setattr(
+        nb, "_fetch",
+        lambda url, cookies, timeout=30: {"ok": True, "denied": False, "status_code": 200,
+                                          "html": '<div>{{ order.label }}</div><script>new Vue()</script>'},
+    )
     record = nb.collect(tmp_path)
     assert record["status"] == nb.UNAVAILABLE
-    assert record.get("authenticated") is True
     assert record["status"] != nb.ZERO
+    assert all(d["status"] != nb.ZERO for d in record["datasets"].values())
 
 
 def test_expired_session_triggers_reauthentication(tmp_path, monkeypatch):
@@ -177,7 +205,7 @@ def test_expired_session_triggers_reauthentication(tmp_path, monkeypatch):
         if fetch_calls["count"] == 1:
             return {"ok": False, "denied": True, "status_code": 302, "html": "", "detail": "session expired"}
         return {"ok": True, "denied": False, "status_code": 200,
-                "html": "<table><tbody><tr><td>a</td></tr></tbody></table>"}
+                "html": "<table><tr><td>479091</td><td>2026-08-14</td></tr></table>"}
 
     monkeypatch.setattr(nb, "_login", fake_login)
     monkeypatch.setattr(nb, "_fetch", fake_fetch)
