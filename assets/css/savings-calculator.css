@@ -16,6 +16,7 @@
 .ln-article-body .slider-value-display { color: var(--ln-color-brand-green); font-size: 1.35rem; font-weight: 700; text-align: center; }
 .ln-article-body .option-icon { font-size: 2rem; }
 .ln-article-body .video-placeholder { display: grid; min-height: 15rem; place-items: center; border: 1px dashed var(--ln-color-border); border-radius: var(--ln-radius-lg); background: var(--ln-color-surface-muted); padding: var(--ln-space-5); text-align: center; }
+.ln-article-body .ln-video-player { display: block; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; border-radius: var(--ln-radius-lg); background: #000; }
 @media (max-width: 42rem) {
   .ln-article-body :where(.calculator-grid, .edu-grid, .cards-grid, .results-grid-2) { grid-template-columns: 1fr; }
   .ln-article-body .calc-card-wide { grid-column: auto; }
