@@ -924,12 +924,14 @@ class LevNyttProcedure:
                 return {"status": "BLOCKED", "detail": "Could not register the slug in routing/sitemap.", "evidence": {"redirect_ok": redirect_ok, "sitemap_ok": sitemap_ok, "external_effect_attempted": False}}
 
         # 3. Stage the intended production files. Include every currently
-        # staged (provenance-authorized) work file so a single deployment commit
-        # leaves no unstaged product page behind to break the push/rebase.
-        files = list(work["files"])
-        for other in _confirmed_staged_work(repo):
-            for f in other.get("files") or []:
-                if f not in files:
+        # staged (provenance-authorized) work file that is actually modified or
+        # untracked, so a single deployment commit leaves no unstaged product
+        # page behind to break the push/rebase.
+        status_paths = _git_status_paths(repo)
+        files: list[str] = []
+        for rec in _confirmed_staged_work(repo):
+            for f in rec.get("files") or []:
+                if f in status_paths and f not in files:
                     files.append(f)
         for candidate in ("_redirects", "sitemap.xml"):
             changed = subprocess.run(
