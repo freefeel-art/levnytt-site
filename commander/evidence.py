@@ -119,6 +119,13 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
     # ordering, never eligibility.
     packet["product_backlog"] = _product_backlog(project_root)
 
+    # A staged product page must surface as awaiting deployment so the decision
+    # model deploys it instead of staging the next product.
+    packet["staged_awaiting_deployment"] = list(
+        set(packet.get("staged_awaiting_deployment") or [])
+        | set(_staged_product_pages(project_root, runtime))
+    )
+
     # Reconcile open durable state so the decision sees everything at once.
     packet["open_defects"] = load_active_defects(runtime)
     packet["open_commitments"] = open_commitments(runtime)
@@ -128,9 +135,39 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
     return packet
 
 
+def _staged_product_pages(project_root: Path, runtime: Path) -> list[str]:
+    """Slugs of staged-but-not-yet-deployed product pages (CONFIRMED product_page
+    commitments whose source file is still uncommitted)."""
+    import subprocess
+
+    ledger = load_json_dict(ledger_path(runtime))
+    rows = ledger.get("commitments")
+    if not isinstance(rows, list):
+        return []
+    completed = subprocess.run(
+        ["git", "-C", str(project_root), "status", "--porcelain", "--untracked-files=all"],
+        capture_output=True, text=True, check=False,
+    )
+    changed = {line[3:].strip() for line in completed.stdout.splitlines() if len(line) > 3}
+    slugs: list[str] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        if row.get("capability_id") != "product_page" or row.get("status") != "CONFIRMED":
+            continue
+        try:
+            parsed = ast.literal_eval(str(row.get("resolution_reason") or ""))
+        except (ValueError, SyntaxError):
+            continue
+        if not isinstance(parsed, dict) or not parsed.get("gate_passed"):
+            continue
+        source_file = str(parsed.get("source_file") or "")
+        if source_file and source_file in changed:
+            slugs.append(str(parsed.get("slug") or ""))
+    return slugs
+
+
 def _product_backlog(project_root: Path) -> list[dict[str, Any]]:
-    """Non-dedicated current NeoLife products, each carrying its exact code,
-    name, target slug, authoritative entity evidence and image evidence."""
     from commander import product_coverage
     from commander import product_page
 
