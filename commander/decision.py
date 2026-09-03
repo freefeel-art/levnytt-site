@@ -47,7 +47,7 @@ _ACTIVE_DEFECT_CAPABILITY = {
 # optimization are budgeted separately; defect repair, deployment of
 # already-accepted work, measurement, commitment resumption, and verification
 # are never budgeted.
-_PUBLICATION_CAPABILITIES = frozenset({"content_production", "social_publishing"})
+_PUBLICATION_CAPABILITIES = frozenset({"content_production", "social_publishing", "product_page"})
 _OPTIMIZATION_CAPABILITIES = frozenset({"content_improvement"})
 
 DAILY_PUBLICATION_LIMIT = 1
@@ -165,7 +165,28 @@ def decide(
             ),
         }
 
-    # 4. Refresh stale measurement before acting on stale evidence.
+    # 4. Produce a dedicated product page for a current NeoLife product lacking
+    # one. The coverage invariant is CURRENT_NEOLIFE_PRODUCT ->
+    # DEDICATED_PRODUCT_PAGE; search volume affects ordering only, never
+    # eligibility.
+    backlog = list(evidence.get("product_backlog") or [])
+    if backlog and budget_check("product_page"):
+        item = backlog[0]
+        return {
+            "kind": "product_backlog",
+            "capability_id": "product_page",
+            "opportunity_id": f"product-page:{item.get('code')}",
+            "code": item.get("code"),
+            "product_name": item.get("product_name"),
+            "slug": item.get("slug"),
+            "reason": (
+                f"Current NeoLife product {item.get('product_name')!r} "
+                f"(Kod {item.get('code')}) lacks a dedicated product page "
+                f"({item.get('coverage')})."
+            ),
+        }
+
+    # 5. Refresh stale measurement before acting on stale evidence.
     freshness = evidence.get("measurement_freshness") or {}
     if not freshness.get("fresh"):
         if budget_check("measurement"):

@@ -50,7 +50,7 @@ from commander.procedure import LevNyttProcedure
 # receipts must carry the executor's structured evidence (file hashes) so the
 # evidence layer and the deployment executor recognise them as awaiting
 # deployment.
-_STAGED_CONTENT_CAPABILITIES = frozenset({"content_improvement", "content_production", "legacy_migration"})
+_STAGED_CONTENT_CAPABILITIES = frozenset({"content_improvement", "content_production", "legacy_migration", "product_page"})
 
 TZ = ZoneInfo("Europe/Stockholm")
 
@@ -107,6 +107,8 @@ def _action_for(decision: dict[str, Any]) -> dict[str, Any]:
     capability = decision.get("capability_id")
     if kind == "repair_defect":
         return {"capability": capability}
+    if kind == "product_backlog":
+        return {"capability": "product_page", "code": decision.get("code")}
     if kind == "resume_commitment":
         parts = str(decision.get("commitment_id") or "").split(":", 2)
         if len(parts) == 3 and parts[0] == identity.PROJECT_ID:
@@ -186,6 +188,16 @@ def _action_id(decision: dict[str, Any]) -> str:
 
 def _commitment_for(decision: dict[str, Any]) -> dict[str, Any] | None:
     """A durable commitment for work that may not finish in one step."""
+    if decision.get("kind") == "product_backlog":
+        code = decision.get("code") or "no-code"
+        return {
+            "commitment_id": f"{identity.PROJECT_ID}:product_page:{code}",
+            "kind": "unverified_external_effect",
+            "capability_id": "product_page",
+            "executor_id": "product_page",
+            "action": decision.get("reason", decision.get("kind", "")),
+            "reason": decision.get("reason", ""),
+        }
     if decision.get("kind") != "opportunity":
         return None
     opportunity_id = decision.get("opportunity_id") or "no-opportunity"

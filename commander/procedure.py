@@ -464,6 +464,8 @@ class LevNyttProcedure:
             return self._execute_content_improvement(ctx, action)
         if capability == "content_production":
             return self._execute_content_production(ctx, action)
+        if capability == "product_page":
+            return self._execute_product_page(ctx, action)
         if capability == "deployment":
             return self._execute_deployment(ctx, action)
         if capability == "technical_repair":
@@ -487,6 +489,72 @@ class LevNyttProcedure:
             "failure_class": "RECOVERABLE_CAPABILITY_GAP",
             "detail": f"No bounded executor is wired for capability {capability!r}.",
             "evidence": {"capability": capability},
+        }
+
+    # ── dedicated product page (product backlog) ───────────────────
+    def _execute_product_page(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Produce one dedicated PRODUCT_PAGE from the product backlog.
+
+        Built deterministically from the authoritative Product Entity System
+        (exact name/code/package/ingredients/usage) and the exact official
+        product image. No DataForSEO keyword is required — search evidence only
+        affects ordering, never eligibility. Stages the page; deployment is the
+        separate, normal step.
+        """
+        from commander import product_coverage
+        from commander import product_page
+
+        code = str(action.get("code") or action.get("summary") or "").strip()
+        entities = product_coverage.load_product_entities(ctx.working_repository)
+        entity = None
+        if code in entities:
+            entity = entities[code]
+        else:
+            # resolve by slug or product-name fold
+            for e in entities.values():
+                if str(e.get("slug", "")) == code or str(e.get("product_name", "")).casefold() == code.casefold():
+                    entity = e
+                    break
+        if entity is None:
+            return {
+                "status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED",
+                "detail": f"No authoritative NeoLife product entity for {code!r}.",
+                "evidence": {"external_effect_attempted": False},
+                "retry_eligible_this_run": False,
+            }
+
+        image = product_page.resolve_image(entity, ctx.working_repository)
+        if image is None:
+            return {
+                "status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED",
+                "detail": f"No exact product image found for {entity.get('product_name')!r}.",
+                "evidence": {"code": entity.get("neoLife_code"), "external_effect_attempted": False},
+                "retry_eligible_this_run": False,
+            }
+
+        slug = str(entity.get("slug") or "")
+        if not slug:
+            return {"status": "BLOCKED", "detail": "Product entity has no slug.", "evidence": {"external_effect_attempted": False}}
+
+        rendered = product_page.build_product_page(entity, image, ctx.working_repository)
+        destination = ctx.working_repository / f"{slug}.html"
+        _atomic_text_write(destination, rendered)
+        _add_sitemap_entry(ctx.working_repository, slug)
+
+        return {
+            "status": "SUCCEEDED",
+            "detail": f"Staged dedicated product page {slug!r} ({entity.get('product_name')}, Kod {entity.get('neoLife_code')}).",
+            "evidence": {
+                "external_effect_attempted": False,
+                "code": entity.get("neoLife_code"),
+                "slug": slug,
+                "product_name": entity.get("product_name"),
+                "image": image,
+                "source_file": f"{slug}.html",
+                "staged_content_sha256": _file_sha256(destination),
+                "production_data_sha256": _file_sha256(ctx.working_repository / "content" / "data" / "production-pages.json"),
+                "gate_passed": True,
+            },
         }
 
     # ── measurement ───────────────────────────────────────────────
@@ -838,10 +906,11 @@ class LevNyttProcedure:
         if not safety["ok"]:
             return {"status": "BLOCKED", "detail": "Deployment safety check failed: " + "; ".join(safety["reasons"]), "evidence": {**safety, "external_effect_attempted": False}}
 
-        # 2. Register routing only for a newly produced page. An improvement
-        # preserves its existing canonical route and must never manufacture a
-        # stale /content/articles rewrite for a root-backed page.
-        if work["capability_id"] == "content_improvement":
+        # 2. Register routing only for a newly produced page. An improvement or
+        # a root product page preserves its existing canonical route and must
+        # never manufacture a stale /content/articles rewrite for a root-backed
+        # page.
+        if work["capability_id"] in ("content_improvement", "product_page"):
             if not _sitemap_has_slug(repo, slug):
                 return {"status": "BLOCKED", "detail": "Existing canonical page is missing from the sitemap; refusing to invent a route during improvement deployment.", "evidence": {"slug": slug, "external_effect_attempted": False}}
         else:
@@ -1539,6 +1608,14 @@ class LevNyttProcedure:
                 return True
             slug = evidence.get("slug")
             return bool(slug) and (ctx.working_repository / "content" / "articles" / f"{slug}.html").is_file()
+        if capability == "product_page":
+            slug = str(evidence.get("slug") or "")
+            source = ctx.working_repository / f"{slug}.html"
+            if not slug or not source.is_file():
+                return False
+            if evidence.get("staged_content_sha256"):
+                return _file_sha256(source) == evidence.get("staged_content_sha256")
+            return True
         if capability == "content_improvement":
             source_file = str(evidence.get("source_file") or "")
             source = ctx.working_repository / source_file
@@ -1847,7 +1924,7 @@ def _provenance_verified_slugs(repo: Path) -> set[str]:
         if not isinstance(row, dict):
             continue
         if row.get("capability_id") not in (
-            "content_production", "content_improvement", "legacy_migration",
+            "content_production", "content_improvement", "legacy_migration", "product_page",
         ):
             continue
         if row.get("status") != "CONFIRMED":
@@ -1872,7 +1949,7 @@ def _confirmed_staged_work(repo: Path) -> list[dict[str, Any]]:
         if not isinstance(row, dict) or row.get("status") != "CONFIRMED":
             continue
         capability = str(row.get("capability_id") or "")
-        if capability not in {"content_production", "content_improvement", "legacy_migration"}:
+        if capability not in {"content_production", "content_improvement", "legacy_migration", "product_page"}:
             continue
         reason = row.get("resolution_reason")
         if not isinstance(reason, str):
@@ -1901,6 +1978,10 @@ def _confirmed_staged_work(repo: Path) -> list[dict[str, Any]]:
                 "production_data_sha256": data_hash,
                 "files": [source_file, "content/data/production-pages.json"],
             })
+        elif capability == "product_page":
+            content_hash = str(parsed.get("staged_content_sha256") or "")
+            if content_hash:
+                record["staged_content_sha256"] = content_hash
         records.append(record)
     return records
 
@@ -1933,6 +2014,13 @@ def _first_staged_work(repo: Path) -> dict[str, Any] | None:
             if _file_sha256(source) != record["staged_content_sha256"]:
                 continue
             if _file_sha256(data) != record["production_data_sha256"]:
+                continue
+        elif record["capability_id"] == "product_page":
+            # A product page may be a new root .html (??) or a converted topic
+            # page (M). Verify the on-disk content matches the staged hash.
+            if status[record["source_file"]] not in ("??", "M "):
+                continue
+            if record.get("staged_content_sha256") and _file_sha256(source) != record["staged_content_sha256"]:
                 continue
         elif status[record["source_file"]] != "??":
             continue

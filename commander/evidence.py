@@ -114,6 +114,11 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
     packet = _levnytt(project_root, runtime, today, identity.PROJECT_ID)
     packet = _suppress_completed_improvements(packet, runtime)
 
+    # Persistent NeoLife product-coverage backlog. Every current product without
+    # a dedicated PRODUCT_PAGE is eligible; search evidence only affects
+    # ordering, never eligibility.
+    packet["product_backlog"] = _product_backlog(project_root)
+
     # Reconcile open durable state so the decision sees everything at once.
     packet["open_defects"] = load_active_defects(runtime)
     packet["open_commitments"] = open_commitments(runtime)
@@ -121,6 +126,46 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
     # Provenance: the packet must be labelled with the project it belongs to.
     packet["project_id"] = identity.PROJECT_ID
     return packet
+
+
+def _product_backlog(project_root: Path) -> list[dict[str, Any]]:
+    """Non-dedicated current NeoLife products, each carrying its exact code,
+    name, target slug, authoritative entity evidence and image evidence."""
+    from commander import product_coverage
+    from commander import product_page
+
+    coverage = product_coverage.compute_coverage(project_root)
+    entities = product_coverage.load_product_entities(project_root)
+    backlog: list[dict[str, Any]] = []
+    for row in coverage["products"]:
+        if row["status"] == product_coverage.DEDICATED_PAGE_EXISTS:
+            continue
+        entity = entities.get(str(row["code"]))
+        if not entity:
+            continue
+        image = product_page.resolve_image(entity, project_root)
+        backlog.append({
+            "code": str(entity.get("neoLife_code")),
+            "product_name": str(entity.get("product_name") or ""),
+            "slug": str(entity.get("slug") or ""),
+            "category": entity.get("category"),
+            "coverage": row["status"],
+            "image": image,
+            "short_description": entity.get("short_description"),
+            "summary": entity.get("summary"),
+            "packaging": entity.get("packaging"),
+            "usage": entity.get("usage"),
+            "ingredients": entity.get("ingredients"),
+        })
+    # Supplements first (highest business value); then a mentioned-only topic
+    # page (improve existing URL) before a no-content product (new page).
+    def _rank(item: dict[str, Any]) -> tuple[int, int, int]:
+        category = 0 if item.get("category") == "supplements" else 1
+        coverage = 0 if item.get("coverage") == "MENTIONED_ONLY" else 1
+        return (category, coverage, int(item.get("code") or 0))
+
+    backlog.sort(key=_rank)
+    return backlog
 
 
 # ── defect detection ─────────────────────────────────────────────────────────
