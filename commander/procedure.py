@@ -900,8 +900,12 @@ class LevNyttProcedure:
         if not article.is_file():
             return {"status": "BLOCKED", "detail": f"Provenance-authorized staged source is missing: {article}", "evidence": {"slug": slug, "external_effect_attempted": False}}
 
-        # 1. Repository/deployment safety checks.
-        allowed_paths = set(work["files"])
+        # 1. Repository/deployment safety checks. Allow every currently staged
+        # (provenance-authorized) work file so that deploying one product page
+        # is not blocked by another staged-but-not-yet-deployed product page.
+        allowed_paths: set[str] = set(work["files"])
+        for other in _confirmed_staged_work(repo):
+            allowed_paths.update(other.get("files") or [])
         safety = _deployment_safety(repo, slug, allowed_paths)
         if not safety["ok"]:
             return {"status": "BLOCKED", "detail": "Deployment safety check failed: " + "; ".join(safety["reasons"]), "evidence": {**safety, "external_effect_attempted": False}}
