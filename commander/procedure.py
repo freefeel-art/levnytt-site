@@ -2016,10 +2016,9 @@ def _first_staged_work(repo: Path) -> dict[str, Any] | None:
             if _file_sha256(data) != record["production_data_sha256"]:
                 continue
         elif record["capability_id"] == "product_page":
-            # A product page may be a new root .html (??) or a converted topic
-            # page (M). Verify the on-disk content matches the staged hash.
-            if status[record["source_file"]] not in ("??", "M "):
-                continue
+            # A product page is a root .html that may be new (untracked) or a
+            # converted topic page (modified). Its presence in git status plus
+            # a matching staged hash is sufficient.
             if record.get("staged_content_sha256") and _file_sha256(source) != record["staged_content_sha256"]:
                 continue
         elif status[record["source_file"]] != "??":
