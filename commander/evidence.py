@@ -119,6 +119,9 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
     # ordering, never eligibility.
     packet["product_backlog"] = _product_backlog(project_root)
 
+    # Pinterest distribution opportunities (dedup-filtered).
+    packet["pinterest_opportunities"] = _pinterest_opportunities(project_root, runtime)
+
     # A staged product page must surface as awaiting deployment so the decision
     # model deploys it instead of staging the next product.
     packet["staged_awaiting_deployment"] = list(
@@ -133,6 +136,23 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
     # Provenance: the packet must be labelled with the project it belongs to.
     packet["project_id"] = identity.PROJECT_ID
     return packet
+
+
+def _pinterest_opportunities(project_root: Path, runtime: Path) -> list[dict[str, Any]]:
+    """Unpublished PRODUCT + INFORMATIONAL Pin opportunities (dedup-filtered)."""
+    from commander import pinterest_channel
+
+    opportunities = (
+        pinterest_channel.product_pin_opportunities(project_root)
+        + pinterest_channel.informational_pin_opportunities(project_root)
+    )
+    pending = [
+        o for o in opportunities
+        if not pinterest_channel.already_published(runtime, o.get("destination", ""), o.get("image", ""), o.get("title", ""))
+    ]
+    # Product pins first (coverage priority), then informational.
+    pending.sort(key=lambda o: (0 if o.get("pin_class") == "product" else 1, o.get("code") or "", o.get("title") or ""))
+    return pending
 
 
 def _staged_product_pages(project_root: Path, runtime: Path) -> list[str]:

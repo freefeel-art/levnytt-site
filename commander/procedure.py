@@ -484,12 +484,44 @@ class LevNyttProcedure:
             return self._execute_community_intelligence(ctx, action)
         if capability == "social_publishing":
             return self._execute_social_publishing(ctx, action)
+        if capability == "pinterest":
+            return self._execute_pinterest(ctx, action)
         return {
             "status": "CAPABILITY_GAP",
             "failure_class": "RECOVERABLE_CAPABILITY_GAP",
             "detail": f"No bounded executor is wired for capability {capability!r}.",
             "evidence": {"capability": capability},
         }
+
+    # ── dedicated product page (product backlog) ───────────────────
+    def _execute_pinterest(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Publish one Pin through the LevNytt Pinterest channel.
+
+        Publication is gated by Pinterest Standard Access; the returned status is
+        truthful (PUBLISHED / BLOCKED_BY_PINTEREST_STANDARD_ACCESS / BLOCKED /
+        DUPLICATE) and is never fabricated into success.
+        """
+        from commander import pinterest_channel
+
+        opportunities = (
+            pinterest_channel.product_pin_opportunities(ctx.working_repository)
+            + pinterest_channel.informational_pin_opportunities(ctx.working_repository)
+        )
+        pending = [
+            o for o in opportunities
+            if not pinterest_channel.already_published(ctx.runtime_directory, o.get("destination", ""), o.get("image", ""), o.get("title", ""))
+        ]
+        pending.sort(key=lambda o: (0 if o.get("pin_class") == "product" else 1, o.get("code") or "", o.get("title") or ""))
+        if not pending:
+            return {"status": "SUCCEEDED", "detail": "No unpublished Pin opportunity.", "evidence": {"pins_pending": 0}}
+        opportunity = pending[0]
+        result = pinterest_channel.publish(ctx.runtime_directory, opportunity, ctx.working_repository)
+        result["evidence"] = {**(result.get("evidence") or {}), "pin_class": opportunity.get("pin_class"), "opportunity": {
+            "code": opportunity.get("code"), "product_name": opportunity.get("product_name"),
+            "title": opportunity.get("title"), "destination": opportunity.get("destination"),
+            "board_id": opportunity.get("board_id"),
+        }}
+        return result
 
     # ── dedicated product page (product backlog) ───────────────────
     def _execute_product_page(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -1682,6 +1714,13 @@ class LevNyttProcedure:
             if evidence.get("skipped"):
                 return True
             return bool(evidence.get("permalink")) and evidence.get("reach_status") == "PUBLISHED"
+        if capability == "pinterest":
+            # A Pin is verified only when a real Pin ID was returned and the
+            # publication status is PUBLISHED.
+            if evidence.get("pins_pending") == 0:
+                return True
+            result = evidence.get("result") or {}
+            return bool(result.get("id")) and (evidence.get("status") == "PUBLISHED" or result.get("id"))
         return False
 
     # ── measurement ───────────────────────────────────────────────

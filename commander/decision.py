@@ -244,7 +244,21 @@ def decide(
             "reason": "A newly published article is not yet distributed to the LevNytt Facebook page.",
         }
 
-    # 8. Collect missing search-demand evidence (Scout / DataForSEO) when the
+    # 8. Distribute a Pin to the LevNytt Pinterest channel (dedup-guarded).
+    pin_opportunities = list(evidence.get("pinterest_opportunities") or [])
+    if pin_opportunities and budget_check("pinterest"):
+        item = pin_opportunities[0]
+        return {
+            "kind": "opportunity",
+            "capability_id": "pinterest",
+            "opportunity_id": f"pinterest:{item.get('pin_class')}:{item.get('slug') or item.get('code')}",
+            "reason": (
+                f"Distribute a {item.get('pin_class')} Pin for "
+                f"{item.get('product_name') or item.get('title')!r} to Pinterest."
+            ),
+        }
+
+    # 9. Collect missing search-demand evidence (Scout / DataForSEO) when the
     #    content pool is not yet exhausted but no eligible keyword is ready.
     seo_intel = evidence.get("seo_intelligence") or {}
     pool = seo_intel.get("opportunity_pool") or {}
