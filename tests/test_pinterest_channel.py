@@ -29,6 +29,18 @@ def test_pin_key_and_dedup(tmp_path):
     assert pc.already_published(tmp_path, "https://levnytt.se/x", "/images/x.jpg", "Title") is True
 
 
+def test_fit_title_truncates_to_100_at_word_boundary():
+    long_title = "NeoLife All C — Tuggbar C-vitamin med bioflavonoider — 120 tabletter, för immunförsvar, kollagenbildning och antioxidantskydd."
+    fitted = pc._fit_title(long_title)
+    assert len(fitted) <= 100
+    assert fitted.startswith("NeoLife All C")
+    assert not fitted.endswith((" —", "-", ","))
+
+
+def test_fit_title_leaves_short_titles_untouched():
+    assert pc._fit_title("NeoLife All C") == "NeoLife All C"
+
+
 def test_validate_pin_image_product_agreement(tmp_path):
     img = tmp_path / "garlic-allium-complex.jpg"
     img.write_bytes(b"\xff\xd8\xff\x00fakejpeg")

@@ -6,8 +6,11 @@ Pin points at a LevNytt-owned page; the site is the conversion asset.
 ## Current access state (verified 2026-09-03)
 
 - OAuth app + access/refresh tokens present and refreshable.
-- `boards:read` + `pins:read` + `pins:write` granted; **`boards:write` missing**,
-  so `POST /pins` is rejected. The token scopes must be re-authorized.
+- All four scopes granted: `boards:read boards:write pins:read pins:write`
+  (`boards:read` verified live against `/v5/boards`; `user_accounts:read` is
+  intentionally not requested — the integration reads boards and pins only).
+- Access tier is still **trial**: the OAuth and read flows work, but
+  `POST /pins` is rejected by Pinterest until Standard Access is granted.
 - Six PUBLIC boards already exist and map cleanly onto LevNytt content:
 
 | Board | Board ID | Pin class |
@@ -49,6 +52,9 @@ Pin points at a LevNytt-owned page; the site is the conversion asset.
 
 ## Owner boundary
 
-Publication is blocked only on the missing `boards:write` scope. The Owner must
-re-authorize the Pinterest app (the provider's `DEFAULT_SCOPES` now includes
-`boards:write`) via the OAuth flow; no other Owner decision is required.
+Publication is blocked only on **Standard Access**, which only Pinterest can
+grant (Trial access may not create Pins in production). The OAuth flow, scopes,
+boards, opportunity generation, dedup ledger, UTM attribution, package building,
+validation, and decision/lifecycle integration are all complete. The remaining
+Owner action is to file a new Standard Access application with a demo video
+(see `PINTEREST-DEMO-SCRIPT.md`) and approve the resulting access.

@@ -112,6 +112,17 @@ def pin_key(destination: str, image: str, title: str) -> str:
     return f"{destination}|{image}|{title.strip().casefold()}"
 
 
+def _fit_title(title: str, limit: int = 100) -> str:
+    """Truncate a Pin title to Pinterest's 100-character limit at a word boundary."""
+    title = title.strip()
+    if len(title) <= limit:
+        return title
+    cut = title[:limit].rstrip()
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    return cut.rstrip(" —–-,")
+
+
 def already_published(runtime: Path, destination: str, image: str, title: str) -> bool:
     ledger = _load_ledger(runtime)
     key = pin_key(destination, image, title)
@@ -155,6 +166,8 @@ def product_pin_opportunities(project_root: Path) -> list[dict[str, Any]]:
         image = product_page.resolve_image(entity, project_root)
         if not image:
             continue
+        title = f"NeoLife {str(entity.get('product_name'))} — {str(entity.get('short_description') or '')}".strip(" —")
+        title = _fit_title(title)
         opportunities.append({
             "pin_class": "product",
             "code": str(entity.get("neoLife_code")),
@@ -163,7 +176,7 @@ def product_pin_opportunities(project_root: Path) -> list[dict[str, Any]]:
             "category": entity.get("category"),
             "image": image,
             "destination": f"{SITE}/{str(entity.get('slug'))}",
-            "title": f"NeoLife {str(entity.get('product_name'))} — {str(entity.get('short_description') or '')}".strip(" —"),
+            "title": title,
             "description": str(entity.get("short_description") or "")[:500],
             "board_id": board_for_product(entity.get("category")),
         })
@@ -207,7 +220,7 @@ def informational_pin_opportunities(project_root: Path) -> list[dict[str, Any]]:
         opportunities.append({
             "pin_class": "informational",
             "slug": slug,
-            "title": title[:100],
+            "title": _fit_title(title),
             "description": description[:500],
             "image": image,
             "destination": f"{SITE}/{slug}",
