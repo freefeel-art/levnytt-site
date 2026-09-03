@@ -47,6 +47,61 @@ def resolve_image(entity: dict[str, Any], project_root: Path) -> str | None:
     return candidates[0] if candidates else None
 
 
+def distinct_related_article(entity: dict[str, Any], project_root: Path) -> str | None:
+    """Return a genuinely distinct related topic-article slug, or None.
+
+    Filters out the product's own slug (a self-link) and any slug that does not
+    resolve to a real page, so a related-content block is omitted rather than
+    linking back to the page itself or to a stale destination.
+    """
+    own_slug = str(entity.get("slug", "")).strip().strip("/")
+    for rel in (entity.get("related_article_slugs") or []):
+        rel_slug = str(rel).strip().strip("/")
+        if not rel_slug or rel_slug == own_slug:
+            continue
+        page = project_root / f"{rel_slug}.html"
+        if not page.is_file():
+            page = project_root / rel_slug / "index.html"
+        if page.is_file():
+            return rel_slug
+    return None
+
+
+def validate_internal_links(html_text: str, current_slug: str, project_root: Path) -> list[dict[str, str]]:
+    """Deterministic internal-link validation for a page about to be published.
+
+    Detects, for every internal ``href``:
+
+    * self-links (href resolves to ``current_slug``),
+    * duplicate destinations (same internal href appears more than once with
+      different anchor text — a low-value/redundant pattern),
+    * stale destinations (internal href with no corresponding page in the repo).
+
+    External links and same-page anchors (``#...``) are ignored. Returns a list
+    of defect records; an empty list means the page passed.
+    """
+    defects: list[dict[str, str]] = []
+    seen: dict[str, str] = {}
+    for match in re.finditer(r'<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>', html_text, re.S | re.I):
+        href = match.group(1)
+        anchor = re.sub(r"<[^>]+>", "", match.group(2)).strip()
+        if not href.startswith("/") or href.startswith("//") or href.startswith("/#"):
+            continue
+        path = href.split("#")[0].rstrip("/") or "/"
+        if path in {"/" + current_slug.strip("/"), "/" + current_slug.strip("/") + ".html"}:
+            defects.append({"kind": "self_link", "href": href, "anchor": anchor[:60]})
+            continue
+        # duplicate destination with a different anchor
+        if path in seen and seen[path] != anchor:
+            defects.append({"kind": "duplicate_destination", "href": href, "anchor": anchor[:60]})
+        seen.setdefault(path, anchor)
+        # stale destination check for root .html and directory index
+        rel = path.lstrip("/")
+        if rel and not (project_root / f"{rel}.html").is_file() and not (project_root / rel / "index.html").is_file():
+            defects.append({"kind": "stale_destination", "href": href, "anchor": anchor[:60]})
+    return defects
+
+
 def _clean(entity: dict[str, Any]) -> dict[str, Any]:
     """Normalise the entity fields into the values the template needs."""
     code = str(entity.get("neoLife_code", ""))
@@ -90,26 +145,20 @@ def build_product_page(entity: dict[str, Any], image_rel: str | None, project_ro
     img_alt = html.escape(c["name"])
     category = html.escape(str(entity.get("category", "supplements")))
 
-    # Related cross-links: topic article + related products.
-    related_links = []
-    related_slugs = entity.get("related_article_slugs") or []
-    for rel in related_slugs[:1]:
-        related_links.append(f'<a href="/{html.escape(str(rel))}">{html.escape(str(rel))}</a>')
+    # Related cross-link: only a genuinely distinct topic article that actually
+    # exists. Never the product's own slug (a self-link) and never a stale slug.
+    topic_href = distinct_related_article(entity, project_root)
+    topic_para = ""
+    if topic_href:
+        topic_para = (
+            f'<p>Läs mer i vår guide <a href="/{html.escape(topic_href)}">'
+            f"{html.escape(topic_href.replace('-', ' '))}</a>.</p>"
+        )
 
     ingredient_items = "".join(
         f"<li>{html.escape(_ingredient_label(i))}</li>" for i in c["ingredients"] if _ingredient_label(i)
     )
     safety_html = f" {safety}" if safety else ""
-
-    # The topic cross-link (a topic article covering the ingredient) helps SEO
-    # framing but is not a coverage prerequisite.
-    topic_href = related_slugs[0] if related_slugs else None
-    topic_para = ""
-    if topic_href:
-        topic_para = (
-            f"<p>Vill du förstå mer om {html.escape(name.split()[-1] if name else '')} i allmänhet? "
-            f'Läs vår guide <a href="/{html.escape(str(topic_href))}">{html.escape(str(topic_href).replace("-", " "))}</a>.</p>'
-        )
 
     return f"""<!doctype html>
 <html lang="sv">

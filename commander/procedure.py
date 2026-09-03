@@ -537,6 +537,16 @@ class LevNyttProcedure:
             return {"status": "BLOCKED", "detail": "Product entity has no slug.", "evidence": {"external_effect_attempted": False}}
 
         rendered = product_page.build_product_page(entity, image, ctx.working_repository)
+
+        # Publication rule: reject self-links before staging.
+        defects = product_page.validate_internal_links(rendered, slug, ctx.working_repository)
+        if any(d["kind"] == "self_link" for d in defects):
+            return {
+                "status": "BLOCKED", "failure_class": "RECOVERABLE_QA_REJECTION",
+                "detail": f"Product page {slug!r} contains a self-link; refusing to stage it.",
+                "evidence": {"slug": slug, "external_effect_attempted": False},
+            }
+
         destination = ctx.working_repository / f"{slug}.html"
         _atomic_text_write(destination, rendered)
         _add_sitemap_entry(ctx.working_repository, slug)
