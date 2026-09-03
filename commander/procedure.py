@@ -923,8 +923,14 @@ class LevNyttProcedure:
             if not (redirect_ok and sitemap_ok):
                 return {"status": "BLOCKED", "detail": "Could not register the slug in routing/sitemap.", "evidence": {"redirect_ok": redirect_ok, "sitemap_ok": sitemap_ok, "external_effect_attempted": False}}
 
-        # 3. Stage exactly the intended production files (never a broad add).
+        # 3. Stage the intended production files. Include every currently
+        # staged (provenance-authorized) work file so a single deployment commit
+        # leaves no unstaged product page behind to break the push/rebase.
         files = list(work["files"])
+        for other in _confirmed_staged_work(repo):
+            for f in other.get("files") or []:
+                if f not in files:
+                    files.append(f)
         for candidate in ("_redirects", "sitemap.xml"):
             changed = subprocess.run(
                 ["git", "-C", str(repo), "status", "--porcelain", "--", candidate],
