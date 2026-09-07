@@ -61,4 +61,14 @@
 /vad-ar-zink /content/articles/vad-ar-zink/vad-ar-zink 200
 /haravfall /content/articles/haravfall 200
 /c-vitamin /content/articles/c-vitamin 200
+
+# GSC indexing-health repair (2026-09): permanent redirects for URLs Google
+# still reports as "Not found (404)". Each target is the current canonical
+# page for the removed/renamed content.
+/blogg /artiklar 301
+/blogg/ /artiklar 301
+/neolife-vetenskapliga-radet /neolife-vetenskap 301
+/neolife-vetenskapliga-radet/ /neolife-vetenskap 301
+/ar-dyra-kosttillskott-verkligen-battre/ /ar-dyra-kosttillskott-verkligen-battre 301
+/forsknings-faq/ /forsknings-faq 301
 /* /404.html 404
