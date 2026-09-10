@@ -53,6 +53,9 @@ def test_rebuild_preserves_published_canonical_and_open_graph_urls(tmp_path):
     html = (output / "neolife-kosttillskott.html").read_text(encoding="utf-8")
     assert '<link rel="canonical" href="https://levnytt.se/neolife-kosttillskott/">' in html
     assert '<meta property="og:url" content="https://levnytt.se/neolife-kosttillskott">' in html
+    product_html = (output / "neolife-kalmag-plus-d.html").read_text(encoding="utf-8")
+    assert '<meta property="og:image:width"' not in product_html
+    assert '<meta property="og:image:height"' not in product_html
 
 
 def test_rebuild_resolves_cloudflare_rewrites_and_includes_error_page(tmp_path):

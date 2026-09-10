@@ -666,8 +666,8 @@ def render_head(page: dict, body_html: str, root: Path) -> str:
         "og:site_name": "LevNytt",
         "og:locale": locale,
         "og:image": og_image,
-        "og:image:width": meta.get(("property", "og:image:width"), "1200"),
-        "og:image:height": meta.get(("property", "og:image:height"), "630"),
+        "og:image:width": meta.get(("property", "og:image:width"), ""),
+        "og:image:height": meta.get(("property", "og:image:height"), ""),
         "og:image:alt": meta.get(("property", "og:image:alt"), "LevNytt"),
     }
 
