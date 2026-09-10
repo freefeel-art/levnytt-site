@@ -33,8 +33,9 @@ def check_page(data: dict, file: Path) -> dict:
         failures.append("shared_shell_missing")
     if source.count("<h1") != 1:
         failures.append("h1_count_not_one")
-    if "levnytt-rebuild.css" not in source or "levnytt-foundations.css" not in source:
-        failures.append("canonical_styles_missing")
+    local_styles = re.findall(r'<link\s+rel="stylesheet"\s+href="(/assets/css/[^"]+)', source, re.I)
+    if len(local_styles) != 1 or not local_styles[0].startswith("/assets/css/levnytt.css?v="):
+        failures.append("canonical_style_contract_invalid")
     if re.search(r"<style\b|\sstyle=|\son\w+=", source, flags=re.I):
         failures.append("inline_code_present")
     if "nav.js" in source or "footer.js" in source or "components.js" in source:

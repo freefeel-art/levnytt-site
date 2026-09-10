@@ -56,6 +56,158 @@ FAMILY_LABELS = {
 }
 
 
+# Canonical component classes are added at the rendering boundary. Historical
+# class names remain only as source-level compatibility markers for existing
+# editorial content and generators; public styling targets the ln-* contract.
+COMPONENT_CLASS_ALIASES = {
+    "container": ("ln-flow",),
+    "wrap": ("ln-flow",),
+    "ia-wrap": ("ln-flow",),
+    "authority-wrap": ("ln-flow",),
+    "section-inner": ("ln-flow",),
+    "article-inner": ("ln-flow",),
+    "hero-inner": ("ln-flow",),
+    "featured-inner": ("ln-flow",),
+    "hero-eyebrow": ("ln-kicker",),
+    "hero-label": ("ln-kicker",),
+    "ia-eyebrow": ("ln-kicker",),
+    "authority-eyebrow": ("ln-kicker",),
+    "hero-intro": ("ln-deck",),
+    "hero-desc": ("ln-deck",),
+    "authority-hero-sub": ("ln-deck",),
+    "hero-meta": ("ln-meta",),
+    "ia-meta": ("ln-meta",),
+    "ia-punchline": ("ln-lede",),
+    "ia-reader-intro": ("ln-lede",),
+    "ia-takeaways": ("ln-takeaways",),
+    "ia-kort-svar": ("ln-takeaways",),
+    "callout": ("ln-callout",),
+    "ia-callout": ("ln-callout",),
+    "authority-callout": ("ln-callout",),
+    "warning-box": ("ln-callout", "ln-callout--warning"),
+    "warn-box": ("ln-callout", "ln-callout--warning"),
+    "ia-warning-box": ("ln-callout", "ln-callout--warning"),
+    "callout-warning": ("ln-callout--warning",),
+    "callout-amber": ("ln-callout--warning",),
+    "callout-standard": ("ln-callout--evidence",),
+    "research-box": ("ln-evidence",),
+    "ia-method-note": ("ln-evidence",),
+    "method-note": ("ln-evidence",),
+    "ia-evidence-label": ("ln-evidence-label",),
+    "evidence-tag": ("ln-evidence-label",),
+    "ia-ev-t1": ("ln-evidence-label--strong",),
+    "evidence-clinical": ("ln-evidence-label--strong",),
+    "ia-ev-t3": ("ln-evidence-label--limited",),
+    "ia-ev-t4": ("ln-evidence-label--weak",),
+    "stats-grid": ("ln-stat-grid",),
+    "ia-stat-grid": ("ln-stat-grid",),
+    "authority-stats": ("ln-stat-grid",),
+    "hero-stats": ("ln-stat-grid",),
+    "ia-stat-card": ("ln-stat",),
+    "authority-stat": ("ln-stat",),
+    "hero-stat": ("ln-stat",),
+    "stat-cell": ("ln-stat",),
+    "table-wrap": ("ln-table-wrap",),
+    "authority-table-wrap": ("ln-table-wrap",),
+    "ia-method-table": ("ln-data-table",),
+    "tier-section": ("ln-related-section",),
+    "ia-tier": ("ln-related-card",),
+    "journey-block": ("ln-related-section",),
+    "related-grid": ("ln-related-grid",),
+    "tier-grid": ("ln-related-grid",),
+    "ia-related": ("ln-related-grid",),
+    "tier-box": ("ln-related-card",),
+    "ia-tier-box": ("ln-related-card",),
+    "ia-tierbox": ("ln-related-grid",),
+    "ia-tier-card": ("ln-related-card",),
+    "related-card": ("ln-related-card",),
+    "ia-related-card": ("ln-related-card",),
+    "faq-section": ("ln-faq",),
+    "ia-faq": ("ln-faq",),
+    "author-box": ("ln-author",),
+    "ia-author-box": ("ln-author",),
+    "authority-author": ("ln-author",),
+    "ia-cta": ("ln-cta",),
+    "cta-block": ("ln-cta",),
+    "cta-section": ("ln-cta",),
+    "authority-cta": ("ln-cta",),
+    "cta-btn": ("ln-button", "ln-button--primary"),
+    "ia-btn": ("ln-button",),
+    "btn-gold": ("ln-button", "ln-button--primary"),
+    "btn-ghost": ("ln-button",),
+    "featured-link": ("ln-button",),
+    "ia-disclosure": ("ln-evidence",),
+    "freshness-banner": ("ln-meta",),
+    "article-body": ("ln-prose",),
+}
+
+PRODUCT_CLASS_ALIASES = {
+    "hero": ("ln-content-intro",),
+    "kost-hero": ("ln-product-catalog-intro",),
+    "hero-inner": ("ln-product-overview-layout",),
+    "hero-img": ("ln-product-overview-media",),
+    "hero-badges": ("ln-badge-list",),
+    "hero-badge": ("ln-badge",),
+    "stats-row": ("ln-stats-section",),
+    "meta-bar": ("ln-product-meta",),
+    "meta-inner": ("ln-product-meta-list",),
+    "meta-item": ("ln-product-meta-item",),
+    "two-col": ("ln-split-layout",),
+    "authority-nav": ("ln-related-nav",),
+    "authority-nav-label": ("ln-related-nav-label",),
+    "section": ("ln-product-section",),
+    "section-inner": ("ln-product-section-inner",),
+    "section-label": ("ln-kicker",),
+    "section-title": ("ln-section-title",),
+    "section-desc": ("ln-section-deck",),
+    "section-divider": ("ln-section-rule",),
+    "card-grid": ("ln-product-grid",),
+    "card-grid-2": ("ln-product-grid--two",),
+    "component-grid": ("ln-product-grid",),
+    "product-grid": ("ln-product-grid",),
+    "products-grid": ("ln-product-grid",),
+    "component-card": ("ln-product-card", "ln-product-card--compact"),
+    "product-card": ("ln-product-card", "ln-product-card--compact"),
+    "ingredient-card": ("ln-product-card", "ln-product-card--compact"),
+    "carot-card": ("ln-product-card", "ln-product-card--compact"),
+    "component-name": ("ln-product-card-title",),
+    "pcard": ("ln-product-card",),
+    "pro-card": ("ln-product-card", "ln-product-card--featured"),
+    "pcard-img": ("ln-product-card-media",),
+    "pro-card-img": ("ln-product-card-media",),
+    "pcard-body": ("ln-product-card-body",),
+    "pro-card-body": ("ln-product-card-body",),
+    "pcard-tag": ("ln-product-card-kicker",),
+    "pro-card-tag": ("ln-product-card-kicker",),
+    "pcard-title": ("ln-product-card-title",),
+    "pro-card-title": ("ln-product-card-title",),
+    "pcard-desc": ("ln-product-card-description",),
+    "pro-card-desc": ("ln-product-card-description",),
+    "pcard-footer": ("ln-product-card-footer",),
+    "pcard-meta": ("ln-product-card-meta",),
+    "pcard-arrow": ("ln-product-card-action",),
+    "pro-card-arrow": ("ln-product-card-action",),
+}
+
+
+def add_canonical_component_classes(body_html: str, family: str) -> str:
+    """Add the stable public component API without rewriting source content."""
+    aliases = dict(COMPONENT_CLASS_ALIASES)
+    if family == "product-category":
+        aliases.update(PRODUCT_CLASS_ALIASES)
+
+    def replace(match: re.Match[str]) -> str:
+        quote, raw = match.group(1), match.group(2)
+        values = raw.split()
+        additions: list[str] = []
+        for value in values:
+            additions.extend(aliases.get(value, ()))
+        merged = values + [value for value in additions if value not in values]
+        return f"class={quote}{' '.join(merged)}{quote}"
+
+    return re.sub(r'class=(["\'])([^"\']*)\1', replace, body_html)
+
+
 def family_for(public_path: str) -> str:
     name = Path(public_path.rstrip("/") or "index").name
     if public_path in {"/", "/no/", "/no"}:
@@ -416,8 +568,9 @@ def _normalise_schema(value, canonical: str, page_name: str = ""):
     schema_type = result.get("@type")
     if schema_type in {"Article", "WebPage", "CollectionPage", "Product", "WebSite"}:
         if schema_type != "WebSite" or canonical.rstrip("/") == SITE:
-            if "url" in result:
-                result["url"] = canonical
+            # Preserve an explicitly published schema URL byte-for-byte. A
+            # trailing-slash difference can be intentional and a visual build
+            # must not rewrite existing structured-data identity.
             if isinstance(result.get("@id"), str) and result["@id"].startswith(SITE):
                 fragment = urlsplit(result["@id"]).fragment
                 result["@id"] = canonical + (f"#{fragment}" if fragment else "")
@@ -530,22 +683,7 @@ def render_head(page: dict, body_html: str, root: Path) -> str:
     if not schemas:
         schemas = [_fallback_schema({**page, "description": description}, body_html)]
 
-    style_hrefs = [
-        "/assets/css/levnytt-foundations.css",
-        "/assets/css/levnytt-components.css",
-        "/assets/css/levnytt-rebuild.css",
-        "/assets/css/editorial-components.css",
-    ]
-    if page["family"] == "informational-article":
-        style_hrefs.append("/assets/css/informational-article.css")
-    if page["family"] == "authority-editorial-trust":
-        style_hrefs.append("/assets/css/authority-trust.css")
-    if page["family"] == "home-editorial-hub":
-        style_hrefs.append("/assets/css/home.css")
-    if page["family"] == "library-category-index":
-        style_hrefs.append("/assets/css/article-index.css")
-    if page["path"] == "/finns-det-billigare-alternativ":
-        style_hrefs.append("/assets/css/savings-calculator.css")
+    style_hrefs = ["/assets/css/levnytt.css"]
 
     lines = [
         '<meta charset="UTF-8">',
@@ -607,6 +745,7 @@ def render_page(page: dict, root: Path) -> str:
         flags=re.I | re.S,
     )
     body_html = add_heading_ids(body_html)
+    body_html = add_canonical_component_classes(body_html, page["family"])
     language = page["language"]
     label = FAMILY_LABELS[language][page["family"]]
     header = _mark_active(_fragment(root, "header", language), page["path"])
@@ -636,7 +775,7 @@ def render_page(page: dict, root: Path) -> str:
         f'<a class="ln-skip-link" href="#main-content">{skip_label}</a>\n{header}\n'
         f'<main id="main-content" class="ln-page ln-family-{page["family"]}"><div class="ln-shell">{breadcrumbs}'
         f'<article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · {html_lib.escape(label)}</p>'
-        f'<h1>{html_lib.escape(page["h1"])}</h1></header><div class="ln-article-body">{body_html}</div></article>'
+        f'<h1>{html_lib.escape(page["h1"])}</h1></header><div class="ln-article-body ln-flow">{body_html}</div></article>'
         f'</div></main>\n{footer}\n' + "\n".join(scripts) + "\n</body>\n</html>\n"
     )
 

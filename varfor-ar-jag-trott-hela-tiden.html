@@ -27,11 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css?v=3e93ffb6b5e4">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css?v=84f4407cc9fe">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css?v=57f20cd8ce59">
-<link rel="stylesheet" href="/assets/css/editorial-components.css?v=8b0d6917cc12">
-<link rel="stylesheet" href="/assets/css/informational-article.css?v=e1fcf95f0019">
+<link rel="stylesheet" href="/assets/css/levnytt.css?v=ae697c449497">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Varför är jag trött hela tiden? 8 vanliga orsaker förklarade","description":"Trött hela tiden trots sömn? Lär dig de vanligaste orsakerna till ihållande trötthet – från näringsbrist och sömn till stress och livsstil – och vad du faktiskt kan göra.","datePublished":"2026-06-08","dateModified":"2026-06-08","author":{"@type":"Person","name":"Jarmo Halonen"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://levnytt.se/varfor-ar-jag-trott-hela-tiden"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Varför är jag trött hela tiden trots att jag sover?","acceptedAnswer":{"@type":"Answer","text":"Ihållande trötthet trots tillräcklig sömn kan bero på många faktorer: sömnkvaliteten (inte bara mängden timmar) spelar stor roll, liksom näringsbrist, höga stressnivåer, lite fysisk aktivitet eller underliggande tillstånd som sköldkörtelrubbningar. Om tröttheten varar mer än fyra veckor och påverkar vardagen är det klokt att tala med en läkare för att utesluta medicinska orsaker."}},{"@type":"Question","name":"Vilka vitaminer och mineraler kan bidra till trötthet?","acceptedAnswer":{"@type":"Answer","text":"Järn, vitamin B12, D-vitamin och magnesium är de näringsbristrelaterade faktorer som oftast kopplas till trötthet och låg energi. Järnbrist är världens vanligaste näringsbrist och ger nedsatt syretransport i blodet. D-vitaminbrist är utbredd i Sverige, särskilt under vinterhalvåret. B12-brist drabbar framförallt vegetarianer och veganer. Ett blodprov hos läkaren kan enkelt identifiera eventuell brist."}},{"@type":"Question","name":"Kan stress göra mig trött hela tiden?","acceptedAnswer":{"@type":"Answer","text":"Ja. Kronisk stress aktiverar kroppens stressrespons och frisätter kortisol, vilket på sikt tär på kroppens återhämtningsförmåga. Stress stör också sömnkvaliteten, minskar motivationen till fysisk aktivitet och påverkar matvanorna – alla faktorer som i sig bidrar till trötthet. Sverige har ett eget diagnossystem för utmattningssyndrom som erkänner sambandet mellan långvarig stress och kronisk trötthet."}},{"@type":"Question","name":"Hur påverkar kosten energinivån?","acceptedAnswer":{"@type":"Answer","text":"Kosten är grunden för cellernas energiproduktion. En ensidig kost med mycket socker och processade livsmedel kan ge snabba energitoppar följda av kraftiga dippar i blodsocker. En varierad kost rik på fullkorn, grönsaker, protein och hälsosamma fetter ger en jämnare energinivå under dagen. Utan rätt byggstenar – vitaminer, mineraler och essentiella fettsyror – kan cellen inte producera energi effektivt."}},{"@type":"Question","name":"Kan brist på rörelse göra mig trött?","acceptedAnswer":{"@type":"Answer","text":"Ja, det är en av de mer motintuitiva faktorerna. Fysisk inaktivitet gör kroppen gradvis sämre på att omsätta energi och sämre på att hantera stress. Regelbunden, måttlig rörelse – som 30 minuters rask promenad – förbättrar sömnkvaliteten, ökar kroppens energieffektivitet och minskar den upplevda tröttheten. Forskning kopplar konsekvent stillasittande till ökad trötthetsrapportering."}},{"@type":"Question","name":"När ska jag söka läkare för trötthet?","acceptedAnswer":{"@type":"Answer","text":"Kontakta vården om tröttheten är ihållande i mer än fyra veckor, påverkar din förmåga att arbeta eller klara vardagslivet, eller om den följs av andra symtom som viktförändring, muskelvärk, yrsel eller nedstämdhet. Många av de vanligaste orsakerna – som järn- eller vitaminbrist, sköldkörtelproblem eller anemi – identifieras enkelt med ett blodprov. Det är alltid bättre att utesluta medicinska orsaker än att gissa."}},{"@type":"Question","name":"Hjälper kosttillskott mot trötthet?","acceptedAnswer":{"@type":"Answer","text":"Kosttillskott kan vara ett relevant komplement om du har en faktisk brist, vilket bekräftas av blodprov. Vid konstaterad järnbrist, B12-brist eller D-vitaminbrist kan tillskott göra märkbar skillnad. Men om bristen inte är orsaken till tröttheten ger tillskott inte effekt. En varierad kost är grunden; tillskott ersätter den inte. Rådfråga alltid en läkare innan du börjar med tillskott om du misstänker en specifik brist."}}]}]}</script>
 <meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="existing-content-cta">
@@ -44,6 +40,7 @@
       <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
     </a>
     <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <button class="ln-menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
     <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
       <a href="/">Hem</a>
       <a href="/om-oss">Om oss</a>
@@ -60,19 +57,19 @@
     </nav>
   </div>
 </header>
-<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Varför är jag trött hela tiden?</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Varför är jag trött hela tiden?</h1></header><div class="ln-article-body"><!-- MAIN ARTICLE -->
-<div class="ia-wrap">
+<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Varför är jag trött hela tiden?</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Varför är jag trött hela tiden?</h1></header><div class="ln-article-body ln-flow"><!-- MAIN ARTICLE -->
+<div class="ia-wrap ln-flow">
 <p>Konsumentutbildning · Energi &amp; hälsa</p>
 
 <p>Av <a href="/om-oss/">Jarmo Halonen</a> · Uppdaterad: juni 2026 · ~9 min läsning</p>
 
     <!-- PUNCHLINE -->
-    <div class="ia-punchline">
+    <div class="ia-punchline ln-lede">
       <p><strong>Varför är jag trött hela tiden?</strong> — Ihållande trötthet beror sällan på bara en sak. De vanligaste förklaringarna är sömnkvalitetsproblem, näringsbrist (järn, D-vitamin, B12), kronisk stress, fysisk inaktivitet och blodsocker­obalanser. Mer ovanliga men viktiga orsaker är sköldkörtelrubbningar och anemi. Den här artikeln förklarar varje faktor och hjälper dig förstå vilket håll du bör titta i.</p>
     </div>
 
     <!-- TAKEAWAYS -->
-    <div class="ia-takeaways">
+    <div class="ia-takeaways ln-takeaways">
       <h2 id="det-viktigaste-att-veta">Det viktigaste att veta</h2>
       <ul>
         <li>Trötthet är ett av de vanligaste symtomen i primärvården – du är inte ensam.</li>
@@ -86,7 +83,7 @@
     </div>
 
     <!-- METHODOLOGY NOTE -->
-    <p class="ia-method-note"><strong>Metodnotering:</strong> Den här artikeln bygger på publicerade studier, svenska myndighetskällor (1177 Vårdguiden, Livsmedelsverket, Internetmedicin.se) och erkända medicinska databaser. Den är avsedd som konsumentinformation – inte som medicinsk rådgivning. Inga anonym­källor, Reddit-trådar eller marknadsmaterial har använts som faktaunderlag. Konsultation med läkare rekommenderas vid kvarstående besvär.</p>
+    <p class="ia-method-note ln-evidence"><strong>Metodnotering:</strong> Den här artikeln bygger på publicerade studier, svenska myndighetskällor (1177 Vårdguiden, Livsmedelsverket, Internetmedicin.se) och erkända medicinska databaser. Den är avsedd som konsumentinformation – inte som medicinsk rådgivning. Inga anonym­källor, Reddit-trådar eller marknadsmaterial har använts som faktaunderlag. Konsultation med läkare rekommenderas vid kvarstående besvär.</p>
 
       <h2 id="vad-ar-skillnaden-mellan-trotthet-och-somnighet">Vad är skillnaden mellan trötthet och sömnighet?</h2>
 
@@ -94,7 +91,7 @@
 
       <p>Inom vården brukar man skilja på fysiologisk trötthet (obalans i livsstilen, till exempel sömnbrist eller näringsbrist) och sekundär trötthet (trötthet som beror på ett specifikt medicinskt tillstånd). Kronisk trötthet, som varar i sex månader eller längre, är ett mer komplext tillstånd med oklara mekanismer och kräver professionell bedömning.</p>
 
-      <div class="ia-callout">
+      <div class="ia-callout ln-callout">
         <strong>Viktigt att förstå</strong>
         <p>Om du känner dig trött trots att du sover tillräckligt många timmar är frågan sällan <em>hur mycket</em> du sover – utan <em>hur bra</em> du sover och vad som händer i kroppen under sömnen. Sömnkvaliteten är minst lika viktig som sömn­kvantiteten.</p>
       </div>
@@ -144,7 +141,7 @@
 
       <p>Järn är nödvändigt för att kroppen ska kunna producera hemoglobin, det protein i röda blodkroppar som transporterar syre till kroppens vävnader. Utan tillräckligt järn minskar syretransporten, vilket direkt påverkar energi och uthållighet. <a href="https://www.mindoktor.se/journalen/vitaminer-mot-trotthet/" target="_blank" rel="noopener noreferrer">Järnbrist kan orsaka anemi och trötthet</a>, och är vanligare hos gravida och hos personer med riklig menstruation. Vegetarianer och veganer löper också ökad risk, eftersom järn från växtbaserade källor tas upp sämre av kroppen.</p>
 
-      <div class="ia-callout">
+      <div class="ia-callout ln-callout">
         <strong>Obs – järntillskott utan läkarkontakt</strong>
         <p>Ta inte järntillskott utan att ha bekräftat en brist via blodprov. För högt järnintag kan vara skadligt. Kontakta vården för provtagning om du misstänker järnbrist.</p>
       </div>
@@ -159,7 +156,7 @@
 
       <p>Du kan läsa mer om NeoLifes vetenskapliga perspektiv på näring och cellhälsa på <a href="/neolife-vetenskap">NeoLife Vetenskap</a>.</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap ln-table-wrap">
         <table>
           <thead>
             <tr>
@@ -204,7 +201,7 @@
         </table>
       </div>
 
-      <p class="ia-method-note">Tabellen ovan baseras på publicerade källor från 1177 Vårdguiden, Livsmedelsverket och Internetmedicin.se. Observationella kopplingar innebär samband – inte bevisat orsakssamband.</p>
+      <p class="ia-method-note ln-evidence">Tabellen ovan baseras på publicerade källor från 1177 Vårdguiden, Livsmedelsverket och Internetmedicin.se. Observationella kopplingar innebär samband – inte bevisat orsakssamband.</p>
 
       <h2 id="vilken-roll-spelar-vitaminer-mineraler-och-daglig-nutrition">Vilken roll spelar vitaminer, mineraler och daglig nutrition?</h2>
 
@@ -212,7 +209,7 @@
 
       <p>En varierad och fullvärdig kost är grunden. Kosttillskott kan vara ett relevant komplement – men de ersätter inte maten. <a href="https://www.meds.se/tipsochrad/-trott-hela-tiden/" target="_blank" rel="noopener noreferrer">Tillskott kan vara ett bra komplement, men ersätter inte en varierad kost</a>, som det formuleras av Meds apotek. Det gäller att börja med blodprov för att förstå om det faktiskt finns en brist – annars riskerar man att ta tillskott mot ett problem som inte är tillskottets att lösa.</p>
 
-      <div class="ia-callout">
+      <div class="ia-callout ln-callout">
         <strong>Den viktiga frågan</strong>
         <p>Kosttillskott hjälper när det finns en faktisk brist som bekräftats via blodprov. De ger inte effekt om bristen inte är orsaken till tröttheten. Prioritera ordningen: blodprov → diagnos → rätt åtgärd.</p>
       </div>
@@ -235,7 +232,7 @@
 
       <p>En kost med mycket socker och raffinerade kolhydrater skapar snabba blodsockertoppar följda av kraftiga dippar. De dippar du känner efter ett sockerrikt mellanmål är en direkt energikrasch. En kost med mer protein, fullkorn, grönsaker och hälsosamma fetter ger en jämnare energinivå under dagen. Det handlar inte om att äta "perfekt" – det handlar om att äta på ett sätt som håller energinivån stabil.</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap ln-table-wrap">
         <table>
           <thead>
             <tr>
@@ -279,29 +276,29 @@
         </table>
       </div>
 
-      <div class="ia-callout">
+      <div class="ia-callout ln-callout">
         <strong>Vad säger forskningen om sömn och trötthet?</strong>
         <p>En nordsvensk populationsstudie publicerad i <em>BMC Public Health</em> (Engberg m.fl., 2017) undersökte trötthetsmönster hos 1 557 deltagare och fann att <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5557471/" target="_blank" rel="noopener noreferrer">trötthet konsekvent kopplades till lägre självskattad hälsa, högt stillasittande och lägre socioekonomisk status</a>. Studiens styrka ligger i att den använder ett etablerat och validerat instrument (MFI-20) i ett representativt urval av den svenska befolkningen.</p>
       </div>
 
       <!-- SAVINGS / PRODUCT LINK BLOCK -->
-      <div class="ia-cta">
+      <div class="ia-cta ln-cta">
         <h3 id="hur-vet-man-om-ett-dyrare-kosttillskott-verkligen-ar-battre">Hur vet man om ett dyrare kosttillskott verkligen är bättre?</h3>
         <p>Lär dig vad som påverkar kvalitet, biotillgänglighet, råvaruval och tillverkningsstandard – och hur du jämför produkter på ett mer informerat sätt.</p>
         <a href="/ar-dyra-kosttillskott-verkligen-battre">Läs jämförelsen →</a>
       </div>
 
       <!-- TIER BOXES -->
-      <div class="ia-tierbox">
+      <div class="ia-tierbox ln-related-grid">
         <div>
-          <a class="ia-tier" href="/neolife-historia">NeoLife Historia</a>
-          <a class="ia-tier" href="/neolife-vetenskap">NeoLife Vetenskap</a>
+          <a class="ia-tier ln-related-card" href="/neolife-historia">NeoLife Historia</a>
+          <a class="ia-tier ln-related-card" href="/neolife-vetenskap">NeoLife Vetenskap</a>
 
         </div>
       </div>
 
       <!-- FAQ SECTION -->
-      <div class="ia-faq">
+      <div class="ia-faq ln-faq">
         <h2 id="vanliga-fragor-om-ihallande-trotthet">Vanliga frågor om ihållande trötthet</h2>
 
         <details>
@@ -368,7 +365,7 @@
 
       <p>Startpunkten för de flesta bör vara ett blodprov för att kontrollera järn, ferritin, B12 och D-vitamin. Det kostar lite tid men ger dig faktaunderlag att gå på. Parallellt är det värt att se över sömnrutiner, stressnivå och hur varierad din kost faktiskt är.</p>
 
-      <div class="ia-callout">
+      <div class="ia-callout ln-callout">
         <strong>Det viktigaste du kan göra</strong>
         <p>Ta ett blodprov. Det är det enda sättet att avgöra om näringsbrist bidrar till din trötthet. Att gissa och ta tillskott på måfå ger sällan resultat – och kan ibland vara skadligt. Rätt diagnos är alltid utgångspunkten för rätt åtgärd.</p>
       </div>
@@ -380,7 +377,7 @@
 
 
     <!-- AUTHOR BOX -->
-    <div class="ia-author-box">
+    <div class="ia-author-box ln-author">
       <div class="ia-author-avatar"><img src="/images/jarmo-halonen.jpg" alt="Jarmo Halonen" width="169" height="170" loading="eager" fetchpriority="high" decoding="async"></div>
       <div>
         <strong>Jarmo Halonen</strong>
@@ -390,13 +387,13 @@
 
 
 
-<p class="ia-disclosure">LevNytt.se är en oberoende informationskälla som drivs av en NeoLife-distributör. Innehållet granskas kontinuerligt för att säkerställa vetenskaplig noggrannhet och transparens. Läs mer om <a href="/var-metod">vår metod</a> och <a href="/om-oss">om oss</a>.</p>
+<p class="ia-disclosure ln-evidence">LevNytt.se är en oberoende informationskälla som drivs av en NeoLife-distributör. Innehållet granskas kontinuerligt för att säkerställa vetenskaplig noggrannhet och transparens. Läs mer om <a href="/var-metod">vår metod</a> och <a href="/om-oss">om oss</a>.</p>
 </div></div></article></div></main>
 <footer class="ln-site-footer">
   <div class="ln-shell ln-footer-grid">
     <div class="ln-footer-about">
       <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+        <img src="/assets/brand/footer-logo.svg" alt="LevNytt" width="128" height="45">
       </a>
       <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     </div>
@@ -418,6 +415,6 @@
     </div>
   </div>
 </footer>
-<script src="/assets/js/levnytt-rebuild.js?v=2b31f8d01253" defer></script>
+<script src="/assets/js/levnytt-rebuild.js?v=aaebe7199357" defer></script>
 </body>
 </html>

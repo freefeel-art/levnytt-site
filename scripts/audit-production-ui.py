@@ -19,7 +19,7 @@ IMAGE_RE = re.compile(r'<img\b[^>]*\bsrc=["\'](?P<src>[^"\']+)', re.I)
 JSONLD_RE = re.compile(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script\s*>', re.I | re.S)
 KNOWN_TEMPLATES = {"rebuild-home-editorial-hub", "rebuild-library-category-index", "rebuild-utility-legal", "rebuild-authority-editorial-trust", "rebuild-product-category", "rebuild-informational-article"}
 CANONICAL_COLOR_LITERALS = {"#1b4332", "#e8c870", "#c9a84c", "#f9f6ef", "#ddd8ce"}
-SHARED_STYLE_FILES = ("assets/css/levnytt-components.css", "assets/css/authority-trust.css")
+SHARED_STYLE_FILES = ("assets/css/levnytt.css",)
 
 
 def _rebuild(root: Path):
@@ -74,7 +74,9 @@ def audit(root: Path) -> dict:
         if 'class="ln-site-header"' not in source: issues.append("missing_canonical_header")
         if 'class="ln-site-footer"' not in source: issues.append("missing_canonical_footer")
         if source.count("<head>") != 1 or source.count("</head>") != 1: issues.append("invalid_head_structure")
-        if "levnytt-foundations.css" not in source or "levnytt-components.css" not in source or "levnytt-rebuild.css" not in source: issues.append("missing_canonical_styles")
+        styles = re.findall(r'<link\s+rel=["\']stylesheet["\']\s+href=["\']([^"\']+)', source, re.I)
+        local_styles = [value for value in styles if value.startswith("/assets/css/")]
+        if len(local_styles) != 1 or not local_styles[0].startswith("/assets/css/levnytt.css?v="): issues.append("invalid_canonical_style_contract")
         if re.search(r"<style\b|\sstyle=|\son\w+=", source, re.I): issues.append("inline_code_present")
         if len(H1_RE.findall(source)) != 1: issues.append("invalid_h1_count")
         if not title: issues.append("missing_title")
@@ -104,7 +106,11 @@ def audit(root: Path) -> dict:
     literal_violations = []
     for relative in SHARED_STYLE_FILES:
         text = (root / relative).read_text(encoding="utf-8").lower()
-        if any(token in text for token in CANONICAL_COLOR_LITERALS): literal_violations.append(relative)
+        # The canonical stylesheet owns the palette, so literals belong in its
+        # token declarations. Reusing those literals in component rules would
+        # bypass the design-system contract and remains an audit failure.
+        component_text = re.sub(r":root\s*\{.*?\}", "", text, flags=re.S)
+        if any(token in component_text for token in CANONICAL_COLOR_LITERALS): literal_violations.append(relative)
     return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "production_page_count": len(records), "family_counts": dict(sorted(families.items())), "duplicates": duplicates, "pages": records, "failures": failures, "shared_style_literal_color_violations": literal_violations}
 
 

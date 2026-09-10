@@ -4,9 +4,11 @@
   function initialiseMenu() {
     var toggle = document.querySelector('.ln-menu-toggle');
     var nav = document.querySelector('.ln-primary-nav');
+    var backdrop = document.querySelector('.ln-menu-backdrop');
     if (!toggle || !nav) return;
     function closeMenu(returnFocus) {
       nav.classList.remove('is-open');
+      document.body.classList.remove('is-menu-open');
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', document.documentElement.lang === 'no' ? 'Åpne meny' : 'Öppna meny');
       if (returnFocus) toggle.focus();
@@ -14,9 +16,11 @@
     toggle.addEventListener('click', function () {
       var open = !nav.classList.contains('is-open');
       nav.classList.toggle('is-open', open);
+      document.body.classList.toggle('is-menu-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? (document.documentElement.lang === 'no' ? 'Lukk meny' : 'Stäng meny') : (document.documentElement.lang === 'no' ? 'Åpne meny' : 'Öppna meny'));
     });
+    if (backdrop) backdrop.addEventListener('click', function () { closeMenu(true); });
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && nav.classList.contains('is-open')) closeMenu(true);
     });

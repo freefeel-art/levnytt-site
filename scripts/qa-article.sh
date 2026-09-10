@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
-# QA Article Validator V1
+# LevNytt canonical article validator
 #
-# Validates a content/articles/<slug>/<slug>.html file against the
-# PAS V1.0 Publication Article Standard. 12 critical checks.
+# Validates a content/articles/<slug>/<slug>.html file against the shared
+# editorial DOM, stylesheet and behavior contract. 12 critical checks.
 #
 # Usage:
 #   ./scripts/qa-article.sh <slug>
@@ -43,7 +43,7 @@ ARTICLE="content/articles/$SLUG/$SLUG.html"
 # ─── Header ─────────────────────────────────────────────────────────────
 echo ""
 echo -e "${GREEN}╔══════════════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║         QA Article Validator V1                  ║${NC}"
+echo -e "${GREEN}║         LevNytt Article Validator                ║${NC}"
 echo -e "${GREEN}╚══════════════════════════════════════════════════╝${NC}"
 echo ""
 echo "Article: $ARTICLE"
@@ -92,57 +92,48 @@ check "2" "Non-empty (> 5000 bytes, actual: $SIZE)" $?
 HAS_HTML_OPEN=$(grep_count '<html' "$ARTICLE")
 HAS_HTML_CLOSE=$(grep_count '</html>' "$ARTICLE")
 HAS_HEAD=$(grep_count '<head>' "$ARTICLE")
-HAS_BODY=$(grep_count '<body>' "$ARTICLE")
+HAS_BODY=$(grep_count '<body' "$ARTICLE")
 [ "$HAS_HTML_OPEN" -ge 1 ] && [ "$HAS_HTML_CLOSE" -ge 1 ] && [ "$HAS_HEAD" -ge 1 ] && [ "$HAS_BODY" -ge 1 ]
 check "3" "Valid HTML shell (html/head/body)" $?
 
-# ─── Q4 — PAS wrapper: <div class="ia-wrap"> + <article> (NOT <main>) ────
-DIV_OPEN=$(grep_count '<div class="ia-wrap">' "$ARTICLE")
+# ─── Q4 — Canonical semantic article wrapper ─────────────────────────
+MAIN_WRAP=$(grep_count '<main id="main-content"' "$ARTICLE")
 ARTICLE_OPEN=$(grep_count '<article>' "$ARTICLE")
 ARTICLE_CLOSE=$(grep_count '</article>' "$ARTICLE")
-DIV_CLOSE=$(grep_count '</div>' "$ARTICLE")
-MAIN_WRAP=$(grep_count '<main class="ia-wrap">' "$ARTICLE")
-[ "$DIV_OPEN" -ge 1 ] && [ "$ARTICLE_OPEN" -ge 1 ] && [ "$ARTICLE_CLOSE" -ge 1 ] && [ "$DIV_CLOSE" -ge 1 ] && [ "$MAIN_WRAP" -eq 0 ]
-check "4" "PAS wrapper (.ia-wrap div + article, no <main>)" $?
+ARTICLE_BODY=$(grep_count 'class="ln-article-body ln-flow"' "$ARTICLE")
+[ "$MAIN_WRAP" -eq 1 ] && [ "$ARTICLE_OPEN" -ge 1 ] && [ "$ARTICLE_CLOSE" -ge 1 ] && [ "$ARTICLE_BODY" -eq 1 ]
+check "4" "Canonical main/article/content wrapper" $?
 
-# ─── Q5 — PAS CSS classes ───────────────────────────────────────────────
-HAS_PUNCH=$(grep_count '\.ia-punchline' "$ARTICLE")
-HAS_TAKE=$(grep_count '\.ia-takeaways' "$ARTICLE")
-HAS_CTA=$(grep_count '\.ia-cta' "$ARTICLE")
-HAS_FAQ=$(grep_count '\.ia-faq' "$ARTICLE")
+# ─── Q5 — Canonical editorial components ─────────────────────────────
+HAS_PUNCH=$(grep_count 'ln-lede' "$ARTICLE")
+HAS_TAKE=$(grep_count 'ln-takeaways' "$ARTICLE")
+HAS_CTA=$(grep_count 'ln-cta' "$ARTICLE")
+HAS_FAQ=$(grep_count 'ln-faq' "$ARTICLE")
 [ "$HAS_PUNCH" -ge 1 ] && [ "$HAS_TAKE" -ge 1 ] && [ "$HAS_CTA" -ge 1 ] && [ "$HAS_FAQ" -ge 1 ]
-check "5" "PAS CSS (.ia-punchline/.ia-takeaways/.ia-cta/.ia-faq)" $?
+check "5" "Canonical lede/takeaways/CTA/FAQ components" $?
 
-# ─── Q6 — Brand palette: green + gold (NO legacy navy/coral) ──────────
-HAS_GREEN=$(grep_count '#1B4332' "$ARTICLE")
-HAS_GOLD_E8=$(grep_count '#E8C870' "$ARTICLE")
-HAS_GOLD_C9=$(grep_count '#C9A84C' "$ARTICLE")
-HAS_GOLD_D4=$(grep_count '#d4b85e' "$ARTICLE")
-HAS_CREAM=$(grep_count '#F9F6EF' "$ARTICLE")
-HAS_NAVY=$(grep_count '#0F1B3A' "$ARTICLE")
-HAS_CORAL=$(grep_count '#F25F4C' "$ARTICLE")
-HAS_OLD_CREAM=$(grep_count '#FAF4E6' "$ARTICLE")
-HAS_GOLD=$((HAS_GOLD_E8 + HAS_GOLD_C9 + HAS_GOLD_D4))
-[ "$HAS_GREEN" -ge 1 ] && [ "$HAS_GOLD" -ge 1 ] && [ "$HAS_CREAM" -ge 1 ] && [ "$HAS_NAVY" -eq 0 ] && [ "$HAS_CORAL" -eq 0 ] && [ "$HAS_OLD_CREAM" -eq 0 ]
-check "6" "Brand palette (green/gold/cream, no navy/coral/old-cream)" $?
+# ─── Q6 — One canonical visual foundation ────────────────────────────
+HAS_CANON_STYLE=$(grep_count '/assets/css/levnytt.css?v=' "$ARTICLE")
+HAS_LEGACY_STYLE=$(grep_count 'pillar.css\|levnytt-foundations.css\|levnytt-components.css\|levnytt-rebuild.css\|editorial-components.css' "$ARTICLE")
+[ "$HAS_CANON_STYLE" -eq 1 ] && [ "$HAS_LEGACY_STYLE" -eq 0 ]
+check "6" "One canonical versioned stylesheet" $?
 
-# ─── Q7 — Dark evidence tiers ───────────────────────────────────────────
-HAS_EVT1=$(grep_count '\.ia-ev-t1' "$ARTICLE")
-HAS_EVT2=$(grep_count '\.ia-ev-t2' "$ARTICLE")
-[ "$HAS_EVT1" -ge 1 ] && [ "$HAS_EVT2" -ge 1 ]
-check "7" "Dark evidence tiers (.ia-ev-t1, .ia-ev-t2)" $?
+# ─── Q7 — Canonical evidence components ──────────────────────────────
+HAS_EVIDENCE=$(grep_count 'ln-evidence-label' "$ARTICLE")
+[ "$HAS_EVIDENCE" -ge 1 ]
+check "7" "Canonical evidence labels" $?
 
-# ─── Q8 — #site-nav div ─────────────────────────────────────────────────
-HAS_SITENAV=$(grep_count '<div id="site-nav">' "$ARTICLE")
-[ "$HAS_SITENAV" -ge 1 ]
-check "8" "#site-nav div present" $?
+# ─── Q8 — Canonical accessible shell ─────────────────────────────────
+HAS_HEADER=$(grep_count 'class="ln-site-header"' "$ARTICLE")
+HAS_MENU=$(grep_count 'aria-controls="ln-primary-nav"' "$ARTICLE")
+[ "$HAS_HEADER" -eq 1 ] && [ "$HAS_MENU" -eq 1 ]
+check "8" "Canonical header and accessible menu" $?
 
-# ─── Q9 — Shared scripts ────────────────────────────────────────────────
-HAS_NAVJS=$(grep_count 'nav.js' "$ARTICLE")
-HAS_FOOTERJS=$(grep_count 'footer.js' "$ARTICLE")
-HAS_COMPJS=$(grep_count 'components.js' "$ARTICLE")
-[ "$HAS_NAVJS" -ge 1 ] && [ "$HAS_FOOTERJS" -ge 1 ] && [ "$HAS_COMPJS" -ge 1 ]
-check "9" "Shared scripts (nav.js/footer.js/components.js)" $?
+# ─── Q9 — One shared behavior runtime ────────────────────────────────
+HAS_RUNTIME=$(grep_count '/assets/js/levnytt-rebuild.js?v=' "$ARTICLE")
+HAS_LEGACY_RUNTIME=$(grep_count '/nav.js\|/footer.js\|/components.js' "$ARTICLE")
+[ "$HAS_RUNTIME" -eq 1 ] && [ "$HAS_LEGACY_RUNTIME" -eq 0 ]
+check "9" "One canonical shared runtime" $?
 
 # ─── Q10 — @graph schema ────────────────────────────────────────────────
 HAS_FAQPG=$(grep_count 'FAQPage' "$ARTICLE")

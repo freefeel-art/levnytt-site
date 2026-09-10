@@ -27,11 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css?v=3e93ffb6b5e4">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css?v=84f4407cc9fe">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css?v=57f20cd8ce59">
-<link rel="stylesheet" href="/assets/css/editorial-components.css?v=8b0d6917cc12">
-<link rel="stylesheet" href="/assets/css/informational-article.css?v=e1fcf95f0019">
+<link rel="stylesheet" href="/assets/css/levnytt.css?v=ae697c449497">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Vad är vitamin B12 — och varför räcker inte alltid kosten?","description":"Vitamin B12 (kobalamin) behövs för nervsystemet och röda blodkroppar. Men kroppen kan ibland inte ta upp det. Läs om absorptionsmekanismen, riskgrupper och B12-former.","datePublished":"2026-06-28","dateModified":"2026-06-28","author":{"@type":"Person","name":"Jarmo Halonen","url":"https://levnytt.se/den-fundersamma-mannen"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://levnytt.se/vad-ar-vitamin-b12"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kan man överdosera vitamin B12?","acceptedAnswer":{"@type":"Answer","text":"Det finns inga bevis för att intag upp till 100 µg per dag från mat eller tillskott är skadligt, enligt Livsmedelsverket. Kroppen utsöndrar överskott via urinen. Höga doser används ibland terapeutiskt vid perniciös anemi utan kända biverkningar."}},{"@type":"Question","name":"Hur vet man om man har B12-brist?","acceptedAnswer":{"@type":"Answer","text":"Diagnos ställs via blodprov. Vanliga markörer är serum-B12, holotranskobalamin (aktivt B12), homocystein och metylmalonsyra (MMA). MMA och homocystein är känsligare markörer som stiger tidigt vid brist. Kontakta vården om du misstänker brist."}},{"@type":"Question","name":"Kan veganer få tillräckligt med B12 utan tillskott?","acceptedAnswer":{"@type":"Answer","text":"Nej — vitamin B12 finns enbart i animaliska livsmedel, och växtbaserade analoger fungerar inte som ersättning. Livsmedelsverket rekommenderar uttryckligen att veganer tar tillskott eller äter tillräckliga mängder berikade livsmedel dagligen."}},{"@type":"Question","name":"Varför ordinerar läkare ibland B12-injektioner istället för tabletter?","acceptedAnswer":{"@type":"Answer","text":"Vid perniciös anemi saknar patienten intrinsic factor och kan inte absorbera B12 via den normala aktiva vägen i tarmen. Injektioner levererar B12 direkt i blodet och kringgår absorptionsproblemet. Alternativt kan mycket höga orala doser (1 000–2 000 µg/dag) fungera eftersom ~1 % tas upp via passiv diffusion utan intrinsic factor."}},{"@type":"Question","name":"Påverkar protonpumpshämmare (PPI) B12-absorption?","acceptedAnswer":{"@type":"Answer","text":"Ja. PPI-läkemedel minskar magsyraproduktionen, vilket försämrar kroppens förmåga att frigöra B12 från mat. Vid långtidsanvändning av PPI (>12 månader) bör B12-status kontrolleras, särskilt hos äldre. Tillskott av kristallinsk B12 (i tabletter) påverkas däremot inte i samma utsträckning, eftersom det inte behöver frigöras från matproteiner."}},{"@type":"Question","name":"Kan man ha B12-brist utan symtom?","acceptedAnswer":{"@type":"Answer","text":"Ja. Kroppen kan lagra B12 i levern i 3–5 år, vilket innebär att brist kan smyga sig på utan tydliga symtom under lång tid. Neurologiska skador kan dessutom uppstå innan blodbildsförändringar syns. Regelbundna blodprov rekommenderas för riskgrupper."}},{"@type":"Question","name":"Hur länge kan kroppen lagra vitamin B12?","acceptedAnswer":{"@type":"Answer","text":"Lever och njurar lagrar aktivt B12. Depåerna uppskattas räcka i 3–5 år vid totalt avbrott i intaget — men individuell variation är stor. Denna lagringsförmåga förklarar varför B12-brist kan ta lång tid att utvecklas, och varför symtom kan uppstå utan att man förstår varför."}}]}]}</script>
 <meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="existing-content-cta">
@@ -44,6 +40,7 @@
       <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
     </a>
     <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <button class="ln-menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
     <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
       <a href="/">Hem</a>
       <a href="/om-oss">Om oss</a>
@@ -60,7 +57,7 @@
     </nav>
   </div>
 </header>
-<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Vad är vitamin B12 — och varför räcker inte alltid kosten?</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Vad är vitamin B12 — och varför räcker inte alltid kosten?</h1></header><div class="ln-article-body"><div class="ia-wrap">
+<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Vad är vitamin B12 — och varför räcker inte alltid kosten?</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Vad är vitamin B12 — och varför räcker inte alltid kosten?</h1></header><div class="ln-article-body ln-flow"><div class="ia-wrap ln-flow">
 <p>Kost &amp; Näring · Vitaminer</p>
 
 <p>Av <a href="/den-fundersamma-mannen/">Jarmo Halonen</a> · Uppdaterad: juni 2026 · ~10 min läsning</p>
@@ -83,9 +80,9 @@
   <rect x="820" y="40" width="3" height="200" fill="#C9A84C" opacity="0.4" rx="1"/>
 </svg>
 
-<p class="ia-punchline">Vitamin B12 — kobalamin — är ett vattenlösligt vitamin som kroppen inte kan tillverka själv, och som behövs för bildningen av röda blodkroppar, nervsystemets funktion och DNA-syntes. Det finns naturligt enbart i animaliska livsmedel, och kroppen kan ibland inte ta upp det trots tillräckligt kostintag — på grund av en absorptionsmekanism som kräver ett protein som kallas intrinsic factor.</p>
+<p class="ia-punchline ln-lede">Vitamin B12 — kobalamin — är ett vattenlösligt vitamin som kroppen inte kan tillverka själv, och som behövs för bildningen av röda blodkroppar, nervsystemets funktion och DNA-syntes. Det finns naturligt enbart i animaliska livsmedel, och kroppen kan ibland inte ta upp det trots tillräckligt kostintag — på grund av en absorptionsmekanism som kräver ett protein som kallas intrinsic factor.</p>
 
-<div class="ia-takeaways">
+<div class="ia-takeaways ln-takeaways">
   <h3 id="viktiga-punkter">Viktiga punkter</h3>
   <ul>
     <li>Livsmedelsverket rekommenderar <strong>4 µg B12 per dag</strong> för vuxna (NNR 2023) — en fördubbling från det gamla värdet 2 µg (NNR 2012) som fortfarande cirkulerar på många svenska hälsosidor</li>
@@ -103,7 +100,7 @@
 
 <p>Varken växter eller djur kan bilda B12 på egen hand. Det ansamlas i djurens vävnader via mikroorganismer i deras tarmsystem eller i de organismer de äter. Det är anledningen till att B12 <em>enbart</em> återfinns i animaliska livsmedel — kött, fisk, skaldjur, ägg och mejeriprodukter.</p>
 
-<p>Trots att det är vattenlösligt beter sig B12 annorlunda än de flesta vitaminer i den gruppen: kroppen lagrar det aktivt i levern. Dessa depåer kan räcka i <strong>3–5 år</strong> vid totalt avbrott i intaget, enligt <a href="https://www.ncbi.nlm.nih.gov/books/NBK546655/" target="_blank" rel="noopener noreferrer">Al-Awami, Raja &amp; Soos (StatPearls, 2023)</a> <span class="ia-evidence-label ia-ev-t4">Tier 4</span>. Det innebär att brist kan utvecklas under lång tid utan tydliga varningssignaler — vilket är en av de viktigaste anledningarna att känna till de vanliga <a href="/naringsbrist-symptom">symtomen på näringsbrist</a>.</p>
+<p>Trots att det är vattenlösligt beter sig B12 annorlunda än de flesta vitaminer i den gruppen: kroppen lagrar det aktivt i levern. Dessa depåer kan räcka i <strong>3–5 år</strong> vid totalt avbrott i intaget, enligt <a href="https://www.ncbi.nlm.nih.gov/books/NBK546655/" target="_blank" rel="noopener noreferrer">Al-Awami, Raja &amp; Soos (StatPearls, 2023)</a> <span class="ia-evidence-label ia-ev-t4 ln-evidence-label ln-evidence-label--weak">Tier 4</span>. Det innebär att brist kan utvecklas under lång tid utan tydliga varningssignaler — vilket är en av de viktigaste anledningarna att känna till de vanliga <a href="/naringsbrist-symptom">symtomen på näringsbrist</a>.</p>
 
 <h2 id="vad-behover-kroppen-egentligen-b12-till">Vad behöver kroppen egentligen B12 till?</h2>
 
@@ -111,7 +108,7 @@
 
 <p><strong>Bildning av röda blodkroppar.</strong> B12 krävs för normal celldelning och mognad i benmärgen. Vid brist bildas onormalt stora, omogna röda blodkroppar — ett tillstånd som kallas <em>megaloblastisk anemi</em>. Cellerna bär syre sämre, vilket leder till trötthet och andfåddhet.</p>
 
-<p><strong>Nervsystemets funktion.</strong> B12 är nödvändigt för att bygga och underhålla myelin — det skyddande hölje som omger nervtrådarna. Utan tillräckligt myelin försämras signalöverföringen i nervsystemet, vilket kan ge stickningar, domningar och i allvarliga fall permanenta nervskador. Enligt <a href="https://www.internetmedicin.se/allmanmedicin/b12-och-folatbrist-utan-anemi" target="_blank" rel="noopener noreferrer">Internetmedicin.se</a> <span class="ia-evidence-label ia-ev-t4">Tier 4</span> kan neurologiska symtom uppstå <em>innan</em> anemi syns i blodbilden.</p>
+<p><strong>Nervsystemets funktion.</strong> B12 är nödvändigt för att bygga och underhålla myelin — det skyddande hölje som omger nervtrådarna. Utan tillräckligt myelin försämras signalöverföringen i nervsystemet, vilket kan ge stickningar, domningar och i allvarliga fall permanenta nervskador. Enligt <a href="https://www.internetmedicin.se/allmanmedicin/b12-och-folatbrist-utan-anemi" target="_blank" rel="noopener noreferrer">Internetmedicin.se</a> <span class="ia-evidence-label ia-ev-t4 ln-evidence-label ln-evidence-label--weak">Tier 4</span> kan neurologiska symtom uppstå <em>innan</em> anemi syns i blodbilden.</p>
 
 <p><strong>Homocysteinmetabolism.</strong> B12 är ett koenzym som medverkar i omvandlingen av aminosyran homocystein till metionin. Vid brist stiger homocysteinhalten i blodet. I observationsstudier har förhöjt homocystein associerats med ökad risk för hjärt-kärlsjukdom — men observationsdata etablerar inte kausalitet utan visar enbart samband.</p>
 
@@ -128,39 +125,39 @@
 
 <p><strong>Det avgörande steget är intrinsic factor.</strong> Om parietalcellerna inte producerar tillräckligt med IF — på grund av autoimmun sjukdom (perniciös anemi), magkirurgi eller atrofisk gastrit — blockeras den aktiva absorptionsvägen.</p>
 
-<div class="ia-callout">
-  <p><strong>Vad aktiv absorption klarar — och var den mättas:</strong> En klinisk studie <span class="ia-evidence-label ia-ev-t2">Tier 2</span> med 9 friska vuxna (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11643782/" target="_blank" rel="noopener noreferrer">Kashyap et al., Nutrients 2024</a>) mätte biotillgängligheten av kristallinsk B12 vid olika doser: vid 2,5 µg absorberades ~50,9 %, vid 5 µg ~26,7 %, och vid 10 µg ~15,4 %. Slutsatsen: <em>"The active bioavailability of crystalline B12 is not dose-dependent, saturating at ~1.2 µg."</em> Det innebär att aktiv absorption mättas vid ungefär 1,2 µg per dos — ytterligare B12 tas upp via passiv diffusion med bara ~1 % effektivitet per µg. Det är den mekanismen som gör att mycket höga tillskottsdoser (100–1 000 µg) kan fungera för personer med nedsatt IF-produktion.</p>
+<div class="ia-callout ln-callout">
+  <p><strong>Vad aktiv absorption klarar — och var den mättas:</strong> En klinisk studie <span class="ia-evidence-label ia-ev-t2 ln-evidence-label">Tier 2</span> med 9 friska vuxna (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11643782/" target="_blank" rel="noopener noreferrer">Kashyap et al., Nutrients 2024</a>) mätte biotillgängligheten av kristallinsk B12 vid olika doser: vid 2,5 µg absorberades ~50,9 %, vid 5 µg ~26,7 %, och vid 10 µg ~15,4 %. Slutsatsen: <em>"The active bioavailability of crystalline B12 is not dose-dependent, saturating at ~1.2 µg."</em> Det innebär att aktiv absorption mättas vid ungefär 1,2 µg per dos — ytterligare B12 tas upp via passiv diffusion med bara ~1 % effektivitet per µg. Det är den mekanismen som gör att mycket höga tillskottsdoser (100–1 000 µg) kan fungera för personer med nedsatt IF-produktion.</p>
 </div>
 
 <h2 id="vilka-siffror-galler-key-numbers-om-vitamin-b12">Vilka siffror gäller — key numbers om vitamin B12</h2>
 
-<div class="ia-stat-grid">
-  <div class="ia-stat-card">
+<div class="ia-stat-grid ln-stat-grid">
+  <div class="ia-stat-card ln-stat">
     <div class="ia-stat-num">4 µg</div>
     <div class="ia-stat-label">Rekommenderat dagligt intag för vuxna (NNR 2023)</div>
     <div class="ia-stat-src">Källa: Livsmedelsverket / NNR 2023</div>
   </div>
-  <div class="ia-stat-card">
+  <div class="ia-stat-card ln-stat">
     <div class="ia-stat-num">~1,2 µg</div>
     <div class="ia-stat-label">Maximal absorption per dos via aktiv väg (intrinsic factor)</div>
     <div class="ia-stat-src">Källa: Kashyap et al., 2024</div>
   </div>
-  <div class="ia-stat-card">
+  <div class="ia-stat-card ln-stat">
     <div class="ia-stat-num">~1 %</div>
     <div class="ia-stat-label">Passiv diffusion per µg vid höga doser (utan intrinsic factor)</div>
     <div class="ia-stat-src">Källa: Kashyap et al., 2024</div>
   </div>
-  <div class="ia-stat-card">
+  <div class="ia-stat-card ln-stat">
     <div class="ia-stat-num">13 %</div>
     <div class="ia-stat-label">Mer B12 lagrat i levern med metylkobalamin vs cyanokobalamin (djurstudier)</div>
     <div class="ia-stat-src">Källa: Behringer et al., 2025</div>
   </div>
-  <div class="ia-stat-card">
+  <div class="ia-stat-card ln-stat">
     <div class="ia-stat-num">~1 %</div>
     <div class="ia-stat-label">Andel av Sveriges befolkning med perniciös anemi</div>
     <div class="ia-stat-src">Källa: 1177.se, granskat av prof. Gunnar Birgegård</div>
   </div>
-  <div class="ia-stat-card">
+  <div class="ia-stat-card ln-stat">
     <div class="ia-stat-num">3–5 år</div>
     <div class="ia-stat-label">Uppskattad lagringstid för B12 i levern</div>
     <div class="ia-stat-src">Källa: Al-Awami et al., StatPearls 2023</div>
@@ -173,7 +170,7 @@
 
 <p><strong>Veganer.</strong> Eftersom B12 enbart finns i animaliska livsmedel saknar en strikt vegansk kost naturliga B12-källor. Livsmedelsverket rekommenderar uttryckligen tillskott eller berikade livsmedel. Växtbaserade analoger — som de i spirulina — fungerar inte som ersättning för äkta B12.</p>
 
-<p><strong>Äldre.</strong> Förmågan att ta upp B12 minskar med åldern, delvis på grund av lägre magsyraproduktion och ökad förekomst av atrofisk gastrit. Enligt <a href="https://www.1177.se/sjukdomar--besvar/hjarta-och-blodkarl/blodsjukdomar/blodbrist-pa-grund-av-for-lite-vitamin-b12/" target="_blank" rel="noopener noreferrer">1177.se</a> <span class="ia-evidence-label ia-ev-t4">Tier 4</span>, granskad av prof. Gunnar Birgegård vid Akademiska sjukhuset Uppsala, drabbar perniciös anemi ungefär 2 % av dem över 70 år. Läs mer om aktuella <a href="/nya-kostrad-65-plus-d-vitamin-magnesium">kostråd för äldre</a>.</p>
+<p><strong>Äldre.</strong> Förmågan att ta upp B12 minskar med åldern, delvis på grund av lägre magsyraproduktion och ökad förekomst av atrofisk gastrit. Enligt <a href="https://www.1177.se/sjukdomar--besvar/hjarta-och-blodkarl/blodsjukdomar/blodbrist-pa-grund-av-for-lite-vitamin-b12/" target="_blank" rel="noopener noreferrer">1177.se</a> <span class="ia-evidence-label ia-ev-t4 ln-evidence-label ln-evidence-label--weak">Tier 4</span>, granskad av prof. Gunnar Birgegård vid Akademiska sjukhuset Uppsala, drabbar perniciös anemi ungefär 2 % av dem över 70 år. Läs mer om aktuella <a href="/nya-kostrad-65-plus-d-vitamin-magnesium">kostråd för äldre</a>.</p>
 
 <p><strong>Perniciös anemi.</strong> En autoimmun sjukdom där immunsystemet angriper parietalcellerna som producerar intrinsic factor. Ungefär 1 % av befolkningen i Sverige berörs. Utan IF kan B12 inte absorberas aktivt och tillståndet kräver livslång behandling — antingen höga orala doser eller B12-injektioner.</p>
 
@@ -205,7 +202,7 @@
 
 <p>Det råder förvirring om B12-rekommendationer på svenska hälsosidor. Anledningen är att Nordiska Näringsstyrelsens rekommendationer reviderades 2023.</p>
 
-<table class="ia-method-table">
+<table class="ia-method-table ln-data-table">
   <thead>
     <tr>
       <th>Version</th>
@@ -230,7 +227,7 @@
   </tbody>
 </table>
 
-<p>Det uppdaterade värdet 4 µg/dag är baserat på en vetenskaplig genomgång inför NNR 2023 <span class="ia-evidence-label ia-ev-t1">Tier 1</span> (<a href="https://pubmed.ncbi.nlm.nih.gov/38084149/" target="_blank" rel="noopener noreferrer">PubMed, 2023</a>), och återspeglar den nivå som är förknippad med adekvata serumnivåer av B12 hos friska vuxna. Värdet harmonierar med EFSA:s rekommendationer. Det gamla värdet 2 µg cirkulerar fortfarande på många svenska hälsosidor — kontrollera alltid mot <a href="https://www.livsmedelsverket.se/livsmedel-och-innehall/naringsamne/vitaminer-och-antioxidanter/vitamin-b12/" target="_blank" rel="noopener noreferrer">Livsmedelsverkets aktuella rekommendation</a>.</p>
+<p>Det uppdaterade värdet 4 µg/dag är baserat på en vetenskaplig genomgång inför NNR 2023 <span class="ia-evidence-label ia-ev-t1 ln-evidence-label ln-evidence-label--strong">Tier 1</span> (<a href="https://pubmed.ncbi.nlm.nih.gov/38084149/" target="_blank" rel="noopener noreferrer">PubMed, 2023</a>), och återspeglar den nivå som är förknippad med adekvata serumnivåer av B12 hos friska vuxna. Värdet harmonierar med EFSA:s rekommendationer. Det gamla värdet 2 µg cirkulerar fortfarande på många svenska hälsosidor — kontrollera alltid mot <a href="https://www.livsmedelsverket.se/livsmedel-och-innehall/naringsamne/vitaminer-och-antioxidanter/vitamin-b12/" target="_blank" rel="noopener noreferrer">Livsmedelsverkets aktuella rekommendation</a>.</p>
 
 <p>Inga bevis finns för att intag upp till 100 µg/dag från mat eller tillskott är skadligt, enligt Livsmedelsverket. Kroppen utsöndrar överskott av B12 via urinen.</p>
 
@@ -238,7 +235,7 @@
 
 <p>B12 finns enbart i animaliska livsmedel. Växtbaserade analoger — exempelvis i spirulina och fermenterade grönsaker — fungerar inte som äkta B12 och kan inte motverka brist.</p>
 
-<table class="ia-method-table">
+<table class="ia-method-table ln-data-table">
   <thead>
     <tr>
       <th>Livsmedel</th>
@@ -295,7 +292,7 @@
 
 <p><strong>Cyanokobalamin</strong> är en syntetisk form som är stabil, billig och välstuderad. Kroppen omvandlar den till de biologiskt aktiva formerna metylkobalamin och adenosylkobalamin i cellerna. Processen kräver ett extra metaboliseringssteg som inkluderar att avlägsna en cyanidgrupp — normalt harmlöst i vanliga tillskottsdoser.</p>
 
-<p><strong>Metylkobalamin</strong> är en naturligt förekommande, biologiskt aktiv form som kan användas direkt av cellerna utan konvertering. I djurstudier visade metylkobalamin 13 % bättre retention i levern jämfört med cyanokobalamin, och Behringer, Kulkarni och Weinstein (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12681447/" target="_blank" rel="noopener noreferrer">PMC 2025</a>) <span class="ia-evidence-label ia-ev-t2">Tier 2</span> rekommenderar att "<em>prioritizing methylcobalamin over cyanocobalamin, whether through diet or supplementation</em>" — med det viktiga förbehållet att humanstudier om långsiktiga skillnader i hälsoutfall fortfarande är begränsade.</p>
+<p><strong>Metylkobalamin</strong> är en naturligt förekommande, biologiskt aktiv form som kan användas direkt av cellerna utan konvertering. I djurstudier visade metylkobalamin 13 % bättre retention i levern jämfört med cyanokobalamin, och Behringer, Kulkarni och Weinstein (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12681447/" target="_blank" rel="noopener noreferrer">PMC 2025</a>) <span class="ia-evidence-label ia-ev-t2 ln-evidence-label">Tier 2</span> rekommenderar att "<em>prioritizing methylcobalamin over cyanocobalamin, whether through diet or supplementation</em>" — med det viktiga förbehållet att humanstudier om långsiktiga skillnader i hälsoutfall fortfarande är begränsade.</p>
 
 <p><strong>Hydroxokobalamin</strong> används primärt vid kliniska B12-injektioner och är ofta att föredra för personer med perniciös anemi som behandlas i vården.</p>
 
@@ -305,19 +302,19 @@
 
 <p><strong>Praktisk slutsats:</strong> För de flesta friska personer fungerar cyanokobalamin väl. Djurstudiedata tyder på att metylkobalamin kan ha fördelar vid absorption och retention — men det behövs fler kontrollerade humanstudier för säkra slutsatser om klinisk skillnad vid normalt intag.</p>
 
-<div class="ia-tierbox">
-  <a class="ia-tier" href="/naringsbrist-symptom">Näringsbrist symptom</a>
-  <a class="ia-tier" href="/vad-ar-vitamin-b12">Vitamin B12 guide</a>
-  <a class="ia-tier" href="/neolife-vetenskap">NeoLife Vetenskap</a>
-  <a class="ia-tier" href="/om-oss">Om LevNytt</a>
+<div class="ia-tierbox ln-related-grid">
+  <a class="ia-tier ln-related-card" href="/naringsbrist-symptom">Näringsbrist symptom</a>
+  <a class="ia-tier ln-related-card" href="/vad-ar-vitamin-b12">Vitamin B12 guide</a>
+  <a class="ia-tier ln-related-card" href="/neolife-vetenskap">NeoLife Vetenskap</a>
+  <a class="ia-tier ln-related-card" href="/om-oss">Om LevNytt</a>
 </div>
-<div class="ia-cta">
+<div class="ia-cta ln-cta">
   <h3 id="las-vidare">Läs vidare</h3>
   <p>Vill du veta mer om vad ett välformulerat multivitamin bör innehålla för att täcka det dagliga behovet av B12 och andra viktiga vitaminer? Vi har granskat vad forskning och kliniska riktlinjer säger om multivitaminens sammansättning.</p>
   <a href="/neolife-formula-iv">Vad ska ett multivitamin egentligen innehålla? →</a>
 </div>
 
-<div class="ia-faq">
+<div class="ia-faq ln-faq">
   <h2 id="vanliga-fragor-om-vitamin-b12">Vanliga frågor om vitamin B12</h2>
   <details>
     <summary>Kan man överdosera vitamin B12?</summary>
@@ -349,11 +346,11 @@
   </details>
 </div>
 
-<div class="ia-method-note">
+<div class="ia-method-note ln-evidence">
   <strong>Metodik och källanvändning:</strong> Denna artikel är en hälsorelaterad YMYL-artikel. Reddit och sociala medier har uteslutits som källor — anonyma anekdoter stärker inte EEAT på medicinska ämnen. Alla hälsopåståenden är kopplade till citerbara primärkällor (Tier 1–4 per CONTENT-FACTORY.md). Rekommendationer om diagnos och behandling hänvisar till 1177.se och vården. Inga påståenden om att B12 behandlar, botar eller förebygger sjukdomar görs i denna artikel. Uppdaterad: juni 2026.
 </div>
 
-<div class="ia-author-box">
+<div class="ia-author-box ln-author">
   <img src="/images/generated/951ae4ef3505a2fa3c27.jpg" alt="Jarmo Halonen, redaktör LevNytt" class="ia-author-avatar" width="169" height="170" loading="eager" fetchpriority="high" decoding="async">
   <div>
     <div class="ia-author-name">Jarmo Halonen</div>
@@ -362,13 +359,13 @@
   </div>
 </div>
 
-<p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
+<p class="ia-disclosure ln-evidence">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
 </div></div></article></div></main>
 <footer class="ln-site-footer">
   <div class="ln-shell ln-footer-grid">
     <div class="ln-footer-about">
       <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+        <img src="/assets/brand/footer-logo.svg" alt="LevNytt" width="128" height="45">
       </a>
       <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     </div>
@@ -390,6 +387,6 @@
     </div>
   </div>
 </footer>
-<script src="/assets/js/levnytt-rebuild.js?v=2b31f8d01253" defer></script>
+<script src="/assets/js/levnytt-rebuild.js?v=aaebe7199357" defer></script>
 </body>
 </html>

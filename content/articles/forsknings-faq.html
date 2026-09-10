@@ -27,11 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css?v=3e93ffb6b5e4">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css?v=84f4407cc9fe">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css?v=57f20cd8ce59">
-<link rel="stylesheet" href="/assets/css/editorial-components.css?v=651db2f78ace">
-<link rel="stylesheet" href="/assets/css/informational-article.css?v=e1fcf95f0019">
+<link rel="stylesheet" href="/assets/css/levnytt.css?v=ae697c449497">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Så läser och bedömer du hälsoforskning","description":"Förstå vanliga forskningsbegrepp som RCT, peer review, meta-analys, statistisk signifikans, korrelation och kausalitet – och lär dig granska hälsopåståenden själv.","url":"https://levnytt.se/forsknings-faq","datePublished":"2026-06-09","dateModified":"2026-09-02","inLanguage":"sv","author":{"@type":"Person","name":"Jarmo Halonen"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://levnytt.se/forsknings-faq"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LevNytt","item":"https://levnytt.se/"},{"@type":"ListItem","position":2,"name":"Så läser och bedömer du hälsoforskning","item":"https://levnytt.se/forsknings-faq"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Vad är evidens?","acceptedAnswer":{"@type":"Answer","text":"Evidens är det samlade vetenskapliga stödet för ett påstående. Stark evidens innebär att många välgjorda studier pekar åt samma håll och att resultaten har replikerats av oberoende forskargrupper. Svag evidens innebär litet, motstridigt eller metodsvagt stöd."}},{"@type":"Question","name":"Vad är peer review – och betyder det att studien är korrekt?","acceptedAnswer":{"@type":"Answer","text":"Peer review innebär att en vetenskaplig artikel granskas av oberoende experter innan den publiceras. Det är ett viktigt kvalitetsfilter, men ingen garanti. En granskad studie kan fortfarande ha svagheter, felaktiga slutsatser eller resultat som inte har replikerats."}},{"@type":"Question","name":"Vad är skillnaden mellan en observationsstudie och en RCT?","acceptedAnswer":{"@type":"Answer","text":"En observationsstudie observerar vad som sker naturligt utan att forskarna ingriper. En RCT delar slumpmässigt in deltagare i en behandlingsgrupp och en kontrollgrupp. RCT anses starkare för att fastställa orsakssamband."}},{"@type":"Question","name":"Vad är en meta-analys – och är den alltid tillförlitlig?","acceptedAnswer":{"@type":"Answer","text":"En meta-analys kombinerar resultat från flera studier statistiskt. Den är generellt mer tillförlitlig än enstaka studier, men om de ingående studierna är av dålig kvalitet blir även meta-analysen missvisande."}},{"@type":"Question","name":"Vad betyder statistisk signifikans i praktiken?","acceptedAnswer":{"@type":"Answer","text":"Statistisk signifikans (ofta ett p-värde under 0,05) betyder att ett resultat sannolikt inte beror på slumpen. Det är inte samma sak som praktisk betydelse: ett mycket litet resultat kan vara signifikant men ändå sakna relevans."}},{"@type":"Question","name":"Varför kan forskare dra olika slutsatser om samma ämne?","acceptedAnswer":{"@type":"Answer","text":"Av flera legitima skäl: olika studiedesign, urvalsstorlek, populationer, mätmetoder och finansiering. Oenighet betyder sällan att vi inget vet – oftast att bilden håller på att formas."}},{"@type":"Question","name":"Hur vet jag om ett hälsopåstående är välgrundat?","acceptedAnswer":{"@type":"Answer","text":"Ställ frågorna: Finns det en länk till primärkällan? Vilken typ av studie? Hur många deltagare? Har resultatet replikerats? Redovisas begränsningarna? Vem finansierade studien? Ett välgrundat påstående kan svara på dessa frågor – ett marknadsföringspåstående undviker dem."}}]}]}</script>
 <meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="existing-content-cta">
@@ -44,6 +40,7 @@
       <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
     </a>
     <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <button class="ln-menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
     <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
       <a href="/">Hem</a>
       <a href="/om-oss">Om oss</a>
@@ -60,7 +57,7 @@
     </nav>
   </div>
 </header>
-<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Så läser och bedömer du hälsoforskning</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Så läser och bedömer du hälsoforskning</h1></header><div class="ln-article-body"><p class="ia-punchline">När du läser om kosttillskott och hälsa möter du ord som RCT, peer review, meta-analys och statistisk signifikans. Den här guiden förklarar vad begreppen betyder – och vilka frågor du själv kan ställa för att avgöra om ett hälsopåstående verkligen håller.</p>
+<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Så läser och bedömer du hälsoforskning</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Så läser och bedömer du hälsoforskning</h1></header><div class="ln-article-body ln-flow"><p class="ia-punchline ln-lede">När du läser om kosttillskott och hälsa möter du ord som RCT, peer review, meta-analys och statistisk signifikans. Den här guiden förklarar vad begreppen betyder – och vilka frågor du själv kan ställa för att avgöra om ett hälsopåstående verkligen håller.</p>
 
 <nav class="contents-nav" aria-label="På den här sidan">
   <a href="#begrepp">Vanliga forskningsbegrepp</a>
@@ -159,7 +156,7 @@
   </div>
 </div>
 
-<div class="ia-callout">
+<div class="ia-callout ln-callout">
   <h4>Orden som säger minst</h4>
   <p>Orden "studier visar" och "kliniskt testad" är de vanligaste i hälsomarknadsföring – och de minst informativa. Det relevanta är alltid: vilken typ av studie, hur många deltagare, publicerad var, och replikerad av vem?</p>
 </div>
@@ -174,7 +171,7 @@
   <li><strong>Systematiska översikter och meta-analyser</strong> – sammanfattar många studier. Den starkaste evidensformen.</li>
 </ol>
 
-<div class="ia-callout">
+<div class="ia-callout ln-callout">
   <h4>Det vanligaste missförståndet</h4>
   <p>Marknadsföring hoppar ofta direkt från ett laboratorieresultat till en tillämpning på konsumenter. Det hoppar över stegen däremellan – pilotstudier, RCT och replikering. Det är inte fel att nämna laboratorieresultat, men det är fel att presentera dem som klinisk evidens.</p>
 </div>
@@ -215,7 +212,7 @@
   </tbody>
 </table>
 
-<div class="ia-callout">
+<div class="ia-callout ln-callout">
   <h4>Ett hälsorelaterat exempel</h4>
   <p>Studier har visat att de som tar vitamintillskott generellt är friskare och lever längre. Men de som tar tillskott tenderar också att ha bättre levnadsvanor i övrigt: de tränar, röker mindre och har regelbundna läkarbesök. Tillskottet och hälsan korrelerar – men levnadsvanorna är sannolikt orsaken, inte kapseln.</p>
 </div>
@@ -232,7 +229,7 @@
   <li><strong>Vad säger oberoende myndigheter?</strong> EFSA, Livsmedelsverket, WHO och Socialstyrelsen är oberoende av kommersiella intressen. Deras riktlinjer väger tyngre än enstaka produktstudier.</li>
 </ol>
 
-<div class="ia-callout">
+<div class="ia-callout ln-callout">
   <h4>Vill du kontrollera själv?</h4>
   <p><strong>PubMed</strong> (pubmed.ncbi.nlm.nih.gov) – fri sökning i medicinska och nutritionsvetenskapliga studier.</p>
   <p><strong>Cochrane Library</strong> (cochranelibrary.com) – systematiska översikter med högsta evidensnivå.</p>
@@ -242,7 +239,7 @@
 
 <h2 id="faq">Vanliga frågor</h2>
 
-<div class="ia-faq">
+<div class="ia-faq ln-faq">
   <details>
     <summary>Vad är evidens?</summary>
     <p>Evidens är det samlade vetenskapliga stödet för ett påstående. Stark evidens innebär att många välgjorda studier pekar åt samma håll och att resultaten har replikerats av oberoende forskargrupper. Svag evidens innebär litet, motstridigt eller metodsvagt stöd.</p>
@@ -273,12 +270,12 @@
   </details>
 </div>
 
-<div class="ia-callout">
+<div class="ia-callout ln-callout">
   <h4>Vill du veta hur LevNytt själv arbetar med källor?</h4>
   <p>Den här guiden hjälper dig att läsa hälsoforskning. Vill du förstå hur LevNytt utvärderar och hanterar källor och kommersiella relationer, läs vår sida om <a href="/var-metod">Vår metod</a>.</p>
 </div>
 
-<div class="ia-author-box">
+<div class="ia-author-box ln-author">
   <div class="ia-author-avatar">JH</div>
   <div>
     <div><strong>Jarmo Halonen</strong></div>
@@ -287,12 +284,12 @@
   </div>
 </div>
 
-<p class="ia-disclosure">Den här sidan är en utbildande referensguide och gör inga behandlings- eller produktpåståenden. LevNytt täcker NeoLife och har ett kommersiellt intresse i ämnet. Innehållet ersätter inte medicinsk rådgivning.</p></div></article></div></main>
+<p class="ia-disclosure ln-evidence">Den här sidan är en utbildande referensguide och gör inga behandlings- eller produktpåståenden. LevNytt täcker NeoLife och har ett kommersiellt intresse i ämnet. Innehållet ersätter inte medicinsk rådgivning.</p></div></article></div></main>
 <footer class="ln-site-footer">
   <div class="ln-shell ln-footer-grid">
     <div class="ln-footer-about">
       <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+        <img src="/assets/brand/footer-logo.svg" alt="LevNytt" width="128" height="45">
       </a>
       <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     </div>
@@ -314,6 +311,6 @@
     </div>
   </div>
 </footer>
-<script src="/assets/js/levnytt-rebuild.js?v=2b31f8d01253" defer></script>
+<script src="/assets/js/levnytt-rebuild.js?v=aaebe7199357" defer></script>
 </body>
 </html>

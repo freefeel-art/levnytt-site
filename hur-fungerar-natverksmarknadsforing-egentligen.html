@@ -27,11 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css?v=3e93ffb6b5e4">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css?v=84f4407cc9fe">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css?v=57f20cd8ce59">
-<link rel="stylesheet" href="/assets/css/editorial-components.css?v=8b0d6917cc12">
-<link rel="stylesheet" href="/assets/css/informational-article.css?v=e1fcf95f0019">
+<link rel="stylesheet" href="/assets/css/levnytt.css?v=ae697c449497">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Hur fungerar nätverksmarknadsföring egentligen? Det säger forskningen","datePublished":"2026-06-28","dateModified":"2026-06-28","author":{"@type":"Person","name":"Jarmo Halonen","url":"https://levnytt.se/den-fundersamma-mannen"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"description":"En faktabaserad genomgång av hur nätverksmarknadsföring och MLM fungerar som affärsmodell, vad forskning och FTC:s inkomstdata visar, och hur man bedömer om ett MLM-erbjudande är seriöst.","keywords":"nätverksmarknadsföring, MLM, multi-level marketing, direktförsäljning, hur fungerar MLM, nätverksförsäljning"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Vilka nätverksmarknadsföringsföretag är aktiva i Sverige?","acceptedAnswer":{"@type":"Answer","text":"Bland de mest kända i Sverige finns Oriflame (grundat av svenska familjen af Jochnick), Amway, Herbalife, NeoLife, Mary Kay och Golden Home Care. Direkthandelsföretagen är branschorganisationen för legitimt verksamma bolag i Sverige."}},{"@type":"Question","name":"Är det möjligt att tjäna bra pengar på nätverksmarknadsföring?","acceptedAnswer":{"@type":"Answer","text":"Tekniskt möjligt, men statistiskt ovanligt. FTC:s analys av 70 MLM-bolags egna inkomstredovisningar visar att de flesta aktiva deltagare tjänar under 1 000 dollar per år. I ett enskilt bolag (LifeWave, 2024) tjänade 79 % av aktiva deltagare ingenting alls. Forskning visar att ungefär 25 % av amerikanska MLM-säljare faktiskt går med vinst (Stacey Bosley, 2021)."}},{"@type":"Question","name":"Vad säger FTC om inkomster från MLM?","acceptedAnswer":{"@type":"Answer","text":"FTC (US Federal Trade Commission) publicerade 2024 en rapport baserad på analys av 70 MLM-bolags egna inkomstredovisningar. Slutsatsen: 'Most people who join legitimate MLMs make little or no money. Some of them lose money.' I 17 av 70 bolag tjänade majoriteten av deltagarna ingenting. FTC vidtog i april 2026 rättsliga åtgärder mot MLM-aktörer som gjort sig skyldiga till vilseledande inkomstkrav."}},{"@type":"Question","name":"Vad är ett startpaket och vad kostar det?","acceptedAnswer":{"@type":"Answer","text":"De flesta MLM-bolag kräver att nya distributörer köper ett startpaket med produkter och/eller marknadsföringsmaterial. Kostnaderna varierar kraftigt — från några hundra kronor till tiotusentals kronor. Startpaketet är ofta ett krav för att aktivera rätten att tjäna provision. Kontrollera alltid om osålda produkter kan returneras och till vilket pris."}},{"@type":"Question","name":"Kan man anmäla ett MLM-bolag till myndigheter i Sverige?","acceptedAnswer":{"@type":"Answer","text":"Ja. Konsumentverket tar emot anmälningar mot bolag som bryter mot Marknadsföringslagen (2008:486), inklusive vilseledande inkomstkrav. Om bolaget bedöms bedriva ett olagligt pyramidspel snarare än legitim direktförsäljning kan Konsumentombudsmannen (KO) ingripa."}},{"@type":"Question","name":"Varför rekryterar MLM-bolag framför allt kvinnor?","acceptedAnswer":{"@type":"Answer","text":"Statistik från WFDSA (2024) visar att 72,1 % av globala MLM-deltagare är kvinnor. Forskare menar att rekryteringen ofta utnyttjar sociala nätverk inom familje- och vänkretsar, flexibilitetsargument riktat mot föräldralediga, och en kulturell benägenhet att vilja hjälpa nära och kära. Forskaren Rigmor Robèrt har dragit paralleller till den psykologiska dynamiken i slutna gemenskaper."}},{"@type":"Question","name":"Hur skyddar Konsumentverket konsumenter mot oseriös MLM-marknadsföring?","acceptedAnswer":{"@type":"Answer","text":"Konsumentverket tillämpar Marknadsföringslagen och kan kräva att bolag dokumenterar att inkomstkrav är sanna. Konsumentombudsmannen kan förbjuda vilseledande marknadsföring och väcka talan vid Patent- och marknadsdomstolen. Olagliga pyramidspel kan även prövas under lotterilagen."}}]}]}</script>
 <meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="existing-content-cta">
@@ -44,6 +40,7 @@
       <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
     </a>
     <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <button class="ln-menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
     <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
       <a href="/">Hem</a>
       <a href="/om-oss">Om oss</a>
@@ -60,11 +57,11 @@
     </nav>
   </div>
 </header>
-<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Hur fungerar nätverksmarknadsföring egentligen? Det säger forskningen</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Hur fungerar nätverksmarknadsföring egentligen? Det säger forskningen</h1></header><div class="ln-article-body"><div class="ia-wrap">
+<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Hur fungerar nätverksmarknadsföring egentligen? Det säger forskningen</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Hur fungerar nätverksmarknadsföring egentligen? Det säger forskningen</h1></header><div class="ln-article-body ln-flow"><div class="ia-wrap ln-flow">
 <p>Direktförsäljning · Affärsmodell</p>
 
 <p>Av <a href="/den-fundersamma-mannen/">Jarmo Halonen</a> · Uppdaterad: juni 2026 · ~12 min läsning</p>
-<p class="ia-punchline">Nätverksmarknadsföring — även kallat MLM eller multi-level marketing — är en affärsmodell där distributörer tjänar pengar både på egna produktförsäljningar och på de provisioner som flödar upp från det nätverk av säljare de rekryterar. FTC:s analys av 70 MLM-bolags egna inkomstredovisningar visar att de flesta aktiva deltagare tjänar under 1 000 dollar per år — och i enskilda bolag tjänade 79 % av aktiva deltagare ingenting alls.</p>
+<p class="ia-punchline ln-lede">Nätverksmarknadsföring — även kallat MLM eller multi-level marketing — är en affärsmodell där distributörer tjänar pengar både på egna produktförsäljningar och på de provisioner som flödar upp från det nätverk av säljare de rekryterar. FTC:s analys av 70 MLM-bolags egna inkomstredovisningar visar att de flesta aktiva deltagare tjänar under 1 000 dollar per år — och i enskilda bolag tjänade 79 % av aktiva deltagare ingenting alls.</p>
 <svg viewbox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hur fungerar nätverksmarknadsföring egentligen — LevNytt">
   <defs>
     <lineargradient id="hg" x1="0" y1="0" x2="1" y2="1">
@@ -82,7 +79,7 @@
   <text x="54" y="248" font-family="Inter,sans-serif" font-size="14" fill="#BAE6FD">FTC analyserade 70 MLM-bolag · 79 % tjänade ingenting</text>
   <text x="54" y="278" font-family="Inter,sans-serif" font-size="12" fill="#94A3B8">levnytt.se</text>
 </svg>
-<div class="ia-takeaways">
+<div class="ia-takeaways ln-takeaways">
   <h3 id="det-viktigaste-att-veta">Det viktigaste att veta</h3>
   <ul>
     <li><strong>Pengar flödar uppåt:</strong> provisioner för varje försäljning i nedlinjen tas ut från marginalen och betalas upp till rekryterare på flera nivåer — detta är mekanismen som gynnar toppskiktet strukturellt.</li>
@@ -93,7 +90,7 @@
     <li><strong>25 % lönsamma:</strong> forskning (Stacey Bosley, 2021) visar att ungefär en av fyra amerikanska MLM-säljare faktiskt går med vinst — övriga förlorar pengar eller går på noll. (<a href="https://yle.fi/a/7-10024220" target="_blank" rel="noopener noreferrer">Yle</a>)</li>
   </ul>
 </div>
-<div class="ia-method-note">
+<div class="ia-method-note ln-evidence">
   <p><strong>Metod:</strong> Artikeln bygger på primärkällor: FTC:s inkomstredovisningsrapport (2024), en peer-reviewed studie publicerad i Journal of Marketing Management (Groß &amp; Keep, november 2025) och WFDSA:s globala statistik. Reddit-diskussioner har uteslutits — ämnet är YMYL (financial), och anonyma anekdoter försvagar EEAT på finansiella frågor. <a href="/levnytt-principer">Läs om LevNytts redaktionella principer.</a></p>
 </div>
 <h2 id="vad-ar-natverksmarknadsforing-och-varfor-kallas-det-sa-manga-saker">Vad är nätverksmarknadsföring — och varför kallas det så många saker?</h2>
@@ -113,46 +110,46 @@
 <p>Pengarna i ett MLM-system har en enda källa: slutkonsumenternas betalningar för produkter. Men varje krona som betalas för en produkt måste täcka bolagets kostnader, produktionspriset, distributörens provision på nivå 1, och provisioner till upplinjen på nivå 2, 3, 4 och uppåt. Allt detta tas ur samma marginalmassa.</p>
 <p>Resultatet är matematisk: ju fler provisionstagare som befinner sig ovanför en distributör i nätverket, desto tunnare blir marginalerna för den som faktiskt säljer produkten till slutkund. En distributör på djup nivå i ett moget nätverk konkurrerar på en marknad som redan är mättad med kollegor som säljer exakt samma produkter — ibland till sina egna familjemedlemmar.</p>
 <p>Det är detta FTC beskriver som "becoming unpaid competitors to your own recruits" i sin granskning av inkomstredovisningar. Strukturen är inte designad för att vara olaglig — men den är konstruerad för att optimera volym och rekrytering, inte för att garantera lönsamhet för varje deltagare.</p>
-<div class="warn-box">
+<div class="warn-box ln-callout ln-callout--warning">
   <p><strong>Observera:</strong> att nätverksmarknadsföring kan vara lönsamt för enskilda individer är odiskutabelt. Att det är statistiskt ovanligt är lika odiskutabelt. Dessa två faktum existerar parallellt — och ett seriöst MLM-bolag bör redovisa båda.</p>
 </div>
 <h2 id="vad-sager-forskningen-om-vad-natverksmarknadsforare-faktiskt-tjanar">Vad säger forskningen om vad nätverksmarknadsförare faktiskt tjänar?</h2>
 <p>Den mest auktoritativa datakällan om MLM-inkomster är FTC:s 2024-rapport, som analyserade 70 MLM-bolags egna, frivilligt publicerade inkomstredovisningar. Dessa redovisningar är avsedda att hjälpa presumtiva distributörer att fatta informerade beslut — men FTC fann att de systematiskt överskattade potentialen.</p>
 <blockquote>
   <p>"Most people who join legitimate MLMs make little or no money. Some of them lose money."</p>
-  <p>— <a href="https://consumer.ftc.gov/consumer-alerts/2024/09/what-are-multi-level-marketing-mlm-disclosure-statements-really-telling-you" target="_blank" rel="noopener noreferrer">FTC Consumer Alert, september 2024</a> <span class="ia-evidence-label ia-ev-t2">Tier 2</span></p>
+  <p>— <a href="https://consumer.ftc.gov/consumer-alerts/2024/09/what-are-multi-level-marketing-mlm-disclosure-statements-really-telling-you" target="_blank" rel="noopener noreferrer">FTC Consumer Alert, september 2024</a> <span class="ia-evidence-label ia-ev-t2 ln-evidence-label">Tier 2</span></p>
 </blockquote>
 <p>I praktiken: i ett enskilt bolag (LifeWave, 2024) tjänade 79 % av aktiva deltagare ingenting alls, och maximalt 0,035 % av deltagarna tjänade vad FTC klassificerar som "significant income." Forskaren Stacey Bosley (2021) fann att ungefär 25 % av amerikanska MLM-säljare faktiskt <a href="https://yle.fi/a/7-10024220" target="_blank" rel="noopener noreferrer">går med vinst</a> — tre av fyra gör det alltså inte.</p>
-<p>En viktig förklaring till varför dessa siffror inte är allmänt kända publicerades i november 2025: Claudia Groß (Radboud University) och William Keep (College of New Jersey) granskade 68 vetenskapliga artiklar om MLM och fann att <a href="https://www.ru.nl/en/research/research-news/dangers-of-direct-selling-and-network-marketing-are-rarely-mentioned-in-research" target="_blank" rel="noopener noreferrer">59 % av artiklarna hade direkta kopplingar till MLM-industrin</a> — via branschfinansiering, styrelseuppdrag eller eget ägande. Groß konstaterar: <em>"This creates the false impression that scientific research shows that there are few risks associated with MLMs."</em> Studien publicerades i Journal of Marketing Management. <span class="ia-evidence-label ia-ev-t1">Tier 1</span></p>
+<p>En viktig förklaring till varför dessa siffror inte är allmänt kända publicerades i november 2025: Claudia Groß (Radboud University) och William Keep (College of New Jersey) granskade 68 vetenskapliga artiklar om MLM och fann att <a href="https://www.ru.nl/en/research/research-news/dangers-of-direct-selling-and-network-marketing-are-rarely-mentioned-in-research" target="_blank" rel="noopener noreferrer">59 % av artiklarna hade direkta kopplingar till MLM-industrin</a> — via branschfinansiering, styrelseuppdrag eller eget ägande. Groß konstaterar: <em>"This creates the false impression that scientific research shows that there are few risks associated with MLMs."</em> Studien publicerades i Journal of Marketing Management. <span class="ia-evidence-label ia-ev-t1 ln-evidence-label ln-evidence-label--strong">Tier 1</span></p>
 <p>Globalt redovisar <a href="https://wfdsa.org/global-statistics/" target="_blank" rel="noopener noreferrer">WFDSA (World Federation of Direct Selling Associations)</a> att marknaden 2023 omsatte 167,6 miljarder dollar med 104,3 miljoner deltagare världen över. Storleken till trots ger marknadsstorleken ingen information om hur inkomsterna fördelas inom den.</p>
 <figure>
-  <div class="ia-stat-grid">
-    <div class="ia-stat-card">
+  <div class="ia-stat-grid ln-stat-grid">
+    <div class="ia-stat-card ln-stat">
       <span class="stat-num">79%</span>
       <span class="stat-label">av LifeWave-deltagare tjänade ingenting (2024)</span>
       <span class="stat-src">FTC Consumer Alert 2024</span>
     </div>
-    <div class="ia-stat-card">
+    <div class="ia-stat-card ln-stat">
       <span class="stat-num">25%</span>
       <span class="stat-label">av amerikanska MLM-säljare går faktiskt med vinst</span>
       <span class="stat-src">Stacey Bosley 2021 / Yle</span>
     </div>
-    <div class="ia-stat-card">
+    <div class="ia-stat-card ln-stat">
       <span class="stat-num">59%</span>
       <span class="stat-label">av MLM-forskning hade direkta branschkopplingar</span>
       <span class="stat-src">Groß &amp; Keep, JMM 2025</span>
     </div>
-    <div class="ia-stat-card">
+    <div class="ia-stat-card ln-stat">
       <span class="stat-num">104,3M</span>
       <span class="stat-label">deltagare i direktförsäljning globalt (2024)</span>
       <span class="stat-src">WFDSA 2024</span>
     </div>
-    <div class="ia-stat-card">
+    <div class="ia-stat-card ln-stat">
       <span class="stat-num">72,1%</span>
       <span class="stat-label">av globala MLM-deltagare är kvinnor</span>
       <span class="stat-src">WFDSA 2024</span>
     </div>
-    <div class="ia-stat-card">
+    <div class="ia-stat-card ln-stat">
       <span class="stat-num">$167,6Mdr</span>
       <span class="stat-label">global direktförsäljningsmarknad 2023</span>
       <span class="stat-src">WFDSA 2024</span>
@@ -166,7 +163,7 @@
 <p>Den svenska riksdagen behandlade reglering av nätverksmarknadsföring redan 2000–2001 (Motion 2000/01:L708) och identifierade åtta kriterier för ett seriöst bolag — inklusive rätten att returnera osålda produkter och förbud mot vilseledande inkomstkrav. Reglerna tillämpas av Konsumentverket och Konsumentombudsmannen.</p>
 <h2 id="hur-skiljer-man-ett-legitimt-mlm-fran-ett-pyramidspel">Hur skiljer man ett legitimt MLM från ett pyramidspel?</h2>
 <p>Gränsen är reell men ibland otydlig i praktiken. Tre frågor ger vanligen svaret:</p>
-<table class="ia-method-table">
+<table class="ia-method-table ln-data-table">
   <thead>
     <tr>
       <th>Fråga</th>
@@ -218,19 +215,19 @@
   <li><strong>Fråga vem du faktiskt säljer till.</strong> Är kunderna utanför nätverket — det vill säga personer utan distributörsavtal — eller är bolagets primära "kunder" i praktiken distributörerna själva? Om det är det senare är modellen rekryteringsdriven snarare än produktdriven.</li>
 </ol>
 <p>LevNytts princip på detta område: <strong>förstå mekanismen innan du bestämmer dig</strong>. Du har rätt att ställa frågorna ovan — och ett seriöst bolag ger ärliga svar.</p>
-<div class="ia-tierbox">
-    <a class="ia-tier" href="/direktforsaljning-fakta">Direktförsäljning — fakta</a>
-    <a class="ia-tier" href="/neolife-historia">NeoLife Historia</a>
-    <a class="ia-tier" href="/neolife-vetenskap">NeoLife Vetenskap</a>
-    <a class="ia-tier" href="/om-oss">Om LevNytt</a>
+<div class="ia-tierbox ln-related-grid">
+    <a class="ia-tier ln-related-card" href="/direktforsaljning-fakta">Direktförsäljning — fakta</a>
+    <a class="ia-tier ln-related-card" href="/neolife-historia">NeoLife Historia</a>
+    <a class="ia-tier ln-related-card" href="/neolife-vetenskap">NeoLife Vetenskap</a>
+    <a class="ia-tier ln-related-card" href="/om-oss">Om LevNytt</a>
   </div>
-  <div class="ia-cta">
+  <div class="ia-cta ln-cta">
   <h3 id="vill-du-veta-mer-om-direktforsaljning-i-sverige">Vill du veta mer om direktförsäljning i Sverige?</h3>
   <p>LevNytt har samlat fakta om direktförsäljningsmodellen och hur seriösa bolag skiljer sig från oseriösa aktörer.</p>
   <a href="/direktforsaljning-fakta">Direktförsäljning — fakta och regler</a>
   <a href="/neolife-affarsmojlighet">Se ett konkret MLM-exempel: NeoLife</a>
 </div>
-<div class="ia-faq">
+<div class="ia-faq ln-faq">
   <h2 id="vanliga-fragor-om-natverksmarknadsforing">Vanliga frågor om nätverksmarknadsföring</h2>
   <details>
     <summary>Vilka nätverksmarknadsföringsföretag är aktiva i Sverige?</summary>
@@ -261,20 +258,20 @@
     <p>Konsumentverket tillämpar <a href="https://www.konsumentverket.se/" target="_blank" rel="noopener noreferrer">Marknadsföringslagen</a> och kan kräva att bolag dokumenterar att inkomstkrav är sanna. Konsumentombudsmannen kan förbjuda vilseledande marknadsföring och väcka talan vid Patent- och marknadsdomstolen. Olagliga pyramidspel kan även prövas under lotterilagen.</p>
   </details>
 </div>
-<div class="ia-author-box">
+<div class="ia-author-box ln-author">
   <div class="ia-author-avatar" aria-label="Jarmo Halonen">JH</div>
   <div>
     <strong><a href="/den-fundersamma-mannen">Jarmo Halonen</a></strong>
     <p>Skribent specialiserad på konsumentfrågor, direktförsäljning och nätverksmarknadsföring. Redaktör på LevNytt.se.</p>
   </div>
 </div>
-<p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
+<p class="ia-disclosure ln-evidence">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
 </div></div></article></div></main>
 <footer class="ln-site-footer">
   <div class="ln-shell ln-footer-grid">
     <div class="ln-footer-about">
       <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+        <img src="/assets/brand/footer-logo.svg" alt="LevNytt" width="128" height="45">
       </a>
       <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     </div>
@@ -296,6 +293,6 @@
     </div>
   </div>
 </footer>
-<script src="/assets/js/levnytt-rebuild.js?v=2b31f8d01253" defer></script>
+<script src="/assets/js/levnytt-rebuild.js?v=aaebe7199357" defer></script>
 </body>
 </html>

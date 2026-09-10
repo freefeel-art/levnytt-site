@@ -22,10 +22,7 @@ class InformationalPageValidatorTests(unittest.TestCase):
             """<!doctype html><html><head>
 <meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="none">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css">
-<link rel="stylesheet" href="/assets/css/informational-article.css">
+<link rel="stylesheet" href="/assets/css/levnytt.css?v=123456789abc">
 </head><body><header class="ln-site-header"></header>
 <article class="ia-wrap">Test</article><footer class="ln-site-footer"></footer>""" + extra + "</body></html>",
             encoding="utf-8",

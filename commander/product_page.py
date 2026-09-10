@@ -14,11 +14,21 @@ without requiring a DataForSEO keyword to already exist.
 from __future__ import annotations
 
 import glob
+import hashlib
 import html
 import os
 import re
 from pathlib import Path
 from typing import Any
+
+
+def _asset_url(project_root: Path, public_path: str) -> str:
+    """Return the canonical asset URL with a content hash when available."""
+    candidate = project_root / public_path.lstrip("/")
+    if not candidate.is_file():
+        return public_path
+    version = hashlib.sha256(candidate.read_bytes()).hexdigest()[:12]
+    return f"{public_path}?v={version}"
 
 
 def _fold(value: str) -> str:
@@ -159,6 +169,8 @@ def build_product_page(entity: dict[str, Any], image_rel: str | None, project_ro
         f"<li>{html.escape(_ingredient_label(i))}</li>" for i in c["ingredients"] if _ingredient_label(i)
     )
     safety_html = f" {safety}" if safety else ""
+    style_url = _asset_url(project_root, "/assets/css/levnytt.css")
+    runtime_url = _asset_url(project_root, "/assets/js/levnytt-rebuild.js")
 
     return f"""<!doctype html>
 <html lang="sv">
@@ -187,10 +199,7 @@ def build_product_page(entity: dict[str, Any], image_rel: str | None, project_ro
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css?v=3e93ffb6b5e4">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css?v=84f4407cc9fe">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css?v=57f20cd8ce59">
-<link rel="stylesheet" href="/assets/css/editorial-components.css?v=651db2f78ace">
+<link rel="stylesheet" href="{style_url}">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"Product","name":"NeoLife {name}","description":"{short}","brand":{{"@type":"Brand","name":"NeoLife"}},"url":"https://levnytt.se/{slug}"}}</script>
 <meta name="levnytt-template" content="rebuild-product-category">
 <meta name="levnytt-cta" content="existing-content-cta">
@@ -203,6 +212,7 @@ def build_product_page(entity: dict[str, Any], image_rel: str | None, project_ro
       <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
     </a>
     <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <button class="ln-menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
     <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
       <a href="/">Hem</a>
       <a href="/om-oss">Om oss</a>
@@ -219,45 +229,45 @@ def build_product_page(entity: dict[str, Any], image_rel: str | None, project_ro
     </nav>
   </div>
 </header>
-<main id="main-content" class="ln-page ln-family-product-category"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">NeoLife {name}</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Produkter och konsumentkunskap</p><h1>NeoLife {name}</h1></header><div class="ln-article-body"><div class="freshness-banner">&#128300; <strong>Uppdaterad september 2026</strong> &mdash; aktuell produktfakta, verifierade källor.</div>
+<main id="main-content" class="ln-page ln-family-product-category"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">NeoLife {name}</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Produkter och konsumentkunskap</p><h1>NeoLife {name}</h1></header><div class="ln-article-body ln-flow"><div class="freshness-banner ln-meta">&#128300; <strong>Uppdaterad september 2026</strong> &mdash; aktuell produktfakta, verifierade källor.</div>
 
-<section class="hero">
-  <div class="hero-inner">
+<section class="hero ln-content-intro">
+  <div class="hero-inner ln-flow ln-product-overview-layout">
     <div>
-      <p class="hero-label">{name} &mdash; Kod {code}</p>
+      <p class="hero-label ln-kicker">{name} &mdash; Kod {code}</p>
       <div class="hero-divider"></div>
-      <p class="hero-desc">{short}</p>
-      <div class="hero-badges">
-        <span class="hero-badge">{pack_label}</span>
-        <span class="hero-badge">Kod {code}</span>
+      <p class="hero-desc ln-deck">{short}</p>
+      <div class="hero-badges ln-badge-list">
+        <span class="hero-badge ln-badge">{pack_label}</span>
+        <span class="hero-badge ln-badge">Kod {code}</span>
       </div>
     </div>
-    <div class="hero-img">
+    <div class="hero-img ln-product-overview-media">
       <img src="{img}" alt="NeoLife {img_alt}" width="440" height="252" loading="eager" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
 
-<div class="meta-bar">
-  <div class="meta-inner">
-    <div class="meta-item"><strong>Produktkod:</strong> {code}</div>
-    <div class="meta-item"><strong>Förpackning:</strong> {pack_label}</div>
-    <div class="meta-item"><strong>Dosering:</strong> {dosage}</div>
+<div class="meta-bar ln-product-meta">
+  <div class="meta-inner ln-product-meta-list">
+    <div class="meta-item ln-product-meta-item"><strong>Produktkod:</strong> {code}</div>
+    <div class="meta-item ln-product-meta-item"><strong>Förpackning:</strong> {pack_label}</div>
+    <div class="meta-item ln-product-meta-item"><strong>Dosering:</strong> {dosage}</div>
   </div>
 </div>
 
-<section class="section">
-  <div class="section-inner">
-    <p class="section-label">Vad är NeoLife {name}?</p>
-    <p class="section-title">{name}</p>
+<section class="section ln-product-section">
+  <div class="section-inner ln-flow ln-product-section-inner">
+    <p class="section-label ln-kicker">Vad är NeoLife {name}?</p>
+    <p class="section-title ln-section-title">{name}</p>
     <div class="section-divider"></div>
-    <div class="two-col">
+    <div class="two-col ln-split-layout">
       <div>
         <p>{summary}</p>
         {topic_para}
       </div>
       <div>
-        <div class="ingredients-box">
+        <div class="ingredients-box ln-evidence">
           <h3 id="nyckelingredienser">Nyckelingredienser</h3>
           <ul class="ingredients-list">
 {ingredient_items}
@@ -269,20 +279,20 @@ def build_product_page(entity: dict[str, Any], image_rel: str | None, project_ro
   </div>
 </section>
 
-<section class="cta-section">
+<section class="cta-section ln-cta">
   <p>Beställ NeoLife {name}</p>
   <h2 class="cta-title" id="handla-neolife">Handla NeoLife {name}</h2>
   <p class="cta-desc">Handla som kund eller spara 20&ndash;25% som distributör. Sponsor-ID: 41-830928.</p>
   <div>
-    <a class="btn-gold" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow noopener noreferrer sponsored">Kundshop &rarr;</a>
-    <a class="btn-ghost" href="https://se.neolifeshop.com/i/registration.html?type=reseller&amp;sponsor=41-830928" target="_blank" rel="nofollow noopener noreferrer sponsored">Bli distributör &rarr;</a>
+    <a class="btn-gold ln-button ln-button--primary" href="https://se.neolifeshop.com/i/shop.html?sponsor=41-830928" target="_blank" rel="nofollow noopener noreferrer sponsored">Kundshop &rarr;</a>
+    <a class="btn-ghost ln-button" href="https://se.neolifeshop.com/i/registration.html?type=reseller&amp;sponsor=41-830928" target="_blank" rel="nofollow noopener noreferrer sponsored">Bli distributör &rarr;</a>
   </div>
 </section></div></article></div></main>
 <footer class="ln-site-footer">
   <div class="ln-shell ln-footer-grid">
     <div class="ln-footer-about">
       <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+        <img src="/assets/brand/footer-logo.svg" alt="LevNytt" width="128" height="45">
       </a>
       <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     </div>
@@ -304,7 +314,7 @@ def build_product_page(entity: dict[str, Any], image_rel: str | None, project_ro
     </div>
   </div>
 </footer>
-<script src="/assets/js/levnytt-rebuild.js?v=2b31f8d01253" defer></script>
+<script src="{runtime_url}" defer></script>
 </body>
 </html>
 """

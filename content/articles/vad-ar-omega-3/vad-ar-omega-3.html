@@ -27,11 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css?v=3e93ffb6b5e4">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css?v=84f4407cc9fe">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css?v=57f20cd8ce59">
-<link rel="stylesheet" href="/assets/css/editorial-components.css?v=8b0d6917cc12">
-<link rel="stylesheet" href="/assets/css/informational-article.css?v=e1fcf95f0019">
+<link rel="stylesheet" href="/assets/css/levnytt.css?v=ae697c449497">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Vad är omega-3? En komplett guide till omega-3-fettsyror","description":"Vad är omega-3? Guide om ALA, EPA och DHA — hälsoeffekter, livsmedelskällor, dosering och klinisk evidens från över 127 000 studiedeltagare.","url":"https://levnytt.se/vad-ar-omega-3","inLanguage":"sv","publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://levnytt.se/vad-ar-omega-3"},"datePublished":"2026-07-01","dateModified":"2026-07-01","author":{"@type":"Person","name":"Jarmo Halonen"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Vad är omega-3?","acceptedAnswer":{"@type":"Answer","text":"Omega-3 är en grupp essentiella fleromättade fettsyror som kroppen inte själv kan producera. De tre huvudtyperna är ALA (alfalinolensyra), EPA (eikosapentaensyra) och DHA (dokosahexaensyra). De måste tillföras via kosten eller tillskott."}},{"@type":"Question","name":"Vad är skillnaden mellan ALA, EPA och DHA?","acceptedAnswer":{"@type":"Answer","text":"ALA är en kortkedjig omega-3 som främst finns i vegetabiliska källor som linfrö och rapsolja. EPA och DHA är långkedjiga och finns i fet fisk och alger. EPA används för inflammationsreglering, medan DHA är en strukturell komponent i hjärna och näthinna. Omvandlingen av ALA till EPA och DHA i kroppen är låg."}},{"@type":"Question","name":"Hur mycket omega-3 behöver jag per dag?","acceptedAnswer":{"@type":"Answer","text":"WHO/FAO rekommenderar minst 250 mg EPA+DHA per dag för vuxna. De Nordiska Näringsrekommendationerna (NNR 2023) anger cirka 2,5–3 gram totalt omega-3 per dag, vilket motsvarar 1 energiprocent. En portion lax täcker flera dagars behov."}},{"@type":"Question","name":"Vilka livsmedel innehåller mest omega-3?","acceptedAnswer":{"@type":"Answer","text":"Fet fisk som lax, makrill, sardiner och sill är de rikaste källorna till EPA och DHA. ALA finns i linfröolja (7,3 g/matsked), chiafrön (5 g/30 g), valnötter (2,6 g/30 g) och rapsolja (1,3 g/matsked)."}},{"@type":"Question","name":"Räcker det med vegetabiliska källor som linfrö och chia?","acceptedAnswer":{"@type":"Answer","text":"Vegetabiliska källor innehåller ALA, men omvandlingen till EPA och DHA är låg — endast cirka 5–15 % till EPA och ännu mindre till DHA enligt NIH Office of Dietary Supplements . För att höja blodnivåerna av EPA och DHA behöver du antingen fet fisk eller ett tillskott som innehåller dessa direkt."}},{"@type":"Question","name":"Ska jag ta omega-3-tillskott?","acceptedAnswer":{"@type":"Answer","text":"För de flesta friska personer som äter fisk regelbundet är tillskott sannolikt inte nödvändigt. Om du inte äter fisk, är gravid eller ammar, kan ett tillskott med EPA och DHA vara motiverat. Diskutera med en läkare eller dietist för individuell rådgivning."}},{"@type":"Question","name":"Kan man få i sig för mycket omega-3?","acceptedAnswer":{"@type":"Answer","text":"Doser över 4 gram per dag kan öka risken för förmaksflimmer och blödningar ( Gencer et al., Circulation 2021 ). Håll dig inom rekommenderade doser om du tar tillskott, och rådgör med läkare vid högre doser."}},{"@type":"Question","name":"Vad är skillnaden mellan omega-3 och omega-6 och varför är balansen viktig?","acceptedAnswer":{"@type":"Answer","text":"Omega-6 är en annan familj av essentiella fleromättade fetter som finns i vegetabiliska oljor. En hög omega-6/omega-3-kvot (vanlig i västkosten) kan främja kronisk låggradig inflammation. Att öka intaget av omega-3 bidrar till att balansera kvoten."}}]}]}</script>
 <meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="existing-content-cta">
@@ -44,6 +40,7 @@
       <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
     </a>
     <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <button class="ln-menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
     <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
       <a href="/">Hem</a>
       <a href="/om-oss">Om oss</a>
@@ -60,16 +57,16 @@
     </nav>
   </div>
 </header>
-<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Vad är omega-3? En komplett guide till omega-3-fettsyror</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Vad är omega-3? En komplett guide till omega-3-fettsyror</h1></header><div class="ln-article-body"><div class="ia-wrap">
+<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Vad är omega-3? En komplett guide till omega-3-fettsyror</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Vad är omega-3? En komplett guide till omega-3-fettsyror</h1></header><div class="ln-article-body ln-flow"><div class="ia-wrap ln-flow">
 
 <p>Kost &amp; Tillskott</p>
-<div class="ia-eyebrow">Senast uppdaterad: Juli 2026</div>
+<div class="ia-eyebrow ln-kicker">Senast uppdaterad: Juli 2026</div>
 
 <p>Av <strong>Jarmo Halonen</strong> — Grundare av LevNytt</p>
 
-<p class="ia-punchline">Omega-3 är en grupp essentiella fleromättade fettsyror — ALA, EPA och DHA — som kroppen inte själv kan producera och som måste tillföras via kosten, främst genom fet fisk, vegetabiliska oljor och kosttillskott.</p>
+<p class="ia-punchline ln-lede">Omega-3 är en grupp essentiella fleromättade fettsyror — ALA, EPA och DHA — som kroppen inte själv kan producera och som måste tillföras via kosten, främst genom fet fisk, vegetabiliska oljor och kosttillskott.</p>
 
-<div class="ia-takeaways">
+<div class="ia-takeaways ln-takeaways">
 <h3 id="det-viktigaste">Det viktigaste</h3>
 <ul>
 <li>Omega-3 delas in i tre typer — ALA (vegetabilisk), EPA och DHA (marina) — med olika funktioner i kroppen.</li>
@@ -86,20 +83,20 @@
 
 <p>Omega-3-fettsyror är en familj av <strong>fleromättade fettsyror</strong> (polyunsaturated fatty acids, PUFAs) som kännetecknas av en dubbelbindning mellan den tredje och fjärde kolatomen räknat från molekylens metylända. De är <strong>essentiella</strong> — kroppen saknar enzymet för att själv sätta in dubbelbindningen på den positionen, vilket innebär att de måste tillföras via kosten.</p>
 
-<p>Omega-3-fettsyror är grundläggande byggstenar i <strong>cellmembranens fosfolipider</strong> och påverkar membranens flytbarhet, signalering och funktion. De fungerar också som prekursorer till signalmolekyler som reglerar inflammation, blodtryck och immunförsvar. En systematisk översikt av 13 randomiserade kontrollerade studier med totalt 127 477 deltagare visade att marint omega-3 minskade risken för hjärtinfarkt med cirka 8 % (<a href="https://doi.org/10.1161/JAHA.119.013543" target="_blank" rel="noopener noreferrer">Hu et al., <em>JAHA</em> 2019</a>). <span class="ia-evidence-label ia-ev-t1">Systematisk översikt</span></p>
+<p>Omega-3-fettsyror är grundläggande byggstenar i <strong>cellmembranens fosfolipider</strong> och påverkar membranens flytbarhet, signalering och funktion. De fungerar också som prekursorer till signalmolekyler som reglerar inflammation, blodtryck och immunförsvar. En systematisk översikt av 13 randomiserade kontrollerade studier med totalt 127 477 deltagare visade att marint omega-3 minskade risken för hjärtinfarkt med cirka 8 % (<a href="https://doi.org/10.1161/JAHA.119.013543" target="_blank" rel="noopener noreferrer">Hu et al., <em>JAHA</em> 2019</a>). <span class="ia-evidence-label ia-ev-t1 ln-evidence-label ln-evidence-label--strong">Systematisk översikt</span></p>
 
-<div class="ia-stat-grid">
-<div class="ia-stat-card"><span class="num">250 mg</span><span class="lbl">Rekommenderat dagligt intag EPA+DHA för vuxna</span><span class="src">WHO/FAO, 2010</span></div>
-<div class="ia-stat-card"><span class="num">2,7 g</span><span class="lbl">Genomsnittligt intag omega-3 per dag i Sverige</span><span class="src">Riksmaten 2010–11</span></div>
-<div class="ia-stat-card"><span class="num">5–15 %</span><span class="lbl">Omvandlingsgrad ALA → EPA/DHA i kroppen</span><span class="src">NIH ODS</span></div>
-<div class="ia-stat-card"><span class="num">25 %</span><span class="lbl">Relativ riskreduktion för ischemiska händelser med 4 g/dag EPA</span><span class="src">REDUCE-IT, NEJM 2019</span></div>
+<div class="ia-stat-grid ln-stat-grid">
+<div class="ia-stat-card ln-stat"><span class="num">250 mg</span><span class="lbl">Rekommenderat dagligt intag EPA+DHA för vuxna</span><span class="src">WHO/FAO, 2010</span></div>
+<div class="ia-stat-card ln-stat"><span class="num">2,7 g</span><span class="lbl">Genomsnittligt intag omega-3 per dag i Sverige</span><span class="src">Riksmaten 2010–11</span></div>
+<div class="ia-stat-card ln-stat"><span class="num">5–15 %</span><span class="lbl">Omvandlingsgrad ALA → EPA/DHA i kroppen</span><span class="src">NIH ODS</span></div>
+<div class="ia-stat-card ln-stat"><span class="num">25 %</span><span class="lbl">Relativ riskreduktion för ischemiska händelser med 4 g/dag EPA</span><span class="src">REDUCE-IT, NEJM 2019</span></div>
 </div>
 
 <h2 id="vilka-ar-de-tre-huvudtyperna-av-omega-3">Vilka är de tre huvudtyperna av omega-3?</h2>
 
 <p>Det finns tre huvudtyper av omega-3 som är relevanta för människans näring: <strong>ALA (alfalinolensyra)</strong>, <strong>EPA (eikosapentaensyra)</strong> och <strong>DHA (dokosahexaensyra)</strong>. Varje typ har olika molekylstruktur, funktion och förekomst i livsmedel.</p>
 
-<table class="ia-method-table">
+<table class="ia-method-table ln-data-table">
 <thead>
 <tr><th>Typ</th><th>Kolatomer</th><th>Huvudfunktion</th><th>Livsmedelskällor</th></tr>
 </thead>
@@ -110,22 +107,22 @@
 </tbody>
 </table>
 
-<p>ALA är den kortaste kedjan och fungerar som en prekursor som kroppen kan omvandla till EPA och DHA — men omvandlingen är starkt begränsad. Enligt NIH Office of Dietary Supplements omvandlas endast cirka <strong>5–15 % av ALA till EPA</strong> och ännu mindre till DHA (cirka 2–5 %). Detta gör att vegetabiliska källor ensamma sällan räcker för att upprätthålla optimala nivåer av EPA och DHA hos vuxna. <span class="ia-evidence-label ia-ev-t3">Observationsdata</span></p>
+<p>ALA är den kortaste kedjan och fungerar som en prekursor som kroppen kan omvandla till EPA och DHA — men omvandlingen är starkt begränsad. Enligt NIH Office of Dietary Supplements omvandlas endast cirka <strong>5–15 % av ALA till EPA</strong> och ännu mindre till DHA (cirka 2–5 %). Detta gör att vegetabiliska källor ensamma sällan räcker för att upprätthålla optimala nivåer av EPA och DHA hos vuxna. <span class="ia-evidence-label ia-ev-t3 ln-evidence-label ln-evidence-label--limited">Observationsdata</span></p>
 
 <h2 id="varfor-ar-omega-3-viktigt-for-halsan">Varför är omega-3 viktigt för hälsan?</h2>
 
 <p>Omega-3-fettsyrorna spelar en central roll i flera fysiologiska system. Här är de områden där den starkaste evidensen finns.</p>
 
 <h3 id="hjarta-och-karl">Hjärta och kärl</h3>
-<p>Det starkaste evidensområdet för omega-3 är hjärt-kärlhälsa. REDUCE-IT-studien (2019), en randomiserad kontrollerad studie med 8 179 statinbehandlade patienter med förhöjda triglycerider, visade att <strong>4 gram ren EPA per dag minskade risken</strong> för sammansatta ischemiska händelser med 25 % (HR 0,75; p&lt;0,001) och kardiovaskulär död med 20 % (HR 0,80; p=0,03) under 4,9 års uppföljning (<a href="https://doi.org/10.1056/NEJMoa1812792" target="_blank" rel="noopener noreferrer">Bhatt et al., <em>New England Journal of Medicine</em> 2019</a>). <span class="ia-evidence-label ia-ev-t2">Klinisk prövning</span></p>
+<p>Det starkaste evidensområdet för omega-3 är hjärt-kärlhälsa. REDUCE-IT-studien (2019), en randomiserad kontrollerad studie med 8 179 statinbehandlade patienter med förhöjda triglycerider, visade att <strong>4 gram ren EPA per dag minskade risken</strong> för sammansatta ischemiska händelser med 25 % (HR 0,75; p&lt;0,001) och kardiovaskulär död med 20 % (HR 0,80; p=0,03) under 4,9 års uppföljning (<a href="https://doi.org/10.1056/NEJMoa1812792" target="_blank" rel="noopener noreferrer">Bhatt et al., <em>New England Journal of Medicine</em> 2019</a>). <span class="ia-evidence-label ia-ev-t2 ln-evidence-label">Klinisk prövning</span></p>
 
-<p>Det är viktigt att notera att denna effekt gäller högdos EPA (receptbelagd icosapentetyl), inte vanliga fiskoljetillskott i lägre doser. En metaanalys från 2019 visade att marint omega-3 i typiska tillskottsdoser gav en blygsam riskminskning på cirka 7–8 % för kardiovaskulära händelser — statistiskt signifikant men långt ifrån dramatisk (<a href="https://doi.org/10.1161/JAHA.119.013543" target="_blank" rel="noopener noreferrer">Hu et al., <em>JAHA</em> 2019</a>). <span class="ia-evidence-label ia-ev-t1">Systematisk översikt</span></p>
+<p>Det är viktigt att notera att denna effekt gäller högdos EPA (receptbelagd icosapentetyl), inte vanliga fiskoljetillskott i lägre doser. En metaanalys från 2019 visade att marint omega-3 i typiska tillskottsdoser gav en blygsam riskminskning på cirka 7–8 % för kardiovaskulära händelser — statistiskt signifikant men långt ifrån dramatisk (<a href="https://doi.org/10.1161/JAHA.119.013543" target="_blank" rel="noopener noreferrer">Hu et al., <em>JAHA</em> 2019</a>). <span class="ia-evidence-label ia-ev-t1 ln-evidence-label ln-evidence-label--strong">Systematisk översikt</span></p>
 
 <h3 id="inflammation">Inflammation</h3>
-<p>EPA och DHA fungerar som substrat för <strong>antiinflammatoriska mediatorer</strong> — resolviner, protectiner och maresiner — som aktivt bidrar till att lösa inflammation. Detta mekanistiska ramverk är väletablerat, även om de kliniska implikationerna varierar mellan olika inflammatoriska tillstånd. <span class="ia-evidence-label ia-ev-t4">Expertkonsensus</span></p>
+<p>EPA och DHA fungerar som substrat för <strong>antiinflammatoriska mediatorer</strong> — resolviner, protectiner och maresiner — som aktivt bidrar till att lösa inflammation. Detta mekanistiska ramverk är väletablerat, även om de kliniska implikationerna varierar mellan olika inflammatoriska tillstånd. <span class="ia-evidence-label ia-ev-t4 ln-evidence-label ln-evidence-label--weak">Expertkonsensus</span></p>
 
 <h3 id="hjarna-och-kognition">Hjärna och kognition</h3>
-<p>DHA utgör cirka <strong>97 % av alla omega-3-fettsyror i hjärnan</strong> och är koncentrerad till synapsernas membran. Observationsstudier har funnit samband mellan låga DHA-nivåer och kognitiv nedgång. En kohortstudie från ADNI (2023) med 6 års uppföljning visade att långtidsanvändare av omega-3-tillskott hade 64 % minskad risk för Alzheimers sjukdom (HR 0,36; 95 % CI: 0,18–0,72), där varje ökning med 0,1 g/dag DHA eller EPA minskade risken för kognitiv nedgång med 8–10 % (<a href="https://doi.org/10.3390/nu15143131" target="_blank" rel="noopener noreferrer">Zhang et al., <em>Nutrients</em> 2023</a>). <span class="ia-evidence-label ia-ev-t3">Observationsstudie</span></p>
+<p>DHA utgör cirka <strong>97 % av alla omega-3-fettsyror i hjärnan</strong> och är koncentrerad till synapsernas membran. Observationsstudier har funnit samband mellan låga DHA-nivåer och kognitiv nedgång. En kohortstudie från ADNI (2023) med 6 års uppföljning visade att långtidsanvändare av omega-3-tillskott hade 64 % minskad risk för Alzheimers sjukdom (HR 0,36; 95 % CI: 0,18–0,72), där varje ökning med 0,1 g/dag DHA eller EPA minskade risken för kognitiv nedgång med 8–10 % (<a href="https://doi.org/10.3390/nu15143131" target="_blank" rel="noopener noreferrer">Zhang et al., <em>Nutrients</em> 2023</a>). <span class="ia-evidence-label ia-ev-t3 ln-evidence-label ln-evidence-label--limited">Observationsstudie</span></p>
 
 <p>Forskarna betonar dock att observationsdata inte kan fastställa orsakssamband — det kan finnas andra livsstilsfaktorer hos personer som regelbundet tar omega-3-tillskott som förklarar skillnaden.</p>
 
@@ -133,7 +130,7 @@
 
 <p>Omega-3 finns i både animaliska och vegetabiliska livsmedel, men fördelningen mellan ALA, EPA och DHA varierar kraftigt.</p>
 
-<table class="ia-method-table">
+<table class="ia-method-table ln-data-table">
 <thead>
 <tr><th>Livsmedel</th><th>Mängd</th><th>Omega-3-innehåll</th><th>Typ</th></tr>
 </thead>
@@ -155,7 +152,7 @@
 
 <p>De internationella rekommendationerna för omega-3-intag baseras på WHO/FAO:s expertkonsultation från 2010 (Food and Nutrition Paper 91) och har uppdaterats i de <strong>Nordiska Näringsrekommendationerna (NNR 2023)</strong>.</p>
 
-<div class="ia-callout">
+<div class="ia-callout ln-callout">
 <h4>Rekommenderat dagligt intag</h4>
 <p><strong><a href="https://www.fao.org/3/a1953e/a1953e.pdf" target="_blank" rel="noopener noreferrer">WHO/FAO (2010)</a>:</strong> Minst 250 mg EPA + DHA per dag för vuxna.<br>
 <strong><a href="https://pubmed.ncbi.nlm.nih.gov/37580632/" target="_blank" rel="noopener noreferrer">NNR 2023</a>:</strong> Cirka 2,5–3 gram totalt omega-3 per dag (1 energiprocent).<br>
@@ -174,9 +171,9 @@
 
 <p>Evidensläget för omega-3-tillskott är <strong>nyanserat</strong> och skiljer sig markant mellan olika doser och populationer.</p>
 
-<p><strong>För friska personer:</strong> Randomiserade kontrollerade studier har inte kunnat visa att lågdos fiskoljetillskott (250–500 mg EPA+DHA) förebygger hjärt-kärlsjukdom hos friska personer som redan äter en balanserad kost. En <a href="https://doi.org/10.1002/14651858.CD003177.pub3" target="_blank" rel="noopener noreferrer">Cochrane-översikt (2018)</a> av 79 RCTs med 112 059 deltagare fann ingen signifikant effekt på total dödlighet eller kardiovaskulär död av lågdos omega-3-tillskott. <span class="ia-evidence-label ia-ev-t1">Systematisk översikt</span></p>
+<p><strong>För friska personer:</strong> Randomiserade kontrollerade studier har inte kunnat visa att lågdos fiskoljetillskott (250–500 mg EPA+DHA) förebygger hjärt-kärlsjukdom hos friska personer som redan äter en balanserad kost. En <a href="https://doi.org/10.1002/14651858.CD003177.pub3" target="_blank" rel="noopener noreferrer">Cochrane-översikt (2018)</a> av 79 RCTs med 112 059 deltagare fann ingen signifikant effekt på total dödlighet eller kardiovaskulär död av lågdos omega-3-tillskott. <span class="ia-evidence-label ia-ev-t1 ln-evidence-label ln-evidence-label--strong">Systematisk översikt</span></p>
 
-<p><strong>För personer med förhöjda triglycerider:</strong> Här är evidensen starkare. Högre doser (2–4 g/dag) av EPA och DHA kan sänka triglycerider med <strong>25–30 %</strong> (<a href="https://doi.org/10.1016/j.atherosclerosis.2010.12.008" target="_blank" rel="noopener noreferrer">Miller et al., <em>Atherosclerosis</em> 2011</a>). <span class="ia-evidence-label ia-ev-t2">Klinisk prövning</span></p>
+<p><strong>För personer med förhöjda triglycerider:</strong> Här är evidensen starkare. Högre doser (2–4 g/dag) av EPA och DHA kan sänka triglycerider med <strong>25–30 %</strong> (<a href="https://doi.org/10.1016/j.atherosclerosis.2010.12.008" target="_blank" rel="noopener noreferrer">Miller et al., <em>Atherosclerosis</em> 2011</a>). <span class="ia-evidence-label ia-ev-t2 ln-evidence-label">Klinisk prövning</span></p>
 
 <p><strong>Vid högdos EPA:</strong> REDUCE-IT-studien är den mest citerade studien och visade signifikant nytta av 4 g/dag ren EPA hos patienter med etablerad kardiovaskulär sjukdom eller diabetes och förhöjda triglycerider. Dosen är endast tillgänglig på recept.</p>
 
@@ -196,7 +193,7 @@
 
 <h2 id="vanliga-missuppfattningar-om-omega-3">Vanliga missuppfattningar om omega-3</h2>
 
-<table class="ia-method-table">
+<table class="ia-method-table ln-data-table">
 <thead>
 <tr><th>Missuppfattning</th><th>Vad forskningen faktiskt visar</th></tr>
 </thead>
@@ -209,30 +206,30 @@
 </tbody>
 </table>
 
-<div class="ia-callout">
+<div class="ia-callout ln-callout">
 <h4>Omvandlingstabell: ALA → EPA → DHA</h4>
 <p>Kvinnor omvandlar i allmänhet en något högre andel ALA till EPA (cirka 21 %) än män (cirka 8 %), troligen på grund av östrogenets effekt på enzymet delta-6-desaturas (<a href="https://doi.org/10.1079/BJN20051413" target="_blank" rel="noopener noreferrer">Burdge &amp; Calder, 2005</a>). Graviditet ökar omvandlingen ytterligare för att möta fostrets DHA-behov. Även med den högre omvandlingen är den absoluta mängden DHA som produceras från ALA mycket liten.</p>
 </div>
 
-<div class="ia-method-note">
+<div class="ia-method-note ln-evidence">
 <p><strong>Metodnotering:</strong> Den här artikeln är baserad på sökningar i PubMed, Cochrane Library och Livsmedelsverkets databas. Inga Reddit-källor har använts — ämnet är hälso- och näringsrelaterat (YMYL). Evidensnivåer anges med etiketter från LevNytts evidenshierarki (Tier 1–4). Artikeln är skriven som en oberoende informationsresurs och inte som marknadsföring för något specifikt produktsortiment.</p>
 </div>
 
-<div class="ia-tierbox">
-<a class="ia-tier" href="/neolife-historia/"><b>Tier 1</b> NeoLife Historia</a>
-<a class="ia-tier" href="/neolife-vetenskap/"><b>Tier 2</b> NeoLife Vetenskap</a>
-<a class="ia-tier" href="/forsknings-faq/"><b>Tier 3</b> Future Research FAQ</a>
-<a class="ia-tier" href="/den-fundersamma-mannen/"><b>Tier 4</b> Jarmo Halonen</a>
+<div class="ia-tierbox ln-related-grid">
+<a class="ia-tier ln-related-card" href="/neolife-historia/"><b>Tier 1</b> NeoLife Historia</a>
+<a class="ia-tier ln-related-card" href="/neolife-vetenskap/"><b>Tier 2</b> NeoLife Vetenskap</a>
+<a class="ia-tier ln-related-card" href="/forsknings-faq/"><b>Tier 3</b> Future Research FAQ</a>
+<a class="ia-tier ln-related-card" href="/den-fundersamma-mannen/"><b>Tier 4</b> Jarmo Halonen</a>
 </div>
 
-<div class="ia-cta">
+<div class="ia-cta ln-cta">
 <h3 id="vill-du-veta-mer-om-omega-3-produkter">Vill du veta mer om omega-3-produkter?</h3>
 <p>NeoLife Omega-3 Salmon Oil Plus innehåller EPA och DHA från vildfångad lax med beprövad kvalitet och stabilitet. Ett kosttillskott för dig som vill komplettera ditt omega-3-intag.</p>
 <a href="/neolife-omega-3-plus">Läs mer om Omega-3 Salmon Oil Plus →</a>
 </div>
 
 <h2 id="vanliga-fragor-om-omega-3-faq">Vanliga frågor om omega-3 (FAQ)</h2>
-<div class="ia-faq">
+<div class="ia-faq ln-faq">
 
 <details>
 <summary>Vad är omega-3?</summary>
@@ -276,11 +273,11 @@
 
 </div>
 
-<div class="ia-disclosure">
+<div class="ia-disclosure ln-evidence">
 <p><strong>Ansvarsfriskrivning:</strong> Informationen i denna artikel är avsedd för utbildningssyfte och är inte en ersättning för professionell medicinsk rådgivning. Rådgör alltid med en läkare innan du påbörjar ett nytt kosttillskott, särskilt om du är gravid, ammar eller har en medicinsk diagnos.</p>
 </div>
 
-<div class="ia-author-box">
+<div class="ia-author-box ln-author">
 <div class="ia-author-avatar">JH</div>
 <div>
 <strong>Jarmo Halonen</strong><br>
@@ -289,7 +286,7 @@ Grundare av LevNytt och långvarig NeoLife-distributör med fokus på konsumentu
 </div>
 </div>
 
-<div class="ia-disclosure">
+<div class="ia-disclosure ln-evidence">
 <p>LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
 </div>
 
@@ -299,7 +296,7 @@ Grundare av LevNytt och långvarig NeoLife-distributör med fokus på konsumentu
   <div class="ln-shell ln-footer-grid">
     <div class="ln-footer-about">
       <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+        <img src="/assets/brand/footer-logo.svg" alt="LevNytt" width="128" height="45">
       </a>
       <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     </div>
@@ -321,6 +318,6 @@ Grundare av LevNytt och långvarig NeoLife-distributör med fokus på konsumentu
     </div>
   </div>
 </footer>
-<script src="/assets/js/levnytt-rebuild.js?v=2b31f8d01253" defer></script>
+<script src="/assets/js/levnytt-rebuild.js?v=aaebe7199357" defer></script>
 </body>
 </html>

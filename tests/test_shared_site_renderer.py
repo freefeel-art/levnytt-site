@@ -59,6 +59,7 @@ def test_shared_fragments_have_disclosure_and_accessible_menu_contract():
     footer = (ROOT / "assets/fragments/footer-sv.html").read_text(encoding="utf-8")
     assert 'aria-controls="ln-primary-nav"' in header
     assert 'aria-expanded="false"' in header
+    assert 'class="ln-menu-backdrop"' in header
     assert "Sponsor-ID 41-830928" in header and "Sponsor-ID: 41-830928" in footer
     assert 'rel="nofollow sponsored noopener noreferrer"' in header
     assert '<a href="/artiklar">' in header and 'href="/artiklar" target="_blank"' not in header

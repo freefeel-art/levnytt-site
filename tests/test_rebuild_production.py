@@ -31,6 +31,18 @@ def test_generated_page_has_canonical_shell_and_link_policy(tmp_path):
     assert {"nofollow", "noopener", "noreferrer", "sponsored"}.issubset(set(re.search(r'rel="([^"]+)"', shop_tag).group(1).split()))
     assert "style=" not in html
     assert html.count("<h1") == 1
+    assert len(re.findall(r'<link rel="stylesheet" href="/assets/css/', html)) == 1
+    assert "/assets/css/levnytt.css?v=" in html
+
+
+def test_product_family_receives_canonical_component_contract(tmp_path):
+    data = tmp_path / "production-pages.json"
+    output = tmp_path / "output"
+    subprocess.run([sys.executable, "scripts/rebuild-production.py", "--root", str(ROOT), "--bootstrap", "--data", str(data)], check=True)
+    subprocess.run([sys.executable, "scripts/rebuild-production.py", "--root", str(ROOT), "--build", "--data", str(data), "--output-root", str(output)], check=True)
+    html = (output / "neolife-omega-3-plus.html").read_text(encoding="utf-8")
+    for component in ("ln-content-intro", "ln-meta", "ln-stat-grid", "ln-lede", "ln-takeaways", "ln-prose", "ln-related-nav"):
+        assert component in html
 
 
 def test_rebuild_resolves_cloudflare_rewrites_and_includes_error_page(tmp_path):

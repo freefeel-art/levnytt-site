@@ -27,11 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css?v=3e93ffb6b5e4">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css?v=84f4407cc9fe">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css?v=57f20cd8ce59">
-<link rel="stylesheet" href="/assets/css/editorial-components.css?v=8b0d6917cc12">
-<link rel="stylesheet" href="/assets/css/informational-article.css?v=e1fcf95f0019">
+<link rel="stylesheet" href="/assets/css/levnytt.css?v=ae697c449497">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Vad är zeaxantin — och vad säger forskningen om immunförsvar?","description":"Zeaxantin är ett karotenoid känt för ögonhälsa. Ny forskning från University of Chicago visar att det också kan påverka immunförsvarets T-celler. Vi undersöker vad evidensen faktiskt säger.","datePublished":"2026-06-14","dateModified":"2026-06-14","author":{"@type":"Person","name":"Jarmo Halonen"},"publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://levnytt.se/zeaxantin-immunforsvar-2025"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Vad är zeaxantin?","acceptedAnswer":{"@type":"Answer","text":"Zeaxantin är ett xantofyll-karotenoid — ett naturligt pigment som ger gul och orange färg åt livsmedel som majs, paprika och saffran. Det är en av de få karotenoider som samlas specifikt i ögats gula fläck (macula), där det fungerar som naturligt blåljusfilter och antioxidant. Kroppen kan inte producera zeaxantin själv — det måste tillföras via kost eller kosttillskott."}},{"@type":"Question","name":"Vad säger forskningen om zeaxantin och ögonhälsa?","acceptedAnswer":{"@type":"Answer","text":"Det finns stark klinisk evidens för zeaxantins roll i ögonhälsa. AREDS2-studien (Age-Related Eye Disease Study 2), en stor randomiserad kontrollerad studie finansierad av National Eye Institute, visade att supplementering med lutein och zeaxantin minskade risken för progression till avancerad åldersrelaterad makuladegeneration (AMD) med 18% jämfört med betakaroten — och med 25% i gruppen med lägst kostintag av dessa karotenoider vid baseline."}},{"@type":"Question","name":"Påverkar zeaxantin immunförsvaret?","acceptedAnswer":{"@type":"Answer","text":"En studie publicerad i Cell Reports Medicine (september 2025) från University of Chicago identifierade zeaxantin som en immunmodulator som kan förstärka CD8+ T-cellers aktivitet mot tumörceller. Forskningen är preklinisk — genomförd i cellkulturer och djurmodeller — och kliniska studier på människa saknas ännu. Ledande forskare betonar att fynden är lovande men att ytterligare forskning krävs innan slutsatser kan dras om effekter hos människor."}},{"@type":"Question","name":"Hur mycket zeaxantin finns i vanlig mat?","acceptedAnswer":{"@type":"Answer","text":"Zeaxantin förekommer i majs, orange och röd paprika, saffran, gojibär och äggula. Det genomsnittliga dagliga kostintaget av lutein och zeaxantin tillsammans ligger på ungefär 1–3 mg, enligt forskning publicerad i Journal of Food Composition and Analysis. Forskning kopplar ett intag på 6 mg xantofyller dagligen (lutein + zeaxantin) till reducerad AMD-risk — ett intag som kräver antingen en konsekvent kost rik på dessa livsmedel eller kosttillskott."}},{"@type":"Question","name":"Är lutein och zeaxantin samma sak?","acceptedAnswer":{"@type":"Answer","text":"Nej — lutein och zeaxantin är strukturisomerer. De har samma kemiska formel men skiljer sig i positionen av en dubbelbindning i en cyklisk ring. Båda samlas i ögats macula, men zeaxantin dominerar i maculas centrum (fovea) medan lutein dominerar i periferin. I 2025 års studie från University of Chicago visade zeaxantin immunmodulerande effekter på CD8+ T-celler, medan lutein — trots sin liknande struktur — inte uppvisade samma effekt i samma försöksupplägg."}},{"@type":"Question","name":"Var i kroppen samlas zeaxantin?","acceptedAnswer":{"@type":"Answer","text":"Zeaxantin samlas selektivt i ögats macula, framför allt i fovea (maculas centrum). Makulan är den del av näthinnan som ansvarar för skarp centralseende. Zeaxantin och lutein är de enda karotenoider som koncentreras i ögat. Dessutom finns zeaxantin och lutein i hjärnvävnad — 66–77% av hjärnans totala karotenoidinnehåll utgörs av dessa två, enligt forskning publicerad i Frontiers in Nutrition."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LevNytt","item":"https://levnytt.se/"},{"@type":"ListItem","position":2,"name":"Vad är zeaxantin? Forskning om ögon och immunförsvar","item":"https://levnytt.se/zeaxantin-immunforsvar-2025"}]}]}</script>
 <meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="existing-content-cta">
@@ -44,6 +40,7 @@
       <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
     </a>
     <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <button class="ln-menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
     <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
       <a href="/">Hem</a>
       <a href="/om-oss">Om oss</a>
@@ -60,16 +57,16 @@
     </nav>
   </div>
 </header>
-<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Vad är zeaxantin? Forskning om ögon och immunförsvar</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Vad är zeaxantin? Forskning om ögon och immunförsvar</h1></header><div class="ln-article-body"><div class="ia-wrap">
+<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Vad är zeaxantin? Forskning om ögon och immunförsvar</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Vad är zeaxantin? Forskning om ögon och immunförsvar</h1></header><div class="ln-article-body ln-flow"><div class="ia-wrap ln-flow">
 <header class="ia-header"></header>
 
     <!-- PUNCHLINE -->
-    <div class="ia-punchline">
+    <div class="ia-punchline ln-lede">
       <p>Påverkar zeaxantin immunförsvaret? — Preklinisk forskning från 2025 antyder det. <strong>Men den avgörande frågan — om effekten gäller hos människor — är ännu obesvarad.</strong> Det ögonen vet med större säkerhet: zeaxantin är ett av de bäst dokumenterade karotenoiderna för ögonhälsa, med kliniska RCT-data bakom sig.</p>
     </div>
 
     <!-- KEY TAKEAWAYS -->
-    <div class="ia-takeaways">
+    <div class="ia-takeaways ln-takeaways">
       <h3 id="det-viktigaste">Det viktigaste</h3>
       <ul>
         <li>Zeaxantin är ett xantofyll-karotenoid som kroppen inte kan producera själv — det måste tillföras via kost eller tillskott.</li>
@@ -124,8 +121,8 @@
       <h2 id="vad-sager-forskningen-om-zeaxantin-och-ogonhalsa">Vad säger forskningen om zeaxantin och ögonhälsa?</h2>
       <p>Av alla karotenoidernas potentiella hälsoroller är zeaxantins och luteinets roll i ögonhälsan den med starkast klinisk evidensbas. Forskningen har pågått i decennier och kulminerat i ett av de mest citerade näringsstudieprogram i ögonmedicin: <a href="https://www.aoa.org/news/clinical-eye-care/health-and-wellness/lutein-zeaxanthin-reaffirmed-over-beta-carotene-in-areds2" target="_blank" rel="noopener noreferrer">AREDS och AREDS2</a>.</p>
 
-      <div class="research-box">
-        <span class="research-box-label">Klinisk evidens <span class="evidence-tag evidence-clinical">RCT · Tier 2</span></span>
+      <div class="research-box ln-evidence">
+        <span class="research-box-label">Klinisk evidens <span class="evidence-tag evidence-clinical ln-evidence-label ln-evidence-label--strong">RCT · Tier 2</span></span>
         <h4>AREDS2 — Age-Related Eye Disease Study 2</h4>
         <p>Den randomiserade kontrollerade studien finansierades av National Eye Institute (NIH) och inkluderade tusentals deltagare med åldersrelaterad makuladegeneration (AMD). AREDS2 jämförde bland annat supplementering med lutein (10 mg) + zeaxantin (2 mg) mot betakaroten i en modifierad AREDS-formel.</p>
         <p>Resultaten visade att lutein/zeaxantin minskade risken för progression till avancerad AMD med 18% jämfört med betakaroten. I subgruppen med lägst kostintag av dessa karotenoider vid studiestart var minskningen 25%. Studien ledde till att lutein/zeaxantin numera rekommenderas framför betakaroten i AREDS-typformeln, särskilt för rökare.</p>
@@ -135,7 +132,7 @@
       <p>Mekanismen bakom ögoneffekterna är välbeskriven: zeaxantin och lutein absorberar blåljus och ultraviolett ljus i maculas vävnad, vilket minskar fotokemisk skada på fotoreceptorerna. De fungerar också som antioxidanter som neutraliserar fria radikaler som bildas vid ljusexponering.</p>
       <p>En viktig detalj: zeaxantin dominerar i maculas absoluta centrum — fovea — medan lutein är mer framträdande i periferin av macula. Maculas centrum ansvarar för den skarpaste centralseendet. Forskning har visat att zeaxantin förekommer 2,4 gånger mer än lutein just i fovea, vilket tyder på en preferentiell anrikning av zeaxantin i den mest ljuskänsliga regionen.</p>
 
-      <div class="ia-callout">
+      <div class="ia-callout ln-callout">
         <h4>Evidensnivå: Ögonhälsa</h4>
         <p>Klinisk evidens (Tier 2 — RCT): AREDS2 är en väldesignad randomiserad kontrollerad studie med robusta data. Evidensen för lutein/zeaxantin och AMD-progression betraktas som tillräckligt stark för att ligga till grund för kliniska rekommendationer inom ögonvård.</p>
       </div>
@@ -143,8 +140,8 @@
       <h2 id="vad-visar-den-nya-immunforsvarsforskningen">Vad visar den nya immunförsvarsforskningen?</h2>
       <p>I september 2025 publicerades en studie i <em>Cell Reports Medicine</em> från forskargruppen ledd av Jing Chen, PhD, vid University of Chicago. Studien identifierade zeaxantin som en immunmodulator med potentiell relevans för anti-tumörimmunitet.</p>
 
-      <div class="research-box">
-        <span class="research-box-label">Preklinisk studie <span class="evidence-tag evidence-preclinical">Cellkultur + Djurmodell · Tier 3–4</span></span>
+      <div class="research-box ln-evidence">
+        <span class="research-box-label">Preklinisk studie <span class="evidence-tag evidence-preclinical ln-evidence-label">Cellkultur + Djurmodell · Tier 3–4</span></span>
         <h4>Zeaxantin och CD8+ T-celler — University of Chicago, 2025</h4>
         <p>Forskarna screenade ett bibliotek av blodnäringsämnen för förmågan att förstärka CD8+ cytotoxiska T-cellers aktivitet mot tumörceller i cellkulturer. Zeaxantin identifierades som en stark kandidat. Vidare studier i djurmodeller visade att oralt zeaxantin förstärkte rekrytering och aktivering av CD8+ T-celler i tumörer, vilket förbättrade anti-tumörimmuniteten.</p>
         <p>Mekanistiska studier (multi-omics) visade att zeaxantin stimulerar T-cellsreceptorn (TCR) på CD8+ T-cellernas yta, vilket leder till förstärkt intracellulär TCR-signalering. Zeaxantin ökade också effekten av anti-PD1 immunterapi (checkpoint-hämmare) i djurmodeller. Lutein — zeaxantins strukturisomer — uppvisade inte samma effekt.</p>
@@ -152,7 +149,7 @@
         <cite>Zhang FQ et al. Cell Reports Medicine. 2025;6(9). DOI: 10.1016/j.xcrm.2025.102397</cite>
       </div>
 
-      <div class="ia-callout">
+      <div class="ia-callout ln-callout">
         <h4>Evidensnivå: Immunförsvar</h4>
         <p>Preklinisk evidens (Tier 3–4): Resultaten är från cellkulturer och djurmodeller. Translationen till människa är okänd. Forskargruppen själva betonar att kliniska prövningar krävs för att avgöra om effekterna gäller hos cancer- eller immunterapi-patienter. Det är fortfarande hypotes, inte bekräftad effekt.</p>
       </div>
@@ -208,7 +205,7 @@
       <p>Zeaxantin är ovanligare i kosten än lutein. Mörkgröna bladgrönsaker — i övrigt utmärkta karotenoidkällor — innehåller nästan inget zeaxantin. Majs innehåller ungefär 0,5 mg zeaxantin per 100 gram, vilket innebär att man skulle behöva äta nästan två kilo majs för att nå 10 mg zeaxantin enbart från denna källa.</p>
       <p>Det genomsnittliga dagliga intaget av lutein och zeaxantin tillsammans i kosten är 1–3 mg, enligt <a href="https://www.sciencedirect.com/science/article/abs/pii/S0889157508001336" target="_blank" rel="noopener noreferrer">forskning publicerad i Journal of Food Composition and Analysis</a>. Forskning kopplar ett dagligt intag på 6 mg xantofyller (lutein + zeaxantin) till reducerad AMD-risk — ett gap som för de flesta inte täcks av en genomsnittlig kost utan riktade kostförändringar eller tillskott.</p>
 
-      <div class="ia-callout">
+      <div class="ia-callout ln-callout">
         <h4>Biotillgänglighet</h4>
         <p>Zeaxantin är fettlösligt och absorberas bättre när det konsumeras med fett. Äggulas zeaxantin är känd för sin höga biotillgänglighet — delvis tack vare den naturliga fettmatrisen. Matlagning och bearbetning påverkar också tillgängligheten: bioaccessibility-studier visar att zeaxantin från oljebaserade källor är mer tillgängligt än från råa frukter med låg fettandel.</p>
       </div>
@@ -220,14 +217,14 @@
       <p>LevNytt följer <a href="/var-metod">vår metod</a>: vi beskriver vad forskningen faktiskt visar, på vilken evidensnivå, och vad som återstår att bevisa.</p>
 
       <!-- CTA -->
-      <div class="ia-cta">
+      <div class="ia-cta ln-cta">
         <h3 id="zeaxantin-i-ett-bredare-karotenoidperspektiv">Zeaxantin i ett bredare karotenoidperspektiv</h3>
         <p>Zeaxantin förekommer sällan ensamt i väldesignade tillskott — det ingår typiskt i ett spektrum av karotenoider. LevNytt undersöker vad som händer när hela karotenoidbilden tas i beaktande.</p>
         <a class="ia-cta-btn" href="/neolife-carotenoid-complex">Karotenoider — hela spektrumet →</a>
       </div>
 
       <!-- FAQ -->
-      <div class="ia-faq">
+      <div class="ia-faq ln-faq">
         <h2 id="vanliga-fragor-om-zeaxantin">Vanliga frågor om zeaxantin</h2>
 
         <details>
@@ -266,34 +263,34 @@
         </details>
       </div>
 
-      <p class="ia-disclosure"><strong>Metodnotering:</strong> Den här artikeln täcker en hälso- och näringsfråga (YMYL-kategori). Reddit och anonyma forum är uteslutna som källor. Evidenskällornas primärstudier är direkt refererade (PubMed, Cell Reports Medicine, JAMA Ophthalmology). Evidensnivån är tydligt angiven vid varje kliniskt påstående. Kommersiella källor är inte använda som primärevidents.</p>
+      <p class="ia-disclosure ln-evidence"><strong>Metodnotering:</strong> Den här artikeln täcker en hälso- och näringsfråga (YMYL-kategori). Reddit och anonyma forum är uteslutna som källor. Evidenskällornas primärstudier är direkt refererade (PubMed, Cell Reports Medicine, JAMA Ophthalmology). Evidensnivån är tydligt angiven vid varje kliniskt påstående. Kommersiella källor är inte använda som primärevidents.</p>
 
       <!-- TIER BOXES -->
-      <div class="ia-tierbox">
-          <a class="ia-tier" href="/neolife-carotenoid-complex">
+      <div class="ia-tierbox ln-related-grid">
+          <a class="ia-tier ln-related-card" href="/neolife-carotenoid-complex">
             <b>Produkt-Pillar</b>
             Vad är karotenoider?
           </a>
-          <a class="ia-tier" href="/neolife-vetenskap">
+          <a class="ia-tier ln-related-card" href="/neolife-vetenskap">
             <b>Om NeoLife</b>
             NeoLife och forskning
           </a>
-          <a class="ia-tier" href="/ar-dyra-kosttillskott-verkligen-battre">
+          <a class="ia-tier ln-related-card" href="/ar-dyra-kosttillskott-verkligen-battre">
             <b>Artikel</b>
             Är dyra kosttillskott bättre?
           </a>
-          <a class="ia-tier" href="/forsknings-faq">
+          <a class="ia-tier ln-related-card" href="/forsknings-faq">
             <b>LevNytt</b>
             Forsknings-FAQ
           </a>
-          <a class="ia-tier" href="/karotenoid-tillskott-vs-mat">
+          <a class="ia-tier ln-related-card" href="/karotenoid-tillskott-vs-mat">
             <b>Fördjupning</b>
             Karotenoider — mat vs tillskott
           </a>
       </div>
 
       <!-- AUTHOR BOX -->
-      <div class="ia-author-box">
+      <div class="ia-author-box ln-author">
         <div class="ia-author-avatar">JH</div>
         <div>
           <span class="author-label">Skribent</span>
@@ -302,14 +299,14 @@
         </div>
       </div>
 
-      <p class="ia-disclosure">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
+      <p class="ia-disclosure ln-evidence">LevNytt.se är en oberoende NeoLife-distributörswebbplats (Sponsor-ID: 41-830928). Innehållet är avsett för utbildningssyfte och har inte utvärderats av Livsmedelsverket. Produkterna är inte avsedda att diagnostisera, behandla, bota eller förebygga några sjukdomar. NeoLife® är ett registrerat varumärke tillhörande NeoLife International.</p>
 
 </div></div></article></div></main>
 <footer class="ln-site-footer">
   <div class="ln-shell ln-footer-grid">
     <div class="ln-footer-about">
       <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+        <img src="/assets/brand/footer-logo.svg" alt="LevNytt" width="128" height="45">
       </a>
       <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     </div>
@@ -331,6 +328,6 @@
     </div>
   </div>
 </footer>
-<script src="/assets/js/levnytt-rebuild.js?v=2b31f8d01253" defer></script>
+<script src="/assets/js/levnytt-rebuild.js?v=aaebe7199357" defer></script>
 </body>
 </html>

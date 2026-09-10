@@ -27,11 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/css/levnytt-foundations.css?v=3e93ffb6b5e4">
-<link rel="stylesheet" href="/assets/css/levnytt-components.css?v=84f4407cc9fe">
-<link rel="stylesheet" href="/assets/css/levnytt-rebuild.css?v=57f20cd8ce59">
-<link rel="stylesheet" href="/assets/css/editorial-components.css?v=8b0d6917cc12">
-<link rel="stylesheet" href="/assets/css/informational-article.css?v=e1fcf95f0019">
+<link rel="stylesheet" href="/assets/css/levnytt.css?v=ae697c449497">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Kända MLM-företag och skandaler i Sverige och världen","description":"MLM-företag som Herbalife, Amway och LuLaRoe har präglats av skandaler och rättsliga konflikter. Lär dig skilja legitima företag från pyramidspel och förstå vad tillsynsmyndigheter letar efter.","url":"https://levnytt.se/mlm-foretag-skandaler-sverige-varlden","inLanguage":"sv","publisher":{"@type":"Organization","name":"LevNytt","url":"https://levnytt.se"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://levnytt.se/mlm-foretag-skandaler-sverige-varlden"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Är alla MLM-företag pyramidspel?","acceptedAnswer":{"@type":"Answer","text":"Nej, inte alla MLM-företag är pyramidspel. Legitimt MLM fokuserar på att sälja faktiska produkter till slutkonsumenter, medan pyramidspel främst fokuserar på rekrytering. Nyckeln är att majoriteten av intäkterna kommer från produktförsäljning, inte från rekrytering av nya distributörer."}},{"@type":"Question","name":"Vilka varningssignaler ska jag leta efter hos MLM-företag?","acceptedAnswer":{"@type":"Answer","text":"Varningssignaler inkluderar höga startavgifter, fokus på rekrytering över produktförsäljning, överdrivna inkomstpåståenden, begränsade återköpspolicyer, och påtryckningar att köpa stora mängder inventarier. Om företaget inte kan visa realistiska inkomststatistiker är det en röd flagga."}},{"@type":"Question","name":"Hur regleras MLM-företag i Sverige?","acceptedAnswer":{"@type":"Answer","text":"I Sverige övervakas MLM-företag av Konsumentverket enligt marknadsföringslagen. Vilseledande marknadsföring är förbjudet, och konsumenter har ångerrätt vid hemförsäljning. Konsumentombudsmannen kan väcka talan mot företag som bryter mot reglerna."}},{"@type":"Question","name":"Vad hände med Herbalife efter FTC-förlikningen?","acceptedAnswer":{"@type":"Answer","text":"Efter 2016 års förlikning på 200 miljoner USD tvingades Herbalife omstrukturera sin affärsmodell i USA. Företaget måste säkerställa att 80% av försäljningen sker till personer utanför distributörsnätverket och begränsa rekryteringsbaserade bonusar. Företaget övervakades i sju år för efterlevnad."}},{"@type":"Question","name":"Kan MLM-distributörer verkligen tjäna pengar?","acceptedAnswer":{"@type":"Answer","text":"Statistiken visar att de allra flesta MLM-distributörer tjänar mycket lite eller förlorar pengar. FTC-studier indikerar att 99% av MLM-deltagare förlorar pengar när alla kostnader räknas in. Endast en mycket liten andel i toppen av organisationen tjänar betydande summor."}},{"@type":"Question","name":"Vad ska jag göra om jag har blivit lurad av ett MLM-företag?","acceptedAnswer":{"@type":"Answer","text":"Om du misstänker att du har blivit lurad, kontakta först företaget för att försöka lösa problemet. Om det inte fungerar, anmäl till Konsumentverket i Sverige eller motsvarande myndighet i ditt land. Samla all dokumentation och överväg att kontakta en konsumenträttsadvokat om stora summor är inblandade."}},{"@type":"Question","name":"Finns det legitima alternativ till MLM för hemföretagare?","acceptedAnswer":{"@type":"Answer","text":"Ja, det finns många sätt att starta hemföretag utan MLM-strukturer. Alternativ inkluderar e-handel, frilansing, konsulttjänster, lokal serviceverksamhet, eller att bli återförsäljare för etablerade varumärken utan rekryteringskrav. Dessa alternativ har vanligtvis mer förutsägbara inkomstmöjligheter."}},{"@type":"Question","name":"Varför tillåter myndigheter MLM-företag att fortsätta verka?","acceptedAnswer":{"@type":"Answer","text":"Legitim direktförsäljning är laglig i de flesta länder. Problemet är att skilja mellan legitimt MLM och pyramidspel, vilket ofta kräver omfattande utredningar. Myndigheter arbetar med att förbättra regleringar och genomdrivande, men juridiska processer tar tid."}}]}]}</script>
 <meta name="levnytt-template" content="rebuild-informational-article">
 <meta name="levnytt-cta" content="existing-content-cta">
@@ -44,6 +40,7 @@
       <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="160" height="56">
     </a>
     <button class="ln-menu-toggle" type="button" aria-label="Öppna meny" aria-controls="ln-primary-nav" aria-expanded="false">Meny</button>
+    <button class="ln-menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
     <nav class="ln-primary-nav" id="ln-primary-nav" aria-label="Huvudnavigation">
       <a href="/">Hem</a>
       <a href="/om-oss">Om oss</a>
@@ -60,12 +57,12 @@
     </nav>
   </div>
 </header>
-<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Kända MLM-företag och skandaler i Sverige och världen</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Kända MLM-företag och skandaler i Sverige och världen</h1></header><div class="ln-article-body"><div class="ia-wrap">
+<main id="main-content" class="ln-page ln-family-informational-article"><div class="ln-shell"><nav class="ln-breadcrumbs" aria-label="Brödsmulor"><a href="/">LevNytt</a> <span aria-hidden="true">›</span> <span aria-current="page">Kända MLM-företag och skandaler i Sverige och världen</span></nav><article><header class="ln-article-header"><p class="ln-eyebrow">LevNytt · Konsumentguide</p><h1>Kända MLM-företag och skandaler i Sverige och världen</h1></header><div class="ln-article-body ln-flow"><div class="ia-wrap ln-flow">
 
 
-    <p class="ia-punchline">MLM-företag och skandaler — direktförsäljningsföretag som Herbalife, Amway och LuLaRoe har präglats av betydande rättsliga konflikter och påstådda pyramidspel-strukturer som kostat distributörer miljardbelopp.</p>
+    <p class="ia-punchline ln-lede">MLM-företag och skandaler — direktförsäljningsföretag som Herbalife, Amway och LuLaRoe har präglats av betydande rättsliga konflikter och påstådda pyramidspel-strukturer som kostat distributörer miljardbelopp.</p>
 
-    <div class="ia-takeaways">
+    <div class="ia-takeaways ln-takeaways">
         <h3 id="det-viktigaste">Det viktigaste</h3>
         <ul>
             <li><strong>Herbalife betalade 200 miljoner USD</strong> till FTC 2016 för att omstrukturera sin affärsmodell efter pyramidspel-anklagelser</li>
@@ -78,20 +75,20 @@
     </div>
 
     <!-- MLM Scandal Statistics -->
-    <div class="ia-stat-grid">
-        <div class="ia-stat-card">
+    <div class="ia-stat-grid ln-stat-grid">
+        <div class="ia-stat-card ln-stat">
             <div class="ia-stat-number">$200M</div>
             <div class="ia-stat-label">Herbalife FTC-förlikning 2016</div>
         </div>
-        <div class="ia-stat-card">
+        <div class="ia-stat-card ln-stat">
             <div class="ia-stat-number">93%</div>
             <div class="ia-stat-label">Nu Skin-distributörer utan provision</div>
         </div>
-        <div class="ia-stat-card">
+        <div class="ia-stat-card ln-stat">
             <div class="ia-stat-number">$4.74M</div>
             <div class="ia-stat-label">LuLaRoe Washington-förlikning</div>
         </div>
-        <div class="ia-stat-card">
+        <div class="ia-stat-card ln-stat">
             <div class="ia-stat-number">350K</div>
             <div class="ia-stat-label">Herbalife-distributörer fick återbetalning</div>
         </div>
@@ -103,7 +100,7 @@
 
     <p>Enligt <a href="https://www.ftc.gov/news-events/news/press-releases/2016/07/herbalife-will-restructure-its-multi-level-marketing-operations" target="_blank" rel="noopener noreferrer">Federal Trade Commission (FTC)</a> är en viktig varningssignal när distributörer uppmuntras att köpa stora mängder inventarier eller när rekrytering betonas mer än produktförsäljning till verkliga kunder.</p>
 
-    <div class="ia-tier-box">
+    <div class="ia-tier-box ln-related-card">
         <div class="ia-tier-label">Tier 2</div>
         <div class="ia-tier-content">
             Vetenskapen bakom affärsmodeller och regulatoriska ramverk avslöjar varför vissa MLM-strukturer kollapsar medan andra överlever. <a href="/neolife-vetenskap">Utforska forskningsbaserade insikter →</a>
@@ -157,7 +154,7 @@
 
     <p>Konsumentverket kan utfärda förbud mot företag som bryter mot marknadsföringsreglerna och kräva vite för fortsatta överträdelser. Konsumentombudsmannen (KO) kan också väcka talan i Marknads- och patentdomstolen.</p>
 
-    <div class="ia-tier-box">
+    <div class="ia-tier-box ln-related-card">
         <div class="ia-tier-label">Tier 1</div>
         <div class="ia-tier-content">
             Historien bakom modern direktförsäljning sträcker sig tillbaka över ett sekel och formar fortfarande dagens regelverk. <a href="/neolife-historia">Upptäck ursprunget till nätverksmarknadsföring →</a>
@@ -182,7 +179,7 @@
 
     <p>Regulatorer använder flera nyckelfaktorer för att bedöma om ett MLM-företag driver legitim verksamhet eller ett pyramidspel:</p>
 
-    <table class="ia-method-table">
+    <table class="ia-method-table ln-data-table">
         <thead>
             <tr>
                 <th>Bedömningsfaktor</th>
@@ -312,7 +309,7 @@
         <li>Utbilda distributörer om etisk marknadsföring</li>
     </ul>
 
-    <div class="ia-tier-box">
+    <div class="ia-tier-box ln-related-card">
         <div class="ia-tier-label">Tier 4</div>
         <div class="ia-tier-content">
             Bakom varje affärsmodell finns filosofier om värde, etik och hållbart företagande. <a href="/den-fundersamma-mannen">Utforska djupare perspektiv på affärsetik →</a>
@@ -349,7 +346,7 @@
     </ul>
 
     <!-- FAQ Section -->
-    <div class="ia-faq">
+    <div class="ia-faq ln-faq">
         <h2 id="vanliga-fragor-om-mlm-foretag-och-skandaler">Vanliga frågor om MLM-företag och skandaler</h2>
 
         <details>
@@ -410,7 +407,7 @@
     </div>
 
     <!-- Call to Action -->
-    <div class="ia-cta">
+    <div class="ia-cta ln-cta">
         <h3 id="utforska-sakrare-alternativ-for-naringsoptimering">Utforska säkrare alternativ för näringsoptimering</h3>
         <p>Istället för att riskera pengar i tvivelaktiga affärsmöjligheter, fokusera på beprövade metoder för hälsa och välbefinnande.</p>
         <p><a href="/neolife-kosttillskott">Lär dig om evidensbaserade kosttillskott →</a></p>
@@ -433,7 +430,7 @@
   <div class="ln-shell ln-footer-grid">
     <div class="ln-footer-about">
       <a class="ln-footer-brand" href="/" aria-label="LevNytt — Hem">
-        <img src="/assets/brand/header-logo.svg" alt="LevNytt" width="128" height="45">
+        <img src="/assets/brand/footer-logo.svg" alt="LevNytt" width="128" height="45">
       </a>
       <p>Fakta före hype. Värde före pris. Förstå först. Bestäm sedan.</p>
     </div>
@@ -455,6 +452,6 @@
     </div>
   </div>
 </footer>
-<script src="/assets/js/levnytt-rebuild.js?v=2b31f8d01253" defer></script>
+<script src="/assets/js/levnytt-rebuild.js?v=aaebe7199357" defer></script>
 </body>
 </html>

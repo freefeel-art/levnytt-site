@@ -57,6 +57,11 @@ def test_build_product_page_uses_entity_identity(tmp_path):
     assert "Kod 555" in html
     assert 'src="/images/garlic-allium-complex.jpg"' in html
     assert "neolifeshop.com" in html
+    assert html.count('href="/assets/css/levnytt.css"') == 1
+    assert "levnytt-foundations.css" not in html
+    assert 'class="ln-menu-backdrop"' in html
+    assert 'class="ln-article-body ln-flow"' in html
+    assert "ln-product-overview-layout" in html
 
 
 def test_resolve_image_matches_slug(tmp_path):

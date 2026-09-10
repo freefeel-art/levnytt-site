@@ -22,9 +22,12 @@ def validate(path: Path) -> list[str]:
     template = meta(html, "levnytt-template")
     if template not in ALLOWED_TEMPLATES:
         errors.append("template must be rebuild-informational-article")
-    for required in ('/assets/css/levnytt-foundations.css', '/assets/css/levnytt-components.css', '/assets/css/levnytt-rebuild.css', '/assets/css/informational-article.css', 'class="ln-site-header"', 'class="ln-site-footer"'):
+    for required in ('/assets/css/levnytt.css', 'class="ln-site-header"', 'class="ln-site-footer"'):
         if required not in html:
             errors.append(f"missing shared shell requirement: {required}")
+    local_styles = re.findall(r'<link\s+rel=["\']stylesheet["\']\s+href=["\'](/assets/css/[^"\']+)', html, re.I)
+    if len(local_styles) != 1:
+        errors.append("informational pages must load exactly one canonical local stylesheet")
     for color in LITERAL_BRAND_COLORS:
         if color.lower() in html.lower():
             errors.append(f"unapproved literal brand color in template: {color}")

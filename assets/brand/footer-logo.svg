@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 100" role="img" aria-labelledby="title">
+  <title id="title">LevNytt</title>
+  <circle cx="50" cy="50" r="47" fill="none" stroke="#E8C870" stroke-width="3"/>
+  <text x="50" y="65" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-size="46" font-weight="400" fill="#E8C870" letter-spacing="-3.5">LV</text>
+  <text x="148" y="66"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-size="46" font-weight="400">
+    <tspan fill="#F7F4ED">Lev</tspan>
+    <tspan fill="#E8C870">Nytt</tspan>
+  </text>
+</svg>
