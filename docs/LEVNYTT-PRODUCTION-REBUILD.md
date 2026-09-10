@@ -18,13 +18,17 @@ The generated shell provides `SiteHeader`, `PrimaryNavigation`, `SiteFooter`,
 for key takeaways, information cards, related links, CTA blocks, source lists
 and author/disclosure blocks retained in page content.
 
-## Tokens and link policy
+## Canonical presentation contract
 
-Design tokens are defined in `assets/css/levnytt-foundations.css`; shared
-production rules are in `assets/css/levnytt-rebuild.css`. Generated pages do
-not contain page CSS. Every hyperlink, including internal links and shell
-links, uses `target="_blank"` and `rel="noopener noreferrer"`; sponsored
-links preserve their sponsored relationship token.
+Design tokens, layout primitives and all shared production components are
+defined in the single canonical stylesheet `assets/css/levnytt.css`.
+`scripts/site_renderer.py` owns the shared shell and maps retained source
+markup to the stable `ln-*` component vocabulary at the build boundary.
+Generated pages do not contain page CSS or load page-family override sheets.
+
+Internal links retain normal same-tab navigation. External links that open a
+new tab retain `noopener noreferrer`; sponsored links also preserve their
+commercial relationship tokens and destination parameters.
 
 Inline SVG presentation styles are converted to presentation attributes during
 bootstrap so they remain part of the asset while page CSS stays centralized.
@@ -36,6 +40,6 @@ canonical styles, absence of inline page CSS, link safety, and source-token
 preservation. `scripts/audit-production-links.py` and
 `scripts/audit-production-ui.py` provide repository-wide reports.
 
-The rebuild is prepared for review only. Deployment requires a separate Owner
-approval that names the exact commit and keeps the previous deployed revision
-as rollback reference.
+Deployment follows the repository's established Cloudflare Pages Git workflow.
+The previous deployed revision remains available in Git and Cloudflare as the
+rollback reference.
