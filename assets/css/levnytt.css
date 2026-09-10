@@ -183,7 +183,7 @@
   :is(.ln-stat,.ln-stat-grid > *) :where(.lbl,.stat-label,.hero-stat-label,.authority-stat-label,.stat-source) { display: block; margin-top: .3rem; color: var(--ln-muted); font-size: .78rem; line-height: 1.45; }
 
   .ln-table-wrap { max-width: 100%; margin-block: var(--ln-space-6); overflow-x: auto; border-block: 1px solid var(--ln-line-strong); }
-  .ln-article-body table { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: .9rem; }
+  .ln-article-body table { display: block; width: 100%; min-width: 0; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-size: .9rem; -webkit-overflow-scrolling: touch; }
   .ln-article-body :where(th,td) { padding: .75rem .85rem; border-bottom: 1px solid var(--ln-line); text-align: left; vertical-align: top; }
   .ln-article-body th { background: var(--ln-green-900); color: white; font-size: .78rem; letter-spacing: .025em; }
   .ln-article-body tbody tr:nth-child(even) { background: rgba(238,233,222,.55); }
