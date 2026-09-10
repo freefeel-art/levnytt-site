@@ -264,7 +264,7 @@ def render_latest_banner(article: dict) -> str:
   <div class="latest-post-inner">
     <span class="latest-post-label">Senaste artikeln</span>
     <span class="latest-post-title">{title_escaped}</span>
-    <a href="{article['path']}" class="latest-post-link">Läs artikeln →</a>
+    <a class="latest-post-link" href="{article['path']}">Läs artikeln →</a>
   </div>
 </div>"""
 
@@ -278,7 +278,7 @@ def render_articles_section(articles: list) -> str:
         title_escaped = a["title"].replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
         date_str = format_swedish_date(a["date"])
         rt = a["reading_time"]
-        cards.append(f"""    <a href="{a['path']}" class="article-card">
+        cards.append(f"""    <a class="article-card" href="{a['path']}">
       <span class="article-card-title">{title_escaped}</span>
       <span class="article-card-meta">
         <span>{date_str}</span>
@@ -289,9 +289,9 @@ def render_articles_section(articles: list) -> str:
     cards_html = "\n".join(cards)
 
     return f"""<section class="section section-alt" id="senaste-artiklar">
-  <div class="container">
+  <div class="container ln-flow">
     <span class="section-label">Senaste publicerat</span>
-    <h2 class="section-heading">Senaste artiklarna</h2>
+    <h2 class="section-heading" id="senaste-artiklarna">Senaste artiklarna</h2>
     <p class="section-intro">De senaste konsumentguiderna och artiklarna från LevNytt.</p>
     <div class="articles-grid">
 {cards_html}

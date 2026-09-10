@@ -17,6 +17,7 @@ import sys
 import importlib.util
 import subprocess
 from datetime import datetime
+from html import escape, unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -295,6 +296,11 @@ def normalise(s: str) -> str:
             .replace("é", "e").replace("-", ".").replace(" ", "."))
 
 
+def heading_id(value: str) -> str:
+    value = (value.lower().replace("å", "a").replace("ä", "a").replace("ö", "o"))
+    return re.sub(r"[^a-z0-9]+", "-", value).strip("-")
+
+
 def classify_category(title: str, description: str, slug: str) -> str:
     """Classify an article into a category based on keywords."""
     text = normalise(f"{slug} {title} {description}")
@@ -354,7 +360,8 @@ def render_card_html(article: dict, cat: str) -> str:
     article_type = get_article_type(title)
     is_pg = is_portalguide(title)
 
-    search_data = normalise(f"{title} {desc} {article['slug']}")
+    search_data = normalise(unescape(f"{title} {desc} {article['slug']}"))
+    search_data_escaped = escape(search_data, quote=True)
 
     title_escaped = (title.replace("&", "&amp;").replace("<", "&lt;")
                      .replace(">", "&gt;").replace('"', "&quot;"))
@@ -366,8 +373,8 @@ def render_card_html(article: dict, cat: str) -> str:
         badge = '        <span class="idx-card-badge star">&#9733; Portalguide</span>\n'
 
     return (
-        f'      <a href="{path}" class="idx-card" data-cat="{cat}" '
-        f'data-search="{search_data}">\n'
+        f'      <a class="idx-card" data-cat="{cat}" '
+        f'data-search="{search_data_escaped}" href="{path}">\n'
         f'{badge}'
         f'        <span class="idx-card-title">{title_escaped}</span>\n'
         f'        <span class="idx-card-desc">{desc_escaped}</span>\n'
@@ -389,7 +396,7 @@ def render_category_section(cat_id: str, cat_title: str, cat_intro: str, article
 
     return (
         f'  <section class="idx-cat" id="cat-{cat_id}" data-category="{cat_id}">\n'
-        f'    <h2 class="idx-cat-h">{cat_title}</h2>\n'
+        f'    <h2 class="idx-cat-h" id="{heading_id(cat_title)}">{cat_title}</h2>\n'
         f'    <div class="idx-cat-grid">\n\n'
         f'{cards_html}\n\n'
         f'    </div>\n'

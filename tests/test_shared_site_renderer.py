@@ -114,3 +114,29 @@ def test_article_index_discovers_every_swedish_content_route_once():
     # sitemap and therefore this count; the assertion documents that invariant.
     assert len(articles) == 142
     assert len({article["path"] for article in articles}) == len(articles)
+
+
+def test_auto_generated_hubs_preserve_canonical_component_contract():
+    homepage = load_script("homepage_generator_contract", "scripts/generate-homepage.py")
+    home_section = homepage.render_articles_section([
+        {"title": "Example", "path": "/example", "date": homepage.datetime(2026, 9, 10), "reading_time": 4}
+    ])
+    assert 'class="container ln-flow"' in home_section
+    assert 'class="section-heading" id="senaste-artiklarna"' in home_section
+    assert '<a class="article-card" href="/example">' in home_section
+
+    article_index = load_script("article_index_generator_contract", "scripts/generate-article-index.py")
+    card = article_index.render_card_html(
+        {
+            "title": "A & M",
+            "description": "Quoted &quot;term&quot;",
+            "slug": "a-m",
+            "path": "/a-m",
+            "date_str": "10 september 2026",
+        },
+        "vitaminer",
+    )
+    section = article_index.render_category_section("vitaminer", "VITAMINER & MINERALER", "", [card])
+    assert 'id="vitaminer-mineraler"' in section
+    assert '<a class="idx-card" data-cat="vitaminer"' in card
+    assert 'data-search="a.&amp;.m.quoted.&quot;term&quot;.a.m"' in card
