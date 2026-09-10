@@ -659,7 +659,10 @@ def render_head(page: dict, body_html: str, root: Path) -> str:
         "og:type": meta.get(("property", "og:type"), "article" if page["family"] == "informational-article" else "website"),
         "og:title": meta.get(("property", "og:title"), title),
         "og:description": meta.get(("property", "og:description"), description),
-        "og:url": canonical,
+        # Open Graph identity is metadata, not presentation. Preserve the
+        # explicitly published value even when its slash convention differs
+        # from the canonical link or sitemap URL.
+        "og:url": meta.get(("property", "og:url"), canonical),
         "og:site_name": "LevNytt",
         "og:locale": locale,
         "og:image": og_image,

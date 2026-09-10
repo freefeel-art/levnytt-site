@@ -45,6 +45,16 @@ def test_product_family_receives_canonical_component_contract(tmp_path):
         assert component in html
 
 
+def test_rebuild_preserves_published_canonical_and_open_graph_urls(tmp_path):
+    data = tmp_path / "production-pages.json"
+    output = tmp_path / "output"
+    subprocess.run([sys.executable, "scripts/rebuild-production.py", "--root", str(ROOT), "--bootstrap", "--data", str(data)], check=True)
+    subprocess.run([sys.executable, "scripts/rebuild-production.py", "--root", str(ROOT), "--build", "--data", str(data), "--output-root", str(output)], check=True)
+    html = (output / "neolife-kosttillskott.html").read_text(encoding="utf-8")
+    assert '<link rel="canonical" href="https://levnytt.se/neolife-kosttillskott/">' in html
+    assert '<meta property="og:url" content="https://levnytt.se/neolife-kosttillskott">' in html
+
+
 def test_rebuild_resolves_cloudflare_rewrites_and_includes_error_page(tmp_path):
     data = tmp_path / "production-pages.json"
     subprocess.run([sys.executable, "scripts/rebuild-production.py", "--root", str(ROOT), "--bootstrap", "--data", str(data)], check=True)
