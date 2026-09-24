@@ -2,7 +2,10 @@ ROLE: OPERATIONAL
 
 # LevNytt — State
 
-**Last updated:** 2026-08-18
+**Last updated:** 2026-09-10
+
+> The authoritative operating contract is `SOUL.md`. This file records project
+> state; it does not define Commander behavior.
 
 ## Primary Business Objective (Owner-set)
 
@@ -19,7 +22,8 @@ Build and operate a profitable Swedish NeoLife organic acquisition asset
   `components.js` fixLinks; 57-product price database. Revenue **unmeasured**.
 - **Traffic baseline:** ~2 clicks / 366 impressions per rolling 28 days (GSC),
   avg position ~31.5, CTR ~0.55%. Pre-traction.
-- **Phase:** activation-ready (no autonomous production started).
+- **Phase:** active — the dedicated project-local Commander runs autonomous
+  production (scheduled by `scripts/commander-daily.sh`).
 
 ## Measurement
 

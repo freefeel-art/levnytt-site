@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from types import SimpleNamespace
 
 from commander import procedure
+from conftest import production_gsc_snapshot
 
 
 def _ctx(tmp_path: Path) -> SimpleNamespace:
@@ -75,16 +77,17 @@ def test_successful_wrangler_collection_persists_zero_as_observed_zero(tmp_path,
 
 def test_gsc_success_and_cta_failure_is_truthful_partial_measurement(tmp_path, monkeypatch):
     ctx = _ctx(tmp_path)
-    fetched_at = "2026-08-23T01:00:00+00:00"
+    fetched_at = datetime.now(timezone.utc).isoformat()
     destination = ctx.runtime_directory / "intelligence" / "gsc-latest.json"
     destination.parent.mkdir(parents=True)
     destination.write_text(
-        json.dumps({"site": procedure.GSC_PROPERTY, "fetched_at": "2026-08-22T01:00:00+00:00"}),
+        json.dumps(production_gsc_snapshot(30, (datetime.now(timezone.utc) - timedelta(days=3)).isoformat())),
         encoding="utf-8",
     )
     def collect_gsc(*args, **kwargs):
+        days = int(args[0][-1])
         destination.write_text(
-            json.dumps({"site": procedure.GSC_PROPERTY, "fetched_at": fetched_at}),
+            json.dumps(production_gsc_snapshot(days, (datetime.now(timezone.utc) - timedelta(seconds=days)).isoformat())),
             encoding="utf-8",
         )
         return _completed(stdout="GSC collection complete")
@@ -106,7 +109,8 @@ def test_gsc_success_and_cta_failure_is_truthful_partial_measurement(tmp_path, m
     assert execution["status"] == "PARTIAL"
     assert "No zero-event inference" in execution["detail"]
     assert "total_events" not in execution["evidence"]["sources"]["cta_d1"]
-    assert execution["evidence"]["sources"]["gsc"]["fetched_at"] == fetched_at
+    assert execution["evidence"]["sources"]["gsc"]["fetched_at"] == json.loads(destination.read_text())["fetched_at"]
+    assert set(json.loads(destination.read_text())["trends"]["windows"]) == {"7", "14", "30"}
     assert "diagnostic" not in execution["evidence"]["sources"]["gsc"]
     assert procedure.LevNyttProcedure().verify(ctx, action, execution) is True
 
@@ -116,7 +120,7 @@ def test_gsc_success_without_a_new_artifact_does_not_mask_cta_failure(tmp_path, 
     destination = ctx.runtime_directory / "intelligence" / "gsc-latest.json"
     destination.parent.mkdir(parents=True)
     destination.write_text(
-        json.dumps({"site": procedure.GSC_PROPERTY, "fetched_at": "2026-08-22T01:00:00+00:00"}),
+        json.dumps(production_gsc_snapshot(30, (datetime.now(timezone.utc) - timedelta(days=3)).isoformat())),
         encoding="utf-8",
     )
     monkeypatch.setattr(procedure.subprocess, "run", lambda *a, **k: _completed())

@@ -11,7 +11,10 @@ Hermes control repository.
 from __future__ import annotations
 
 import os
+import copy
+import json
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 LEVNYTT_ROOT = Path(__file__).resolve().parents[1]
@@ -32,3 +35,16 @@ def _ensure_paths() -> None:
 
 
 _ensure_paths()
+
+
+def production_gsc_snapshot(days: int, fetched_at: str | None = None) -> dict:
+    """Use the actual LevNytt query/page schema; vary only observation dates."""
+    snapshot = copy.deepcopy(json.loads((LEVNYTT_ROOT / "runtime" / "intelligence" / "gsc-latest.json").read_text(encoding="utf-8")))
+    observed = datetime.fromisoformat(fetched_at.replace("Z", "+00:00")) if fetched_at else datetime.now(timezone.utc)
+    end = (observed - timedelta(days=3)).date()
+    for dimension in ("query", "page"):
+        snapshot[dimension]["date_range"] = {"days": days, "start": (end - timedelta(days=days - 1)).isoformat(), "end": end.isoformat()}
+        snapshot[dimension]["fetched_at"] = observed.isoformat()
+    snapshot["fetched_at"] = observed.isoformat()
+    snapshot.pop("trends", None)
+    return snapshot

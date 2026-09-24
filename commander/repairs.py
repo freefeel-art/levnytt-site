@@ -24,6 +24,7 @@ unresolved exceptions, not by trusting the repair executor's own return value.
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -131,6 +132,10 @@ def run_link_repair(project_root: Path) -> dict[str, Any]:
             "detail": "No repairable internal-link defect remains.",
             "evidence": {"before_count": 0, "after_count": 0, "fixed": False},
         }
+    sources = {str(item.get("page") or "") for item in before}
+    initial_hashes = {source: hashlib.sha256((project_root / source).read_bytes()).hexdigest()
+                      for source in sources if source and (project_root / source).is_file()
+                      and (project_root / source).resolve().is_relative_to(project_root.resolve())}
     try:
         auditor = _load_auditor(project_root)
         auditor.run(project_root, True)
@@ -145,6 +150,10 @@ def run_link_repair(project_root: Path) -> dict[str, Any]:
     # as the "after" evidence).
     after = _repairable_exceptions(_read_only_audit(project_root))
     fixed = len(before) - len(after)
+    changed_files = {source: hashlib.sha256((project_root / source).read_bytes()).hexdigest()
+                     for source, old_hash in initial_hashes.items()
+                     if (project_root / source).is_file()
+                     and hashlib.sha256((project_root / source).read_bytes()).hexdigest() != old_hash}
     return {
         "status": "SUCCEEDED" if not after else "BLOCKED",
         "detail": (
@@ -155,6 +164,7 @@ def run_link_repair(project_root: Path) -> dict[str, Any]:
             "before_count": len(before),
             "after_count": len(after),
             "fixed": fixed,
+            "changed_files": changed_files,
             "remaining": after[:20],
         },
     }

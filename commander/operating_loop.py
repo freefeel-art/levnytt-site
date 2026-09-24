@@ -1,8 +1,9 @@
 """Dedicated LevNytt Commander operating loop.
 
 One bounded business cycle: load state -> collect factual evidence -> reconcile
-open defects / commitments -> select one action -> execute -> verify -> persist
--> report the real business result.
+open defects / commitments -> select an action -> execute -> verify -> persist
+-> rebuild evidence and select again, until a truthful stop reason or the finite
+action bound is reached.
 
 This loop owns LevNytt and nothing else. It resolves its identity, runtime and
 evidence from fixed construction (``commander.identity``), never from a mutable
@@ -21,7 +22,7 @@ import ast
 import hashlib
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -38,6 +39,8 @@ from app.commander.commitment_ledger import (
 from app.commander.operational_defects import (
     close_defect,
     load_active_defects,
+    record_repair_attempt,
+    repair_due,
 )
 from app.core.files import atomic_json_write, load_json_dict
 
@@ -50,7 +53,12 @@ from commander.procedure import LevNyttProcedure
 # receipts must carry the executor's structured evidence (file hashes) so the
 # evidence layer and the deployment executor recognise them as awaiting
 # deployment.
-_STAGED_CONTENT_CAPABILITIES = frozenset({"content_improvement", "content_production", "legacy_migration", "product_page"})
+_STAGED_CONTENT_CAPABILITIES = frozenset({"content_improvement", "content_production", "legacy_migration", "product_page", "link_repair", "internal_linking"})
+MAX_ACTIONS_PER_INVOCATION = 8
+
+# A failing repair is retried at most once per this interval, so a deterministic
+# internal failure cannot be re-attempted every cycle (anti-stall / §7 backoff).
+REPAIR_BACKOFF_SECONDS = 24 * 3600
 
 TZ = ZoneInfo("Europe/Stockholm")
 
@@ -102,7 +110,7 @@ def _reconcile_legacy_commitments(runtime: Path) -> None:
 # ── execution + verification ─────────────────────────────────────────────────
 
 
-def _action_for(decision: dict[str, Any]) -> dict[str, Any]:
+def _action_for(decision: dict[str, Any], runtime: Path | None = None) -> dict[str, Any]:
     kind = decision.get("kind")
     capability = decision.get("capability_id")
     if kind == "repair_defect":
@@ -112,11 +120,22 @@ def _action_for(decision: dict[str, Any]) -> dict[str, Any]:
     if kind == "resume_commitment":
         parts = str(decision.get("commitment_id") or "").split(":", 2)
         if len(parts) == 3 and parts[0] == identity.PROJECT_ID:
-            return {"capability": parts[1], "summary": parts[2]}
+            prior = next((r for r in reversed(identity.load_state(runtime=runtime).get("prior_decisions", []))
+                          if r.get("capability_id") == parts[1] and r.get("opportunity_id") == parts[2]), None) if runtime else None
+            row = (next((r for r in open_commitments(runtime) if r.get("commitment_id") == decision.get("commitment_id")), {})
+                   if runtime else {})
+            metadata = row.get("metadata") or {}
+            fallback = (parts[2].removeprefix("content-gap:") if parts[1] == "content_production"
+                        and parts[2].startswith("content-gap:") else None)
+            return {"capability": parts[1], "summary": parts[2],
+                    "opportunity_id": parts[2],
+                    "target": (prior.get("target") if prior else None) or metadata.get("target") or fallback,
+                    "provenance": prior.get("provenance") if prior else metadata.get("provenance")}
         return {"capability": None}
     if kind == "opportunity":
         summary = decision.get("opportunity_id") or decision.get("reason", "")
-        return {"capability": capability, "summary": summary}
+        return {"capability": capability, "summary": summary, "target": decision.get("target"),
+                "opportunity_id": decision.get("opportunity_id"), "provenance": decision.get("provenance")}
     return {"capability": None}
 
 
@@ -129,7 +148,7 @@ def _execute_decision(decision: dict[str, Any], project_root: Path, runtime: Pat
 
     procedure = LevNyttProcedure()
     ctx = _ctx(project_root, runtime)
-    action = _action_for(decision)
+    action = _action_for(decision, runtime)
 
     if kind == "idle":
         return {"status": "IDLE", "detail": decision.get("reason", ""), "evidence": {}}
@@ -139,11 +158,16 @@ def _execute_decision(decision: dict[str, Any], project_root: Path, runtime: Pat
             "detail": "commitment resumption could not be mapped to a capability",
             "evidence": {"commitment_id": decision.get("commitment_id")},
         }
-    return procedure.execute(ctx, action)
+    try:
+        return procedure.execute(ctx, action)
+    except Exception as error:
+        return {"status": "BLOCKED", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE",
+                "detail": f"{capability} executor failed: {type(error).__name__}: {error}",
+                "evidence": {"external_effect_attempted": False}}
 
 
 def _verify_outcome(decision: dict[str, Any], outcome: dict[str, Any], project_root: Path, runtime: Path) -> dict[str, Any]:
-    """Turn an executor return into a verified / unverified production effect.
+    """Distinguish a verified local result from a verified external effect.
 
     SUCCEEDED is never trusted on its own. The effect is re-checked against the
     thing it claimed to change: a live page, a refreshed artifact, a permalink.
@@ -153,6 +177,7 @@ def _verify_outcome(decision: dict[str, Any], outcome: dict[str, Any], project_r
 
     if kind == "repair_defect" and capability == "link_repair":
         verified, detail = repairs.verify_link_repair(project_root)
+        verified = verified and outcome.get("status") == "SUCCEEDED"
         return {
             "verified": verified,
             "verification_class": "LINK_REPAIR_RECHECK" if verified else "UNVERIFIED",
@@ -162,17 +187,207 @@ def _verify_outcome(decision: dict[str, Any], outcome: dict[str, Any], project_r
     if kind == "idle":
         return {"verified": False, "verification_class": "IDLE", "detail": outcome.get("detail", "")}
 
+    if outcome.get("status") not in {"SUCCEEDED", "PARTIAL", "PUBLISHED"}:
+        return {"verified": False, "verification_class": "EXTERNAL_EFFECT_UNVERIFIED",
+                "detail": outcome.get("detail", "")}
+
     procedure = LevNyttProcedure()
     ctx = _ctx(project_root, runtime)
-    action = _action_for(decision)
+    action = _action_for(decision, runtime)
     if action.get("capability") is None:
         return {"verified": False, "verification_class": "UNVERIFIED", "detail": outcome.get("detail", "")}
 
     verified = procedure.verify(ctx, action, outcome)
+    if capability == "measurement" and decision.get("opportunity_id") == "measurement:gsc-refresh":
+        verified = verified and (outcome.get("evidence") or {}).get("sources", {}).get("gsc", {}).get("status") == "available"
+    receipt = outcome.get("evidence") or {}
+    if not verified:
+        verification_class = "EXTERNAL_EFFECT_UNVERIFIED"
+    elif (capability in {"deployment", "social_publishing", "pinterest"}
+          and receipt.get("external_effect_attempted") is True):
+        # procedure.verify checks the live revision / provider receipt for the
+        # exact selected action; an executor assertion alone is never enough.
+        verification_class = "EXTERNAL_EFFECT_VERIFIED"
+    elif capability in _STAGED_CONTENT_CAPABILITIES and receipt.get("gate_passed"):
+        verification_class = "STAGED_VERIFIED"
+    elif capability in {"measurement", "seo_intelligence", "search_demand_scout", "community_intelligence", "legacy_audit"}:
+        verification_class = "OBSERVATION_VERIFIED"
+    else:
+        verification_class = "EXECUTION_VERIFIED"
     return {
         "verified": verified,
-        "verification_class": "EXTERNAL_EFFECT_VERIFIED" if verified else "EXTERNAL_EFFECT_UNVERIFIED",
+        "verification_class": verification_class,
+        "external_effect_verified": verification_class == "EXTERNAL_EFFECT_VERIFIED",
         "detail": outcome.get("detail", ""),
+    }
+
+
+def _record_capability_blocker(state: dict[str, Any], decision: dict[str, Any], outcome: dict[str, Any]) -> None:
+    """Only an explicit capability-scoped executor receipt parks an entire lane."""
+    blocker = (outcome.get("evidence") or {}).get("blocker")
+    capability = str(decision.get("capability_id") or "")
+    if (not str(outcome.get("status") or "").startswith("BLOCKED") or not capability
+            or not isinstance(blocker, dict) or blocker.get("scope") != "CAPABILITY"
+            or not blocker.get("blocker_id") or not isinstance(blocker.get("condition"), dict)):
+        return
+    state.setdefault("capability_blockers", {})[capability] = {
+        "scope": "CAPABILITY", "blocker_id": blocker["blocker_id"],
+        "condition": blocker["condition"], "status": outcome["status"],
+        "opportunity_id": decision.get("opportunity_id"),
+        "detail": str(outcome.get("detail") or "")[:300], "observed_at": _iso(),
+    }
+
+
+def _hydrate_capability_blockers(state: dict[str, Any]) -> None:
+    """Recognise the already-recorded production Pinterest block on upgrade.
+
+    The real operation before this repair persisted the provider status in its
+    decision history but did not yet persist the capability scope. No production
+    state is cleared or fabricated; the existing receipt supplies the evidence.
+    """
+    blockers = state.setdefault("capability_blockers", {})
+    if "pinterest" in blockers:
+        return
+    for row in reversed(state.get("prior_decisions") or []):
+        if row.get("capability_id") != "pinterest":
+            continue
+        execution = row.get("execution") or {}
+        status = execution.get("status")
+        if status == "PUBLISHED":
+            break
+        if status != "BLOCKED_BY_PINTEREST_STANDARD_ACCESS":
+            continue
+        from commander.pinterest_channel import standard_access_blocker
+        detail = str(execution.get("detail") or "")
+        blocker = standard_access_blocker(detail)
+        blockers["pinterest"] = {
+            **blocker, "status": status, "opportunity_id": row.get("opportunity_id"),
+            "detail": detail[:300], "observed_at": row.get("selected_at"),
+        }
+        break
+
+
+def _blocker_still_active(blocker: dict[str, Any]) -> bool:
+    """Recheck the *recorded* external condition, never a different Pin."""
+    condition = blocker.get("condition") or {}
+    if condition.get("type") == "environment_required" and condition.get("name") == "PINTEREST_ACCESS_TIER":
+        # Importing the existing provider loads the same dotenv configuration
+        # used by its publication gate, without reading credentials or posting.
+        from app.providers import pinterest as _pinterest  # noqa: F401
+        import os
+        return os.getenv("PINTEREST_ACCESS_TIER", "trial").strip().lower() != condition.get("value")
+    if condition.get("type") == "retry_after_seconds":
+        try:
+            observed = datetime.fromisoformat(str(blocker["observed_at"]).replace("Z", "+00:00"))
+            seconds = int(condition["seconds"])
+            return seconds <= 0 or (datetime.now(timezone.utc) - observed).total_seconds() < seconds
+        except (KeyError, TypeError, ValueError):
+            return True  # invalid provenance is not evidence that access cleared
+    return True  # unknown conditions fail closed
+
+
+def _active_capability_blockers(state: dict[str, Any]) -> tuple[list[str], list[str]]:
+    _hydrate_capability_blockers(state)
+    blockers = state.get("capability_blockers") or {}
+    cleared: list[str] = []
+    active: list[str] = []
+    for capability, blocker in blockers.items():
+        if not isinstance(blocker, dict):
+            active.append(capability)  # malformed boundary fails closed
+        elif blocker.get("status") == "CLEARED":
+            continue
+        elif _blocker_still_active(blocker):
+            active.append(capability)
+        else:
+            blocker["status"] = "CLEARED"
+            blocker["cleared_at"] = _iso()
+            cleared.append(capability)
+    return sorted(active), sorted(cleared)
+
+
+def _escalate_if_non_retryable(decision: dict[str, Any], outcome: dict[str, Any], runtime: Path) -> None:
+    """Anti-stall: escalate a determinately-blocked commitment instead of retrying.
+
+    A commitment whose execution returned BLOCKED with ``failure_class``
+    EVIDENCE_REQUIRED and ``retry_eligible_this_run`` False is a determinate
+    absence of required evidence (for example an official product image that
+    neither the local assets nor the autonomous acquisition path could supply).
+    It can never self-resolve by retrying, so it is preserved as an
+    OWNER_BOUNDARY terminal resolution carrying the blocker detail, and the loop
+    proceeds to the next independent priority on the following cycle.
+
+    Transient blocks (UNAVAILABLE, RECOVERABLE_*, or any retryable outcome) are
+    deliberately left OPEN so a later cycle may retry them.
+    """
+    if outcome.get("status") != "BLOCKED":
+        return
+    if outcome.get("failure_class") != "EVIDENCE_REQUIRED":
+        return
+    if outcome.get("retry_eligible_this_run", True):
+        return
+    commitment_id = str(decision.get("commitment_id") or "")
+    if not commitment_id:
+        commitment = _commitment_for(decision)
+        if commitment:
+            commitment_id = str(commitment["commitment_id"])
+    if not commitment_id:
+        return
+    record_commitment_resolution(
+        commitment_id=commitment_id,
+        resolution="OWNER_BOUNDARY",
+        reason=str(outcome.get("detail") or "blocked")[:500],
+        runtime=runtime,
+    )
+
+
+def _park_deployment_if_stalled(
+    decision: dict[str, Any],
+    outcome: dict[str, Any],
+    state: dict[str, Any],
+    project_root: Path,
+) -> None:
+    """Park a determinately-blocked deployment so it is not re-selected.
+
+    A deterministic dirty-tree failure is recorded with its blocking paths and
+    staged revision identity. The evidence builder excludes that revision until
+    the deployment safety check actually clears. Unrelated accepted staged work
+    cannot expire this park; it remains independently selectable.
+
+    The staged-product commitment itself is never discarded;
+    ``_escalate_if_non_retryable`` already resolved only the transient
+    deployment-attempt commitment, leaving the confirmed staged-product
+    commitment intact.
+    """
+    if decision.get("capability_id") != "deployment":
+        return
+    if outcome.get("status") != "BLOCKED":
+        return
+    if outcome.get("failure_class") != "EVIDENCE_REQUIRED":
+        return
+    if outcome.get("retry_eligible_this_run", True):
+        return
+    evidence = outcome.get("evidence") or {}
+    slug = str(evidence.get("slug") or "")
+    if not slug:
+        return
+
+    reasons = list(evidence.get("reasons") or [])
+
+    parked = state.get("deployment_parked")
+    if not isinstance(parked, dict):
+        parked = {}
+        state["deployment_parked"] = parked
+    entry = parked.get(slug, {})
+    count = int(entry.get("escalation_count", 0)) + 1
+
+    parked[slug] = {
+        "slug": slug,
+        "staged_content_sha256": evidence.get("staged_content_sha256"),
+        "source_file": evidence.get("source_file"),
+        "blocker_paths": evidence.get("blocker_paths", []),
+        "reasons": reasons[:20],
+        "parked_at": _iso(),
+        "escalation_count": count,
     }
 
 
@@ -192,22 +407,24 @@ def _commitment_for(decision: dict[str, Any]) -> dict[str, Any] | None:
         code = decision.get("code") or "no-code"
         return {
             "commitment_id": f"{identity.PROJECT_ID}:product_page:{code}",
-            "kind": "unverified_external_effect",
+            "kind": "staged_work",
             "capability_id": "product_page",
             "executor_id": "product_page",
             "action": decision.get("reason", decision.get("kind", "")),
             "reason": decision.get("reason", ""),
+            "metadata": {"target": decision.get("target"), "provenance": decision.get("provenance")},
         }
     if decision.get("kind") != "opportunity":
         return None
     opportunity_id = decision.get("opportunity_id") or "no-opportunity"
     return {
         "commitment_id": f"{identity.PROJECT_ID}:{decision.get('capability_id')}:{opportunity_id}",
-        "kind": "unverified_external_effect",
+        "kind": "staged_work" if decision.get("capability_id") in _STAGED_CONTENT_CAPABILITIES else "unverified_external_effect",
         "capability_id": decision.get("capability_id"),
         "executor_id": decision.get("capability_id"),
         "action": decision.get("reason", decision.get("kind", "")),
         "reason": decision.get("reason", ""),
+        "metadata": {"target": decision.get("target"), "provenance": decision.get("provenance")},
     }
 
 
@@ -224,7 +441,8 @@ def _confirmation_evidence(decision: dict[str, Any], outcome: dict[str, Any], ve
     evidence = outcome.get("evidence")
     if capability in _STAGED_CONTENT_CAPABILITIES and isinstance(evidence, dict) and evidence:
         return repr(evidence)
-    return verification.get("detail", "verified external effect")
+    return verification.get("detail") or ("verified external effect"
+            if verification.get("verification_class") == "EXTERNAL_EFFECT_VERIFIED" else "verified execution result")
 
 
 def _sha256(project_root: Path, rel: str) -> str | None:
@@ -308,12 +526,17 @@ def _persist(state, decision, outcome, verification, runtime) -> None:
         "decision": decision.get("kind"),
         "action": decision.get("reason") or decision.get("kind"),
         "reason": decision.get("reason"),
+        "opportunity_id": decision.get("opportunity_id"),
+        "commitment_id": decision.get("commitment_id"),
+        "target": decision.get("target"),
+        "provenance": decision.get("provenance"),
         "execution": {
             "status": outcome.get("status"),
             "detail": str(outcome.get("detail", ""))[:500],
             "evidence": outcome.get("evidence"),
         },
         "verified": verification.get("verified"),
+        "external_effect_verified": verification.get("verification_class") == "EXTERNAL_EFFECT_VERIFIED",
         "verification_class": verification.get("verification_class"),
         "measurement": {},
     }
@@ -330,32 +553,45 @@ def _persist(state, decision, outcome, verification, runtime) -> None:
 # ── cycle ───────────────────────────────────────────────────────────────────
 
 
-def run_cycle(
+def _run_step(
     *,
     project_root: Path | None = None,
     runtime: Path | None = None,
     today: str | None = None,
     execute: bool = True,
+    attempted: set[str] | None = None,
 ) -> dict[str, Any]:
-    """Run one bounded LevNytt Commander cycle."""
+    """Run one decision against newly assembled evidence."""
     identity.assert_identity()
     project_root = Path(project_root) if project_root is not None else identity.PROJECT_ROOT
     runtime = Path(runtime) if runtime is not None else identity.RUNTIME_DIR
     today = today or _today()
 
     state = identity.load_state(runtime=runtime)
+    prior_blockers = json.dumps(state.get("capability_blockers") or {}, sort_keys=True, default=str)
+    active_blockers, cleared_blockers = _active_capability_blockers(state)
+    if execute and json.dumps(state.get("capability_blockers") or {}, sort_keys=True, default=str) != prior_blockers:
+        identity.save_state(state, runtime=runtime)
     evidence = evidence_module.build_evidence(project_root, runtime, today)
-    evidence_module.detect_defects(project_root, runtime)
-    _reconcile_legacy_commitments(runtime)
-    _reconcile_staged_commitments(runtime, project_root)
-    # Re-read evidence now that the reconciliation may have made staged content
-    # recognisable as awaiting deployment.
-    evidence = evidence_module.build_evidence(project_root, runtime, today)
-    defects = load_active_defects(runtime)
+    if execute:
+        evidence_module.detect_defects(project_root, runtime)
+        _reconcile_legacy_commitments(runtime)
+        _reconcile_staged_commitments(runtime, project_root)
+        # Re-read evidence now that reconciliation may have made staged work
+        # recognisable as awaiting deployment.
+        evidence = evidence_module.build_evidence(project_root, runtime, today)
+    defects = [
+        d for d in load_active_defects(runtime)
+        if repair_due(d, backoff_seconds=REPAIR_BACKOFF_SECONDS)
+    ]
     commitments = open_commitments(runtime)
 
     budget_check = lambda capability: decision_model.budget_available(state, today, capability)
-    decision = decision_model.decide(evidence, defects, commitments, budget_check=budget_check)
+    evidence["recent_decisions"] = state.get("prior_decisions", [])
+    evidence["blocked_capabilities"] = active_blockers
+    evidence["cleared_capability_blockers"] = cleared_blockers
+    decision = decision_model.decide(evidence, defects, commitments, budget_check=budget_check,
+                                     attempted=attempted)
 
     summary = {
         "project_id": identity.PROJECT_ID,
@@ -368,14 +604,19 @@ def run_cycle(
         "executed": False,
     }
 
-    if not execute:
+    if not execute or decision.get("kind") == "idle":
         return summary
+
+    # Record the bounded repair attempt so backoff (repair_due) prevents an
+    # immediately-failing repair from being retried every cycle.
+    if decision.get("kind") == "repair_defect":
+        record_repair_attempt(runtime, str(decision.get("defect_id") or ""))
 
     # A NEW budgeted action (publication/optimization/measurement) consumes its
     # budget at the moment it is decided, so more cycles cannot become more
     # publishing. Defect repair, deployment, resumption and verification never
     # consume a content budget.
-    if decision.get("kind") == "opportunity":
+    if decision.get("kind") in {"opportunity", "product_backlog"}:
         decision_model.record_budget_use(state, today, str(decision.get("capability_id") or ""))
 
     commitment = _commitment_for(decision)
@@ -389,10 +630,15 @@ def run_cycle(
             executor_id=commitment["executor_id"],
             action=commitment["action"],
             reason=commitment["reason"],
+            metadata=commitment.get("metadata"),
         )
 
     outcome = _execute_decision(decision, project_root, runtime)
     verification = _verify_outcome(decision, outcome, project_root, runtime)
+
+    _record_capability_blocker(state, decision, outcome)
+    _escalate_if_non_retryable(decision, outcome, runtime)
+    _park_deployment_if_stalled(decision, outcome, state, project_root)
 
     if commitment is not None and verification.get("verified"):
         confirm_commitment(
@@ -400,8 +646,23 @@ def run_cycle(
             evidence=_confirmation_evidence(decision, outcome, verification),
             runtime=runtime,
         )
+    elif decision.get("kind") == "resume_commitment" and verification.get("verified"):
+        # A resumed commitment has no new commitment record (``_commitment_for``
+        # only covers product_backlog / opportunity). On a verified success the
+        # pre-existing OPEN commitment must still reach CONFIRMED, otherwise it
+        # lingers OPEN and is re-selected on the next cycle forever.
+        confirm_commitment(
+            commitment_id=decision.get("commitment_id"),
+            evidence=_confirmation_evidence(decision, outcome, verification),
+            runtime=runtime,
+        )
 
     _persist(state, decision, outcome, verification, runtime)
+
+    from commander import interventions
+    interventions.record_result(runtime, decision, outcome, verification, evidence)
+    if decision.get("capability_id") == "measurement" and (outcome.get("evidence") or {}).get("sources", {}).get("gsc", {}).get("status") == "available":
+        interventions.follow_up(runtime, runtime / "intelligence" / "gsc-latest.json")
 
     summary.update({
         "outcome": outcome,
@@ -409,6 +670,61 @@ def run_cycle(
         "executed": True,
     })
     return summary
+
+
+def run_cycle(
+    *, project_root: Path | None = None, runtime: Path | None = None,
+    today: str | None = None, execute: bool = True,
+) -> dict[str, Any]:
+    """One finite objective loop: re-observe after every action, then decide again.
+
+    A failed action may be skipped for this invocation; no safety or publication
+    budget is reset between steps. Cron still owns the next independent visit.
+    """
+    identity.assert_identity()
+    project_root = Path(project_root) if project_root is not None else identity.PROJECT_ROOT
+    runtime = Path(runtime) if runtime is not None else identity.RUNTIME_DIR
+    today = today or _today()
+    if not execute:
+        return _run_step(project_root=project_root, runtime=runtime, today=today, execute=False)
+
+    attempted: set[str] = set()
+    steps: list[dict[str, Any]] = []
+    for _ in range(MAX_ACTIONS_PER_INVOCATION):
+        result = _run_step(project_root=project_root, runtime=runtime, today=today,
+                           attempted=attempted)
+        if result["decision"]["kind"] == "idle":
+            if result["evidence_summary"].get("gsc_fresh") is False and (
+                result["content_budgets"]["measurement"]["used"] >= result["content_budgets"]["measurement"]["limit"]
+            ):
+                stop = "WAITING_FOR_MEASUREMENT"
+            elif result["open_commitments"]:
+                stop = "WAITING_FOR_COMMITMENT_RETRY_OR_EXTERNAL_EFFECT"
+            elif identity.load_state(runtime=runtime).get("deployment_parked"):
+                stop = "WAITING_FOR_BLOCKED_DEPLOYMENT"
+            elif ((result["evidence_summary"].get("product_backlog_count", 0) > 0 and
+                   result["content_budgets"]["publication"]["used"] >= result["content_budgets"]["publication"]["limit"]) or
+                  (result["evidence_summary"].get("optimization_opportunity_count", 0) > 0 and
+                   result["content_budgets"]["optimization"]["used"] >= result["content_budgets"]["optimization"]["limit"])):
+                stop = "CAPACITY_EXHAUSTED"
+            else:
+                stop = "NO_JUSTIFIED_EXECUTABLE_WORK"
+            state = identity.load_state(runtime=runtime)
+            state["latest_stop_reason"] = stop
+            identity.save_state(state, runtime=runtime)
+            return {**result, "steps": steps, "action_count": len(steps),
+                    "stop_reason": stop}
+        attempted.add(decision_model.action_key(result["decision"]))
+        commitment = _commitment_for(result["decision"])
+        if commitment and not result.get("verification", {}).get("verified"):
+            attempted.add(decision_model.action_key({"kind": "resume_commitment",
+                "capability_id": commitment["capability_id"], "commitment_id": commitment["commitment_id"]}))
+        steps.append(result)
+    state = identity.load_state(runtime=runtime)
+    state["latest_stop_reason"] = "BOUNDED_LOOP_SAFETY_LIMIT"
+    identity.save_state(state, runtime=runtime)
+    return {**steps[-1], "steps": steps, "action_count": len(steps),
+            "stop_reason": "BOUNDED_LOOP_SAFETY_LIMIT"}
 
 
 def _evidence_summary(evidence: dict[str, Any]) -> dict[str, Any]:
@@ -431,4 +747,8 @@ def _evidence_summary(evidence: dict[str, Any]) -> dict[str, Any]:
         ),
         "no_autonomous_production_action": work.get("no_autonomous_production_action"),
         "search_index_coverage": evidence.get("search_index_coverage"),
+        "product_backlog_count": len(evidence.get("product_backlog") or []),
+        "blocked_capabilities": evidence.get("blocked_capabilities") or [],
+        "optimization_opportunity_count": (len((evidence.get("content_improvement_opportunities") or {}).get("opportunities") or [])
+                                           + len(evidence.get("internal_link_opportunities") or [])),
     }

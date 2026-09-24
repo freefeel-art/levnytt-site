@@ -109,7 +109,9 @@ def test_resumption_redispatches_original_work():
         "commitment_id": "levnytt:content_improvement:content-improvement:finns-det-billigare-alternativ",
     })
     assert action == {"capability": "content_improvement",
-                      "summary": "content-improvement:finns-det-billigare-alternativ"}
+                      "summary": "content-improvement:finns-det-billigare-alternativ",
+                      "opportunity_id": "content-improvement:finns-det-billigare-alternativ",
+                      "target": None, "provenance": None}
 
 
 def test_legacy_commitment_cannot_silently_redirect():

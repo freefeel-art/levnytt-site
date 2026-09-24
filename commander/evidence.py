@@ -20,6 +20,7 @@ as UNKNOWN/UNAVAILABLE rather than zero.
 from __future__ import annotations
 
 import ast
+import hashlib
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -28,7 +29,7 @@ from app.commander.commitment_ledger import ledger_path, open_commitments
 from app.commander.operational_defects import load_active_defects, register_defect
 from app.core.files import load_json_dict
 
-from commander import identity, repairs
+from commander import gsc_control, identity, repairs
 
 # A content_improvement is suppressed from re-selection for one GSC data window
 # after it is confirmed, so the Commander does not re-improve a page using
@@ -80,6 +81,11 @@ def _suppress_completed_improvements(packet: dict[str, Any], runtime: Path) -> d
     recently-confirmed improvement, so the Commander moves on to fresh work
     instead of re-selecting a just-deployed page on stale GSC evidence."""
     suppressed = _recently_improved_slugs(runtime)
+    from commander import interventions
+    measured = interventions.measured_outcomes(runtime)
+    suppressed -= {r["slug"] for r in measured if r.get("direction") == "DECLINED"}
+    suppressed |= {r["slug"] for r in measured if r.get("direction") in
+                   {"INCREASED", "UNCHANGED", "NEWLY_OBSERVED", "NOT_REPORTED"}}
     opportunities = packet.get("content_improvement_opportunities")
     if not isinstance(opportunities, dict):
         return packet
@@ -113,20 +119,59 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
 
     packet = _levnytt(project_root, runtime, today, identity.PROJECT_ID)
     packet = _suppress_completed_improvements(packet, runtime)
+    gsc = load_json_dict(runtime / "intelligence" / "gsc-latest.json")
+    freshness = dict(packet.get("measurement_freshness") or {})
+    freshness["gsc_fresh"] = gsc_control.fresh(gsc)
+    freshness["fresh"] = freshness["gsc_fresh"] and bool(freshness.get("cta_fresh"))
+    packet["measurement_freshness"] = freshness
+    packet["gsc_trends"] = gsc.get("trends") if gsc_control.valid_snapshot(gsc) else None
+    from commander import interventions
+    packet["intervention_followups"] = interventions.measured_outcomes(runtime)
+    # Only current GSC rows can justify a new routing intervention. The CTA
+    # reader already distinguishes a stale historical click from a fresh one.
+    packet["gsc_pages"] = (gsc.get("page") or {}).get("all_pages", []) if freshness["gsc_fresh"] else []
+    packet["gsc_queries"] = (gsc.get("query") or {}).get("all_queries", []) if freshness["gsc_fresh"] else []
+    from commander import site_opportunities
+    packet["internal_link_opportunities"] = site_opportunities.opportunities(project_root, packet)
+    from commander.community import community_derived_candidates
+    packet["community_demand_candidates"] = community_derived_candidates(runtime, limit=5)
+    try:
+        keywords = load_json_dict(runtime / "intelligence" / "keywords.json")
+    except ValueError:
+        keywords = {}
+    packet["known_keyword_terms"] = [str(row["keyword"]) for row in keywords.get("keywords", [])
+                                     if isinstance(row, dict) and row.get("keyword")]
+    # The shared summary is intentionally bounded; retain the selected Scout
+    # item's full measured market, coverage and commercial provenance without
+    # copying or rerunning the Hermes provider.
+    scout = packet.get("search_demand_scout") or {}
+    if scout.get("checked_at"):
+        try:
+            raw_scout = load_json_dict(runtime / "intelligence" / "search-demand-scout.json")
+        except ValueError:
+            raw_scout = {}
+        if raw_scout.get("checked_at") == scout["checked_at"]:
+            scout["actionable_opportunities"] = [row for row in raw_scout.get("opportunities", [])
+                                                  if isinstance(row, dict) and row.get("classification") in {"CREATE", "UPDATE"}][:8]
 
     # Persistent NeoLife product-coverage backlog. Every current product without
     # a dedicated PRODUCT_PAGE is eligible; search evidence only affects
     # ordering, never eligibility.
-    packet["product_backlog"] = _product_backlog(project_root)
+    packet["product_backlog"] = _product_backlog(project_root, runtime)
 
     # Pinterest distribution opportunities (dedup-filtered).
     packet["pinterest_opportunities"] = _pinterest_opportunities(project_root, runtime)
 
     # A staged product page must surface as awaiting deployment so the decision
     # model deploys it instead of staging the next product.
-    packet["staged_awaiting_deployment"] = list(
+    packet["staged_awaiting_deployment"] = sorted(
         set(packet.get("staged_awaiting_deployment") or [])
         | set(_staged_product_pages(project_root, runtime))
+        | set(_staged_link_repairs(project_root, runtime))
+        | set(_staged_internal_links(project_root))
+    )
+    packet["staged_awaiting_deployment"] = _filter_parked_deployments(
+        packet["staged_awaiting_deployment"], project_root, runtime
     )
 
     # Reconcile open durable state so the decision sees everything at once.
@@ -153,6 +198,24 @@ def _pinterest_opportunities(project_root: Path, runtime: Path) -> list[dict[str
     # Product pins first (coverage priority), then informational.
     pending.sort(key=lambda o: (0 if o.get("pin_class") == "product" else 1, o.get("code") or "", o.get("title") or ""))
     return pending
+
+
+def _staged_link_repairs(project_root: Path, runtime: Path) -> list[str]:
+    from commander import interventions
+    from commander.procedure import _git_status_paths
+
+    changed = _git_status_paths(project_root)
+    return sorted({r["slug"] for r in interventions._rows(runtime)
+                   if r.get("capability_id") == "link_repair" and r.get("stage") == "EXECUTED"
+                   and r.get("source_file") in changed
+                   and (project_root / r["source_file"]).is_file()
+                    and hashlib.sha256((project_root / r["source_file"]).read_bytes()).hexdigest() == r.get("source_sha256")})
+
+
+def _staged_internal_links(project_root: Path) -> list[str]:
+    from commander.procedure import _confirmed_staged_work
+    return [row["slug"] for row in _confirmed_staged_work(project_root)
+            if row["capability_id"] == "internal_linking"]
 
 
 def _staged_product_pages(project_root: Path, runtime: Path) -> list[str]:
@@ -182,17 +245,88 @@ def _staged_product_pages(project_root: Path, runtime: Path) -> list[str]:
         if not isinstance(parsed, dict) or not parsed.get("gate_passed"):
             continue
         source_file = str(parsed.get("source_file") or "")
-        if source_file and source_file in changed:
+        expected_hash = parsed.get("staged_content_sha256")
+        source_path = project_root / source_file
+        if (source_file and source_file in changed and source_path.is_file()
+                and (not expected_hash or hashlib.sha256(source_path.read_bytes()).hexdigest() == expected_hash)):
             slugs.append(str(parsed.get("slug") or ""))
     return slugs
 
 
-def _product_backlog(project_root: Path) -> list[dict[str, Any]]:
+def _filter_parked_deployments(
+    staged: list[str], project_root: Path, runtime: Path,
+) -> list[str]:
+    """Filter out staged slugs whose deployment was parked due to a deterministic
+    safety-gate failure, so the next cycle can proceed to other work.
+
+    Each parked entry retains the staged revision and dirty-path blockers.
+    Only an independently rechecked, safe deployment unblocks that revision;
+    unrelated git changes cannot expire its park.
+    """
+    if not staged:
+        return staged
+    state = identity.load_state(runtime=runtime)
+    parked = state.get("deployment_parked")
+    if not isinstance(parked, dict) or not parked:
+        return staged
+    filtered: list[str] = []
+    for slug in staged:
+        entry = parked.get(slug)
+        if isinstance(entry, dict) and _deployment_still_blocked(slug, project_root, entry):
+            continue
+        filtered.append(slug)
+    return filtered
+
+
+def _deployment_still_blocked(slug: str, project_root: Path, entry: dict[str, Any]) -> bool:
+    """Only reconsider when this staged revision's actual safety blockers clear.
+
+    Other accepted staged files may be added while it is parked. They do not
+    constitute evidence that the unrelated dirty files blocking this deployment
+    have been cleaned. Missing provenance is not permission to unpark.
+    """
+    from commander.procedure import _confirmed_staged_work, _deployment_safety, _file_sha256
+
+    work = next((r for r in _confirmed_staged_work(project_root) if r["slug"] == slug), None)
+    if work is None:
+        return True
+    expected = entry.get("staged_content_sha256")
+    if expected and _file_sha256(project_root / work["source_file"]) != expected:
+        return True  # changed source needs a new confirmed provenance receipt
+    allowed = {f for r in _confirmed_staged_work(project_root) for f in r["files"]}
+    return not _deployment_safety(project_root, slug, allowed)["ok"]
+
+
+def _escalated_product_codes(runtime: Path) -> set[str]:
+    """Product codes whose product_page commitment was escalated OWNER_BOUNDARY.
+
+    An OWNER_BOUNDARY product_page commitment is the durable record that the
+    autonomous image-acquisition path was exhausted for that product. These codes
+    are excluded from the backlog while they still have no local image, so a
+    determinate absence does not re-select the same product every cycle. If the
+    Owner later supplies a local image, the product re-enters the backlog.
+    """
+    from app.commander.commitment_ledger import commitment_records
+
+    codes: set[str] = set()
+    for row in commitment_records(runtime):
+        if row.get("capability_id") != "product_page":
+            continue
+        if row.get("status") != "OWNER_BOUNDARY":
+            continue
+        code = str(row.get("commitment_id") or "").rsplit(":", 1)[-1]
+        if code:
+            codes.add(code)
+    return codes
+
+
+def _product_backlog(project_root: Path, runtime: Path) -> list[dict[str, Any]]:
     from commander import product_coverage
     from commander import product_page
 
     coverage = product_coverage.compute_coverage(project_root)
     entities = product_coverage.load_product_entities(project_root)
+    escalated_codes = _escalated_product_codes(runtime)
     backlog: list[dict[str, Any]] = []
     for row in coverage["products"]:
         if row["status"] == product_coverage.DEDICATED_PAGE_EXISTS:
@@ -201,6 +335,11 @@ def _product_backlog(project_root: Path) -> list[dict[str, Any]]:
         if not entity:
             continue
         image = product_page.resolve_image(entity, project_root)
+        # Skip a product that was escalated (autonomous acquisition exhausted)
+        # and still has no local image, so it cannot be re-selected 4x/day. It
+        # returns to the backlog as soon as a local image exists.
+        if image is None and str(entity.get("neoLife_code") or "") in escalated_codes:
+            continue
         backlog.append({
             "code": str(entity.get("neoLife_code")),
             "product_name": str(entity.get("product_name") or ""),

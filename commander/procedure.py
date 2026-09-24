@@ -1,11 +1,10 @@
-"""LevNytt domain adapters and executors for the shared Commander loop.
+"""LevNytt domain adapters and executors for the dedicated Commander loop.
 
 Supplies only domain adapters/executors/evidence helpers. It does NOT encode
-LevNytt's leadership decisions: the Commander decision comes from
-``app.commander.decision.decide`` (the real LLM Commander), which loads the
-authoritative ``docs/commander/SOUL.md``, the LevNytt objectives, and the
-facts-only evidence. This file's ``execute`` maps the Commander's selected
-capability to one bounded, NeoLife-scoped domain action.
+LevNytt's leadership decisions: the deterministic business decision comes from
+``commander.decision.decide`` (the project-local decision model), which follows
+the consolidated operating contract in ``SOUL.md``. This file's ``execute`` maps
+the Commander's selected capability to one bounded, NeoLife-scoped domain action.
 
 LevNytt is the NeoLife project. No OLSP or Cashbackkollen objective,
 attribution, runtime state, or business logic is used here.
@@ -47,6 +46,10 @@ CTA_LATEST_FILENAME = "cta-events-latest.json"
 CTA_ATTEMPT_FILENAME = "cta-events-last-attempt.json"
 PENDING_DEPLOYMENT_FILENAME = "pending-deployment-verification.json"
 NEOLIFE_LATEST_FILENAME = "neolife-backoffice-latest.json"
+# Back-office (orders / PV / commissions / invoices) is secondary accounting
+# evidence that never gates a production decision. It is refreshed at most once
+# per this interval and otherwise reused, so it cannot dominate the loop.
+BACKOFFICE_REFRESH_MIN_AGE_HOURS = 7 * 24
 USER_AGENT = "Mozilla/5.0 (compatible; LevNyttHermes/1.0; +https://levnytt.se)"
 HERMES_REPO = Path("/home/yampa/projects/active/hermes")
 HERMES_PYTHON = HERMES_REPO / ".venv" / "bin" / "python"
@@ -460,6 +463,11 @@ class LevNyttProcedure:
             return self._execute_measurement(ctx, action)
         if capability == "seo_intelligence":
             return self._execute_seo_intelligence(ctx, action)
+        if capability == "search_demand_scout":
+            return self._execute_search_demand_scout(ctx, action)
+        if capability == "internal_linking":
+            from commander.site_opportunities import stage_link
+            return stage_link(ctx.working_repository, action)
         if capability == "content_improvement":
             return self._execute_content_improvement(ctx, action)
         if capability == "content_production":
@@ -514,7 +522,11 @@ class LevNyttProcedure:
         pending.sort(key=lambda o: (0 if o.get("pin_class") == "product" else 1, o.get("code") or "", o.get("title") or ""))
         if not pending:
             return {"status": "SUCCEEDED", "detail": "No unpublished Pin opportunity.", "evidence": {"pins_pending": 0}}
-        opportunity = pending[0]
+        requested = action.get("opportunity_id") or action.get("summary")
+        opportunity = next((o for o in pending if
+                            f"pinterest:{o.get('pin_class')}:{o.get('slug') or o.get('code')}" == requested), None)
+        if opportunity is None:
+            return {"status": "BLOCKED", "detail": "Selected exact Pin is no longer eligible.", "evidence": {}}
         result = pinterest_channel.publish(ctx.runtime_directory, opportunity, ctx.working_repository)
         result["evidence"] = {**(result.get("evidence") or {}), "pin_class": opportunity.get("pin_class"), "opportunity": {
             "code": opportunity.get("code"), "product_name": opportunity.get("product_name"),
@@ -557,12 +569,34 @@ class LevNyttProcedure:
 
         image = product_page.resolve_image(entity, ctx.working_repository)
         if image is None:
-            return {
-                "status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED",
-                "detail": f"No exact product image found for {entity.get('product_name')!r}.",
-                "evidence": {"code": entity.get("neoLife_code"), "external_effect_attempted": False},
-                "retry_eligible_this_run": False,
-            }
+            # Autonomous recovery: before declaring the image an Owner-only
+            # dependency, try the project's own evidence sources. The public
+            # NeoLife shop exposes the official image keyed by product code.
+            from commander import product_media
+
+            acquisition = product_media.acquire_official_image(entity, ctx.working_repository)
+            if acquisition.get("status") == product_media.ACQUIRED:
+                image = acquisition.get("image")
+            else:
+                status = acquisition.get("status")
+                detail = acquisition.get("detail") or "no detail"
+                # UNAVAILABLE is transient (network/HTTP); it may be retried on a
+                # later cycle. A determinate absence (NOT_FOUND / UNMAPPED /
+                # NO_CODE) is non-retryable and is escalated by the loop.
+                transient = status == product_media.UNAVAILABLE
+                return {
+                    "status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED",
+                    "detail": (
+                        f"No exact product image found for {entity.get('product_name')!r} "
+                        f"and autonomous acquisition did not recover it: {detail}"
+                    ),
+                    "evidence": {
+                        "code": entity.get("neoLife_code"),
+                        "external_effect_attempted": False,
+                        "acquisition_status": status,
+                    },
+                    "retry_eligible_this_run": transient,
+                }
 
         slug = str(entity.get("slug") or "")
         if not slug:
@@ -601,49 +635,74 @@ class LevNyttProcedure:
 
     # ── measurement ───────────────────────────────────────────────
     def _execute_measurement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        from commander import gsc_control
+
         attempted_at = datetime.now(timezone.utc).isoformat()
-        previous_gsc = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
-        completed = subprocess.run(
-            [str(HERMES_PYTHON), "-m", "scripts.collect_gsc",
-             "--project", "levnytt", "--site", GSC_PROPERTY],
-            cwd=str(HERMES_REPO),
-            capture_output=True, text=True, check=False,
-        )
+        latest_path = ctx.runtime_directory / "intelligence" / "gsc-latest.json"
+        previous_gsc = _read_json(latest_path)
+        snapshots: dict[int, dict[str, Any]] = {}
+        diagnostic = ""
+        # The shared collector writes its rolling snapshot to gsc-latest.json.
+        # Read each genuine API result before the next request replaces it;
+        # finish with 30d so the canonical artifact retains its useful base.
+        for days in (7, 14, 28, 60, 30):
+            before = _read_json(latest_path).get("fetched_at")
+            try:
+                completed = subprocess.run(
+                    [str(HERMES_PYTHON), "-m", "scripts.collect_gsc",
+                     "--project", "levnytt", "--site", GSC_PROPERTY, "--days", str(days)],
+                    cwd=str(HERMES_REPO), capture_output=True, text=True, check=False,
+                )
+            except OSError as error:
+                completed = type("CollectorFailure", (), {"returncode": 1, "stdout": "", "stderr": str(error)})()
+            snapshot = _read_json(latest_path)
+            if (completed.returncode != 0 or not gsc_control.valid_snapshot(snapshot)
+                    or snapshot.get("fetched_at") == before
+                    or snapshot["page"]["date_range"].get("days") != days):
+                diagnostic = _bounded_provider_diagnostic(completed.stderr, completed.stdout) or (
+                    f"GSC {days}d request did not produce a new production-shaped artifact."
+                )
+                break
+            snapshots[days] = snapshot
+        if len(snapshots) == len(gsc_control.WINDOWS):
+            try:
+                latest = dict(snapshots[30])
+                latest["trends"] = gsc_control.build_trends(snapshots)
+                _atomic_json_write(latest_path, latest)
+                if not gsc_control.fresh(latest):
+                    diagnostic = "GSC returned historical data outside the current measurement window."
+            except ValueError as error:
+                diagnostic = str(error)
+        if diagnostic:
+            # No partial collection may replace the last coherent observation.
+            if previous_gsc:
+                _atomic_json_write(latest_path, previous_gsc)
+            else:
+                latest_path.unlink(missing_ok=True)
         gsc: dict[str, Any] = {
             "source": GSC_PROPERTY,
             "attempted_at": attempted_at,
-            "status": "available" if completed.returncode == 0 else "unavailable",
+            "status": "unavailable" if diagnostic else "available",
             "returncode": completed.returncode,
         }
-        if completed.returncode != 0:
-            gsc_diagnostic = _bounded_provider_diagnostic(completed.stderr, completed.stdout)
-            if gsc_diagnostic:
-                gsc["diagnostic"] = gsc_diagnostic
-        if completed.returncode == 0:
-            latest = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
-            if (
-                latest.get("site") == GSC_PROPERTY
-                and latest.get("fetched_at")
-                and latest.get("fetched_at") != previous_gsc.get("fetched_at")
-            ):
-                gsc["fetched_at"] = latest["fetched_at"]
-            else:
-                gsc["status"] = "unavailable"
-                gsc["diagnostic"] = (
-                    "GSC collector returned success without a newly fetched matching project artifact."
-                )
+        if diagnostic:
+            gsc["diagnostic"] = diagnostic
+        else:
+            gsc["fetched_at"] = latest["fetched_at"]
 
         cta = _collect_cta_events(ctx)
-        neolife = _collect_neolife_backoffice(ctx)
-        evidence = {"sources": {"gsc": gsc, "cta_d1": cta, "neolife_backoffice": neolife}}
+        evidence = {"sources": {"gsc": gsc, "cta_d1": cta}}
+        # Back-office revenue/accounting evidence is secondary: it is collected on
+        # a bounded cadence and never contributes to measurement success/failure,
+        # so unavailable revenue reporting cannot degrade production measurement.
+        evidence["neolife_backoffice"] = _collect_neolife_backoffice_if_due(ctx)
         available = [name for name, source in evidence["sources"].items() if source.get("status") == "available"]
         failed = [name for name, source in evidence["sources"].items() if source.get("status") != "available"]
-        neolife_verified = neolife.get("neolife_status") == "VERIFIED"
         if not failed:
             status = "SUCCEEDED"
             detail = (
-                "Refreshed independent Search Console, NeoLife link-click, and direct "
-                f"NeoLife back-office evidence ({cta['total_events']} CTA events)."
+                "Refreshed independent Search Console and NeoLife link-click "
+                f"evidence ({cta['total_events']} CTA events)."
             )
         elif available:
             status = "PARTIAL"
@@ -654,8 +713,6 @@ class LevNyttProcedure:
         else:
             status = "BLOCKED"
             detail = "Measurement failed: no first-party evidence source was refreshed."
-        if neolife_verified:
-            detail += " Direct NeoLife back-office revenue/conversions are VERIFIED and replace the link-click proxy."
         return {
             "status": status,
             "detail": detail,
@@ -666,20 +723,55 @@ class LevNyttProcedure:
     def _execute_seo_intelligence(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
         _rebuild_content_inventory(ctx.working_repository)
         _seed_keyword_candidates(ctx)
-        _build_scout_discovery_context(ctx)
+        target = action.get("target")
+        if target is not None and (not isinstance(target, str) or not target.strip()):
+            return {"status": "BLOCKED", "detail": "Selected search term is invalid.", "evidence": {}}
+        context = _build_scout_discovery_context(ctx)
+        if target:
+            # Hermes Scout expands its context seeds before explicit keywords.
+            # Place this *selected* target first within the existing context so
+            # the bounded provider budget cannot silently research another seed.
+            context["seed_concepts"] = [target] + [s for s in context["seed_concepts"]
+                                                   if s.casefold() != target.casefold()]
+            _atomic_json_write(ctx.runtime_directory / "intelligence" / "scout-discovery-context.json", context)
         try:
             from app.commander.scout_executor import execute as scout_execute
-            code, message = scout_execute(project=ctx.working_repository)
+            code, message = scout_execute(project=ctx.working_repository,
+                                          keywords=[target] if target else None)
         except Exception as error:
             return {"status": "CAPABILITY_GAP", "failure_class": "RECOVERABLE_EXECUTOR_FAILURE", "detail": f"SEO Scout execution failed: {type(error).__name__}: {error}", "evidence": {}, "repair": {"repository_kind": "HERMES", "allowed_write_scope": ["app/commander/scout_executor.py"]}}
         if code != 0:
             return {"status": "BLOCKED", "detail": message, "evidence": {"scout_code": code}}
+        if target and not any(str(r.get("keyword") or "").casefold() == target.casefold()
+                              for r in (_read_json(ctx.runtime_directory / "intelligence" / "keywords.json").get("keywords") or [])
+                              if isinstance(r, dict)):
+            return {"status": "BLOCKED", "failure_class": "PROVIDER_EVIDENCE_UNAVAILABLE",
+                    "detail": f"Scout completed but did not validate the selected term {target!r}.",
+                    "evidence": {"scout_code": code, "selected_term": target}}
         gap_count = _coverage_gap_count(ctx)
         return {
             "status": "SUCCEEDED",
             "detail": message,
-            "evidence": {"scout_code": 0, "artifact": "runtime/intelligence/keywords.json", "content_gap_count": gap_count},
+            "evidence": {"scout_code": 0, "artifact": "runtime/intelligence/keywords.json",
+                         "selected_term": target, "content_gap_count": gap_count},
         }
+
+    def _execute_search_demand_scout(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Reuse the Hermes market Scout; it writes only project-scoped evidence."""
+        from app.commander.search_demand_scout import run_search_demand_scout
+
+        try:
+            result = run_search_demand_scout(ctx.working_repository, ctx.runtime_directory,
+                                             rotate_seeds=True)
+        except Exception as error:
+            return {"status": "BLOCKED", "detail": f"Search Scout unavailable: {type(error).__name__}: {error}",
+                    "evidence": {"external_effect_attempted": False}}
+        status = result.get("status")
+        return {"status": "SUCCEEDED" if status in {"OPPORTUNITY_FOUND", "CHECKED_NO_OPPORTUNITY"} else "BLOCKED",
+                "detail": f"Search demand discovery: {status}",
+                "evidence": {"status": status, "checked_at": result.get("checked_at"),
+                             "opportunities": result.get("opportunities", []),
+                             "artifact": "runtime/intelligence/search-demand-scout.json"}}
 
     # ── existing-page improvement (stage, never publish directly) ─
     def _execute_content_improvement(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -855,6 +947,10 @@ class LevNyttProcedure:
 
     # ── content production (stage a full production page) ─────────
     def _execute_content_production(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        if action.get("opportunity_id") and not action.get("target"):
+            return {"status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED",
+                    "detail": "Selected content opportunity has no exact target; no keyword was substituted.",
+                    "evidence": {"external_effect_attempted": False}, "retry_eligible_this_run": False}
         keyword = _keyword_from_action(ctx, action)
         if not keyword:
             return {"status": "BLOCKED", "failure_class": "EVIDENCE_REQUIRED", "detail": "No SEO Scout keyword evidence is available to select a content target.", "evidence": {"external_effect_attempted": False}}
@@ -933,9 +1029,15 @@ class LevNyttProcedure:
         if pending:
             return _resume_pending_deployment(repo, pending_path, pending)
 
-        work = _first_staged_work(repo)
+        from commander import evidence as evidence_module, identity
+        parked = identity.load_state(runtime=ctx.runtime_directory).get("deployment_parked") or {}
+        excluded = {slug for slug, entry in parked.items()
+                    if isinstance(entry, dict) and evidence_module._deployment_still_blocked(slug, repo, entry)}
+        requested = str(action.get("summary") or "").removeprefix("deployment:")
+        work = _first_staged_work(repo, excluded_slugs=excluded,
+                                  requested_slug=requested if requested not in ("", "staged", "pending") else None)
         if work is None:
-            return {"status": "SUCCEEDED", "detail": "No staged article is awaiting deployment.", "evidence": {"deployable": False}}
+            return {"status": "IDLE", "detail": "No unparked staged revision is awaiting deployment.", "evidence": {"deployable": False}}
         slug = work["slug"]
 
         article = repo / work["source_file"]
@@ -950,13 +1052,20 @@ class LevNyttProcedure:
             allowed_paths.update(other.get("files") or [])
         safety = _deployment_safety(repo, slug, allowed_paths)
         if not safety["ok"]:
-            return {"status": "BLOCKED", "detail": "Deployment safety check failed: " + "; ".join(safety["reasons"]), "evidence": {**safety, "external_effect_attempted": False}}
+            return {
+                "status": "BLOCKED",
+                "failure_class": "EVIDENCE_REQUIRED",
+                "retry_eligible_this_run": False,
+                "detail": "Deployment safety check failed: " + "; ".join(safety["reasons"]),
+                "evidence": {**safety, "slug": slug, "source_file": work["source_file"],
+                             "staged_content_sha256": _file_sha256(article), "external_effect_attempted": False},
+            }
 
         # 2. Register routing only for a newly produced page. An improvement or
         # a root product page preserves its existing canonical route and must
         # never manufacture a stale /content/articles rewrite for a root-backed
         # page.
-        if work["capability_id"] in ("content_improvement", "product_page"):
+        if work["capability_id"] in ("content_improvement", "product_page", "link_repair", "internal_linking"):
             if not _sitemap_has_slug(repo, slug):
                 return {"status": "BLOCKED", "detail": "Existing canonical page is missing from the sitemap; refusing to invent a route during improvement deployment.", "evidence": {"slug": slug, "external_effect_attempted": False}}
         else:
@@ -1005,6 +1114,8 @@ class LevNyttProcedure:
         pending = {
             "slug": slug,
             "commit": _git_head(repo),
+            "source_file": work["source_file"],
+            "source_sha256": _file_sha256(article),
             "pushed": False,
             "files": files,
             "created_at": datetime.now(timezone.utc).isoformat(),
@@ -1018,7 +1129,7 @@ class LevNyttProcedure:
         _atomic_json_write(pending_path, pending)
 
         # 4. Live verification (Cloudflare Pages auto-deploys on push).
-        live = _verify_live(slug, wait_seconds=120)
+        live = _verify_live_revision(slug, pending["source_sha256"], wait_seconds=120)
         if not live:
             return {"status": "BLOCKED", "detail": f"Committed and pushed {slug!r}, but live verification failed (not yet 200).", "evidence": {"slug": slug, "deployed": True, "live_verified": False, "pending_recovery": True, "external_effect_attempted": True}}
 
@@ -1026,7 +1137,10 @@ class LevNyttProcedure:
         return {
             "status": "SUCCEEDED",
             "detail": f"Deployed {slug!r} and verified live at {SITE}/{slug}.",
-            "evidence": {"slug": slug, "live_url": f"{SITE}/{slug}", "live_verified": True, "deployed": True, "external_effect_attempted": True},
+            "evidence": {"slug": slug, "source_file": work["source_file"],
+                         "source_sha256": pending["source_sha256"], "commit": pending["commit"],
+                         "files": files,
+                         "live_url": f"{SITE}/{slug}", "live_verified": True, "deployed": True, "external_effect_attempted": True},
         }
 
     def _execute_technical_repair(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
@@ -1365,6 +1479,10 @@ class LevNyttProcedure:
         }
         if new_item_count == 0 and not reasoning_results and not thread_traces:
             evidence["skipped"] = True
+        if len(errors) == len(queries) and not reports:
+            return {"status": "BLOCKED", "failure_class": "PROVIDER_EVIDENCE_UNAVAILABLE",
+                    "detail": "All community search requests failed; no observation was established.",
+                    "evidence": evidence}
         outcome_counts: dict[str, int] = {}
         for r in reasoning_results:
             outcome_counts[r["outcome"]] = outcome_counts.get(r["outcome"], 0) + 1
@@ -1423,7 +1541,7 @@ class LevNyttProcedure:
         candidate = next(
             (
                 item for item in candidates
-                if isinstance(item, dict) and str(item.get("opportunity_id") or "") in action_text
+                if isinstance(item, dict) and str(item.get("opportunity_id") or "") == action_text
             ),
             None,
         )
@@ -1493,6 +1611,7 @@ class LevNyttProcedure:
             "platform_id": receipt.get("platform_id"),
             "permalink": receipt.get("permalink"),
             "verification_status": receipt.get("verification_status"),
+            "external_effect_attempted": receipt.get("status") == "PUBLISHED",
         }
 
         if receipt.get("status") == "PUBLISHED":
@@ -1636,8 +1755,9 @@ class LevNyttProcedure:
             neolife = sources.get("neolife_backoffice") if isinstance(sources.get("neolife_backoffice"), dict) else {}
             verified_sources = 0
             if gsc.get("status") == "available":
+                from commander import gsc_control
                 latest = _read_json(ctx.runtime_directory / "intelligence" / "gsc-latest.json")
-                if latest.get("site") != GSC_PROPERTY or latest.get("fetched_at") != gsc.get("fetched_at"):
+                if latest.get("fetched_at") != gsc.get("fetched_at") or not gsc_control.fresh(latest):
                     return False
                 verified_sources += 1
             if cta.get("status") == "available":
@@ -1652,7 +1772,17 @@ class LevNyttProcedure:
                 verified_sources += 1
             return verified_sources > 0
         if capability == "seo_intelligence":
-            return (ctx.runtime_directory / "intelligence" / "keywords.json").is_file()
+            rows = _read_json(ctx.runtime_directory / "intelligence" / "keywords.json").get("keywords") or []
+            target = action.get("target")
+            return bool(rows) and (not target or any(isinstance(row, dict) and
+                        str(row.get("keyword", "")).casefold() == str(target).casefold() for row in rows))
+        if capability == "search_demand_scout":
+            latest = _read_json(ctx.runtime_directory / "intelligence" / "search-demand-scout.json")
+            return bool(evidence.get("checked_at") and latest.get("checked_at") == evidence["checked_at"]
+                        and latest.get("status") == evidence.get("status"))
+        if capability == "internal_linking":
+            from commander.site_opportunities import verify_staged_link
+            return verify_staged_link(ctx.working_repository, evidence)
         if capability == "technical_repair":
             return _https_serves_200()
         if capability == "content_repair":
@@ -1691,10 +1821,12 @@ class LevNyttProcedure:
                 and "levnytt-rebuild.js?v=" in html
             )
         if capability == "deployment":
-            if evidence.get("deployable") is False:
-                return True
             slug = evidence.get("slug")
-            return bool(slug) and _verify_live(slug, wait_seconds=0)
+            return bool(execution.get("status") == "SUCCEEDED" and slug and
+                        evidence.get("deployed") is True and evidence.get("live_verified") is True and
+                        evidence.get("external_effect_attempted") is True and evidence.get("commit") and
+                        evidence.get("source_sha256") and
+                        _verify_live_revision(slug, evidence["source_sha256"], wait_seconds=0))
         if capability == "community_acquisition":
             # Read-only observation through the shared Community Manager is
             # verified when its own status is a completed/partial observation;
@@ -1705,11 +1837,11 @@ class LevNyttProcedure:
                 return True
             return bool(evidence.get("replied"))
         if capability == "community_intelligence":
-            # Read-only discovery is verified when the run completed and
-            # produced no writes (errors alone don't fail it -- a query
-            # returning zero discussion-shaped results, or a provider error
-            # on one of several queries, is still a valid, honest pass).
-            return execution.get("status") == "SUCCEEDED" and bool(evidence.get("read_only"))
+            store = _read_json(ctx.runtime_directory / "community" / "knowledge.json")
+            runs = store.get("discovery_runs") or []
+            return bool(execution.get("status") == "SUCCEEDED" and evidence.get("read_only")
+                        and runs and isinstance(runs[-1], dict)
+                        and runs[-1].get("candidate_count") == evidence.get("result_count"))
         if capability == "social_publishing":
             if evidence.get("skipped"):
                 return True
@@ -1803,6 +1935,25 @@ def _verify_live_ok(slug: str) -> bool:
     return _verify_live(slug, wait_seconds=0)
 
 
+def _verify_live_revision(slug: str, expected_sha256: str, wait_seconds: int = 0) -> bool:
+    """Check the actual served revision, never just an existing page's HTTP 200."""
+    import time
+    if not expected_sha256:
+        return False
+    deadline = time.monotonic() + wait_seconds
+    while True:
+        try:
+            request = urllib.request.Request(f"{SITE}/{slug}", method="GET", headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(request, timeout=15) as response:
+                if response.status == 200 and hashlib.sha256(response.read()).hexdigest() == expected_sha256:
+                    return True
+        except (urllib.error.URLError, OSError):
+            pass
+        if time.monotonic() >= deadline:
+            return False
+        time.sleep(5)
+
+
 def _git_head(repo: Path) -> str:
     completed = subprocess.run(
         ["git", "-C", str(repo), "rev-parse", "HEAD"],
@@ -1849,7 +2000,8 @@ def _resume_pending_deployment(
     """Resume the existing commit/push/live-verification deployment lifecycle."""
     slug = str(pending.get("slug") or "").strip()
     commit = str(pending.get("commit") or "").strip()
-    if not slug or not commit:
+    expected_hash = str(pending.get("source_sha256") or "")
+    if not slug or not commit or not expected_hash:
         return {
             "status": "BLOCKED",
             "detail": "Pending deployment continuation state is malformed.",
@@ -1874,7 +2026,7 @@ def _resume_pending_deployment(
         pending["pushed"] = True
         pending["commit"] = _git_head(repo)
         _atomic_json_write(pending_path, pending)
-    if not _verify_live(slug, wait_seconds=120):
+    if not _verify_live_revision(slug, expected_hash, wait_seconds=120):
         return {
             "status": "BLOCKED",
             "detail": f"Deployment continuation still cannot verify {slug!r} live.",
@@ -1889,6 +2041,10 @@ def _resume_pending_deployment(
             "live_url": f"{SITE}/{slug}",
             "live_verified": True,
             "deployed": True,
+            "source_file": pending.get("source_file"),
+            "source_sha256": expected_hash,
+            "commit": pending["commit"],
+            "files": pending.get("files", []),
             "recovered_pending_deployment": True,
             "external_effect_attempted": True,
         },
@@ -1905,6 +2061,7 @@ def _deployment_safety(
         ["git", "-C", str(repo), "status", "--porcelain", "--untracked-files=all"],
         capture_output=True, text=True, check=False,
     ).stdout
+    blocker_paths: list[str] = []
     for line in status.splitlines():
         code = line[:2]
         path = line[3:].strip()
@@ -1914,10 +2071,11 @@ def _deployment_safety(
             continue
         if path in allowed:
             continue
+        blocker_paths.append(path)
         reasons.append(f"unexpected tracked change {code!r} {path}")
     if reasons:
-        return {"ok": False, "reasons": reasons}
-    return {"ok": True, "reasons": []}
+        return {"ok": False, "reasons": reasons, "blocker_paths": blocker_paths}
+    return {"ok": True, "reasons": [], "blocker_paths": []}
 
 
 def _sitemap_has_slug(repo: Path, slug: str) -> bool:
@@ -2006,11 +2164,12 @@ def _confirmed_staged_work(repo: Path) -> list[dict[str, Any]]:
     ledger = _read_json(repo / "runtime" / "commander" / "commitments.json")
     rows = ledger.get("commitments") if isinstance(ledger.get("commitments"), list) else []
     records: list[dict[str, Any]] = []
+    changed = _git_status_paths(repo)
     for row in rows:
         if not isinstance(row, dict) or row.get("status") != "CONFIRMED":
             continue
         capability = str(row.get("capability_id") or "")
-        if capability not in {"content_production", "content_improvement", "legacy_migration", "product_page"}:
+        if capability not in {"content_production", "content_improvement", "legacy_migration", "product_page", "internal_linking"}:
             continue
         reason = row.get("resolution_reason")
         if not isinstance(reason, str):
@@ -2023,13 +2182,15 @@ def _confirmed_staged_work(repo: Path) -> list[dict[str, Any]]:
             continue
         slug = str(parsed["slug"])
         source_file = str(parsed.get("source_file") or f"content/articles/{slug}.html")
+        if source_file not in changed or not (repo / source_file).is_file():
+            continue
         record = {
             "capability_id": capability,
             "slug": slug,
             "source_file": source_file,
             "files": [source_file],
         }
-        if capability == "content_improvement":
+        if capability in {"content_improvement", "internal_linking"}:
             content_hash = str(parsed.get("staged_content_sha256") or "")
             data_hash = str(parsed.get("production_data_sha256") or "")
             if not content_hash or not data_hash:
@@ -2039,11 +2200,37 @@ def _confirmed_staged_work(repo: Path) -> list[dict[str, Any]]:
                 "production_data_sha256": data_hash,
                 "files": [source_file, "content/data/production-pages.json"],
             })
+            if (_file_sha256(repo / source_file) != content_hash or
+                    _file_sha256(repo / "content" / "data" / "production-pages.json") != data_hash):
+                continue
         elif capability == "product_page":
             content_hash = str(parsed.get("staged_content_sha256") or "")
-            if content_hash:
-                record["staged_content_sha256"] = content_hash
+            if not content_hash or _file_sha256(repo / source_file) != content_hash:
+                continue
+            record["staged_content_sha256"] = content_hash
+            # A product page references its official image under /images/. That
+            # asset is a new untracked file and must ride the same deployment
+            # commit, otherwise the deployed page points at a missing image.
+            image_rel = str(parsed.get("image") or "").lstrip("/")
+            if image_rel and image_rel not in record["files"]:
+                record["files"].append(image_rel)
+        elif changed[source_file] != "??":
+            continue
         records.append(record)
+    # Link repair is a defect action, not an opportunity commitment. Its
+    # verified, hash-bound changed files have equivalent local provenance in
+    # the intervention ledger and must reach the same publication path.
+    from commander import interventions
+    for row in interventions._rows(repo / "runtime"):
+        if row.get("capability_id") != "link_repair" or row.get("stage") != "EXECUTED":
+            continue
+        source = row.get("source_file")
+        slug = row.get("slug")
+        content_hash = row.get("source_sha256")
+        if source and slug and content_hash and source in changed and _file_sha256(repo / source) == content_hash:
+            records.append({"capability_id": "link_repair", "slug": slug,
+                            "source_file": source, "staged_content_sha256": content_hash,
+                            "files": [source]})
     return records
 
 
@@ -2061,14 +2248,17 @@ def _git_status_paths(repo: Path) -> dict[str, str]:
     }
 
 
-def _first_staged_work(repo: Path) -> dict[str, Any] | None:
+def _first_staged_work(repo: Path, excluded_slugs: set[str] | None = None,
+                       requested_slug: str | None = None) -> dict[str, Any] | None:
     status = _git_status_paths(repo)
     eligible: list[dict[str, Any]] = []
     for record in _confirmed_staged_work(repo):
+        if record["slug"] in (excluded_slugs or set()):
+            continue
         source = repo / record["source_file"]
         if not source.is_file() or record["source_file"] not in status:
             continue
-        if record["capability_id"] == "content_improvement":
+        if record["capability_id"] in {"content_improvement", "internal_linking"}:
             data = repo / "content" / "data" / "production-pages.json"
             if "content/data/production-pages.json" not in status:
                 continue
@@ -2076,7 +2266,7 @@ def _first_staged_work(repo: Path) -> dict[str, Any] | None:
                 continue
             if _file_sha256(data) != record["production_data_sha256"]:
                 continue
-        elif record["capability_id"] == "product_page":
+        elif record["capability_id"] in {"product_page", "link_repair"}:
             # A product page is a root .html that may be new (untracked) or a
             # converted topic page (modified). Its presence in git status plus
             # a matching staged hash is sufficient.
@@ -2085,6 +2275,8 @@ def _first_staged_work(repo: Path) -> dict[str, Any] | None:
         elif status[record["source_file"]] != "??":
             continue
         eligible.append(record)
+    if requested_slug:
+        return next((r for r in eligible if r["slug"] == requested_slug), None)
     return sorted(eligible, key=lambda item: item["slug"])[0] if eligible else None
 
 
@@ -2744,18 +2936,44 @@ def _collect_cta_events(ctx) -> dict[str, Any]:
     return result
 
 
-def _collect_neolife_backoffice(ctx) -> dict[str, Any]:
-    """Collect direct NeoLife back-office revenue/conversion evidence.
+def _collect_neolife_backoffice_if_due(ctx) -> dict[str, Any]:
+    """Collect NeoLife back-office evidence on a bounded cadence.
 
-    Wires ``commander.neolife_backoffice`` into the measurement capability as a
-    third first-party source alongside GSC and D1 link clicks. The provider's
-    outcome is mapped to the measurement contract: ``VERIFIED``/``ZERO`` are a
-    real, authenticated collection (``available``); ``MISSING_CREDENTIALS``,
-    ``AUTH_FAILURE`` and ``UNAVAILABLE`` are ``unavailable`` — never a
-    fabricated zero. The full record is persisted so the evidence builder can
-    surface direct revenue/conversions and replace the link-click proxy when
-    back-office data is actually verified.
+    Back-office (orders / PV / commissions / invoices) is secondary accounting
+    evidence that never gates a production decision. It is re-authenticated and
+    re-fetched at most once per ``BACKOFFICE_REFRESH_MIN_AGE_HOURS`` and the
+    persisted snapshot is reused otherwise, so it cannot dominate the loop or
+    block publishable work.
     """
+    path = ctx.runtime_directory / "intelligence" / NEOLIFE_LATEST_FILENAME
+    cached = _read_json(path)
+    collected_at = cached.get("collected_at")
+    age_hours: float | None = None
+    if collected_at:
+        try:
+            collected = datetime.fromisoformat(str(collected_at).replace("Z", "+00:00"))
+            if collected.tzinfo is None:
+                collected = collected.replace(tzinfo=timezone.utc)
+            age_hours = (datetime.now(timezone.utc) - collected).total_seconds() / 3600
+        except ValueError:
+            age_hours = None
+    if age_hours is not None and age_hours < BACKOFFICE_REFRESH_MIN_AGE_HOURS:
+        status = cached.get("status")
+        return {
+            "source": "NeoLife back office (cached)",
+            "attempted_at": datetime.now(timezone.utc).isoformat(),
+            "status": "available" if status in ("VERIFIED", "ZERO") else "unavailable",
+            "provider": "neolife_backoffice",
+            "cached": True,
+            "collected_at": collected_at,
+            "datasets": cached.get("datasets") or {},
+            "limitations": cached.get("limitations") or [],
+        }
+    return _collect_neolife_backoffice(ctx)
+
+
+def _collect_neolife_backoffice(ctx) -> dict[str, Any]:
+    """Collect direct NeoLife back-office revenue/conversion evidence."""
     result: dict[str, Any] = {
         "source": "NeoLife back office (myoffice.neolife.com)",
         "attempted_at": datetime.now(timezone.utc).isoformat(),
@@ -2842,6 +3060,15 @@ def _top_keyword(ctx) -> str | None:
 
 
 def _keyword_from_action(ctx, action: dict[str, Any]) -> str | None:
+    selected = action.get("target")
+    if selected is not None:
+        if not isinstance(selected, str) or not selected.strip():
+            return None
+        from app.commander.evidence import _seo_intelligence_levnytt
+        intel = _seo_intelligence_levnytt(ctx.working_repository, ctx.runtime_directory)
+        if selected.casefold() not in {k.casefold() for k in intel.get("next_eligible_keywords") or []}:
+            return None  # never substitute another keyword after selection
+        return selected
     action_text = str(action.get("summary") or action.get("action") or "").casefold()
     data = _read_json(ctx.runtime_directory / "intelligence" / "keywords.json")
     rows = data.get("keywords") if isinstance(data.get("keywords"), list) else []

@@ -149,6 +149,22 @@ def record_attempt(runtime: Path, *, key: str, destination: str, title: str, boa
     _save_ledger(runtime, ledger)
 
 
+def standard_access_blocker(detail: str) -> dict[str, Any]:
+    """A provider-wide access boundary, not a failure of a particular Pin.
+
+    The local tier gate can be rechecked without publishing. If Pinterest
+    rejects a configured Standard app as Trial, its remote tier has no local
+    readback; permit one bounded recheck after a week rather than reattempting
+    every Pin or every scheduled invocation.
+    """
+    condition = ({"type": "environment_required", "name": "PINTEREST_ACCESS_TIER",
+                  "value": "standard"}
+                 if "PINTEREST_ACCESS_TIER=standard" in detail else
+                 {"type": "retry_after_seconds", "seconds": 7 * 24 * 3600})
+    return {"scope": "CAPABILITY", "blocker_id": "pinterest_standard_access",
+            "condition": condition}
+
+
 def product_pin_opportunities(project_root: Path) -> list[dict[str, Any]]:
     """PRODUCT_PIN opportunities: every current NeoLife product with a dedicated
     PRODUCT_PAGE and an exact product image."""
@@ -300,7 +316,10 @@ def publish(runtime: Path, opportunity: dict[str, Any], project_root: Path) -> d
         else:
             status = "BLOCKED"
         record_attempt(runtime, key=key, destination=opportunity["destination"], title=opportunity["title"], board_id=opportunity["board_id"], status=status, detail=detail)
-        return {"status": status, "detail": detail, "evidence": {"opportunity": opportunity, "pin_class": opportunity["pin_class"]}}
+        evidence = {"opportunity": opportunity, "pin_class": opportunity["pin_class"]}
+        if status == "BLOCKED_BY_PINTEREST_STANDARD_ACCESS":
+            evidence["blocker"] = standard_access_blocker(detail)
+        return {"status": status, "detail": detail, "evidence": evidence}
 
     verified, vdetail = verify_pin(result, package.artifact())
     if verified:
@@ -308,5 +327,6 @@ def publish(runtime: Path, opportunity: dict[str, Any], project_root: Path) -> d
     return {
         "status": "PUBLISHED" if verified else "UNVERIFIED",
         "detail": vdetail,
-        "evidence": {"result": result, "pin_class": opportunity["pin_class"], "destination": opportunity["destination"]},
+        "evidence": {"result": result, "pin_class": opportunity["pin_class"],
+                     "destination": opportunity["destination"], "external_effect_attempted": True},
     }

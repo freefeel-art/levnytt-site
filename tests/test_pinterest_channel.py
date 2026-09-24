@@ -90,3 +90,25 @@ def test_publish_returns_blocked_status_when_trial_access(tmp_path, monkeypatch)
     result = pc.publish(tmp_path, opp, tmp_path)
     assert result["status"] == "BLOCKED_BY_PINTEREST_STANDARD_ACCESS"
     assert result["status"] != "PUBLISHED"
+    assert result["evidence"]["blocker"] == {
+        "scope": "CAPABILITY", "blocker_id": "pinterest_standard_access",
+        "condition": {"type": "retry_after_seconds", "seconds": 7 * 24 * 3600}}
+
+
+def test_local_standard_access_gate_is_capability_wide_but_bad_image_is_not(tmp_path, monkeypatch):
+    import app.providers.pinterest as provider
+    class TrialProvider:
+        def publish_package(self, package, approved=False):
+            raise provider.PinterestError("Pinterest publication is blocked until PINTEREST_ACCESS_TIER=standard")
+    monkeypatch.setattr(provider, "PinterestProvider", lambda: TrialProvider())
+    img = tmp_path / "garlic-allium-complex.jpg"
+    img.write_bytes(b"\xff\xd8\xff\x00")
+    opp = {"pin_class": "product", "code": "555", "product_name": "Garlic Allium Complex",
+           "destination": "https://levnytt.se/neolife-garlic-allium-complex",
+           "image": img.name, "title": "NeoLife Garlic Allium Complex", "description": "Information",
+           "board_id": "1151232792187766770"}
+    blocked = pc.publish(tmp_path, opp, tmp_path)
+    assert blocked["evidence"]["blocker"]["condition"] == {
+        "type": "environment_required", "name": "PINTEREST_ACCESS_TIER", "value": "standard"}
+    bad = pc.publish(tmp_path, {**opp, "image": "unrelated.jpg"}, tmp_path)
+    assert bad["status"] == "BLOCKED" and "blocker" not in bad["evidence"]

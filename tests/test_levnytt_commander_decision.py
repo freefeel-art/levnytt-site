@@ -84,7 +84,9 @@ def test_publication_budget_gates_new_content():
     ev = _evidence(runtime_capability_availability={
         "content_improvement": {"executable_now": True},
         "content_production": {"executable_now": True},
-    }, content_improvement_opportunities={"opportunities": [{"opportunity_id": "content-improvement:x"}]})
+    }, content_improvement_opportunities={"opportunities": [{"opportunity_id": "content-improvement:x"}]},
+        seo_intelligence={"opportunity_pool": {"exhausted": False}, "next_eligible_keywords": ["fibrer"],
+                          "keywords": [{"keyword": "fibrer", "monthly_search_volume": 150}]})
     state = _state()
     state["daily_optimization_budget"] = {"date": "2026-09-02", "used": 3, "limit": 3}
     budget = lambda c: decision.budget_available(state, "2026-09-02", c)

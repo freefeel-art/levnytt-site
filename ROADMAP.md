@@ -2,9 +2,11 @@ ROLE: STRATEGIC
 
 # LevNytt — Roadmap
 
-> Ordered implementation plan. Highest priority first. This roadmap is a plan
-> for post-activation autonomous operation; no phase executes until the project
-> is activated and the production scheduler is enabled.
+> Ordered implementation plan. Highest priority first. The dedicated
+> project-local Commander executes this plan autonomously per the operating
+> contract in `SOUL.md`, choosing the highest-value executable phase from
+> current evidence. This roadmap defines the plan; it is not a business target
+> and does not gate production.
 
 ---
 

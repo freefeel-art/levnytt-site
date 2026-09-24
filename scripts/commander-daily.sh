@@ -3,8 +3,8 @@
 #
 # This is the ONLY scheduled entrypoint for the LevNytt operating system. It
 # does not use `hermes run --project`, project activation, or the mutable
-# active-project selector. It runs one bounded cycle of the dedicated LevNytt
-# Commander and stops.
+# active-project selector. It runs one finite, bounded multi-action objective
+# cycle of the dedicated LevNytt Commander and stops.
 #
 # Cadence is NOT publication cadence. This entrypoint runs several times per day
 # (see the crontab below), but the Commander's own daily budgets cap publication

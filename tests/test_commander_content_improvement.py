@@ -294,8 +294,10 @@ def test_pending_live_verification_resumes_on_later_invocation(tmp_path: Path, m
         "commit": procedure._git_head(ctx.working_repository),
         "pushed": True,
         "files": ["existing.html"],
+        "source_file": "existing.html",
+        "source_sha256": "verified-revision-hash",
     }), encoding="utf-8")
-    monkeypatch.setattr(procedure, "_verify_live", lambda slug, wait_seconds: True)
+    monkeypatch.setattr(procedure, "_verify_live_revision", lambda slug, expected, wait_seconds=0: expected == "verified-revision-hash")
 
     result = procedure.LevNyttProcedure().execute(
         ctx, {"capability": "deployment", "summary": "Resume pending deployment."},
