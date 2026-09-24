@@ -469,6 +469,8 @@ class LevNyttProcedure:
             return self._execute_content_production(ctx, action)
         if capability == "product_page":
             return self._execute_product_page(ctx, action)
+        if capability == "product_discovery":
+            return self._execute_product_discovery(ctx, action)
         if capability == "deployment":
             return self._execute_deployment(ctx, action)
         if capability == "technical_repair":
@@ -494,6 +496,33 @@ class LevNyttProcedure:
             "failure_class": "RECOVERABLE_CAPABILITY_GAP",
             "detail": f"No bounded executor is wired for capability {capability!r}.",
             "evidence": {"capability": capability},
+        }
+
+    def _execute_product_discovery(self, ctx, action: dict[str, Any]) -> dict[str, Any]:
+        """Refresh the official catalog and ingest only previously unknown entities."""
+        from commander import product_catalog
+
+        try:
+            rows = product_catalog.discover_catalog()
+            receipt = product_catalog.ingest_missing_entities(
+                ctx.working_repository, ctx.runtime_directory, rows,
+            )
+        except Exception as error:
+            return {
+                "status": "BLOCKED",
+                "failure_class": "RECOVERABLE_EXECUTOR_FAILURE",
+                "detail": f"Official NeoLife catalog discovery failed: {type(error).__name__}: {error}",
+                "evidence": {"external_effect_attempted": False},
+            }
+        return {
+            "status": "SUCCEEDED",
+            "detail": f"Refreshed official NeoLife catalog ({receipt['catalog_count']} products).",
+            "evidence": {
+                "catalog_count": receipt["catalog_count"],
+                "new_entities": receipt["new_entities"],
+                "fetched_at": receipt["fetched_at"],
+                "external_effect_attempted": False,
+            },
         }
 
     # ── dedicated product page (product backlog) ───────────────────
@@ -1028,6 +1057,11 @@ class LevNyttProcedure:
         work = _first_staged_work(repo, excluded_slugs=excluded,
                                   requested_slug=requested if requested not in ("", "staged", "pending") else None)
         if work is None:
+            work = _parked_staged_work(
+                repo, parked, excluded_slugs=excluded,
+                requested_slug=requested if requested not in ("", "staged", "pending") else None,
+            )
+        if work is None:
             return {"status": "IDLE", "detail": "No unparked staged revision is awaiting deployment.", "evidence": {"deployable": False}}
         slug = work["slug"]
 
@@ -1049,7 +1083,10 @@ class LevNyttProcedure:
                 "retry_eligible_this_run": False,
                 "detail": "Deployment safety check failed: " + "; ".join(safety["reasons"]),
                 "evidence": {**safety, "slug": slug, "source_file": work["source_file"],
-                             "staged_content_sha256": _file_sha256(article), "external_effect_attempted": False},
+                             "staged_content_sha256": _file_sha256(article),
+                             "files": work.get("files", [work["source_file"]]),
+                             "source_capability_id": work.get("capability_id", "product_page"),
+                             "external_effect_attempted": False},
             }
 
         # 2. Register routing only for a newly produced page. An improvement or
@@ -1071,7 +1108,10 @@ class LevNyttProcedure:
         # page behind to break the push/rebase.
         status_paths = _git_status_paths(repo)
         files: list[str] = []
-        for rec in _confirmed_staged_work(repo):
+        records = _confirmed_staged_work(repo)
+        if not any(rec.get("slug") == work.get("slug") for rec in records):
+            records.append(work)
+        for rec in records:
             for f in rec.get("files") or []:
                 if f in status_paths and f not in files:
                     files.append(f)
@@ -1756,6 +1796,14 @@ class LevNyttProcedure:
                     return False
                 verified_sources += 1
             return verified_sources > 0
+        if capability == "product_discovery":
+            from commander import product_catalog
+            artifact = _read_json(product_catalog.artifact_path(ctx.runtime_directory))
+            return bool(
+                artifact.get("source_type") == "NEOLIFE_OFFICIAL_PUBLIC_CATALOG"
+                and artifact.get("fetched_at") == evidence.get("fetched_at")
+                and int(artifact.get("products_count", len(artifact.get("products") or []))) == int(evidence.get("catalog_count") or 0)
+            )
         if capability == "seo_intelligence":
             rows = _read_json(ctx.runtime_directory / "intelligence" / "keywords.json").get("keywords") or []
             target = action.get("target")
@@ -2217,6 +2265,42 @@ def _confirmed_staged_work(repo: Path) -> list[dict[str, Any]]:
                             "source_file": source, "staged_content_sha256": content_hash,
                             "files": [source]})
     return records
+
+
+def _parked_staged_work(
+    repo: Path,
+    parked: dict[str, Any],
+    *,
+    excluded_slugs: set[str] | None = None,
+    requested_slug: str | None = None,
+) -> dict[str, Any] | None:
+    """Reconstruct a parked work receipt when the commitment ledger was pruned.
+
+    The park record itself contains the exact source path and content hash from
+    the rejected deployment. Requiring both to match preserves provenance while
+    allowing a cleaned tree to recover old work instead of treating missing
+    ledger history as a permanent block.
+    """
+    status = _git_status_paths(repo)
+    candidates: list[dict[str, Any]] = []
+    for slug, entry in (parked or {}).items():
+        if slug in (excluded_slugs or set()) or not isinstance(entry, dict):
+            continue
+        if requested_slug and slug != requested_slug:
+            continue
+        source_file = str(entry.get("source_file") or "")
+        expected_hash = str(entry.get("staged_content_sha256") or "")
+        source = repo / source_file
+        if not source_file or not expected_hash or not source.is_file():
+            continue
+        if source_file not in status or _file_sha256(source) != expected_hash:
+            continue
+        files = list(entry.get("files") or [source_file])
+        capability = str(entry.get("source_capability_id") or "product_page")
+        candidates.append({"capability_id": capability, "slug": slug,
+                           "source_file": source_file, "files": files,
+                           "staged_content_sha256": expected_hash})
+    return sorted(candidates, key=lambda item: item["slug"])[0] if candidates else None
 
 
 def _git_status_paths(repo: Path) -> dict[str, str]:

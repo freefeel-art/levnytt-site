@@ -195,10 +195,22 @@ def test_backlog_skips_escalated_product_without_local_image(tmp_path):
     _write_ledger(runtime, [{
         "commitment_id": "levnytt:product_page:740", "status": "OWNER_BOUNDARY",
         "capability_id": "product_page", "project_id": "levnytt",
-        "resolution_reason": "no image", "resolved_at": "2026-09-10T10:00:00+02:00",
+        "resolution_reason": "no image", "resolved_at": "2099-09-10T10:00:00+02:00",
     }])
     backlog = evidence._product_backlog(repo, runtime)
     assert backlog == []
+
+
+def test_expired_owner_boundary_rechecks_product_condition(tmp_path):
+    repo = _build_entity_repo(tmp_path)
+    runtime = tmp_path / "runtime"
+    _write_ledger(runtime, [{
+        "commitment_id": "levnytt:product_page:740", "status": "OWNER_BOUNDARY",
+        "capability_id": "product_page", "project_id": "levnytt",
+        "resolution_reason": "no image", "resolved_at": "2026-09-10T10:00:00+02:00",
+    }])
+    backlog = evidence._product_backlog(repo, runtime)
+    assert any(row["code"] == "740" for row in backlog)
 
 
 def test_backlog_reincludes_escalated_product_once_local_image_exists(tmp_path):
@@ -395,6 +407,38 @@ def test_parked_deployment_unparks_when_tree_changes(tmp_path):
         ["neolife-vita-squares"], project_root, runtime,
     )
     assert filtered == ["neolife-vita-squares"]
+
+
+def test_parked_deployment_recovers_when_commitment_receipt_is_missing(tmp_path):
+    import hashlib
+    import subprocess
+
+    project_root = tmp_path / "repo"
+    project_root.mkdir()
+    subprocess.run(["git", "-C", str(project_root), "init"], capture_output=True, check=True)
+    (project_root / ".git" / "info" / "exclude").write_text("runtime/\n")
+    (project_root / "neolife-vita-squares.html").write_text("staged revision")
+    source_hash = hashlib.sha256((project_root / "neolife-vita-squares.html").read_bytes()).hexdigest()
+    runtime = project_root / "runtime"
+    from commander.identity import save_state
+    save_state({"deployment_parked": {"neolife-vita-squares": {
+        "slug": "neolife-vita-squares",
+        "source_file": "neolife-vita-squares.html",
+        "staged_content_sha256": source_hash,
+        "blocker_paths": ["ROADMAP.md"],
+    }}}, runtime=runtime)
+
+    from commander.evidence import _filter_parked_deployments
+    assert _filter_parked_deployments(["neolife-vita-squares"], project_root, runtime) == ["neolife-vita-squares"]
+
+    from commander.procedure import _parked_staged_work
+    work = _parked_staged_work(
+        project_root, {"neolife-vita-squares": {
+            "source_file": "neolife-vita-squares.html",
+            "staged_content_sha256": source_hash,
+        }},
+    )
+    assert work and work["source_file"] == "neolife-vita-squares.html"
 
 
 def test_deployment_safety_remains_fail_closed(tmp_path):

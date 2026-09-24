@@ -106,6 +106,20 @@ def test_several_independent_actions_and_both_daily_budgets(harness):
     assert result["stop_reason"] == "CAPACITY_EXHAUSTED"
 
 
+def test_failed_budgeted_action_does_not_consume_daily_capacity(harness):
+    repo, runtime, state = harness
+    state["product_backlog"] = [{"code": "789", "product_name": "Beta Guard"}]
+    state["outcomes"]["product_page"] = {
+        "status": "BLOCKED",
+        "failure_class": "RECOVERABLE_EXECUTOR_FAILURE",
+        "retry_eligible_this_run": True,
+        "evidence": {"external_effect_attempted": False},
+    }
+    run(harness)
+    persisted = json.loads((runtime / "commander" / "commander-state.json").read_text())
+    assert persisted.get("daily_publication_budget", {}).get("used", 0) == 0
+
+
 def test_blocked_deployment_is_parked_and_independent_work_runs(harness):
     repo, runtime, state = harness
     state["staged"] = ["blocked"]
@@ -312,6 +326,7 @@ def test_real_evidence_join_promotes_scout_and_forum_questions(tmp_path, monkeyp
         "community": {"community_intelligence": {"last_run_at": checked_at}},
         "neolife_link_clicks": {"fresh": False}})
     packet = local_evidence.build_evidence(repo, rt, datetime.now().date().isoformat())
+    packet["product_catalog_discovery_due"] = False
     assert packet["search_demand_scout"]["actionable_opportunities"][0]["commercial_relevance"] == "HIGH"
     assert packet["community_demand_candidates"][0]["source_url"] == "https://www.flashback.org/t3456000"
     selected = decision.decide(packet, [], [])
@@ -321,6 +336,7 @@ def test_real_evidence_join_promotes_scout_and_forum_questions(tmp_path, monkeyp
     artifact["opportunities"] = []
     (rt / "intelligence" / "search-demand-scout.json").write_text(json.dumps(artifact))
     packet = local_evidence.build_evidence(repo, rt, datetime.now().date().isoformat())
+    packet["product_catalog_discovery_due"] = False
     selected = decision.decide(packet, [], [])
     assert selected["target"] == "Vilket magnesium ska jag välja"
     assert selected["provenance"]["source_url"].endswith("t3456000")
@@ -349,6 +365,7 @@ def test_pinterest_access_blocker_parks_capability_not_independent_discovery(har
     built = operating_loop.evidence_module.build_evidence
     def packet(root, rt, today):
         result = built(root, rt, today)
+        result["product_catalog_discovery_due"] = False
         result["pinterest_opportunities"] = [o for o in candidates if not pins.already_published(
             rt, o["destination"], o["image"], o["title"])]
         return result

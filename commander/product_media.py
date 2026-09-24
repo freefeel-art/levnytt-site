@@ -61,10 +61,14 @@ NO_CODE = "NO_CODE"
 _CATEGORY_PATHS: dict[str, str] = {
     "supplements": "/c/kosttillskott/",
     "personal-care": "/c/personlig-vard/",
+    "personal_care": "/c/personlig-vard/",
     "skin-care": "/c/personlig-vard/",
+    "skin_care": "/c/personlig-vard/",
     "home-care": "/c/rengoring/",
+    "home_care": "/c/rengoring/",
     "accessories": "/c/rengoring/",
     "weight-management": "/c/viktkontroll/",
+    "weight_management": "/c/viktkontroll/",
 }
 
 # A product thumbnail is ``/thumb/<image_id>/<size>/<code>[_suffix].<ext>``.

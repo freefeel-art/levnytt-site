@@ -35,6 +35,7 @@ from app.commander.commitment_ledger import (
     open_commitments,
     record_commitment,
     record_commitment_resolution,
+    update_commitment_metadata,
 )
 from app.commander.operational_defects import (
     close_defect,
@@ -59,6 +60,9 @@ MAX_ACTIONS_PER_INVOCATION = 8
 # A failing repair is retried at most once per this interval, so a deterministic
 # internal failure cannot be re-attempted every cycle (anti-stall / §7 backoff).
 REPAIR_BACKOFF_SECONDS = 24 * 3600
+COMMITMENT_RETRY_BASE_SECONDS = 24 * 3600
+COMMITMENT_RETRY_MAX_SECONDS = 7 * 24 * 3600
+CAPABILITY_BLOCKER_RECHECK_SECONDS = 24 * 3600
 
 TZ = ZoneInfo("Europe/Stockholm")
 
@@ -69,6 +73,14 @@ def _now() -> datetime:
 
 def _iso() -> str:
     return _now().isoformat()
+
+
+def _commitment_id_for(decision: dict[str, Any]) -> str:
+    commitment_id = str(decision.get("commitment_id") or "")
+    if commitment_id:
+        return commitment_id
+    commitment = _commitment_for(decision)
+    return str(commitment.get("commitment_id") or "") if commitment else ""
 
 
 def _today() -> str:
@@ -293,16 +305,89 @@ def _active_capability_blockers(state: dict[str, Any]) -> tuple[list[str], list[
     active: list[str] = []
     for capability, blocker in blockers.items():
         if not isinstance(blocker, dict):
-            active.append(capability)  # malformed boundary fails closed
+            # A malformed receipt is not safe to treat as cleared. Permit one
+            # bounded executor re-probe after the recovery interval instead of
+            # making corrupted state a permanent capability lock.
+            blocker = {
+                "status": "RECHECK_DUE", "condition": {}, "observed_at": None,
+                "recheck_after": _now().timestamp() + CAPABILITY_BLOCKER_RECHECK_SECONDS,
+            }
+            blockers[capability] = blocker
+            active.append(capability)
         elif blocker.get("status") == "CLEARED":
             continue
+        elif blocker.get("status") == "RECHECK_DUE":
+            if _blocker_recheck_due(blocker):
+                blocker["recheck_after"] = (_now().timestamp() + CAPABILITY_BLOCKER_RECHECK_SECONDS)
+                cleared.append(capability)
+            else:
+                active.append(capability)
         elif _blocker_still_active(blocker):
-            active.append(capability)
+            if _unknown_blocker_recheck_due(blocker):
+                blocker["status"] = "RECHECK_DUE"
+                blocker["recheck_after"] = (_now().timestamp() + CAPABILITY_BLOCKER_RECHECK_SECONDS)
+                cleared.append(capability)
+            else:
+                active.append(capability)
         else:
             blocker["status"] = "CLEARED"
             blocker["cleared_at"] = _iso()
             cleared.append(capability)
     return sorted(active), sorted(cleared)
+
+
+def _blocker_recheck_due(blocker: dict[str, Any]) -> bool:
+    try:
+        return _now().timestamp() >= float(blocker.get("recheck_after"))
+    except (TypeError, ValueError):
+        return True
+
+
+def _unknown_blocker_recheck_due(blocker: dict[str, Any]) -> bool:
+    condition = blocker.get("condition") or {}
+    if condition.get("type") in {"environment_required", "retry_after_seconds"}:
+        return False
+    try:
+        observed = datetime.fromisoformat(str(blocker["observed_at"]).replace("Z", "+00:00"))
+        if observed.tzinfo is None:
+            observed = observed.replace(tzinfo=timezone.utc)
+        return (datetime.now(timezone.utc) - observed).total_seconds() >= CAPABILITY_BLOCKER_RECHECK_SECONDS
+    except (KeyError, TypeError, ValueError):
+        return True
+
+
+def _record_commitment_retry(decision: dict[str, Any], runtime: Path) -> None:
+    commitment_id = _commitment_id_for(decision)
+    if not commitment_id:
+        return
+    row = next((item for item in commitment_records(runtime)
+                if item.get("commitment_id") == commitment_id and item.get("status") == "OPEN"), None)
+    if not row:
+        return
+    metadata = dict(row.get("metadata") or {})
+    try:
+        attempts = int(metadata.get("retry_attempts", 0)) + 1
+    except (TypeError, ValueError):
+        attempts = 1
+    delay = min(COMMITMENT_RETRY_MAX_SECONDS,
+                COMMITMENT_RETRY_BASE_SECONDS * (2 ** min(attempts - 1, 3)))
+    metadata.update({
+        "retry_attempts": attempts,
+        "retry_after": (_now().timestamp() + delay),
+    })
+    update_commitment_metadata(commitment_id=commitment_id, metadata=metadata, runtime=runtime)
+
+
+def _clear_rechecked_capability_blocker(
+    state: dict[str, Any], decision: dict[str, Any], verification: dict[str, Any],
+) -> None:
+    if not verification.get("verified"):
+        return
+    capability = str(decision.get("capability_id") or "")
+    blocker = (state.get("capability_blockers") or {}).get(capability)
+    if isinstance(blocker, dict) and blocker.get("status") == "RECHECK_DUE":
+        blocker["status"] = "CLEARED"
+        blocker["cleared_at"] = _iso()
 
 
 def _escalate_if_non_retryable(decision: dict[str, Any], outcome: dict[str, Any], runtime: Path) -> None:
@@ -385,6 +470,8 @@ def _park_deployment_if_stalled(
         "staged_content_sha256": evidence.get("staged_content_sha256"),
         "source_file": evidence.get("source_file"),
         "blocker_paths": evidence.get("blocker_paths", []),
+        "files": evidence.get("files", [evidence.get("source_file")]),
+        "source_capability_id": evidence.get("source_capability_id", "product_page"),
         "reasons": reasons[:20],
         "parked_at": _iso(),
         "escalation_count": count,
@@ -612,13 +699,6 @@ def _run_step(
     if decision.get("kind") == "repair_defect":
         record_repair_attempt(runtime, str(decision.get("defect_id") or ""))
 
-    # A NEW budgeted action (publication/optimization/measurement) consumes its
-    # budget at the moment it is decided, so more cycles cannot become more
-    # publishing. Defect repair, deployment, resumption and verification never
-    # consume a content budget.
-    if decision.get("kind") in {"opportunity", "product_backlog"}:
-        decision_model.record_budget_use(state, today, str(decision.get("capability_id") or ""))
-
     commitment = _commitment_for(decision)
     if commitment is not None:
         record_commitment(
@@ -636,9 +716,21 @@ def _run_step(
     outcome = _execute_decision(decision, project_root, runtime)
     verification = _verify_outcome(decision, outcome, project_root, runtime)
 
+    # A failed action must not consume pacing capacity. Count a budget only
+    # after an independently verified result, or after an external effect was
+    # actually attempted and therefore must be paced despite uncertain receipt.
+    if decision.get("kind") in {"opportunity", "product_backlog"}:
+        receipt = outcome.get("evidence") or {}
+        if verification.get("verified") or receipt.get("external_effect_attempted") is True:
+            decision_model.record_budget_use(state, today, str(decision.get("capability_id") or ""))
+
     _record_capability_blocker(state, decision, outcome)
     _escalate_if_non_retryable(decision, outcome, runtime)
     _park_deployment_if_stalled(decision, outcome, state, project_root)
+    _clear_rechecked_capability_blocker(state, decision, verification)
+
+    if (commitment is not None or decision.get("kind") == "resume_commitment") and not verification.get("verified"):
+        _record_commitment_retry(decision, runtime)
 
     if commitment is not None and verification.get("verified"):
         confirm_commitment(

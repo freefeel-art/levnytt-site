@@ -35,6 +35,7 @@ from commander import gsc_control, identity, repairs
 # after it is confirmed, so the Commander does not re-improve a page using
 # search evidence that predates the just-deployed revision.
 _IMPROVEMENT_SUPPRESSION_DAYS = 28
+_OWNER_BOUNDARY_RECHECK_SECONDS = 24 * 3600
 
 
 def _recently_improved_slugs(runtime: Path) -> set[str]:
@@ -153,6 +154,9 @@ def build_evidence(project_root: Path, runtime: Path, today: str) -> dict[str, A
         if raw_scout.get("checked_at") == scout["checked_at"]:
             scout["actionable_opportunities"] = [row for row in raw_scout.get("opportunities", [])
                                                   if isinstance(row, dict) and row.get("classification") in {"CREATE", "UPDATE"}][:8]
+
+    from commander import product_catalog
+    packet["product_catalog_discovery_due"] = product_catalog.discovery_due(runtime)
 
     # Persistent NeoLife product-coverage backlog. Every current product without
     # a dedicated PRODUCT_PAGE is eligible; search evidence only affects
@@ -285,15 +289,18 @@ def _deployment_still_blocked(slug: str, project_root: Path, entry: dict[str, An
     constitute evidence that the unrelated dirty files blocking this deployment
     have been cleaned. Missing provenance is not permission to unpark.
     """
-    from commander.procedure import _confirmed_staged_work, _deployment_safety, _file_sha256
+    from commander.procedure import _confirmed_staged_work, _deployment_safety, _file_sha256, _parked_staged_work
 
     work = next((r for r in _confirmed_staged_work(project_root) if r["slug"] == slug), None)
     if work is None:
-        return True
+        work = _parked_staged_work(project_root, {slug: entry}, requested_slug=slug)
+    if work is None:
+        return True  # missing path/hash is not permission to deploy
     expected = entry.get("staged_content_sha256")
     if expected and _file_sha256(project_root / work["source_file"]) != expected:
         return True  # changed source needs a new confirmed provenance receipt
     allowed = {f for r in _confirmed_staged_work(project_root) for f in r["files"]}
+    allowed.update(work.get("files") or [])
     return not _deployment_safety(project_root, slug, allowed)["ok"]
 
 
@@ -309,10 +316,24 @@ def _escalated_product_codes(runtime: Path) -> set[str]:
     from app.commander.commitment_ledger import commitment_records
 
     codes: set[str] = set()
+    now = datetime.now(timezone.utc)
     for row in commitment_records(runtime):
         if row.get("capability_id") != "product_page":
             continue
         if row.get("status") != "OWNER_BOUNDARY":
+            continue
+        resolved_at = row.get("resolved_at")
+        try:
+            resolved = datetime.fromisoformat(str(resolved_at).replace("Z", "+00:00"))
+            if resolved.tzinfo is None:
+                resolved = resolved.replace(tzinfo=timezone.utc)
+            if (now - resolved).total_seconds() >= _OWNER_BOUNDARY_RECHECK_SECONDS:
+                # Terminal history remains intact, but the evidence model gets
+                # a bounded opportunity to test whether the original boundary
+                # condition has changed (for example, an image became fetchable).
+                continue
+        except (TypeError, ValueError):
+            # Invalid historical timestamps must not become a permanent filter.
             continue
         code = str(row.get("commitment_id") or "").rsplit(":", 1)[-1]
         if code:

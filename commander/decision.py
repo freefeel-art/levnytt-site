@@ -167,10 +167,10 @@ def decide(
             return not any((r.get("commitment_id") == action.get("commitment_id")
                             or (r.get("capability_id") == capability and r.get("opportunity_id") == original_id))
                            and r.get("execution", {}).get("status") not in {"SUCCEEDED", "PARTIAL", "PUBLISHED"}
-                           and not _due(r.get("selected_at"), days=1) for r in recent)
+                            and not _due(r.get("selected_at"), days=1) for r in recent)
         # Do not pay for repeated discovery or re-run a blocked commitment at
         # every cron tick. A new observation or the next day reopens the lane.
-        if capability in {"seo_intelligence", "search_demand_scout", "community_intelligence"}:
+        if capability in {"seo_intelligence", "search_demand_scout", "community_intelligence", "product_discovery"}:
             return not any(r.get("capability_id") == capability
                            and r.get("opportunity_id") == action.get("opportunity_id")
                            and not _due(r.get("selected_at"), days=1) for r in recent)
@@ -211,6 +211,16 @@ def decide(
 
     # 2. Resume an open commitment (durable, interrupted work).
     for commitment in commitments:
+        retry_after = (commitment.get("metadata") or {}).get("retry_after")
+        try:
+            capability = str(commitment.get("capability_id") or "")
+            if (retry_after is not None
+                    and capability not in set(evidence.get("cleared_capability_blockers") or [])
+                    and datetime.now(timezone.utc).timestamp() < float(retry_after)):
+                continue
+        except (TypeError, ValueError):
+            # Invalid recovery metadata must not become a permanent lock.
+            pass
         candidate = {
             "kind": "resume_commitment",
             "commitment_id": commitment.get("commitment_id"),
@@ -233,6 +243,19 @@ def decide(
                 "Staged content is awaiting deployment; deploy it before "
                 "producing more (SOUL §5a)."
             ),
+        }
+        if available(candidate):
+            return candidate
+
+    # Refresh the official NeoLife catalog before selecting from a potentially
+    # stale local Product Entity catalog. This is bounded by the catalog TTL and
+    # does not consume a content budget.
+    if evidence.get("product_catalog_discovery_due"):
+        candidate = {
+            "kind": "opportunity",
+            "capability_id": "product_discovery",
+            "opportunity_id": "product-catalog:refresh",
+            "reason": "Refresh the official NeoLife catalog and ingest missing Product Entities.",
         }
         if available(candidate):
             return candidate
