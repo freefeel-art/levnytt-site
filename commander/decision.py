@@ -130,6 +130,48 @@ def _due(timestamp: Any, days: int = 7) -> bool:
         return True
 
 
+def commitment_executable(
+    evidence: dict[str, Any],
+    commitment: dict[str, Any],
+    *,
+    budget_check=None,
+    attempted: set[str] | None = None,
+) -> bool:
+    """Return whether one OPEN commitment can execute in the current state."""
+    if budget_check is None:
+        budget_check = lambda _capability: True
+    attempted = attempted or set()
+    capability = str(commitment.get("capability_id") or "")
+    candidate = {
+        "kind": "resume_commitment",
+        "commitment_id": commitment.get("commitment_id"),
+        "capability_id": capability,
+    }
+    if capability in set(evidence.get("blocked_capabilities") or []):
+        return False
+    if action_key(candidate) in attempted:
+        return False
+    retry_after = (commitment.get("metadata") or {}).get("retry_after")
+    try:
+        if (retry_after is not None
+                and capability not in set(evidence.get("cleared_capability_blockers") or [])
+                and datetime.now(timezone.utc).timestamp() < float(retry_after)):
+            return False
+    except (TypeError, ValueError):
+        pass
+    if capability in set(evidence.get("cleared_capability_blockers") or []):
+        return True
+    recent = evidence.get("recent_decisions") or []
+    original_id = str(candidate.get("commitment_id") or "").split(":", 2)[-1]
+    if any((row.get("commitment_id") == candidate.get("commitment_id")
+            or (row.get("capability_id") == capability and row.get("opportunity_id") == original_id))
+           and row.get("execution", {}).get("status") not in {"SUCCEEDED", "PARTIAL", "PUBLISHED"}
+           and not _due(row.get("selected_at"), days=1) for row in recent):
+        return False
+    freshness = evidence.get("measurement_freshness") or {}
+    if freshness.get("gsc_fresh") is False and capability == "content_improvement":
+        return False
+    return capability != "measurement" or budget_check("measurement")
 def decide(
     evidence: dict[str, Any],
     defects: list[dict[str, Any]],
@@ -211,24 +253,14 @@ def decide(
 
     # 2. Resume an open commitment (durable, interrupted work).
     for commitment in commitments:
-        retry_after = (commitment.get("metadata") or {}).get("retry_after")
-        try:
-            capability = str(commitment.get("capability_id") or "")
-            if (retry_after is not None
-                    and capability not in set(evidence.get("cleared_capability_blockers") or [])
-                    and datetime.now(timezone.utc).timestamp() < float(retry_after)):
-                continue
-        except (TypeError, ValueError):
-            # Invalid recovery metadata must not become a permanent lock.
-            pass
         candidate = {
             "kind": "resume_commitment",
             "commitment_id": commitment.get("commitment_id"),
             "capability_id": commitment.get("capability_id"),
             "reason": f"resume open commitment: {str(commitment.get('action') or '')[:160]}",
         }
-        if (available(candidate) and (gsc_current or candidate["capability_id"] != "content_improvement")
-                and (candidate["capability_id"] != "measurement" or budget_check("measurement"))):
+        if (available(candidate) and commitment_executable(
+                evidence, commitment, budget_check=budget_check, attempted=attempted)):
             return candidate
 
     # 3. Deploy staged content that is already accepted but not yet live.

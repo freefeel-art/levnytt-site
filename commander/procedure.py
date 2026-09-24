@@ -520,6 +520,7 @@ class LevNyttProcedure:
             "evidence": {
                 "catalog_count": receipt["catalog_count"],
                 "new_entities": receipt["new_entities"],
+                "entity_files": receipt["entity_files"],
                 "fetched_at": receipt["fetched_at"],
                 "external_effect_attempted": False,
             },
@@ -1075,6 +1076,7 @@ class LevNyttProcedure:
         allowed_paths: set[str] = set(work["files"])
         for other in _confirmed_staged_work(repo):
             allowed_paths.update(other.get("files") or [])
+        allowed_paths.update(_confirmed_discovery_files(repo))
         safety = _deployment_safety(repo, slug, allowed_paths)
         if not safety["ok"]:
             return {
@@ -1115,6 +1117,9 @@ class LevNyttProcedure:
             for f in rec.get("files") or []:
                 if f in status_paths and f not in files:
                     files.append(f)
+        for f in _confirmed_discovery_files(repo):
+            if f in status_paths and f not in files:
+                files.append(f)
         for candidate in ("_redirects", "sitemap.xml"):
             changed = subprocess.run(
                 ["git", "-C", str(repo), "status", "--porcelain", "--", candidate],
@@ -2265,6 +2270,64 @@ def _confirmed_staged_work(repo: Path) -> list[dict[str, Any]]:
                             "source_file": source, "staged_content_sha256": content_hash,
                             "files": [source]})
     return records
+
+
+def _confirmed_discovery_files(repo: Path) -> list[str]:
+    """Return only entity files proven to come from verified catalog discovery.
+
+    The structured receipt is the current format. The artifact fallback keeps
+    the nine entities created by the first discovery run safe to deploy even
+    though that older receipt stored only a plain detail string.
+    """
+    ledger = _read_json(repo / "runtime" / "commander" / "commitments.json")
+    rows = ledger.get("commitments") if isinstance(ledger.get("commitments"), list) else []
+    changed = _git_status_paths(repo)
+    candidates: list[tuple[str, str]] = []
+    for row in rows:
+        if not isinstance(row, dict) or row.get("status") != "CONFIRMED":
+            continue
+        if row.get("capability_id") != "product_discovery":
+            continue
+        parsed: dict[str, Any] = {}
+        reason = row.get("resolution_reason")
+        if isinstance(reason, str):
+            try:
+                value = ast.literal_eval(reason)
+                if isinstance(value, dict):
+                    parsed = value
+            except (ValueError, SyntaxError):
+                parsed = {}
+        receipt_files = (parsed.get("entity_files") or []) if parsed.get("discovery_verified") else []
+        if receipt_files:
+            for item in receipt_files:
+                if isinstance(item, dict) and item.get("path") and item.get("sha256"):
+                    candidates.append((str(item["path"]), str(item["sha256"])))
+            continue
+
+        # Legacy confirmed discovery receipt: derive paths only from the
+        # Commander-written artifact and validate the actual entity contents.
+        artifact = _read_json(repo / "runtime" / "intelligence" / "neolife-product-catalog.json")
+        for item in artifact.get("new_entities") or []:
+            if not isinstance(item, dict) or not item.get("slug"):
+                continue
+            slug = str(item["slug"])
+            rel = f"content/products/entities/entity_{slug.removeprefix('neolife-').replace('-', '_')}/sv.json"
+            candidates.append((rel, ""))
+
+    verified: list[str] = []
+    for rel, expected_hash in candidates:
+        if not rel.startswith("content/products/entities/") or rel not in changed:
+            continue
+        path = repo / rel
+        if not path.is_file():
+            continue
+        if expected_hash and _file_sha256(path) != expected_hash:
+            continue
+        entity = _read_json(path)
+        if (entity.get("source") or {}).get("type") != "NEOLIFE_OFFICIAL_PUBLIC_CATALOG":
+            continue
+        verified.append(rel)
+    return sorted(set(verified))
 
 
 def _parked_staged_work(

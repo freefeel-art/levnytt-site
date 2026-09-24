@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from html.parser import HTMLParser
+import hashlib
 import json
 import re
 import tempfile
@@ -200,6 +201,7 @@ def ingest_missing_entities(project_root: Path, runtime: Path, rows: list[dict[s
 
     now = datetime.now(timezone.utc).isoformat()
     added: list[dict[str, Any]] = []
+    entity_files: list[dict[str, str]] = []
     for row in rows:
         if str(row["neoLife_code"]) in known:
             continue
@@ -210,6 +212,10 @@ def ingest_missing_entities(project_root: Path, runtime: Path, rows: list[dict[s
         _atomic_json(path, entity)
         known.add(str(row["neoLife_code"]))
         added.append({"code": str(row["neoLife_code"]), "slug": entity["slug"]})
+        entity_files.append({
+            "path": str(path.relative_to(project_root)),
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        })
 
     artifact = {
         "source": product_media.SHOP_BASE,
@@ -220,7 +226,10 @@ def ingest_missing_entities(project_root: Path, runtime: Path, rows: list[dict[s
         "new_entities": added,
     }
     _atomic_json(artifact_path(runtime), artifact)
-    return {"catalog_count": len(rows), "new_entities": added, "fetched_at": now}
+    return {
+        "catalog_count": len(rows), "new_entities": added,
+        "entity_files": entity_files, "fetched_at": now,
+    }
 
 
 def discovery_due(runtime: Path, now: datetime | None = None) -> bool:

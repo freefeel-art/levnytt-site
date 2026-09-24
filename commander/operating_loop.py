@@ -528,6 +528,13 @@ def _confirmation_evidence(decision: dict[str, Any], outcome: dict[str, Any], ve
     evidence = outcome.get("evidence")
     if capability in _STAGED_CONTENT_CAPABILITIES and isinstance(evidence, dict) and evidence:
         return repr(evidence)
+    if capability == "product_discovery" and isinstance(evidence, dict) and evidence:
+        return repr({
+            "discovery_verified": True,
+            "entity_files": evidence.get("entity_files") or [],
+            "catalog_count": evidence.get("catalog_count"),
+            "fetched_at": evidence.get("fetched_at"),
+        })
     return verification.get("detail") or ("verified external effect"
             if verification.get("verification_class") == "EXTERNAL_EFFECT_VERIFIED" else "verified execution result")
 
@@ -687,6 +694,12 @@ def _run_step(
         "evidence_summary": _evidence_summary(evidence),
         "open_defects": len(defects),
         "open_commitments": len(commitments),
+        "executable_commitments": sum(
+            decision_model.commitment_executable(
+                evidence, commitment, budget_check=budget_check, attempted=attempted,
+            ) for commitment in commitments
+        ),
+        "active_capability_blockers": len(active_blockers),
         "content_budgets": decision_model.budgets_summary(state, today),
         "executed": False,
     }
@@ -790,15 +803,17 @@ def run_cycle(
                 result["content_budgets"]["measurement"]["used"] >= result["content_budgets"]["measurement"]["limit"]
             ):
                 stop = "WAITING_FOR_MEASUREMENT"
-            elif result["open_commitments"]:
+            elif result.get("executable_commitments", 0) > 0:
                 stop = "WAITING_FOR_COMMITMENT_RETRY_OR_EXTERNAL_EFFECT"
-            elif identity.load_state(runtime=runtime).get("deployment_parked"):
-                stop = "WAITING_FOR_BLOCKED_DEPLOYMENT"
             elif ((result["evidence_summary"].get("product_backlog_count", 0) > 0 and
                    result["content_budgets"]["publication"]["used"] >= result["content_budgets"]["publication"]["limit"]) or
                   (result["evidence_summary"].get("optimization_opportunity_count", 0) > 0 and
                    result["content_budgets"]["optimization"]["used"] >= result["content_budgets"]["optimization"]["limit"])):
                 stop = "CAPACITY_EXHAUSTED"
+            elif result.get("active_capability_blockers", 0) > 0:
+                stop = "WAITING_FOR_CAPABILITY_BLOCKER"
+            elif identity.load_state(runtime=runtime).get("deployment_parked"):
+                stop = "WAITING_FOR_BLOCKED_DEPLOYMENT"
             else:
                 stop = "NO_JUSTIFIED_EXECUTABLE_WORK"
             state = identity.load_state(runtime=runtime)

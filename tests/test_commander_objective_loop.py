@@ -120,6 +120,26 @@ def test_failed_budgeted_action_does_not_consume_daily_capacity(harness):
     assert persisted.get("daily_publication_budget", {}).get("used", 0) == 0
 
 
+def test_idle_does_not_report_commitment_wait_when_open_commitments_are_not_executable(harness):
+    repo, runtime, state = harness
+    state["product_backlog"] = [{"code": "789", "product_name": "Beta Guard"}]
+    state["improvements"] = [{"opportunity_id": "content-improvement:fixture"}]
+    (runtime / "commander" / "commitments.json").write_text(json.dumps({"commitments": [{
+        "commitment_id": "levnytt:content_improvement:content-improvement:fixture",
+        "capability_id": "content_improvement", "status": "OPEN", "action": "fixture",
+        "metadata": {}, "project_id": "levnytt",
+    }]}))
+    from commander.identity import save_state
+    save_state({
+        "daily_publication_budget": {"date": operating_loop._today(), "used": 1, "limit": 1},
+        "daily_optimization_budget": {"date": operating_loop._today(), "used": 3, "limit": 3},
+        "daily_measurement_budget": {"date": operating_loop._today(), "used": 1, "limit": 1},
+    }, runtime)
+    result = run(harness)
+    assert result["executable_commitments"] == 0
+    assert result["stop_reason"] == "CAPACITY_EXHAUSTED"
+
+
 def test_blocked_deployment_is_parked_and_independent_work_runs(harness):
     repo, runtime, state = harness
     state["staged"] = ["blocked"]

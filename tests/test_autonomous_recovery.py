@@ -441,6 +441,46 @@ def test_parked_deployment_recovers_when_commitment_receipt_is_missing(tmp_path)
     assert work and work["source_file"] == "neolife-vita-squares.html"
 
 
+def test_verified_discovery_entity_is_allowed_by_deployment_safety(tmp_path):
+    import subprocess
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
+    (repo / ".git" / "info" / "exclude").write_text("runtime/\n")
+    entity_root = repo / "content" / "products" / "entities"
+    discovered = []
+    for index in range(9):
+        slug = f"neolife-fixture-discovery-{index}"
+        entity = entity_root / f"entity_fixture_discovery_{index}"
+        entity.mkdir(parents=True)
+        (entity / "sv.json").write_text(json.dumps({
+            "neoLife_code": 4000 + index,
+            "source": {"type": "NEOLIFE_OFFICIAL_PUBLIC_CATALOG"},
+        }), encoding="utf-8")
+        discovered.append({"code": str(4000 + index), "slug": slug})
+    runtime = repo / "runtime"
+    _write_ledger(runtime, [{
+        "commitment_id": "levnytt:product_discovery:product-catalog:refresh",
+        "status": "CONFIRMED", "capability_id": "product_discovery",
+        "resolution_reason": "Refreshed official NeoLife catalog (67 products).",
+    }])
+    (runtime / "intelligence").mkdir(parents=True)
+    (runtime / "intelligence" / "neolife-product-catalog.json").write_text(json.dumps({
+        "source_type": "NEOLIFE_OFFICIAL_PUBLIC_CATALOG",
+        "new_entities": discovered,
+    }), encoding="utf-8")
+
+    from commander.procedure import _confirmed_discovery_files, _deployment_safety
+    files = _confirmed_discovery_files(repo)
+    assert len(files) == 9
+    assert _deployment_safety(repo, "fixture-page", set(files))["ok"] is True
+    (repo / "unrelated-untracked.txt").write_text("not Commander provenance", encoding="utf-8")
+    safety = _deployment_safety(repo, "fixture-page", set(files))
+    assert safety["ok"] is False
+    assert any("unrelated-untracked.txt" in reason for reason in safety["reasons"])
+
+
 def test_deployment_safety_remains_fail_closed(tmp_path):
     """The deployment safety gate must never be weakened: it still rejects
     unexpected working-tree changes regardless of parking state."""
