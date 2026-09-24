@@ -40,6 +40,14 @@ def _prepare_path() -> None:
     # Hermes control repository so those resolve, while identity/state remain
     # fixed to the LevNytt repository via commander.identity.
     os.chdir(_HERMES_ROOT)
+    # Load Hermes' shared and repository-local environment layers before any
+    # LevNytt provider reads process credentials. The dedicated Commander uses
+    # a local decision model, so no other Hermes import can provide this side
+    # effect reliably.
+    os.environ.setdefault("HERMES_CONTROL_REPOSITORY", str(_HERMES_ROOT))
+    from app.core.environment import load_hermes_environment
+
+    load_hermes_environment()
 
 
 def main(argv: list[str] | None = None) -> int:
