@@ -129,7 +129,6 @@ def test_failed_refresh_preserves_prior_artifact_and_never_creates_freshness(tmp
 
     monkeypatch.setattr(procedure.subprocess, "run", collect)
     monkeypatch.setattr(procedure, "_collect_cta_events", lambda _: {"status": "unavailable"})
-    monkeypatch.setattr(procedure, "_collect_neolife_backoffice_if_due", lambda _: {"status": "unavailable"})
     result = procedure.LevNyttProcedure()._execute_measurement(SimpleNamespace(working_repository=repo, runtime_directory=runtime), {})
     assert calls == [7, 14]
     assert result["evidence"]["sources"]["gsc"]["status"] == "unavailable"

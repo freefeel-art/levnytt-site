@@ -126,10 +126,6 @@ Production leads; measurement supports.
 - **Measurement truthfulness:** never fabricate conversions or revenue. When
   direct measurement is unavailable, report the strongest truthful proxy
   (NeoLife link-click events; GSC traffic) and the missing attribution path.
-- **NeoLife back-office accounting data** (orders, PV/turnover, commissions,
-  invoices) is secondary evidence, never a primary operating objective. It is
-  collected on a bounded cadence only and never gates or degrades production
-  measurement or blocks publishable work.
 - Missing evidence is recorded and may become a later measurement decision; it
   must not stop safe, already-executable production.
 
