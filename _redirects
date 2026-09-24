@@ -65,6 +65,16 @@
 # GSC indexing-health repair (2026-09): permanent redirects for URLs Google
 # still reports as "Not found (404)". Each target is the current canonical
 # page for the removed/renamed content.
+/content/articles/sab-scientific-advisory-board.html /neolife-vetenskap 301
+/produkter/neolife-vitamin-d /neolife-vitamin-d 301
+/content/articles/neolife-vetenskap.html /neolife-vetenskap 301
+/pro-vitality/ /neolife-pro-vitality 301
+/sparanalys/ /finns-det-billigare-alternativ 301
+/lonar-sig-medlemskap /finns-det-billigare-alternativ 301
+/produkter/tre-en-en.html /neolife-tre-en-en 301
+/produkter/pro-vitality-plus.html /neolife-pro-vitality 301
+/neolife-hub/ /neolife-kosttillskott/ 301
+/neolife-golden-home-care/ /golden-home-care 301
 /blogg /artiklar 301
 /blogg/ /artiklar 301
 /neolife-vetenskapliga-radet /neolife-vetenskap 301

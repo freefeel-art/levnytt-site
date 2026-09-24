@@ -104,6 +104,41 @@ def test_redirect_catch_all_is_last_and_all_canonical_pages_are_indexed():
         assert not re.search(r"<style\b|\sstyle=|\son\w+=", source, re.I)
 
 
+def test_gsc_missing_redirects_are_single_hop_permanent_routes_to_live_pages():
+    expected = {
+        "/content/articles/sab-scientific-advisory-board.html": "/neolife-vetenskap",
+        "/produkter/neolife-vitamin-d": "/neolife-vitamin-d",
+        "/content/articles/neolife-vetenskap.html": "/neolife-vetenskap",
+        "/pro-vitality/": "/neolife-pro-vitality",
+        "/sparanalys/": "/finns-det-billigare-alternativ",
+        "/lonar-sig-medlemskap": "/finns-det-billigare-alternativ",
+        "/produkter/tre-en-en.html": "/neolife-tre-en-en",
+        "/produkter/pro-vitality-plus.html": "/neolife-pro-vitality",
+        "/neolife-hub/": "/neolife-kosttillskott/",
+        "/neolife-golden-home-care/": "/golden-home-care",
+    }
+    rules = [
+        line.split()
+        for line in (ROOT / "_redirects").read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    redirect_rules = [rule for rule in rules if len(rule) >= 3 and rule[2] == "301"]
+    for source, target in expected.items():
+        matches = [rule for rule in redirect_rules if rule[0] == source]
+        assert matches == [[source, target, "301"]]
+        assert not any(rule[0] == target for rule in redirect_rules)
+
+        target_file = ROOT / target.strip("/")
+        if target_file.is_dir():
+            target_file /= "index.html"
+        elif target_file.suffix != ".html":
+            target_file = target_file.with_suffix(".html")
+        assert target_file.is_file()
+        source_html = target_file.read_text(encoding="utf-8")
+        canonical = re.search(r'<link rel="canonical" href="([^"]+)"', source_html, re.I)
+        assert canonical and canonical.group(1).rstrip("/") == "https://levnytt.se" + target.rstrip("/")
+
+
 def test_article_index_discovers_every_swedish_content_route_once():
     generator = load_script("article_index_generator", "scripts/generate-article-index.py")
     articles = generator.discover_articles()
