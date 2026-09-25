@@ -1,0 +1,25 @@
+{
+  "aliases": [],
+  "canonical_id": "entity_creatine",
+  "category": "supplements",
+  "entity_version": 1,
+  "ingredients": [],
+  "last_verified": "2026-09-24",
+  "locale": "sv",
+  "media": {
+    "official_catalog_image": "/thumb/3525/350x350/870.png"
+  },
+  "neoLife_code": 870,
+  "packaging": {},
+  "product_name": "Creatine",
+  "shop_path": "/p/kosttillskott/creatine-9999.html",
+  "short_description": "NeoLife Creatine. Officiell produktkatalogpost, kod 870.",
+  "slug": "neolife-creatine",
+  "source": {
+    "type": "NEOLIFE_OFFICIAL_PUBLIC_CATALOG",
+    "url": "https://se.neolifeshop.com/p/kosttillskott/creatine-9999.html",
+    "verified_at": "2026-09-24T17:08:20.924292+00:00"
+  },
+  "summary": "Produktfakta behöver kompletteras från verifierade officiella källor.",
+  "usage": {}
+}

@@ -1,0 +1,25 @@
+{
+  "aliases": [],
+  "canonical_id": "entity_neolifeshake_berries_n_cream",
+  "category": "supplements",
+  "entity_version": 1,
+  "ingredients": [],
+  "last_verified": "2026-09-24",
+  "locale": "sv",
+  "media": {
+    "official_catalog_image": "/thumb/1277/350x350/917.jpg"
+  },
+  "neoLife_code": 917,
+  "packaging": {},
+  "product_name": "NeoLifeShake Berries n' Cream",
+  "shop_path": "/p/kosttillskott/neolifeshake-berries-n-cream-5163.html",
+  "short_description": "NeoLife NeoLifeShake Berries n' Cream. Officiell produktkatalogpost, kod 917.",
+  "slug": "neolife-neolifeshake-berries-n-cream",
+  "source": {
+    "type": "NEOLIFE_OFFICIAL_PUBLIC_CATALOG",
+    "url": "https://se.neolifeshop.com/p/kosttillskott/neolifeshake-berries-n-cream-5163.html",
+    "verified_at": "2026-09-24T17:08:20.924292+00:00"
+  },
+  "summary": "Produktfakta behöver kompletteras från verifierade officiella källor.",
+  "usage": {}
+}

@@ -1,0 +1,25 @@
+{
+  "aliases": [],
+  "canonical_id": "entity_super_10_5_liter",
+  "category": "home_care",
+  "entity_version": 1,
+  "ingredients": [],
+  "last_verified": "2026-09-24",
+  "locale": "sv",
+  "media": {
+    "official_catalog_image": "/thumb/600/350x350/17.jpg"
+  },
+  "neoLife_code": 17,
+  "packaging": {},
+  "product_name": "Super 10, 5 liter",
+  "shop_path": "/p/rengoring/super-10-5-liter-476.html",
+  "short_description": "NeoLife Super 10, 5 liter. Officiell produktkatalogpost, kod 17.",
+  "slug": "neolife-super-10-5-liter",
+  "source": {
+    "type": "NEOLIFE_OFFICIAL_PUBLIC_CATALOG",
+    "url": "https://se.neolifeshop.com/p/rengoring/super-10-5-liter-476.html",
+    "verified_at": "2026-09-24T17:08:20.924292+00:00"
+  },
+  "summary": "Produktfakta behöver kompletteras från verifierade officiella källor.",
+  "usage": {}
+}
